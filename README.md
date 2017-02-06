@@ -2,6 +2,10 @@
 
 The lecture slides, PDF files of handout notes, and source code for Foundations of Applied Statistics and Data Science course.
 
+### Source code, html, and PDF files
+
+These are all located in the `docs/` directory.
+
 ### Each week we will provide:
 
 - HTML slides laid out in a 2D grid by topic
