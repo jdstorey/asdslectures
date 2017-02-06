@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 1</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="statistics-and-data-science" class="titleslide slide level1"><h1>Statistics and Data Science</h1></section><section id="statistics" class="slide level2">
+<h1>Statistics</h1>
+<p><strong>Statistics</strong> is the study of the collection, analysis, interpretation, presentation, and organization of data.</p>
+<p><a href="https://en.wikipedia.org/wiki/Statistics" class="uri">https://en.wikipedia.org/wiki/Statistics</a></p>
+</section><section id="applied-statistics" class="slide level2">
+<h1>Applied Statistics</h1>
+<p><strong>Applied Statistics</strong> is concerned with the practical considerations and implementations needed to carry out a statistical analysis.</p>
+</section><section id="machine-learning" class="slide level2">
+<h1>Machine Learning</h1>
+<p><strong>Machine learning</strong> explores the study and construction of algorithms that can learn from and make predictions on data. Machine learning is closely related to and often overlaps with computational statistics; a discipline which also focuses in prediction-making through the use of computers.</p>
+<p><a href="https://en.wikipedia.org/wiki/Machine_learning" class="uri">https://en.wikipedia.org/wiki/Machine_learning</a></p>
+</section><section id="data-science" class="slide level2">
+<h1>Data Science</h1>
+<p><strong>Data Science</strong> is an interdisciplinary field about processes and systems to extract knowledge or insights from data in various forms, either structured or unstructured, which is a continuation of some of the data analysis fields such as statistics, data mining, and predictive analytics.</p>
+<p><a href="https://en.wikipedia.org/wiki/Data_science" class="uri">https://en.wikipedia.org/wiki/Data_science</a></p>
+</section><section id="what-is-data-science" class="slide level2">
+<h1>What is Data Science?</h1>
+<ul>
+<li><p><em>Data Science</em> is a very new term</p></li>
+<li><p>No well-accepted definition</p></li>
+<li><p>Statistics, machine learning, and data science are all essentially about extracting knowledge or value from data</p></li>
+<li><p>DS deals with data in the following ways: collecting, storing, managing, wrangling, exploration, learning, discovery, communication, products</p></li>
+</ul>
+</section><section id="some-history" class="slide level2">
+<h1>Some History</h1>
+</section><section id="john-tukey" class="slide level2">
+<h1>John Tukey</h1>
+<p>John Tukey pioneered a field called “exploratory data analysis” (EDA)</p>
+<p>From <a href="https://projecteuclid.org/euclid.aoms/1177704711">The Future of Data Analysis</a> (1962) <em>Annals of Mathematical Statistics</em> …</p>
+<blockquote>
+<p>For a long time I have thought I was a statistician, interested in inferences from the particular to the general. But as I have watched mathematical statistics evolve, I have had cause to wonder and to doubt.</p>
+</blockquote>
+</section><section id="john-tukey-contd" class="slide level2">
+<h1>John Tukey (cont’d)</h1>
+<blockquote>
+<p>All in all, I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.</p>
+</blockquote>
+</section><section id="john-tukey-contd-1" class="slide level2">
+<h1>John Tukey (cont’d)</h1>
+<blockquote>
+<p>Data analysis is a larger and more varied field than inference, or incisive procedures, or allocation.</p>
+</blockquote>
+<p><a href="http://simplystatistics.org/2015/08/25/interview-with-copss-award-winner-john-storey/">IMO</a>, Tukey saw the need for and initiated data science in 1962</p>
+<p>David Donoho <a href="https://dl.dropboxusercontent.com/u/23421017/50YearsDataScience.pdf">seems to agree</a></p>
+</section><section id="jeff-wu" class="slide level2">
+<h1>Jeff Wu</h1>
+<blockquote>
+<p>In November 1997, C.F. Jeff Wu gave the inaugural lecture entitled “Statistics = Data Science?”. In this lecture, he characterized statistical work as a trilogy of data collection, data modeling and analysis, and decision making. In his conclusion, he initiated the modern, non-computer science, usage of the term “data science” and advocated that statistics be renamed data science and statisticians data scientists.</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Data_science" class="uri">https://en.wikipedia.org/wiki/Data_science</a></p>
+</section><section id="william-cleveland" class="slide level2">
+<h1>William Cleveland</h1>
+<ul>
+<li><p>In 2001, William Cleveland introduced data science as an independent discipline, extending the field of statistics to incorporate “advances in computing with data” in his article <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1751-5823.2001.tb00477.x/abstract">Data Science: An Action Plan for Expanding the Technical Areas of the Field of Statistics</a> in <em>International Statistical Review</em></p></li>
+<li><p>Cleveland establishes six technical areas which he believed to encompass the field of data science</p></li>
+</ul>
+<p>(The above is modified text from <a href="https://en.wikipedia.org/wiki/Data_science">Wikipedia</a>.)</p>
+</section><section id="statistics-rightarrow-data-science" class="slide level2">
+<h1>Statistics <span class="math inline">\(\rightarrow\)</span> Data Science</h1>
+<p>Cleveland’s six area to extend statistics to data science:</p>
+<ol type="1">
+<li>multidisciplinary investigations</li>
+<li>models and methods for data</li>
+<li>computing with data</li>
+<li>pedagogy</li>
+<li>tool evaluation</li>
+<li>theory</li>
+</ol>
+</section><section id="industry" class="slide level2">
+<h1>Industry</h1>
+<ul>
+<li><p>“In 2008, DJ Patil and Jeff Hammerbacher used the term ‘data scientist’ to define their jobs at LinkedIn and Facebook, respectively.” (<a href="https://en.wikipedia.org/wiki/Data_science">from Wikipedia</a>)</p></li>
+<li><p>The term “data scientist” is now often used to describe positions in industry that primarily involve data, whether it is statistics, machine learning, data curation, or other data-centric activities</p></li>
+</ul>
+</section><section id="relevant-quotations" class="slide level2">
+<h1>Relevant Quotations</h1>
+</section><section id="nate-silver" class="slide level2">
+<h1>Nate Silver</h1>
+<p>“I think data scientist is a sexed-up term for a statistician.”</p>
+<p><a href="http://simplystatistics.org/2013/08/08/data-scientist-is-just-a-sexed-up-word-for-statistician/" class="uri">http://simplystatistics.org/2013/08/08/data-scientist-is-just-a-sexed-up-word-for-statistician/</a></p>
+</section><section id="twitter" class="slide level2">
+<h1>Twitter</h1>
+<ul>
+<li><p>“Data science is statistics on a Mac.”</p></li>
+<li><p>“A data scientist is a statistician who lives in San Francisco.”</p></li>
+<li><p>“A data scientist is someone who is better at statistics than any software engineer and better at software engineering than any statistician.”</p></li>
+</ul>
+<p><a href="http://datascopeanalytics.com/blog/what-is-a-data-scientist/" class="uri">http://datascopeanalytics.com/blog/what-is-a-data-scientist/</a></p>
+</section><section id="hadley-wickham" class="slide level2">
+<h1>Hadley Wickham</h1>
+<p>“Recently, there has been much hand-wringing about the role of statistics in data science.</p>
+<p>I think there are three main steps in a data science project: you collect data (and questions), analyze it (using visualization and models), then communicate the results.&quot;</p>
+<p><a href="http://bulletin.imstat.org/2014/09/data-science-how-is-it-different-to-statistics%E2%80%89/">http://bulletin.imstat.org/2014/09/data-science-how-is-it-different-to-statistics%E2%80%89/</a></p>
+</section><section id="hadley-wickham-contd" class="slide level2">
+<h1>Hadley Wickham (cont’d)</h1>
+<p>“Statistics is a part of data science, not the whole thing. Statistics research focuses on data collection and modelling, and there is little work on developing good questions, thinking about the shape of data, communicating results or building data products.”</p>
+<p><a href="http://bulletin.imstat.org/2014/09/data-science-how-is-it-different-to-statistics%E2%80%89/">http://bulletin.imstat.org/2014/09/data-science-how-is-it-different-to-statistics%E2%80%89/</a></p>
+</section><section id="jeff-leek" class="slide level2">
+<h1>Jeff Leek</h1>
+<p>“The key word in Data Science is not Data, it is <em>Science</em>.”</p>
+<p><a href="http://simplystatistics.org/2013/12/12/the-key-word-in-data-science-is-not-data-it-is-science/" class="uri">http://simplystatistics.org/2013/12/12/the-key-word-in-data-science-is-not-data-it-is-science/</a></p>
+</section><section class="slide level2">
+
+<center>
+<img src="images/Data_Science_VD.png" alt="DS Venn Diagram" />
+</center>
+<p><a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram" class="uri">http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram</a></p>
+</section><section class="slide level2">
+
+<center>
+<img src="images/storey_lab.jpeg" alt="Storey Lab" />
+</center>
+</section></section>
+<section><section id="qcb-508" class="titleslide slide level1"><h1>QCB 508</h1></section><section id="what-we-cover" class="slide level2">
+<h1>What we cover</h1>
+<p>This course is organized into three parts:</p>
+<ol type="1">
+<li>Wrangling and exploring data</li>
+<li>Statistical inference</li>
+<li>Statistical modeling</li>
+</ol>
+</section><section id="what-we-dont-cover" class="slide level2">
+<h1>What we don’t cover</h1>
+<ul>
+<li>Python</li>
+<li>Databases</li>
+<li>Big data computing (e.g., Hadoop, MapReduce, Spark)</li>
+<li>Prediction models</li>
+<li>Deploying data products</li>
+</ul>
+</section><section id="course-logistics" class="slide level2">
+<h1>Course Logistics</h1>
+<p>This course will be managed on:</p>
+<ul>
+<li><a href="https://blackboard.princeton.edu/webapps/pu-courseredirect-bb_bb60/find.jsp?course_id=QCB508_S2017">Blackboard</a></li>
+<li><a href="https://piazza.com/princeton/spring2017/qcb408508/home">Piazza</a></li>
+<li><a href="https://jdstorey.github.io/asdscourse/" class="uri">https://jdstorey.github.io/asdscourse/</a></li>
+</ul>
+<p>All course notes will be made available on the course web site and GitHub:</p>
+<ul>
+<li><a href="https://github.com/jdstorey/asdslectures/" class="uri">https://github.com/jdstorey/asdslectures/</a></li>
+</ul>
+<p>The slides <del>will</del> <em>may</em> be organized into a book:</p>
+<ul>
+<li><a href="https://jdstorey.github.io/asdsbook/" class="uri">https://jdstorey.github.io/asdsbook/</a></li>
+</ul>
+</section></section>
+<section><section id="computing" class="titleslide slide level1"><h1>Computing</h1></section><section id="what-is-r" class="slide level2">
+<h1>What is R?</h1>
+<ul>
+<li>R is a programming language, a high-level “interpreted language”</li>
+<li>R is an interactive environment</li>
+<li>R is used for doing statistics and data science</li>
+</ul>
+</section><section id="pros-and-cons-of-r" class="slide level2">
+<h1>Pros and Cons of R</h1>
+<ul>
+<li>R is free and open-source</li>
+<li>R stays on the cutting-edge because of its ability to utilize independently developed “packages”</li>
+<li>R has some <a href="http://www.johndcook.com/blog/r_language_for_programmers/">peculiar featues</a> that experienced programmers should note (see <a href="http://www.burns-stat.com/pages/Tutor/R_inferno.pdf">The R Inferno</a>)</li>
+<li>R has an <a href="https://twitter.com/search?q=%23rstats">amazing</a> <a href="http://stackoverflow.com/tags/r/info">community</a> of passionate users and developers</li>
+</ul>
+</section><section id="rstudio" class="slide level2">
+<h1>RStudio</h1>
+<ul>
+<li><p>RStudio is an IDE (integrated development environment) for R</p></li>
+<li><p>It contains many useful features for using R</p></li>
+<li><p>We will use the free version of RStudio in this course</p></li>
+</ul>
+</section></section>
+<section><section id="getting-started-in-r" class="titleslide slide level1"><h1>Getting Started in R</h1></section><section id="calculator" class="slide level2">
+<h1>Calculator</h1>
+<p>Operations on numbers: <code>+ - * / ^</code></p>
+<pre class="r"><code>&gt; 2+1
+[1] 3</code></pre>
+<pre class="r"><code>&gt; 6+3*4-2^3
+[1] 10</code></pre>
+<pre class="r"><code>&gt; 6+(3*4)-(2^3)
+[1] 10</code></pre>
+</section><section id="atomic-classes" class="slide level2">
+<h1>Atomic Classes</h1>
+<p>There are five atomic classes (or modes) of objects in R:</p>
+<ol type="1">
+<li>character</li>
+<li>complex</li>
+<li>integer</li>
+<li>logical</li>
+<li>numeric (real number)</li>
+</ol>
+<p>There is a sixth called “raw” that we will not discuss.</p>
+</section><section id="assigning-values-to-variables" class="slide level2">
+<h1>Assigning Values to Variables</h1>
+<pre class="r"><code>&gt; x &lt;- &quot;qcb508&quot; # character
+&gt; x &lt;- 2+1i     # complex
+&gt; x &lt;- 4L       # integer
+&gt; x &lt;- TRUE     # logical
+&gt; x &lt;- 3.14159  # numeric</code></pre>
+<p>Note: Anything typed after the <code>#</code> sign is not evaluated. The <code>#</code> sign allows you to add comments to your code.</p>
+</section><section id="more-ways-to-assign-values" class="slide level2">
+<h1>More Ways to Assign Values</h1>
+<pre class="r"><code>&gt; x &lt;- 1
+&gt; 1 -&gt; x
+&gt; x = 1</code></pre>
+<p>In this class, we ask that you only use <code>x &lt;- 1</code>.</p>
+</section><section id="evaluation" class="slide level2">
+<h1>Evaluation</h1>
+<p>When a complete expression is entered at the prompt, it is evaluated and the result of the evaluated expression is returned. The result may be auto-printed.</p>
+<pre class="r"><code>&gt; x &lt;- 1
+&gt; x+2
+[1] 3
+&gt; print(x)
+[1] 1
+&gt; print(x+2)
+[1] 3</code></pre>
+</section><section id="functions" class="slide level2">
+<h1>Functions</h1>
+<p>There are <a href="http://www.statmethods.net/management/functions.html">many useful functions</a> included in R. “Packages” (covered later) can be loaded as libraries to provide additional functions. You can also write your own functions in any R session.</p>
+<p>Here are some examples of built-in functions:</p>
+<pre class="r"><code>&gt; x &lt;- 2
+&gt; print(x)
+[1] 2
+&gt; sqrt(x)
+[1] 1.414214
+&gt; log(x)
+[1] 0.6931472
+&gt; class(x)
+[1] &quot;numeric&quot;
+&gt; is.vector(x)
+[1] TRUE</code></pre>
+</section><section id="accessing-help-in-r" class="slide level2">
+<h1>Accessing Help in R</h1>
+<p>You can open the help file for any function by typing <code>?</code> with the functions name. Here is an example:</p>
+<pre class="r"><code>&gt; ?sqrt</code></pre>
+<p>There’s also a function <code>help.search</code> that can do general searches for help. You can learn about it by typing:</p>
+<pre class="r"><code>&gt; ?help.search</code></pre>
+<p>It’s also useful to use Google: for example, <a href="https://www.google.com/search?q=r+help+square+root">“r help square root”</a>. The R help files are also on the web.</p>
+</section><section id="variable-names" class="slide level2">
+<h1>Variable Names</h1>
+<p>In the previous examples, we used <code>x</code> as our variable name. Do not use the following variable names, as they have special meanings in R:</p>
+<pre><code>c, q, s, t, C, D, F, I, T</code></pre>
+<p>When combining two words for a given variable, we recommend one of these options:</p>
+<pre class="r"><code>&gt; my_variable &lt;- 1
+&gt; myVariable &lt;- 1</code></pre>
+<p>Variable names such as <code>my.variable</code> are problematic because of the special use of “.” in R.</p>
+</section><section id="vectors" class="slide level2">
+<h1>Vectors</h1>
+<p>The vector is the most basic object in R. You can create vectors in a number of ways.</p>
+<pre class="r"><code>&gt; x &lt;- c(1, 2, 3, 4, 5)
+&gt; x
+[1] 1 2 3 4 5
+&gt; 
+&gt; y &lt;- 1:40
+&gt; y
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+[20] 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
+[39] 39 40
+&gt; 
+&gt; z &lt;- seq(from=0, to=100, by=10)
+&gt; z
+ [1]   0  10  20  30  40  50  60  70  80  90 100
+&gt; length(z)
+[1] 11</code></pre>
+</section><section id="vectors-1" class="slide level2">
+<h1>Vectors</h1>
+<ul>
+<li>Programmers: vectors are indexed starting at <code>1</code>, not <code>0</code></li>
+<li>A vector can only contain elements of a single class:</li>
+</ul>
+<pre class="r"><code>&gt; x &lt;- &quot;a&quot;
+&gt; x[0]
+character(0)
+&gt; x[1]
+[1] &quot;a&quot;
+&gt; 
+&gt; y &lt;- 1:3
+&gt; z &lt;- c(x, y, TRUE, FALSE)
+&gt; z
+[1] &quot;a&quot;     &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;TRUE&quot;  &quot;FALSE&quot;</code></pre>
+</section><section id="matrices" class="slide level2">
+<h1>Matrices</h1>
+<p>Like vectors, matrices are objects that can contain elements of only one class.</p>
+<pre class="r"><code>&gt; m &lt;- matrix(1:6, nrow=2, ncol=3)
+&gt; m
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+&gt; 
+&gt; m &lt;- matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+&gt; m
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6</code></pre>
+</section><section id="factors" class="slide level2">
+<h1>Factors</h1>
+<p>In statistics, factors encode categorical data.</p>
+<pre class="r"><code>&gt; paint &lt;- factor(c(&quot;red&quot;, &quot;white&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;red&quot;, 
++                   &quot;red&quot;))
+&gt; paint
+[1] red   white blue  blue  red   red  
+Levels: blue red white
+&gt; 
+&gt; table(paint)
+paint
+ blue   red white 
+    2     3     1 
+&gt; unclass(paint)
+[1] 2 3 1 1 2 2
+attr(,&quot;levels&quot;)
+[1] &quot;blue&quot;  &quot;red&quot;   &quot;white&quot;</code></pre>
+</section><section id="lists" class="slide level2">
+<h1>Lists</h1>
+<p>Lists allow you to hold different classes of objects in one variable.</p>
+<pre class="r"><code>&gt; x &lt;- list(1:3, &quot;a&quot;, c(TRUE, FALSE))
+&gt; x
+[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] &quot;a&quot;
+
+[[3]]
+[1]  TRUE FALSE
+&gt; 
+&gt; # access any element of the list
+&gt; x[[2]]
+[1] &quot;a&quot;
+&gt; x[[3]][2]
+[1] FALSE</code></pre>
+</section><section id="lists-with-names" class="slide level2">
+<h1>Lists with Names</h1>
+<p>The elements of a list can be given names.</p>
+<pre class="r"><code>&gt; x &lt;- list(counting=1:3, char=&quot;a&quot;, logic=c(TRUE, FALSE))
+&gt; x
+$counting
+[1] 1 2 3
+
+$char
+[1] &quot;a&quot;
+
+$logic
+[1]  TRUE FALSE
+&gt; 
+&gt; # access any element of the list
+&gt; x$char
+[1] &quot;a&quot;
+&gt; x$logic[2]
+[1] FALSE</code></pre>
+</section><section id="missing-values" class="slide level2">
+<h1>Missing Values</h1>
+<p>In data analysis and model fitting, we often have missing values. <code>NA</code> represents missing values and <code>NaN</code> means “not a number”, which is a special type of missing value.</p>
+<pre class="r"><code>&gt; m &lt;- matrix(nrow=3, ncol=3)
+&gt; m
+     [,1] [,2] [,3]
+[1,]   NA   NA   NA
+[2,]   NA   NA   NA
+[3,]   NA   NA   NA
+&gt; 0/1
+[1] 0
+&gt; 1/0
+[1] Inf
+&gt; 0/0
+[1] NaN</code></pre>
+</section><section id="null" class="slide level2">
+<h1><code>NULL</code></h1>
+<p><code>NULL</code> is a special type of reserved value in R.</p>
+<pre class="r"><code>&gt; x &lt;- vector(mode=&quot;list&quot;, length=3)
+&gt; x
+[[1]]
+NULL
+
+[[2]]
+NULL
+
+[[3]]
+NULL</code></pre>
+</section><section id="coercion" class="slide level2">
+<h1>Coercion</h1>
+<p>We saw earlier that when we mixed classes in a vector they were all coerced to be of type character:</p>
+<pre class="r"><code>&gt; c(&quot;a&quot;, 1:3, TRUE, FALSE)
+[1] &quot;a&quot;     &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;TRUE&quot;  &quot;FALSE&quot;</code></pre>
+<p>You can directly apply coercion with functions <code>as.numeric()</code>, <code>as.character()</code>, <code>as.logical()</code>, etc.</p>
+<p>This doesn’t always work out well:</p>
+<pre class="r"><code>&gt; x &lt;- 1:3
+&gt; as.character(x)
+[1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
+&gt; 
+&gt; y &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
+&gt; as.numeric(y)
+Warning: NAs introduced by coercion
+[1] NA NA NA</code></pre>
+</section><section id="data-frames" class="slide level2">
+<h1>Data Frames</h1>
+<p>The data frame is one of the most important objects in R. Data sets very often come in tabular form of mixed classes, and data frames are constructed exactly for this.</p>
+<p>Data frames are lists where each element has the same length.</p>
+</section><section id="data-frames-1" class="slide level2">
+<h1>Data Frames</h1>
+<pre class="r"><code>&gt; df &lt;- data.frame(counting=1:3, char=c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 
++                  logic=c(TRUE, FALSE, TRUE))
+&gt; df
+  counting char logic
+1        1    a  TRUE
+2        2    b FALSE
+3        3    c  TRUE
+&gt; 
+&gt; nrow(df)
+[1] 3
+&gt; ncol(df)
+[1] 3</code></pre>
+</section><section id="data-frames-2" class="slide level2">
+<h1>Data Frames</h1>
+<pre class="r"><code>&gt; dim(df)
+[1] 3 3
+&gt; 
+&gt; names(df)
+[1] &quot;counting&quot; &quot;char&quot;     &quot;logic&quot;   
+&gt; 
+&gt; attributes(df)
+$names
+[1] &quot;counting&quot; &quot;char&quot;     &quot;logic&quot;   
+
+$row.names
+[1] 1 2 3
+
+$class
+[1] &quot;data.frame&quot;</code></pre>
+</section><section id="attributes" class="slide level2">
+<h1>Attributes</h1>
+<p>Attributes give information (or meta-data) about R objects. The previous slide shows <code>attributes(df)</code>, the attributes of the data frame <code>df</code>.</p>
+<pre class="r"><code>&gt; x &lt;- 1:3
+&gt; attributes(x) # no attributes for a standard vector
+NULL
+&gt; 
+&gt; m &lt;- matrix(1:6, nrow=2, ncol=3)
+&gt; attributes(m)
+$dim
+[1] 2 3</code></pre>
+</section><section id="attributes-contd" class="slide level2">
+<h1>Attributes (cont’d)</h1>
+<pre class="r"><code>&gt; paint &lt;- factor(c(&quot;red&quot;, &quot;white&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;red&quot;, 
++                   &quot;red&quot;))
+&gt; attributes(paint)
+$levels
+[1] &quot;blue&quot;  &quot;red&quot;   &quot;white&quot;
+
+$class
+[1] &quot;factor&quot;</code></pre>
+</section><section id="names" class="slide level2">
+<h1>Names</h1>
+<p>Names can be assigned to columns and rows of vectors, matrices, and data frames. This makes your code easier to write and read.</p>
+<pre class="r"><code>&gt; names(x) &lt;- c(&quot;Princeton&quot;, &quot;Rutgers&quot;, &quot;Penn&quot;)
+&gt; x
+Princeton   Rutgers      Penn 
+        1         2         3 
+&gt; 
+&gt; colnames(m) &lt;- c(&quot;NJ&quot;, &quot;NY&quot;, &quot;PA&quot;)
+&gt; rownames(m) &lt;- c(&quot;East&quot;, &quot;West&quot;)
+&gt; m
+     NJ NY PA
+East  1  3  5
+West  2  4  6
+&gt; colnames(m)
+[1] &quot;NJ&quot; &quot;NY&quot; &quot;PA&quot;</code></pre>
+</section><section id="accessing-names" class="slide level2">
+<h1>Accessing Names</h1>
+<p>Displaying or assigning names to these three types of objects does not have consistent syntax.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Object</th>
+<th>Column Names</th>
+<th>Row Names</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>vector</td>
+<td><code>names()</code></td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td>data frame</td>
+<td><code>names()</code></td>
+<td><code>row.names()</code></td>
+</tr>
+<tr class="odd">
+<td>data frame</td>
+<td><code>colnames()</code></td>
+<td><code>rownames()</code></td>
+</tr>
+<tr class="even">
+<td>matrix</td>
+<td><code>colnames()</code></td>
+<td><code>rownames()</code></td>
+</tr>
+</tbody>
+</table>
+</section><section id="going-deeper" class="slide level2">
+<h1>Going Deeper</h1>
+<ul>
+<li><a href="#//control-structures">Control Structures</a></li>
+<li><a href="#//vectorized-operations">Vectorized Operations</a></li>
+<li><a href="#//subsetting-r-objects">Subsetting R Objects</a></li>
+<li><a href="#//functions-1">Functions</a></li>
+<li><a href="#//environment">Environments</a></li>
+<li><a href="#//packages">Packages</a></li>
+<li><a href="#//organizing-your-code">Code Organization</a></li>
+</ul>
+</section></section>
+<section><section id="reproducibility" class="titleslide slide level1"><h1>Reproducibility</h1></section><section id="definition-and-motivation" class="slide level2">
+<h1>Definition and Motivation</h1>
+<ul>
+<li><p>Reproducibility involves <em>being able to recalculate the exact numbers in a data analysis using the code and raw data provided by the analyst</em>.</p></li>
+<li><p>Reproducibility is often difficult to achieve and has slowed down the discovery of important data analytic errors.</p></li>
+<li><p>Reproducibility should not be confused with “correctness” of a data analysis. A data analysis can be fully reproducible and recreate all numbers in an analysis and still be misleading or incorrect.</p></li>
+</ul>
+<p>From <a href="https://leanpub.com/datastyle"><em>Elements of Data Analytic Style</em></a>, by Leek</p>
+</section><section id="reproducible-vs.replicable" class="slide level2">
+<h1>Reproducible vs. Replicable</h1>
+<p><em>Reproducible research</em> is often used these days to indicate the ability to recalculate the exact numbers in a data analysis</p>
+<p><em>Replicable research results</em> often refers to the ability to independently carry out a study (thereby collecting new data) and coming to equivalent conclusions as the original study</p>
+<p>These two terms are often confused, so it is important to clearly state the definition</p>
+</section><section id="steps-to-a-reproducible-analysis" class="slide level2">
+<h1>Steps to a Reproducible Analysis</h1>
+<ol type="1">
+<li><p>Use a data analysis script – e.g., R Markdown (discussed next section!) or iPython Notebooks</p></li>
+<li><p>Record versions of software and paramaters – e.g., use <code>sessionInfo()</code> in R as in <code>hw_1.Rmd</code></p></li>
+<li><p>Organize your data analysis</p></li>
+<li><p>Use version control – e.g., GitHub</p></li>
+<li><p>Set a random number generator seed – e.g., use <code>set.seed()</code> in R</p></li>
+<li><p>Have someone else run your analysis</p></li>
+</ol>
+</section><section id="organizing-your-data-analysis" class="slide level2">
+<h1>Organizing Your Data Analysis</h1>
+<ul>
+<li>Data
+<ul>
+<li>raw data</li>
+<li>processed data (sometimes multiple stages for very large data sets)</li>
+</ul></li>
+<li>Figures
+<ul>
+<li>Exploratory figures</li>
+<li>Final figures</li>
+</ul></li>
+</ul>
+</section><section id="organizing-your-data-analysis-contd" class="slide level2">
+<h1>Organizing Your Data Analysis (cont’d)</h1>
+<ul>
+<li>R code
+<ul>
+<li>Raw or unused scripts</li>
+<li>Data processing scripts</li>
+<li>Analysis scripts</li>
+</ul></li>
+<li>Text
+<ul>
+<li>README files explaining what all the components are</li>
+<li>Final data analysis products like presentations/writeups</li>
+</ul></li>
+</ul>
+</section><section id="common-mistakes" class="slide level2">
+<h1>Common Mistakes</h1>
+<ul>
+<li>Failing to use a script for your analysis</li>
+<li>Not recording software and package version numbers or other settings used</li>
+<li>Not sharing your data and code</li>
+<li>Using reproducibility as a social weapon</li>
+</ul>
+</section></section>
+<section><section id="r-markdown" class="titleslide slide level1"><h1>R Markdown</h1></section><section id="r-markdown-knitr" class="slide level2">
+<h1>R + Markdown + knitr</h1>
+<p>R Markdown was developed by the RStudio team to allow one to write reproducible research documents using Markdown and <code>knitr</code>. This is contained in the <code>rmarkdown</code> package, but can easily be carried out in RStudio.</p>
+<p>Markdown was originally developed as a very simply text-to-html conversion tool. With Pandoc, Markdown is a very simply text-to-<code>X</code> conversion tool where <code>X</code> can be many different formats: html, LaTeX, PDF, Word, etc.</p>
+</section><section id="r-markdown-files" class="slide level2">
+<h1>R Markdown Files</h1>
+<p>R Markdown documents begin with a metadata section, the YAML header, that can include information on the title, author, and date as well as options for customizing output.</p>
+<pre><code>---
+title: &quot;QCB 508 -- Homework 1&quot;
+author: &quot;Your Name&quot;
+date: February 23, 2017
+output: pdf_document
+---</code></pre>
+<p>Many options are available. See <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a> for full documentation.</p>
+</section><section id="markdown" class="slide level2">
+<h1>Markdown</h1>
+<p>Headers:</p>
+<pre><code># Header 1
+## Header 2
+### Header 3</code></pre>
+<p>Emphasis:</p>
+<pre><code>*italic* **bold**
+_italic_ __bold__</code></pre>
+<p>Tables:</p>
+<pre><code>First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell</code></pre>
+</section><section id="markdown-contd" class="slide level2">
+<h1>Markdown (cont’d)</h1>
+<p>Unordered list:</p>
+<pre><code>- Item 1
+- Item 2
+    - Item 2a
+    - Item 2b</code></pre>
+<p>Ordered list:</p>
+<pre><code>1. Item 1
+2. Item 2
+3. Item 3
+    - Item 3a
+    - Item 3b</code></pre>
+</section><section id="markdown-contd-1" class="slide level2">
+<h1>Markdown (cont’d)</h1>
+<p>Links:</p>
+<pre><code>http://example.com
+
+[linked phrase](http://example.com)</code></pre>
+<p>Blockquotes:</p>
+<pre><code>Florence Nightingale once said:
+
+&gt; For the sick it is important 
+&gt; to have the best. </code></pre>
+</section><section id="markdown-contd-2" class="slide level2">
+<h1>Markdown (cont’d)</h1>
+<p>Plain code blocks:</p>
+<pre><code>```
+This text is displayed verbatim with no formatting.
+```</code></pre>
+<p>Inline Code:</p>
+<pre><code>We use the `print()` function to print the contents 
+of a variable in R.</code></pre>
+<p>Additional documentation and examples can be found <a href="http://rmarkdown.rstudio.com/authoring_basics.html">here</a> and <a href="http://daringfireball.net/projects/markdown/basics">here</a>.</p>
+</section><section id="latex" class="slide level2">
+<h1>LaTeX</h1>
+<p>LaTeX is a markup language for technical writing, especially for mathematics. It can be include in R Markdown files.</p>
+<p>For example,</p>
+<pre><code>$y = a + bx + \epsilon$</code></pre>
+<p>produces</p>
+<p><span class="math inline">\(y = a + bx + \epsilon\)</span></p>
+<p><a href="https://www.artofproblemsolving.com/wiki/index.php/LaTeX">Here</a> is an introduction to LaTeX and <a href="http://www.stat.cmu.edu/~cshalizi/rmarkdown/#math-in-r-markdown">here</a> is a primer on LaTeX for R Markdown.</p>
+</section><section id="knitr" class="slide level2">
+<h1>knitr</h1>
+<p>The <code>knitr</code> R package allows one to execute R code within a document, and to display the code itself and its output (if desired). This is particularly easy to do in the R Markdown setting. For example…</p>
+<p><em>Placing the following text in an R Markdown file</em></p>
+<pre><code>The sum of 2 and 2 is `r 2+2`.</code></pre>
+<p><em>produces in the output file</em></p>
+<p>The sum of 2 and 2 is 4.</p>
+</section><section id="knitr-chunks" class="slide level2">
+<h1>knitr Chunks</h1>
+<p>Chunks of R code separated from the text. In R Markdown:</p>
+<pre><code>```{r}
+x &lt;- 2
+x + 1
+print(x)
+```</code></pre>
+<p>Output in file:</p>
+<pre class="r"><code>&gt; x &lt;- 2
+&gt; x + 1
+[1] 3
+&gt; print(x)
+[1] 2</code></pre>
+</section><section id="chunk-option-echo" class="slide level2">
+<h1>Chunk Option: <code>echo</code></h1>
+<p>In R Markdown:</p>
+<pre><code>```{r, echo=FALSE}
+x &lt;- 2
+x + 1
+print(x)
+```</code></pre>
+<p>Output in file:</p>
+<pre><code>[1] 3
+[1] 2</code></pre>
+</section><section id="chunk-option-results" class="slide level2">
+<h1>Chunk Option: <code>results</code></h1>
+<p>In R Markdown:</p>
+<pre><code>```{r, results=&quot;hide&quot;}
+x &lt;- 2
+x + 1
+print(x)
+```</code></pre>
+<p>Output in file:</p>
+<pre class="r"><code>&gt; x &lt;- 2
+&gt; x + 1
+&gt; print(x)</code></pre>
+</section><section id="chunk-option-include" class="slide level2">
+<h1>Chunk Option: <code>include</code></h1>
+<p>In R Markdown:</p>
+<pre><code>```{r, include=FALSE}
+x &lt;- 2
+x + 1
+print(x)
+```</code></pre>
+<p>Output in file:</p>
+<p>(nothing)</p>
+</section><section id="chunk-option-eval" class="slide level2">
+<h1>Chunk Option: <code>eval</code></h1>
+<p>In R Markdown:</p>
+<pre><code>```{r, eval=FALSE}
+x &lt;- 2
+x + 1
+print(x)
+```</code></pre>
+<p>Output in file:</p>
+<pre class="r"><code>&gt; x &lt;- 2
+&gt; x + 1
+&gt; print(x)</code></pre>
+</section><section id="chunk-names" class="slide level2">
+<h1>Chunk Names</h1>
+<p>Naming your chunks can be useful for identifying them in your file and during the execution, and also to denote dependencies among chunks.</p>
+<pre><code>```{r my_first_chunk}
+x &lt;- 2
+x + 1
+print(x)
+```</code></pre>
+</section><section id="knitr-option-cache" class="slide level2">
+<h1>knitr Option: <code>cache</code></h1>
+<p>Sometimes you don’t want to run chunks over and over, especially for large calculations. You can “cache” them.</p>
+<pre><code>```{r chunk1, cache=TRUE, include=FALSE}
+x &lt;- 2
+```</code></pre>
+<pre><code>```{r chunk2, cache=TRUE, dependson=&quot;chunk1&quot;}
+y &lt;- 3
+z &lt;- x + y
+```</code></pre>
+<p>This creates a directory called <code>cache</code> in your working directory that stores the objects created or modified in these chunks. When <code>chunk1</code> is modified, it is re-run. Since <code>chunk2</code> depends on <code>chunk1</code>, it will also be re-run.</p>
+</section><section id="knitr-options-figures" class="slide level2">
+<h1>knitr Options: figures</h1>
+<p>You can add chunk options regarding the placement and size of figures. Examples include:</p>
+<ul>
+<li><code>fig.width</code></li>
+<li><code>fig.height</code></li>
+<li><code>fig.align</code></li>
+</ul>
+</section><section id="changing-default-chunk-settings" class="slide level2">
+<h1>Changing Default Chunk Settings</h1>
+<p>If you will be using the same options on most chunks, you can set default options for the entire document. Run something like this at the beginning of your document with your desired chunk options.</p>
+<pre><code>```{r my_opts, cache=FALSE, echo=FALSE}
+library(&quot;knitr&quot;)
+opts_chunk$set(fig.align=&quot;center&quot;, fig.height=4, fig.width=6)
+```</code></pre>
+</section><section id="documentation-and-examples" class="slide level2">
+<h1>Documentation and Examples</h1>
+<ul>
+<li><a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a></li>
+<li><a href="http://kbroman.org/knitr_knutshell/pages/Rmarkdown.html" class="uri">http://kbroman.org/knitr_knutshell/pages/Rmarkdown.html</a></li>
+<li><a href="https://github.com/jdstorey/asdslectures" class="uri">https://github.com/jdstorey/asdslectures</a></li>
+</ul>
+</section></section>
+<section><section id="control-structures" class="titleslide slide level1"><h1>Control Structures</h1></section><section id="rationale" class="slide level2">
+<h1>Rationale</h1>
+<ul>
+<li><p>Control structures in R allow you to control the flow of execution of a series of R expressions</p></li>
+<li><p>They allow you to put some logic into your R code, rather than just always executing the same R code every time</p></li>
+<li><p>Control structures also allow you to respond to inputs or to features of the data and execute different R expressions accordingly</p></li>
+</ul>
+<p>Paraphrased from <a href="https://leanpub.com/rprogramming"><em>R Programming for Data Science</em></a>, by Peng</p>
+</section><section id="common-control-structures" class="slide level2">
+<h1>Common Control Structures</h1>
+<ul>
+<li><code>if</code> and <code>else</code>: testing a condition and acting on it</li>
+<li><code>for</code>: execute a loop a fixed number of times</li>
+<li><code>while</code>: execute a loop while a condition is true</li>
+<li><code>repeat</code>: execute an infinite loop (must break out of it to stop)</li>
+<li><code>break</code>: break the execution of a loop</li>
+<li><code>next</code>: skip an interation of a loop</li>
+</ul>
+<p>From <em>R Programming for Data Science</em>, by Peng</p>
+</section><section id="some-boolean-logic" class="slide level2">
+<h1>Some Boolean Logic</h1>
+<p>R has built-in functions that produce <code>TRUE</code> or <code>FALSE</code> such as <code>is.vector</code> or <code>is.na</code>. You can also do the following:</p>
+<ul>
+<li><code>x == y</code> : does x equal y?</li>
+<li><code>x &gt; y</code> : is x greater than y? (also <code>&lt;</code> less than)</li>
+<li><code>x &gt;= y</code> : is x greater than or equal to y?</li>
+<li><code>x &amp;&amp; y</code> : are both x and y true?</li>
+<li><code>x || y</code> : is either x or y true?</li>
+<li><code>!is.vector(x)</code> : this is <code>TRUE</code> if x is not a vector</li>
+</ul>
+</section><section id="if" class="slide level2">
+<h1><code>if</code></h1>
+<p>Idea:</p>
+<pre><code>if(&lt;condition&gt;) {
+        ## do something
+} 
+## Continue with rest of code</code></pre>
+<p>Example:</p>
+<pre class="r"><code>&gt; x &lt;- c(1,2,3)
+&gt; if(is.numeric(x)) {
++   x+2
++ }
+[1] 3 4 5</code></pre>
+</section><section id="if-else" class="slide level2">
+<h1><code>if</code>-<code>else</code></h1>
+<p>Idea:</p>
+<pre><code>if(&lt;condition&gt;) {
+        ## do something
+} 
+else {
+        ## do something else
+}</code></pre>
+<p>Example:</p>
+<pre class="r"><code>&gt; x &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
+&gt; if(is.numeric(x)) {
++   print(x+2)
++ } else {
++   class(x)
++ }
+[1] &quot;character&quot;</code></pre>
+</section><section id="for-loops" class="slide level2">
+<h1><code>for</code> Loops</h1>
+<p>Example:</p>
+<pre class="r"><code>&gt; for(i in 1:10) {
++   print(i)
++ }
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+</section><section id="for-loops-contd" class="slide level2">
+<h1><code>for</code> Loops (cont’d)</h1>
+<p>Examples:</p>
+<pre class="r"><code>&gt; x &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
+&gt; 
+&gt; for(i in 1:4) {
++   print(x[i])
++ }
+[1] &quot;a&quot;
+[1] &quot;b&quot;
+[1] &quot;c&quot;
+[1] &quot;d&quot;
+&gt; 
+&gt; for(i in seq_along(x)) {
++   print(x[i])
++ }
+[1] &quot;a&quot;
+[1] &quot;b&quot;
+[1] &quot;c&quot;
+[1] &quot;d&quot;</code></pre>
+</section><section id="nested-for-loops" class="slide level2">
+<h1>Nested <code>for</code> Loops</h1>
+<p>Example:</p>
+<pre class="r"><code>&gt; m &lt;- matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+&gt; 
+&gt; for(i in seq_len(nrow(m))) {
++   for(j in seq_len(ncol(m))) {
++     print(m[i,j])
++   }
++ }
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6</code></pre>
+</section><section id="while" class="slide level2">
+<h1><code>while</code></h1>
+<p>Example:</p>
+<pre class="r"><code>&gt; x &lt;- 1:10
+&gt; idx &lt;- 1
+&gt; 
+&gt; while(x[idx] &lt; 4) {
++   print(x[idx])
++   idx &lt;- idx + 1
++ }
+[1] 1
+[1] 2
+[1] 3
+&gt; 
+&gt; idx
+[1] 4</code></pre>
+<p>Repeats the loop until while the condition is <code>TRUE</code>.</p>
+</section><section id="repeat" class="slide level2">
+<h1><code>repeat</code></h1>
+<p>Example:</p>
+<pre class="r"><code>&gt; x &lt;- 1:10
+&gt; idx &lt;- 1
+&gt; 
+&gt; repeat {
++   print(x[idx])
++   idx &lt;- idx + 1
++   if(idx &gt;= 4) {
++     break
++   }
++ }
+[1] 1
+[1] 2
+[1] 3
+&gt; 
+&gt; idx
+[1] 4</code></pre>
+<p>Repeats the loop until <code>break</code> is executed.</p>
+</section><section id="break-and-next" class="slide level2">
+<h1><code>break</code> and <code>next</code></h1>
+<p><code>break</code> ends the loop. <code>next</code> skips the rest of the current loop iteration.</p>
+<p>Example:</p>
+<pre class="r"><code>&gt; x &lt;- 1:1000
+&gt; for(idx in 1:1000) {
++   # %% calculates division remainder
++   if((x[idx] %% 2) &gt; 0) { 
++     next
++   } else if(x[idx] &gt; 10) { # an else-if!!
++     break
++   } else {
++     print(x[idx])
++   }
++ }
+[1] 2
+[1] 4
+[1] 6
+[1] 8
+[1] 10</code></pre>
+</section></section>
+<section><section id="vectorized-operations" class="titleslide slide level1"><h1>Vectorized Operations</h1></section><section id="calculations-on-vectors" class="slide level2">
+<h1>Calculations on Vectors</h1>
+<p>R is usually smart about doing calculations with vectors. Examples:</p>
+<pre class="r"><code>&gt; 
+&gt; x &lt;- 1:3
+&gt; y &lt;- 4:6
+&gt; 
+&gt; 2*x     # same as c(2*x[1], 2*x[2], 2*x[3])
+[1] 2 4 6
+&gt; x + 1   # same as c(x[1]+1, x[2]+1, x[3]+1)
+[1] 2 3 4
+&gt; x + y   # same as c(x[1]+y[1], x[2]+y[2], x[3]+y[3])
+[1] 5 7 9
+&gt; x*y     # same as c(x[1]*y[1], x[2]*y[2], x[3]*y[3])
+[1]  4 10 18</code></pre>
+</section><section id="a-caveat" class="slide level2">
+<h1>A Caveat</h1>
+<p>If two vectors are of different lengths, R tries to find a solution for you (and doesn’t always tell you).</p>
+<pre class="r"><code>&gt; x &lt;- 1:5
+&gt; y &lt;- 1:2
+&gt; x+y
+Warning in x + y: longer object length is not a multiple of
+shorter object length
+[1] 2 4 4 6 6</code></pre>
+<p>What happened here?</p>
+</section><section id="vectorized-matrix-operations" class="slide level2">
+<h1>Vectorized Matrix Operations</h1>
+<p>Operations on matrices are also vectorized. Example:</p>
+<pre class="r"><code>&gt; x &lt;- matrix(1:4, nrow=2, ncol=2, byrow=TRUE)
+&gt; y &lt;- matrix(1:4, nrow=2, ncol=2)
+&gt; 
+&gt; x+y
+     [,1] [,2]
+[1,]    2    5
+[2,]    5    8
+&gt; 
+&gt; x*y
+     [,1] [,2]
+[1,]    1    6
+[2,]    6   16</code></pre>
+</section><section id="mixing-vectors-and-matrices" class="slide level2">
+<h1>Mixing Vectors and Matrices</h1>
+<p>What happens when we do calculations involving a vector and a matrix? Example:</p>
+<pre class="r"><code>&gt; x &lt;- matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+&gt; z &lt;- 1:2
+&gt; 
+&gt; x + z
+     [,1] [,2] [,3]
+[1,]    2    3    4
+[2,]    6    7    8
+&gt; 
+&gt; x * z
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    8   10   12</code></pre>
+</section><section id="mixing-vectors-and-matrices-1" class="slide level2">
+<h1>Mixing Vectors and Matrices</h1>
+<p>Another example:</p>
+<pre class="r"><code>&gt; x &lt;- matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+&gt; z &lt;- 1:3
+&gt; 
+&gt; x + z
+     [,1] [,2] [,3]
+[1,]    2    5    5
+[2,]    6    6    9
+&gt; 
+&gt; x * z
+     [,1] [,2] [,3]
+[1,]    1    6    6
+[2,]    8    5   18</code></pre>
+<p>What happened this time?</p>
+</section><section id="vectorized-boolean-logic" class="slide level2">
+<h1>Vectorized Boolean Logic</h1>
+<p>We saw <code>&amp;&amp;</code> and <code>||</code> applied to pairs of logical values. We can also vectorize these operations.</p>
+<pre class="r"><code>&gt; a &lt;- c(TRUE, TRUE, FALSE)
+&gt; b &lt;- c(FALSE, TRUE, FALSE)
+&gt; 
+&gt; a | b
+[1]  TRUE  TRUE FALSE
+&gt; a &amp; b
+[1] FALSE  TRUE FALSE</code></pre>
+</section></section>
+<section><section id="subsetting-r-objects" class="titleslide slide level1"><h1>Subsetting R Objects</h1></section><section id="subsetting-vectors" class="slide level2">
+<h1>Subsetting Vectors</h1>
+<pre class="r"><code>&gt; x &lt;- 1:8
+&gt; 
+&gt; x[1]           # extract the first element
+[1] 1
+&gt; x[2]           # extract the second element
+[1] 2
+&gt; 
+&gt; x[1:4]         # extract the first 4 elements
+[1] 1 2 3 4
+&gt; 
+&gt; x[c(1, 3, 4)]  # extract elements 1, 3, and 4
+[1] 1 3 4
+&gt; x[-c(1, 3, 4)] # extract all elements EXCEPT 1, 3, and 4
+[1] 2 5 6 7 8</code></pre>
+</section><section id="subsetting-vectors-1" class="slide level2">
+<h1>Subsetting Vectors</h1>
+<pre class="r"><code>&gt; names(x) &lt;- letters[1:8]
+&gt; x
+a b c d e f g h 
+1 2 3 4 5 6 7 8 
+&gt; 
+&gt; x[c(&quot;a&quot;, &quot;b&quot;, &quot;f&quot;)]
+a b f 
+1 2 6 
+&gt; 
+&gt; s &lt;- x &gt; 3
+&gt; s
+    a     b     c     d     e     f     g     h 
+FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE 
+&gt; x[s]
+d e f g h 
+4 5 6 7 8 </code></pre>
+</section><section id="subsettng-matrices" class="slide level2">
+<h1>Subsettng Matrices</h1>
+<pre class="r"><code>&gt; x &lt;- matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+&gt; x
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+&gt; 
+&gt; x[1,2]
+[1] 2
+&gt; x[1, ]
+[1] 1 2 3
+&gt; x[ ,2]
+[1] 2 5</code></pre>
+</section><section id="subsettng-matrices-1" class="slide level2">
+<h1>Subsettng Matrices</h1>
+<pre class="r"><code>&gt; colnames(x) &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
+&gt; 
+&gt; x[ , c(&quot;B&quot;, &quot;C&quot;)]
+     B C
+[1,] 2 3
+[2,] 5 6
+&gt; 
+&gt; x[c(FALSE, TRUE), c(&quot;B&quot;, &quot;C&quot;)]
+B C 
+5 6 
+&gt; 
+&gt; x[2, c(&quot;B&quot;, &quot;C&quot;)]
+B C 
+5 6 </code></pre>
+</section><section id="subsettng-matrices-2" class="slide level2">
+<h1>Subsettng Matrices</h1>
+<pre class="r"><code>&gt; s &lt;- (x %% 2) == 0
+&gt; s
+         A     B     C
+[1,] FALSE  TRUE FALSE
+[2,]  TRUE FALSE  TRUE
+&gt; 
+&gt; x[s]
+[1] 4 2 6
+&gt; 
+&gt; x[c(2, 3, 6)]
+[1] 4 2 6</code></pre>
+</section><section id="subsetting-lists" class="slide level2">
+<h1>Subsetting Lists</h1>
+<pre class="r"><code>&gt; x &lt;- list(my=1:3, favorite=c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 
++           course=c(FALSE, TRUE, NA))
+&gt; 
+&gt; x[[1]]
+[1] 1 2 3
+&gt; x[[&quot;my&quot;]]
+[1] 1 2 3
+&gt; x$my
+[1] 1 2 3</code></pre>
+<pre class="r"><code>&gt; x[[c(3,1)]]
+[1] FALSE
+&gt; x[[3]][1]
+[1] FALSE</code></pre>
+<pre class="r"><code>&gt; x[c(3,1)]
+$course
+[1] FALSE  TRUE    NA
+
+$my
+[1] 1 2 3</code></pre>
+</section><section id="subsetting-data-frames" class="slide level2">
+<h1>Subsetting Data Frames</h1>
+<pre class="r"><code>&gt; x &lt;- data.frame(my=1:3, favorite=c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 
++           course=c(FALSE, TRUE, NA))
+&gt; 
+&gt; x[[1]]
+[1] 1 2 3
+&gt; x[[&quot;my&quot;]]
+[1] 1 2 3
+&gt; x$my
+[1] 1 2 3</code></pre>
+<pre class="r"><code>&gt; x[[c(3,1)]]
+[1] FALSE
+&gt; x[[3]][1]
+[1] FALSE</code></pre>
+<pre class="r"><code>&gt; x[c(3,1)]
+  course my
+1  FALSE  1
+2   TRUE  2
+3     NA  3</code></pre>
+</section><section id="subsetting-data-frames-1" class="slide level2">
+<h1>Subsetting Data Frames</h1>
+<pre class="r"><code>&gt; x &lt;- data.frame(my=1:3, favorite=c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 
++           course=c(FALSE, TRUE, NA))
+&gt; 
+&gt; x[1, ]
+  my favorite course
+1  1        a  FALSE
+&gt; x[ ,3]
+[1] FALSE  TRUE    NA
+&gt; x[ ,&quot;favorite&quot;]
+[1] a b c
+Levels: a b c</code></pre>
+<pre class="r"><code>&gt; x[1:2, ]
+  my favorite course
+1  1        a  FALSE
+2  2        b   TRUE
+&gt; x[ ,2:3]
+  favorite course
+1        a  FALSE
+2        b   TRUE
+3        c     NA</code></pre>
+</section><section id="note-on-data-frames" class="slide level2">
+<h1>Note on Data Frames</h1>
+<p>R often converts character strings to factors unless you specify otherwise.</p>
+<p>In the previous slide, we saw it converted the “favorite” column to factors. Let’s fix that…</p>
+<pre class="r"><code>&gt; x &lt;- data.frame(my=1:3, favorite=c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 
++                 course=c(FALSE, TRUE, NA), 
++                 stringsAsFactors=FALSE)
+&gt; 
+&gt; x[ ,&quot;favorite&quot;]
+[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;
+&gt; class(x[ ,&quot;favorite&quot;])
+[1] &quot;character&quot;</code></pre>
+</section><section id="missing-values-1" class="slide level2">
+<h1>Missing Values</h1>
+<pre class="r"><code>&gt; data(&quot;airquality&quot;, package=&quot;datasets&quot;)
+&gt; head(airquality)
+  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6
+&gt; dim(airquality)
+[1] 153   6</code></pre>
+<pre class="r"><code>&gt; which(is.na(airquality$Ozone))
+ [1]   5  10  25  26  27  32  33  34  35  36  37  39  42  43
+[15]  45  46  52  53  54  55  56  57  58  59  60  61  65  72
+[29]  75  83  84 102 103 107 115 119 150
+&gt; sum(is.na(airquality$Ozone))
+[1] 37</code></pre>
+</section><section id="subsetting-by-matching" class="slide level2">
+<h1>Subsetting by Matching</h1>
+<pre class="r"><code>&gt; letters
+ [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot;
+[15] &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;
+&gt; vowels &lt;- c(&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;)
+&gt; 
+&gt; letters %in% vowels
+ [1]  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE
+[10] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+[19] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+&gt; which(letters %in% vowels)
+[1]  1  5  9 15 21
+&gt; 
+&gt; letters[which(letters %in% vowels)]
+[1] &quot;a&quot; &quot;e&quot; &quot;i&quot; &quot;o&quot; &quot;u&quot;</code></pre>
+</section><section id="advanced-subsetting" class="slide level2">
+<h1>Advanced Subsetting</h1>
+<p>The <a href="https://leanpub.com/rprogramming"><em>R Programming for Data Science</em></a> chapter titled “Subsetting R Objects” contains additional material on subsetting that you should know.</p>
+<p>The <a href="http://adv-r.had.co.nz/Subsetting.html"><em>Advanced R</em></a> website contains more detailed information on subsetting that you may find useful.</p>
+</section></section>
+<section><section id="functions-1" class="titleslide slide level1"><h1>Functions</h1></section><section id="rationale-1" class="slide level2">
+<h1>Rationale</h1>
+<ul>
+<li><p>Writing functions is a core activity of an R programmer. It represents the key step of the transition from a mere user to a developer who creates new functionality for R.</p></li>
+<li><p>Functions are often used to encapsulate a sequence of expressions that need to be executed numerous times, perhaps under slightly different conditions.</p></li>
+<li><p>Functions are also often written when code must be shared with others or the public.</p></li>
+</ul>
+<p>From <em>R Programming for Data Science</em>, by Peng</p>
+</section><section id="defining-a-new-function" class="slide level2">
+<h1>Defining a New Function</h1>
+<ul>
+<li><p>Functions are defined using the <code>function()</code> directive</p></li>
+<li><p>They are stored as variables, so they can be passed to other functions and assigned to new variables</p></li>
+<li><p>Arguments and a final return object are defined</p></li>
+</ul>
+</section><section id="example-1" class="slide level2">
+<h1>Example 1</h1>
+<pre class="r"><code>&gt; my_square &lt;- function(x) {
++   x*x  # can also do return(x*x)
++ }
+&gt; 
+&gt; my_square(x=2)
+[1] 4
+&gt; 
+&gt; my_fun2 &lt;- my_square
+&gt; my_fun2(x=3)
+[1] 9</code></pre>
+</section><section id="example-2" class="slide level2">
+<h1>Example 2</h1>
+<pre class="r"><code>&gt; my_square_ext &lt;- function(x) {
++   y &lt;- x*x
++   return(list(x_original=x, x_squared=y))
++ }
+&gt; 
+&gt; my_square_ext(x=2)
+$x_original
+[1] 2
+
+$x_squared
+[1] 4
+&gt; 
+&gt; z &lt;- my_square_ext(x=2)</code></pre>
+</section><section id="example-3" class="slide level2">
+<h1>Example 3</h1>
+<pre class="r"><code>&gt; my_power &lt;- function(x, e, say_hello) {
++   if(say_hello) {
++     cat(&quot;Hello World!&quot;)
++   }
++   x^e
++ }
+&gt; 
+&gt; my_power(x=2, e=3, say_hello=TRUE)
+Hello World!
+[1] 8
+&gt; 
+&gt; z &lt;- my_power(x=2, e=3, say_hello=TRUE)
+Hello World!
+&gt; z
+[1] 8</code></pre>
+</section><section id="default-function-argument-values" class="slide level2">
+<h1>Default Function Argument Values</h1>
+<p>Some functions have default values for their arguments:</p>
+<pre class="r"><code>&gt; str(matrix)
+function (data = NA, nrow = 1, ncol = 1, byrow = FALSE, 
+    dimnames = NULL)  </code></pre>
+<p>You can define a function with default values by the following:</p>
+<pre><code>f &lt;- function(x, y=2) {
+  x + y
+}</code></pre>
+<p>If the user types <code>f(x=1)</code> then it defaults to <code>y=2</code>, but if the user types <code>f(x=1, y=3)</code>, then it executes with these assignments.</p>
+</section><section id="the-ellipsis-argument" class="slide level2">
+<h1>The Ellipsis Argument</h1>
+<p>You will encounter functions that include as a possible argument the ellipsis: <code>...</code></p>
+<p>This basically holds arguments that can be passed to functions called within a function. Example:</p>
+<pre class="r"><code>&gt; double_log &lt;- function(x, ...) {
++   log((2*x), ...)
++ }
+&gt; 
+&gt; double_log(x=1, base=2)
+[1] 1
+&gt; double_log(x=1, base=10)
+[1] 0.30103</code></pre>
+</section><section id="argument-matching" class="slide level2">
+<h1>Argument Matching</h1>
+<p>R tries to automatically deal with function calls when the arguments are not defined explicity. For example:</p>
+<pre><code>x &lt;- matrix(1:6, nrow=2, ncol=3, byrow=TRUE)  # versus
+x &lt;- matrix(1:6, 2, 3, TRUE)</code></pre>
+<p>I strongly recommend that you define arguments explcitly. For example, I can never remember which comes first in <code>matrix()</code>, <code>nrow</code> or <code>ncol</code>.</p>
+</section></section>
+<section><section id="environment" class="titleslide slide level1"><h1>Environment</h1></section><section id="loading-.rdata-files" class="slide level2">
+<h1>Loading <code>.RData</code> Files</h1>
+<p>An <code>.RData</code> file is a binary file containing R objects. These can be saved from your current R session and also loaded into your current session.</p>
+<pre><code>&gt; # generally...
+&gt; # to load:
+&gt; load(file=&quot;path/to/file_name.RData&quot;)
+&gt; # to save:
+&gt; save(file=&quot;path/to/file_name.RData&quot;)</code></pre>
+<pre class="r"><code>&gt; # assumes file in working directory
+&gt; load(file=&quot;project_1_R_basics.RData&quot;) </code></pre>
+<pre class="r"><code>&gt; # loads from our GitHub repository
+&gt; load(file=url(&quot;https://github.com/SML201/project1/raw/
++          master/project_1_R_basics.RData&quot;)) </code></pre>
+</section><section id="listing-objects" class="slide level2">
+<h1>Listing Objects</h1>
+<p>The objects in your current R session can be listed. An environment can also be specificied in case you have objects stored in different environments.</p>
+<pre class="r"><code>&gt; ls()
+[1] &quot;num_people_in_precept&quot;     &quot;SML201_grade_distribution&quot;
+[3] &quot;some_ORFE_profs&quot;          
+&gt; 
+&gt; ls(name=globalenv())
+[1] &quot;num_people_in_precept&quot;     &quot;SML201_grade_distribution&quot;
+[3] &quot;some_ORFE_profs&quot;          
+&gt; 
+&gt; # see help file for other options
+&gt; ?ls</code></pre>
+</section><section id="removing-objects" class="slide level2">
+<h1>Removing Objects</h1>
+<p>You can remove specific objects or all objects from your R environment of choice.</p>
+<pre class="r"><code>&gt; rm(&quot;some_ORFE_profs&quot;) # removes variable some_ORFE_profs
+&gt; 
+&gt; rm(list=ls()) # Removes all variables from environment</code></pre>
+</section><section id="advanced" class="slide level2">
+<h1>Advanced</h1>
+<p>The R environment is there to connect object names to object values.</p>
+<p>The <a href="https://leanpub.com/rprogramming"><em>R Programming for Data Science</em></a> chapter titled “Scoping Rules of R” discussed environments and object names in more detail than we need for this course.</p>
+<p>A useful discussion about environments can also be found on the <a href="http://adv-r.had.co.nz/Environments.html"><em>Advanced R</em></a> web site.</p>
+</section></section>
+<section><section id="packages" class="titleslide slide level1"><h1>Packages</h1></section><section id="rationale-2" class="slide level2">
+<h1>Rationale</h1>
+<p>“In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. As of January 2015, there were over 6,000 packages available on the <strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork, or <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">CRAN</a>, the public clearing house for R packages. This huge variety of packages is one of the reasons that R is so successful: the chances are that someone has already solved a problem that you’re working on, and you can benefit from their work by downloading their package.”</p>
+<p>From <a href="http://r-pkgs.had.co.nz/intro.html" class="uri">http://r-pkgs.had.co.nz/intro.html</a> by Hadley Wickham</p>
+</section><section id="contents-of-a-package" class="slide level2">
+<h1>Contents of a Package</h1>
+<ul>
+<li>R functions</li>
+<li>R data objects</li>
+<li>Help documents for using the package</li>
+<li>Information on the authors, dependencies, etc.</li>
+<li>Information to make sure it “plays well” with R and other packages</li>
+</ul>
+</section><section id="installing-packages" class="slide level2">
+<h1>Installing Packages</h1>
+<p>From CRAN:</p>
+<pre><code>install.packages(&quot;dplyr&quot;)</code></pre>
+<p>From GitHub (for advanced users):</p>
+<pre><code>library(&quot;devtools&quot;)
+install_github(&quot;hadley/dplyr&quot;)</code></pre>
+<p>From Bioconductor (basically CRAN for biology):</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;qvalue&quot;)</code></pre>
+<p>Be <em>very</em> careful about dependencies when installing from GitHub.</p>
+</section><section id="installing-packages-contd" class="slide level2">
+<h1>Installing Packages (cont’d)</h1>
+<p>Multiple packages:</p>
+<pre><code>install.packages(c(&quot;dplyr&quot;, &quot;ggplot2&quot;))</code></pre>
+<p>Install all dependencies:</p>
+<pre><code>install.packages(c(&quot;dplyr&quot;, &quot;ggplot2&quot;), dependencies=TRUE)</code></pre>
+<p>Updating packages:</p>
+<pre><code>update.packages()</code></pre>
+</section><section id="loading-packages" class="slide level2">
+<h1>Loading Packages</h1>
+<p>Two ways to load a package:</p>
+<pre><code>library(&quot;dplyr&quot;)
+library(dplyr)</code></pre>
+<p>I prefer the former.</p>
+</section><section id="getting-started-with-a-package" class="slide level2">
+<h1>Getting Started with a Package</h1>
+<p>When you install a new package and load it, what’s next? I like to look at the help files and see what functions and data sets a package has.</p>
+<pre><code>library(&quot;dplyr&quot;)
+help(package=&quot;dplyr&quot;)</code></pre>
+</section><section id="specifying-a-function-within-a-package" class="slide level2">
+<h1>Specifying a Function within a Package</h1>
+<p>You can call a function from a specific package. Suppose you are in a setting where you have two packages loaded that have functions with the same name.</p>
+<pre><code>dplyr::arrange(mtcars, cyl, disp)</code></pre>
+<p>This calls the <code>arrange</code> functin specifically from <code>dplyr</code>. The package <code>plyr</code> also has an <code>arrange</code> function.</p>
+</section><section id="more-on-packages" class="slide level2">
+<h1>More on Packages</h1>
+<p>We will be covering several highly used R packages in depth this semester, so we will continue to learn about packages, how they are organized, and how they are used.</p>
+<p>You can download the “source” of a package from R and take a look at the contents if you want to dig deeper. There are also many good tutorials on creating packages, such as <a href="http://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/" class="uri">http://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/</a>.</p>
+</section></section>
+<section><section id="organizing-your-code" class="titleslide slide level1"><h1>Organizing Your Code</h1></section><section id="suggestions" class="slide level2">
+<h1>Suggestions</h1>
+<p>RStudio conveniently tries to automatically format your R code. We suggest the following in general.</p>
+<p>1. No more than 80 characters per line (or fewer depending on how R Markdown compiles):</p>
+<pre><code>really_long_line &lt;- my_function(x=20, y=30, z=TRUE,
+                                a=&quot;Joe&quot;, b=3.8)</code></pre>
+<p>2. Indent 2 or more characters for nested commands:</p>
+<pre><code>for(i in 1:10) {
+  if(i &gt; 4) {
+    print(i)
+  }
+}</code></pre>
+</section><section id="suggestions-contd" class="slide level2">
+<h1>Suggestions (cont’d)</h1>
+<p>3. Generously comment your code.</p>
+<pre><code># a for-loop that prints the index 
+# whenever it is greater than 4
+for(i in 1:10) {
+  if(i &gt; 4) {
+    print(i)
+  }
+}
+# a good way to get partial credit
+# if something goes wrong :-)</code></pre>
+<p>4. Do not hesitate to write functions to organize tasks. These help to break up your code into more undertsandable pieces, and functions can often be used several times.</p>
+</section><section id="where-to-put-files" class="slide level2">
+<h1>Where to Put Files</h1>
+<p>See the <a href="https://leanpub.com/rprogramming"><em>Elements of Data Analytic Style</em></a> chapter titled “Reproducibility” for suggestions on how to organize your files.</p>
+<p>In this course, we will keep this relatively simple. We will try to provide you with some organization when distributing the projects.</p>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h1>Source</h1>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h1>Session Information</h1>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.3
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+[1] knitr_1.15.1    magrittr_1.5    devtools_1.12.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.8     revealjs_0.8    digest_0.6.11  
+ [4] withr_1.0.2     rprojroot_1.1   backports_1.0.4
+ [7] evaluate_0.10   highr_0.6       stringi_1.1.2  
+[10] rmarkdown_1.3   tools_3.3.2     stringr_1.1.0  
+[13] yaml_2.1.14     memoise_1.0.0   htmltools_0.3.5</code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
