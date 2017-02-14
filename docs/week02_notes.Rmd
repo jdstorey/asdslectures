@@ -156,7 +156,7 @@ df
 We apply the `gather()` function to make a column containing the `survived` and `perished` observations.
 
 ```{r}
-df %<>% gather(survived, perished, 
+df <- gather(df, survived, perished, 
                key="fate", value="number")
 df
 ```
@@ -166,7 +166,7 @@ df
 This example is here to show that `spread()` does the opposite operation as `gather()`.  It isn't used appropriately here because we revert the data back to untidy format.
 
 ```{r}
-df %>% spread(key=fate, value=number)
+spread(df, key=fate, value=number)
 ```
 
 ## Tidy with `spread()` 
@@ -184,7 +184,7 @@ df
 ```
 
 ```{r}
-df %>% spread(key=median_value, value=dollars)
+spread(df, key=median_value, value=dollars)
 ```
 
 
@@ -202,7 +202,7 @@ Wide format data is useful for some analyses and long format for others.
 
 The `reshape2` package has three important functions:  `melt`, `dcast`, and `acast`.  It allows one to move between wide and long tidy data formats.
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, message=FALSE}
 library("reshape2")
 library("datasets")
 data(airquality, package="datasets")
@@ -255,7 +255,7 @@ Casting is more difficult because choices have to be made to determine how the w
 
 Let's do an example with `dcast`, which is casting for data frames.
 
-## `dcast`
+## `dcast()`
 
 ```{r}
 aqw <- dcast(aql, Month + Day ~ variable)
@@ -681,7 +681,7 @@ There are R packages that provide an interface  with specific APIs, such as the 
 
 ## Yeast Genomics
 
-[Smith and Kruglyak (2008)](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083) is a study that measured 2820 genotypes in 109 yeast F1 yeast segregants from a cross between parental lines BY and RM.
+[Smith and Kruglyak (2008)](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083) is a study that measured 2820 genotypes in 109 yeast F1 segregants from a cross between parental lines BY and RM.
 
 They also measured gene expression on 4482 genes in each of these segregants when growing in two different Carbon sources, glucose and ethanol. 
 

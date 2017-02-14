@@ -269,7 +269,7 @@ lag():    dplyr, stats</code></pre>
 </section><section id="gather" class="slide level2">
 <h1><code>gather()</code></h1>
 <p>We apply the <code>gather()</code> function to make a column containing the <code>survived</code> and <code>perished</code> observations.</p>
-<pre class="r"><code>&gt; df %&lt;&gt;% gather(survived, perished, 
+<pre class="r"><code>&gt; df &lt;- gather(df, survived, perished, 
 +                key=&quot;fate&quot;, value=&quot;number&quot;)
 &gt; df
 # A tibble: 4 × 3
@@ -282,7 +282,7 @@ lag():    dplyr, stats</code></pre>
 </section><section id="spread" class="slide level2">
 <h1><code>spread()</code></h1>
 <p>This example is here to show that <code>spread()</code> does the opposite operation as <code>gather()</code>. It isn’t used appropriately here because we revert the data back to untidy format.</p>
-<pre class="r"><code>&gt; df %&gt;% spread(key=fate, value=number)
+<pre class="r"><code>&gt; spread(df, key=fate, value=number)
 # A tibble: 2 × 3
      sex perished survived
 *  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -299,7 +299,7 @@ lag():    dplyr, stats</code></pre>
 2  Boston       income   71738
 3 Raleigh         home  215700
 4 Raleigh       income   65778</code></pre>
-<pre class="r"><code>&gt; df %&gt;% spread(key=median_value, value=dollars)
+<pre class="r"><code>&gt; spread(df, key=median_value, value=dollars)
 # A tibble: 2 × 3
      city   home income
 *   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -315,11 +315,6 @@ lag():    dplyr, stats</code></pre>
 <h1><code>reshape2</code> Package</h1>
 <p>The <code>reshape2</code> package has three important functions: <code>melt</code>, <code>dcast</code>, and <code>acast</code>. It allows one to move between wide and long tidy data formats.</p>
 <pre class="r"><code>&gt; library(&quot;reshape2&quot;)
-
-Attaching package: &#39;reshape2&#39;
-The following object is masked from &#39;package:tidyr&#39;:
-
-    smiths
 &gt; library(&quot;datasets&quot;)
 &gt; data(airquality, package=&quot;datasets&quot;)
 &gt; names(airquality)
@@ -396,7 +391,7 @@ No id variables; using all as measure variables
 <p>Casting is more difficult because choices have to be made to determine how the wide format will be organized. It often takes some thought and experimentation for new users.</p>
 <p>Let’s do an example with <code>dcast</code>, which is casting for data frames.</p>
 </section><section id="dcast" class="slide level2">
-<h1><code>dcast</code></h1>
+<h1><code>dcast()</code></h1>
 <pre class="r"><code>&gt; aqw &lt;- dcast(aql, Month + Day ~ variable)
 &gt; head(aqw)
   Month Day Ozone Solar.R Wind Temp
@@ -1022,7 +1017,7 @@ Joining, by = &quot;key&quot;
 </section></section>
 <section><section id="case-study" class="titleslide slide level1"><h1>Case Study</h1></section><section id="yeast-genomics" class="slide level2">
 <h1>Yeast Genomics</h1>
-<p><a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083">Smith and Kruglyak (2008)</a> is a study that measured 2820 genotypes in 109 yeast F1 yeast segregants from a cross between parental lines BY and RM.</p>
+<p><a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083">Smith and Kruglyak (2008)</a> is a study that measured 2820 genotypes in 109 yeast F1 segregants from a cross between parental lines BY and RM.</p>
 <p>They also measured gene expression on 4482 genes in each of these segregants when growing in two different Carbon sources, glucose and ethanol.</p>
 </section><section id="load-data" class="slide level2">
 <h1>Load Data</h1>
