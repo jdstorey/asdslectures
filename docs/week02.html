@@ -801,7 +801,7 @@ Groups: year [10]
 <p>You should study additional tutorials of <code>dplyr</code> that utilize other data sets:</p>
 <ul>
 <li>Read the <code>dplyr</code> <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">introductory vignette</a></li>
-<li>Read the examples given in <em>R Programming for Data Science</em>, the “Managing Data Frames with the <code>dplyr</code> Package” chapter</li>
+<li>Read the examples given in the <em>R for Data Science</em> assigned reading</li>
 </ul>
 </section><section id="additional-dplyr-features" class="slide level2">
 <h1>Additional <code>dplyr</code> Features</h1>
@@ -938,6 +938,7 @@ Joining, by = &quot;key&quot;
 4     3    x3  &lt;NA&gt;</code></pre>
 </section><section id="set-operations" class="slide level2">
 <h1>Set Operations</h1>
+<p>One can perform traditional set operations on the rows of data frames.</p>
 <ul>
 <li><code>intersect(x, y)</code>: return only observations in both <code>x</code> and <code>y</code></li>
 <li><code>union(x, y)</code>: return unique observations in <code>x</code> and <code>y</code></li>
@@ -989,7 +990,7 @@ Joining, by = &quot;key&quot;
 &gt; first_table[2,&quot;reading&quot;] %&gt;% strsplit(split=&quot;  &quot;)
 [[1]]
 [1] &quot;R4DS Ch. 5, 9-16&quot;
-&gt; grep(&quot;R4DS&quot;, first_table$reading)
+&gt; grep(&quot;R4DS&quot;, first_table$reading) # which rows (weeks) have R4DS
 [1] 1 2 3</code></pre>
 </section><section id="scraping-from-the-web-ex.-2" class="slide level2">
 <h1>Scraping from the Web (Ex. 2)</h1>

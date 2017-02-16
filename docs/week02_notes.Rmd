@@ -489,7 +489,7 @@ plot(bella$year, bella$prop, type="l")
 You should study additional tutorials of `dplyr` that utilize other data sets:
 
 - Read the `dplyr` [introductory vignette](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)
-- Read the examples given in *R Programming for Data Science*, the "Managing Data Frames with the `dplyr` Package" chapter
+- Read the examples given in the *R for Data Science* assigned reading
 
 ## Additional `dplyr` Features
 
@@ -604,6 +604,8 @@ x %>% left_join(y2, key="key")
 
 ## Set Operations
 
+One can perform traditional set operations on the rows of data frames. 
+
 - `intersect(x, y)`: return only observations in both `x` and `y`
 - `union(x, y)`: return unique observations in `x` and `y`
 - `setdiff(x, y)`: return observations in `x`, but not in `y`
@@ -653,7 +655,7 @@ names(first_table) <- c("week", "topics", "reading")
 first_table[2,"week"]
 first_table[2,"topics"] %>% strsplit(split="  ")
 first_table[2,"reading"] %>% strsplit(split="  ")
-grep("R4DS", first_table$reading)
+grep("R4DS", first_table$reading) # which rows (weeks) have R4DS
 ```
 
 ## Scraping from the Web (Ex. 2)
