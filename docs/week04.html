@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 4</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 4</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="probability-and-statistics" class="titleslide slide level1"><h1>Probability and Statistics</h1></section><section id="roles-in-data-science" class="slide level2">
+<h1>Roles In Data Science</h1>
+<p>Probabilistic modeling and/or statistical inference are required in data science when the goals include:</p>
+<ol type="1">
+<li>Characterizing randomness or “noise” in the data</li>
+<li>Quantifying uncertainty in models we build or decisions we make from the data</li>
+<li>Predicting future observations or decisions in the face of uncertainty</li>
+</ol>
+</section><section id="central-dogma-of-inference" class="slide level2">
+<h1>Central Dogma of Inference</h1>
+<center>
+<img src="images/inference_idea.jpg" alt="central_dogma_statistics" />
+</center>
+</section><section id="data-analysis-without-probability" class="slide level2">
+<h1>Data Analysis Without Probability</h1>
+<p>It is possible to do data analysis without probability and formal statistical inference:</p>
+<ul>
+<li>Descriptive statistics can be reported without utilizing probability and statistical inference</li>
+<li>Exploratory data analysis and visualization tend to not involve probability or formal statistical inference</li>
+<li>Important problems in machine learning do not involve probability or statistical inference.</li>
+</ul>
+</section></section>
+<section><section id="probability" class="titleslide slide level1"><h1>Probability</h1></section><section id="sample-space" class="slide level2">
+<h1>Sample Space</h1>
+<ul>
+<li>The <strong>sample space</strong> <span class="math inline">\(\Omega\)</span> is the set of all <strong>outcomes</strong></li>
+<li>We are interested in calculating probabilities on relevant subsets of this space, called <strong>events</strong>: <span class="math inline">\(A \subseteq \Omega\)</span></li>
+<li>Examples —
+<ul>
+<li>Two coin flips: <span class="math inline">\(\Omega =\)</span> {HH, HT, TH, TT}</li>
+<li>Netflix movie rating: <span class="math inline">\(\Omega =\)</span> {1, 2, 3, 4, 5}</li>
+<li>Number of lightning strikes on campus: <span class="math inline">\(\Omega =\)</span> {0, 1, 2, 3, …}</li>
+<li>Height of adult humans in meters: <span class="math inline">\(\Omega = [0, \infty)\)</span></li>
+</ul></li>
+</ul>
+</section><section id="measure-theoretic-probabilty" class="slide level2">
+<h1>Measure Theoretic Probabilty</h1>
+<p><span class="math display">\[(\Omega, \mathcal{F}, \Pr)\]</span></p>
+<ul>
+<li><span class="math inline">\(\Omega\)</span> is the sample space</li>
+<li><span class="math inline">\(\mathcal{F}\)</span> is the <span class="math inline">\(\sigma\)</span>-algebra of events where probability can be measured</li>
+<li><span class="math inline">\(\Pr\)</span> is the probability measure</li>
+</ul>
+</section><section id="mathematical-probability" class="slide level2">
+<h1>Mathematical Probability</h1>
+<p>A proper mathematical formulation of a probability measure should include the following properties:</p>
+<ol type="1">
+<li>The probability of any even <span class="math inline">\(A\)</span> is such that <span class="math inline">\(0 \leq \Pr(A) \leq 1\)</span></li>
+<li>If <span class="math inline">\(\Omega\)</span> is the sample space then <span class="math inline">\(\Pr(\Omega)=1\)</span></li>
+<li>Let <span class="math inline">\(A^c\)</span> be all outcomes from <span class="math inline">\(\Omega\)</span> that are not in <span class="math inline">\(A\)</span> (called the <em>complement</em>); then <span class="math inline">\(\Pr(A) + \Pr(A^c) = 1\)</span></li>
+<li>For any <span class="math inline">\(n\)</span> events such that <span class="math inline">\(A_i \cap A_j = \varnothing\)</span> for all <span class="math inline">\(i \not= j\)</span>, then <span class="math inline">\(\Pr\left( \cup_{i=1}^n A_i \right) = \sum_{i=1}^n \Pr(A_i)\)</span>, where <span class="math inline">\(\varnothing\)</span> is the empty set</li>
+</ol>
+</section><section id="union-of-two-events" class="slide level2">
+<h1>Union of Two Events</h1>
+<p>The probability of two events are calculated by the following general relationship:</p>
+<p><span class="math display">\[\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)\]</span></p>
+<p>where we note that <span class="math inline">\(\Pr(A \cap B)\)</span> gets counted twice in <span class="math inline">\(\Pr(A) + \Pr(B)\)</span>.</p>
+</section><section id="conditional-probability" class="slide level2">
+<h1>Conditional Probability</h1>
+<p>An important calclation in probability and statistics is the conditional probability. We can consider the probability of an event <span class="math inline">\(A\)</span>, conditional on the fact that we are restricted to be within event <span class="math inline">\(B\)</span>. This is defined as:</p>
+<p><span class="math display">\[\Pr(A | B) = \frac{\Pr(A \cap B)}{\Pr(B)}\]</span></p>
+</section><section id="independence" class="slide level2">
+<h1>Independence</h1>
+<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> by definition independent when:</p>
+<ul>
+<li><span class="math inline">\(\Pr(A | B) = \Pr(A)\)</span></li>
+<li><span class="math inline">\(\Pr(B | A) = \Pr(B)\)</span></li>
+<li><span class="math inline">\(\Pr(A \cap B) = \Pr(A) \Pr(B)\)</span></li>
+</ul>
+<p>All three of these are equivalent.</p>
+</section><section id="bayes-theorem" class="slide level2">
+<h1>Bayes Theorem</h1>
+<p>A common approach in statistics is to obtain a conditional probability of two events through the opposite conditional probability and their marginal probability. This is called Bayes Theorem:</p>
+<p><span class="math display">\[\Pr(B | A) = \frac{\Pr(A | B)\Pr(B)}{\Pr(A)}\]</span></p>
+<p>This forms the basis of <em>Bayesian Inference</em> but has more general use in carrying out probability calculations.</p>
+</section><section id="law-of-total-probability" class="slide level2">
+<h1>Law of Total Probability</h1>
+<p>For events <span class="math inline">\(A_1, \ldots, A_n\)</span> such that <span class="math inline">\(A_i \cap A_j = \varnothing\)</span> for all <span class="math inline">\(i \not= j\)</span> and <span class="math inline">\(\cup_{i=1}^n A_i = \Omega\)</span>, it follows that for any event <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[\Pr(B) = \sum_{i=1}^n \Pr(B | A_i) \Pr(A_i).\]</span></p>
+</section></section>
+<section><section id="random-variables" class="titleslide slide level1"><h1>Random Variables</h1></section><section id="definition" class="slide level2">
+<h1>Definition</h1>
+<p>A random variable <span class="math inline">\(X\)</span> is a function from <span class="math inline">\(\Omega\)</span> to the real numbers:</p>
+<p><span class="math display">\[X: \Omega \rightarrow \mathbb{R}\]</span></p>
+<p>For any outcome in <span class="math inline">\(\Omega\)</span>, the function <span class="math inline">\(X(\omega)\)</span> produces a real value.</p>
+<p>We will write the range of <span class="math inline">\(X\)</span> as</p>
+<p><span class="math display">\[\mathcal{R} = \{X(\omega): \omega \in \Omega\}\]</span></p>
+<p>where <span class="math inline">\(\mathcal{R} \subseteq \mathbb{R}\)</span>.</p>
+</section><section id="distributon-of-rv" class="slide level2">
+<h1>Distributon of RV</h1>
+<p>We define the probability distribution of a random variable through its <strong>probability mass function</strong> (pmf) for discrete rv’s or its <strong>probability density function</strong> (pdf) for continuous rv’s.</p>
+<p>We can also define the distribution through its <strong>cumulative distribution function</strong> (cdf). The pmf/pdf determines the cdf, and vice versa.</p>
+</section><section id="discrete-random-variables" class="slide level2">
+<h1>Discrete Random Variables</h1>
+<p>A discrete rv <span class="math inline">\(X\)</span> takes on a discrete set of values such as <span class="math inline">\(\{1, 2, \ldots, n\}\)</span> or <span class="math inline">\(\{0, 1, 2, 3, \ldots \}\)</span>.</p>
+<p>Its distribution is characterized by its pmf <span class="math display">\[f(x) = \Pr(X = x)\]</span> for <span class="math inline">\(x \in \{X(\omega): \omega \in \Omega \}\)</span> and <span class="math inline">\(f(x) = 0\)</span> otherwise.</p>
+<p>Its cdf is <span class="math display">\[F(y) = \Pr(X \leq y) = \sum_{x \leq y} \Pr(X = x)\]</span> for <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
+</section><section id="example-discrete-pmf" class="slide level2">
+<h1>Example: Discrete PMF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="example-discrete-cdf" class="slide level2">
+<h1>Example: Discrete CDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="probabilities-of-events-via-discrete-cdf" class="slide level2">
+<h1>Probabilities of Events Via Discrete CDF</h1>
+<p>Examples:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Probability</th>
+<th style="text-align: left;">CDF</th>
+<th style="text-align: left;">PMF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Pr(X \leq b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(F(b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum_{x \leq b} f(x)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Pr(X \geq a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1-F(a-1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum_{x \geq a} f(x)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Pr(X &gt; a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1-F(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum_{x &gt; a} f(x)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Pr(a \leq X \leq b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(F(b) - F(a-1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum_{a \leq x \leq b} f(x)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Pr(a &lt; X \leq b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(F(b) - F(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum_{a &lt; x \leq b} f(x)\)</span></td>
+</tr>
+</tbody>
+</table>
+</section><section id="continuous-random-variables" class="slide level2">
+<h1>Continuous Random Variables</h1>
+<p>A continuous rv <span class="math inline">\(X\)</span> takes on a continuous set of values such as <span class="math inline">\([0, \infty)\)</span> or <span class="math inline">\(\mathbb{R} = (-\infty, \infty)\)</span>.</p>
+<p>The probability that <span class="math inline">\(X\)</span> takes on any specific value is 0; but the probability it lies within an interval can be non-zero. Its pdf <span class="math inline">\(f(x)\)</span> therefore gives an infinitesimal, local, relative probability.</p>
+<p>Its cdf is <span class="math display">\[F(y) = \Pr(X \leq y) = \int_{-\infty}^y f(x) dx\]</span> for <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
+</section><section id="example-continuous-pdf" class="slide level2">
+<h1>Example: Continuous PDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="example-continuous-cdf" class="slide level2">
+<h1>Example: Continuous CDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="probabilities-of-events-via-continuous-cdf" class="slide level2">
+<h1>Probabilities of Events Via Continuous CDF</h1>
+<p>Examples:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Probability</th>
+<th style="text-align: left;">CDF</th>
+<th style="text-align: left;">PDF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Pr(X \leq b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(F(b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int_{-\infty}^{b} f(x) dx\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Pr(X \geq a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1-F(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int_{a}^{\infty} f(x) dx\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Pr(X &gt; a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1-F(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int_{a}^{\infty} f(x) dx\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Pr(a \leq X \leq b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(F(b) - F(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int_{a}^{b} f(x) dx\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Pr(a &lt; X \leq b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(F(b) - F(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int_{a}^{b} f(x) dx\)</span></td>
+</tr>
+</tbody>
+</table>
+</section><section id="example-continuous-rv-event" class="slide level2">
+<h1>Example: Continuous RV Event</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="note-on-pmfs-and-pdfs" class="slide level2">
+<h1>Note on PMFs and PDFs</h1>
+<p>PMFs and PDFs are defined as <span class="math inline">\(f(x)=0\)</span> outside of the range of <span class="math inline">\(X\)</span>, <span class="math inline">\(\mathcal{R} = \{X(\omega): \omega \in \Omega\}\)</span>. That is:</p>
+<p>Also, they sum or integrate to 1:</p>
+<p><span class="math display">\[\sum_{x \in \mathcal{R}} f(x) = 1\]</span></p>
+<p><span class="math display">\[\int_{x \in \mathcal{R}} f(x) dx = 1\]</span></p>
+<p>Using measure theory, we can consider both types of rv’s in one framework, and we would write: <span class="math display">\[\int_{-\infty}^{\infty} dF(x) = 1\]</span></p>
+</section><section id="note-on-cdfs" class="slide level2">
+<h1>Note on CDFs</h1>
+<p>Properties of all cdf’s, regardless of continuous or discrete underlying rv:</p>
+<ul>
+<li>They are right continuous with left limits</li>
+<li><span class="math inline">\(\lim_{x \rightarrow \infty} F(x) = 1\)</span></li>
+<li><span class="math inline">\(\lim_{x \rightarrow -\infty} F(x) = 0\)</span></li>
+<li>The right derivative of <span class="math inline">\(F(x)\)</span> equals <span class="math inline">\(f(x)\)</span></li>
+</ul>
+</section><section id="sample-vs-population-statistics" class="slide level2">
+<h1>Sample Vs Population Statistics</h1>
+<p>We earlier discussed measures of center and spread for a set of data, such as the mean and the variance.</p>
+<p>Analogous measures exist for probability distributions.</p>
+<p>These are distinguished by calling those on data “sample” measures (e.g., sample mean) and those on probability distributions “population” measures (e.g., population mean).</p>
+</section><section id="expected-value" class="slide level2">
+<h1>Expected Value</h1>
+<p>The <strong>expected value</strong>, also called the “population mean”, is a measure of center for a rv. It is calculated in a fashion analogous to the sample mean:</p>
+<span class="math display">\[\begin{align*}
+&amp; \operatorname{E}[X] = \sum_{x \in \mathcal{R}} x \  f(x) &amp; \mbox{(discrete)} \\
+&amp; \operatorname{E}[X] = \int_{-\infty}^{\infty} x \  f(x) \  dx &amp; \mbox{(continuous)} \\
+&amp; \operatorname{E}[X] = \int_{-\infty}^{\infty} x \  dF(x) &amp; \mbox{(general)}
+\end{align*}\]</span>
+</section><section id="variance" class="slide level2">
+<h1>Variance</h1>
+<p>The <strong>variance</strong>, also called the “population variance”, is a measure of spread for a rv. It is calculated in a fashion analogous to the sample variance:</p>
+<p><span class="math display">\[{\operatorname{Var}}(X) = {\operatorname{E}}\left[\left(X-{\operatorname{E}}[X]\right)^2\right]; \quad \quad {\rm SD}(X) = \sqrt{{\operatorname{Var}}(X)}\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}(X) = \sum_{x \in \mathcal{R}} \left(x-{\operatorname{E}}[X]\right)^2 \ f(x) \ \ \ \ \mbox{(discrete)}\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}(X) = \int_{-\infty}^{\infty} \left(x-{\operatorname{E}}[X]\right)^2 \ f(x) \  dx \ \ \ \ \mbox{(continuous)}\]</span></p>
+</section><section id="covariance" class="slide level2">
+<h1>Covariance</h1>
+<p>The <strong>covariance</strong>, also called the “population covariance”, measures how two rv’s covary. It is calculated in a fashion analogous to the sample covariance:</p>
+<p><span class="math display">\[{\operatorname{Cov}}(X, Y) = \operatorname{E} \left[ (X - \operatorname{E}[X]) (Y - \operatorname{E}[Y]) \right]\]</span></p>
+<p>Note that <span class="math inline">\({\operatorname{Cov}}(X, X) = {\operatorname{Var}}(X)\)</span>.</p>
+</section><section id="correlation" class="slide level2">
+<h1>Correlation</h1>
+<p>The population <strong>correlation</strong> is calculated analogously to the sample correlation:</p>
+<p><span class="math display">\[\operatorname{Cor}(X, Y) = \frac{{\operatorname{Cov}}(X, Y)}{\operatorname{SD}(X)\operatorname{SD}(Y)}\]</span></p>
+</section><section id="moment-generating-functions" class="slide level2">
+<h1>Moment Generating Functions</h1>
+<p>The <strong>moment generating function</strong> (mgf) of a rv is defined to be</p>
+<p><span class="math display">\[m(t) = \operatorname{E}\left[e^{tX}\right]\]</span></p>
+<p>whenever this expecation exists.</p>
+<p>Under certain conditions, the <strong>moments</strong> of a rv can then be obtained by:</p>
+<p><span class="math display">\[\operatorname{E} \left[ X^k \right] = \frac{d^k}{dt^k}m(0).\]</span></p>
+</section><section id="random-variables-in-r" class="slide level2">
+<h1>Random Variables in R</h1>
+<p>The pmf/pdf, cdf, quantile function, and random number generator for many important random variables are built into R. They all follow the form, where <code>&lt;name&gt;</code> is replaced with the name used in R for each specific distribution:</p>
+<ul>
+<li><code>d&lt;name&gt;</code>: pmf or pdf</li>
+<li><code>p&lt;name&gt;</code>: cdf</li>
+<li><code>q&lt;name&gt;</code>: quantile function or inverse cdf</li>
+<li><code>r&lt;name&gt;</code>: random number generator</li>
+</ul>
+<p>To see a list of random variables, type <code>?Distributions</code> in R.</p>
+</section></section>
+<section><section id="discrete-rvs" class="titleslide slide level1"><h1>Discrete RVs</h1></section><section id="uniform-discrete" class="slide level2">
+<h1>Uniform (Discrete)</h1>
+<p>This simple rv distribution assigns equal probabilities to a finite set of values:</p>
+<p><span class="math display">\[X \sim \mbox{Uniform}\{1, 2, \ldots, n\}\]</span></p>
+<p><span class="math display">\[\mathcal{R} = \{1, 2, \ldots, n\}\]</span></p>
+<p><span class="math display">\[f(x; n) = 1/n \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = \frac{n+1}{2}, \ {\operatorname{Var}}(X) = \frac{n^2-1}{12}\]</span></p>
+</section><section id="uniform-discrete-pmf" class="slide level2">
+<h1>Uniform (Discrete) PMF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="uniform-discrete-in-r" class="slide level2">
+<h1>Uniform (Discrete) in R</h1>
+<p>There is no family of functions built into R for this distribution since it is so simple. However, it is possible to generate random values via the <code>sample</code> function:</p>
+<pre class="r"><code>&gt; n &lt;- 20L
+&gt; sample(x=1:n, size=10, replace=TRUE)
+ [1]  5 13  2 14 15 19 15 15  3 14
+&gt; 
+&gt; x &lt;- sample(x=1:n, size=1e6, replace=TRUE)
+&gt; mean(x) - (n+1)/2
+[1] 0.005001
+&gt; var(x) - (n^2-1)/12
+[1] -0.003801764</code></pre>
+</section><section id="bernoulli" class="slide level2">
+<h1>Bernoulli</h1>
+<p>A single success/failure event, such as heads/tails when flipping a coin or survival/death.</p>
+<p><span class="math display">\[X \sim \mbox{Bernoulli}(p)\]</span></p>
+<p><span class="math display">\[\mathcal{R} = \{0, 1\}\]</span></p>
+<p><span class="math display">\[f(x; p) = p^x (1-p)^{1-x} \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = p, \ {\operatorname{Var}}(X) = p(1-p)\]</span></p>
+</section><section id="binomial" class="slide level2">
+<h1>Binomial</h1>
+<p>An extension of the Bernoulli distribution to simultaneously considering <span class="math inline">\(n\)</span> independent success/failure trials and counting the number of successes.</p>
+<p><span class="math display">\[X \sim \mbox{Binomial}(n, p)\]</span></p>
+<p><span class="math display">\[\mathcal{R} = \{0, 1, 2, \ldots, n\}\]</span></p>
+<p><span class="math display">\[f(x; p) = {n \choose x} p^x (1-p)^{n-x} \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = np, \ {\operatorname{Var}}(X) = np(1-p)\]</span></p>
+<p>Note that <span class="math inline">\({n \choose x} = \frac{n!}{x! (n-x)!}\)</span> is the number of unique ways to choose <span class="math inline">\(x\)</span> items from <span class="math inline">\(n\)</span> without respect to order.</p>
+</section><section id="binomial-pmf" class="slide level2">
+<h1>Binomial PMF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="binomial-in-r" class="slide level2">
+<h1>Binomial in R</h1>
+<pre class="r"><code>&gt; str(dbinom)
+function (x, size, prob, log = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(pbinom)
+function (q, size, prob, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(qbinom)
+function (p, size, prob, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(rbinom)
+function (n, size, prob)  </code></pre>
+</section><section id="poisson" class="slide level2">
+<h1>Poisson</h1>
+<p>Models the number of occurrences of something within a defined time/space period, where the occurrences are independent. Examples: the number of lightning strikes on campus in a given year; the number of emails received on a given day.</p>
+<p><span class="math display">\[X \sim \mbox{Poisson}(\lambda)\]</span></p>
+<p><span class="math display">\[\mathcal{R} = \{0, 1, 2, 3, \ldots \}\]</span></p>
+<p><span class="math display">\[f(x; \lambda) = \frac{\lambda^x e^{-\lambda}}{x!} \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = \lambda, \ {\operatorname{Var}}(X) = \lambda\]</span></p>
+</section><section id="poisson-pmf" class="slide level2">
+<h1>Poisson PMF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="poisson-in-r" class="slide level2">
+<h1>Poisson in R</h1>
+<pre class="r"><code>&gt; str(dpois)
+function (x, lambda, log = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(ppois)
+function (q, lambda, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(qpois)
+function (p, lambda, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(rpois)
+function (n, lambda)  </code></pre>
+</section></section>
+<section><section id="continuous-rvs" class="titleslide slide level1"><h1>Continuous RVs</h1></section><section id="uniform-continuous" class="slide level2">
+<h1>Uniform (Continuous)</h1>
+<p>Models the scenario where all values in the unit interval [0,1] are equally likely.</p>
+<p><span class="math display">\[X \sim \mbox{Uniform}(0,1)\]</span></p>
+<p><span class="math display">\[\mathcal{R} = [0,1]\]</span></p>
+<p><span class="math display">\[f(x) = 1 \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[F(y) = y \mbox{ for } y \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = 1/2, \ {\operatorname{Var}}(X) = 1/12\]</span></p>
+</section><section id="uniform-continuous-pdf" class="slide level2">
+<h1>Uniform (Continuous) PDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="uniform-continuous-in-r" class="slide level2">
+<h1>Uniform (Continuous) in R</h1>
+<pre class="r"><code>&gt; str(dunif)
+function (x, min = 0, max = 1, log = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(punif)
+function (q, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(qunif)
+function (p, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(runif)
+function (n, min = 0, max = 1)  </code></pre>
+</section><section id="exponential" class="slide level2">
+<h1>Exponential</h1>
+<p>Models a time to failure and has a “memoryless property”.</p>
+<p><span class="math display">\[X \sim \mbox{Exponential}(\lambda)\]</span></p>
+<p><span class="math display">\[\mathcal{R} = [0, \infty)\]</span></p>
+<p><span class="math display">\[f(x; \lambda) = \lambda e^{-\lambda x} \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[F(y; \lambda) = 1 - e^{-\lambda y} \mbox{ for } y \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = \frac{1}{\lambda}, \ {\operatorname{Var}}(X) = \frac{1}{\lambda^2}\]</span></p>
+</section><section id="exponential-pdf" class="slide level2">
+<h1>Exponential PDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="exponential-in-r" class="slide level2">
+<h1>Exponential in R</h1>
+<pre class="r"><code>&gt; str(dexp)
+function (x, rate = 1, log = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(pexp)
+function (q, rate = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(qexp)
+function (p, rate = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(rexp)
+function (n, rate = 1)  </code></pre>
+</section><section id="beta" class="slide level2">
+<h1>Beta</h1>
+<p>Yields values in <span class="math inline">\((0,1)\)</span>, so often used to generate random probabilities, such as the <span class="math inline">\(p\)</span> in Bernoulli<span class="math inline">\((p)\)</span>.</p>
+<p><span class="math display">\[X \sim \mbox{Beta}(\alpha,\beta) \mbox{ where } \alpha, \beta &gt; 0\]</span></p>
+<p><span class="math display">\[\mathcal{R} = (0,1)\]</span></p>
+<p><span class="math display">\[f(x; \alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta - 1} \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p>where <span class="math inline">\(\Gamma(z) = \int_{0}^{\infty} x^{z-1} e^{-x} dx\)</span>.</p>
+<p><span class="math display">\[{\operatorname{E}}[X] = \frac{\alpha}{\alpha + 
+\beta}, \ {\operatorname{Var}}(X) = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}\]</span></p>
+</section><section id="beta-pdf" class="slide level2">
+<h1>Beta PDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-28-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="beta-in-r" class="slide level2">
+<h1>Beta in R</h1>
+<pre class="r"><code>&gt; str(dbeta) #shape1=alpha, shape2=beta
+function (x, shape1, shape2, ncp = 0, log = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(pbeta)
+function (q, shape1, shape2, ncp = 0, lower.tail = TRUE, 
+    log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(qbeta)
+function (p, shape1, shape2, ncp = 0, lower.tail = TRUE, 
+    log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(rbeta)
+function (n, shape1, shape2, ncp = 0)  </code></pre>
+</section><section id="normal" class="slide level2">
+<h1>Normal</h1>
+<p>Due to the Central Limit Theorem (covered later), this “bell curve” distribution is often observed in properly normalized real data.</p>
+<p><span class="math display">\[X \sim \mbox{Normal}(\mu, \sigma^2)\]</span></p>
+<p><span class="math display">\[\mathcal{R} = (-\infty, \infty)\]</span></p>
+<p><span class="math display">\[f(x; \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2 \sigma^2}} \mbox{ for } x \in \mathcal{R}\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}[X] = \mu, \ {\operatorname{Var}}(X) = \sigma^2\]</span></p>
+</section><section id="normal-pdf" class="slide level2">
+<h1>Normal PDF</h1>
+<p><img src="week04_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="normal-in-r" class="slide level2">
+<h1>Normal in R</h1>
+<pre class="r"><code>&gt; str(dnorm) #notice it requires the STANDARD DEVIATION, not the variance
+function (x, mean = 0, sd = 1, log = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(pnorm)
+function (q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(qnorm)
+function (p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
+<pre class="r"><code>&gt; str(rnorm)
+function (n, mean = 0, sd = 1)  </code></pre>
+</section></section>
+<section><section id="sums-of-random-variables" class="titleslide slide level1"><h1>Sums of Random Variables</h1></section><section id="linear-transformation-of-a-rv" class="slide level2">
+<h1>Linear Transformation of a RV</h1>
+<p>Suppose that <span class="math inline">\(X\)</span> is a random variable and that <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants. Then:</p>
+<p><span class="math display">\[{\operatorname{E}}\left[a + bX \right] = a + b {\operatorname{E}}[X]\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}\left(a + bX \right) = b^2 {\operatorname{Var}}(X)\]</span></p>
+</section><section id="sums-of-independent-rvs" class="slide level2">
+<h1>Sums of Independent RVs</h1>
+<p>If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent random variables, then:</p>
+<p><span class="math display">\[{\operatorname{E}}\left[ \sum_{i=1}^n X_i \right] = \sum_{i=1}^n {\operatorname{E}}[X_i]\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n {\operatorname{Var}}(X_i)\]</span></p>
+</section><section id="sums-of-dependent-rvs" class="slide level2">
+<h1>Sums of Dependent RVs</h1>
+<p>If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent random variables, then:</p>
+<p><span class="math display">\[{\operatorname{E}}\left[ \sum_{i=1}^n X_i \right] = \sum_{i=1}^n {\operatorname{E}}[X_i]\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n {\operatorname{Var}}(X_i) + 2 \sum_{i \not= j} {\operatorname{Cov}}(X_i, X_j)\]</span></p>
+</section><section id="means-of-random-variables" class="slide level2">
+<h1>Means of Random Variables</h1>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent and identically distributed (iid) random variables. Let <span class="math inline">\(\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i\)</span> be their sample mean. Then:</p>
+<p><span class="math display">\[{\operatorname{E}}\left[\overline{X}_n \right] = {\operatorname{E}}[X_i]\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}\left(\overline{X}_n \right) = \frac{1}{n}{\operatorname{Var}}(X_i)\]</span></p>
+</section></section>
+<section><section id="convergence-of-random-variables" class="titleslide slide level1"><h1>Convergence of Random Variables</h1></section><section id="sequence-of-rvs" class="slide level2">
+<h1>Sequence of RVs</h1>
+<p>Let <span class="math inline">\(Z_1, Z_2, \ldots\)</span> be an infinite sequence of rv’s.</p>
+<p>An important example is</p>
+<p><span class="math display">\[Z_n = \overline{X}_n = \frac{\sum_{i=1}^n X_i}{n}.\]</span></p>
+<p>It is useful to be able to determine a limiting value or distribution of <span class="math inline">\(\{Z_i\}\)</span>.</p>
+</section><section id="convergence-in-distribution" class="slide level2">
+<h1>Convergence in Distribution</h1>
+<p><span class="math inline">\(\{Z_i\}\)</span> converges in distribution to <span class="math inline">\(Z\)</span>, written</p>
+<p><span class="math display">\[Z_n \stackrel{D}{\longrightarrow} Z\]</span></p>
+<p>if</p>
+<p><span class="math display">\[F_{Z_n}(y) = \Pr(Z_n \leq y) \rightarrow \Pr(Z \leq y) = F_{Z}(y)\]</span></p>
+<p>as <span class="math inline">\(n \rightarrow \infty\)</span> for all <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
+</section><section id="convergence-in-probability" class="slide level2">
+<h1>Convergence in Probability</h1>
+<p><span class="math inline">\(\{Z_i\}\)</span> converges in probability to <span class="math inline">\(Z\)</span>, written</p>
+<p><span class="math display">\[Z_n \stackrel{P}{\longrightarrow} Z\]</span></p>
+<p>if</p>
+<p><span class="math display">\[\Pr(|Z_n - Z| \leq \epsilon) \rightarrow 1\]</span></p>
+<p>as <span class="math inline">\(n \rightarrow \infty\)</span> for all <span class="math inline">\(\epsilon &gt; 0\)</span>.</p>
+<p>Note that it may also be the case that <span class="math inline">\(Z_n \stackrel{P}{\longrightarrow} \theta\)</span> for a fixed, nonrandom value <span class="math inline">\(\theta\)</span>.</p>
+</section><section id="almost-sure-convergence" class="slide level2">
+<h1>Almost Sure Convergence</h1>
+<p><span class="math inline">\(\{Z_i\}\)</span> converges almost surely (or “with probability 1”) to <span class="math inline">\(Z\)</span>, written</p>
+<p><span class="math display">\[Z_n \stackrel{a.s.}{\longrightarrow} Z\]</span></p>
+<p>if</p>
+<p><span class="math display">\[\Pr\left(\{\omega: |Z_n(\omega) - Z(\omega)| \stackrel{n \rightarrow \infty}{\longrightarrow} 0 \}\right) = 1.\]</span></p>
+<p>Note that it may also be the case that <span class="math inline">\(Z_n \stackrel{a.s.}{\longrightarrow} \theta\)</span> for a fixed, nonrandom value <span class="math inline">\(\theta\)</span>.</p>
+</section><section id="strong-law-of-large-numbers" class="slide level2">
+<h1>Strong Law of Large Numbers</h1>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are iid rv’s with population mean <span class="math inline">\({\operatorname{E}}[X_i] = \mu\)</span> where <span class="math inline">\({\operatorname{E}}[|X_i|] &lt; \infty\)</span>. Then</p>
+<p><span class="math display">\[\overline{X}_n \stackrel{a.s.}{\longrightarrow} \mu.\]</span></p>
+</section><section id="central-limit-theorem" class="slide level2">
+<h1>Central Limit Theorem</h1>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are iid rv’s with population mean <span class="math inline">\({\operatorname{E}}[X_i] = \mu\)</span> and variance <span class="math inline">\({\operatorname{Var}}(X_i) = \sigma^2\)</span>. Then as <span class="math inline">\(n \rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[\sqrt{n}(\overline{X}_n - \mu)  \stackrel{D}{\longrightarrow} \mbox{Normal}(0, \sigma^2)\]</span></p>
+<p><span class="math display">\[\frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}  \stackrel{D}{\longrightarrow} \mbox{Normal}(0, 1)\]</span></p>
+</section><section id="example-calculations" class="slide level2">
+<h1>Example: Calculations</h1>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_{40}\)</span> be iid Poisson(<span class="math inline">\(\lambda\)</span>) with <span class="math inline">\(\lambda=6\)</span>.</p>
+<p>We will form <span class="math inline">\(\sqrt{40}(\overline{X} - 6)\)</span> over 10,000 realizations and compare their distribution to a Normal(0, 6) distribution.</p>
+<pre class="r"><code>&gt; x &lt;- replicate(n=1e4, expr=rpois(n=40, lambda=6), 
++                simplify=&quot;matrix&quot;)
+&gt; x_bar &lt;- apply(x, 2, mean)
+&gt; clt &lt;- sqrt(40)*(x_bar - 6)
+&gt; 
+&gt; df &lt;- data.frame(clt=clt, x = seq(-18,18,length.out=1e4), 
++                  y = dnorm(seq(-18,18,length.out=1e4), 
++                            sd=sqrt(6)))</code></pre>
+</section><section id="example-plot" class="slide level2">
+<h1>Example: Plot</h1>
+<pre class="r"><code>&gt; ggplot(data=df) +
++   geom_histogram(aes(x=clt, y=..density..), color=&quot;blue&quot;, 
++                  fill=&quot;lightgray&quot;, binwidth=0.75) +
++   geom_line(aes(x=x, y=y), size=1.5)</code></pre>
+<p><img src="week04_files/figure-revealjs/clt_plot-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="joint-distributions" class="titleslide slide level1"><h1>Joint Distributions</h1></section><section id="bivariate-random-variables" class="slide level2">
+<h1>Bivariate Random Variables</h1>
+<p>For a pair of rv’s <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> defined on the same probability space, we can define their joint pmf or pdf. For the discrete case,</p>
+<span class="math display">\[\begin{align*}
+f(x, y) &amp; = \Pr(\{\omega: X(\omega) = x\} \cap \{\omega: Y(\omega) = y\}) \\
+\ &amp; = \Pr(X=x, Y=y).
+\end{align*}\]</span>
+<p>The joint pdf is defined analogously for continuous rv’s.</p>
+</section><section id="events-for-bivariate-rvs" class="slide level2">
+<h1>Events for Bivariate RVs</h1>
+<p>Let <span class="math inline">\(A_x \times A_y \subseteq \mathbb{R} \times \mathbb{R}\)</span> be an event. Then <span class="math inline">\(\Pr(X \in A_x, Y \in A_y)\)</span> is calculated by:</p>
+<span class="math display">\[\begin{align*}
+&amp; \sum_{x \in A_x} \sum_{y \in A_y} f(x, y) &amp;  \mbox{(discrete)} \\
+&amp; \int_{x \in A_x} \int_{y \in A_y} f(x, y) dy dx &amp; \mbox{(continuous)} \\
+&amp; \int_{x \in A_x} \int_{y \in A_y} f(x, y) dF_Y(y) dF_{X}(x) &amp; \mbox{(general)}
+\end{align*}\]</span>
+</section><section id="marginal-distributions" class="slide level2">
+<h1>Marginal Distributions</h1>
+<p>We can calculate the marginal distribution of <span class="math inline">\(X\)</span> (or <span class="math inline">\(Y\)</span>) from their joint distribution:</p>
+<p><span class="math display">\[f(x) = \int_{-\infty}^{\infty} f(x, y) dF_Y(y)\]</span></p>
+</section><section id="independent-random-variables" class="slide level2">
+<h1>Independent Random Variables</h1>
+<p>Two rv’s are independent when their joint pmf or pdf factor:</p>
+<p><span class="math display">\[f(x,y) = f(x) f(y)\]</span></p>
+<p>This means, for example in the continuous case,</p>
+<span class="math display">\[\begin{align*}
+\Pr(X \in A_x, Y \in A_y) &amp; = \int_{x \in A_x} \int_{y \in A_y} f(x, y) dy dx  \\
+\ &amp; = \int_{x \in A_x} \int_{y \in A_y} f(x) f(y) dy dx  \\
+\ &amp; = \Pr(X \in A_x) \Pr(Y \in A_y)
+\end{align*}\]</span>
+</section><section id="conditional-distributions" class="slide level2">
+<h1>Conditional Distributions</h1>
+<p>We can define the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> as follows. The conditional rv <span class="math inline">\(X | Y \sim F_{X|Y}\)</span> with conditional pmf or pdf for <span class="math inline">\(X | Y=y\)</span> given by</p>
+<p><span class="math display">\[
+f(x | y) = \frac{f(x, y)}{f(y)}. 
+\]</span></p>
+</section><section id="conditional-moments" class="slide level2">
+<h1>Conditional Moments</h1>
+</section><section id="law-of-total-variation" class="slide level2">
+<h1>Law of Total Variation</h1>
+</section><section id="multivariate-distributions" class="slide level2">
+<h1>Multivariate Distributions</h1>
+</section><section id="mv-expected-value" class="slide level2">
+<h1>MV Expected Value</h1>
+</section><section id="mv-variance-covariance-matrix" class="slide level2">
+<h1>MV Variance-Covariance Matrix</h1>
+</section></section>
+<section><section id="multivariate-rvs" class="titleslide slide level1"><h1>Multivariate RVs</h1></section><section id="multinomial" class="slide level2">
+<h1>Multinomial</h1>
+</section><section id="multivariate-normal" class="slide level2">
+<h1>Multivariate Normal</h1>
+</section><section id="dirichlet" class="slide level2">
+<h1>Dirichlet</h1>
+</section></section>
+<section><section id="likelihood" class="titleslide slide level1"><h1>Likelihood</h1></section><section id="likelihood-function" class="slide level2">
+<h1>Likelihood Function</h1>
+</section><section id="log-likelihood-function" class="slide level2">
+<h1>Log-Likelihood Function</h1>
+</section><section id="iid-log-likelihood" class="slide level2">
+<h1>IID Log-Likelihood</h1>
+</section><section id="sufficient-statistics" class="slide level2">
+<h1>Sufficient Statistics</h1>
+</section><section id="factorization-theorem" class="slide level2">
+<h1>Factorization Theorem</h1>
+</section><section id="likelihood-principle" class="slide level2">
+<h1>Likelihood Principle</h1>
+</section><section id="maximum-likelihood" class="slide level2">
+<h1>Maximum Likelihood</h1>
+</section><section id="going-further" class="slide level2">
+<h1>Going Further</h1>
+<p>If this interests you, be sure to read about:</p>
+<ul>
+<li>Minimal sufficient statistics</li>
+<li>Complete sufficient statistics</li>
+<li>Ancillary statistics</li>
+<li>Basu’s theorem</li>
+</ul>
+</section></section>
+<section><section id="exponential-family-distributions" class="titleslide slide level1"><h1>Exponential Family Distributions</h1></section><section id="definition-1" class="slide level2">
+<h1>Definition</h1>
+</section><section id="example-bernoulli" class="slide level2">
+<h1>Example: Bernoulli</h1>
+</section><section id="example-normal" class="slide level2">
+<h1>Example: Normal</h1>
+</section><section id="natural-parameter" class="slide level2">
+<h1>Natural Parameter</h1>
+</section><section id="natural-single-parameter-efd" class="slide level2">
+<h1>Natural Single Parameter EFD</h1>
+</section><section id="calculating-moments" class="slide level2">
+<h1>Calculating Moments</h1>
+</section><section id="example-bernoulli-1" class="slide level2">
+<h1>Example: Bernoulli</h1>
+</section><section id="example-normal-1" class="slide level2">
+<h1>Example: Normal</h1>
+</section><section id="maximum-likelihood-1" class="slide level2">
+<h1>Maximum Likelihood</h1>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h1>Source</h1>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h1>Session Information</h1>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.3
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+ [1] dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
+ [4] tidyr_0.6.1     tibble_1.2      ggplot2_2.2.1  
+ [7] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
+[10] devtools_1.12.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.9      plyr_1.8.4       forcats_0.2.0   
+ [4] tools_3.3.2      digest_0.6.12    lubridate_1.6.0 
+ [7] jsonlite_1.2     evaluate_0.10    memoise_1.0.0   
+[10] nlme_3.1-131     gtable_0.2.0     lattice_0.20-34 
+[13] psych_1.6.12     DBI_0.5-1        yaml_2.1.14     
+[16] parallel_3.3.2   haven_1.0.0      xml2_1.1.1      
+[19] withr_1.0.2      stringr_1.1.0    httr_1.2.1      
+[22] revealjs_0.8     hms_0.3          rprojroot_1.2   
+[25] grid_3.3.2       R6_2.2.0         readxl_0.1.1    
+[28] foreign_0.8-67   rmarkdown_1.3    modelr_0.1.0    
+[31] reshape2_1.4.2   backports_1.0.5  scales_0.4.1    
+[34] htmltools_0.3.5  rvest_0.3.2      assertthat_0.1  
+[37] mnormt_1.5-5     colorspace_1.3-2 labeling_0.3    
+[40] stringi_1.1.2    lazyeval_0.2.0   munsell_0.4.3   
+[43] broom_0.4.2     </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
