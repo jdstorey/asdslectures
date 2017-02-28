@@ -132,9 +132,9 @@ p {
 <li>Examples —
 <ul>
 <li>Two coin flips: <span class="math inline">\(\Omega =\)</span> {HH, HT, TH, TT}</li>
-<li>Netflix movie rating: <span class="math inline">\(\Omega =\)</span> {1, 2, 3, 4, 5}</li>
-<li>Number of lightning strikes on campus: <span class="math inline">\(\Omega =\)</span> {0, 1, 2, 3, …}</li>
-<li>Height of adult humans in meters: <span class="math inline">\(\Omega = [0, \infty)\)</span></li>
+<li>SNP genotypes: <span class="math inline">\(\Omega =\)</span> {AA, AT, TT}</li>
+<li>Amazon product rating: <span class="math inline">\(\Omega =\)</span> {1 star, 2 stars, …, 5 stars}</li>
+<li>Political survey: <span class="math inline">\(\Omega =\)</span> {agree, disagree}</li>
 </ul></li>
 </ul>
 </section><section id="measure-theoretic-probabilty" class="slide level2">
@@ -374,13 +374,13 @@ p {
 <p>There is no family of functions built into R for this distribution since it is so simple. However, it is possible to generate random values via the <code>sample</code> function:</p>
 <pre class="r"><code>&gt; n &lt;- 20L
 &gt; sample(x=1:n, size=10, replace=TRUE)
- [1]  5 13  2 14 15 19 15 15  3 14
+ [1]  4 15  2 20 18  7 15  1  8 12
 &gt; 
 &gt; x &lt;- sample(x=1:n, size=1e6, replace=TRUE)
 &gt; mean(x) - (n+1)/2
-[1] 0.005001
+[1] 0.0117
 &gt; var(x) - (n^2-1)/12
-[1] -0.003801764</code></pre>
+[1] -0.006917647</code></pre>
 </section><section id="bernoulli" class="slide level2">
 <h1>Bernoulli</h1>
 <p>A single success/failure event, such as heads/tails when flipping a coin or survival/death.</p>

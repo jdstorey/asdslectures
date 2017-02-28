@@ -54,10 +54,10 @@ It is possible to do data analysis without probability and formal statistical in
 - We are interested in calculating probabilities on relevant subsets of this space, called **events**: $A \subseteq \Omega$
 - Examples ---
     - Two coin flips: $\Omega =$ {HH, HT, TH, TT}
-    - Netflix movie rating: $\Omega =$ {1, 2, 3, 4, 5}
-    - Number of lightning strikes on campus: $\Omega =$ {0, 1, 2, 3, ...}
-    - Height of adult humans in meters: $\Omega = [0, \infty)$
-
+    - SNP genotypes: $\Omega =$ {AA, AT, TT}
+    - Amazon product rating: $\Omega =$ {1 star, 2 stars, ..., 5 stars}
+    - Political survey: $\Omega =$ {agree, disagree}
+ 
 ## Measure Theoretic Probabilty
 
 $$(\Omega, \mathcal{F}, \Pr)$$
