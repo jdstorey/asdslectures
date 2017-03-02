@@ -282,7 +282,8 @@ The **expected value**, also called the "population mean", is a measure of cente
 
 The **variance**, also called the "population variance", is a measure of spread for a rv.  It is calculated in a fashion analogous to the sample variance:
 
-$$\V(X) = \E \left[\left(X-\E[X]\right)^2\right]; \quad \quad {\rm SD}(X) = \sqrt{\V(X)}$$
+$$\V(X) = \E \left[\left(X-\E[X]\right)^2\right] = \E[X^2] - E[X]^2$$
+$${\rm SD}(X) = \sqrt{\V(X)}$$
 
 $$\V(X) = \sum_{x \in \mathcal{R}} \left(x-\E[X]\right)^2 \ f(x) \ \ \ \ \mbox{(discrete)}$$
 
@@ -801,7 +802,9 @@ Let $A_x \times A_y \subseteq \mathbb{R} \times \mathbb{R}$ be an event.  Then $
 
 We can calculate the marginal distribution of $X$ (or $Y$) from their joint distribution:
 
-$$f(x) = \int_{-\infty}^{\infty} f(x, y) dF_Y(y)$$
+$$f(x) = \sum_{y \in \mathcal{R}_y} f(x, y)$$
+
+$$f(x) = \int_{-\infty}^{\infty} f(x, y) dy$$
 
 ## Independent Random Variables
 
@@ -809,7 +812,7 @@ Two rv's are independent when their joint pmf or pdf factor:
 
 $$f(x,y) = f(x) f(y)$$
 
-This means, for example in the continuous case,
+This means, for example, in the continuous case,
 
 \begin{align*}
 \Pr(X \in A_x, Y \in A_y) & = \int_{x \in A_x} \int_{y \in A_y} f(x, y) dy dx  \\
@@ -827,37 +830,198 @@ $$
 
 ## Conditional Moments
 
-## Law of Total Variation
+The $k$th conditional moment (when it exists) is calculated by:
+
+$$\E\left[X^k | Y=y\right] = \sum_{x \in \mathcal{R}_x} x^k f(x | y)$$
+
+$$\E\left[X^k | Y=y\right] = \int_{-\infty}^{\infty} x^k f(x | y) dx$$
+
+Note that $\E \left[X^k | Y\right]$ is a random variable that is a function of $Y$ whose distribution is determined by that of $Y$.
+
+## Law of Total Variance
+
+We can partition the variance of $X$ according to the following conditional calculations on $Y$:
+
+$$\V(X) = \V(\E[X | Y]) + \E[\V(X | Y)].$$
+
+This is a useful result for partitioning variation in modeling fitting.
 
 ## Multivariate Distributions
 
+Let $\boldsymbol{X} = (X_1, X_2, \ldots, X_n)^T$ be a vector of $n$ rv's.  We also let realiozed values be $\boldsymbol{x} = (x_1, x_2, \ldots, x_n)^T$.  The joint pmf or pdf is written as
+
+$$f(\boldsymbol{x}) = f(x_1, x_2, \ldots, x_n)$$
+
+and if the rv's are independent then
+
+$$f(\boldsymbol{x}) = \prod_{i=1}^{n} f(x_i).$$
+
 ## MV Expected Value
 
+The expected value of $\boldsymbol{X} = (X_1, X_2, \ldots, X_n)^T$ is an $n$-vector:
+
+$$\E[\boldsymbol{X}] = 
+\begin{bmatrix}
+\E[X_1] \\
+\E[X_2] \\
+\vdots \\
+\E[X_n]
+\end{bmatrix}
+$$
+
 ## MV Variance-Covariance Matrix  
+
+The variance-covariance matrix of $\boldsymbol{X}$ is an $n \times n$ matrix with $(i, j)$ entry equal to $\Cov(X_i, X_j)$.
+  
+  
+$$\V(\boldsymbol{X}) =
+\begin{bmatrix}
+\V(X_1) & \Cov(X_1, X_2) & \cdots & \Cov(X_1, X_n) \\
+\Cov(X_2, X_1) & \V(X_2) & \cdots & \vdots \\
+\vdots & & \ddots & \vdots \\
+\Cov(X_n, X_1) & \cdots & & \V(X_n)
+\end{bmatrix}
+$$
 
 # Multivariate RVs
 
 ## Multinomial
 
+Suppose $\boldsymbol{X}$ (an $m$-vector) is $\mbox{Multinomial}_m(n, \boldsymbol{p})$, where $\boldsymbol{p}$ is an $m$-vector such that $\sum_{i=1}^m p_i = 1$.  It has pmf
+
+$$
+f(\boldsymbol{x}; \boldsymbol{p}) = 
+{n \choose x_1 \ x_2 \ \cdots \ x_m} p_1^{x_1} p_2^{x_2} \cdots p_m^{x_m} 
+$$
+
+where 
+
+$${n \choose x_1 \ x_2 \ \cdots \ x_m} = \frac{n!}{x_1! x_2! \cdots x_m!}$$
+and $\sum_{i=1}^m x_i = n$.
+
+## Multinomial (continued)
+
+The Multinomial distribution is a generalization of the Binomial distribution. It models $n$ independent outcomes where each outcome has probability $p_i$ of category $i$ occurring (for $i=1, 2, \ldots, m$).  The counts per category are contained in the $X_i$ random variables that are constrained so that $\sum_{i=1}^m X_i = n$.
+
+It can be calculated that
+
+$$\E[X_i] = p_i n,$$
+
+$$\Cov(X_i, X_j) = -n p_i p_j.$$
+
+
 ## Multivariate Normal
 
+The $n$-vector $\boldsymbol{X}$ has Multivariate Normal distribution when $\boldsymbol{X} \sim \mbox{MVN}_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ where $\boldsymbol{\mu}$ is the $n$-vector of population means and $\boldsymbol{\Sigma}$ is the $n \times n$ variance-covariance matrix.  Its pdf is
+
+$$ f(\boldsymbol{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma}) = 
+\frac{1}{\sqrt{2 \pi |\boldsymbol{\Sigma}|}} \exp -\left\{ -\frac{1}{2} (\boldsymbol{x} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\boldsymbol{x} - \boldsymbol{\mu}) \right\}.
+$$
+  
+\   
+
+Fun fact: $\boldsymbol{\Sigma}^{-1/2} (\boldsymbol{X}-\boldsymbol{\mu}) \sim \mbox{MVN}_n(\boldsymbol{0}, \boldsymbol{I})$.
+
 ## Dirichlet
+
+The Dirichlet distribution models an $m$-vector $\boldsymbol{X}$ so that $0 \leq X_i \leq 1$ and $\sum_{i=1}^m X_i = 1$.  It is a generalization of the Beta distribution.  The rv $\boldsymbol{X} \sim \mbox{Dirichlet}_m(\boldsymbol{\alpha})$, where $\boldsymbol{\alpha}$ is an $m$-vector, has pdf
+
+$$
+f(\boldsymbol{x}; \boldsymbol{\alpha}) =
+\frac{\Gamma\left( \sum_{i=1}^m \alpha_i \right)}{\prod_{i=1}^m \Gamma(\alpha_i)} \prod_{i=1}^m x_i^{\alpha_i-1}.
+$$
+
+It can be calculated that
+$$\E[X_i] = \frac{\alpha_i}{\alpha_0}, \V(X_i) = \frac{\alpha_i (\alpha_0 - \alpha_i)}{\alpha_0^2 (\alpha_0 + 1)}, \Cov(X_i, X_j) = \frac{- \alpha_i \alpha_j}{\alpha_0^2 (\alpha_0 + 1)}$$
+where $\alpha_0 = \sum_{k=1}^m \alpha_k$.
+
+
+## In R
+
+For the Multinomial, base R contains the functions `dmultinom` and `rmultinom`. 
+
+For the Multivariate Normal, there are several packages that work with this distribution.  One choice is the package `mvtnorm`, which contains the functions `dmvnorm` and `rmvnorm`.
+
+For the Dirichlet, there are several packages that work with this distribution.  One choice is the package `MCMCpack`, which contains the functions `ddirichlet` and `rdirichlet`.
 
 # Likelihood
 
 ## Likelihood Function
 
+Suppose that we observe $x_1, x_2, \ldots, x_n$ according to the model $X_1, X_2, \ldots, X_n \sim F_{\theta}$. 
+The joint pdf is $f(\boldsymbol{x} | \theta)$.  We view the pdf as being a function of $\boldsymbol{x}$ for a fixed $\theta$.
+
+The **likelihood function** is obtained by reversing the arguments and viewing this as a function of $\theta$ for a fixed, observed $\boldsymbol{x}$:
+
+$$L(\theta | \boldsymbol{x}) = f(\boldsymbol{x} | \theta).$$ 
+
 ## Log-Likelihood Function
 
-## IID Log-Likelihood
+The log-likelihood function is
+
+$$ \ell(\theta | \boldsymbol{x}) = \log L(\theta | \boldsymbol{x}).$$
+
+When the data are iid, we have
+
+$$ \ell(\theta | \boldsymbol{x}) = \log \prod_{i=1}^n f(x_i | \theta) = \sum_{i=1}^n \log f(x_i | \theta).$$
 
 ## Sufficient Statistics
 
+A **statistic** $T(\boldsymbol{x})$ is defined to be a function of the data. 
+
+A **sufficient statistic** is a statistic where the distribution of data, conditional on this statistic, does not depend on $\theta$.  That is, $\boldsymbol{X} | T(\boldsymbol{X})$ does not depend on $\theta$.
+
+The interpretation is that the information in $\boldsymbol{X}$ about $\theta$ (the target of inference) is contained in $T(\boldsymbol{X})$.
+
 ## Factorization Theorem
+
+The factorization theorem says that $T(\boldsymbol{x})$ is a sufficient statistic if and only if we can factor
+
+$$f(\boldsymbol{x} | \theta) = g(T(\boldsymbol{x}) | \theta) h(\boldsymbol{x}).$$
+
+Therefore, if $T(\boldsymbol{x})$ is a sufficient statistic then
+
+$$L(\theta | \boldsymbol{x}) = g(T(\boldsymbol{x}) | \theta) h(\boldsymbol{x}) \propto L(\theta | T(\boldsymbol{x})).$$
+
+This formalizes the idea that the information in $\boldsymbol{X}$ about $\theta$ (the target of inference) is contained in $T(\boldsymbol{X})$.
+
+## Example: Normal
+
+\ 
+
+If $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu \sigma^2)$, then $\overline{X}$ is sufficient for $\mu$.
+
+\  
+
+As an exercise, show this via the factorization theorem.
+
+\ 
+
+Hint: $\sum_{i=1}^n (x_i - \mu)^2 = \sum_{i=1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2$. 
 
 ## Likelihood Principle
 
+\ 
+
+If $\boldsymbol{x}$ and $\boldsymbol{y}$ are two data sets so that 
+
+$$L(\theta | \boldsymbol{x}) \propto L(\theta | \boldsymbol{y}),$$
+
+$$\mbox{i.e., } L(\theta | \boldsymbol{x}) = c(\boldsymbol{x}, \boldsymbol{y}) L(\theta | \boldsymbol{y}),$$
+
+then inferenece $\theta$ should be the same for $\boldsymbol{x}$ and $\boldsymbol{y}$.
+
 ## Maximum Likelihood
+
+A common starting point for inference is to calculate the **maximum likelihood estimate**.  This is the value of $\theta$ that maximizes $L(\theta | \boldsymbol{x})$ for an observe data set $\boldsymbol{x}$.
+
+\begin{align*}
+\hat{\theta}_{{\rm MLE}} & = \operatorname{argmax}_{\theta} L(\theta | \boldsymbol{x}) \\
+ & = \operatorname{argmax}_{\theta} \ell (\theta | \boldsymbol{x}) \\
+ & = \operatorname{argmax}_{\theta} L (\theta | T(\boldsymbol{x}))
+\end{align*}
+
+where the last equality holds for sufficient statistics $T(\boldsymbol{x})$.
 
 ## Going Further
 
@@ -870,23 +1034,112 @@ If this interests you, be sure to read about:
 
 # Exponential Family Distributions
 
+## Rationale
+
+**Exponential family distributions** (EFDs) provide a generalized parameterization and form of a very large class of distributions used in inference. For example, Binomia, Poisson, Exponential, Normal, Multinomial, MVN, and Dirichlet are all EFDs.
+
+The generalized form provides generally applicable formulas for moments, estimators, etc.
+
+EFDs also facilitate developing general algorithms for model fitting.
+
 ## Definition
+
+If $X$ follows an EFD then it has pdf of the form
+
+$$f(x ; \boldsymbol{\theta}) =
+h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) - A(\boldsymbol{\eta}) \right\}
+$$
+
+where $\boldsymbol{\theta}$ is a vector of parameters, $\{T_k(x)\}$ are sufficient statistics, $A(\boldsymbol{\eta})$ is the cumulant generating function.
+
+
+The functions $\eta_k(\boldsymbol{\theta})$ for $k=1, \ldots, d$ map the usual parameters to the "natural parameters".
+
+$\{T_k(x)\}$ are sufficient statistics for $\{\eta_k\}$ due to the factorization theorem.
+
+$A(\boldsymbol{\eta})$ is sometimes called the "log normalizer" because
+
+$$A(\boldsymbol{\eta}) = \log \int h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) \right\}.$$
 
 ## Example: Bernoulli
 
+\begin{align*}
+f(x ; p) & = p^x (1-p)^{1-x} \\
+ & = \exp \left\{ x \log(p) + (1-x) \log(1-p) \right\} \\
+ & = \exp \left\{ x \log\left( \frac{p}{1-p} \right) + \log(1-p) \right\}
+\end{align*}
+
+
+$\eta = \log\left( \frac{p}{1-p} \right)$
+
+$T(x) = x$ 
+
+$A(\eta) = \log\left(1 + e^\eta\right)$
+
 ## Example: Normal
 
-## Natural Parameter
+\begin{align*}
+f(x ; \mu, \sigma^2) & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2 \sigma^2}\right\} \\
+ & = \frac{1}{\sqrt{2 \pi}} \exp\left\{\frac{\mu}{\sigma^2} x - \frac{1}{2 \sigma^2} x^2 - \log(\sigma) - \frac{\mu^2}{2 \sigma^2}\right\}
+\end{align*}
+
+$\boldsymbol{\eta} = \left(\frac{\mu}{\sigma^2}, - \frac{1}{2 \sigma^2} \right)^T$
+
+$\boldsymbol{T}(x) = \left(x, x^2\right)^T$ 
+
+$A(\boldsymbol{\eta}) = \log(\sigma) + \frac{\mu^2}{2 \sigma^2} = -\frac{1}{2} \log(-2 \eta_2) - \frac{\eta_1^2}{4\eta_2}$
+
 
 ## Natural Single Parameter EFD
 
+\ 
+
+A natural single parameter EFD simplifies to the scenario where $d=1$ and $T(x) = x$:
+
+$$f(x ; \boldsymbol{\theta}) =
+h(x) \exp \left\{ \eta x - A(\eta) \right\}
+$$
+
+
 ## Calculating Moments
 
-## Example: Bernoulli
+\ 
+
+$$
+\frac{d}{d \eta_k} A(\boldsymbol{\eta}) = \E[T_k(X)]
+$$
+
+\ 
+
+$$
+\frac{d^2}{d \eta_k^2} A(\boldsymbol{\eta}) = \V[T_k(X)]
+$$
+
 
 ## Example: Normal
 
+For $X \sim \mbox{Normal}(\mu, \sigma^2)$, 
+
+$$\E[X] = \frac{d}{d \eta_1} A(\boldsymbol{\eta}) = -\frac{\eta_1}{2 \eta_2} = \mu,$$
+
+$$\V(X) = \frac{d^2}{d \eta_1^2} A(\boldsymbol{\eta}) = -\frac{1}{2 \eta_2} = \sigma^2.$$
+
 ## Maximum Likelihood
+
+Suppose $X_1, X_2, \ldots, X_n$ are iid from some EFD.  Then,
+
+$$
+\ell(\boldsymbol{\eta} | \boldsymbol{x}) = \sum_{i=1}^n \left[ \log h(x_i) + \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x_i) - A(\boldsymbol{\eta})  \right]
+$$
+
+$$
+\frac{d}{d \eta_k} \ell(\boldsymbol{\eta} | \boldsymbol{x}) = \sum_{i=1}^n T_k(x_i) - n \frac{d}{d \eta_k} A(\boldsymbol{\eta})
+$$
+Setting the second equation to 0, it follows that the MLE of $\eta_k$ is the solution to 
+
+$$
+\frac{1}{n} \sum_{i=1}^n T_k(x_i) = \frac{d}{d \eta_k} A(\boldsymbol{\eta}).
+$$
 
 # Extras
 

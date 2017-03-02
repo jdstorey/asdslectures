@@ -329,7 +329,7 @@ p {
 </section><section id="variance" class="slide level2">
 <h1>Variance</h1>
 <p>The <strong>variance</strong>, also called the “population variance”, is a measure of spread for a rv. It is calculated in a fashion analogous to the sample variance:</p>
-<p><span class="math display">\[{\operatorname{Var}}(X) = {\operatorname{E}}\left[\left(X-{\operatorname{E}}[X]\right)^2\right]; \quad \quad {\rm SD}(X) = \sqrt{{\operatorname{Var}}(X)}\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}(X) = {\operatorname{E}}\left[\left(X-{\operatorname{E}}[X]\right)^2\right] = {\operatorname{E}}[X^2] - E[X]^2\]</span> <span class="math display">\[{\rm SD}(X) = \sqrt{{\operatorname{Var}}(X)}\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = \sum_{x \in \mathcal{R}} \left(x-{\operatorname{E}}[X]\right)^2 \ f(x) \ \ \ \ \mbox{(discrete)}\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = \int_{-\infty}^{\infty} \left(x-{\operatorname{E}}[X]\right)^2 \ f(x) \  dx \ \ \ \ \mbox{(continuous)}\]</span></p>
 </section><section id="covariance" class="slide level2">
@@ -374,13 +374,13 @@ p {
 <p>There is no family of functions built into R for this distribution since it is so simple. However, it is possible to generate random values via the <code>sample</code> function:</p>
 <pre class="r"><code>&gt; n &lt;- 20L
 &gt; sample(x=1:n, size=10, replace=TRUE)
- [1]  4 15  2 20 18  7 15  1  8 12
+ [1]  2  2 19  8  6  2  4 10  6 16
 &gt; 
 &gt; x &lt;- sample(x=1:n, size=1e6, replace=TRUE)
 &gt; mean(x) - (n+1)/2
-[1] 0.0117
+[1] 0.002384
 &gt; var(x) - (n^2-1)/12
-[1] -0.006917647</code></pre>
+[1] 0.02686159</code></pre>
 </section><section id="bernoulli" class="slide level2">
 <h1>Bernoulli</h1>
 <p>A single success/failure event, such as heads/tails when flipping a coin or survival/death.</p>
@@ -614,12 +614,13 @@ f(x, y) &amp; = \Pr(\{\omega: X(\omega) = x\} \cap \{\omega: Y(\omega) = y\}) \\
 </section><section id="marginal-distributions" class="slide level2">
 <h1>Marginal Distributions</h1>
 <p>We can calculate the marginal distribution of <span class="math inline">\(X\)</span> (or <span class="math inline">\(Y\)</span>) from their joint distribution:</p>
-<p><span class="math display">\[f(x) = \int_{-\infty}^{\infty} f(x, y) dF_Y(y)\]</span></p>
+<p><span class="math display">\[f(x) = \sum_{y \in \mathcal{R}_y} f(x, y)\]</span></p>
+<p><span class="math display">\[f(x) = \int_{-\infty}^{\infty} f(x, y) dy\]</span></p>
 </section><section id="independent-random-variables" class="slide level2">
 <h1>Independent Random Variables</h1>
 <p>Two rv’s are independent when their joint pmf or pdf factor:</p>
 <p><span class="math display">\[f(x,y) = f(x) f(y)\]</span></p>
-<p>This means, for example in the continuous case,</p>
+<p>This means, for example, in the continuous case,</p>
 <span class="math display">\[\begin{align*}
 \Pr(X \in A_x, Y \in A_y) &amp; = \int_{x \in A_x} \int_{y \in A_y} f(x, y) dy dx  \\
 \ &amp; = \int_{x \in A_x} \int_{y \in A_y} f(x) f(y) dy dx  \\
@@ -633,36 +634,128 @@ f(x | y) = \frac{f(x, y)}{f(y)}.
 \]</span></p>
 </section><section id="conditional-moments" class="slide level2">
 <h1>Conditional Moments</h1>
-</section><section id="law-of-total-variation" class="slide level2">
-<h1>Law of Total Variation</h1>
+<p>The <span class="math inline">\(k\)</span>th conditional moment (when it exists) is calculated by:</p>
+<p><span class="math display">\[{\operatorname{E}}\left[X^k | Y=y\right] = \sum_{x \in \mathcal{R}_x} x^k f(x | y)\]</span></p>
+<p><span class="math display">\[{\operatorname{E}}\left[X^k | Y=y\right] = \int_{-\infty}^{\infty} x^k f(x | y) dx\]</span></p>
+<p>Note that <span class="math inline">\({\operatorname{E}}\left[X^k | Y\right]\)</span> is a random variable that is a function of <span class="math inline">\(Y\)</span> whose distribution is determined by that of <span class="math inline">\(Y\)</span>.</p>
+</section><section id="law-of-total-variance" class="slide level2">
+<h1>Law of Total Variance</h1>
+<p>We can partition the variance of <span class="math inline">\(X\)</span> according to the following conditional calculations on <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[{\operatorname{Var}}(X) = {\operatorname{Var}}({\operatorname{E}}[X | Y]) + {\operatorname{E}}[{\operatorname{Var}}(X | Y)].\]</span></p>
+<p>This is a useful result for partitioning variation in modeling fitting.</p>
 </section><section id="multivariate-distributions" class="slide level2">
 <h1>Multivariate Distributions</h1>
+<p>Let <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, \ldots, X_n)^T\)</span> be a vector of <span class="math inline">\(n\)</span> rv’s. We also let realiozed values be <span class="math inline">\(\boldsymbol{x} = (x_1, x_2, \ldots, x_n)^T\)</span>. The joint pmf or pdf is written as</p>
+<p><span class="math display">\[f(\boldsymbol{x}) = f(x_1, x_2, \ldots, x_n)\]</span></p>
+<p>and if the rv’s are independent then</p>
+<p><span class="math display">\[f(\boldsymbol{x}) = \prod_{i=1}^{n} f(x_i).\]</span></p>
 </section><section id="mv-expected-value" class="slide level2">
 <h1>MV Expected Value</h1>
+<p>The expected value of <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, \ldots, X_n)^T\)</span> is an <span class="math inline">\(n\)</span>-vector:</p>
+<p><span class="math display">\[{\operatorname{E}}[\boldsymbol{X}] = 
+\begin{bmatrix}
+{\operatorname{E}}[X_1] \\
+{\operatorname{E}}[X_2] \\
+\vdots \\
+{\operatorname{E}}[X_n]
+\end{bmatrix}
+\]</span></p>
 </section><section id="mv-variance-covariance-matrix" class="slide level2">
 <h1>MV Variance-Covariance Matrix</h1>
+<p>The variance-covariance matrix of <span class="math inline">\(\boldsymbol{X}\)</span> is an <span class="math inline">\(n \times n\)</span> matrix with <span class="math inline">\((i, j)\)</span> entry equal to <span class="math inline">\({\operatorname{Cov}}(X_i, X_j)\)</span>.</p>
+<p><span class="math display">\[{\operatorname{Var}}(\boldsymbol{X}) =
+\begin{bmatrix}
+{\operatorname{Var}}(X_1) &amp; {\operatorname{Cov}}(X_1, X_2) &amp; \cdots &amp; {\operatorname{Cov}}(X_1, X_n) \\
+{\operatorname{Cov}}(X_2, X_1) &amp; {\operatorname{Var}}(X_2) &amp; \cdots &amp; \vdots \\
+\vdots &amp; &amp; \ddots &amp; \vdots \\
+{\operatorname{Cov}}(X_n, X_1) &amp; \cdots &amp; &amp; {\operatorname{Var}}(X_n)
+\end{bmatrix}
+\]</span></p>
 </section></section>
 <section><section id="multivariate-rvs" class="titleslide slide level1"><h1>Multivariate RVs</h1></section><section id="multinomial" class="slide level2">
 <h1>Multinomial</h1>
+<p>Suppose <span class="math inline">\(\boldsymbol{X}\)</span> (an <span class="math inline">\(m\)</span>-vector) is <span class="math inline">\(\mbox{Multinomial}_m(n, \boldsymbol{p})\)</span>, where <span class="math inline">\(\boldsymbol{p}\)</span> is an <span class="math inline">\(m\)</span>-vector such that <span class="math inline">\(\sum_{i=1}^m p_i = 1\)</span>. It has pmf</p>
+<p><span class="math display">\[
+f(\boldsymbol{x}; \boldsymbol{p}) = 
+{n \choose x_1 \ x_2 \ \cdots \ x_m} p_1^{x_1} p_2^{x_2} \cdots p_m^{x_m} 
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[{n \choose x_1 \ x_2 \ \cdots \ x_m} = \frac{n!}{x_1! x_2! \cdots x_m!}\]</span> and <span class="math inline">\(\sum_{i=1}^m x_i = n\)</span>.</p>
+</section><section id="multinomial-continued" class="slide level2">
+<h1>Multinomial (continued)</h1>
+<p>The Multinomial distribution is a generalization of the Binomial distribution. It models <span class="math inline">\(n\)</span> independent outcomes where each outcome has probability <span class="math inline">\(p_i\)</span> of category <span class="math inline">\(i\)</span> occurring (for <span class="math inline">\(i=1, 2, \ldots, m\)</span>). The counts per category are contained in the <span class="math inline">\(X_i\)</span> random variables that are constrained so that <span class="math inline">\(\sum_{i=1}^m X_i = n\)</span>.</p>
+<p>It can be calculated that</p>
+<p><span class="math display">\[{\operatorname{E}}[X_i] = p_i n,\]</span></p>
+<p><span class="math display">\[{\operatorname{Cov}}(X_i, X_j) = -n p_i p_j.\]</span></p>
 </section><section id="multivariate-normal" class="slide level2">
 <h1>Multivariate Normal</h1>
+<p>The <span class="math inline">\(n\)</span>-vector <span class="math inline">\(\boldsymbol{X}\)</span> has Multivariate Normal distribution when <span class="math inline">\(\boldsymbol{X} \sim \mbox{MVN}_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span> where <span class="math inline">\(\boldsymbol{\mu}\)</span> is the <span class="math inline">\(n\)</span>-vector of population means and <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is the <span class="math inline">\(n \times n\)</span> variance-covariance matrix. Its pdf is</p>
+<p><span class="math display">\[ f(\boldsymbol{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma}) = 
+\frac{1}{\sqrt{2 \pi |\boldsymbol{\Sigma}|}} \exp -\left\{ -\frac{1}{2} (\boldsymbol{x} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\boldsymbol{x} - \boldsymbol{\mu}) \right\}.
+\]</span></p>
+<p> </p>
+<p>Fun fact: <span class="math inline">\(\boldsymbol{\Sigma}^{-1/2} (\boldsymbol{X}-\boldsymbol{\mu}) \sim \mbox{MVN}_n(\boldsymbol{0}, \boldsymbol{I})\)</span>.</p>
 </section><section id="dirichlet" class="slide level2">
 <h1>Dirichlet</h1>
+<p>The Dirichlet distribution models an <span class="math inline">\(m\)</span>-vector <span class="math inline">\(\boldsymbol{X}\)</span> so that <span class="math inline">\(0 \leq X_i \leq 1\)</span> and <span class="math inline">\(\sum_{i=1}^m X_i = 1\)</span>. It is a generalization of the Beta distribution. The rv <span class="math inline">\(\boldsymbol{X} \sim \mbox{Dirichlet}_m(\boldsymbol{\alpha})\)</span>, where <span class="math inline">\(\boldsymbol{\alpha}\)</span> is an <span class="math inline">\(m\)</span>-vector, has pdf</p>
+<p><span class="math display">\[
+f(\boldsymbol{x}; \boldsymbol{\alpha}) =
+\frac{\Gamma\left( \sum_{i=1}^m \alpha_i \right)}{\prod_{i=1}^m \Gamma(\alpha_i)} \prod_{i=1}^m x_i^{\alpha_i-1}.
+\]</span></p>
+<p>It can be calculated that <span class="math display">\[{\operatorname{E}}[X_i] = \frac{\alpha_i}{\alpha_0}, {\operatorname{Var}}(X_i) = \frac{\alpha_i (\alpha_0 - \alpha_i)}{\alpha_0^2 (\alpha_0 + 1)}, {\operatorname{Cov}}(X_i, X_j) = \frac{- \alpha_i \alpha_j}{\alpha_0^2 (\alpha_0 + 1)}\]</span> where <span class="math inline">\(\alpha_0 = \sum_{k=1}^m \alpha_k\)</span>.</p>
+</section><section id="in-r" class="slide level2">
+<h1>In R</h1>
+<p>For the Multinomial, base R contains the functions <code>dmultinom</code> and <code>rmultinom</code>.</p>
+<p>For the Multivariate Normal, there are several packages that work with this distribution. One choice is the package <code>mvtnorm</code>, which contains the functions <code>dmvnorm</code> and <code>rmvnorm</code>.</p>
+<p>For the Dirichlet, there are several packages that work with this distribution. One choice is the package <code>MCMCpack</code>, which contains the functions <code>ddirichlet</code> and <code>rdirichlet</code>.</p>
 </section></section>
 <section><section id="likelihood" class="titleslide slide level1"><h1>Likelihood</h1></section><section id="likelihood-function" class="slide level2">
 <h1>Likelihood Function</h1>
+<p>Suppose that we observe <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> according to the model <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F_{\theta}\)</span>. The joint pdf is <span class="math inline">\(f(\boldsymbol{x} | \theta)\)</span>. We view the pdf as being a function of <span class="math inline">\(\boldsymbol{x}\)</span> for a fixed <span class="math inline">\(\theta\)</span>.</p>
+<p>The <strong>likelihood function</strong> is obtained by reversing the arguments and viewing this as a function of <span class="math inline">\(\theta\)</span> for a fixed, observed <span class="math inline">\(\boldsymbol{x}\)</span>:</p>
+<p><span class="math display">\[L(\theta | \boldsymbol{x}) = f(\boldsymbol{x} | \theta).\]</span></p>
 </section><section id="log-likelihood-function" class="slide level2">
 <h1>Log-Likelihood Function</h1>
-</section><section id="iid-log-likelihood" class="slide level2">
-<h1>IID Log-Likelihood</h1>
+<p>The log-likelihood function is</p>
+<p><span class="math display">\[ \ell(\theta | \boldsymbol{x}) = \log L(\theta | \boldsymbol{x}).\]</span></p>
+<p>When the data are iid, we have</p>
+<p><span class="math display">\[ \ell(\theta | \boldsymbol{x}) = \log \prod_{i=1}^n f(x_i | \theta) = \sum_{i=1}^n \log f(x_i | \theta).\]</span></p>
 </section><section id="sufficient-statistics" class="slide level2">
 <h1>Sufficient Statistics</h1>
+<p>A <strong>statistic</strong> <span class="math inline">\(T(\boldsymbol{x})\)</span> is defined to be a function of the data.</p>
+<p>A <strong>sufficient statistic</strong> is a statistic where the distribution of data, conditional on this statistic, does not depend on <span class="math inline">\(\theta\)</span>. That is, <span class="math inline">\(\boldsymbol{X} | T(\boldsymbol{X})\)</span> does not depend on <span class="math inline">\(\theta\)</span>.</p>
+<p>The interpretation is that the information in <span class="math inline">\(\boldsymbol{X}\)</span> about <span class="math inline">\(\theta\)</span> (the target of inference) is contained in <span class="math inline">\(T(\boldsymbol{X})\)</span>.</p>
 </section><section id="factorization-theorem" class="slide level2">
 <h1>Factorization Theorem</h1>
+<p>The factorization theorem says that <span class="math inline">\(T(\boldsymbol{x})\)</span> is a sufficient statistic if and only if we can factor</p>
+<p><span class="math display">\[f(\boldsymbol{x} | \theta) = g(T(\boldsymbol{x}) | \theta) h(\boldsymbol{x}).\]</span></p>
+<p>Therefore, if <span class="math inline">\(T(\boldsymbol{x})\)</span> is a sufficient statistic then</p>
+<p><span class="math display">\[L(\theta | \boldsymbol{x}) = g(T(\boldsymbol{x}) | \theta) h(\boldsymbol{x}) \propto L(\theta | T(\boldsymbol{x})).\]</span></p>
+<p>This formalizes the idea that the information in <span class="math inline">\(\boldsymbol{X}\)</span> about <span class="math inline">\(\theta\)</span> (the target of inference) is contained in <span class="math inline">\(T(\boldsymbol{X})\)</span>.</p>
+</section><section id="example-normal" class="slide level2">
+<h1>Example: Normal</h1>
+<p> </p>
+<p>If <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu \sigma^2)\)</span>, then <span class="math inline">\(\overline{X}\)</span> is sufficient for <span class="math inline">\(\mu\)</span>.</p>
+<p> </p>
+<p>As an exercise, show this via the factorization theorem.</p>
+<p> </p>
+<p>Hint: <span class="math inline">\(\sum_{i=1}^n (x_i - \mu)^2 = \sum_{i=1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2\)</span>.</p>
 </section><section id="likelihood-principle" class="slide level2">
 <h1>Likelihood Principle</h1>
+<p> </p>
+<p>If <span class="math inline">\(\boldsymbol{x}\)</span> and <span class="math inline">\(\boldsymbol{y}\)</span> are two data sets so that</p>
+<p><span class="math display">\[L(\theta | \boldsymbol{x}) \propto L(\theta | \boldsymbol{y}),\]</span></p>
+<p><span class="math display">\[\mbox{i.e., } L(\theta | \boldsymbol{x}) = c(\boldsymbol{x}, \boldsymbol{y}) L(\theta | \boldsymbol{y}),\]</span></p>
+<p>then inferenece <span class="math inline">\(\theta\)</span> should be the same for <span class="math inline">\(\boldsymbol{x}\)</span> and <span class="math inline">\(\boldsymbol{y}\)</span>.</p>
 </section><section id="maximum-likelihood" class="slide level2">
 <h1>Maximum Likelihood</h1>
+<p>A common starting point for inference is to calculate the <strong>maximum likelihood estimate</strong>. This is the value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(L(\theta | \boldsymbol{x})\)</span> for an observe data set <span class="math inline">\(\boldsymbol{x}\)</span>.</p>
+<span class="math display">\[\begin{align*}
+\hat{\theta}_{{\rm MLE}} &amp; = \operatorname{argmax}_{\theta} L(\theta | \boldsymbol{x}) \\
+ &amp; = \operatorname{argmax}_{\theta} \ell (\theta | \boldsymbol{x}) \\
+ &amp; = \operatorname{argmax}_{\theta} L (\theta | T(\boldsymbol{x}))
+\end{align*}\]</span>
+<p>where the last equality holds for sufficient statistics <span class="math inline">\(T(\boldsymbol{x})\)</span>.</p>
 </section><section id="going-further" class="slide level2">
 <h1>Going Further</h1>
 <p>If this interests you, be sure to read about:</p>
@@ -673,24 +766,77 @@ f(x | y) = \frac{f(x, y)}{f(y)}.
 <li>Basu’s theorem</li>
 </ul>
 </section></section>
-<section><section id="exponential-family-distributions" class="titleslide slide level1"><h1>Exponential Family Distributions</h1></section><section id="definition-1" class="slide level2">
+<section><section id="exponential-family-distributions" class="titleslide slide level1"><h1>Exponential Family Distributions</h1></section><section id="rationale" class="slide level2">
+<h1>Rationale</h1>
+<p><strong>Exponential family distributions</strong> (EFDs) provide a generalized parameterization and form of a very large class of distributions used in inference. For example, Binomia, Poisson, Exponential, Normal, Multinomial, MVN, and Dirichlet are all EFDs.</p>
+<p>The generalized form provides generally applicable formulas for moments, estimators, etc.</p>
+<p>EFDs also facilitate developing general algorithms for model fitting.</p>
+</section><section id="definition-1" class="slide level2">
 <h1>Definition</h1>
+<p>If <span class="math inline">\(X\)</span> follows an EFD then it has pdf of the form</p>
+<p><span class="math display">\[f(x ; \boldsymbol{\theta}) =
+h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) - A(\boldsymbol{\eta}) \right\}
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\theta}\)</span> is a vector of parameters, <span class="math inline">\(\{T_k(x)\}\)</span> are sufficient statistics, <span class="math inline">\(A(\boldsymbol{\eta})\)</span> is the cumulant generating function.</p>
+</section><section class="slide level2">
+
+<p>The functions <span class="math inline">\(\eta_k(\boldsymbol{\theta})\)</span> for <span class="math inline">\(k=1, \ldots, d\)</span> map the usual parameters to the “natural parameters”.</p>
+<p><span class="math inline">\(\{T_k(x)\}\)</span> are sufficient statistics for <span class="math inline">\(\{\eta_k\}\)</span> due to the factorization theorem.</p>
+<p><span class="math inline">\(A(\boldsymbol{\eta})\)</span> is sometimes called the “log normalizer” because</p>
+<p><span class="math display">\[A(\boldsymbol{\eta}) = \log \int h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) \right\}.\]</span></p>
 </section><section id="example-bernoulli" class="slide level2">
 <h1>Example: Bernoulli</h1>
-</section><section id="example-normal" class="slide level2">
-<h1>Example: Normal</h1>
-</section><section id="natural-parameter" class="slide level2">
-<h1>Natural Parameter</h1>
-</section><section id="natural-single-parameter-efd" class="slide level2">
-<h1>Natural Single Parameter EFD</h1>
-</section><section id="calculating-moments" class="slide level2">
-<h1>Calculating Moments</h1>
-</section><section id="example-bernoulli-1" class="slide level2">
-<h1>Example: Bernoulli</h1>
+<span class="math display">\[\begin{align*}
+f(x ; p) &amp; = p^x (1-p)^{1-x} \\
+ &amp; = \exp \left\{ x \log(p) + (1-x) \log(1-p) \right\} \\
+ &amp; = \exp \left\{ x \log\left( \frac{p}{1-p} \right) + \log(1-p) \right\}
+\end{align*}\]</span>
+<p><span class="math inline">\(\eta = \log\left( \frac{p}{1-p} \right)\)</span></p>
+<p><span class="math inline">\(T(x) = x\)</span></p>
+<p><span class="math inline">\(A(\eta) = \log\left(1 + e^\eta\right)\)</span></p>
 </section><section id="example-normal-1" class="slide level2">
 <h1>Example: Normal</h1>
+<span class="math display">\[\begin{align*}
+f(x ; \mu, \sigma^2) &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2 \sigma^2}\right\} \\
+ &amp; = \frac{1}{\sqrt{2 \pi}} \exp\left\{\frac{\mu}{\sigma^2} x - \frac{1}{2 \sigma^2} x^2 - \log(\sigma) - \frac{\mu^2}{2 \sigma^2}\right\}
+\end{align*}\]</span>
+<p><span class="math inline">\(\boldsymbol{\eta} = \left(\frac{\mu}{\sigma^2}, - \frac{1}{2 \sigma^2} \right)^T\)</span></p>
+<p><span class="math inline">\(\boldsymbol{T}(x) = \left(x, x^2\right)^T\)</span></p>
+<p><span class="math inline">\(A(\boldsymbol{\eta}) = \log(\sigma) + \frac{\mu^2}{2 \sigma^2} = -\frac{1}{2} \log(-2 \eta_2) - \frac{\eta_1^2}{4\eta_2}\)</span></p>
+</section><section id="natural-single-parameter-efd" class="slide level2">
+<h1>Natural Single Parameter EFD</h1>
+<p> </p>
+<p>A natural single parameter EFD simplifies to the scenario where <span class="math inline">\(d=1\)</span> and <span class="math inline">\(T(x) = x\)</span>:</p>
+<p><span class="math display">\[f(x ; \boldsymbol{\theta}) =
+h(x) \exp \left\{ \eta x - A(\eta) \right\}
+\]</span></p>
+</section><section id="calculating-moments" class="slide level2">
+<h1>Calculating Moments</h1>
+<p> </p>
+<p><span class="math display">\[
+\frac{d}{d \eta_k} A(\boldsymbol{\eta}) = {\operatorname{E}}[T_k(X)]
+\]</span></p>
+<p> </p>
+<p><span class="math display">\[
+\frac{d^2}{d \eta_k^2} A(\boldsymbol{\eta}) = {\operatorname{Var}}[T_k(X)]
+\]</span></p>
+</section><section id="example-normal-2" class="slide level2">
+<h1>Example: Normal</h1>
+<p>For <span class="math inline">\(X \sim \mbox{Normal}(\mu, \sigma^2)\)</span>,</p>
+<p><span class="math display">\[{\operatorname{E}}[X] = \frac{d}{d \eta_1} A(\boldsymbol{\eta}) = -\frac{\eta_1}{2 \eta_2} = \mu,\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}}(X) = \frac{d^2}{d \eta_1^2} A(\boldsymbol{\eta}) = -\frac{1}{2 \eta_2} = \sigma^2.\]</span></p>
 </section><section id="maximum-likelihood-1" class="slide level2">
 <h1>Maximum Likelihood</h1>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are iid from some EFD. Then,</p>
+<p><span class="math display">\[
+\ell(\boldsymbol{\eta} | \boldsymbol{x}) = \sum_{i=1}^n \left[ \log h(x_i) + \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x_i) - A(\boldsymbol{\eta})  \right]
+\]</span></p>
+<p><span class="math display">\[
+\frac{d}{d \eta_k} \ell(\boldsymbol{\eta} | \boldsymbol{x}) = \sum_{i=1}^n T_k(x_i) - n \frac{d}{d \eta_k} A(\boldsymbol{\eta})
+\]</span> Setting the second equation to 0, it follows that the MLE of <span class="math inline">\(\eta_k\)</span> is the solution to</p>
+<p><span class="math display">\[
+\frac{1}{n} \sum_{i=1}^n T_k(x_i) = \frac{d}{d \eta_k} A(\boldsymbol{\eta}).
+\]</span></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>
