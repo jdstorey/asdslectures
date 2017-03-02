@@ -681,7 +681,7 @@ If $X_1, X_2, \ldots, X_n$ are independent random variables, then:
 
 $$\E\left[ \sum_{i=1}^n X_i \right] = \sum_{i=1}^n \E[X_i]$$
 
-$$\V\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n \V(X_i) + 2 \sum_{i \not= j} \Cov(X_i, X_j)$$
+$$\V\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n \V(X_i) + \sum_{i \not= j} \Cov(X_i, X_j)$$
 
 ## Means of Random Variables
 
@@ -803,7 +803,7 @@ Let $A_x \times A_y \subseteq \mathbb{R} \times \mathbb{R}$ be an event.  Then $
 \begin{align*}
 & \sum_{x \in A_x} \sum_{y \in A_y} f(x, y) &  \mbox{(discrete)} \\
 & \int_{x \in A_x} \int_{y \in A_y} f(x, y) dy dx & \mbox{(continuous)} \\
-& \int_{x \in A_x} \int_{y \in A_y} f(x, y) dF_Y(y) dF_{X}(x) & \mbox{(general)}
+& \int_{x \in A_x} \int_{y \in A_y} dF_Y(y) dF_{X}(x) & \mbox{(general)}
 \end{align*}
 
 ## Marginal Distributions
@@ -913,9 +913,9 @@ The Multinomial distribution is a generalization of the Binomial distribution. I
 
 It can be calculated that
 
-$$\E[X_i] = p_i n,$$
+$$\E[X_i] = np_i, \quad \V(X_i) = n p_i (1-p_i),$$
 
-$$\Cov(X_i, X_j) = -n p_i p_j.$$
+$$\Cov(X_i, X_j) = -n p_i p_j \quad (i \not= j).$$
 
 
 ## Multivariate Normal
@@ -941,7 +941,7 @@ $$
 
 It can be calculated that
 $$\E[X_i] = \frac{\alpha_i}{\alpha_0}, \V(X_i) = \frac{\alpha_i (\alpha_0 - \alpha_i)}{\alpha_0^2 (\alpha_0 + 1)}, \Cov(X_i, X_j) = \frac{- \alpha_i \alpha_j}{\alpha_0^2 (\alpha_0 + 1)}$$
-where $\alpha_0 = \sum_{k=1}^m \alpha_k$.
+where $\alpha_0 = \sum_{k=1}^m \alpha_k$ and $i \not= j$ in $\Cov(X_i, X_j)$.
 
 
 ## In R
@@ -957,21 +957,21 @@ For the Dirichlet, there are several packages that work with this distribution. 
 ## Likelihood Function
 
 Suppose that we observe $x_1, x_2, \ldots, x_n$ according to the model $X_1, X_2, \ldots, X_n \sim F_{\theta}$. 
-The joint pdf is $f(\boldsymbol{x} | \theta)$.  We view the pdf as being a function of $\boldsymbol{x}$ for a fixed $\theta$.
+The joint pdf is $f(\boldsymbol{x} ; \theta)$.  We view the pdf as being a function of $\boldsymbol{x}$ for a fixed $\theta$.
 
 The **likelihood function** is obtained by reversing the arguments and viewing this as a function of $\theta$ for a fixed, observed $\boldsymbol{x}$:
 
-$$L(\theta | \boldsymbol{x}) = f(\boldsymbol{x} | \theta).$$ 
+$$L(\theta ; \boldsymbol{x}) = f(\boldsymbol{x} ; \theta).$$ 
 
 ## Log-Likelihood Function
 
 The log-likelihood function is
 
-$$ \ell(\theta | \boldsymbol{x}) = \log L(\theta | \boldsymbol{x}).$$
+$$ \ell(\theta ; \boldsymbol{x}) = \log L(\theta ; \boldsymbol{x}).$$
 
 When the data are iid, we have
 
-$$ \ell(\theta | \boldsymbol{x}) = \log \prod_{i=1}^n f(x_i | \theta) = \sum_{i=1}^n \log f(x_i | \theta).$$
+$$ \ell(\theta ; \boldsymbol{x}) = \log \prod_{i=1}^n f(x_i ; \theta) = \sum_{i=1}^n \log f(x_i ; \theta).$$
 
 ## Sufficient Statistics
 
@@ -985,11 +985,11 @@ The interpretation is that the information in $\boldsymbol{X}$ about $\theta$ (t
 
 The factorization theorem says that $T(\boldsymbol{x})$ is a sufficient statistic if and only if we can factor
 
-$$f(\boldsymbol{x} | \theta) = g(T(\boldsymbol{x}) | \theta) h(\boldsymbol{x}).$$
+$$f(\boldsymbol{x} ; \theta) = g(T(\boldsymbol{x}), \theta) h(\boldsymbol{x}).$$
 
 Therefore, if $T(\boldsymbol{x})$ is a sufficient statistic then
 
-$$L(\theta | \boldsymbol{x}) = g(T(\boldsymbol{x}) | \theta) h(\boldsymbol{x}) \propto L(\theta | T(\boldsymbol{x})).$$
+$$L(\theta ; \boldsymbol{x}) = g(T(\boldsymbol{x}), \theta) h(\boldsymbol{x}) \propto L(\theta ; T(\boldsymbol{x})).$$
 
 This formalizes the idea that the information in $\boldsymbol{X}$ about $\theta$ (the target of inference) is contained in $T(\boldsymbol{X})$.
 
@@ -1013,20 +1013,20 @@ Hint: $\sum_{i=1}^n (x_i - \mu)^2 = \sum_{i=1}^n (x_i - \overline{x})^2 + n(\ove
 
 If $\boldsymbol{x}$ and $\boldsymbol{y}$ are two data sets so that 
 
-$$L(\theta | \boldsymbol{x}) \propto L(\theta | \boldsymbol{y}),$$
+$$L(\theta ; \boldsymbol{x}) \propto L(\theta ; \boldsymbol{y}),$$
 
-$$\mbox{i.e., } L(\theta | \boldsymbol{x}) = c(\boldsymbol{x}, \boldsymbol{y}) L(\theta | \boldsymbol{y}),$$
+$$\mbox{i.e., } L(\theta ; \boldsymbol{x}) = c(\boldsymbol{x}, \boldsymbol{y}) L(\theta ; \boldsymbol{y}),$$
 
 then inferenece $\theta$ should be the same for $\boldsymbol{x}$ and $\boldsymbol{y}$.
 
 ## Maximum Likelihood
 
-A common starting point for inference is to calculate the **maximum likelihood estimate**.  This is the value of $\theta$ that maximizes $L(\theta | \boldsymbol{x})$ for an observe data set $\boldsymbol{x}$.
+A common starting point for inference is to calculate the **maximum likelihood estimate**.  This is the value of $\theta$ that maximizes $L(\theta ; \boldsymbol{x})$ for an observe data set $\boldsymbol{x}$.
 
 \begin{align*}
-\hat{\theta}_{{\rm MLE}} & = \operatorname{argmax}_{\theta} L(\theta | \boldsymbol{x}) \\
- & = \operatorname{argmax}_{\theta} \ell (\theta | \boldsymbol{x}) \\
- & = \operatorname{argmax}_{\theta} L (\theta | T(\boldsymbol{x}))
+\hat{\theta}_{{\rm MLE}} & = \operatorname{argmax}_{\theta} L(\theta ; \boldsymbol{x}) \\
+ & = \operatorname{argmax}_{\theta} \ell (\theta ; \boldsymbol{x}) \\
+ & = \operatorname{argmax}_{\theta} L (\theta ; T(\boldsymbol{x}))
 \end{align*}
 
 where the last equality holds for sufficient statistics $T(\boldsymbol{x})$.
@@ -1079,7 +1079,7 @@ f(x ; p) & = p^x (1-p)^{1-x} \\
 \end{align*}
 
 
-$\eta = \log\left( \frac{p}{1-p} \right)$
+$\eta(p) = \log\left( \frac{p}{1-p} \right)$
 
 $T(x) = x$ 
 
@@ -1092,7 +1092,7 @@ f(x ; \mu, \sigma^2) & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{-\frac{(x-\m
  & = \frac{1}{\sqrt{2 \pi}} \exp\left\{\frac{\mu}{\sigma^2} x - \frac{1}{2 \sigma^2} x^2 - \log(\sigma) - \frac{\mu^2}{2 \sigma^2}\right\}
 \end{align*}
 
-$\boldsymbol{\eta} = \left(\frac{\mu}{\sigma^2}, - \frac{1}{2 \sigma^2} \right)^T$
+$\boldsymbol{\eta}(\mu, \sigma^2) = \left(\frac{\mu}{\sigma^2}, - \frac{1}{2 \sigma^2} \right)^T$
 
 $\boldsymbol{T}(x) = \left(x, x^2\right)^T$ 
 
@@ -1105,7 +1105,7 @@ $A(\boldsymbol{\eta}) = \log(\sigma) + \frac{\mu^2}{2 \sigma^2} = -\frac{1}{2} \
 
 A natural single parameter EFD simplifies to the scenario where $d=1$ and $T(x) = x$:
 
-$$f(x ; \boldsymbol{\theta}) =
+$$f(x ; \eta) =
 h(x) \exp \left\{ \eta x - A(\eta) \right\}
 $$
 
@@ -1138,11 +1138,11 @@ $$\V(X) = \frac{d^2}{d \eta_1^2} A(\boldsymbol{\eta}) = -\frac{1}{2 \eta_2} = \s
 Suppose $X_1, X_2, \ldots, X_n$ are iid from some EFD.  Then,
 
 $$
-\ell(\boldsymbol{\eta} | \boldsymbol{x}) = \sum_{i=1}^n \left[ \log h(x_i) + \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x_i) - A(\boldsymbol{\eta})  \right]
+\ell(\boldsymbol{\eta} ; \boldsymbol{x}) = \sum_{i=1}^n \left[ \log h(x_i) + \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x_i) - A(\boldsymbol{\eta})  \right]
 $$
 
 $$
-\frac{d}{d \eta_k} \ell(\boldsymbol{\eta} | \boldsymbol{x}) = \sum_{i=1}^n T_k(x_i) - n \frac{d}{d \eta_k} A(\boldsymbol{\eta})
+\frac{d}{d \eta_k} \ell(\boldsymbol{\eta} ; \boldsymbol{x}) = \sum_{i=1}^n T_k(x_i) - n \frac{d}{d \eta_k} A(\boldsymbol{\eta})
 $$
 Setting the second equation to 0, it follows that the MLE of $\eta_k$ is the solution to 
 
