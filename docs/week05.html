@@ -662,7 +662,7 @@ z = \frac{\hat{p}_1 - \hat{p}_2 }{\sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \fr
 </section></section>
 <section><section id="the-t-distribution" class="titleslide slide level1"><h1>The <em>t</em> Distribution</h1></section><section id="normal-unknown-variance" class="slide level2">
 <h1>Normal, Unknown Variance</h1>
-<p>Suppose data a sample of <span class="math inline">\(n\)</span> data points is modeled by <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu, \sigma^2)\)</span> where <span class="math inline">\(\sigma^2\)</span> is <em>unknown</em>. Recall that <span class="math inline">\(S = \sqrt{\frac{\sum_{i=1}^n (X_i - \overline{X})^2}{n-1}}\)</span> is the sample standard deviation.</p>
+<p>Suppose a sample of <span class="math inline">\(n\)</span> data points is modeled by <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu, \sigma^2)\)</span> where <span class="math inline">\(\sigma^2\)</span> is <em>unknown</em>. Recall that <span class="math inline">\(S = \sqrt{\frac{\sum_{i=1}^n (X_i - \overline{X})^2}{n-1}}\)</span> is the sample standard deviation.</p>
 <p>The statistic <span class="math display">\[\frac{\overline{X} - \mu}{S/\sqrt{n}}\]</span></p>
 <p>has a <span class="math inline">\(t_{n-1}\)</span> distribution, a <em>t</em>-distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
 </section><section id="aside-chi-square-distribution" class="slide level2">
@@ -1247,24 +1247,100 @@ rate ratio
 </section></section>
 <section><section id="likelihood-ratio-tests" class="titleslide slide level1"><h1>Likelihood Ratio Tests</h1></section><section id="general-set-up" class="slide level2">
 <h1>General Set-up</h1>
-</section><section id="signficance-regions" class="slide level2">
-<h1>Signficance Regions</h1>
+<p>Most hypothesis testing procedures can be formulated so that a test statistic, <span class="math inline">\(S(\boldsymbol{x})\)</span> is applied to the data <span class="math inline">\(\boldsymbol{x} = (x_1, x_2, \ldots, x_n)^T\)</span> so that:</p>
+<ol type="1">
+<li><span class="math inline">\(S(\boldsymbol{x}) \geq 0\)</span></li>
+<li>The larger <span class="math inline">\(S(\boldsymbol{x})\)</span> is, the more significant the test is (i.e., the more evidence against the null in favor of the alternative)</li>
+<li>The p-value is <span class="math inline">\(p(\boldsymbol{x}) = \Pr(S(\boldsymbol{X^*}) \geq S(\boldsymbol{x}))\)</span> where <span class="math inline">\(S(\boldsymbol{X^*})\)</span> is distributed according to the null distribution</li>
+</ol>
+</section><section id="significance-regions" class="slide level2">
+<h1>Significance Regions</h1>
+<p>A level <span class="math inline">\(\alpha\)</span> test is a signficance rule (i.e., a rule for calling a test statistically significant) that results in a false positive rate (i.e., Type I error rate) of <span class="math inline">\(\alpha\)</span>. Under our set-up, significance regions take the form:</p>
+<p><span class="math display">\[\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq c_{1-\alpha} \right\},\]</span></p>
+<p>where <span class="math inline">\(c_{1-\alpha}\)</span> is the <span class="math inline">\((1-\alpha)\)</span> percentile of <span class="math inline">\(S(\boldsymbol{X}^*)\)</span> so that <span class="math inline">\(\Pr(S(\boldsymbol{X}^*) \geq c_{1-\alpha}) = \alpha\)</span>. We restrict <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>.</p>
+<p>Note that if <span class="math inline">\(\alpha&#39; \leq \alpha\)</span> then <span class="math inline">\(\Gamma_{\alpha&#39;} \subseteq \Gamma_\alpha\)</span>.</p>
 </section><section id="p-values-1" class="slide level2">
 <h1>P-values</h1>
+<p>A p-value can be defined in terms of significance regions:</p>
+<p><span class="math display">\[p(\boldsymbol{x}) = \min \left\{\alpha: \boldsymbol{x} \in \Gamma_\alpha \right\}\]</span></p>
 </section><section id="example-wald-test" class="slide level2">
 <h1>Example: Wald Test</h1>
-</section><section id="simple-vs.composite-hypotheses" class="slide level2">
-<h1>Simple vs. Composite Hypotheses</h1>
+<p>Consider the hypothesis test, <span class="math inline">\(H_0: \theta=\theta_0\)</span> vs <span class="math inline">\(H_1: \theta \not= \theta_0\)</span>. Let <span class="math inline">\(\hat{\theta}_n(\boldsymbol{x})\)</span> be the MLE of <span class="math inline">\(\theta\)</span>. We have</p>
+<p><span class="math display">\[S(\boldsymbol{x}) = \frac{\left| \hat{\theta}_n(\boldsymbol{x}) - \theta_0 \right|}{\hat{{\operatorname{se}}}\left(\hat{\theta}_n(\boldsymbol{x})\right)},\]</span></p>
+<p><span class="math display">\[\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq |z_{\alpha/2}| \right\},\]</span></p>
+<p>where <span class="math inline">\(z_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span> percentile of the Normal<span class="math inline">\((0,1)\)</span> distribution.</p>
 </section><section id="neyman-pearson-lemma" class="slide level2">
 <h1>Neyman-Pearson Lemma</h1>
+<p>Suppose we are testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs <span class="math inline">\(H_1: \theta = \theta_1\)</span> where in practice <span class="math inline">\(\theta_0\)</span> and <span class="math inline">\(\theta_1\)</span> are known, fixed quantities. The most powerful test has statistic and significance regions:</p>
+<p><span class="math display">\[
+S(\boldsymbol{x}) = \frac{f(\boldsymbol{x}; \theta_1)}{f(\boldsymbol{x}; \theta_0)}
+= \frac{L(\theta_1; \boldsymbol{x})}{L(\theta_0; \boldsymbol{x})}
+\]</span></p>
+<p><span class="math display">\[\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq c_{1-\alpha} \right\},\]</span></p>
+<p>where <span class="math inline">\(c_{1-\alpha}\)</span> is the <span class="math inline">\((1-\alpha)\)</span> percentile of <span class="math inline">\(S(\boldsymbol{X}^*)\)</span> so that <span class="math inline">\(\operatorname{Pr}_{\theta_0}(S(\boldsymbol{X}^*) \geq c_{1-\alpha}) = \alpha\)</span>.</p>
+</section><section id="simple-vs.composite-hypotheses" class="slide level2">
+<h1>Simple vs. Composite Hypotheses</h1>
+<p>A simple hypothesis is defined in terms of a single value, e.g.,</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu=0\)</span></li>
+<li><span class="math inline">\(H_0: p = p_0\)</span> where <span class="math inline">\(p_0\)</span> is a placehold for a known, fixed number in practice</li>
+<li><span class="math inline">\(H_1: \lambda=5\)</span></li>
+</ul>
+<p>A composite hypothesis is defined by multiple values, e.g.,</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu \leq 0\)</span> vs <span class="math inline">\(H_1: \mu &gt; 0\)</span></li>
+<li><span class="math inline">\(H_0: p_1 = p_2\)</span>, where <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> are two unknown parameters corresponding to two populations</li>
+<li><span class="math inline">\(H_1: \mu \not= 0\)</span></li>
+</ul>
+</section><section id="general-hypothesis-tests" class="slide level2">
+<h1>General Hypothesis Tests</h1>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} F_\theta\)</span> where <span class="math inline">\(\theta \in \Theta\)</span>. Let <span class="math inline">\(\Theta_0, \Theta_1 \subseteq \Theta\)</span> so that <span class="math inline">\(\Theta_0 \cap \Theta_1 = \varnothing\)</span> and <span class="math inline">\(\Theta_0 \cup \Theta_1 = \Theta\)</span>. The hypothesis test is:</p>
+<p><span class="math inline">\(H_0: \theta \in \Theta_0\)</span> vs <span class="math inline">\(H_1: \theta \in \Theta_1\)</span></p>
+<p>If <span class="math inline">\(\Theta_0\)</span> or <span class="math inline">\(\Theta_1\)</span> contain more than one value then the corresponding hypothesis is composite.</p>
+</section><section id="composite-h_0" class="slide level2">
+<h1>Composite <span class="math inline">\(H_0\)</span></h1>
+<p>The significance regions indexed by their level <span class="math inline">\(\alpha\)</span> are determined so that:</p>
+<p><span class="math display">\[\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq c_{1-\alpha} \right\},\]</span></p>
+<p>where <span class="math inline">\(c_{1-\alpha}\)</span> is such that <span class="math display">\[\max_{\theta \in \Theta_0} \Pr(S(\boldsymbol{X^*}) \geq c_{1-\alpha}) = \alpha.\]</span></p>
+<p>In this case,</p>
+<span class="math display">\[\begin{align*}
+p(\boldsymbol{x}) &amp; = \min \left\{\alpha: \boldsymbol{x} \in \Gamma_\alpha \right\} \\
+ &amp; = \max_{\theta \in \Theta_0} \operatorname{Pr}_\theta (S(\boldsymbol{X}^*) \geq S(\boldsymbol{x}))
+\end{align*}\]</span>
 </section><section id="generalized-lrt" class="slide level2">
 <h1>Generalized LRT</h1>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} F_\theta\)</span> where <span class="math inline">\(\theta \in \Theta\)</span> and we are testing <span class="math inline">\(H_0: \theta \in \Theta_0\)</span> vs <span class="math inline">\(H_1: \theta \in \Theta_1\)</span>.</p>
+<p>The generalized LRT utilizes test statistic and significance regions:</p>
+<p><span class="math display">\[\lambda(\boldsymbol{x}) = \frac{\max_{\theta \in \Theta} L(\theta; \boldsymbol{x})}{\max_{\theta \in \Theta_0} L(\theta; \boldsymbol{x})}
+= \frac{L\left(\hat{\theta}; \boldsymbol{x}\right)}{L\left(\hat{\theta}_0; \boldsymbol{x}\right)}
+\]</span></p>
+<p><span class="math display">\[\Gamma_\alpha = \left\{\boldsymbol{x}: \lambda(\boldsymbol{x}) \geq c_{1-\alpha} \right\}\]</span></p>
 </section><section id="null-distribution-of-gen.lrt" class="slide level2">
 <h1>Null Distribution of Gen. LRT</h1>
-</section><section id="example-one-sample-poisson" class="slide level2">
-<h1>Example: One-Sample Poisson</h1>
-</section><section id="example-two-sample-normal" class="slide level2">
-<h1>Example: Two-Sample Normal</h1>
+<p>The null distribution of <span class="math inline">\(\lambda(\boldsymbol{x})\)</span> under “certain regularity assumptions” can be shown to be such that, as <span class="math inline">\(n \rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[ 2 \log \lambda(\boldsymbol{x}) \stackrel{D}{\longrightarrow} \chi^2_v \]</span></p>
+<p>where <span class="math inline">\(v = \operatorname{dim}(\Theta) - \operatorname{dim}(\Theta_0)\)</span>.</p>
+<p>The significance regions can be more easily written as <span class="math inline">\(\Gamma_\alpha = \left\{\boldsymbol{x}: 2 \log \lambda(\boldsymbol{x}) \geq c_{1-\alpha} \right\}\)</span> where <span class="math inline">\(c_{1-\alpha}\)</span> is the <span class="math inline">\(1-\alpha\)</span> percentile of the <span class="math inline">\(\chi^2_v\)</span> distribution.</p>
+</section><section id="example-poisson-1" class="slide level2">
+<h1>Example: Poisson</h1>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Poisson}(\theta)\)</span> where <span class="math inline">\(\theta &gt; 0\)</span> and we are testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs <span class="math inline">\(H_1: \theta \not= \theta_0\)</span>. The unconstrained MLE is <span class="math inline">\(\hat{\theta} = \overline{x}\)</span>. The generalized LRT statistic</p>
+<p><span class="math display">\[
+2 \log \lambda(\boldsymbol{x}) 
+= 2 \log \frac{e^{-n \hat{\theta}} \hat{\theta}^{\sum x_i} }{e^{-n \theta_0} \theta_0^{\sum x_i} }
+= 2 n \left[ (\theta_0 - \hat{\theta}) - \hat{\theta} \log(\theta_0 / \hat{\theta}) \right]
+\]</span></p>
+<p>which has an asymptotic <span class="math inline">\(\chi^2_1\)</span> null distribution.</p>
+</section><section id="example-normal" class="slide level2">
+<h1>Example: Normal</h1>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu, \sigma^2)\)</span> and we are testing <span class="math inline">\(H_0: \mu = \mu_0\)</span> vs <span class="math inline">\(H_1: \mu \not= \mu_0\)</span>. The generalized LRT can be applied for multidimensional parameter spaces <span class="math inline">\(\boldsymbol{\Theta}\)</span> as well. The statistic, which has asymptotic null distribution <span class="math inline">\(\chi^2_1\)</span>, is</p>
+<p><span class="math display">\[
+2 \log \lambda(\boldsymbol{x}) 
+= 2 \log \left( \frac{\hat{\sigma}^2_0}{\hat{\sigma}^2} \right)^{n/2}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (x_i - \mu_0)^2}{n}, \quad \hat{\sigma}^2 = \frac{\sum_{i=1}^n (x_i - \overline{x})^2}{n}.
+\]</span></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>

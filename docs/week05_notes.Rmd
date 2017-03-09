@@ -808,7 +808,7 @@ where $Z^*$ is a Normal(0,1) random variable.
 
 ## Normal, Unknown Variance
 
-Suppose data a sample of $n$ data points is modeled by $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu, \sigma^2)$ where $\sigma^2$ is *unknown*. Recall that $S = \sqrt{\frac{\sum_{i=1}^n (X_i - \overline{X})^2}{n-1}}$ is the sample standard deviation.
+Suppose a sample of $n$ data points is modeled by $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu, \sigma^2)$ where $\sigma^2$ is *unknown*. Recall that $S = \sqrt{\frac{\sum_{i=1}^n (X_i - \overline{X})^2}{n-1}}$ is the sample standard deviation.
 
 The statistic
 $$\frac{\overline{X} - \mu}{S/\sqrt{n}}$$
@@ -1305,23 +1305,137 @@ Which analysis is the more informative and scientifically correct one, and why?
 
 ## General Set-up
 
-## Signficance Regions
+Most hypothesis testing procedures can be formulated so that a test statistic, $S(\boldsymbol{x})$ is applied to the data $\boldsymbol{x} = (x_1, x_2, \ldots, x_n)^T$ so that:
+
+1. $S(\boldsymbol{x}) \geq 0$
+2. The larger $S(\boldsymbol{x})$ is, the more significant the test is (i.e., the more evidence against the null in favor of the alternative)
+3. The p-value is $p(\boldsymbol{x}) = \Pr(S(\boldsymbol{X^*}) \geq S(\boldsymbol{x}))$ where $S(\boldsymbol{X^*})$ is distributed according to the null distribution
+
+## Significance Regions
+
+A level $\alpha$ test is a signficance rule (i.e., a rule for calling a test statistically significant) that results in a false positive rate (i.e., Type I error rate) of $\alpha$.  Under our set-up, significance regions take the form:
+
+$$\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq c_{1-\alpha} \right\},$$
+
+where $c_{1-\alpha}$ is the $(1-\alpha)$ percentile of $S(\boldsymbol{X}^*)$ so that $\Pr(S(\boldsymbol{X}^*) \geq c_{1-\alpha}) = \alpha$. We restrict $0 < \alpha < 1$.
+
+Note that if $\alpha' \leq \alpha$ then $\Gamma_{\alpha'} \subseteq \Gamma_\alpha$.
 
 ## P-values
 
+A p-value can be defined in terms of significance regions:
+
+$$p(\boldsymbol{x}) = \min \left\{\alpha: \boldsymbol{x} \in \Gamma_\alpha \right\}$$
+
 ## Example: Wald Test
 
-## Simple vs. Composite Hypotheses
+Consider the hypothesis test, $H_0: \theta=\theta_0$ vs $H_1: \theta \not= \theta_0$.  Let $\hat{\theta}_n(\boldsymbol{x})$ be the MLE of $\theta$.  We have
+
+$$S(\boldsymbol{x}) = \frac{\left| \hat{\theta}_n(\boldsymbol{x}) - \theta_0 \right|}{\hat{\se}\left(\hat{\theta}_n(\boldsymbol{x})\right)},$$
+
+$$\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq |z_{\alpha/2}| \right\},$$
+
+where $z_{\alpha/2}$ is the $\alpha/2$ percentile of the Normal$(0,1)$ distribution.
 
 ## Neyman-Pearson Lemma
 
+Suppose we are testing $H_0: \theta = \theta_0$ vs $H_1: \theta = \theta_1$ where in practice $\theta_0$ and $\theta_1$ are known, fixed quantities.  The most powerful test has statistic and significance regions:
+
+$$
+S(\boldsymbol{x}) = \frac{f(\boldsymbol{x}; \theta_1)}{f(\boldsymbol{x}; \theta_0)}
+= \frac{L(\theta_1; \boldsymbol{x})}{L(\theta_0; \boldsymbol{x})}
+$$
+
+$$\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq c_{1-\alpha} \right\},$$
+
+where $c_{1-\alpha}$ is the $(1-\alpha)$ percentile of $S(\boldsymbol{X}^*)$ so that $\operatorname{Pr}_{\theta_0}(S(\boldsymbol{X}^*) \geq c_{1-\alpha}) = \alpha$.
+
+## Simple vs. Composite Hypotheses
+
+A simple hypothesis is defined in terms of a single value, e.g., 
+
+- $H_0: \mu=0$
+- $H_0: p = p_0$ where $p_0$ is a placehold for a known, fixed number in practice
+- $H_1: \lambda=5$
+
+A composite hypothesis is defined by multiple values, e.g., 
+
+- $H_0: \mu \leq 0$ vs $H_1: \mu > 0$
+- $H_0: p_1 = p_2$, where $p_1$ and $p_2$ are two unknown parameters corresponding to two populations
+- $H_1: \mu \not= 0$
+
+## General Hypothesis Tests
+
+Let $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} F_\theta$ where $\theta \in \Theta$.  Let $\Theta_0, \Theta_1 \subseteq \Theta$ so that $\Theta_0 \cap \Theta_1 = \varnothing$ and $\Theta_0 \cup \Theta_1 = \Theta$.  The hypothesis test is:
+
+$H_0: \theta \in \Theta_0$ vs $H_1: \theta \in \Theta_1$
+
+If $\Theta_0$ or $\Theta_1$ contain more than one value then the corresponding hypothesis is composite.
+
+## Composite $H_0$
+
+The significance regions indexed by their level $\alpha$ are determined so that:
+
+$$\Gamma_\alpha = \left\{\boldsymbol{x}: S(\boldsymbol{x}) \geq c_{1-\alpha} \right\},$$
+
+where $c_{1-\alpha}$ is such that $$\max_{\theta \in \Theta_0} \Pr(S(\boldsymbol{X^*}) \geq c_{1-\alpha}) = \alpha.$$
+
+In this case,
+
+\begin{align*}
+p(\boldsymbol{x}) & = \min \left\{\alpha: \boldsymbol{x} \in \Gamma_\alpha \right\} \\
+ & = \max_{\theta \in \Theta_0} \operatorname{Pr}_\theta (S(\boldsymbol{X}^*) \geq S(\boldsymbol{x}))
+\end{align*}
+
+
 ## Generalized LRT
+
+Let $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} F_\theta$ where $\theta \in \Theta$ and we are testing $H_0: \theta \in \Theta_0$ vs $H_1: \theta \in \Theta_1$.  
+
+The generalized LRT utilizes test statistic and significance regions:
+
+$$\lambda(\boldsymbol{x}) = \frac{\max_{\theta \in \Theta} L(\theta; \boldsymbol{x})}{\max_{\theta \in \Theta_0} L(\theta; \boldsymbol{x})}
+= \frac{L\left(\hat{\theta}; \boldsymbol{x}\right)}{L\left(\hat{\theta}_0; \boldsymbol{x}\right)}
+$$
+
+$$\Gamma_\alpha = \left\{\boldsymbol{x}: \lambda(\boldsymbol{x}) \geq c_{1-\alpha} \right\}$$
 
 ## Null Distribution of Gen. LRT
 
-## Example: One-Sample Poisson
+The null distribution of $\lambda(\boldsymbol{x})$ under "certain regularity assumptions" can be shown to be such that, as $n \rightarrow \infty$,
 
-## Example: Two-Sample Normal
+$$ 2 \log \lambda(\boldsymbol{x}) \stackrel{D}{\longrightarrow} \chi^2_v $$
+
+where $v = \operatorname{dim}(\Theta) - \operatorname{dim}(\Theta_0)$.
+
+The significance regions can be more easily written as $\Gamma_\alpha = \left\{\boldsymbol{x}: 2 \log \lambda(\boldsymbol{x}) \geq c_{1-\alpha} \right\}$ where $c_{1-\alpha}$ is the $1-\alpha$ percentile of the $\chi^2_v$ distribution. 
+
+## Example: Poisson
+
+Let $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Poisson}(\theta)$ where $\theta > 0$ and we are testing $H_0: \theta = \theta_0$ vs $H_1: \theta \not= \theta_0$.  The unconstrained MLE is $\hat{\theta} = \overline{x}$.  The generalized LRT statistic
+
+$$
+2 \log \lambda(\boldsymbol{x}) 
+= 2 \log \frac{e^{-n \hat{\theta}} \hat{\theta}^{\sum x_i} }{e^{-n \theta_0} \theta_0^{\sum x_i} }
+= 2 n \left[ (\theta_0 - \hat{\theta}) - \hat{\theta} \log(\theta_0 / \hat{\theta}) \right]
+$$
+
+which has an asymptotic $\chi^2_1$ null distribution.
+
+## Example: Normal
+
+Let $X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu, \sigma^2)$ and we are testing $H_0: \mu = \mu_0$ vs $H_1: \mu \not= \mu_0$.  The generalized LRT can be applied for multidimensional parameter spaces $\boldsymbol{\Theta}$ as well.  The statistic, which has asymptotic null distribution $\chi^2_1$, is 
+
+$$
+2 \log \lambda(\boldsymbol{x}) 
+= 2 \log \left( \frac{\hat{\sigma}^2_0}{\hat{\sigma}^2} \right)^{n/2}
+$$
+
+where
+
+$$
+\hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (x_i - \mu_0)^2}{n}, \quad \hat{\sigma}^2 = \frac{\sum_{i=1}^n (x_i - \overline{x})^2}{n}.
+$$
 
 # Extras
 
