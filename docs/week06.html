@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 6</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 6</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="likelihood-function" class="titleslide slide level1"><h1>Likelihood Function</h1></section><section id="same-mle-different-ltheta-boldsymbolx" class="slide level2">
+<h1>Same MLE, Different <span class="math inline">\(L(\theta | \boldsymbol{x})\)</span></h1>
+<p><img src="week06_files/figure-revealjs/unnamed-chunk-1-1.png" width="864" style="display: block; margin: auto;" /></p>
+</section><section id="weighted-likelihood-estimate" class="slide level2">
+<h1>Weighted Likelihood Estimate</h1>
+<p>Instead of employing estimator <span class="math inline">\(\hat{\theta}_{{\rm MLE}} = \operatorname{argmax}_\theta L(\theta ; \boldsymbol{x})\)</span>, consider instead an arbitrary weight function, <span class="math inline">\(g(\theta)\)</span>. We could take a weighted average of the likelihood function, assuming all of the integrals below exist.</p>
+<p><span class="math display">\[
+\tilde{\theta} = \frac{\int \theta g(\theta) L(\theta ; \boldsymbol{x}) d\theta}{\int g(\theta) L(\theta ; \boldsymbol{x}) d\theta}
+\]</span></p>
+</section><section id="conditional-expected-value" class="slide level2">
+<h1>Conditional Expected Value</h1>
+<p>If we set</p>
+<p><span class="math display">\[
+h(\theta | \boldsymbol{x}) = \frac{g(\theta) L(\theta ; \boldsymbol{x})}{\int g(\theta^*) L(\theta^* ; \boldsymbol{x}) d\theta^*}
+\]</span></p>
+<p>then <span class="math inline">\(h(\theta | \boldsymbol{x})\)</span> is a probability density function and</p>
+<p><span class="math display">\[
+\tilde{\theta} = {\operatorname{E}}_{h(\theta | \boldsymbol{x})}[\theta].
+\]</span></p>
+</section><section id="standard-errror" class="slide level2">
+<h1>Standard Errror</h1>
+<p>Consider the model, <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_{\theta}\)</span>.</p>
+<p>Since <span class="math inline">\(\tilde{\theta} = {\operatorname{E}}_{h(\theta | \boldsymbol{x})}[\theta]\)</span> is a function of the data <span class="math inline">\(\boldsymbol{x}\)</span>, it follows that in most circumstances it should be possible to obtain an approximation to its standard error, <span class="math inline">\(\sqrt{{\operatorname{Var}}(\tilde{\theta})}\)</span> and an estimate of the standard error.</p>
+<p>This allows for frequentist inference of estimates based on a weighted integral of the likelihood function.</p>
+</section></section>
+<section><section id="bayesian-inference" class="titleslide slide level1"><h1>Bayesian Inference</h1></section><section id="frequentist-probability" class="slide level2">
+<h1>Frequentist Probability</h1>
+<p>The inference framework we have covered so far uses a <strong>frequentist</strong> intepretation of probability.</p>
+<p>We made statements such as, “If we repeat this study over and over, the long run frequency is such that…”</p>
+</section><section id="bayesian-probability" class="slide level2">
+<h1>Bayesian Probability</h1>
+<p>Traditional <strong>Bayesian inference</strong> is based on a different interpretation of probability, that probability is a measure of subjective belief.</p>
+<p>We will call this “subjective Bayesian statistics.”</p>
+</section><section id="the-framework" class="slide level2">
+<h1>The Framework</h1>
+<p>A <strong>prior probability distribution</strong> is introduced for an unknown parameter, which is a probability distribution on the unknown parameter that captures one’s subjective belief about its possible values.</p>
+<p>The <strong>posterior probability distributuon</strong> of the parameter is then calculated using Bayes theorem once data are observed. Analogs of confidence intervals and hypothesis tests can then be obtained through the posterior distribution.</p>
+</section><section id="an-example" class="slide level2">
+<h1>An Example</h1>
+<p>Prior: <span class="math inline">\(P \sim \mbox{Uniform}(0,1)\)</span></p>
+<p>Data generating distribution: <span class="math inline">\(X|P=p \sim \mbox{Binomial}(n,p)\)</span></p>
+<p>Posterior pdf (via Bayes Theorem):</p>
+<span class="math display">\[\begin{align*}
+f(p | X=x) &amp; = \frac{\Pr(X=x | P=p) f(p)}{\Pr(X=x)} \\
+ &amp; = \frac{\Pr(X=x | P=p) f(p)}{\int \Pr(X=x | P=p^*) f(p^*) dp^*}
+\end{align*}\]</span>
+</section><section id="calculations" class="slide level2">
+<h1>Calculations</h1>
+<p>In the previous example, it is possible to analytically calculate the posterior distribution. (In the example, it is a Beta distribution with parameters that involve <span class="math inline">\(x\)</span>.) However, this is often impossible.</p>
+<p>Bayesian inference often involves complicated and intensive calculations to numerically approximate the posterior probability distribution.</p>
+</section><section id="in-practice" class="slide level2">
+<h1>In Practice</h1>
+<p>Although the Bayesian inference framework has its roots in the subjective view of probability, in modern times this philosophical aspect is often ignored or unimportant.</p>
+<p>When subjectivism is ignored, is this really Bayesian statistics, or is it frequentist statistics that includes a probability model on the unknown parameter(s) that employes Bayes Theorem?</p>
+</section><section id="in-practice-contd" class="slide level2">
+<h1>In Practice (cont’d)</h1>
+<p>Bayesian inference is often used because it provides a flexible and sometimes superior model for real world problems. But the interpretation and evaluation are often tacitly frequentist.</p>
+<p>There are very few pure subjective Bayesians working in the natural sciences or in technology industries.</p>
+</section><section id="goal" class="slide level2">
+<h1>Goal</h1>
+<p>Suppose we model <span class="math inline">\((X_1, X_2, \ldots, X_n) | \theta \ {\; \stackrel{\text{iid}}{\sim}\;}\ F_{\theta}\)</span> with <strong>prior distribution</strong> <span class="math inline">\(\theta \sim F_{\tau}\)</span> where it should be noted that <span class="math inline">\(\theta\)</span> also depends on (possibly unknown or subjective) parameter(s) <span class="math inline">\(\tau\)</span>.</p>
+<p>The ultimate goal is to determine the <strong>posterior distribution</strong> of <span class="math inline">\(\theta | \boldsymbol{X}\)</span> through Bayes theorem:</p>
+<p><span class="math display">\[
+f(\theta | \boldsymbol{X}) = \frac{f(\boldsymbol{X} | \theta) f(\theta)}{f(\boldsymbol{X})} = \frac{f(\boldsymbol{X} | \theta) f(\theta)}{\int f(\boldsymbol{X} | \theta^*) f(\theta^*) d\theta^*}.
+\]</span></p>
+<p>If there is a true fixed value of <span class="math inline">\(\theta\)</span>, then a well-behaved model should be so that <span class="math inline">\(f(\theta | \boldsymbol{X})\)</span> concentrates around this fixed value as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
+</section><section id="advantages" class="slide level2">
+<h1>Advantages</h1>
+<ul>
+<li>Statements on measures of uncertainty and inference are easier to make</li>
+<li>Often superior numerical stability to the estimates</li>
+<li>Data across studies or multiple samples easier to combine (e.g., how to combine frequentist p-values?)</li>
+<li>High-dimensional inference works especially well in a Bayesian framework</li>
+</ul>
+</section><section id="computation" class="slide level2">
+<h1>Computation</h1>
+<p>Bayesian inference can be particularly computationally intensive. The challenge is usually in calculating the denominator of the right hand side of Bayes thereom, <span class="math inline">\(f(\boldsymbol{X})\)</span>:</p>
+<p><span class="math display">\[
+f(\theta | \boldsymbol{X}) = \frac{f(\boldsymbol{X} | \theta) f(\theta)}{f(\boldsymbol{X})}
+\]</span></p>
+<p>Markov chain Monte Carlo methods and variational inference methods are particularly popular for dealing with the numerical challenges of obtain good estimates of the posterior distribution.</p>
+</section></section>
+<section><section id="estimation" class="titleslide slide level1"><h1>Estimation</h1></section><section id="assumptions" class="slide level2">
+<h1>Assumptions</h1>
+<p>We will assume that <span class="math inline">\((X_1, X_2, \ldots, X_n) | \theta {\; \stackrel{\text{iid}}{\sim}\;}F_{\theta}\)</span> with prior distribution <span class="math inline">\(\theta \sim F_{\tau}\)</span> unless stated otherwise. Shorthand for the former is <span class="math inline">\(\boldsymbol{X} | \theta {\; \stackrel{\text{iid}}{\sim}\;}F_{\theta}\)</span>.</p>
+<p>We will write the pdf or pmf of <span class="math inline">\(X\)</span> as <span class="math inline">\(f(x | \theta)\)</span> as opposed to <span class="math inline">\(f(x ; \theta)\)</span> because in the Bayesian framework this actually represents conditional probability.</p>
+<p>We will write the pdf or pmf of <span class="math inline">\(\theta\)</span> as <span class="math inline">\(f(\theta)\)</span> or <span class="math inline">\(f(\theta ; \tau)\)</span> or <span class="math inline">\(f(\theta | \tau)\)</span>. Always remember that prior distributions require paramater values, even if we don’t explicitly write them.</p>
+</section><section id="posterior-distribution" class="slide level2">
+<h1>Posterior Distribution</h1>
+<p>The posterior distribution of <span class="math inline">\(\theta | \boldsymbol{X}\)</span> is obtained through Bayes theorem:</p>
+<span class="math display">\[\begin{align*}
+f(\theta | \boldsymbol{x}) &amp; = \frac{f(\boldsymbol{x} | \theta) f(\theta)}{f(\boldsymbol{x})} = \frac{f(\boldsymbol{x} | \theta) f(\theta)}{\int f(\boldsymbol{x} | \theta^*) f(\theta^*) d\theta^*} \\
+&amp; \propto L(\theta ; \boldsymbol{x}) f(\theta)
+\end{align*}\]</span>
+</section><section id="posterior-expectation" class="slide level2">
+<h1>Posterior Expectation</h1>
+<p>A very common point estimate of <span class="math inline">\(\theta\)</span> in Bayesian inference is the posterior expected value:</p>
+<span class="math display">\[\begin{align*}
+\operatorname{E}[\theta | \boldsymbol{x}]  &amp; = \int \theta f(\theta | \boldsymbol{x}) d\theta \\
+ &amp; = \frac{\int \theta L(\theta ; \boldsymbol{x}) f(\theta) d\theta}{\int L(\theta ; \boldsymbol{x}) f(\theta) d\theta}
+\end{align*}\]</span>
+</section><section id="posterior-interval" class="slide level2">
+<h1>Posterior Interval</h1>
+<p>The Bayesian analog of the frequentist confidence interval is the <span class="math inline">\(1-\alpha\)</span> posterior interval, where <span class="math inline">\(C_{\ell}\)</span> and <span class="math inline">\(C_{u}\)</span> are determined so that:</p>
+<p><span class="math display">\[
+1-\alpha = \Pr(C_\ell \leq \theta \leq C_u | \boldsymbol{x})
+\]</span></p>
+</section><section id="maximum-a-posteriori-probability" class="slide level2">
+<h1>Maximum <em>A Posteriori</em> Probability</h1>
+<p>The maximum <em>a posteriori</em> probability (MAP) is the value (or values) of <span class="math inline">\(\theta\)</span> that maximize the posterior pdf or pmf:</p>
+<span class="math display">\[\begin{align*}
+\hat{\theta}_{\text{MAP}} &amp; = \operatorname{argmax}_\theta \Pr(\theta | \boldsymbol{x}) \\
+ &amp; = \operatorname{argmax}_\theta L(\theta ; \boldsymbol{x}) f(\theta)
+\end{align*}\]</span>
+<p>This is a frequentist-esque use of the Bayesian framework.</p>
+</section><section id="loss-functions" class="slide level2">
+<h1>Loss Functions</h1>
+<p>Let <span class="math inline">\(\mathcal{L}\left(\theta, \tilde{\theta}\right)\)</span> be a <strong>loss function</strong> for a given estimator <span class="math inline">\(\tilde{\theta}\)</span>. Examples are</p>
+<p><span class="math display">\[
+\mathcal{L}\left(\theta, \tilde{\theta}\right) = \left(\theta - \tilde{\theta}\right)^2 \mbox{ or } 
+\mathcal{L}\left(\theta, \tilde{\theta}\right) = \left|\theta - \tilde{\theta}\right|.
+\]</span></p>
+<p>Note that, where the expected value is over <span class="math inline">\(f(\boldsymbol{x}; \theta)\)</span>:</p>
+<span class="math display">\[\begin{align*}
+\operatorname{E}\left[\left(\theta - \tilde{\theta}\right)^2\right] &amp; = \left(\operatorname{E}\left[\tilde{\theta}\right] - \theta\right)^2 + \operatorname{Var}\left(\tilde{\theta}\right) \\
+ &amp; = \mbox{bias}^2 + \mbox{variance}
+\end{align*}\]</span>
+</section><section id="bayes-risk" class="slide level2">
+<h1>Bayes Risk</h1>
+<p>The <strong>Bayes risk</strong>, <span class="math inline">\(R\left(\theta, \tilde{\theta}\right)\)</span>, is the expected loss with respect to the posterior:</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[ \left. \mathcal{L}\left(\theta, \tilde{\theta}\right) \right| \boldsymbol{x} \right]
+= \int \mathcal{L}\left(\theta, \tilde{\theta}\right) f(\theta | \boldsymbol{x}) d\theta
+\]</span></p>
+</section><section id="bayes-estimators" class="slide level2">
+<h1>Bayes Estimators</h1>
+<p>The <strong>Bayes estimator</strong> minimizes the Bayes risk.</p>
+<p>The posterior expectation <span class="math inline">\({\operatorname{E}}\left[ \left. \theta \right| \boldsymbol{x} \right]\)</span> minimizes the Bayes risk of <span class="math inline">\(\mathcal{L}\left(\theta, \tilde{\theta}\right) = \left(\theta - \tilde{\theta}\right)^2\)</span>.</p>
+<p>The median of <span class="math inline">\(f(\theta | \boldsymbol{x})\)</span>, calculated by <span class="math inline">\(F^{-1}_{\theta | \boldsymbol{x}}(1/2)\)</span>, minimizes the Bayes risk of <span class="math inline">\(\mathcal{L}\left(\theta, \tilde{\theta}\right) = \left|\theta - \tilde{\theta}\right|\)</span>.</p>
+</section></section>
+<section><section id="classification" class="titleslide slide level1"><h1>Classification</h1></section><section id="assumptions-1" class="slide level2">
+<h1>Assumptions</h1>
+<p>Let <span class="math inline">\((X_1, X_2, \ldots, X_n) | \theta {\; \stackrel{\text{iid}}{\sim}\;}F_\theta\)</span> where <span class="math inline">\(\theta \in \Theta\)</span> and <span class="math inline">\(\theta \sim F_{\tau}\)</span>. Let <span class="math inline">\(\Theta_0, \Theta_1 \subseteq \Theta\)</span> so that <span class="math inline">\(\Theta_0 \cap \Theta_1 = \varnothing\)</span> and <span class="math inline">\(\Theta_0 \cup \Theta_1 = \Theta\)</span>.</p>
+<p>Given observed data <span class="math inline">\(\boldsymbol{x}\)</span>, we wish to classify whether <span class="math inline">\(\theta \in \Theta_0\)</span> or <span class="math inline">\(\theta \in \Theta_1\)</span>.</p>
+<p>This is the Bayesian analog of hypothesis testing.</p>
+</section><section id="prior-probability-on-h" class="slide level2">
+<h1>Prior Probability on <em>H</em></h1>
+<p>Let <span class="math inline">\(H\)</span> be a rv such that <span class="math inline">\(H=0\)</span> when <span class="math inline">\(\theta \in \Theta_0\)</span> and <span class="math inline">\(H=1\)</span> when <span class="math inline">\(\theta \in \Theta_1\)</span>.</p>
+<p>From the prior distribution on <span class="math inline">\(\theta\)</span>, we can calculate</p>
+<p><span class="math display">\[
+\Pr(H=0) = \int_{\theta \in \Theta_0} f(\theta) d\theta
+\]</span></p>
+<p>and <span class="math inline">\(\Pr(H=1) = 1-\Pr(H=0)\)</span>.</p>
+</section><section id="posterior-probability" class="slide level2">
+<h1>Posterior Probability</h1>
+<p>Using Bayes theorem, we can also calculate</p>
+<span class="math display">\[\begin{align*}
+\Pr(H=0 | \boldsymbol{x}) 
+&amp; = \frac{f(\boldsymbol{x} | H=0) \Pr(H=0)}{f(\boldsymbol{x})} \\
+&amp; = \frac{\int_{\theta \in \Theta_0} f(\boldsymbol{x} | \theta) f(\theta) d\theta}{\int_{\theta \in \Theta} f(\boldsymbol{x} | \theta) f(\theta) d\theta}
+\end{align*}\]</span>
+<p>where note that <span class="math inline">\(\Pr(H=1 | \boldsymbol{x}) = 1-\Pr(H=0 | \boldsymbol{x})\)</span>.</p>
+</section><section id="loss-function" class="slide level2">
+<h1>Loss Function</h1>
+<p>Let <span class="math inline">\(\mathcal{L}\left(\tilde{H}, H\right)\)</span> be such that</p>
+<span class="math display">\[\begin{align*}
+\mathcal{L}\left(\tilde{H}=1, H=0 \right) &amp; = c_{I}\\
+\mathcal{L}\left(\tilde{H}=0, H=1 \right) &amp; = c_{II}
+\end{align*}\]</span>
+<p>for some <span class="math inline">\(c_{I}, c_{II} &gt; 0\)</span>.</p>
+</section><section id="bayes-risk-1" class="slide level2">
+<h1>Bayes Risk</h1>
+<p>The Bayes risk, <span class="math inline">\(R\left(\tilde{H}, H\right)\)</span>, is</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[ \left. \mathcal{L}\left(\theta, \tilde{\theta}\right) \right| \boldsymbol{x} \right]
+= c_{I} \Pr(\tilde{H}=1 | H=0) + c_{II} \Pr(\tilde{H}=0 | H=1).
+\]</span></p>
+<p>Notice how this balances what frequentists call Type I error and Type II error.</p>
+</section><section id="bayes-rule" class="slide level2">
+<h1>Bayes Rule</h1>
+<p>The estimate <span class="math inline">\(\tilde{H}\)</span> that minimizes <span class="math inline">\(R\left(\tilde{H}, H\right)\)</span> is</p>
+<p><span class="math display">\[\tilde{H}=1 \mbox{ when } \Pr(H=1 | \boldsymbol{x}) \geq \frac{c_{I}}{c_{I} + c_{II}}\]</span></p>
+<p>and <span class="math inline">\(\tilde{H}=0\)</span> otherwise.</p>
+</section></section>
+<section><section id="priors" class="titleslide slide level1"><h1>Priors</h1></section><section id="conjugate-priors" class="slide level2">
+<h1>Conjugate Priors</h1>
+<p>A <strong>conjugate prior</strong> is a prior distribution for a data generating distribution so that the posterior distribution is of the same type as the prior.</p>
+<p>Conjugate priors are useful for obtaining stratightforward calculations of the posterior.</p>
+<p>There is a systematic method for calculating conjugate priors for exponential family distributions.</p>
+</section><section id="example-beta-bernoulli" class="slide level2">
+<h1>Example: Beta-Bernoulli</h1>
+<p>Suppose <span class="math inline">\(\boldsymbol{X} | \mu {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Bernoulli}(p)\)</span> and suppose that <span class="math inline">\(p \sim \mbox{Beta}(\alpha, \beta)\)</span>.</p>
+<span class="math display">\[\begin{align*}
+f(p | \boldsymbol{x}) &amp; \propto L(p ; \boldsymbol{x}) f(p) \\
+ &amp; = p^{\sum x_i} (1-p)^{\sum (1-x_i)} p^{\alpha - 1} (1-p)^{\beta-1} \\
+ &amp; = p^{\alpha - 1 + \sum x_i} (1-p)^{\beta - 1 + \sum (1-x_i)} \\
+ &amp; \propto \mbox{Beta}(\alpha + \sum x_i, \beta + \sum (1-x_i))
+\end{align*}\]</span>
+<p>Therefore, <span class="math display">\[
+{\operatorname{E}}[p | \boldsymbol{x}] = \frac{\alpha + \sum x_i}{\alpha + \beta + n}.
+\]</span></p>
+</section><section id="example-normal-normal" class="slide level2">
+<h1>Example: Normal-Normal</h1>
+<p>Suppose <span class="math inline">\(\boldsymbol{X} | \mu {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2\)</span> is known, and suppose that <span class="math inline">\(\mu \sim \mbox{Normal}(a, b^2)\)</span>.</p>
+<p>Then it can be shown that <span class="math inline">\(\mu | \boldsymbol{x} \sim \mbox{Normal}({\operatorname{E}}[\mu | \boldsymbol{x}], {\operatorname{Var}}(\mu | \boldsymbol{x}))\)</span> where</p>
+<p><span class="math display">\[
+{\operatorname{E}}[\mu | \boldsymbol{x}] = \frac{b^2}{\frac{\sigma^2}{n} + b^2} \overline{x} + \frac{\frac{\sigma^2}{n}}{\frac{\sigma^2}{n} + b^2} a
+\]</span></p>
+<p><span class="math display">\[
+{\operatorname{Var}}(\mu | \boldsymbol{x}) = \frac{b^2 \frac{\sigma^2}{n}}{\frac{\sigma^2}{n} + b^2}
+\]</span></p>
+</section><section id="example-dirichlet-multinomial" class="slide level2">
+<h1>Example: Dirichlet-Multinomial</h1>
+<p> </p>
+<p>This is a problem on Homework 3!</p>
+</section><section id="example-gamma-poisson" class="slide level2">
+<h1>Example: Gamma-Poisson</h1>
+<p> </p>
+<p>This is a problem on Homework 3!</p>
+</section><section id="jeffreys-prior" class="slide level2">
+<h1>Jeffreys Prior</h1>
+<p>If we do inference based on prior <span class="math inline">\(\theta \sim F_{\tau}\)</span> to obtain <span class="math inline">\(f(\theta | \boldsymbol{x}) \propto L(\theta; \boldsymbol{x}) f(\theta)\)</span>, it follows that this inference may <em>not</em> be invariant to transformations of <span class="math inline">\(\theta\)</span>, such as <span class="math inline">\(\eta = g(\theta)\)</span>.</p>
+<p>If we utilize a <strong>Jeffreys prior</strong>, which means it is such that</p>
+<p><span class="math display">\[f(\theta) \propto \sqrt{I(\theta)}\]</span></p>
+<p>then the prior will be invariant to transformations of <span class="math inline">\(\theta\)</span>. We would want to show that <span class="math inline">\(f(\theta) \propto \sqrt{I(\theta)}\)</span> implies <span class="math inline">\(f(\eta) \propto \sqrt{I(\eta)}\)</span>.</p>
+</section><section id="examples-jeffreys-priors" class="slide level2">
+<h1>Examples: Jeffreys Priors</h1>
+<p> </p>
+<p>Normal<span class="math inline">\((\mu, \sigma^2)\)</span>, <span class="math inline">\(\sigma^2\)</span> known: <span class="math inline">\(f(\mu) \propto 1\)</span></p>
+<p>Normal<span class="math inline">\((\mu, \sigma^2)\)</span>, <span class="math inline">\(\mu\)</span> known: <span class="math inline">\(f(\sigma) \propto \frac{1}{\sigma}\)</span></p>
+<p>Poisson<span class="math inline">\((\lambda)\)</span>: <span class="math inline">\(f(\lambda) \propto \frac{1}{\sqrt{\lambda}}\)</span></p>
+<p>Bernoulli<span class="math inline">\((p)\)</span>: <span class="math inline">\(f(p) \propto \frac{1}{\sqrt{p(1-p)}}\)</span></p>
+</section><section id="improper-prior" class="slide level2">
+<h1>Improper Prior</h1>
+<p>An <strong>improper prior</strong> is a prior such that <span class="math inline">\(\int f(\theta) d\theta = \infty\)</span>. Nevertheless, sometimes it still may be the case that <span class="math inline">\(f(\theta | \boldsymbol{x}) \propto L(\theta; \boldsymbol{x}) f(\theta)\)</span> yields a probability distribution.</p>
+<p>Take for example the case where <span class="math inline">\(\boldsymbol{X} | \mu {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2\)</span> is known, and suppose that <span class="math inline">\(f(\mu) \propto 1\)</span>. Then <span class="math inline">\(\int f(\theta) d\theta = \infty\)</span>, but</p>
+<p><span class="math display">\[ f(\theta | \boldsymbol{x}) \propto L(\theta; \boldsymbol{x}) f(\theta) \sim \mbox{Normal}\left(\overline{x}, \sigma^2/n\right)\]</span></p>
+<p>which is a proper probability distribution.</p>
+</section></section>
+<section><section id="theory" class="titleslide slide level1"><h1>Theory</h1></section><section id="de-finettis-theorem" class="slide level2">
+<h1>de Finetti’s Theorem</h1>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots\)</span> be an infinite exchangeable sequence of Bernoulli rv’s. There exists a random variable <span class="math inline">\(P \in [0, 1]\)</span> such that:</p>
+<ul>
+<li><span class="math inline">\(X_1|P, X_2|P, \ldots\)</span> are conditionally independent</li>
+<li><span class="math inline">\(X_1, X_2, \ldots | P=p \stackrel{{\rm iid}}{\sim} \mbox{Bernoulli}(p)\)</span></li>
+</ul>
+<p>This theorem is often used to justify the assumption of exchangeability, which is weaker than iid, with a prior distribution on the parameter(s).</p>
+</section><section id="admissibility" class="slide level2">
+<h1>Admissibility</h1>
+<p>An estimator <span class="math inline">\(\tilde{\theta}\)</span> is <strong>admissible</strong> with respect to risk function <span class="math inline">\(R(\cdot, \theta)\)</span> if there is exists no other estimator <span class="math inline">\(\hat{\theta}\)</span> such that <span class="math inline">\(R(\hat{\theta}, \theta) &lt; R(\tilde{\theta}, \theta)\)</span> for all <span class="math inline">\(\theta \in \Theta\)</span>.</p>
+<p>There’s a theoretical result that says <em>all</em> admissible estimators are Bayes estimates.</p>
+</section></section>
+<section><section id="empirical-bayes" class="titleslide slide level1"><h1>Empirical Bayes</h1></section><section id="rationale" class="slide level2">
+<h1>Rationale</h1>
+<p>Under the scenario that <span class="math inline">\(\boldsymbol{X} | \theta {\; \stackrel{\text{iid}}{\sim}\;}F_{\theta}\)</span> with prior distribution <span class="math inline">\(\theta \sim F_{\tau}\)</span>, we have to determine values for <span class="math inline">\(\tau\)</span>.</p>
+<p>The <strong>empirical Bayes</strong> approach uses the observed data to estimate the prior parameter(s), <span class="math inline">\(\tau\)</span>.</p>
+<p>This is especially useful for high-dimensional data when many parameters are simultaneously drawn from a prior with multiple observations drawn per parameter realization.</p>
+</section><section id="approach" class="slide level2">
+<h1>Approach</h1>
+<p>The usual approach is to first integrate out the parameter to obtain</p>
+<p><span class="math display">\[
+f(\boldsymbol{x} ; \tau) = \int f(\boldsymbol{x} | \theta) f(\theta ; \tau) d\theta.
+\]</span></p>
+<p>An estimation method (such as MLE) is then applied to estimate <span class="math inline">\(\tau\)</span>. Then inference proceeds as usual under the assumption that <span class="math inline">\(\theta \sim f(\theta ; \hat{\tau})\)</span>.</p>
+</section><section id="example-normal" class="slide level2">
+<h1>Example: Normal</h1>
+<p>Suppose that <span class="math inline">\(X_i | \mu_i \sim \mbox{Normal}(\mu_i, 1)\)</span> for <span class="math inline">\(i=1, 2, \ldots, n\)</span> where these rv’s are independent. Also suppose that <span class="math inline">\(\mu_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(a, b^2)\)</span>.</p>
+<p><span class="math display">\[
+f(x_i ; a, b) = \int f(x_i | \mu_i) f(\mu_i; a, b) d\mu_i \sim \mbox{Normal}(a, 1+b^2).
+\]</span></p>
+<p><span class="math display">\[
+\implies \hat{a} = \overline{x}, \ 1+\hat{b}^2 =  \frac{\sum_{k=1}^n (x_k - \overline{x})^2}{n}
+\]</span></p>
+</section><section id="example-normal-contd" class="slide level2">
+<h1>Example: Normal (cont’d)</h1>
+<span class="math display">\[\begin{align*}
+\operatorname{E}[\mu_i | x_i] &amp; = \frac{1}{1+b^2}a + \frac{b^2}{1+b^2}x_i \implies \\
+ &amp; \\
+\hat{\operatorname{E}}[\mu_i | x_i] &amp; = \frac{1}{1+\hat{b}^2}\hat{a} + \frac{\hat{b}^2}{1+\hat{b}^2}x_i \\
+ &amp; = \frac{n}{\sum_{k=1}^n (x_k - \overline{x})^2} \overline{x} + \left(1-\frac{n}{\sum_{k=1}^n (x_k - \overline{x})^2}\right) x_i
+\end{align*}\]</span>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h1>Source</h1>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h1>Session Information</h1>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.3
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+ [1] dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
+ [4] tidyr_0.6.1     tibble_1.2      ggplot2_2.2.1  
+ [7] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
+[10] devtools_1.12.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.9      plyr_1.8.4       forcats_0.2.0   
+ [4] tools_3.3.2      digest_0.6.12    lubridate_1.6.0 
+ [7] jsonlite_1.2     evaluate_0.10    memoise_1.0.0   
+[10] nlme_3.1-131     gtable_0.2.0     lattice_0.20-34 
+[13] psych_1.6.12     DBI_0.5-1        yaml_2.1.14     
+[16] parallel_3.3.2   haven_1.0.0      xml2_1.1.1      
+[19] withr_1.0.2      stringr_1.1.0    httr_1.2.1      
+[22] revealjs_0.8     hms_0.3          rprojroot_1.2   
+[25] grid_3.3.2       R6_2.2.0         readxl_0.1.1    
+[28] foreign_0.8-67   rmarkdown_1.3    modelr_0.1.0    
+[31] reshape2_1.4.2   backports_1.0.5  scales_0.4.1    
+[34] htmltools_0.3.5  rvest_0.3.2      assertthat_0.1  
+[37] mnormt_1.5-5     colorspace_1.3-2 labeling_0.3    
+[40] stringi_1.1.2    lazyeval_0.2.0   munsell_0.4.3   
+[43] broom_0.4.2     </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
