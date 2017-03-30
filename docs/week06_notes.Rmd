@@ -283,10 +283,12 @@ for some $c_{I}, c_{II} > 0$.
 
 The Bayes risk, $R\left(\tilde{H}, H\right)$, is 
 
-$$
-\E\left[ \left. \mathcal{L}\left(\theta, \tilde{\theta}\right) \right| \boldsymbol{x} \right]
-= c_{I} \Pr(\tilde{H}=1 | H=0) + c_{II} \Pr(\tilde{H}=0 | H=1).
-$$
+\begin{align*}
+\operatorname{E}\left[ \left. \mathcal{L}\left(\theta, \tilde{\theta}\right) \right| \boldsymbol{x} \right]
+& = c_{I} \Pr(\tilde{H}=1, H=0) + c_{II} \Pr(\tilde{H}=0, H=1) \\
+& = c_{I} \Pr(\tilde{H}=1 | H=0) \Pr(H=0) \\
+& \quad\quad + c_{II} \Pr(\tilde{H}=0 | H=1) \Pr(H=1)
+\end{align*}
 
 Notice how this balances what frequentists call Type I error and Type II error.
 
