@@ -82,7 +82,6 @@ An example is $X_i | \mu_i \sim \mbox{Normal}(\mu_i, 1)$ and $\mu_i \iid F$ for 
 - Permutation methods
 - Goodness of fit
 - Method of moments
-- Semiparametric empirical Bayes
 
 # Empirical Distribution Functions
 
@@ -200,7 +199,7 @@ $$
 because $T(F) = \int a(x) dF(x) = \E_F[a(X)]$.  Likewise,
 
 $$
-\V_{\hat{F}_{\bX}}(a(X)) = \sum_{i=1}^n (a(X_i) - T(\hat{F}_{\bX}))^2
+\V_{\hat{F}_{\bX}}(a(X)) = \frac{1}{n} \sum_{i=1}^n (a(X_i) - T(\hat{F}_{\bX}))^2
 $$
 
 where $T(\hat{F}_{\bX}) = \frac{1}{n} \sum_{i=1}^n a(X_i)$.
@@ -225,7 +224,7 @@ The estimators are very easy to calculate on real data, so this a powerful set o
 
 ## Rationale
 
-Suppose $X_1, X_2, \ldots, X_n \sim F$. If the edf $\hat{F}_{\bX}$ is an accurate approximation for the true cdf $F$, then we can utilize $\hat{F}_{\bX}$ in place of $F$ to nonparametrically characterize the sampling distribution of a statistic $T(\bX)$.
+Suppose $X_1, X_2, \ldots, X_n \iid F$. If the edf $\hat{F}_{\bX}$ is an accurate approximation for the true cdf $F$, then we can utilize $\hat{F}_{\bX}$ in place of $F$ to nonparametrically characterize the sampling distribution of a statistic $T(\bX)$.
 
 This allows for the sampling distribution of more general statistics to be considered, such as the median or a percentile, as well as more traditional statistics, such as the mean, when the underlying distribution is unknown.
 
@@ -277,9 +276,9 @@ plot(n, y, xlab="Sample Size", ylab="% Data Present", pch=20, xlim=c(10,100))
 
 Suppose that $\theta = T(F)$ and $\hat{\theta} = T(\hat{F}_{\bx})$.  
 
-We can use the bootstrap to generate data from $T(\hat{F}_{\bx})$.  
+We can use the bootstrap to generate data from $\hat{F}_{\bx}$.  
 
-For $b = 1, 2, \ldots, B$, we draw $x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)}$ as iid realiztions from $T(\hat{F}_{\bx})$, and calculate $\hat{\theta}^{*(b)} = T(\hat{F}_{\bx^{*(b)}})$.
+For $b = 1, 2, \ldots, B$, we draw $x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)}$ as iid realiztions from $\hat{F}_{\bx}$, and calculate $\hat{\theta}^{*(b)} = T(\hat{F}_{\bx^{*(b)}})$.
 
 Let $p^{*}_{\alpha}$ be the $\alpha$ percentile of $\left\{\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\right\}$.
 
@@ -290,20 +289,24 @@ Let's discuss several ways of calculating confidence intervals for $\theta = T(F
 If we have evidence that the central limit theorem can be applied, we can form the $(1-\alpha)$ CI as:
 
 $$
-(T(\hat{F}_{\bx}) - |z_{\alpha/2}| \se^*, T(\hat{F}_{\bx}) + |z_{\alpha/2}| \se^*)
+(\hat{\theta} - |z_{\alpha/2}| \se^*, \hat{\theta} + |z_{\alpha/2}| \se^*)
 $$
 
 where $\se^*$ is the bootstrap standard error calculated as 
 
 $$
-\se^{*} = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(T\left(\hat{F}_{\bx^{*(b)}}\right) -  \frac{1}{B} \sum_{k=1}^B T\left(\hat{F}_{\bx^{*(k)}}\right) \right)^2}.
+\se^{*} = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(\hat{\theta}^{*(b)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(k)} \right)^2}.
 $$
+
+\  
+
+Note that $\se^*$ serves as estimate of $\se(\hat{\theta})$.
 
 
 Note that to get this confidence interval we need to justify that the following pivotal statistics are approximately Normal(0,1):
 
 $$
-\frac{T(\hat{F}_{\bx}) - T(F)}{\se(T(\hat{F}_{\bx}))} \approx \frac{T(\hat{F}_{\bx}) - T(F)}{\se^*}
+\frac{\hat{\theta} - \theta}{\se(\hat{\theta})} \approx \frac{\hat{\theta} - \theta}{\se^*}
 $$
 
 
@@ -380,6 +383,28 @@ $$
 
 Exercise:  Why?
 
+
+How do we obtain $\hat{\se}\left(\hat{\theta}\right)$ and $\hat{\se}\left(\hat{\theta}^{*(b)}\right)$?
+
+If we have an analytical formula for these, then $\hat{\se}(\hat{\theta})$ is calculated from the original data and $\hat{\se}(\hat{\theta}^{*(b)})$ from the bootstrap data sets.  But we probably don't since we're using the bootstrap.
+
+Instead, we can calculate:
+
+$$
+\hat{\se}\left(\hat{\theta}\right) = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(\hat{\theta}^{*(b)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(k)} \right)^2}.
+$$
+
+This is what we called $\se^*$ above.  But what about $\hat{\se}\left(\hat{\theta}^{*(b)}\right)$?
+
+
+To estimate $\hat{\se}\left(\hat{\theta}^{*(b)}\right)$ we need to do a double bootstrap.  For each bootstrap sample $b$ we need to bootstrap that daat set another $B$ times to calculate:
+
+$$
+\hat{\se}\left(\hat{\theta}^{*(b)}\right) = \sqrt{\frac{1}{B} \sum_{v=1}^B \left(\hat{\theta}^{*(b)*(v)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(b)*(k)} \right)^2}
+$$
+
+where $\hat{\theta}^{*(b)*(v)}$ is the statistic calculated from bootstrap sample $v$ within bootstrap sample $b$. This can be very computationally intensive, and it requires a large sample size $n$.
+
 ## Bootstrap Hypothesis Testing
 
 As we have seen, hypothesis testing and confidence intervals are very related.  For a simple null hypothesis, a bootstrap hypothesis test p-value can be calculated by finding the minimum $\alpha$ for which the $(1-\alpha)$ CI does not contain the null hypothesis value. You showed this on your homework.
@@ -405,10 +430,10 @@ Note that the bootstrap distributions are such that $\mu(\hat{F}_{X^{*}}) = \ove
 Specifically, for a bootstrap data set $x^{*} = (x_1^{*}, x_2^{*}, \ldots, x_m^{*})^T$ and $y^{*} = (y_1^{*}, y_2^{*}, \ldots, y_n^{*})^T$, we form null t-statistic
 
 $$
-t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y})}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2, *}}}
+t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y})}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2*}}}
 $$
 
-where again $s^{2, *}$ is the pooled sample variance.
+where again $s^{2*}$ is the pooled sample variance.
 
 ---- 
 
@@ -507,63 +532,445 @@ plot(density(boot_var, adj=1.5), main=" ")
 abline(v=sampling_var)
 ```
 
-# Bootstrap Subtleties
 
-## Comment
+<div id="left">
+We repeated this simulation over a range of $n$ and $B$.
+</div>
 
-## Normal Data
 
-## Verify Sampling Distribution
-
-## Bootstrap Columns
-
-## Bootstrap Rows
-
-## Studentize Rows
+<div id="right">
+| *n*  | *B*  | *coverage* | *avg CI width*|
+|-----:|-----:|---------:|-------------:|
+| 1e+02|  1000|     0.868|     0.7805404|
+| 1e+02|  2000|     0.872|     0.7882278|
+| 1e+02|  4000|     0.865|     0.7852837|
+| 1e+02|  8000|     0.883|     0.7817222|
+| 1e+03|  1000|     0.923|     0.2465840|
+| 1e+03|  2000|     0.909|     0.2477463|
+| 1e+03|  4000|     0.915|     0.2475550|
+| 1e+03|  8000|     0.923|     0.2458167|
+| 1e+04|  1000|     0.935|     0.0781421|
+| 1e+04|  2000|     0.937|     0.0784541|
+| 1e+04|  4000|     0.942|     0.0784559|
+| 1e+04|  8000|     0.948|     0.0785591|
+| 1e+05|  1000|     0.949|     0.0246918|
+| 1e+05|  2000|     0.942|     0.0246938|
+</div>
 
 # Permutation Methods
 
 ## Rationale
 
+Permutation methods are useful for testing hypotheses about equality of distributions.  
+
+Observations can be permuted among populations to simulate the case where the distributions are equivalent.
+
+Many permutation methods only depend on the ranks of the data, so they are a class of robust methods for performing hypothesis tests.  However, the types of hypotheses that can be tested are limited.
+
 ## Permutation Test
 
-## Wilcoxon Signed Rank-Sum Test
+Suppose $X_1, X_2, \ldots, X_m \iid F_X$ and $Y_1, Y_2, \ldots, Y_n \iid F_Y$.  
+
+We wish to test $H_0: F_X = F_Y$ vs $H_1: F_X \not= F_Y$.  
+
+Consider a general test statistic $S = S(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n)$ so that the larger $S$ is the more evidence there is against the null hypothesis.
+
+Under the null hypothesis, any reordering of these values, where $m$ are randomly assigned to the "$X$" population and $n$ are assigned to the "$Y$" population, should be equivalently distributed.
+
+
+For $B$ permutations (possibly all unique permutations), we calculate 
+
+$$
+S^{*(b)} = S\left(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \ldots, Z^{*(b)}_{m+n}\right)
+$$ 
+
+where $Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \ldots, Z^{*(b)}_{m+n}$ is a random permutation of the values $X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n$.
+
+Example permutation in R:
+
+```{r, eval=FALSE}
+z <- c(x, y)
+zstar <- sample(z, replace=FALSE)
+```
+
+
+The p-value is calculated as proportion of permutations where the resulting permutation statistic exceeds the observed statistics:
+
+$$
+\mbox{p-value}(s) = \frac{1}{B} \sum_{b=1}^{B} 1\left(S^{*(b)} \geq S\right).
+$$
+
+This can be (1) an exact calculation where all permutations are considered, (2) a Monte Carlo approximation where $B$ random permutations are considered, or (3) a large $\min(m, n)$ calculation where an asymptotic probabilistic approximation is used.
 
 ## Wilcoxon Rank Sum Test
 
+Also called the Mann-Whitney-Wilcoxon test.
+
+Consider the ranks of the data as a whole, $X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n$, where $r(X_i)$ is the rank of $X_i$ and $r(Y_j)$ is the rank of $Y_j$.  Note that $r(\cdot) \in \{1, 2, \ldots, m+n\}$.  The smallest value is such that $r(X_i)=1$ or $r(Y_j)=1$, the next smallest value maps to 2, etc.  
+
+Note that 
+
+$$
+\sum_{i=1}^m r(X_i) + \sum_{j=1}^n r(Y_j) = \frac{(m+n)(m+n+1)}{2}.
+$$
+
+
+The statistic $W$ is calculated by:
+
+$$
+\begin{aligned}
+& R_X = \sum_{i=1}^m r(X_i) & R_Y = \sum_{j=1}^n r(Y_j) \\
+& W_X = R_X - \frac{m(m+1)}{2} & W_Y = R_Y - \frac{n(n+1)}{2} \\
+& W = \min(W_X, W_Y) & 
+\end{aligned}
+$$
+
+In this case, the *smaller* $W$ is, the more significant it is.  Note that $mn-W = \max(W_X, W_Y)$, so we just as well could utilize large $\max(W_X, W_Y)$ as a test statistic.
+
+## Wilcoxon Signed Rank-Sum Test
+
+The Wilcoxon signed rank test is similar to the Wilcoxon two-sample test, except here we have paired observations $(X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)$.  
+
+An example is an individual's clinical measurement before ($X$) and after ($Y$) treatment.
+
+In order to test the hypothesis, we calculate $r(X_i, Y_i) = |Y_i - X_i|$ and also $s(X_i, Y_i) = \operatorname{sign}(Y_i - X_i)$.
+
+The test statistic is $|W|$ where
+
+$$
+W = \sum_{i=1}^n r(X_i, Y_i) s(X_i, Y_i).
+$$
+
+
+Both of these tests can be carried out using the `wilcox.test()` function in R.
+
+```
+wilcox.test(x, y = NULL,
+            alternative = c("two.sided", "less", "greater"),
+            mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
+            conf.int = FALSE, conf.level = 0.95, ...)
+```
+
+## Examples
+
+Same population mean and variance.
+
+```{r}
+x <- rnorm(100, mean=1)
+y <- rexp(100, rate=1)
+wilcox.test(x, y)
+```
+
+
+```{r, small.mar=TRUE}
+qqplot(x, y); abline(0,1)
+```
+
+
+Same population mean and variance.  Large sample size.
+
+```{r}
+x <- rnorm(10000, mean=1)
+y <- rexp(10000, rate=1)
+wilcox.test(x, y)
+```
+
+
+```{r, small.mar=TRUE}
+qqplot(x, y); abline(0,1)
+```
+
+
+Same mean, very different variances.
+
+```{r}
+x <- rnorm(100, mean=1, sd=0.01)
+y <- rexp(100, rate=1)
+wilcox.test(x, y)
+```
+
+
+```{r, small.mar=TRUE}
+qqplot(x, y); abline(0,1)
+```
+
+
+Same variances, different means.
+
+```{r}
+x <- rnorm(100, mean=2)
+y <- rexp(100, rate=1)
+wilcox.test(x, y)
+```
+
+
+```{r, small.mar=TRUE}
+qqplot(x, y); abline(0,1)
+```
+
+
+Same population mean and variance.
+
+```{r}
+x <- rnorm(100, mean=1)
+y <- rexp(100, rate=1)
+wilcox.test(x, y, paired=TRUE)
+```
+
+
+```{r}
+hist(y-x)
+```
+
+
+
+Same population mean and variance.  Large sample size.
+
+```{r}
+x <- rnorm(10000, mean=1)
+y <- rexp(10000, rate=1)
+wilcox.test(x, y, paired=TRUE)
+```
+
+
+```{r}
+hist(y-x)
+```
+
 ## Permutation *t*-test
+
+As above, suppose $X_1, X_2, \ldots, X_m \iid F_X$ and $Y_1, Y_2, \ldots, Y_n \iid F_Y$, and we wish to test $H_0: F_X = F_Y$ vs $H_1: F_X \not= F_Y$.  However, suppose we additionally know that $\V(X) = \V(Y)$.  We can use a t-statistic to test this hypothesis:
+
+$$
+t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^2}}
+$$
+
+where $s^2$ is the pooled sample variance.
+
+
+To obtain the null distribution, we randomly permute the observations to assign $m$ data points to the $X$ sample and $n$ to the $Y$ sample.  This yields permutation data set $x^{*} = (x_1^{*}, x_2^{*}, \ldots, x_m^{*})^T$ and $y^{*} = (y_1^{*}, y_2^{*}, \ldots, y_n^{*})^T$. We form null t-statistic
+
+$$
+t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2*}}}
+$$
+
+where again $s^{2*}$ is the pooled sample variance.
+
+
+In order to obtain a p-value, we calculate $t^{*(b)}$ for $b=1, 2, \ldots, B$ permutation data sets.
+
+The p-value of $t$ is then the proportion of permutation statistics as or more extreme than the observed statistic:
+
+$$
+\mbox{p-value}(t) = \frac{1}{B} \sum_{b=1}^{B} 1\left(|t^{*(b)}| \geq |t|\right).
+$$
 
 # Goodness of Fit
 
 ## Rationale
 
+Sometimes we want to figure out which probability distribution is a reasonable model for the data.
+
+This is related to nonparametric inference in that we wish to go from being in a nonparametric framework to a parametric framework.
+
+Goodness of fit (GoF) tests allow one to perform a hypothesis test of how well a particular parametric probability model explains variation observed in a data set.
+
 ## Chi-Square GoF Test
 
-## Example
+Suppose we have data generating process $X_1, X_2, \ldots, X_n \sim F$ for some probability distribution $F$. We wish to test $H_0: F \in \{F_{\bt}: \bt \in \boldsymbol{\Theta} \}$ vs $H_1: \mbox{not } H_0$.   Suppose that $\boldsymbol{\Theta}$ is $d$-dimensional.
 
-## Chi-Square Contingency Test
+Divide the support of $\{F_{\bt}: \bt \in \boldsymbol{\Theta} \}$ into $k$ bins $I_1, I_2, \ldots, I_k$.
 
-## Example
+For $j=1, 2, \ldots, k$, calculate
+
+$$
+q_j(\bt) = \int_{I_j} dF_{\bt}(x).
+$$
+
+
+Suppose we observe data $x_1, x_2, \ldots, x_n$.  For $j = 1, 2, \ldots, k$, let $n_j$ be the number of values $x_i \in I_j$.
+
+Let $\tilde{\theta}_1, \tilde{\theta}_2, \ldots, \tilde{\theta}_d$ be the values that maximize the multinomial likelihood
+
+$$
+\prod_{j=1}^k q_j(\bt)^{n_j}.
+$$
+
+
+Form GoF statistic
+
+$$
+s(\bx) = \sum_{j=1}^k \frac{\left(n_j - n q_j\left(\tilde{\bt} \right) \right)^2}{n q_j\left(\tilde{\bt} \right)}
+$$
+
+When $H_0$ is true, $S \sim \chi^2_v$ where $v = k - d - 1$.  The p-value is calculated by $\Pr(S^* \geq s(\bx))$ where $S^* \sim \chi^2_{k-d-1}$.
+
+## Example: Hardy-Weinberg
+
+Suppose at your favorite SNP, we observe genotypes from 100 randomly sampled individuals as follows:
+
+AA | AT | TT
+---|---|---
+28 | 60 | 12
+
+If we code these genotypes as 0, 1, 2, testing for Hardy-Weinberg equilibrium is equivalent to testing whether $X_1, X_2, \ldots, X_{100} \iid \mbox{Binomial}(2, \theta)$ for some unknown allele frequency of T, $\theta$.
+
+
+The parameter dimension is such that $d=1$.  We will also set $k=3$, where each bin is a genotype.  Therefore, we have $n_1 = 28$, $n_2 = 60$, and $n_3 = 12$.  Also, 
+
+$$
+q_1(\theta) = (1-\theta)^2, \ \ q_2(\theta) = 2 \theta (1-\theta), \ \ q_3(\theta) = \theta^2.
+$$
+
+\  
+
+Forming the multinomial likelihood under these bin probabilities, we find $\tilde{\theta} = (n_2 + 2n_3)/(2n)$.  The degrees of freedom of the $\chi^2_v$ null distribution is $v = k - d - 1 = 3 - 1 - 1 = 1$.
+
+
+Let's carry out the test in R.
+
+```{r}
+n <- 100
+nj <- c(28, 60, 12)
+
+# parameter estimates
+theta <- (nj[2] + 2*nj[3])/(2*n)
+qj <- c((1-theta)^2, 2*theta*(1-theta), theta^2)
+
+# gof statistic
+s <- sum((nj - n*qj)^2 / (n*qj))
+
+# p-value
+1-pchisq(s, df=1)
+```
+
 
 ## Kolmogorov–Smirnov Test
 
-## Example
+The KS test can be used to compare a sample of data to a particular distribution, or to compare two samples of data.  The former is a parametric GoF test, and the latter is a nonparametric test of equal distributions. 
+
+## One Sample KS Test
+
+Suppose we have data generating process $X_1, X_2, \ldots, X_n \sim F$ for some probability distribution $F$. We wish to test $H_0: F = F_{\bt}$ vs $H_1: F \not= F_{\bt}$ for some parametric distribution $F_{\bt}$.
+
+For observed data $x_1, x_2, \ldots, x_n$ we form the edf $\hat{F}_{\bx}$ and test-statistic
+
+$$
+D(\bx) = \sup_{z} \left| \hat{F}_{\bx}(z) - F_{\bt}(z) \right|.
+$$
+
+The null distribution of this test can be approximated based on a stochastic process called the Brownian bridge.
+
+## Two Sample KS Test
+
+Suppose $X_1, X_2, \ldots, X_m \iid F_X$ and $Y_1, Y_2, \ldots, Y_n \iid F_Y$. We wish to test $H_0: F_X = F_Y$ vs $H_1: F_X \not= F_Y$.  
+
+For observed data $x_1, x_2, \ldots, x_m$ and $y_1, y_2, \ldots, y_n$ we form the edf's $\hat{F}_{\bx}$ and $\hat{F}_{\boldsymbol{y}}$.  We then form test-statistic
+
+$$
+D(\bx,\boldsymbol{y})  = \sup_{z} \left| \hat{F}_{\bx}(z) - \hat{F}_{\boldsymbol{y}}(z) \right|.
+$$
+
+The null distribution of this statistic can be approximated using results on edf's.
+
+
+Both of these tests can be carried out using the `ks.test()` function in R.
+
+```
+ks.test(x, y, ...,
+        alternative = c("two.sided", "less", "greater"),
+        exact = NULL)
+```
+
+## Example: Exponential vs Normal
+
+Two sample KS test.
+
+```{r}
+x <- rnorm(100, mean=1)
+y <- rexp(100, rate=1)
+wilcox.test(x, y)
+ks.test(x, y)
+```
+
+
+```{r, small.mar=TRUE}
+qqplot(x, y); abline(0,1)
+```
+
+
+One sample KS tests.
+
+```{r}
+ks.test(x=x, y="pnorm")
+
+ks.test(x=x, y="pnorm", mean=1)
+```
+
+
+Standardize (mean center, sd scale) the observations before comparing to a Normal(0,1) distribution.
+
+```{r}
+ks.test(x=((x-mean(x))/sd(x)), y="pnorm")
+
+ks.test(x=((y-mean(y))/sd(y)), y="pnorm")
+```
+
 
 # Method of Moments
 
+## Rationale
+
+Suppose that $X_1, X_2, \ldots, X_n \iid F$.  By the strong law of large numbers we have, as $n \rightarrow \infty$
+
+$$
+\frac{\sum_{i=1}^n X_i^k}{n} \stackrel{\text{a.s.}}{\longrightarrow} \E_{F}\left[X^k\right]
+$$
+
+when $\E_{F}\left[X^k\right]$ exists.
+
+This means that we can nonparametrically estimate the moments of a distribution.  Also, in the parametric setting, these moments can be used to form parameter estimates.
+
 ## Definition
+
+Suppose that $X_1, X_2, \ldots, X_n \iid F_{\bt}$ where $\bt$ is $d$-dimensional.
+
+Calculate moments $\E\left[X^k\right]$ for $k = 1, 2, \ldots, d'$ where $d' \geq d$.  
+
+For each parameter $j = 1, 2, \ldots, d$, solve for $\theta_j$ in terms of $\E\left[X^k\right]$ for $k = 1, 2, \ldots, d'$.  
+
+The method of moments estimator of $\theta_j$ is formed by replacing the function of moments $\E\left[X^k\right]$ that equals $\theta_j$ with the empirical moments $\sum_{i=1}^n X_i^k / n$.
 
 ## Example: Normal
 
-## Goodness of Fit
+For a $\mbox{Normal}(\mu, \sigma^2)$ distribution, we have
 
-# Semiparametric Empirical Bayes
+$$
+\E[X] = \mu
+$$
 
-## Rationale
+$$
+\E\left[X^2\right] = \sigma^2 + \mu^2
+$$
 
-## Robbins Method
+Solving for $\mu$ and $\sigma^2$, we have $\mu = \E[X]$ and $\sigma^2 = \E[X^2] - \E[X]^2$.  This yields method of moments estimators
 
-## Normal Example
+$$
+\tilde{\mu} = \frac{\sum_{i=1}^n X_i}{n}, \ \ \ \tilde{\sigma}^2 = \frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
+$$
+
+## Exploring Goodness of Fit
+
+As mentioned above, moments can be nonparametrically estimated.  At the same time, for a given parametric distribution, these moments can also be written in terms of the parameters.
+
+
+For example, consider a single parameter exponential family distribution.  The variance is going to be defined in terms of the parameter.  At the same time, we can estimate variance through the empirical moments 
+
+$$
+\frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
+$$
+
+In the scenario where several sets of variables are measured, the MLEs of the variance in terms of the single parameter can be compared to the moment estimates of variance to assess goodness of fit of that distribution.
 
 # Extras
 

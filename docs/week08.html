@@ -59,6 +59,7 @@
 
     <style type="text/css">code{white-space: pre;}</style>
 
+    <link rel="stylesheet" href="../customization/custom.css"/>
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
@@ -136,7 +137,6 @@ p {
 <li>Permutation methods</li>
 <li>Goodness of fit</li>
 <li>Method of moments</li>
-<li>Semiparametric empirical Bayes</li>
 </ul>
 </section></section>
 <section><section id="empirical-distribution-functions" class="titleslide slide level1"><h1>Empirical Distribution Functions</h1></section><section id="definition" class="slide level2">
@@ -214,7 +214,7 @@ p {
 {\operatorname{Var}}_F(a(X)) = \int (a(x) - T(F))^2 dF(x)
 \]</span> because <span class="math inline">\(T(F) = \int a(x) dF(x) = {\operatorname{E}}_F[a(X)]\)</span>. Likewise,</p>
 <p><span class="math display">\[
-{\operatorname{Var}}_{\hat{F}_{{\boldsymbol{X}}}}(a(X)) = \sum_{i=1}^n (a(X_i) - T(\hat{F}_{{\boldsymbol{X}}}))^2
+{\operatorname{Var}}_{\hat{F}_{{\boldsymbol{X}}}}(a(X)) = \frac{1}{n} \sum_{i=1}^n (a(X_i) - T(\hat{F}_{{\boldsymbol{X}}}))^2
 \]</span></p>
 <p>where <span class="math inline">\(T(\hat{F}_{{\boldsymbol{X}}}) = \frac{1}{n} \sum_{i=1}^n a(X_i)\)</span>.</p>
 </section><section id="edf-clt" class="slide level2">
@@ -232,7 +232,7 @@ p {
 </section></section>
 <section><section id="bootstrap" class="titleslide slide level1"><h1>Bootstrap</h1></section><section id="rationale" class="slide level2">
 <h1>Rationale</h1>
-<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span>. If the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> is an accurate approximation for the true cdf <span class="math inline">\(F\)</span>, then we can utilize <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> in place of <span class="math inline">\(F\)</span> to nonparametrically characterize the sampling distribution of a statistic <span class="math inline">\(T({\boldsymbol{X}})\)</span>.</p>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. If the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> is an accurate approximation for the true cdf <span class="math inline">\(F\)</span>, then we can utilize <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> in place of <span class="math inline">\(F\)</span> to nonparametrically characterize the sampling distribution of a statistic <span class="math inline">\(T({\boldsymbol{X}})\)</span>.</p>
 <p>This allows for the sampling distribution of more general statistics to be considered, such as the median or a percentile, as well as more traditional statistics, such as the mean, when the underlying distribution is unknown.</p>
 <p>When we encounter modeling fitting, the bootstrap may be very useful for characterizing the sampling distribution of complex statistics we calculate from fitted models.</p>
 </section><section id="big-picture" class="slide level2">
@@ -264,25 +264,27 @@ p {
 </section><section id="bootstrap-cis" class="slide level2">
 <h1>Bootstrap CIs</h1>
 <p>Suppose that <span class="math inline">\(\theta = T(F)\)</span> and <span class="math inline">\(\hat{\theta} = T(\hat{F}_{{\boldsymbol{x}}})\)</span>.</p>
-<p>We can use the bootstrap to generate data from <span class="math inline">\(T(\hat{F}_{{\boldsymbol{x}}})\)</span>.</p>
-<p>For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>, we draw <span class="math inline">\(x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)}\)</span> as iid realiztions from <span class="math inline">\(T(\hat{F}_{{\boldsymbol{x}}})\)</span>, and calculate <span class="math inline">\(\hat{\theta}^{*(b)} = T(\hat{F}_{{\boldsymbol{x}}^{*(b)}})\)</span>.</p>
+<p>We can use the bootstrap to generate data from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>.</p>
+<p>For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>, we draw <span class="math inline">\(x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)}\)</span> as iid realiztions from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>, and calculate <span class="math inline">\(\hat{\theta}^{*(b)} = T(\hat{F}_{{\boldsymbol{x}}^{*(b)}})\)</span>.</p>
 <p>Let <span class="math inline">\(p^{*}_{\alpha}\)</span> be the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\left\{\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\right\}\)</span>.</p>
 <p>Let’s discuss several ways of calculating confidence intervals for <span class="math inline">\(\theta = T(F)\)</span>.</p>
 </section><section id="invoking-the-clt" class="slide level2">
 <h1>Invoking the CLT</h1>
 <p>If we have evidence that the central limit theorem can be applied, we can form the <span class="math inline">\((1-\alpha)\)</span> CI as:</p>
 <p><span class="math display">\[
-(T(\hat{F}_{{\boldsymbol{x}}}) - |z_{\alpha/2}| {\operatorname{se}}^*, T(\hat{F}_{{\boldsymbol{x}}}) + |z_{\alpha/2}| {\operatorname{se}}^*)
+(\hat{\theta} - |z_{\alpha/2}| {\operatorname{se}}^*, \hat{\theta} + |z_{\alpha/2}| {\operatorname{se}}^*)
 \]</span></p>
 <p>where <span class="math inline">\({\operatorname{se}}^*\)</span> is the bootstrap standard error calculated as</p>
 <p><span class="math display">\[
-{\operatorname{se}}^{*} = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(T\left(\hat{F}_{{\boldsymbol{x}}^{*(b)}}\right) -  \frac{1}{B} \sum_{k=1}^B T\left(\hat{F}_{{\boldsymbol{x}}^{*(k)}}\right) \right)^2}.
+{\operatorname{se}}^{*} = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(\hat{\theta}^{*(b)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(k)} \right)^2}.
 \]</span></p>
+<p> </p>
+<p>Note that <span class="math inline">\({\operatorname{se}}^*\)</span> serves as estimate of <span class="math inline">\({\operatorname{se}}(\hat{\theta})\)</span>.</p>
 </section><section class="slide level2">
 
 <p>Note that to get this confidence interval we need to justify that the following pivotal statistics are approximately Normal(0,1):</p>
 <p><span class="math display">\[
-\frac{T(\hat{F}_{{\boldsymbol{x}}}) - T(F)}{{\operatorname{se}}(T(\hat{F}_{{\boldsymbol{x}}}))} \approx \frac{T(\hat{F}_{{\boldsymbol{x}}}) - T(F)}{{\operatorname{se}}^*}
+\frac{\hat{\theta} - \theta}{{\operatorname{se}}(\hat{\theta})} \approx \frac{\hat{\theta} - \theta}{{\operatorname{se}}^*}
 \]</span></p>
 </section><section id="percentile-interval" class="slide level2">
 <h1>Percentile Interval</h1>
@@ -336,6 +338,22 @@ p {
 \]</span></p>
 <p> </p>
 <p>Exercise: Why?</p>
+</section><section class="slide level2">
+
+<p>How do we obtain <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}\right)\)</span> and <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right)\)</span>?</p>
+<p>If we have an analytical formula for these, then <span class="math inline">\(\hat{{\operatorname{se}}}(\hat{\theta})\)</span> is calculated from the original data and <span class="math inline">\(\hat{{\operatorname{se}}}(\hat{\theta}^{*(b)})\)</span> from the bootstrap data sets. But we probably don’t since we’re using the bootstrap.</p>
+<p>Instead, we can calculate:</p>
+<p><span class="math display">\[
+\hat{{\operatorname{se}}}\left(\hat{\theta}\right) = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(\hat{\theta}^{*(b)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(k)} \right)^2}.
+\]</span></p>
+<p>This is what we called <span class="math inline">\({\operatorname{se}}^*\)</span> above. But what about <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right)\)</span>?</p>
+</section><section class="slide level2">
+
+<p>To estimate <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right)\)</span> we need to do a double bootstrap. For each bootstrap sample <span class="math inline">\(b\)</span> we need to bootstrap that daat set another <span class="math inline">\(B\)</span> times to calculate:</p>
+<p><span class="math display">\[
+\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right) = \sqrt{\frac{1}{B} \sum_{v=1}^B \left(\hat{\theta}^{*(b)*(v)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(b)*(k)} \right)^2}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\theta}^{*(b)*(v)}\)</span> is the statistic calculated from bootstrap sample <span class="math inline">\(v\)</span> within bootstrap sample <span class="math inline">\(b\)</span>. This can be very computationally intensive, and it requires a large sample size <span class="math inline">\(n\)</span>.</p>
 </section><section id="bootstrap-hypothesis-testing" class="slide level2">
 <h1>Bootstrap Hypothesis Testing</h1>
 <p>As we have seen, hypothesis testing and confidence intervals are very related. For a simple null hypothesis, a bootstrap hypothesis test p-value can be calculated by finding the minimum <span class="math inline">\(\alpha\)</span> for which the <span class="math inline">\((1-\alpha)\)</span> CI does not contain the null hypothesis value. You showed this on your homework.</p>
@@ -355,9 +373,9 @@ t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\rig
 <p>Note that the bootstrap distributions are such that <span class="math inline">\(\mu(\hat{F}_{X^{*}}) = \overline{x}\)</span> and <span class="math inline">\(\mu(\hat{F}_{Y^{*}}) = \overline{y}\)</span>. Thus we want to center the bootstrap t-statistics about these known means.</p>
 <p>Specifically, for a bootstrap data set <span class="math inline">\(x^{*} = (x_1^{*}, x_2^{*}, \ldots, x_m^{*})^T\)</span> and <span class="math inline">\(y^{*} = (y_1^{*}, y_2^{*}, \ldots, y_n^{*})^T\)</span>, we form null t-statistic</p>
 <p><span class="math display">\[
-t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y})}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2, *}}}
+t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y})}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2*}}}
 \]</span></p>
-<p>where again <span class="math inline">\(s^{2, *}\)</span> is the pooled sample variance.</p>
+<p>where again <span class="math inline">\(s^{2*}\)</span> is the pooled sample variance.</p>
 </section><section class="slide level2">
 
 <p>In order to obtain a p-value, we calculate <span class="math inline">\(t^{*(b)}\)</span> for <span class="math inline">\(b=1, 2, \ldots, B\)</span> bootstrap data sets.</p>
@@ -435,59 +453,484 @@ t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y}
 &gt; plot(density(boot_var, adj=1.5), main=&quot; &quot;)
 &gt; abline(v=sampling_var)</code></pre>
 <p><img src="week08_files/figure-revealjs/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
-</section></section>
-<section><section id="bootstrap-subtleties" class="titleslide slide level1"><h1>Bootstrap Subtleties</h1></section><section id="comment" class="slide level2">
-<h1>Comment</h1>
-</section><section id="normal-data" class="slide level2">
-<h1>Normal Data</h1>
-</section><section id="verify-sampling-distribution" class="slide level2">
-<h1>Verify Sampling Distribution</h1>
-</section><section id="bootstrap-columns" class="slide level2">
-<h1>Bootstrap Columns</h1>
-</section><section id="bootstrap-rows" class="slide level2">
-<h1>Bootstrap Rows</h1>
-</section><section id="studentize-rows" class="slide level2">
-<h1>Studentize Rows</h1>
+</section><section class="slide level2">
+
+<div id="left">
+<p>We repeated this simulation over a range of <span class="math inline">\(n\)</span> and <span class="math inline">\(B\)</span>.</p>
+</div>
+<div id="right">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;"><em>n</em></th>
+<th style="text-align: right;"><em>B</em></th>
+<th style="text-align: right;"><em>coverage</em></th>
+<th style="text-align: right;"><em>avg CI width</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.868</td>
+<td style="text-align: right;">0.7805404</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">0.7882278</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">0.865</td>
+<td style="text-align: right;">0.7852837</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">8000</td>
+<td style="text-align: right;">0.883</td>
+<td style="text-align: right;">0.7817222</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.923</td>
+<td style="text-align: right;">0.2465840</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.909</td>
+<td style="text-align: right;">0.2477463</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">0.915</td>
+<td style="text-align: right;">0.2475550</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">8000</td>
+<td style="text-align: right;">0.923</td>
+<td style="text-align: right;">0.2458167</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.935</td>
+<td style="text-align: right;">0.0781421</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.937</td>
+<td style="text-align: right;">0.0784541</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.0784559</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">8000</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: right;">0.0785591</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+05</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.949</td>
+<td style="text-align: right;">0.0246918</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+05</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.0246938</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section></section>
 <section><section id="permutation-methods" class="titleslide slide level1"><h1>Permutation Methods</h1></section><section id="rationale-1" class="slide level2">
 <h1>Rationale</h1>
+<p>Permutation methods are useful for testing hypotheses about equality of distributions.</p>
+<p>Observations can be permuted among populations to simulate the case where the distributions are equivalent.</p>
+<p>Many permutation methods only depend on the ranks of the data, so they are a class of robust methods for performing hypothesis tests. However, the types of hypotheses that can be tested are limited.</p>
 </section><section id="permutation-test" class="slide level2">
 <h1>Permutation Test</h1>
-</section><section id="wilcoxon-signed-rank-sum-test" class="slide level2">
-<h1>Wilcoxon Signed Rank-Sum Test</h1>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>.</p>
+<p>We wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>.</p>
+<p>Consider a general test statistic <span class="math inline">\(S = S(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n)\)</span> so that the larger <span class="math inline">\(S\)</span> is the more evidence there is against the null hypothesis.</p>
+<p>Under the null hypothesis, any reordering of these values, where <span class="math inline">\(m\)</span> are randomly assigned to the “<span class="math inline">\(X\)</span>” population and <span class="math inline">\(n\)</span> are assigned to the “<span class="math inline">\(Y\)</span>” population, should be equivalently distributed.</p>
+</section><section class="slide level2">
+
+<p>For <span class="math inline">\(B\)</span> permutations (possibly all unique permutations), we calculate</p>
+<p><span class="math display">\[
+S^{*(b)} = S\left(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \ldots, Z^{*(b)}_{m+n}\right)
+\]</span></p>
+<p>where <span class="math inline">\(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \ldots, Z^{*(b)}_{m+n}\)</span> is a random permutation of the values <span class="math inline">\(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n\)</span>.</p>
+<p>Example permutation in R:</p>
+<pre class="r"><code>&gt; z &lt;- c(x, y)
+&gt; zstar &lt;- sample(z, replace=FALSE)</code></pre>
+</section><section class="slide level2">
+
+<p>The p-value is calculated as proportion of permutations where the resulting permutation statistic exceeds the observed statistics:</p>
+<p><span class="math display">\[
+\mbox{p-value}(s) = \frac{1}{B} \sum_{b=1}^{B} 1\left(S^{*(b)} \geq S\right).
+\]</span></p>
+<p>This can be (1) an exact calculation where all permutations are considered, (2) a Monte Carlo approximation where <span class="math inline">\(B\)</span> random permutations are considered, or (3) a large <span class="math inline">\(\min(m, n)\)</span> calculation where an asymptotic probabilistic approximation is used.</p>
 </section><section id="wilcoxon-rank-sum-test" class="slide level2">
 <h1>Wilcoxon Rank Sum Test</h1>
+<p>Also called the Mann-Whitney-Wilcoxon test.</p>
+<p>Consider the ranks of the data as a whole, <span class="math inline">\(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n\)</span>, where <span class="math inline">\(r(X_i)\)</span> is the rank of <span class="math inline">\(X_i\)</span> and <span class="math inline">\(r(Y_j)\)</span> is the rank of <span class="math inline">\(Y_j\)</span>. Note that <span class="math inline">\(r(\cdot) \in \{1, 2, \ldots, m+n\}\)</span>. The smallest value is such that <span class="math inline">\(r(X_i)=1\)</span> or <span class="math inline">\(r(Y_j)=1\)</span>, the next smallest value maps to 2, etc.</p>
+<p>Note that</p>
+<p><span class="math display">\[
+\sum_{i=1}^m r(X_i) + \sum_{j=1}^n r(Y_j) = \frac{(m+n)(m+n+1)}{2}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>The statistic <span class="math inline">\(W\)</span> is calculated by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; R_X = \sum_{i=1}^m r(X_i) &amp; R_Y = \sum_{j=1}^n r(Y_j) \\
+&amp; W_X = R_X - \frac{m(m+1)}{2} &amp; W_Y = R_Y - \frac{n(n+1)}{2} \\
+&amp; W = \min(W_X, W_Y) &amp; 
+\end{aligned}
+\]</span></p>
+<p>In this case, the <em>smaller</em> <span class="math inline">\(W\)</span> is, the more significant it is. Note that <span class="math inline">\(mn-W = \max(W_X, W_Y)\)</span>, so we just as well could utilize large <span class="math inline">\(\max(W_X, W_Y)\)</span> as a test statistic.</p>
+</section><section id="wilcoxon-signed-rank-sum-test" class="slide level2">
+<h1>Wilcoxon Signed Rank-Sum Test</h1>
+<p>The Wilcoxon signed rank test is similar to the Wilcoxon two-sample test, except here we have paired observations <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>.</p>
+<p>An example is an individual’s clinical measurement before (<span class="math inline">\(X\)</span>) and after (<span class="math inline">\(Y\)</span>) treatment.</p>
+<p>In order to test the hypothesis, we calculate <span class="math inline">\(r(X_i, Y_i) = |Y_i - X_i|\)</span> and also <span class="math inline">\(s(X_i, Y_i) = \operatorname{sign}(Y_i - X_i)\)</span>.</p>
+<p>The test statistic is <span class="math inline">\(|W|\)</span> where</p>
+<p><span class="math display">\[
+W = \sum_{i=1}^n r(X_i, Y_i) s(X_i, Y_i).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Both of these tests can be carried out using the <code>wilcox.test()</code> function in R.</p>
+<pre><code>wilcox.test(x, y = NULL,
+            alternative = c(&quot;two.sided&quot;, &quot;less&quot;, &quot;greater&quot;),
+            mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
+            conf.int = FALSE, conf.level = 0.95, ...)</code></pre>
+</section><section id="examples" class="slide level2">
+<h1>Examples</h1>
+<p>Same population mean and variance.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 4480, p-value = 0.2043
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same population mean and variance. Large sample size.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(10000, mean=1)
+&gt; y &lt;- rexp(10000, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 53312000, p-value = 4.985e-16
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same mean, very different variances.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1, sd=0.01)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 6579, p-value = 0.0001148
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same variances, different means.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=2)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 7836, p-value = 4.261e-12
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same population mean and variance.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y, paired=TRUE)
+
+    Wilcoxon signed rank test with continuity correction
+
+data:  x and y
+V = 2394, p-value = 0.6536
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; hist(y-x)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same population mean and variance. Large sample size.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(10000, mean=1)
+&gt; y &lt;- rexp(10000, rate=1)
+&gt; wilcox.test(x, y, paired=TRUE)
+
+    Wilcoxon signed rank test with continuity correction
+
+data:  x and y
+V = 26770000, p-value = 9.23e-10
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; hist(y-x)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="permutation-t-test" class="slide level2">
 <h1>Permutation <em>t</em>-test</h1>
+<p>As above, suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>, and we wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>. However, suppose we additionally know that <span class="math inline">\({\operatorname{Var}}(X) = {\operatorname{Var}}(Y)\)</span>. We can use a t-statistic to test this hypothesis:</p>
+<p><span class="math display">\[
+t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^2}}
+\]</span></p>
+<p>where <span class="math inline">\(s^2\)</span> is the pooled sample variance.</p>
+</section><section class="slide level2">
+
+<p>To obtain the null distribution, we randomly permute the observations to assign <span class="math inline">\(m\)</span> data points to the <span class="math inline">\(X\)</span> sample and <span class="math inline">\(n\)</span> to the <span class="math inline">\(Y\)</span> sample. This yields permutation data set <span class="math inline">\(x^{*} = (x_1^{*}, x_2^{*}, \ldots, x_m^{*})^T\)</span> and <span class="math inline">\(y^{*} = (y_1^{*}, y_2^{*}, \ldots, y_n^{*})^T\)</span>. We form null t-statistic</p>
+<p><span class="math display">\[
+t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2*}}}
+\]</span></p>
+<p>where again <span class="math inline">\(s^{2*}\)</span> is the pooled sample variance.</p>
+</section><section class="slide level2">
+
+<p>In order to obtain a p-value, we calculate <span class="math inline">\(t^{*(b)}\)</span> for <span class="math inline">\(b=1, 2, \ldots, B\)</span> permutation data sets.</p>
+<p>The p-value of <span class="math inline">\(t\)</span> is then the proportion of permutation statistics as or more extreme than the observed statistic:</p>
+<p><span class="math display">\[
+\mbox{p-value}(t) = \frac{1}{B} \sum_{b=1}^{B} 1\left(|t^{*(b)}| \geq |t|\right).
+\]</span></p>
 </section></section>
 <section><section id="goodness-of-fit" class="titleslide slide level1"><h1>Goodness of Fit</h1></section><section id="rationale-2" class="slide level2">
 <h1>Rationale</h1>
+<p>Sometimes we want to figure out which probability distribution is a reasonable model for the data.</p>
+<p>This is related to nonparametric inference in that we wish to go from being in a nonparametric framework to a parametric framework.</p>
+<p>Goodness of fit (GoF) tests allow one to perform a hypothesis test of how well a particular parametric probability model explains variation observed in a data set.</p>
 </section><section id="chi-square-gof-test" class="slide level2">
 <h1>Chi-Square GoF Test</h1>
-</section><section id="example" class="slide level2">
-<h1>Example</h1>
-</section><section id="chi-square-contingency-test" class="slide level2">
-<h1>Chi-Square Contingency Test</h1>
-</section><section id="example-1" class="slide level2">
-<h1>Example</h1>
+<p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F \in \{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> vs <span class="math inline">\(H_1: \mbox{not } H_0\)</span>. Suppose that <span class="math inline">\(\boldsymbol{\Theta}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
+<p>Divide the support of <span class="math inline">\(\{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> into <span class="math inline">\(k\)</span> bins <span class="math inline">\(I_1, I_2, \ldots, I_k\)</span>.</p>
+<p>For <span class="math inline">\(j=1, 2, \ldots, k\)</span>, calculate</p>
+<p><span class="math display">\[
+q_j({\boldsymbol{\theta}}) = \int_{I_j} dF_{{\boldsymbol{\theta}}}(x).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Suppose we observe data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>. For <span class="math inline">\(j = 1, 2, \ldots, k\)</span>, let <span class="math inline">\(n_j\)</span> be the number of values <span class="math inline">\(x_i \in I_j\)</span>.</p>
+<p>Let <span class="math inline">\(\tilde{\theta}_1, \tilde{\theta}_2, \ldots, \tilde{\theta}_d\)</span> be the values that maximize the multinomial likelihood</p>
+<p><span class="math display">\[
+\prod_{j=1}^k q_j({\boldsymbol{\theta}})^{n_j}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Form GoF statistic</p>
+<p><span class="math display">\[
+s({\boldsymbol{x}}) = \sum_{j=1}^k \frac{\left(n_j - n q_j\left(\tilde{{\boldsymbol{\theta}}} \right) \right)^2}{n q_j\left(\tilde{{\boldsymbol{\theta}}} \right)}
+\]</span></p>
+<p>When <span class="math inline">\(H_0\)</span> is true, <span class="math inline">\(S \sim \chi^2_v\)</span> where <span class="math inline">\(v = k - d - 1\)</span>. The p-value is calculated by <span class="math inline">\(\Pr(S^* \geq s({\boldsymbol{x}}))\)</span> where <span class="math inline">\(S^* \sim \chi^2_{k-d-1}\)</span>.</p>
+</section><section id="example-hardy-weinberg" class="slide level2">
+<h1>Example: Hardy-Weinberg</h1>
+<p>Suppose at your favorite SNP, we observe genotypes from 100 randomly sampled individuals as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>AA</th>
+<th>AT</th>
+<th>TT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>28</td>
+<td>60</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>If we code these genotypes as 0, 1, 2, testing for Hardy-Weinberg equilibrium is equivalent to testing whether <span class="math inline">\(X_1, X_2, \ldots, X_{100} {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Binomial}(2, \theta)\)</span> for some unknown allele frequency of T, <span class="math inline">\(\theta\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The parameter dimension is such that <span class="math inline">\(d=1\)</span>. We will also set <span class="math inline">\(k=3\)</span>, where each bin is a genotype. Therefore, we have <span class="math inline">\(n_1 = 28\)</span>, <span class="math inline">\(n_2 = 60\)</span>, and <span class="math inline">\(n_3 = 12\)</span>. Also,</p>
+<p><span class="math display">\[
+q_1(\theta) = (1-\theta)^2, \ \ q_2(\theta) = 2 \theta (1-\theta), \ \ q_3(\theta) = \theta^2.
+\]</span></p>
+<p> </p>
+<p>Forming the multinomial likelihood under these bin probabilities, we find <span class="math inline">\(\tilde{\theta} = (n_2 + 2n_3)/(2n)\)</span>. The degrees of freedom of the <span class="math inline">\(\chi^2_v\)</span> null distribution is <span class="math inline">\(v = k - d - 1 = 3 - 1 - 1 = 1\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Let’s carry out the test in R.</p>
+<pre class="r"><code>&gt; n &lt;- 100
+&gt; nj &lt;- c(28, 60, 12)
+&gt; 
+&gt; # parameter estimates
+&gt; theta &lt;- (nj[2] + 2*nj[3])/(2*n)
+&gt; qj &lt;- c((1-theta)^2, 2*theta*(1-theta), theta^2)
+&gt; 
+&gt; # gof statistic
+&gt; s &lt;- sum((nj - n*qj)^2 / (n*qj))
+&gt; 
+&gt; # p-value
+&gt; 1-pchisq(s, df=1)
+[1] 0.02059811</code></pre>
 </section><section id="kolmogorovsmirnov-test" class="slide level2">
 <h1>Kolmogorov–Smirnov Test</h1>
-</section><section id="example-2" class="slide level2">
-<h1>Example</h1>
+<p>The KS test can be used to compare a sample of data to a particular distribution, or to compare two samples of data. The former is a parametric GoF test, and the latter is a nonparametric test of equal distributions.</p>
+</section><section id="one-sample-ks-test" class="slide level2">
+<h1>One Sample KS Test</h1>
+<p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F = F_{{\boldsymbol{\theta}}}\)</span> vs <span class="math inline">\(H_1: F \not= F_{{\boldsymbol{\theta}}}\)</span> for some parametric distribution <span class="math inline">\(F_{{\boldsymbol{\theta}}}\)</span>.</p>
+<p>For observed data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> we form the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and test-statistic</p>
+<p><span class="math display">\[
+D({\boldsymbol{x}}) = \sup_{z} \left| \hat{F}_{{\boldsymbol{x}}}(z) - F_{{\boldsymbol{\theta}}}(z) \right|.
+\]</span></p>
+<p>The null distribution of this test can be approximated based on a stochastic process called the Brownian bridge.</p>
+</section><section id="two-sample-ks-test" class="slide level2">
+<h1>Two Sample KS Test</h1>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>. We wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>.</p>
+<p>For observed data <span class="math inline">\(x_1, x_2, \ldots, x_m\)</span> and <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> we form the edf’s <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and <span class="math inline">\(\hat{F}_{\boldsymbol{y}}\)</span>. We then form test-statistic</p>
+<p><span class="math display">\[
+D({\boldsymbol{x}},\boldsymbol{y})  = \sup_{z} \left| \hat{F}_{{\boldsymbol{x}}}(z) - \hat{F}_{\boldsymbol{y}}(z) \right|.
+\]</span></p>
+<p>The null distribution of this statistic can be approximated using results on edf’s.</p>
+</section><section class="slide level2">
+
+<p>Both of these tests can be carried out using the <code>ks.test()</code> function in R.</p>
+<pre><code>ks.test(x, y, ...,
+        alternative = c(&quot;two.sided&quot;, &quot;less&quot;, &quot;greater&quot;),
+        exact = NULL)</code></pre>
+</section><section id="example-exponential-vs-normal" class="slide level2">
+<h1>Example: Exponential vs Normal</h1>
+<p>Two sample KS test.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 5021, p-value = 0.9601
+alternative hypothesis: true location shift is not equal to 0
+&gt; ks.test(x, y)
+
+    Two-sample Kolmogorov-Smirnov test
+
+data:  x and y
+D = 0.19, p-value = 0.0541
+alternative hypothesis: two-sided</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>One sample KS tests.</p>
+<pre class="r"><code>&gt; ks.test(x=x, y=&quot;pnorm&quot;)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  x
+D = 0.41398, p-value = 2.554e-15
+alternative hypothesis: two-sided
+&gt; 
+&gt; ks.test(x=x, y=&quot;pnorm&quot;, mean=1)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  x
+D = 0.068035, p-value = 0.7436
+alternative hypothesis: two-sided</code></pre>
+</section><section class="slide level2">
+
+<p>Standardize (mean center, sd scale) the observations before comparing to a Normal(0,1) distribution.</p>
+<pre class="r"><code>&gt; ks.test(x=((x-mean(x))/sd(x)), y=&quot;pnorm&quot;)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  ((x - mean(x))/sd(x))
+D = 0.05896, p-value = 0.8778
+alternative hypothesis: two-sided
+&gt; 
+&gt; ks.test(x=((y-mean(y))/sd(y)), y=&quot;pnorm&quot;)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  ((y - mean(y))/sd(y))
+D = 0.14439, p-value = 0.03092
+alternative hypothesis: two-sided</code></pre>
 </section></section>
-<section><section id="method-of-moments" class="titleslide slide level1"><h1>Method of Moments</h1></section><section id="definition-1" class="slide level2">
+<section><section id="method-of-moments" class="titleslide slide level1"><h1>Method of Moments</h1></section><section id="rationale-3" class="slide level2">
+<h1>Rationale</h1>
+<p>Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. By the strong law of large numbers we have, as <span class="math inline">\(n \rightarrow \infty\)</span></p>
+<p><span class="math display">\[
+\frac{\sum_{i=1}^n X_i^k}{n} \stackrel{\text{a.s.}}{\longrightarrow} {\operatorname{E}}_{F}\left[X^k\right]
+\]</span></p>
+<p>when <span class="math inline">\({\operatorname{E}}_{F}\left[X^k\right]\)</span> exists.</p>
+<p>This means that we can nonparametrically estimate the moments of a distribution. Also, in the parametric setting, these moments can be used to form parameter estimates.</p>
+</section><section id="definition-1" class="slide level2">
 <h1>Definition</h1>
+<p>Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}\)</span> where <span class="math inline">\({\boldsymbol{\theta}}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
+<p>Calculate moments <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> for <span class="math inline">\(k = 1, 2, \ldots, d&#39;\)</span> where <span class="math inline">\(d&#39; \geq d\)</span>.</p>
+<p>For each parameter <span class="math inline">\(j = 1, 2, \ldots, d\)</span>, solve for <span class="math inline">\(\theta_j\)</span> in terms of <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> for <span class="math inline">\(k = 1, 2, \ldots, d&#39;\)</span>.</p>
+<p>The method of moments estimator of <span class="math inline">\(\theta_j\)</span> is formed by replacing the function of moments <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> that equals <span class="math inline">\(\theta_j\)</span> with the empirical moments <span class="math inline">\(\sum_{i=1}^n X_i^k / n\)</span>.</p>
 </section><section id="example-normal-1" class="slide level2">
 <h1>Example: Normal</h1>
-</section><section id="goodness-of-fit-1" class="slide level2">
-<h1>Goodness of Fit</h1>
-</section></section>
-<section><section id="semiparametric-empirical-bayes" class="titleslide slide level1"><h1>Semiparametric Empirical Bayes</h1></section><section id="rationale-3" class="slide level2">
-<h1>Rationale</h1>
-</section><section id="robbins-method" class="slide level2">
-<h1>Robbins Method</h1>
-</section><section id="normal-example" class="slide level2">
-<h1>Normal Example</h1>
+<p>For a <span class="math inline">\(\mbox{Normal}(\mu, \sigma^2)\)</span> distribution, we have</p>
+<p><span class="math display">\[
+{\operatorname{E}}[X] = \mu
+\]</span></p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[X^2\right] = \sigma^2 + \mu^2
+\]</span></p>
+<p>Solving for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, we have <span class="math inline">\(\mu = {\operatorname{E}}[X]\)</span> and <span class="math inline">\(\sigma^2 = {\operatorname{E}}[X^2] - {\operatorname{E}}[X]^2\)</span>. This yields method of moments estimators</p>
+<p><span class="math display">\[
+\tilde{\mu} = \frac{\sum_{i=1}^n X_i}{n}, \ \ \ \tilde{\sigma}^2 = \frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
+\]</span></p>
+</section><section id="exploring-goodness-of-fit" class="slide level2">
+<h1>Exploring Goodness of Fit</h1>
+<p>As mentioned above, moments can be nonparametrically estimated. At the same time, for a given parametric distribution, these moments can also be written in terms of the parameters.</p>
+</section><section class="slide level2">
+
+<p>For example, consider a single parameter exponential family distribution. The variance is going to be defined in terms of the parameter. At the same time, we can estimate variance through the empirical moments</p>
+<p><span class="math display">\[
+\frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
+\]</span></p>
+<p>In the scenario where several sets of variables are measured, the MLEs of the variance in terms of the single parameter can be compared to the moment estimates of variance to assess goodness of fit of that distribution.</p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>
@@ -515,21 +958,21 @@ other attached packages:
 [10] devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.9      plyr_1.8.4       forcats_0.2.0   
- [4] tools_3.3.2      digest_0.6.12    lubridate_1.6.0 
- [7] jsonlite_1.2     evaluate_0.10    memoise_1.0.0   
-[10] nlme_3.1-131     gtable_0.2.0     lattice_0.20-34 
-[13] psych_1.6.12     DBI_0.5-1        yaml_2.1.14     
-[16] parallel_3.3.2   haven_1.0.0      xml2_1.1.1      
-[19] withr_1.0.2      stringr_1.1.0    httr_1.2.1      
-[22] revealjs_0.8     hms_0.3          rprojroot_1.2   
-[25] grid_3.3.2       R6_2.2.0         readxl_0.1.1    
-[28] foreign_0.8-67   rmarkdown_1.3    modelr_0.1.0    
-[31] reshape2_1.4.2   backports_1.0.5  scales_0.4.1    
-[34] htmltools_0.3.5  rvest_0.3.2      assertthat_0.1  
-[37] mnormt_1.5-5     colorspace_1.3-2 labeling_0.3    
-[40] stringi_1.1.2    lazyeval_0.2.0   munsell_0.4.3   
-[43] broom_0.4.2     </code></pre>
+ [1] Rcpp_0.12.9      highr_0.6        plyr_1.8.4      
+ [4] forcats_0.2.0    tools_3.3.2      digest_0.6.12   
+ [7] lubridate_1.6.0  jsonlite_1.2     evaluate_0.10   
+[10] memoise_1.0.0    nlme_3.1-131     gtable_0.2.0    
+[13] lattice_0.20-34  psych_1.6.12     DBI_0.5-1       
+[16] yaml_2.1.14      parallel_3.3.2   haven_1.0.0     
+[19] xml2_1.1.1       withr_1.0.2      stringr_1.1.0   
+[22] httr_1.2.1       revealjs_0.8     hms_0.3         
+[25] rprojroot_1.2    grid_3.3.2       R6_2.2.0        
+[28] readxl_0.1.1     foreign_0.8-67   rmarkdown_1.3   
+[31] modelr_0.1.0     reshape2_1.4.2   backports_1.0.5 
+[34] scales_0.4.1     htmltools_0.3.5  rvest_0.3.2     
+[37] assertthat_0.1   mnormt_1.5-5     colorspace_1.3-2
+[40] labeling_0.3     stringi_1.1.2    lazyeval_0.2.0  
+[43] munsell_0.4.3    broom_0.4.2     </code></pre>
 </section>
 </section></section>
     </div>
