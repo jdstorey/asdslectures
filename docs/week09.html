@@ -1056,14 +1056,15 @@ p_i = \frac{\exp\left({\boldsymbol{X}}_i {\boldsymbol{\beta}}\right)}{1 + \exp\l
 <p><span class="math display">\[
 \begin{aligned}
 \ell\left({\boldsymbol{\beta}}; {\boldsymbol{y}}, {\boldsymbol{X}}\right) &amp; = \sum_{i=1}^n \log\left(\frac{p_i}{1-p_i}\right) y_i + \log(1-p_i) \\
- &amp; \propto \sum_{i=1}^n ({\boldsymbol{x}}_i {\boldsymbol{\beta}}) y_i - \log\left(1 + \exp\left({\boldsymbol{x}}_i {\boldsymbol{\beta}}\right) \right)  
+ &amp; = \sum_{i=1}^n ({\boldsymbol{x}}_i {\boldsymbol{\beta}}) y_i - \log\left(1 + \exp\left({\boldsymbol{x}}_i {\boldsymbol{\beta}}\right) \right)  
 \end{aligned}
 \]</span></p>
 </section><section id="iteratively-reweighted-least-squares" class="slide level2">
 <h1>Iteratively Reweighted Least Squares</h1>
 <ol type="1">
-<li><p>Initialize <span class="math inline">\({\boldsymbol{\beta}}^{(1)}\)</span> and set <span class="math inline">\(p_i^{(1)} = {\operatorname{logit}}^{-1}\left( {\boldsymbol{x}}_i {\boldsymbol{\beta}}^{(1)} \right)\)</span>.</p></li>
-<li><p>For each iteration <span class="math inline">\(t=1, 2, \ldots\)</span> set <span class="math display">\[
+<li><p>Initialize <span class="math inline">\({\boldsymbol{\beta}}^{(1)}\)</span>.</p></li>
+<li><p>For each iteration <span class="math inline">\(t=1, 2, \ldots\)</span>, set <span class="math display">\[
+p_i^{(t)} = {\operatorname{logit}}^{-1}\left( {\boldsymbol{x}}_i {\boldsymbol{\beta}}^{(t)} \right), \ \ \ \ 
 z_i^{(t)} = {\operatorname{logit}}\left(p_i^{(t)}\right) + \frac{y_i - p_i^{(t)}}{p_i^{(t)}(1-p_i^{(t)})}
 \]</span> and let <span class="math inline">\({\boldsymbol{z}}^{(t)} = \left\{z_i^{(t)}\right\}_{i=1}^n\)</span>.</p></li>
 </ol>

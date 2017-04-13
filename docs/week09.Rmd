@@ -1061,16 +1061,17 @@ The $\bb$ are estimated from the MLE calculated from:
 $$
 \begin{aligned}
 \ell\left(\bb ; \by, \bX \right) & = \sum_{i=1}^n \log\left(\frac{p_i}{1-p_i}\right) y_i + \log(1-p_i) \\
- & \propto \sum_{i=1}^n (\bx_i \bb) y_i - \log\left(1 + \exp\left(\bx_i \bb\right) \right)  
+ & = \sum_{i=1}^n (\bx_i \bb) y_i - \log\left(1 + \exp\left(\bx_i \bb\right) \right)  
 \end{aligned}
 $$
 
 ## Iteratively Reweighted Least Squares
 
-1. Initialize $\bb^{(1)}$ and set $p_i^{(1)} = \logit^{-1}\left( \bx_i \bb^{(1)} \right)$.
+1. Initialize $\bb^{(1)}$.
 
-2. For each iteration $t=1, 2, \ldots$ set 
+2. For each iteration $t=1, 2, \ldots$, set 
 $$
+p_i^{(t)} = \logit^{-1}\left( \bx_i \bb^{(t)} \right), \ \ \ \ 
 z_i^{(t)} = \logit\left(p_i^{(t)}\right) + \frac{y_i - p_i^{(t)}}{p_i^{(t)}(1-p_i^{(t)})}
 $$
 and let $\bz^{(t)} = \left\{z_i^{(t)}\right\}_{i=1}^n$.
