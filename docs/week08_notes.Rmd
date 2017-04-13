@@ -87,7 +87,7 @@ An example is $X_i | \mu_i \sim \mbox{Normal}(\mu_i, 1)$ and $\mu_i \iid F$ for 
 
 ## Definition
 
-Suppose $X_1, X_2, \ldots, X_n \sim F$.  The **empirical distribution function** (edf) -- or **empirical cumulative distribution function** (ecdf) -- is the distribution that puts probability $1/n$ on each observed value $X_i$.
+Suppose $X_1, X_2, \ldots, X_n \iid F$.  The **empirical distribution function** (edf) -- or **empirical cumulative distribution function** (ecdf) -- is the distribution that puts probability $1/n$ on each observed value $X_i$.
 
 Let $1(X_i \leq y) = 1$ if $X_i \leq y$ and $1(X_i \leq y) = 0$ if $X_i > y$.
 
@@ -414,7 +414,7 @@ The general approach is to calculate a test statistic based on the observed data
 
 ## Example: *t*-test
 
-Suppose $X_1, X_2, \ldots, X_m \sim F_X$ and $Y_1, Y_2, \ldots, Y_n \sim F_Y$.  We wish to test $H_0: \mu(F_X) = \mu(F_Y)$ vs $H_1: \mu(F_X) \not= \mu(F_Y)$.  Suppose that we know $\sigma^2(F_X) = \sigma^2(F_Y)$ (if not, it is straightforward to adjust the proecure below).
+Suppose $X_1, X_2, \ldots, X_m \iid F_X$ and $Y_1, Y_2, \ldots, Y_n \iid F_Y$.  We wish to test $H_0: \mu(F_X) = \mu(F_Y)$ vs $H_1: \mu(F_X) \not= \mu(F_Y)$.  Suppose that we know $\sigma^2(F_X) = \sigma^2(F_Y)$ (if not, it is straightforward to adjust the proecure below).
 
 Our test statistic is
 
@@ -777,7 +777,7 @@ Goodness of fit (GoF) tests allow one to perform a hypothesis test of how well a
 
 ## Chi-Square GoF Test
 
-Suppose we have data generating process $X_1, X_2, \ldots, X_n \sim F$ for some probability distribution $F$. We wish to test $H_0: F \in \{F_{\bt}: \bt \in \boldsymbol{\Theta} \}$ vs $H_1: \mbox{not } H_0$.   Suppose that $\boldsymbol{\Theta}$ is $d$-dimensional.
+Suppose we have data generating process $X_1, X_2, \ldots, X_n \iid F$ for some probability distribution $F$. We wish to test $H_0: F \in \{F_{\bt}: \bt \in \boldsymbol{\Theta} \}$ vs $H_1: \mbox{not } H_0$.   Suppose that $\boldsymbol{\Theta}$ is $d$-dimensional.
 
 Divide the support of $\{F_{\bt}: \bt \in \boldsymbol{\Theta} \}$ into $k$ bins $I_1, I_2, \ldots, I_k$.
 

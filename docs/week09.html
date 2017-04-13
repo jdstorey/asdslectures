@@ -113,7 +113,7 @@ p {
 <p>It is often the case that we would like to build a model that <em>explains the variation of one variable in terms of other variables</em>. <strong>Statistical modeling</strong> typically refers to this goal.</p>
 </section><section id="variables" class="slide level2">
 <h1>Variables</h1>
-<p>Let’s suppose our does comes in the form <span class="math inline">\(({\boldsymbol{X}}_n, Y_1), ({\boldsymbol{X}}_n, Y_1), \ldots, ({\boldsymbol{X}}_n, Y_n) {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>.</p>
+<p>Let’s suppose our does comes in the form <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), ({\boldsymbol{X}}_2, Y_2), \ldots, ({\boldsymbol{X}}_n, Y_n) \sim F\)</span>.</p>
 <p>We will call <span class="math inline">\({\boldsymbol{X}}_i = (X_{i1}, X_{i2}, \ldots, X_{ip}) \in \mathbb{R}_{1 \times p}\)</span> the <strong>explanatory variables</strong> and <span class="math inline">\(Y_i \in \mathbb{R}\)</span> the <strong>dependent variable</strong> or <strong>response variable</strong>.</p>
 <p>We can collect all variables as matrices</p>
 <p><span class="math display">\[ {\boldsymbol{Y}}_{n \times 1} \ \mbox{ and } \ {\boldsymbol{X}}_{n \times p}\]</span></p>
@@ -510,7 +510,7 @@ F-statistic: 290.4 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The assumptions on the above linear model are really about the joint distribution of the residuals, which are not directly observed. On data, we try to verify:</p>
 <ol type="1">
 <li>The fitted values and the residuals show no trends with respect to each other</li>
-<li>The residuals are distributed approximately Normal<span class="math inline">\((0,\sigma^2)\)</span>
+<li>The residuals are distributed approximately Normal<span class="math inline">\((0, \sigma^2)\)</span>
 <ul>
 <li>A constant variance is called <a href="https://en.wikipedia.org/wiki/Homoscedasticity"><strong>homoscedasticity</strong></a></li>
 <li>A non-constant variance is called <a href="https://en.wikipedia.org/wiki/Heteroscedasticity"><strong>heteroscedascity</strong></a></li>
@@ -583,37 +583,38 @@ S^2 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_i)^2}{n-p}.
 {\operatorname{E}}\left[ \left. S^2 \right| {\boldsymbol{X}}\right] = \sigma^2
 \]</span></p>
 <p><span class="math display">\[
-{\operatorname{E}}\left[\left. ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} S^2 \right| {\boldsymbol{X}}\right] = {\operatorname{Cov}}(\hat{{\boldsymbol{\beta}}})
+{\operatorname{E}}\left[\left. ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} S^2 \right| {\boldsymbol{X}}\right] = {\operatorname{Cov}}\left(\hat{{\boldsymbol{\beta}}}\right)
 \]</span></p>
 <p><span class="math display">\[
 {\operatorname{Cov}}\left(\hat{\beta}_j, Y_i - \hat{Y}_i\right) = \boldsymbol{0}.
 \]</span></p>
 </section><section id="standard-error" class="slide level2">
 <h1>Standard Error</h1>
-<p>The standard error of <span class="math inline">\(\hat{\beta}_j\)</span> is the <span class="math inline">\((j, j)\)</span> entry of <span class="math inline">\(({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2\)</span></p>
+<p>The standard error of <span class="math inline">\(\hat{\beta}_j\)</span> is the square root of the <span class="math inline">\((j, j)\)</span> diagonal entry of <span class="math inline">\(({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2\)</span></p>
 <p><span class="math display">\[
-{\operatorname{se}}(\hat{\beta}_j) = \sqrt{({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2}_{jj}
+{\operatorname{se}}(\hat{\beta}_j) = \sqrt{\left[({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2\right]_{jj}}
 \]</span></p>
-<p>and estimated standard error</p>
+<p>and estimated standard error is</p>
 <p><span class="math display">\[
-\hat{{\operatorname{se}}}(\hat{\beta}_j) = \sqrt{({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} S^2}_{jj}
+\hat{{\operatorname{se}}}(\hat{\beta}_j) = \sqrt{\left[({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} S^2\right]_{jj}}
 \]</span></p>
 </section><section id="proportion-of-variance-explained" class="slide level2">
 <h1>Proportion of Variance Explained</h1>
-<p>The proportion of variance explained is</p>
+<p>The proportion of variance explained is defined equivalently to the simple linear regression scneario:</p>
 <p><span class="math display">\[
 R^2 = \frac{\sum_{i=1}^n (\hat{Y}_i - \bar{Y})^2}{\sum_{i=1}^n (Y_i - \bar{Y})^2}.
 \]</span></p>
 </section><section id="normal-errors" class="slide level2">
 <h1>Normal Errors</h1>
-<p>Suppose we assume <span class="math inline">\(E_1, E_2, \ldots, E_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0,1)\)</span>. Then</p>
+<p>Suppose we assume <span class="math inline">\(E_1, E_2, \ldots, E_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0, \sigma^2)\)</span>. Then</p>
 <p><span class="math display">\[
 \ell\left({\boldsymbol{\beta}}, \sigma^2 ; {\boldsymbol{Y}}, {\boldsymbol{X}}\right) \propto -n\log(\sigma^2) -\frac{1}{\sigma^2} ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})^T ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}}).
 \]</span></p>
-<p>This implies <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> is the MLE for <span class="math inline">\({\boldsymbol{\beta}}\)</span> and <span class="math inline">\(\frac{n-p}{n} S^2\)</span> is the MLE for <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Since minimizing <span class="math inline">\(({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})^T ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})\)</span> maximizes the likelihood with respect to <span class="math inline">\({\boldsymbol{\beta}}\)</span>, this implies <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> is the MLE for <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</p>
+<p>It can also be calculated that <span class="math inline">\(\frac{n-p}{n} S^2\)</span> is the MLE for <span class="math inline">\(\sigma^2\)</span>.</p>
 </section><section id="sampling-distribution" class="slide level2">
 <h1>Sampling Distribution</h1>
-<p>When <span class="math inline">\(E_1, E_2, \ldots, E_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0,1)\)</span>, it follows that, conditional on <span class="math inline">\({\boldsymbol{X}}\)</span>:</p>
+<p>When <span class="math inline">\(E_1, E_2, \ldots, E_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0, \sigma^2)\)</span>, it follows that, conditional on <span class="math inline">\({\boldsymbol{X}}\)</span>:</p>
 <p><span class="math display">\[
 \hat{{\boldsymbol{\beta}}} \sim \mbox{MVN}_p\left({\boldsymbol{\beta}}, ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2 \right)
 \]</span></p>
@@ -627,12 +628,12 @@ S^2 \frac{n-p}{\sigma^2} &amp; \sim \chi^2_{n-p} \\
 <h1>CLT</h1>
 <p>Under the assumption that <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for <span class="math inline">\(i \not= j\)</span>, it follows that as <span class="math inline">\(n \rightarrow \infty\)</span>,</p>
 <p><span class="math display">\[
-\sqrt{n} \left(\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}\right) \stackrel{D}{\longrightarrow} \mbox{MNV}_p\left( \boldsymbol{0}, ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2 \right).
+\sqrt{n} \left(\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}\right) \stackrel{D}{\longrightarrow} \mbox{MVN}_p\left( \boldsymbol{0}, ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2 \right).
 \]</span></p>
 </section><section id="gauss-markov-theorem" class="slide level2">
 <h1>Gauss-Markov Theorem</h1>
-<p>Under the assumption that <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for <span class="math inline">\(i \not= j\)</span>, the Gauss-Markov theorem shows that among all BLUEs, best linear unbiased estimators, the least squares estimate has the smallest mean-squared error.</p>
-<p>Specifically, suppose that <span class="math inline">\(\tilde{{\boldsymbol{\beta}}}\)</span> is a linear estimator (composed by a linear operator on <span class="math inline">\({\boldsymbol{Y}}\)</span>) where <span class="math inline">\({\operatorname{E}}[\tilde{{\boldsymbol{\beta}}} | {\boldsymbol{X}}] = {\boldsymbol{\beta}}\)</span>. Then</p>
+<p>Under the assumption that <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for <span class="math inline">\(i \not= j\)</span>, the Gauss-Markov theorem shows that among all BLUEs, <strong>best linear unbiased estimators</strong>, the least squares estimate has the smallest mean-squared error.</p>
+<p>Specifically, suppose that <span class="math inline">\(\tilde{{\boldsymbol{\beta}}}\)</span> is a linear estimator (calculated from a linear operator on <span class="math inline">\({\boldsymbol{Y}}\)</span>) where <span class="math inline">\({\operatorname{E}}[\tilde{{\boldsymbol{\beta}}} | {\boldsymbol{X}}] = {\boldsymbol{\beta}}\)</span>. Then</p>
 <p><span class="math display">\[
 {\operatorname{E}}\left[ \left. ({\boldsymbol{Y}}- {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}})^T ({\boldsymbol{Y}}- {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}}) \right| {\boldsymbol{X}}\right] \leq 
 {\operatorname{E}}\left[ \left. ({\boldsymbol{Y}}- {\boldsymbol{X}}\tilde{{\boldsymbol{\beta}}})^T ({\boldsymbol{Y}}- {\boldsymbol{X}}\tilde{{\boldsymbol{\beta}}}) \right| {\boldsymbol{X}}\right].
@@ -771,7 +772,7 @@ F-statistic: 118.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h1>Visualizing Three Different Models</h1>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
-<section><section id="categorial-explanatory-variables" class="titleslide slide level1"><h1>Categorial Explanatory Variables</h1></section><section id="example-chicken-weights" class="slide level2">
+<section><section id="categorical-explanatory-variables" class="titleslide slide level1"><h1>Categorical Explanatory Variables</h1></section><section id="example-chicken-weights" class="slide level2">
 <h1>Example: Chicken Weights</h1>
 <pre class="r"><code>&gt; data(&quot;chickwts&quot;, package=&quot;datasets&quot;)
 &gt; head(chickwts)
@@ -1023,17 +1024,71 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </section></section>
 <section><section id="logistic-regression" class="titleslide slide level1"><h1>Logistic Regression</h1></section><section id="goal" class="slide level2">
 <h1>Goal</h1>
-<p>Logistic regression models Binomial or Bernoulli distributed response variable in terms of linear combinations of explanatory variables.</p>
-</section><section id="bernoulli-as-edf" class="slide level2">
-<h1>Bernoulli as EDF</h1>
+<p>Logistic regression models a Bernoulli distributed response variable in terms of linear combinations of explanatory variables.</p>
+<p>This extends least squares regression to the case where the response variable captures a “success” or “failure” type outcome.</p>
+</section><section id="bernoulli-as-efd" class="slide level2">
+<h1>Bernoulli as EFD</h1>
+<p>If <span class="math inline">\(Y \sim \mbox{Bernoulli}(p)\)</span>, then its pmf is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(y; p) &amp; = p^{y} (1-p)^{1-y} \\
+ &amp; = \exp\left\{ \log\left(\frac{p}{1-p}\right)y + \log(1-p) \right\}
+\end{aligned}
+\]</span></p>
+<p>In exponential family distribution (EFD) notation,</p>
+<p><span class="math display">\[
+\eta(p) = \log\left(\frac{p}{1-p}\right) \equiv {\operatorname{logit}}(p),
+\]</span></p>
+<p><span class="math inline">\(A(\eta(p)) = \log(1 + \exp(\eta)) = \log(1-p)\)</span>, and <span class="math inline">\(y\)</span> is the sufficient statistic.</p>
 </section><section id="model" class="slide level2">
 <h1>Model</h1>
+<p><span class="math inline">\(({\boldsymbol{X}}_1, Y_1), ({\boldsymbol{X}}_2, Y_2), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distributed so that <span class="math inline">\(Y_i | {\boldsymbol{X}}_i \sim \mbox{Bernoulli}(p_i)\)</span>, where <span class="math inline">\(\{Y_i | {\boldsymbol{X}}_i\}_{i=1}^n\)</span> are jointly independent and</p>
+<p><span class="math display">\[
+{\operatorname{logit}}\left({\operatorname{E}}[Y_i | {\boldsymbol{X}}_i]\right) = \log\left( \frac{\Pr(Y_i = 1 | {\boldsymbol{X}}_i)}{\Pr(Y_i = 0 | {\boldsymbol{X}}_i)} \right)  = {\boldsymbol{X}}_i {\boldsymbol{\beta}}.
+\]</span></p>
+<p>From this it follows that</p>
+<p><span class="math display">\[
+p_i = \frac{\exp\left({\boldsymbol{X}}_i {\boldsymbol{\beta}}\right)}{1 + \exp\left({\boldsymbol{X}}_i {\boldsymbol{\beta}}\right)}.
+\]</span></p>
 </section><section id="maximum-likelihood-estimation" class="slide level2">
 <h1>Maximum Likelihood Estimation</h1>
+<p>The <span class="math inline">\({\boldsymbol{\beta}}\)</span> are estimated from the MLE calculated from:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell\left({\boldsymbol{\beta}}; {\boldsymbol{y}}, {\boldsymbol{X}}\right) &amp; = \sum_{i=1}^n \log\left(\frac{p_i}{1-p_i}\right) y_i + \log(1-p_i) \\
+ &amp; \propto \sum_{i=1}^n ({\boldsymbol{x}}_i {\boldsymbol{\beta}}) y_i - \log\left(1 + \exp\left({\boldsymbol{x}}_i {\boldsymbol{\beta}}\right) \right)  
+\end{aligned}
+\]</span></p>
 </section><section id="iteratively-reweighted-least-squares" class="slide level2">
 <h1>Iteratively Reweighted Least Squares</h1>
+<ol type="1">
+<li><p>Initialize <span class="math inline">\({\boldsymbol{\beta}}^{(1)}\)</span> and set <span class="math inline">\(p_i^{(1)} = {\operatorname{logit}}^{-1}\left( {\boldsymbol{x}}_i {\boldsymbol{\beta}}^{(1)} \right)\)</span>.</p></li>
+<li><p>For each iteration <span class="math inline">\(t=1, 2, \ldots\)</span> set <span class="math display">\[
+z_i^{(t)} = {\operatorname{logit}}\left(p_i^{(t)}\right) + \frac{y_i - p_i^{(t)}}{p_i^{(t)}(1-p_i^{(t)})}
+\]</span> and let <span class="math inline">\({\boldsymbol{z}}^{(t)} = \left\{z_i^{(t)}\right\}_{i=1}^n\)</span>.</p></li>
+</ol>
+</section><section class="slide level2">
+
+<ol start="3" type="1">
+<li><p>Form <span class="math inline">\(n \times n\)</span> diagonal matrix <span class="math inline">\(\boldsymbol{W}^{(t)}\)</span> with <span class="math inline">\((i, i)\)</span> entry equal to <span class="math inline">\(p_i^{(t)}(1-p_i^{(t)})\)</span>.</p></li>
+<li><p>Obtain <span class="math inline">\({\boldsymbol{\beta}}^{(t+1)}\)</span> by performing the wieghted least squares regression (see <a href="#//generalized-least-squares-1">GLS</a> from earlier)</p></li>
+</ol>
+<p><span class="math display">\[
+{\boldsymbol{\beta}}^{(t+1)} = \left({\boldsymbol{X}}^T \boldsymbol{W}^{(t)} {\boldsymbol{X}}\right)^{-1} {\boldsymbol{X}}^T \boldsymbol{W}^{(t)} {\boldsymbol{z}}^{(t)}.
+\]</span></p>
+<ol start="5" type="1">
+<li>Iterate Steps 2-4 over <span class="math inline">\(t=1, 2, 3, \ldots\)</span> until convergence, setting <span class="math inline">\(\hat{{\boldsymbol{\beta}}} = {\boldsymbol{\beta}}^{(\infty)}\)</span>.</li>
+</ol>
 </section><section id="glms" class="slide level2">
 <h1>GLMs</h1>
+<p>For exponential family distribution response variables, the <strong>generalized linear model</strong> is</p>
+<p><span class="math display">\[
+\eta\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\]</span></p>
+<p>where <span class="math inline">\(\eta(\theta)\)</span> is function of the expected value <span class="math inline">\(\theta\)</span> into the natural parameter. This is called the <strong>canonical link function</strong> in the GLM setting.</p>
+<p>The <strong>iteratively reweighted least squares</strong> algorithm presented above for calculating (local) maximum likelihood estimates of <span class="math inline">\({\boldsymbol{\beta}}\)</span> has a generalization to a large class of exponential family distribution response vairables.</p>
+</section><section class="slide level2">
+
+<p>Next week we will study the summary statistics, sampling distributions, and inference procedures for GLMs that are analogous to those we covered above for least squares regression.</p>
 </section></section>
 <section><section id="glm-function-in-r" class="titleslide slide level1"><h1><code>glm()</code> Function in R</h1></section><section id="example-grad-school-admissions" class="slide level2">
 <h1>Example: Grad School Admissions</h1>
@@ -1068,12 +1123,12 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 
 <pre class="r"><code>&gt; ggplot(data=mydata) +
 +   geom_boxplot(aes(x=as.factor(admit), y=gre))</code></pre>
-<p><img src="week09_files/figure-revealjs/unnamed-chunk-56-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week09_files/figure-revealjs/unnamed-chunk-55-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; ggplot(data=mydata) +
 +   geom_boxplot(aes(x=as.factor(admit), y=gpa))</code></pre>
-<p><img src="week09_files/figure-revealjs/unnamed-chunk-57-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week09_files/figure-revealjs/unnamed-chunk-56-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="logistic-regression-in-r" class="slide level2">
 <h1>Logistic Regression in R</h1>
 <pre class="r"><code>&gt; mydata$rank &lt;- factor(mydata$rank, levels=c(1, 2, 3, 4))
@@ -1265,7 +1320,7 @@ wantsMore  1   50.501        10     29.917</code></pre>
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12.4
+Running under: macOS Sierra 10.12.3
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1275,7 +1330,7 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] broom_0.4.2     car_2.1-4       MASS_7.3-45    
+ [1] broom_0.4.1     car_2.1-4       MASS_7.3-45    
  [4] dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
  [7] tidyr_0.6.1     tibble_1.2      ggplot2_2.2.1  
 [10] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
@@ -1284,14 +1339,14 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] revealjs_0.8       reshape2_1.4.2     splines_3.3.2     
  [4] haven_1.0.0        lattice_0.20-34    colorspace_1.3-2  
- [7] htmltools_0.3.5    yaml_2.1.14        mgcv_1.8-17       
+ [7] htmltools_0.3.5    yaml_2.1.14        mgcv_1.8-16       
 [10] nloptr_1.0.4       foreign_0.8-67     withr_1.0.2       
 [13] DBI_0.5-1          modelr_0.1.0       readxl_0.1.1      
 [16] plyr_1.8.4         stringr_1.1.0      MatrixModels_0.4-1
 [19] munsell_0.4.3      gtable_0.2.0       rvest_0.3.2       
 [22] psych_1.6.12       memoise_1.0.0      evaluate_0.10     
-[25] labeling_0.3       forcats_0.2.0      SparseM_1.74      
-[28] quantreg_5.29      pbkrtest_0.4-6     parallel_3.3.2    
+[25] labeling_0.3       forcats_0.2.0      SparseM_1.76      
+[28] quantreg_5.29      pbkrtest_0.4-7     parallel_3.3.2    
 [31] Rcpp_0.12.9        scales_0.4.1       backports_1.0.5   
 [34] jsonlite_1.2       lme4_1.1-12        mnormt_1.5-5      
 [37] hms_0.3            digest_0.6.12      stringi_1.1.2     
@@ -1299,7 +1354,7 @@ loaded via a namespace (and not attached):
 [43] lazyeval_0.2.0     Matrix_1.2-8       xml2_1.1.1        
 [46] lubridate_1.6.0    assertthat_0.1     minqa_1.2.4       
 [49] rmarkdown_1.3      httr_1.2.1         R6_2.2.0          
-[52] nnet_7.3-12        nlme_3.1-131      </code></pre>
+[52] nnet_7.3-12        nlme_3.1-130      </code></pre>
 </section>
 </section></section>
     </div>
