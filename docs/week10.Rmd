@@ -1,0 +1,747 @@
+---
+title: QCB 508 -- Week 10
+author: John D. Storey
+date: Spring 2017
+output: 
+  revealjs::revealjs_presentation:
+    theme: simple
+    transition: slide
+    center: true
+    highlight: null
+    self_contained: false
+    lib_dir: libs
+    reveal_plugins: ["chalkboard", "zoom"]
+    reveal_options:
+      slideNumber: false
+      progress: true
+    includes:
+      before_body: ../customization/doc_prefix.html
+    css: ../customization/custom.css
+---
+
+```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
+library(knitr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
+})
+opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE, small.mar=TRUE)
+options(width=63)
+library(tidyverse)
+library(broom)
+theme_set(theme_bw())
+```
+
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\V}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\se}{\operatorname{se}}
+\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\newcommand{\asim}{\; \stackrel{.}{\sim}\;}
+\newcommand{\xs}{x_1, x_2, \ldots, x_n}
+\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
+\newcommand{\bb}{\boldsymbol{\beta}}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\bX}{\boldsymbol{X}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bY}{\boldsymbol{Y}}
+\newcommand{\bz}{\boldsymbol{z}}
+\newcommand{\bZ}{\boldsymbol{Z}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\bE}{\boldsymbol{E}}
+\newcommand{\bP}{\boldsymbol{P}}
+\newcommand{\bI}{\boldsymbol{I}}
+\newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bO}{\boldsymbol{0}}
+\newcommand{\bSig}{\boldsymbol{\Sigma}}
+\newcommand{\bt}{\boldsymbol{\theta}}
+\newcommand{\bT}{\boldsymbol{\Theta}}
+\newcommand{\bpi}{\boldsymbol{\pi}}
+\newcommand{\argmax}{\text{argmax}}
+\newcommand{\KL}{\text{KL}}
+
+# <img src="./images/howto.jpg"></img>
+
+# OLS Goodness of Fit
+
+## Pythagorean Theorem
+
+<div id="left">
+![PythMod](images/right_triangle_model_fits.png)
+</div>
+
+<div id="right">
+Least squares model fitting can be understood through the Pythagorean theorem: $a^2 + b^2 = c^2$.  However, here we have:
+
+$$
+\sum_{i=1}^n Y_i^2 = \sum_{i=1}^n \hat{Y}_i^2 + \sum_{i=1}^n (Y_i - \hat{Y}_i)^2
+$$
+
+where the $\hat{Y}_i$ are the result of a **linear projection** of the $Y_i$.
+</div>
+
+## OLS Normal Model
+
+In this section, let's assume that $(\bX_1, Y_1), \ldots, (\bX_n, Y_n)$ are distribution so that
+
+$$
+\begin{aligned}
+Y_i & = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
+ & = \bX_i \bb + E_i
+\end{aligned}
+$$
+
+where $\bE | \bX \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$.  Note that we haven't specified the distribution of the $\bX_i$ rv's.
+
+## Projection Matrices
+
+In the OLS framework we have:
+
+$$
+\hat{\bY} = \bX (\bX^T \bX)^{-1} \bX^T \bY.
+$$
+
+The matrix $\bP_{n \times n} = \bX (\bX^T \bX)^{-1} \bX^T$ is a projection matrix.  The vector $\bY$ is projected into the space spanned by the column space of $\bX$.
+
+----
+
+Project matrices have the following properties:
+
+- $\bP$ is symmetric
+- $\bP$ is idempotent so that $\bP \bP = \bP$
+- If $\bX$ has column rank $p$, then $\bP$ has rank $p$
+- The eigenvalues of $\bP$ are $p$ 1's and $n-p$ 0's
+- The trace (sum of diagonal entries) is $\operatorname{tr}(\bP) = p$
+- $\bI - \bP$ is also a projection matrix with rank $n-p$
+
+## Decomposition
+
+Note that $\bP (\bI - \bP) = \bP - \bP \bP = \bP - \bP = \bO$.  
+
+We have
+
+$$
+\begin{aligned}
+\| \bY\|_{2}^{2} = \bY^T \bY & = (\bP \bY + (\bI - \bP) \bY)^T (\bP \bY + (\bI - \bP) \bY) \\
+ & = (\bP \bY)^T (\bP \bY) + ((\bI - \bP) \bY)^T ((\bI - \bP) \bY) \\
+ & = \| \bP \bY\|_{2}^{2} + \| (\bI - \bP) \bY \|_{2}^{2}
+\end{aligned}
+$$
+
+where the cross terms disappear because $\bP (\bI - \bP) = \bO$.
+
+----
+
+Note:  The $\ell_p$ norm of an $n$-vector $\boldsymbol{w}$ is defined as
+
+$$
+\| \boldsymbol{w} \|_p = \left(\sum_{i=1}^n |w_i|^p\right)^{1/p}.
+$$
+
+Above we calculated 
+
+$$
+\| \boldsymbol{w} \|_2^2 = \sum_{i=1}^n w_i^2.
+$$
+
+## Distribution of Projection
+
+Suppose that $Y_1, Y_2, \ldots, Y_n \iid \mbox{Normal}(0,\sigma^2)$. This can also be written as $\bY \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$. It follows that 
+
+$$
+\bP \bY \sim \mbox{MVN}_{n}(\bO, \sigma^2 \bP \bI \bP^T).
+$$
+
+where $\bP \bI \bP^T = \bP \bP^T = \bP \bP = \bP$.
+
+Also, $(\bP \bY)^T (\bP \bY) = \bY^T \bP^T \bP \bY = \bY^T \bP \bY$, a **quadratic form**.  Given the eigenvalues of $\bP$, $\bY^T \bP \bY$ is equivalent in distribution to $p$ squared iid Normal(0,1) rv's, so 
+
+$$
+\frac{\bY^T \bP \bY}{\sigma^2} \sim \chi^2_{p}.
+$$
+
+## Distribution of Residuals
+
+If $\bP \bY = \hat{\bY}$ are the fitted OLS values, then $(\bI-\bP) \bY = \bY - \hat{\bY}$ are the residuals.
+
+It follows by the same argument as above that
+
+$$
+\frac{\bY^T (\bI-\bP) \bY}{\sigma^2} \sim \chi^2_{n-p}.
+$$
+
+It's also straightforward to show that $(\bI-\bP)\bY \sim \mbox{MVN}_{n}(\bO, \sigma^2(\bI-\bP))$ and $\Cov(\bP\bY, (\bI-\bP)\bY) = \bO$. 
+
+
+## Degrees of Freedom
+
+The degrees of freedom, $p$, of a linear projection model fit is equal to
+
+- The number of linearly dependent columns of $\bX$
+- The number of nonzero eigenvalues of $\bP$ (where nonzero eigenvalues are equal to 1)
+- The trace of the projection matrix, $\operatorname{tr}(\bP)$.
+
+The reason why we divide estimates of variance by $n-p$ is because this is the number of effective independent sources of variation remaining after the model is fit by projecting the $n$ observations into a $p$ dimensional linear space.
+
+## Submodels
+
+Consider the OLS model $\bY = \bX \bb + \bE$ where there are $p$ columns of $\bX$ and $\bb$ is a $p$-vector.
+
+Let $\bX_0$ be a subset of $p_0$ columns of $\bX$ and let $\bX_1$ be a subset of $p_1$ columns, where $1 \leq p_0 < p_1 \leq p$.  Also, assume that the columns of $\bX_0$ are a subset of $\bX_1$.
+
+We can form $\hat{\bY}_0 = \bP_0 \bY$ where $\bP_0$ is the projection matrix built from $\bX_0$.  We can analogously form $\hat{\bY}_1 = \bP_1 \bY$.
+
+
+## Hypothesis Testing
+
+Without loss of generality, suppose that $\bb_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T$ and $\bb_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T$.
+
+How do we compare these models, specifically to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$?
+
+The basic idea to perform this test is to compare the goodness of fits of each model via a pivotal statistic.  We will discuss the generalized LRT and ANOVA approaches.
+
+## Generalized LRT
+
+Under the OLS Normal model, it follows that $\hat{\bb}_0 = (\bX^T_0 \bX_0)^{-1} \bX_0^T \bY$ is the MLE under the null hypothesis and $\hat{\bb}_1 = (\bX^T_1 \bX_1)^{-1} \bX_1^T \bY$ is the unconstrained MLE.  Also, the respective MLEs of $\sigma^2$ are
+
+$$
+\hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2}{n}
+$$
+
+$$
+\hat{\sigma}^2_1 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2}{n}
+$$
+
+where $\hat{\bY}_{0} = \bX_0 \hat{\bb}_0$ and $\hat{\bY}_{1} = \bX_1 \hat{\bb}_1$.
+
+----
+
+The generalized LRT statistic is
+
+$$
+\lambda(\bX, \bY) = \frac{L\left(\hat{\bb}_1, \hat{\sigma}^2_1; \bX, \bY \right)}{L\left(\hat{\bb}_0, \hat{\sigma}^2_0; \bX, \bY \right)}
+$$
+
+where $2\log\lambda(\bX, \bY)$ has a $\chi^2_{p_1 - p_0}$ null distribution.
+
+## Nested Projections
+
+We can apply the Pythagorean theorem we saw earlier to linear subspaces to get:
+
+$$
+\begin{aligned}
+\| \bY \|^2_2 & = \| (\bI - \bP_1) \bY \|_{2}^{2} + \| \bP_1 \bY\|_{2}^{2} \\
+& = \| (\bI - \bP_1) \bY \|_{2}^{2} + \| (\bP_1 - \bP_0) \bY\|_{2}^{2} + \| \bP_0 \bY\|_{2}^{2}
+\end{aligned}
+$$
+
+We can also use the Pythagorean theorem to decompose the residuals from the smaller projection $\bP_0$:
+
+$$
+\| (\bI - \bP_0) \bY \|^2_2 = \| (\bI - \bP_1) \bY \|^2_2 + \| (\bP_1 - \bP_0) \bY \|^2_2
+$$
+
+## *F* Statistic
+
+The $F$ statistic compares the improvement of goodness in fit of the larger model to that of the smaller model in terms of sums of squared residuals, and it scales this improvement by an estimate of $\sigma^2$:
+
+$$
+\begin{aligned}
+F & = \frac{\left[\| (\bI - \bP_0) \bY \|^2_2 - \| (\bI - \bP_1) \bY \|^2_2\right]/(p_1 - p_0)}{\| (\bI - \bP_1) \bY \|^2_2/(n-p_1)} \\
+& = \frac{\left[\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2 - \sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 \right]/(p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)} \\
+\end{aligned}
+$$
+
+----
+
+Since $\| (\bI - \bP_0) \bY \|^2_2 - \| (\bI - \bP_1) \bY \|^2_2 = \| (\bP_1 - \bP_0) \bY \|^2_2$, we can equivalently write the $F$ statistic as:
+
+$$
+\begin{aligned}
+F & = \frac{\| (\bP_1 - \bP_0) \bY \|^2_2 / (p_1 - p_0)}{\| (\bI - \bP_1) \bY \|^2_2/(n-p_1)} \\
+& = \frac{\sum_{i=1}^n (\hat{Y}_{1,i} - \hat{Y}_{0,i})^2 / (p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)}
+\end{aligned} 
+$$
+
+## *F* Distribution
+
+Suppose we have independent random variables $V \sim \chi^2_a$ and $W \sim \chi^2_b$.  It follows that 
+
+$$
+\frac{V/a}{W/b} \sim F_{a,b}
+$$
+
+where $F_{a,b}$ is the $F$ distribution with $(a, b)$ degrees of freedom.
+
+----
+
+By arguments similar to those given above, we have
+
+$$
+\frac{\| (\bP_1 - \bP_0) \bY \|^2_2}{\sigma^2} \sim \chi^2_{p_1 - p_0}
+$$
+
+$$
+\frac{\| (\bI - \bP_1) \bY \|^2_2}{\sigma^2} \sim \chi^2_{n-p_1}
+$$
+
+and these two rv's are independent.
+
+## *F* Test
+
+Suppose that the OLS model holds where $\bE | \bX \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$.
+
+In order to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$, we can form the $F$ statistic as given above, which has null distribution $F_{p_1 - p_0, n - p_1}$.  The p-value is calculated as $\Pr(F \geq F^*)$ where $F$ is the observed $F$ statistic and $F^* \sim F_{p_1 - p_0, n - p_1}$.
+
+If the above assumption on the distribution of $\bE | \bX$ only approximately holds, then the $F$ test p-value is also an approximation.
+
+## Example: Davis Data
+
+```{r, message=FALSE}
+library("car")
+data("Davis", package="car")
+```
+
+```{r}
+htwt <- tbl_df(Davis)
+htwt[12,c(2,3)] <- htwt[12,c(3,2)]
+head(htwt)
+```
+
+## Comparing Linear Models in R
+
+Example: Davis Data
+
+Suppose we are considering the three following models:
+
+```{r}
+f1 <- lm(weight ~ height, data=htwt)
+f2 <- lm(weight ~ height + sex, data=htwt)
+f3 <- lm(weight ~ height + sex + height:sex, data=htwt)
+```
+
+How do we determine if the additional terms in models `f2` and `f3` are needed?
+
+## ANOVA (Version 2)
+
+A generalization of ANOVA exists that allows us to compare two nested models, quantifying their differences in terms of goodness of fit and performing a hypothesis test of whether this difference is statistically significant.  
+
+A model is *nested* within another model if their difference is simply the absence of certain terms in the smaller model.  
+
+The null hypothesis is that the additional terms have coefficients equal to zero, and the alternative hypothesis is that at least one coefficient is nonzero.
+
+Both versions of ANOVA can be described in a single, elegant mathematical framework.
+
+## Comparing Two Models <br> with `anova()`
+
+This provides a comparison of the improvement in fit from model `f2` compared to model `f1`:
+```{r}
+anova(f1, f2)
+```
+
+## When There's a Single Variable Difference  
+
+Compare above `anova(f1, f2)` p-value to that for the `sex` term from the `f2` model:
+```{r}
+library(broom)
+tidy(f2)
+```
+
+## Calculating the F-statistic
+
+```{r}
+anova(f1, f2)
+```
+
+How the F-statistic is calculated:
+```{r}
+n <- nrow(htwt)
+ss1 <- (n-1)*var(f1$residuals)
+ss1
+ss2 <- (n-1)*var(f2$residuals)
+ss2
+((ss1 - ss2)/anova(f1, f2)$Df[2])/(ss2/f2$df.residual)
+```
+
+## Calculating the Generalized LRT
+
+```{r}
+anova(f1, f2, test="LRT")
+```
+
+```{r, message=FALSE}
+library(lmtest)
+lrtest(f1, f2)
+```
+
+----
+
+These tests produce slightly different answers because `anova()` adjusts for degrees of freedom when estimating the variance, whereas `lrtest()` is the strict generalized LRT. See [here](https://stats.stackexchange.com/questions/155474/r-why-does-lrtest-not-match-anovatest-lrt).
+
+## ANOVA on More Distant Models
+
+We can compare models with multiple differences in terms:
+
+```{r}
+anova(f1, f3)
+```
+
+## Compare Multiple Models at Once
+
+We can compare multiple models at once:
+
+```{r}
+anova(f1, f2, f3)
+```
+
+# Generalized Linear Models
+
+## Definition
+
+The generalized linear model (GLM) builds from OLS and GLS to allow for the case where $Y | \bX$ is distributed according to an exponential family distribution.  The estimated model is
+
+$$
+g\left(\E[Y | \bX]\right) = \bX \bb
+$$
+
+where $g(\cdot)$ is called the **link function**.  This model is typically fit by numerical methods to calculate the maximum likelihood estimate of $\bb$.
+
+## Exponential Family Distributions
+
+Recall that if $Y$ follows an EFD then it has pdf of the form
+
+$$f(y ; \boldsymbol{\theta}) =
+h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) - A(\boldsymbol{\eta}) \right\}
+$$
+
+where $\boldsymbol{\theta}$ is a vector of parameters, $\{T_k(y)\}$ are sufficient statistics, $A(\boldsymbol{\eta})$ is the cumulant generating function.
+
+----
+
+The functions $\eta_k(\boldsymbol{\theta})$ for $k=1, \ldots, d$ map the usual parameters $\bt$ (often moments of the rv $Y$) to the *natural parameters* or *canonical parameters*.
+
+$\{T_k(y)\}$ are sufficient statistics for $\{\eta_k\}$ due to the factorization theorem.
+
+$A(\boldsymbol{\eta})$ is sometimes called the *log normalizer* because
+
+$$A(\boldsymbol{\eta}) = \log \int h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) \right\}.$$
+
+## Natural Single Parameter EFD
+
+A natural single parameter EFD simplifies to the scenario where $d=1$ and $T(y) = y$
+
+$$f(y ; \eta) =
+h(y) \exp \left\{ \eta(\theta) y - A(\eta(\theta)) \right\}
+$$
+
+where without loss of generality we can write $\E[Y] = \theta$.
+
+## Dispersion EFDs
+
+The family of distributions for which GLMs are most typically developed are dispersion EFDs.  An example of a dispersion EFD that extends the natural single parameter EFD is
+
+$$f(y ; \eta) =
+h(y, \phi) \exp \left\{ \frac{\eta(\theta) y - A(\eta(\theta))}{\phi} \right\}
+$$
+
+where $\phi$ is the dispersion parameter.
+
+## Example: Normal
+
+Let $Y \sim \mbox{Normal}(\mu, \sigma^2)$. Then:
+
+$$
+\theta = \mu, \eta(\mu) = \mu
+$$
+
+$$
+\phi = \sigma^2
+$$
+
+$$
+A(\mu) = \frac{\mu^2}{2}
+$$
+
+$$
+h(y, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2}\frac{y^2}{\sigma^2}}
+$$
+
+## EFD for GLMs
+
+There has been a very broad development of GLMs and extensions.  A common setting for introducting GLMs is the dispersion EFD with a general link function $g(\cdot)$.
+
+See the classic text *Generalized Linear Models*, by McCullagh and Nelder, for such a development.
+
+## Components of a GLM
+
+1. *Random*: The particular exponential family distribution.
+$$
+Y \sim f(y ; \eta, \phi)
+$$
+
+2. *Systematic*:  The determination of each $\eta_i$ from $\bX_i$ and $\bb$.
+$$
+\eta_i = \bX_i \bb
+$$
+
+3. *Parametric Link*: The connection between $E[Y_i|\bX_i]$ and $\bX_i \bb$.
+$$
+g(E[Y_i|\bX_i]) = \bX_i \bb
+$$
+
+## Link Functions
+
+Even though the link function $g(\cdot)$ can be considered in a fairly general framework, the **canonical link function** $\eta(\cdot)$ is often utilized.  
+
+The canonical link function is the function that maps the expected value into the natural paramater.
+
+In this case, $Y | \bX$ is distributed according to an exponential family distribution with
+
+$$
+\eta \left(\E[Y | \bX]\right) = \bX \bb.
+$$
+
+## Calculating MLEs
+
+Given the model $g\left(\E[Y | \bX]\right) = \bX \bb$, the EFD should be fully parameterized.  The Newton-Raphson method or Fisher's scoring method can be utilized to find the MLE of $\bb$.  
+
+----
+
+### Newton-Raphson 
+
+1.  Initialize $\bb^{(0)}$. For $t = 1, 2, \ldots$
+
+2.  Calculate the score $s(\bb^{(t)}) = \nabla \ell(\bb; \bX, \bY) \mid_{\bb = \bb^{(t)}}$ and observed Fisher information $$H(\bb^{(t)}) = - \nabla \nabla^T \ell(\bb; \bX, \bY) \mid_{\bb = \bb^{(t)}}$$.  Note that the observed Fisher information is also the negative Hessian matrix.
+
+3.  Update $\bb^{(t+1)} = \bb^{(t)} + H(\bb^{(t)})^{-1} s(\bb^{(t)})$.
+
+4.  Iterate until convergence, and set $\hat{\bb} = \bb^{(\infty)}$.
+
+----
+
+### Fisher's scoring
+
+1.  Initialize $\bb^{(0)}$. For $t = 1, 2, \ldots$
+
+2.  Calculate the score $s(\bb^{(t)}) = \nabla \ell(\bb; \bX, \bY) \mid_{\bb = \bb^{(t)}}$ and expected Fisher information $$I(\bb^{(t)}) = - \E\left[\nabla \nabla^T \ell(\bb; \bX, \bY) \mid_{\bb = \bb^{(t)}} \right].$$
+
+3.  Update $\bb^{(t+1)} = \bb^{(t)} + I(\bb^{(t)})^{-1} s(\bb^{(t)})$.
+
+4.  Iterate until convergence, and set $\hat{\bb} = \bb^{(\infty)}$.
+
+----
+
+When the canonical link function is used, the Newton-Raphson algorithm and Fisher's scoring algorithm are equivalent.
+
+Exercise:  Prove this.
+
+## Iteratively Reweighted Least Squares
+
+For the canonical link, Fisher's scoring method can be written as an iteratively reweighted least squares algorithm, as shown earlier for logistic regression.  Note that the Fisher information is
+
+$$
+I(\bb^{(t)}) = \bX^T \bW \bX
+$$
+
+where $\bW$ is an $n \times n$ diagonal matrix with $(i, i)$ entry equal to $\V(Y_i | \bX; \bb^{(t)})$.
+
+----
+
+The score function is
+
+$$
+s(\bb^{(t)}) = \bX^T \left( \bY - \bX \bb^{(t)} \right)
+$$
+
+and the current coefficient value $\bb^{(t)}$ can be written as
+
+$$
+\bb^{(t)} = (\bX^T \bW \bX)^{-1} \bX^T \bW \bX \bb^{(t)}.
+$$
+
+----
+
+Putting this together we get
+
+$$
+\bb^{(t)} + I(\bb^{(t)})^{-1} s(\bb^{(t)}) = (\bX^T \bW \bX)^{-1} \bX^T \bW \bz^{(t)}
+$$
+
+where
+
+$$
+\bz^{(t)} = \bX \bb^{(t)} + \bW^{-1} \left( \bY - \bX \bb^{(t)} \right).
+$$
+
+This is a generalization of the iteratively reweighted least squares algorithm we showed earlier for logistic regression.
+
+## Estimating Dispersion
+
+For the simple dispersion model above, it is typically straightforward to calculate the MLE $\hat{\phi}$ once $\hat{\bb}$ has been calculated.
+
+## CLT Applied to the MLE
+
+Given that $\hat{\bb}$ is a maximum likelihood estimate, we have the following CLT result on its distribution as $n \rightarrow \infty$:
+
+$$
+\sqrt{n} (\hat{\bb} - \bb) \stackrel{D}{\longrightarrow} \mbox{MVN}_{p}(\bO, \phi (\bX^T \bW \bX)^{-1})
+$$
+
+## Approximately Pivotal Statistics
+
+The previous CLT gives us the following two approximations for pivtoal statistics.  The first statistic facilitates getting overall measures of uncertainty on the estimate $\hat{\bb}$.
+
+$$
+\hat{\phi}^{-1} (\hat{\bb} - \bb)^T (\bX^T \hat{\bW} \bX) (\hat{\bb} - \bb) \asim \chi^2_1
+$$
+
+This second pivotal statistic allows for performing a Wald test or forming a confidence interval on each coefficient, $\beta_j$, for $j=1, \ldots, p$.
+
+$$
+\frac{\hat{\beta}_j - \beta_j}{\sqrt{\hat{\phi} [(\bX^T \hat{\bW} \bX)^{-1}]_{jj}}} \asim \mbox{Normal}(0,1)
+$$
+
+## Deviance
+
+Let $\hat{\boldsymbol{\eta}}$ be the estimated natural parameters from a GLM.  For example, $\hat{\boldsymbol{\eta}} = \bX \hat{\bb}$ when the canonical link function is used.
+
+Let $\hat{\boldsymbol{\eta}}_n$ be the **saturated model** wwhere $Y_i$ is directly used to estimate $\eta_i$ without model constraints.  For example, in the Bernoulli logistic regression model $\hat{\boldsymbol{\eta}}_n = \bY$, the observed outcomes.
+
+The **deviance** for the model is defined to be
+
+$$
+D\left(\hat{\boldsymbol{\eta}}\right) = 2 \ell(\hat{\boldsymbol{\eta}}_n; \bX, \bY) - 2 \ell(\hat{\boldsymbol{\eta}}; \bX, \bY)
+$$
+
+## Generalized LRT
+
+Let $\bX_0$ be a subset of $p_0$ columns of $\bX$ and let $\bX_1$ be a subset of $p_1$ columns, where $1 \leq p_0 < p_1 \leq p$.  Also, assume that the columns of $\bX_0$ are a subset of $\bX_1$.
+
+Without loss of generality, suppose that $\bb_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T$ and $\bb_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T$.
+
+Suppose we wish to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$
+
+----
+
+We can form $\hat{\boldsymbol{\eta}}_0 = \bX \hat{\bb}_0$ from the GLM model $g\left(\E[Y | \bX_0]\right) = \bX_0 \bb_0$.  We can analogously form $\hat{\boldsymbol{\eta}}_1 = \bX \hat{\bb}_1$ from the GLM model $g\left(\E[Y | \bX_1]\right) = \bX_1 \bb_1$.
+
+The $2\log$ generalized LRT can then be formed from the two deviance statistics
+
+$$
+2 \log \lambda(\bX, \bY) = 2 \log \frac{L(\hat{\boldsymbol{\eta}}_1; \bX, \bY)}{L(\hat{\boldsymbol{\eta}}_0; \bX, \bY)} = D\left(\hat{\boldsymbol{\eta}}_0\right) - D\left(\hat{\boldsymbol{\eta}}_1\right)
+$$
+
+where the null distribution is $\chi^2_{p_1-p_0}$.
+
+## Example: Grad School Admissions
+
+Let's revisit a logistic regression example now that we know how the various statistics are calculated.
+
+```{r ucladata, cache=TRUE}
+mydata <- 
+  read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
+dim(mydata)
+head(mydata)
+```
+----
+
+Fit the model with basic output.  Note the argument `family = "binomial"`.
+
+```{r}
+mydata$rank <- factor(mydata$rank, levels=c(1, 2, 3, 4))
+myfit <- glm(admit ~ gre + gpa + rank, 
+             data = mydata, family = "binomial")
+myfit
+```
+
+----
+
+This shows the fitted coefficient values, which is on the link function scale -- logit aka log odds here.  Also, a Wald test is performed for each coefficient.
+
+```{r}
+summary(myfit)
+```
+
+----
+
+Here we perform a generalized LRT on each variable.  Note the `rank` variable is now tested as a single factor variable as opposed to each dummy variable.
+
+```{r}
+anova(myfit, test="LRT")
+```
+
+----
+
+```{r}
+mydata <- data.frame(mydata, probs = myfit$fitted.values)
+ggplot(mydata) + geom_point(aes(x=gpa, y=probs, color=rank)) +
+  geom_jitter(aes(x=gpa, y=admit), width=0, height=0.01, alpha=0.3)
+```
+
+----
+
+```{r}
+ggplot(mydata) + geom_point(aes(x=gre, y=probs, color=rank)) +
+  geom_jitter(aes(x=gre, y=admit), width=0, height=0.01, alpha=0.3)
+```
+
+----
+
+```{r}
+ggplot(mydata) + geom_boxplot(aes(x=rank, y=probs)) +
+  geom_jitter(aes(x=rank, y=probs), width=0.1, height=0.01, alpha=0.3)
+```
+
+## `glm()` Function
+
+The `glm()` function has many different options available to the user.
+
+```
+glm(formula, family = gaussian, data, weights, subset,
+    na.action, start = NULL, etastart, mustart, offset,
+    control = list(...), model = TRUE, method = "glm.fit",
+    x = FALSE, y = TRUE, contrasts = NULL, ...)
+```
+
+To see the different link functions available, type:
+
+```
+help(family)
+```
+
+# Nonparametric Regression
+
+# Generalized Additive Models
+
+```{r, echo=FALSE, eval=FALSE}
+## Definition
+
+$Y | \bX$ is distributed according to an exponential family distribution.  The models, which are called **generalized additive models** (GAMs), will be of the form
+
+$$
+\eta\left(\E[Y | \bX]\right) = \sum_{j=1}^p \sum_{k=1}^d h_k(X_{j})
+$$
+
+where $\eta$ is the canonical link function and the $h_k(\cdot)$ functions are very flexible.
+```
+
+# Bootstrap for Statistical Models
+
+# Extras
+
+## Source
+
+[License](https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md)
+
+[Source Code](https://github.com/jdstorey/asdslectures/)
+
+## Session Information
+
+<section style="font-size: 0.75em;">
+```{r}
+sessionInfo()
+```
+</section>
+
+```{r converttonotes, include=FALSE, cache=FALSE}
+source("../customization/make_notes.R")
+```

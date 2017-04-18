@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 10</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="../customization/custom.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 10</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="ols-goodness-of-fit" class="titleslide slide level1"><h1>OLS Goodness of Fit</h1></section><section id="pythagorean-theorem" class="slide level2">
+<h1>Pythagorean Theorem</h1>
+<div id="left">
+<p><img src="images/right_triangle_model_fits.png" alt="PythMod" /></p>
+</div>
+<div id="right">
+<p>Least squares model fitting can be understood through the Pythagorean theorem: <span class="math inline">\(a^2 + b^2 = c^2\)</span>. However, here we have:</p>
+<p><span class="math display">\[
+\sum_{i=1}^n Y_i^2 = \sum_{i=1}^n \hat{Y}_i^2 + \sum_{i=1}^n (Y_i - \hat{Y}_i)^2
+\]</span></p>
+<p>where the <span class="math inline">\(\hat{Y}_i\)</span> are the result of a <strong>linear projection</strong> of the <span class="math inline">\(Y_i\)</span>.</p>
+</div>
+</section><section id="ols-normal-model" class="slide level2">
+<h1>OLS Normal Model</h1>
+<p>In this section, let’s assume that <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distribution so that</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
+ &amp; = {\boldsymbol{X}}_i {\boldsymbol{\beta}}+ E_i
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>. Note that we haven’t specified the distribution of the <span class="math inline">\({\boldsymbol{X}}_i\)</span> rv’s.</p>
+</section><section id="projection-matrices" class="slide level2">
+<h1>Projection Matrices</h1>
+<p>In the OLS framework we have:</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{Y}}} = {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{Y}}.
+\]</span></p>
+<p>The matrix <span class="math inline">\({\boldsymbol{P}}_{n \times n} = {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T\)</span> is a projection matrix. The vector <span class="math inline">\({\boldsymbol{Y}}\)</span> is projected into the space spanned by the column space of <span class="math inline">\({\boldsymbol{X}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Project matrices have the following properties:</p>
+<ul>
+<li><span class="math inline">\({\boldsymbol{P}}\)</span> is symmetric</li>
+<li><span class="math inline">\({\boldsymbol{P}}\)</span> is idempotent so that <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}\)</span></li>
+<li>If <span class="math inline">\({\boldsymbol{X}}\)</span> has column rank <span class="math inline">\(p\)</span>, then <span class="math inline">\({\boldsymbol{P}}\)</span> has rank <span class="math inline">\(p\)</span></li>
+<li>The eigenvalues of <span class="math inline">\({\boldsymbol{P}}\)</span> are <span class="math inline">\(p\)</span> 1’s and <span class="math inline">\(n-p\)</span> 0’s</li>
+<li>The trace (sum of diagonal entries) is <span class="math inline">\(\operatorname{tr}({\boldsymbol{P}}) = p\)</span></li>
+<li><span class="math inline">\({\boldsymbol{I}}- {\boldsymbol{P}}\)</span> is also a projection matrix with rank <span class="math inline">\(n-p\)</span></li>
+</ul>
+</section><section id="decomposition" class="slide level2">
+<h1>Decomposition</h1>
+<p>Note that <span class="math inline">\({\boldsymbol{P}}({\boldsymbol{I}}- {\boldsymbol{P}}) = {\boldsymbol{P}}- {\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}- {\boldsymbol{P}}= {\boldsymbol{0}}\)</span>.</p>
+<p>We have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\| {\boldsymbol{Y}}\|_{2}^{2} = {\boldsymbol{Y}}^T {\boldsymbol{Y}}&amp; = ({\boldsymbol{P}}{\boldsymbol{Y}}+ ({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}})^T ({\boldsymbol{P}}{\boldsymbol{Y}}+ ({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}}) \\
+ &amp; = ({\boldsymbol{P}}{\boldsymbol{Y}})^T ({\boldsymbol{P}}{\boldsymbol{Y}}) + (({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}})^T (({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}}) \\
+ &amp; = \| {\boldsymbol{P}}{\boldsymbol{Y}}\|_{2}^{2} + \| ({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}}\|_{2}^{2}
+\end{aligned}
+\]</span></p>
+<p>where the cross terms disappear because <span class="math inline">\({\boldsymbol{P}}({\boldsymbol{I}}- {\boldsymbol{P}}) = {\boldsymbol{0}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Note: The <span class="math inline">\(\ell_p\)</span> norm of an <span class="math inline">\(n\)</span>-vector <span class="math inline">\(\boldsymbol{w}\)</span> is defined as</p>
+<p><span class="math display">\[
+\| \boldsymbol{w} \|_p = \left(\sum_{i=1}^n |w_i|^p\right)^{1/p}.
+\]</span></p>
+<p>Above we calculated</p>
+<p><span class="math display">\[
+\| \boldsymbol{w} \|_2^2 = \sum_{i=1}^n w_i^2.
+\]</span></p>
+</section><section id="distribution-of-projection" class="slide level2">
+<h1>Distribution of Projection</h1>
+<p>Suppose that <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0,\sigma^2)\)</span>. This can also be written as <span class="math inline">\({\boldsymbol{Y}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>. It follows that</p>
+<p><span class="math display">\[
+{\boldsymbol{P}}{\boldsymbol{Y}}\sim \mbox{MVN}_{n}({\boldsymbol{0}}, \sigma^2 {\boldsymbol{P}}{\boldsymbol{I}}{\boldsymbol{P}}^T).
+\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{I}}{\boldsymbol{P}}^T = {\boldsymbol{P}}{\boldsymbol{P}}^T = {\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}\)</span>.</p>
+<p>Also, <span class="math inline">\(({\boldsymbol{P}}{\boldsymbol{Y}})^T ({\boldsymbol{P}}{\boldsymbol{Y}}) = {\boldsymbol{Y}}^T {\boldsymbol{P}}^T {\boldsymbol{P}}{\boldsymbol{Y}}= {\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}\)</span>, a <strong>quadratic form</strong>. Given the eigenvalues of <span class="math inline">\({\boldsymbol{P}}\)</span>, <span class="math inline">\({\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}\)</span> is equivalent in distribution to <span class="math inline">\(p\)</span> squared iid Normal(0,1) rv’s, so</p>
+<p><span class="math display">\[
+\frac{{\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}}{\sigma^2} \sim \chi^2_{p}.
+\]</span></p>
+</section><section id="distribution-of-residuals" class="slide level2">
+<h1>Distribution of Residuals</h1>
+<p>If <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{Y}}= \hat{{\boldsymbol{Y}}}\)</span> are the fitted OLS values, then <span class="math inline">\(({\boldsymbol{I}}-{\boldsymbol{P}}) {\boldsymbol{Y}}= {\boldsymbol{Y}}- \hat{{\boldsymbol{Y}}}\)</span> are the residuals.</p>
+<p>It follows by the same argument as above that</p>
+<p><span class="math display">\[
+\frac{{\boldsymbol{Y}}^T ({\boldsymbol{I}}-{\boldsymbol{P}}) {\boldsymbol{Y}}}{\sigma^2} \sim \chi^2_{n-p}.
+\]</span></p>
+<p>It’s also straightforward to show that <span class="math inline">\(({\boldsymbol{I}}-{\boldsymbol{P}}){\boldsymbol{Y}}\sim \mbox{MVN}_{n}({\boldsymbol{0}}, \sigma^2({\boldsymbol{I}}-{\boldsymbol{P}}))\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{P}}{\boldsymbol{Y}}, ({\boldsymbol{I}}-{\boldsymbol{P}}){\boldsymbol{Y}}) = {\boldsymbol{0}}\)</span>.</p>
+</section><section id="degrees-of-freedom" class="slide level2">
+<h1>Degrees of Freedom</h1>
+<p>The degrees of freedom, <span class="math inline">\(p\)</span>, of a linear projection model fit is equal to</p>
+<ul>
+<li>The number of linearly dependent columns of <span class="math inline">\({\boldsymbol{X}}\)</span></li>
+<li>The number of nonzero eigenvalues of <span class="math inline">\({\boldsymbol{P}}\)</span> (where nonzero eigenvalues are equal to 1)</li>
+<li>The trace of the projection matrix, <span class="math inline">\(\operatorname{tr}({\boldsymbol{P}})\)</span>.</li>
+</ul>
+<p>The reason why we divide estimates of variance by <span class="math inline">\(n-p\)</span> is because this is the number of effective independent sources of variation remaining after the model is fit by projecting the <span class="math inline">\(n\)</span> observations into a <span class="math inline">\(p\)</span> dimensional linear space.</p>
+</section><section id="submodels" class="slide level2">
+<h1>Submodels</h1>
+<p>Consider the OLS model <span class="math inline">\({\boldsymbol{Y}}= {\boldsymbol{X}}{\boldsymbol{\beta}}+ {\boldsymbol{E}}\)</span> where there are <span class="math inline">\(p\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{\beta}}\)</span> is a <span class="math inline">\(p\)</span>-vector.</p>
+<p>Let <span class="math inline">\({\boldsymbol{X}}_0\)</span> be a subset of <span class="math inline">\(p_0\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and let <span class="math inline">\({\boldsymbol{X}}_1\)</span> be a subset of <span class="math inline">\(p_1\)</span> columns, where <span class="math inline">\(1 \leq p_0 &lt; p_1 \leq p\)</span>. Also, assume that the columns of <span class="math inline">\({\boldsymbol{X}}_0\)</span> are a subset of <span class="math inline">\({\boldsymbol{X}}_1\)</span>.</p>
+<p>We can form <span class="math inline">\(\hat{{\boldsymbol{Y}}}_0 = {\boldsymbol{P}}_0 {\boldsymbol{Y}}\)</span> where <span class="math inline">\({\boldsymbol{P}}_0\)</span> is the projection matrix built from <span class="math inline">\({\boldsymbol{X}}_0\)</span>. We can analogously form <span class="math inline">\(\hat{{\boldsymbol{Y}}}_1 = {\boldsymbol{P}}_1 {\boldsymbol{Y}}\)</span>.</p>
+</section><section id="hypothesis-testing" class="slide level2">
+<h1>Hypothesis Testing</h1>
+<p>Without loss of generality, suppose that <span class="math inline">\({\boldsymbol{\beta}}_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T\)</span> and <span class="math inline">\({\boldsymbol{\beta}}_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T\)</span>.</p>
+<p>How do we compare these models, specifically to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>?</p>
+<p>The basic idea to perform this test is to compare the goodness of fits of each model via a pivotal statistic. We will discuss the generalized LRT and ANOVA approaches.</p>
+</section><section id="generalized-lrt" class="slide level2">
+<h1>Generalized LRT</h1>
+<p>Under the OLS Normal model, it follows that <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_0 = ({\boldsymbol{X}}^T_0 {\boldsymbol{X}}_0)^{-1} {\boldsymbol{X}}_0^T {\boldsymbol{Y}}\)</span> is the MLE under the null hypothesis and <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_1 = ({\boldsymbol{X}}^T_1 {\boldsymbol{X}}_1)^{-1} {\boldsymbol{X}}_1^T {\boldsymbol{Y}}\)</span> is the unconstrained MLE. Also, the respective MLEs of <span class="math inline">\(\sigma^2\)</span> are</p>
+<p><span class="math display">\[
+\hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2}{n}
+\]</span></p>
+<p><span class="math display">\[
+\hat{\sigma}^2_1 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2}{n}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{{\boldsymbol{Y}}}_{0} = {\boldsymbol{X}}_0 \hat{{\boldsymbol{\beta}}}_0\)</span> and <span class="math inline">\(\hat{{\boldsymbol{Y}}}_{1} = {\boldsymbol{X}}_1 \hat{{\boldsymbol{\beta}}}_1\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The generalized LRT statistic is</p>
+<p><span class="math display">\[
+\lambda({\boldsymbol{X}}, {\boldsymbol{Y}}) = \frac{L\left(\hat{{\boldsymbol{\beta}}}_1, \hat{\sigma}^2_1; {\boldsymbol{X}}, {\boldsymbol{Y}}\right)}{L\left(\hat{{\boldsymbol{\beta}}}_0, \hat{\sigma}^2_0; {\boldsymbol{X}}, {\boldsymbol{Y}}\right)}
+\]</span></p>
+<p>where <span class="math inline">\(2\log\lambda({\boldsymbol{X}}, {\boldsymbol{Y}})\)</span> has a <span class="math inline">\(\chi^2_{p_1 - p_0}\)</span> null distribution.</p>
+</section><section id="nested-projections" class="slide level2">
+<h1>Nested Projections</h1>
+<p>We can apply the Pythagorean theorem we saw earlier to linear subspaces to get:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\| {\boldsymbol{Y}}\|^2_2 &amp; = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|_{2}^{2} + \| {\boldsymbol{P}}_1 {\boldsymbol{Y}}\|_{2}^{2} \\
+&amp; = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|_{2}^{2} + \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|_{2}^{2} + \| {\boldsymbol{P}}_0 {\boldsymbol{Y}}\|_{2}^{2}
+\end{aligned}
+\]</span></p>
+<p>We can also use the Pythagorean theorem to decompose the residuals from the smaller projection <span class="math inline">\({\boldsymbol{P}}_0\)</span>:</p>
+<p><span class="math display">\[
+\| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2 + \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2
+\]</span></p>
+</section><section id="f-statistic" class="slide level2">
+<h1><em>F</em> Statistic</h1>
+<p>The <span class="math inline">\(F\)</span> statistic compares the improvement of goodness in fit of the larger model to that of the smaller model in terms of sums of squared residuals, and it scales this improvement by an estimate of <span class="math inline">\(\sigma^2\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F &amp; = \frac{\left[\| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 - \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2\right]/(p_1 - p_0)}{\| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2/(n-p_1)} \\
+&amp; = \frac{\left[\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2 - \sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 \right]/(p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)} \\
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Since <span class="math inline">\(\| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 - \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2 = \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2\)</span>, we can equivalently write the <span class="math inline">\(F\)</span> statistic as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 / (p_1 - p_0)}{\| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2/(n-p_1)} \\
+&amp; = \frac{\sum_{i=1}^n (\hat{Y}_{1,i} - \hat{Y}_{0,i})^2 / (p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)}
+\end{aligned} 
+\]</span></p>
+</section><section id="f-distribution" class="slide level2">
+<h1><em>F</em> Distribution</h1>
+<p>Suppose we have independent random variables <span class="math inline">\(V \sim \chi^2_a\)</span> and <span class="math inline">\(W \sim \chi^2_b\)</span>. It follows that</p>
+<p><span class="math display">\[
+\frac{V/a}{W/b} \sim F_{a,b}
+\]</span></p>
+<p>where <span class="math inline">\(F_{a,b}\)</span> is the <span class="math inline">\(F\)</span> distribution with <span class="math inline">\((a, b)\)</span> degrees of freedom.</p>
+</section><section class="slide level2">
+
+<p>By arguments similar to those given above, we have</p>
+<p><span class="math display">\[
+\frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2}{\sigma^2} \sim \chi^2_{p_1 - p_0}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2}{\sigma^2} \sim \chi^2_{n-p_1}
+\]</span></p>
+<p>and these two rv’s are independent.</p>
+</section><section id="f-test" class="slide level2">
+<h1><em>F</em> Test</h1>
+<p>Suppose that the OLS model holds where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>.</p>
+<p>In order to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>, we can form the <span class="math inline">\(F\)</span> statistic as given above, which has null distribution <span class="math inline">\(F_{p_1 - p_0, n - p_1}\)</span>. The p-value is calculated as <span class="math inline">\(\Pr(F \geq F^*)\)</span> where <span class="math inline">\(F\)</span> is the observed <span class="math inline">\(F\)</span> statistic and <span class="math inline">\(F^* \sim F_{p_1 - p_0, n - p_1}\)</span>.</p>
+<p>If the above assumption on the distribution of <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\)</span> only approximately holds, then the <span class="math inline">\(F\)</span> test p-value is also an approximation.</p>
+</section><section id="example-davis-data" class="slide level2">
+<h1>Example: Davis Data</h1>
+<pre class="r"><code>&gt; library(&quot;car&quot;)
+&gt; data(&quot;Davis&quot;, package=&quot;car&quot;)</code></pre>
+<pre class="r"><code>&gt; htwt &lt;- tbl_df(Davis)
+&gt; htwt[12,c(2,3)] &lt;- htwt[12,c(3,2)]
+&gt; head(htwt)
+# A tibble: 6 × 5
+     sex weight height repwt repht
+  &lt;fctr&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1      M     77    182    77   180
+2      F     58    161    51   159
+3      F     53    161    54   158
+4      M     68    177    70   175
+5      F     59    157    59   155
+6      M     76    170    76   165</code></pre>
+</section><section id="comparing-linear-models-in-r" class="slide level2">
+<h1>Comparing Linear Models in R</h1>
+<p>Example: Davis Data</p>
+<p>Suppose we are considering the three following models:</p>
+<pre class="r"><code>&gt; f1 &lt;- lm(weight ~ height, data=htwt)
+&gt; f2 &lt;- lm(weight ~ height + sex, data=htwt)
+&gt; f3 &lt;- lm(weight ~ height + sex + height:sex, data=htwt)</code></pre>
+<p>How do we determine if the additional terms in models <code>f2</code> and <code>f3</code> are needed?</p>
+</section><section id="anova-version-2" class="slide level2">
+<h1>ANOVA (Version 2)</h1>
+<p>A generalization of ANOVA exists that allows us to compare two nested models, quantifying their differences in terms of goodness of fit and performing a hypothesis test of whether this difference is statistically significant.</p>
+<p>A model is <em>nested</em> within another model if their difference is simply the absence of certain terms in the smaller model.</p>
+<p>The null hypothesis is that the additional terms have coefficients equal to zero, and the alternative hypothesis is that at least one coefficient is nonzero.</p>
+<p>Both versions of ANOVA can be described in a single, elegant mathematical framework.</p>
+</section><section id="comparing-two-models-with-anova" class="slide level2">
+<h1>Comparing Two Models <br> with <code>anova()</code></h1>
+<p>This provides a comparison of the improvement in fit from model <code>f2</code> compared to model <code>f1</code>:</p>
+<pre class="r"><code>&gt; anova(f1, f2)
+Analysis of Variance Table
+
+Model 1: weight ~ height
+Model 2: weight ~ height + sex
+  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
+1    198 14321                                  
+2    197 12816  1    1504.9 23.133 2.999e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</section><section id="when-theres-a-single-variable-difference" class="slide level2">
+<h1>When There’s a Single Variable Difference</h1>
+<p>Compare above <code>anova(f1, f2)</code> p-value to that for the <code>sex</code> term from the <code>f2</code> model:</p>
+<pre class="r"><code>&gt; library(broom)
+&gt; tidy(f2)
+         term    estimate   std.error statistic      p.value
+1 (Intercept) -76.6167326 15.71504644 -4.875374 2.231334e-06
+2      height   0.8105526  0.09529565  8.505662 4.499241e-15
+3        sexM   8.2268893  1.71050385  4.809629 2.998988e-06</code></pre>
+</section><section id="calculating-the-f-statistic" class="slide level2">
+<h1>Calculating the F-statistic</h1>
+<pre class="r"><code>&gt; anova(f1, f2)
+Analysis of Variance Table
+
+Model 1: weight ~ height
+Model 2: weight ~ height + sex
+  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
+1    198 14321                                  
+2    197 12816  1    1504.9 23.133 2.999e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>How the F-statistic is calculated:</p>
+<pre class="r"><code>&gt; n &lt;- nrow(htwt)
+&gt; ss1 &lt;- (n-1)*var(f1$residuals)
+&gt; ss1
+[1] 14321.11
+&gt; ss2 &lt;- (n-1)*var(f2$residuals)
+&gt; ss2
+[1] 12816.18
+&gt; ((ss1 - ss2)/anova(f1, f2)$Df[2])/(ss2/f2$df.residual)
+[1] 23.13253</code></pre>
+</section><section id="calculating-the-generalized-lrt" class="slide level2">
+<h1>Calculating the Generalized LRT</h1>
+<pre class="r"><code>&gt; anova(f1, f2, test=&quot;LRT&quot;)
+Analysis of Variance Table
+
+Model 1: weight ~ height
+Model 2: weight ~ height + sex
+  Res.Df   RSS Df Sum of Sq  Pr(&gt;Chi)    
+1    198 14321                           
+2    197 12816  1    1504.9 1.512e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>&gt; library(lmtest)
+&gt; lrtest(f1, f2)
+Likelihood ratio test
+
+Model 1: weight ~ height
+Model 2: weight ~ height + sex
+  #Df LogLik Df  Chisq Pr(&gt;Chisq)    
+1   3 -710.9                         
+2   4 -699.8  1 22.205   2.45e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</section><section class="slide level2">
+
+<p>These tests produce slightly different answers because <code>anova()</code> adjusts for degrees of freedom when estimating the variance, whereas <code>lrtest()</code> is the strict generalized LRT. See <a href="https://stats.stackexchange.com/questions/155474/r-why-does-lrtest-not-match-anovatest-lrt">here</a>.</p>
+</section><section id="anova-on-more-distant-models" class="slide level2">
+<h1>ANOVA on More Distant Models</h1>
+<p>We can compare models with multiple differences in terms:</p>
+<pre class="r"><code>&gt; anova(f1, f3)
+Analysis of Variance Table
+
+Model 1: weight ~ height
+Model 2: weight ~ height + sex + height:sex
+  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
+1    198 14321                                  
+2    196 12567  2      1754 13.678 2.751e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</section><section id="compare-multiple-models-at-once" class="slide level2">
+<h1>Compare Multiple Models at Once</h1>
+<p>We can compare multiple models at once:</p>
+<pre class="r"><code>&gt; anova(f1, f2, f3)
+Analysis of Variance Table
+
+Model 1: weight ~ height
+Model 2: weight ~ height + sex
+Model 3: weight ~ height + sex + height:sex
+  Res.Df   RSS Df Sum of Sq       F    Pr(&gt;F)    
+1    198 14321                                   
+2    197 12816  1   1504.93 23.4712 2.571e-06 ***
+3    196 12567  1    249.04  3.8841   0.05015 .  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</section></section>
+<section><section id="generalized-linear-models" class="titleslide slide level1"><h1>Generalized Linear Models</h1></section><section id="definition" class="slide level2">
+<h1>Definition</h1>
+<p>The generalized linear model (GLM) builds from OLS and GLS to allow for the case where <span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution. The estimated model is</p>
+<p><span class="math display">\[
+g\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\]</span></p>
+<p>where <span class="math inline">\(g(\cdot)\)</span> is called the <strong>link function</strong>. This model is typically fit by numerical methods to calculate the maximum likelihood estimate of <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</p>
+</section><section id="exponential-family-distributions" class="slide level2">
+<h1>Exponential Family Distributions</h1>
+<p>Recall that if <span class="math inline">\(Y\)</span> follows an EFD then it has pdf of the form</p>
+<p><span class="math display">\[f(y ; \boldsymbol{\theta}) =
+h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) - A(\boldsymbol{\eta}) \right\}
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\theta}\)</span> is a vector of parameters, <span class="math inline">\(\{T_k(y)\}\)</span> are sufficient statistics, <span class="math inline">\(A(\boldsymbol{\eta})\)</span> is the cumulant generating function.</p>
+</section><section class="slide level2">
+
+<p>The functions <span class="math inline">\(\eta_k(\boldsymbol{\theta})\)</span> for <span class="math inline">\(k=1, \ldots, d\)</span> map the usual parameters <span class="math inline">\({\boldsymbol{\theta}}\)</span> (often moments of the rv <span class="math inline">\(Y\)</span>) to the <em>natural parameters</em> or <em>canonical parameters</em>.</p>
+<p><span class="math inline">\(\{T_k(y)\}\)</span> are sufficient statistics for <span class="math inline">\(\{\eta_k\}\)</span> due to the factorization theorem.</p>
+<p><span class="math inline">\(A(\boldsymbol{\eta})\)</span> is sometimes called the <em>log normalizer</em> because</p>
+<p><span class="math display">\[A(\boldsymbol{\eta}) = \log \int h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) \right\}.\]</span></p>
+</section><section id="natural-single-parameter-efd" class="slide level2">
+<h1>Natural Single Parameter EFD</h1>
+<p>A natural single parameter EFD simplifies to the scenario where <span class="math inline">\(d=1\)</span> and <span class="math inline">\(T(y) = y\)</span></p>
+<p><span class="math display">\[f(y ; \eta) =
+h(y) \exp \left\{ \eta(\theta) y - A(\eta(\theta)) \right\}
+\]</span></p>
+<p>where without loss of generality we can write <span class="math inline">\({\operatorname{E}}[Y] = \theta\)</span>.</p>
+</section><section id="dispersion-efds" class="slide level2">
+<h1>Dispersion EFDs</h1>
+<p>The family of distributions for which GLMs are most typically developed are dispersion EFDs. An example of a dispersion EFD that extends the natural single parameter EFD is</p>
+<p><span class="math display">\[f(y ; \eta) =
+h(y, \phi) \exp \left\{ \frac{\eta(\theta) y - A(\eta(\theta))}{\phi} \right\}
+\]</span></p>
+<p>where <span class="math inline">\(\phi\)</span> is the dispersion parameter.</p>
+</section><section id="example-normal" class="slide level2">
+<h1>Example: Normal</h1>
+<p>Let <span class="math inline">\(Y \sim \mbox{Normal}(\mu, \sigma^2)\)</span>. Then:</p>
+<p><span class="math display">\[
+\theta = \mu, \eta(\mu) = \mu
+\]</span></p>
+<p><span class="math display">\[
+\phi = \sigma^2
+\]</span></p>
+<p><span class="math display">\[
+A(\mu) = \frac{\mu^2}{2}
+\]</span></p>
+<p><span class="math display">\[
+h(y, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2}\frac{y^2}{\sigma^2}}
+\]</span></p>
+</section><section id="efd-for-glms" class="slide level2">
+<h1>EFD for GLMs</h1>
+<p>There has been a very broad development of GLMs and extensions. A common setting for introducting GLMs is the dispersion EFD with a general link function <span class="math inline">\(g(\cdot)\)</span>.</p>
+<p>See the classic text <em>Generalized Linear Models</em>, by McCullagh and Nelder, for such a development.</p>
+</section><section id="components-of-a-glm" class="slide level2">
+<h1>Components of a GLM</h1>
+<ol type="1">
+<li><p><em>Random</em>: The particular exponential family distribution. <span class="math display">\[
+Y \sim f(y ; \eta, \phi)
+\]</span></p></li>
+<li><p><em>Systematic</em>: The determination of each <span class="math inline">\(\eta_i\)</span> from <span class="math inline">\({\boldsymbol{X}}_i\)</span> and <span class="math inline">\({\boldsymbol{\beta}}\)</span>. <span class="math display">\[
+\eta_i = {\boldsymbol{X}}_i {\boldsymbol{\beta}}\]</span></p></li>
+<li><p><em>Parametric Link</em>: The connection between <span class="math inline">\(E[Y_i|{\boldsymbol{X}}_i]\)</span> and <span class="math inline">\({\boldsymbol{X}}_i {\boldsymbol{\beta}}\)</span>. <span class="math display">\[
+g(E[Y_i|{\boldsymbol{X}}_i]) = {\boldsymbol{X}}_i {\boldsymbol{\beta}}\]</span></p></li>
+</ol>
+</section><section id="link-functions" class="slide level2">
+<h1>Link Functions</h1>
+<p>Even though the link function <span class="math inline">\(g(\cdot)\)</span> can be considered in a fairly general framework, the <strong>canonical link function</strong> <span class="math inline">\(\eta(\cdot)\)</span> is often utilized.</p>
+<p>The canonical link function is the function that maps the expected value into the natural paramater.</p>
+<p>In this case, <span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution with</p>
+<p><span class="math display">\[
+\eta \left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}.
+\]</span></p>
+</section><section id="calculating-mles" class="slide level2">
+<h1>Calculating MLEs</h1>
+<p>Given the model <span class="math inline">\(g\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\)</span>, the EFD should be fully parameterized. The Newton-Raphson method or Fisher’s scoring method can be utilized to find the MLE of <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</p>
+</section><section class="slide level2">
+
+<h3 id="newton-raphson">Newton-Raphson</h3>
+<ol type="1">
+<li><p>Initialize <span class="math inline">\({\boldsymbol{\beta}}^{(0)}\)</span>. For <span class="math inline">\(t = 1, 2, \ldots\)</span></p></li>
+<li><p>Calculate the score <span class="math inline">\(s({\boldsymbol{\beta}}^{(t)}) = \nabla \ell({\boldsymbol{\beta}}; {\boldsymbol{X}}, {\boldsymbol{Y}}) \mid_{{\boldsymbol{\beta}}= {\boldsymbol{\beta}}^{(t)}}\)</span> and observed Fisher information <span class="math display">\[H({\boldsymbol{\beta}}^{(t)}) = - \nabla \nabla^T \ell({\boldsymbol{\beta}}; {\boldsymbol{X}}, {\boldsymbol{Y}}) \mid_{{\boldsymbol{\beta}}= {\boldsymbol{\beta}}^{(t)}}\]</span>. Note that the observed Fisher information is also the negative Hessian matrix.</p></li>
+<li><p>Update <span class="math inline">\({\boldsymbol{\beta}}^{(t+1)} = {\boldsymbol{\beta}}^{(t)} + H({\boldsymbol{\beta}}^{(t)})^{-1} s({\boldsymbol{\beta}}^{(t)})\)</span>.</p></li>
+<li><p>Iterate until convergence, and set <span class="math inline">\(\hat{{\boldsymbol{\beta}}} = {\boldsymbol{\beta}}^{(\infty)}\)</span>.</p></li>
+</ol>
+</section><section class="slide level2">
+
+<h3 id="fishers-scoring">Fisher’s scoring</h3>
+<ol type="1">
+<li><p>Initialize <span class="math inline">\({\boldsymbol{\beta}}^{(0)}\)</span>. For <span class="math inline">\(t = 1, 2, \ldots\)</span></p></li>
+<li><p>Calculate the score <span class="math inline">\(s({\boldsymbol{\beta}}^{(t)}) = \nabla \ell({\boldsymbol{\beta}}; {\boldsymbol{X}}, {\boldsymbol{Y}}) \mid_{{\boldsymbol{\beta}}= {\boldsymbol{\beta}}^{(t)}}\)</span> and expected Fisher information <span class="math display">\[I({\boldsymbol{\beta}}^{(t)}) = - {\operatorname{E}}\left[\nabla \nabla^T \ell({\boldsymbol{\beta}}; {\boldsymbol{X}}, {\boldsymbol{Y}}) \mid_{{\boldsymbol{\beta}}= {\boldsymbol{\beta}}^{(t)}} \right].\]</span></p></li>
+<li><p>Update <span class="math inline">\({\boldsymbol{\beta}}^{(t+1)} = {\boldsymbol{\beta}}^{(t)} + I({\boldsymbol{\beta}}^{(t)})^{-1} s({\boldsymbol{\beta}}^{(t)})\)</span>.</p></li>
+<li><p>Iterate until convergence, and set <span class="math inline">\(\hat{{\boldsymbol{\beta}}} = {\boldsymbol{\beta}}^{(\infty)}\)</span>.</p></li>
+</ol>
+</section><section class="slide level2">
+
+<p>When the canonical link function is used, the Newton-Raphson algorithm and Fisher’s scoring algorithm are equivalent.</p>
+<p>Exercise: Prove this.</p>
+</section><section id="iteratively-reweighted-least-squares" class="slide level2">
+<h1>Iteratively Reweighted Least Squares</h1>
+<p>For the canonical link, Fisher’s scoring method can be written as an iteratively reweighted least squares algorithm, as shown earlier for logistic regression. Note that the Fisher information is</p>
+<p><span class="math display">\[
+I({\boldsymbol{\beta}}^{(t)}) = {\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}}\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{W}}\)</span> is an <span class="math inline">\(n \times n\)</span> diagonal matrix with <span class="math inline">\((i, i)\)</span> entry equal to <span class="math inline">\({\operatorname{Var}}(Y_i | {\boldsymbol{X}}; {\boldsymbol{\beta}}^{(t)})\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The score function is</p>
+<p><span class="math display">\[
+s({\boldsymbol{\beta}}^{(t)}) = {\boldsymbol{X}}^T \left( {\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}}^{(t)} \right)
+\]</span></p>
+<p>and the current coefficient value <span class="math inline">\({\boldsymbol{\beta}}^{(t)}\)</span> can be written as</p>
+<p><span class="math display">\[
+{\boldsymbol{\beta}}^{(t)} = ({\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}}{\boldsymbol{\beta}}^{(t)}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Putting this together we get</p>
+<p><span class="math display">\[
+{\boldsymbol{\beta}}^{(t)} + I({\boldsymbol{\beta}}^{(t)})^{-1} s({\boldsymbol{\beta}}^{(t)}) = ({\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{z}}^{(t)}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+{\boldsymbol{z}}^{(t)} = {\boldsymbol{X}}{\boldsymbol{\beta}}^{(t)} + {\boldsymbol{W}}^{-1} \left( {\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}}^{(t)} \right).
+\]</span></p>
+<p>This is a generalization of the iteratively reweighted least squares algorithm we showed earlier for logistic regression.</p>
+</section><section id="estimating-dispersion" class="slide level2">
+<h1>Estimating Dispersion</h1>
+<p>For the simple dispersion model above, it is typically straightforward to calculate the MLE <span class="math inline">\(\hat{\phi}\)</span> once <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> has been calculated.</p>
+</section><section id="clt-applied-to-the-mle" class="slide level2">
+<h1>CLT Applied to the MLE</h1>
+<p>Given that <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> is a maximum likelihood estimate, we have the following CLT result on its distribution as <span class="math inline">\(n \rightarrow \infty\)</span>:</p>
+<p><span class="math display">\[
+\sqrt{n} (\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}) \stackrel{D}{\longrightarrow} \mbox{MVN}_{p}({\boldsymbol{0}}, \phi ({\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}})^{-1})
+\]</span></p>
+</section><section id="approximately-pivotal-statistics" class="slide level2">
+<h1>Approximately Pivotal Statistics</h1>
+<p>The previous CLT gives us the following two approximations for pivtoal statistics. The first statistic facilitates getting overall measures of uncertainty on the estimate <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span>.</p>
+<p><span class="math display">\[
+\hat{\phi}^{-1} (\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}})^T ({\boldsymbol{X}}^T \hat{{\boldsymbol{W}}} {\boldsymbol{X}}) (\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}) {\; \stackrel{.}{\sim}\;}\chi^2_1
+\]</span></p>
+<p>This second pivotal statistic allows for performing a Wald test or forming a confidence interval on each coefficient, <span class="math inline">\(\beta_j\)</span>, for <span class="math inline">\(j=1, \ldots, p\)</span>.</p>
+<p><span class="math display">\[
+\frac{\hat{\beta}_j - \beta_j}{\sqrt{\hat{\phi} [({\boldsymbol{X}}^T \hat{{\boldsymbol{W}}} {\boldsymbol{X}})^{-1}]_{jj}}} {\; \stackrel{.}{\sim}\;}\mbox{Normal}(0,1)
+\]</span></p>
+</section><section id="deviance" class="slide level2">
+<h1>Deviance</h1>
+<p>Let <span class="math inline">\(\hat{\boldsymbol{\eta}}\)</span> be the estimated natural parameters from a GLM. For example, <span class="math inline">\(\hat{\boldsymbol{\eta}} = {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}}\)</span> when the canonical link function is used.</p>
+<p>Let <span class="math inline">\(\hat{\boldsymbol{\eta}}_n\)</span> be the <strong>saturated model</strong> wwhere <span class="math inline">\(Y_i\)</span> is directly used to estimate <span class="math inline">\(\eta_i\)</span> without model constraints. For example, in the Bernoulli logistic regression model <span class="math inline">\(\hat{\boldsymbol{\eta}}_n = {\boldsymbol{Y}}\)</span>, the observed outcomes.</p>
+<p>The <strong>deviance</strong> for the model is defined to be</p>
+<p><span class="math display">\[
+D\left(\hat{\boldsymbol{\eta}}\right) = 2 \ell(\hat{\boldsymbol{\eta}}_n; {\boldsymbol{X}}, {\boldsymbol{Y}}) - 2 \ell(\hat{\boldsymbol{\eta}}; {\boldsymbol{X}}, {\boldsymbol{Y}})
+\]</span></p>
+</section><section id="generalized-lrt-1" class="slide level2">
+<h1>Generalized LRT</h1>
+<p>Let <span class="math inline">\({\boldsymbol{X}}_0\)</span> be a subset of <span class="math inline">\(p_0\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and let <span class="math inline">\({\boldsymbol{X}}_1\)</span> be a subset of <span class="math inline">\(p_1\)</span> columns, where <span class="math inline">\(1 \leq p_0 &lt; p_1 \leq p\)</span>. Also, assume that the columns of <span class="math inline">\({\boldsymbol{X}}_0\)</span> are a subset of <span class="math inline">\({\boldsymbol{X}}_1\)</span>.</p>
+<p>Without loss of generality, suppose that <span class="math inline">\({\boldsymbol{\beta}}_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T\)</span> and <span class="math inline">\({\boldsymbol{\beta}}_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T\)</span>.</p>
+<p>Suppose we wish to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span></p>
+</section><section class="slide level2">
+
+<p>We can form <span class="math inline">\(\hat{\boldsymbol{\eta}}_0 = {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}}_0\)</span> from the GLM model <span class="math inline">\(g\left({\operatorname{E}}[Y | {\boldsymbol{X}}_0]\right) = {\boldsymbol{X}}_0 {\boldsymbol{\beta}}_0\)</span>. We can analogously form <span class="math inline">\(\hat{\boldsymbol{\eta}}_1 = {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}}_1\)</span> from the GLM model <span class="math inline">\(g\left({\operatorname{E}}[Y | {\boldsymbol{X}}_1]\right) = {\boldsymbol{X}}_1 {\boldsymbol{\beta}}_1\)</span>.</p>
+<p>The <span class="math inline">\(2\log\)</span> generalized LRT can then be formed from the two deviance statistics</p>
+<p><span class="math display">\[
+2 \log \lambda({\boldsymbol{X}}, {\boldsymbol{Y}}) = 2 \log \frac{L(\hat{\boldsymbol{\eta}}_1; {\boldsymbol{X}}, {\boldsymbol{Y}})}{L(\hat{\boldsymbol{\eta}}_0; {\boldsymbol{X}}, {\boldsymbol{Y}})} = D\left(\hat{\boldsymbol{\eta}}_0\right) - D\left(\hat{\boldsymbol{\eta}}_1\right)
+\]</span></p>
+<p>where the null distribution is <span class="math inline">\(\chi^2_{p_1-p_0}\)</span>.</p>
+</section><section id="example-grad-school-admissions" class="slide level2">
+<h1>Example: Grad School Admissions</h1>
+<p>Let’s revisit a logistic regression example now that we know how the various statistics are calculated.</p>
+<pre class="r"><code>&gt; mydata &lt;- 
++   read.csv(&quot;http://www.ats.ucla.edu/stat/data/binary.csv&quot;)
+&gt; dim(mydata)
+[1] 400   4
+&gt; head(mydata)
+  admit gre  gpa rank
+1     0 380 3.61    3
+2     1 660 3.67    3
+3     1 800 4.00    1
+4     1 640 3.19    4
+5     0 520 2.93    4
+6     1 760 3.00    2</code></pre>
+</section><section class="slide level2">
+
+<p>Fit the model with basic output. Note the argument <code>family = &quot;binomial&quot;</code>.</p>
+<pre class="r"><code>&gt; mydata$rank &lt;- factor(mydata$rank, levels=c(1, 2, 3, 4))
+&gt; myfit &lt;- glm(admit ~ gre + gpa + rank, 
++              data = mydata, family = &quot;binomial&quot;)
+&gt; myfit
+
+Call:  glm(formula = admit ~ gre + gpa + rank, family = &quot;binomial&quot;, 
+    data = mydata)
+
+Coefficients:
+(Intercept)          gre          gpa        rank2  
+  -3.989979     0.002264     0.804038    -0.675443  
+      rank3        rank4  
+  -1.340204    -1.551464  
+
+Degrees of Freedom: 399 Total (i.e. Null);  394 Residual
+Null Deviance:      500 
+Residual Deviance: 458.5    AIC: 470.5</code></pre>
+</section><section class="slide level2">
+
+<p>This shows the fitted coefficient values, which is on the link function scale – logit aka log odds here. Also, a Wald test is performed for each coefficient.</p>
+<pre class="r"><code>&gt; summary(myfit)
+
+Call:
+glm(formula = admit ~ gre + gpa + rank, family = &quot;binomial&quot;, 
+    data = mydata)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6268  -0.8662  -0.6388   1.1490   2.0790  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -3.989979   1.139951  -3.500 0.000465 ***
+gre          0.002264   0.001094   2.070 0.038465 *  
+gpa          0.804038   0.331819   2.423 0.015388 *  
+rank2       -0.675443   0.316490  -2.134 0.032829 *  
+rank3       -1.340204   0.345306  -3.881 0.000104 ***
+rank4       -1.551464   0.417832  -3.713 0.000205 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 499.98  on 399  degrees of freedom
+Residual deviance: 458.52  on 394  degrees of freedom
+AIC: 470.52
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</section><section class="slide level2">
+
+<p>Here we perform a generalized LRT on each variable. Note the <code>rank</code> variable is now tested as a single factor variable as opposed to each dummy variable.</p>
+<pre class="r"><code>&gt; anova(myfit, test=&quot;LRT&quot;)
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: admit
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                   399     499.98              
+gre   1  13.9204       398     486.06 0.0001907 ***
+gpa   1   5.7122       397     480.34 0.0168478 *  
+rank  3  21.8265       394     458.52 7.088e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; mydata &lt;- data.frame(mydata, probs = myfit$fitted.values)
+&gt; ggplot(mydata) + geom_point(aes(x=gpa, y=probs, color=rank)) +
++   geom_jitter(aes(x=gpa, y=admit), width=0, height=0.01, alpha=0.3)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; ggplot(mydata) + geom_point(aes(x=gre, y=probs, color=rank)) +
++   geom_jitter(aes(x=gre, y=admit), width=0, height=0.01, alpha=0.3)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; ggplot(mydata) + geom_boxplot(aes(x=rank, y=probs)) +
++   geom_jitter(aes(x=rank, y=probs), width=0.1, height=0.01, alpha=0.3)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="glm-function" class="slide level2">
+<h1><code>glm()</code> Function</h1>
+<p>The <code>glm()</code> function has many different options available to the user.</p>
+<pre><code>glm(formula, family = gaussian, data, weights, subset,
+    na.action, start = NULL, etastart, mustart, offset,
+    control = list(...), model = TRUE, method = &quot;glm.fit&quot;,
+    x = FALSE, y = TRUE, contrasts = NULL, ...)</code></pre>
+<p>To see the different link functions available, type:</p>
+<pre><code>help(family)</code></pre>
+</section></section>
+<section><section id="nonparametric-regression" class="titleslide slide level1"><h1>Nonparametric Regression</h1></section></section>
+<section><section id="generalized-additive-models" class="titleslide slide level1"><h1>Generalized Additive Models</h1></section></section>
+<section><section id="bootstrap-for-statistical-models" class="titleslide slide level1"><h1>Bootstrap for Statistical Models</h1></section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h1>Source</h1>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h1>Session Information</h1>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.4
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+ [1] lmtest_0.9-35   zoo_1.8-0       car_2.1-4      
+ [4] broom_0.4.2     dplyr_0.5.0     purrr_0.2.2    
+ [7] readr_1.0.0     tidyr_0.6.1     tibble_1.2     
+[10] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
+[13] magrittr_1.5    devtools_1.12.0
+
+loaded via a namespace (and not attached):
+ [1] revealjs_0.8       reshape2_1.4.2     splines_3.3.2     
+ [4] haven_1.0.0        lattice_0.20-34    colorspace_1.3-2  
+ [7] htmltools_0.3.5    yaml_2.1.14        mgcv_1.8-17       
+[10] nloptr_1.0.4       foreign_0.8-67     withr_1.0.2       
+[13] DBI_0.5-1          modelr_0.1.0       readxl_0.1.1      
+[16] plyr_1.8.4         stringr_1.1.0      MatrixModels_0.4-1
+[19] munsell_0.4.3      gtable_0.2.0       rvest_0.3.2       
+[22] psych_1.6.12       memoise_1.0.0      evaluate_0.10     
+[25] labeling_0.3       forcats_0.2.0      SparseM_1.74      
+[28] quantreg_5.29      pbkrtest_0.4-6     parallel_3.3.2    
+[31] Rcpp_0.12.9        scales_0.4.1       backports_1.0.5   
+[34] jsonlite_1.2       lme4_1.1-12        mnormt_1.5-5      
+[37] hms_0.3            digest_0.6.12      stringi_1.1.2     
+[40] grid_3.3.2         rprojroot_1.2      tools_3.3.2       
+[43] lazyeval_0.2.0     MASS_7.3-45        Matrix_1.2-8      
+[46] xml2_1.1.1         lubridate_1.6.0    assertthat_0.1    
+[49] minqa_1.2.4        rmarkdown_1.3      httr_1.2.1        
+[52] R6_2.2.0           nnet_7.3-12        nlme_3.1-131      </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
