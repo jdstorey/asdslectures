@@ -16,7 +16,7 @@ output:
       progress: true
     includes:
       before_body: ../customization/doc_prefix.html
-    css: ../customization/custom.css
+    css: customization/custom.css
 ---
 
 ```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
