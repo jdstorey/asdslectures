@@ -34,6 +34,7 @@ theme_set(theme_bw())
 \newcommand{\V}{\operatorname{Var}}
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\se}{\operatorname{se}}
+\newcommand{\logit}{\operatorname{logit}}
 \newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
 \newcommand{\xs}{x_1, x_2, \ldots, x_n}
 \newcommand{\Xs}{X_1, X_2, \ldots, X_n}
@@ -71,7 +72,7 @@ It is often the case that we would like to build a model that *explains the vari
 
 ## Variables
 
-Let's suppose our does comes in the form $(\bX_n, Y_1), (\bX_n, Y_1), \ldots, (\bX_n, Y_n) \iid F$.
+Let's suppose our does comes in the form $(\bX_1, Y_1), (\bX_2, Y_2), \ldots, (\bX_n, Y_n) \sim F$.
 
 We will call $\bX_i = (X_{i1}, X_{i2}, \ldots, X_{ip}) \in \mathbb{R}_{1 \times p}$ the **explanatory variables** and $Y_i \in \mathbb{R}$ the **dependent variable** or **response variable**.
 
@@ -491,7 +492,7 @@ var(myfit$fitted.values)/var(htwt$weight)
 The assumptions on the above linear model are really about the joint distribution of the residuals, which are not directly observed.  On data, we try to verify:
 
 1. The fitted values and the residuals show no trends with respect to each other
-1. The residuals are distributed approximately Normal$(0,\sigma^2)$
+1. The residuals are distributed approximately Normal$(0, \sigma^2)$
     - A constant variance is called [**homoscedasticity**](https://en.wikipedia.org/wiki/Homoscedasticity)
     - A non-constant variance is called [**heteroscedascity**](https://en.wikipedia.org/wiki/Heteroscedasticity)
 1. There are no lurking variables
@@ -606,7 +607,7 @@ $$
 $$
 
 $$
-\E\left[\left. (\bX^T \bX)^{-1} S^2 \right| \bX\right] = \Cov(\hat{\bb})
+\E\left[\left. (\bX^T \bX)^{-1} S^2 \right| \bX\right] = \Cov\left(\hat{\bb}\right)
 $$
 
 $$
@@ -615,22 +616,22 @@ $$
 
 ## Standard Error
 
-The standard error of $\hat{\beta}_j$ is the $(j, j)$ entry of $(\bX^T \bX)^{-1} \sigma^2$
+The standard error of $\hat{\beta}_j$ is the square root of the $(j, j)$ diagonal entry of $(\bX^T \bX)^{-1} \sigma^2$
 
 $$
-\se(\hat{\beta}_j) = \sqrt{(\bX^T \bX)^{-1} \sigma^2}_{jj}
+\se(\hat{\beta}_j) = \sqrt{\left[(\bX^T \bX)^{-1} \sigma^2\right]_{jj}}
 $$
 
-and estimated standard error
+and estimated standard error is
 
 $$
-\hat{\se}(\hat{\beta}_j) = \sqrt{(\bX^T \bX)^{-1} S^2}_{jj}
+\hat{\se}(\hat{\beta}_j) = \sqrt{\left[(\bX^T \bX)^{-1} S^2\right]_{jj}}
 $$
 
 
 ## Proportion of Variance Explained
 
-The proportion of variance explained is
+The proportion of variance explained is defined equivalently to the simple linear regression scneario:
 
 $$
 R^2 = \frac{\sum_{i=1}^n (\hat{Y}_i - \bar{Y})^2}{\sum_{i=1}^n (Y_i - \bar{Y})^2}.
@@ -638,17 +639,20 @@ $$
 
 ## Normal Errors
 
-Suppose we assume $E_1, E_2, \ldots, E_n \iid \mbox{Normal}(0,1)$. Then
+Suppose we assume $E_1, E_2, \ldots, E_n \iid \mbox{Normal}(0, \sigma^2)$. Then
 
 $$
 \ell\left(\bb, \sigma^2 ; \bY, \bX\right) \propto -n\log(\sigma^2) -\frac{1}{\sigma^2} (\bY - \bX \bb)^T (\bY - \bX \bb).
 $$
 
-This implies $\hat{\bb}$ is the MLE for $\bb$ and $\frac{n-p}{n} S^2$ is the MLE for $\sigma^2$.
+
+Since minimizing $(\bY - \bX \bb)^T (\bY - \bX \bb)$ maximizes the likelihood with respect to $\bb$, this implies $\hat{\bb}$ is the MLE for $\bb$.  
+
+It can also be calculated that $\frac{n-p}{n} S^2$ is the MLE for $\sigma^2$.
 
 ## Sampling Distribution
 
-When $E_1, E_2, \ldots, E_n \iid \mbox{Normal}(0,1)$, it follows that, conditional on $\bX$:
+When $E_1, E_2, \ldots, E_n \iid \mbox{Normal}(0, \sigma^2)$, it follows that, conditional on $\bX$:
 
 $$
 \hat{\bb} \sim \mbox{MVN}_p\left(\bb, (\bX^T \bX)^{-1} \sigma^2 \right)
@@ -666,14 +670,14 @@ $$
 Under the assumption that ${\rm E}[E_i] = 0$, ${\rm Var}(E_i) = \sigma^2$, and $\Cov(E_i, E_j) = 0$ for $i \not= j$, it follows that as $n \rightarrow \infty$,
 
 $$
-\sqrt{n} \left(\hat{\bb} - \bb\right) \stackrel{D}{\longrightarrow} \mbox{MNV}_p\left( \boldsymbol{0}, (\bX^T \bX)^{-1} \sigma^2 \right).
+\sqrt{n} \left(\hat{\bb} - \bb\right) \stackrel{D}{\longrightarrow} \mbox{MVN}_p\left( \boldsymbol{0}, (\bX^T \bX)^{-1} \sigma^2 \right).
 $$
 
 ## Gauss-Markov Theorem
 
-Under the assumption that ${\rm E}[E_i] = 0$, ${\rm Var}(E_i) = \sigma^2$, and $\Cov(E_i, E_j) = 0$ for $i \not= j$, the Gauss-Markov theorem shows that among all BLUEs, best linear unbiased estimators, the least squares estimate has the smallest mean-squared error.
+Under the assumption that ${\rm E}[E_i] = 0$, ${\rm Var}(E_i) = \sigma^2$, and $\Cov(E_i, E_j) = 0$ for $i \not= j$, the Gauss-Markov theorem shows that among all BLUEs, **best linear unbiased estimators**, the least squares estimate has the smallest mean-squared error.
 
-Specifically, suppose that $\tilde{\bb}$ is a linear estimator (composed by a linear operator on $\bY$) where $\E[\tilde{\bb} | \bX] = \bb$.  Then
+Specifically, suppose that $\tilde{\bb}$ is a linear estimator (calculated from a linear operator on $\bY$) where $\E[\tilde{\bb} | \bX] = \bb$.  Then
 
 $$
 \E\left[ \left. (\bY - \bX \hat{\bb})^T (\bY - \bX \hat{\bb}) \right| \bX \right] \leq 
@@ -809,7 +813,7 @@ ggplot(data = fits) +
   labs(x="height", y="weight")
 ```
 
-# Categorial Explanatory Variables
+# Categorical Explanatory Variables
 
 ## Example: Chicken Weights
 
@@ -1013,23 +1017,98 @@ ggplot(pollen_study) + geom_point(aes(x=week_new, y=pollen))
 
 ## Goal
 
-Logistic regression models Binomial or Bernoulli distributed response variable in terms of linear combinations of explanatory variables.
+Logistic regression models a Bernoulli distributed response variable in terms of linear combinations of explanatory variables.
 
-## Bernoulli as EDF
+This extends least squares regression to the case where the response variable captures a "success" or "failure" type outcome.
+
+## Bernoulli as EFD
+
+If $Y \sim \mbox{Bernoulli}(p)$, then its pmf is:
+
+$$
+\begin{aligned}
+f(y; p) & = p^{y} (1-p)^{1-y} \\
+ & = \exp\left\{ \log\left(\frac{p}{1-p}\right)y + \log(1-p) \right\}
+\end{aligned}
+$$
+
+In exponential family distribution (EFD) notation, 
+
+$$
+\eta(p) = \log\left(\frac{p}{1-p}\right) \equiv \logit(p),
+$$
+
+$A(\eta(p)) = \log(1 + \exp(\eta)) = \log(1-p)$, and $y$ is the sufficient statistic.
 
 ## Model
 
+$(\bX_1, Y_1), (\bX_2, Y_2), \ldots, (\bX_n, Y_n)$ are distributed so that $Y_i | \bX_i \sim \mbox{Bernoulli}(p_i)$, where $\{Y_i | \bX_i\}_{i=1}^n$ are jointly independent and
+
+$$
+\logit\left(\E[Y_i | \bX_i]\right) = \log\left( \frac{\Pr(Y_i = 1 | \bX_i)}{\Pr(Y_i = 0 | \bX_i)} \right)  = \bX_i \bb.
+$$
+
+From this it follows that
+
+$$
+p_i = \frac{\exp\left(\bX_i \bb\right)}{1 + \exp\left(\bX_i \bb\right)}.
+$$
+
 ## Maximum Likelihood Estimation
+
+The $\bb$ are estimated from the MLE calculated from:
+
+$$
+\begin{aligned}
+\ell\left(\bb ; \by, \bX \right) & = \sum_{i=1}^n \log\left(\frac{p_i}{1-p_i}\right) y_i + \log(1-p_i) \\
+ & = \sum_{i=1}^n (\bx_i \bb) y_i - \log\left(1 + \exp\left(\bx_i \bb\right) \right)  
+\end{aligned}
+$$
 
 ## Iteratively Reweighted Least Squares
 
+1. Initialize $\bb^{(1)}$.
+
+2. For each iteration $t=1, 2, \ldots$, set 
+$$
+p_i^{(t)} = \logit^{-1}\left( \bx_i \bb^{(t)} \right), \ \ \ \ 
+z_i^{(t)} = \logit\left(p_i^{(t)}\right) + \frac{y_i - p_i^{(t)}}{p_i^{(t)}(1-p_i^{(t)})}
+$$
+and let $\bz^{(t)} = \left\{z_i^{(t)}\right\}_{i=1}^n$.
+
+----
+
+3. Form $n \times n$ diagonal matrix $\boldsymbol{W}^{(t)}$ with $(i, i)$ entry equal to $p_i^{(t)}(1-p_i^{(t)})$.
+
+4. Obtain $\bb^{(t+1)}$ by performing the wieghted least squares regression (see [GLS](#/generalized-least-squares-1) from earlier)
+
+$$
+\bb^{(t+1)} = \left(\bX^T \boldsymbol{W}^{(t)} \bX \right)^{-1} \bX^T \boldsymbol{W}^{(t)} \bz^{(t)}.
+$$
+
+5.  Iterate Steps 2-4 over $t=1, 2, 3, \ldots$ until convergence, setting $\hat{\bb} = \bb^{(\infty)}$.
+
 ## GLMs
+
+For exponential family distribution response variables, the **generalized linear model** is
+
+$$
+\eta\left(\E[Y | \bX]\right) = \bX \bb
+$$
+
+where $\eta(\theta)$ is function of the expected value $\theta$ into the natural parameter.  This is called the **canonical link function** in the GLM setting.
+
+The **iteratively reweighted least squares** algorithm presented above for calculating (local) maximum likelihood estimates of $\bb$ has a generalization to a large class of exponential family distribution response vairables.
+
+----
+
+Next week we will study the summary statistics, sampling distributions, and inference procedures for GLMs that are analogous to those we covered above for least squares regression.
 
 # `glm()` Function in R
 
 ## Example: Grad School Admissions
 
-```{r}
+```{r ucladata, cache=TRUE}
 mydata <- 
   read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
 dim(mydata)
@@ -1086,7 +1165,7 @@ anova(myfit, test="LRT")
 
 ## Example: Contraceptive Use
 
-```{r}
+```{r wws509data, cache=TRUE}
 cuse <- 
   read.table("http://data.princeton.edu/wws509/datasets/cuse.dat", 
              header=TRUE)

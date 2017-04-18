@@ -141,7 +141,7 @@ p {
 </section></section>
 <section><section id="empirical-distribution-functions" class="titleslide slide level1"><h1>Empirical Distribution Functions</h1></section><section id="definition" class="slide level2">
 <h1>Definition</h1>
-<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span>. The <strong>empirical distribution function</strong> (edf) – or <strong>empirical cumulative distribution function</strong> (ecdf) – is the distribution that puts probability <span class="math inline">\(1/n\)</span> on each observed value <span class="math inline">\(X_i\)</span>.</p>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. The <strong>empirical distribution function</strong> (edf) – or <strong>empirical cumulative distribution function</strong> (ecdf) – is the distribution that puts probability <span class="math inline">\(1/n\)</span> on each observed value <span class="math inline">\(X_i\)</span>.</p>
 <p>Let <span class="math inline">\(1(X_i \leq y) = 1\)</span> if <span class="math inline">\(X_i \leq y\)</span> and <span class="math inline">\(1(X_i \leq y) = 0\)</span> if <span class="math inline">\(X_i &gt; y\)</span>.</p>
 <p><span class="math display">\[
 \mbox{Random variable:  } \hat{F}_{{\boldsymbol{X}}}(y) = \frac{1}{n} \sum_{i=1}^{n} 1(X_i \leq y)
@@ -362,7 +362,7 @@ p {
 <p>The general approach is to calculate a test statistic based on the observed data. Then the null distribution of this statistic is approximated by forming bootstrap test statistics under the scenario that the null hypothesis is true. This can often be accomplished because the <span class="math inline">\(\hat{\theta}\)</span> estimated from the observed data is the <em>population</em> parameter from the bootstrap distribution.</p>
 </section><section id="example-t-test" class="slide level2">
 <h1>Example: <em>t</em>-test</h1>
-<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m \sim F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n \sim F_Y\)</span>. We wish to test <span class="math inline">\(H_0: \mu(F_X) = \mu(F_Y)\)</span> vs <span class="math inline">\(H_1: \mu(F_X) \not= \mu(F_Y)\)</span>. Suppose that we know <span class="math inline">\(\sigma^2(F_X) = \sigma^2(F_Y)\)</span> (if not, it is straightforward to adjust the proecure below).</p>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>. We wish to test <span class="math inline">\(H_0: \mu(F_X) = \mu(F_Y)\)</span> vs <span class="math inline">\(H_1: \mu(F_X) \not= \mu(F_Y)\)</span>. Suppose that we know <span class="math inline">\(\sigma^2(F_X) = \sigma^2(F_Y)\)</span> (if not, it is straightforward to adjust the proecure below).</p>
 <p>Our test statistic is</p>
 <p><span class="math display">\[
 t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^2}}
@@ -745,7 +745,7 @@ t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*}}{\sqrt{\left(\frac{1}{m} + \fr
 <p>Goodness of fit (GoF) tests allow one to perform a hypothesis test of how well a particular parametric probability model explains variation observed in a data set.</p>
 </section><section id="chi-square-gof-test" class="slide level2">
 <h1>Chi-Square GoF Test</h1>
-<p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F \in \{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> vs <span class="math inline">\(H_1: \mbox{not } H_0\)</span>. Suppose that <span class="math inline">\(\boldsymbol{\Theta}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
+<p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F \in \{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> vs <span class="math inline">\(H_1: \mbox{not } H_0\)</span>. Suppose that <span class="math inline">\(\boldsymbol{\Theta}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
 <p>Divide the support of <span class="math inline">\(\{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> into <span class="math inline">\(k\)</span> bins <span class="math inline">\(I_1, I_2, \ldots, I_k\)</span>.</p>
 <p>For <span class="math inline">\(j=1, 2, \ldots, k\)</span>, calculate</p>
 <p><span class="math display">\[
@@ -942,7 +942,7 @@ alternative hypothesis: two-sided</code></pre>
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12.4
+Running under: macOS Sierra 10.12.3
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -961,7 +961,7 @@ loaded via a namespace (and not attached):
  [1] Rcpp_0.12.9      highr_0.6        plyr_1.8.4      
  [4] forcats_0.2.0    tools_3.3.2      digest_0.6.12   
  [7] lubridate_1.6.0  jsonlite_1.2     evaluate_0.10   
-[10] memoise_1.0.0    nlme_3.1-131     gtable_0.2.0    
+[10] memoise_1.0.0    nlme_3.1-130     gtable_0.2.0    
 [13] lattice_0.20-34  psych_1.6.12     DBI_0.5-1       
 [16] yaml_2.1.14      parallel_3.3.2   haven_1.0.0     
 [19] xml2_1.1.1       withr_1.0.2      stringr_1.1.0   
@@ -972,7 +972,7 @@ loaded via a namespace (and not attached):
 [34] scales_0.4.1     htmltools_0.3.5  rvest_0.3.2     
 [37] assertthat_0.1   mnormt_1.5-5     colorspace_1.3-2
 [40] labeling_0.3     stringi_1.1.2    lazyeval_0.2.0  
-[43] munsell_0.4.3    broom_0.4.2     </code></pre>
+[43] munsell_0.4.3    broom_0.4.1     </code></pre>
 </section>
 </section></section>
     </div>
