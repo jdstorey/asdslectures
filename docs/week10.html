@@ -59,7 +59,7 @@
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link rel="stylesheet" href="../customization/custom.css"/>
+    <link rel="stylesheet" href="customization/custom.css"/>
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
@@ -117,7 +117,7 @@ p {
 </div>
 </section><section id="ols-normal-model" class="slide level2">
 <h1>OLS Normal Model</h1>
-<p>In this section, let’s assume that <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distribution so that</p>
+<p>In this section, let’s assume that <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distributed so that</p>
 <p><span class="math display">\[
 \begin{aligned}
 Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
@@ -271,7 +271,7 @@ F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^
 </section><section id="f-test" class="slide level2">
 <h1><em>F</em> Test</h1>
 <p>Suppose that the OLS model holds where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>.</p>
-<p>In order to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>, we can form the <span class="math inline">\(F\)</span> statistic as given above, which has null distribution <span class="math inline">\(F_{p_1 - p_0, n - p_1}\)</span>. The p-value is calculated as <span class="math inline">\(\Pr(F \geq F^*)\)</span> where <span class="math inline">\(F\)</span> is the observed <span class="math inline">\(F\)</span> statistic and <span class="math inline">\(F^* \sim F_{p_1 - p_0, n - p_1}\)</span>.</p>
+<p>In order to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>, we can form the <span class="math inline">\(F\)</span> statistic as given above, which has null distribution <span class="math inline">\(F_{p_1 - p_0, n - p_1}\)</span>. The p-value is calculated as <span class="math inline">\(\Pr(F^* \geq F)\)</span> where <span class="math inline">\(F\)</span> is the observed <span class="math inline">\(F\)</span> statistic and <span class="math inline">\(F^* \sim F_{p_1 - p_0, n - p_1}\)</span>.</p>
 <p>If the above assumption on the distribution of <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\)</span> only approximately holds, then the <span class="math inline">\(F\)</span> test p-value is also an approximation.</p>
 </section><section id="example-davis-data" class="slide level2">
 <h1>Example: Davis Data</h1>
@@ -676,9 +676,486 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>To see the different link functions available, type:</p>
 <pre><code>help(family)</code></pre>
 </section></section>
-<section><section id="nonparametric-regression" class="titleslide slide level1"><h1>Nonparametric Regression</h1></section></section>
-<section><section id="generalized-additive-models" class="titleslide slide level1"><h1>Generalized Additive Models</h1></section></section>
-<section><section id="bootstrap-for-statistical-models" class="titleslide slide level1"><h1>Bootstrap for Statistical Models</h1></section></section>
+<section><section id="nonparametric-regression" class="titleslide slide level1"><h1>Nonparametric Regression</h1></section><section id="simple-linear-regression" class="slide level2">
+<h1>Simple Linear Regression</h1>
+<p>Recall the set up for simple linear regression. For random variables <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>, <strong>simple linear regression</strong> estimates the model</p>
+<p><span class="math display">\[
+Y_i  = \beta_1 + \beta_2 X_i + E_i
+\]</span></p>
+<p>where <span class="math inline">\({\operatorname{E}}[E_i | X_i] = 0\)</span>, <span class="math inline">\({\operatorname{Var}}(E_i | X_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j | X_i, X_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>.</p>
+<p>Note that in this model <span class="math inline">\({\operatorname{E}}[Y | X] = \beta_1 + \beta_2 X.\)</span></p>
+</section><section id="simple-nonparametric-regression" class="slide level2">
+<h1>Simple Nonparametric Regression</h1>
+<p>In <strong>simple nonparametric regression</strong>, we define a similar model while eliminating the linear assumption:</p>
+<p><span class="math display">\[
+Y_i  = s(X_i) + E_i
+\]</span></p>
+<p>for some function <span class="math inline">\(s(\cdot)\)</span> with the same assumptions on the distribution of <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\)</span>. In this model, we also have</p>
+<p><span class="math display">\[
+{\operatorname{E}}[Y | X] = s(X).
+\]</span></p>
+</section><section id="smooth-functions" class="slide level2">
+<h1>Smooth Functions</h1>
+<p>Suppose we consider fitting the model <span class="math inline">\(Y_i = s(X_i) + E_i\)</span> with the restriction that <span class="math inline">\(s \in C^2\)</span>, the class of functions with continuous second derivatives. We can set up an objective function that regularizes how smooth vs wiggly <span class="math inline">\(s\)</span> is.</p>
+<p>Specifically, suppose for a given set of observed data <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span> we wish to identify a function <span class="math inline">\(s \in C^2\)</span> that minimizes for some <span class="math inline">\(\lambda\)</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s&#39;&#39;(x)|^2 dx
+\]</span></p>
+</section><section id="smoothness-parameter-lambda" class="slide level2">
+<h1>Smoothness Parameter <span class="math inline">\(\lambda\)</span></h1>
+<p>When minimizing</p>
+<p><span class="math display">\[
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
+\]</span></p>
+<p>it follows that if <span class="math inline">\(\lambda=0\)</span> then any function <span class="math inline">\(s \in C^2\)</span> that interpolates the data is a solution.</p>
+<p>As <span class="math inline">\(\lambda \rightarrow \infty\)</span>, then the minimizing function is the simple linear regression solution.</p>
+</section><section id="the-solution" class="slide level2">
+<h1>The Solution</h1>
+<p>For an observed data set <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span> where <span class="math inline">\(n \geq 4\)</span> and a fixed value <span class="math inline">\(\lambda\)</span>, there is an exact solution to minimizing</p>
+<p><span class="math display">\[
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx.
+\]</span></p>
+<p>The solution is called a <strong>natural cubic spline</strong>, which is constructed to have knots at <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
+</section><section id="natural-cubic-splines" class="slide level2">
+<h1>Natural Cubic Splines</h1>
+<p>Suppose without loss of generality that we have ordered <span class="math inline">\(x_1 &lt; x_2 &lt; \cdots &lt; x_n\)</span>. We assume all <span class="math inline">\(x_i\)</span> are unique to simplify the explanation here, but ties can be deal with.</p>
+<p>A <strong>natural cubic spline</strong> (NCS) is a function constructed from a set of piecewise cubic functions over the range <span class="math inline">\([x_1, x_n]\)</span> joined at the knots so that the second derivative is continuous at the knots. Outside of the range (<span class="math inline">\(&lt; x_1\)</span> or <span class="math inline">\(&gt; x_n\)</span>), the spline is linear and it has continuous second derivatives at the endpoint knots.</p>
+</section><section id="basis-functions" class="slide level2">
+<h1>Basis Functions</h1>
+<p>Depending on the value <span class="math inline">\(\lambda\)</span>, a different ncs will be constructed, but the entire family of ncs solutions over <span class="math inline">\(0 &lt; \lambda &lt; \infty\)</span> can be constructed from a common set of basis functions.</p>
+<p>We construct <span class="math inline">\(n\)</span> basis functions <span class="math inline">\(N_1(x), N_2(x), \ldots, N_n(x)\)</span> with coefficients <span class="math inline">\(\theta_1(\lambda), \theta_2(\lambda), \ldots, \theta_n(\lambda)\)</span>. The NCS takes the form</p>
+<p><span class="math display">\[
+s(x) = \sum_{i=1}^n \theta_i(\lambda) N_i(x).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Define <span class="math inline">\(N_1(x) = 1\)</span> and <span class="math inline">\(N_2(x) = x\)</span>. For <span class="math inline">\(i = 3, \ldots, n\)</span>, define <span class="math inline">\(N_i(x) = d_{i-1}(x) - d_{i-2}(x)\)</span> where</p>
+<p><span class="math display">\[
+d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
+\]</span></p>
+<p>Recall that we’ve labeled indices so that <span class="math inline">\(x_1 &lt; x_2 &lt; \cdots &lt; x_n\)</span>.</p>
+</section><section id="calculating-the-solution" class="slide level2">
+<h1>Calculating the Solution</h1>
+<p>Let <span class="math inline">\({\boldsymbol{\theta}}_\lambda = (\theta_1(\lambda), \theta_2(\lambda), \ldots, \theta_n(\lambda))^T\)</span> and let <span class="math inline">\({\boldsymbol{N}}\)</span> be the <span class="math inline">\(n \times n\)</span> matrix with <span class="math inline">\((i, j)\)</span> entry equal to <span class="math inline">\(N_j(x_i)\)</span>. Finally, let <span class="math inline">\({\boldsymbol{\Omega}}\)</span> be the <span class="math inline">\(n \times n\)</span> matrix with <span class="math inline">\((i,j)\)</span> entry equal to <span class="math inline">\(\int N_i^{\prime\prime}(x) N_j^{\prime\prime}(x) dx\)</span>.</p>
+<p>The solution to <span class="math inline">\({\boldsymbol{\theta}}_\lambda\)</span> are the values that minimize</p>
+<p><span class="math display">\[
+({\boldsymbol{y}}- {\boldsymbol{N}}{\boldsymbol{\theta}})^T ({\boldsymbol{y}}- {\boldsymbol{N}}{\boldsymbol{\theta}}) + \lambda {\boldsymbol{\theta}}^T {\boldsymbol{\Omega}}{\boldsymbol{\theta}}.
+\]</span></p>
+<p>which results in</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{\theta}}}_\lambda = ({\boldsymbol{N}}^T {\boldsymbol{N}}+ \lambda {\boldsymbol{\Omega}})^{-1} {\boldsymbol{N}}^T {\boldsymbol{y}}.
+\]</span></p>
+</section><section id="linear-operator" class="slide level2">
+<h1>Linear Operator</h1>
+<p>Letting</p>
+<p><span class="math display">\[
+{\boldsymbol{S}}_\lambda = {\boldsymbol{N}}({\boldsymbol{N}}^T {\boldsymbol{N}}+ \lambda {\boldsymbol{\Omega}})^{-1} {\boldsymbol{N}}^T
+\]</span></p>
+<p>it folows that the fitted values are</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{y}}} = {\boldsymbol{S}}_\lambda {\boldsymbol{y}}.
+\]</span></p>
+<p>Thus, the fitted values from a NCS are contructed by taking linear combination of the response variable values <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span>.</p>
+</section><section id="degrees-of-freedom-1" class="slide level2">
+<h1>Degrees of Freedom</h1>
+<p>Recall that in OLS, we formed projection matrix <span class="math inline">\({\boldsymbol{P}}= {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T\)</span> and noted that the number of columns <span class="math inline">\(p\)</span> of <span class="math inline">\({\boldsymbol{X}}\)</span> is also found in the trace of <span class="math inline">\({\boldsymbol{P}}\)</span> where <span class="math inline">\(\operatorname{tr}({\boldsymbol{P}}) = p\)</span>.</p>
+<p>The effective degrees of freedom for a model fit by a linear operator is calculated as the trace of the operator.</p>
+<p>Therefore, for a given <span class="math inline">\(\lambda\)</span>, the effective degrees of freedom is</p>
+<p><span class="math display">\[
+\operatorname{df}_\lambda = \operatorname{tr}({\boldsymbol{S}}_\lambda).
+\]</span></p>
+</section><section id="bayesian-intepretation" class="slide level2">
+<h1>Bayesian Intepretation</h1>
+<p>Minimizing</p>
+<p><span class="math display">\[
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
+\]</span></p>
+<p>is equivalent to maximizing</p>
+<p><span class="math display">\[
+\exp\left\{ -\frac{\sum_{i=1}^n (y_i - s(x_i))^2}{2\sigma^2} \right\} \exp\left\{-\frac{\lambda}{2\sigma^2} \int |s^{\prime\prime}(x)|^2 dx\right\}.
+\]</span></p>
+<p>Therefore, the NCS solution can be interpreted as calculting the MAP where <span class="math inline">\(Y | X\)</span> is Normal and there’s an Exponential prior on the smoothness of <span class="math inline">\(s\)</span>.</p>
+</section><section id="bias-and-variance-trade-off" class="slide level2">
+<h1>Bias and Variance Trade-off</h1>
+<p>Typically we will choose some <span class="math inline">\(0 &lt; \lambda &lt; \infty\)</span> in an effort to balance the bias and variance. Let <span class="math inline">\(\hat{Y} = \hat{s}(X; \lambda)\)</span> where <span class="math inline">\(\hat{s}(\cdot; \lambda)\)</span> minimizes the above for some chosen <span class="math inline">\(\lambda\)</span> on an independent data set. Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+{\operatorname{E}}\left[\left(Y - \hat{Y}\right)^2\right] &amp; = {\rm E}\left[\left(s(x) + E - \hat{s}(x; \lambda)\right)^2 \right] \\
+\ &amp; = {\rm E}\left[\left( s(x) - \hat{s}(x; \lambda) \right)^2 \right] + {\rm Var}(E) \\
+\ &amp; = \left( s(x) - {\rm E}[\hat{s}(x; \lambda)]\right)^2 + {\rm Var}\left(\hat{s}(x; \lambda)\right) + {\rm Var}(E) \\ 
+\ &amp; = \mbox{bias}^2_{\lambda} + \mbox{variance}_{\lambda} + {\rm Var}(E)
+\end{aligned}
+\]</span></p>
+<p>where all of the above calculations are conditioned on <span class="math inline">\(X=x\)</span>.</p>
+</section><section class="slide level2">
+
+<p>In minimizing</p>
+<p><span class="math display">\[
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
+\]</span></p>
+<p>the relationship is such that:</p>
+<p><span class="math display">\[
+\uparrow \lambda \Longrightarrow \mbox{bias}^2 \uparrow, \mbox{variance} \downarrow
+\]</span></p>
+<p><span class="math display">\[
+\downarrow \lambda \Longrightarrow \mbox{bias}^2 \downarrow, \mbox{variance} \uparrow
+\]</span></p>
+</section><section id="choosing-lambda" class="slide level2">
+<h1>Choosing <span class="math inline">\(\lambda\)</span></h1>
+<p>There are several approaches that are commonly used to identify a value of <span class="math inline">\(\lambda\)</span>, including:</p>
+<ul>
+<li>Scientific knowledge that guides the acceptable value of <span class="math inline">\(\operatorname{df}_\lambda\)</span></li>
+<li>Cross-validation or some other prediction quality measure</li>
+<li>Model selection measures, such as Akaike information criterion (AIC) or Mallows <span class="math inline">\(C_p\)</span></li>
+</ul>
+</section><section id="smoothers-and-spline-models" class="slide level2">
+<h1>Smoothers and Spline Models</h1>
+<p>We investigated one type of nonparametric regression model here, the NCS. However, in general there are many such “smoother” methods available in the simple nonparametric regression scenario.</p>
+<p>Splines are particularly popular since splines are constructed from putting together polynomials and are therefore usually tractable to compute and analyze.</p>
+</section><section id="smoothers-in-r" class="slide level2">
+<h1>Smoothers in R</h1>
+<p>There are several functions and packages available in R for computing smoothers and tuning smoothness parameters. Examples include:</p>
+<ul>
+<li><code>splines</code> library</li>
+<li><code>smooth.spline()</code></li>
+<li><code>loess()</code></li>
+<li><code>lowess()</code></li>
+</ul>
+</section><section id="example" class="slide level2">
+<h1>Example</h1>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; y2 &lt;- smooth.spline(x=x, y=y, df=2)
+&gt; y5 &lt;- smooth.spline(x=x, y=y, df=5)
+&gt; y25 &lt;- smooth.spline(x=x, y=y, df=25)
+&gt; ycv &lt;- smooth.spline(x=x, y=y)
+&gt; ycv
+Call:
+smooth.spline(x = x, y = y)
+
+Smoothing Parameter  spar= 0.5162045  lambda= 0.0002730906 (11 iterations)
+Equivalent Degrees of Freedom (Df): 7.293673
+Penalized Criterion: 14.80602
+GCV: 1.180651</code></pre>
+</section><section class="slide level2">
+
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="generalized-additive-models" class="titleslide slide level1"><h1>Generalized Additive Models</h1></section><section id="ordinary-least-squares" class="slide level2">
+<h1>Ordinary Least Squares</h1>
+<p>Recall that OLS estimates the model</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
+ &amp; = {\boldsymbol{X}}_i {\boldsymbol{\beta}}+ E_i
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\({\operatorname{E}}[{\boldsymbol{E}}| {\boldsymbol{X}}] = {\boldsymbol{0}}\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{E}}| {\boldsymbol{X}}) = \sigma^2 {\boldsymbol{I}}\)</span>.</p>
+</section><section id="additive-models" class="slide level2">
+<h1>Additive Models</h1>
+<p>The <strong>additive model</strong> (which could also be called “ordinary nonparametric additive regression”) is of the form</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i &amp; = s_1(X_{i1}) + s_2(X_{i2}) + \ldots + s_p(X_{ip}) + E_i \\
+ &amp; = \sum_{j=1}^p s_j(X_{ij}) + E_i
+\end{aligned}
+\]</span></p>
+<p>where the <span class="math inline">\(s_j(\cdot)\)</span> for <span class="math inline">\(j = 1, \ldots, p\)</span> are a set of nonparametric (or flexible) functions. Again, we assume that <span class="math inline">\({\operatorname{E}}[{\boldsymbol{E}}| {\boldsymbol{X}}] = {\boldsymbol{0}}\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{E}}| {\boldsymbol{X}}) = \sigma^2 {\boldsymbol{I}}\)</span>.</p>
+</section><section id="backfitting" class="slide level2">
+<h1>Backfitting</h1>
+<p>The additive model can be fit through a technique called <strong>backfitting</strong>.</p>
+<ol type="1">
+<li>Intialize <span class="math inline">\(s^{(0)}_j(x)\)</span> for <span class="math inline">\(j = 1, \ldots, p\)</span>.</li>
+<li>For <span class="math inline">\(t=1, 2, \ldots\)</span>, fit <span class="math inline">\(s_j^{(t)}(x)\)</span> on response variable <span class="math display">\[y_i - \sum_{k \not= j} s_k^{(t-1)}(x_{ij}).\]</span></li>
+<li>Repeat until convergence.</li>
+</ol>
+<p>Note that some extra steps have to be taken to deal with the intercept.</p>
+</section><section id="gam-definition" class="slide level2">
+<h1>GAM Definition</h1>
+<p><span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution. The extension of additive models to this family of response variable is called <strong>generalized additive models</strong> (GAMs). The model is of the form</p>
+<p><span class="math display">\[
+g\left({\operatorname{E}}[Y_i | {\boldsymbol{X}}_i]\right) = \sum_{j=1}^p s_j(X_{ij})
+\]</span></p>
+<p>where <span class="math inline">\(g(\cdot)\)</span> is the link function and the <span class="math inline">\(s_j(\cdot)\)</span> are flexible and/or nonparametric functions.</p>
+</section><section id="overview-of-fitting-gams" class="slide level2">
+<h1>Overview of Fitting GAMs</h1>
+<p>Fitting GAMs involves putting together the following three tools:</p>
+<ol type="1">
+<li>We know how to fit a GLM via IRLS</li>
+<li>We know how to fit a smoother of a single explanatory variable via a least squares solution, as seen for the NCS</li>
+<li>We know how to combine additive smoothers by backfitting</li>
+</ol>
+</section><section id="gams-in-r" class="slide level2">
+<h1>GAMs in R</h1>
+<p>Three common ways to fit GAMs in R:</p>
+<ol type="1">
+<li>Utilize <code>glm()</code> on explanatory variables constructed from <code>ns()</code> or <code>bs()</code></li>
+<li>The <code>gam</code> library</li>
+<li>The <code>mgcv</code> library</li>
+</ol>
+</section><section id="example-1" class="slide level2">
+<h1>Example</h1>
+<pre class="r"><code>&gt; set.seed(508)
+&gt; x1 &lt;- seq(1, 10, length.out=50)
+&gt; n &lt;- length(x1)
+&gt; x2 &lt;- rnorm(n)
+&gt; f &lt;- 4*log(x1) + sin(x1) - 7 + 0.5*x2
+&gt; p &lt;- exp(f)/(1+exp(f))
+&gt; summary(p)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.001842 0.074170 0.310700 0.436200 0.860400 0.944800 
+&gt; y &lt;- rbinom(n, size=1, prob=p)
+&gt; mean(y)
+[1] 0.42
+&gt; df &lt;- data.frame(x1=x1, x2=x2, y=y)</code></pre>
+</section><section class="slide level2">
+
+<p>Here, we use the <code>gam()</code> function from the <code>mgcv</code> library. It automates choosing the smoothness of the splines.</p>
+<pre class="r"><code>&gt; library(mgcv)
+&gt; mygam &lt;- gam(y ~ s(x1) + s(x2), family = binomial(), data=df)
+&gt; library(broom)
+&gt; tidy(mygam)
+   term      edf   ref.df statistic     p.value
+1 s(x1) 1.870282 2.374897 12.742930 0.005308795
+2 s(x2) 1.000024 1.000048  1.163059 0.280836876</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; summary(mygam)
+
+Family: binomial 
+Link function: logit 
+
+Formula:
+y ~ s(x1) + s(x2)
+
+Parametric coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)  -1.1380     0.6723  -1.693   0.0905 .
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Approximate significance of smooth terms:
+       edf Ref.df Chi.sq p-value   
+s(x1) 1.87  2.375 12.743 0.00531 **
+s(x2) 1.00  1.000  1.163 0.28084   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+R-sq.(adj) =  0.488   Deviance explained =   47%
+UBRE = -0.12392  Scale est. = 1         n = 50</code></pre>
+</section><section class="slide level2">
+
+<p>True probabilities vs. estimated probabilities.</p>
+<pre class="r"><code>&gt; plot(p, mygam$fitted.values, pch=19); abline(0,1)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Smoother estimated for <code>x1</code>.</p>
+<pre class="r"><code>&gt; plot(mygam, select=1)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Smoother estimated for <code>x2</code>.</p>
+<pre class="r"><code>&gt; plot(mygam, select=2)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Here, we use the <code>glm()</code> function and include as an explanatory variable a NCS built from the <code>ns()</code> function from the <code>splines</code> library. We include a <code>df</code> argument in the <code>ns()</code> call.</p>
+<pre class="r"><code>&gt; library(splines)
+&gt; myglm &lt;- glm(y ~ ns(x1, df=2) + x2, family = binomial(), data=df)
+&gt; tidy(myglm)
+             term    estimate  std.error statistic     p.value
+1     (Intercept) -10.9228749  5.3078903 -2.057856 0.039603941
+2 ns(x1, df = 2)1  21.3848301 10.1317747  2.110670 0.034800710
+3 ns(x1, df = 2)2   6.3266262  2.1103294  2.997933 0.002718174
+4              x2   0.7341812  0.6089442  1.205663 0.227947633</code></pre>
+</section><section class="slide level2">
+
+<p>The spline basis evaluated at <code>x1</code> values.</p>
+<pre class="r"><code>&gt; ns(x1, df=2)
+               1           2
+ [1,] 0.00000000  0.00000000
+ [2,] 0.03114456 -0.02075171
+ [3,] 0.06220870 -0.04138180
+ [4,] 0.09311200 -0.06176867
+ [5,] 0.12377405 -0.08179071
+ [6,] 0.15411442 -0.10132630
+ [7,] 0.18405270 -0.12025384
+ [8,] 0.21350847 -0.13845171
+ [9,] 0.24240131 -0.15579831
+[10,] 0.27065081 -0.17217201
+[11,] 0.29817654 -0.18745121
+[12,] 0.32489808 -0.20151430
+[13,] 0.35073503 -0.21423967
+[14,] 0.37560695 -0.22550571
+[15,] 0.39943343 -0.23519080
+[16,] 0.42213406 -0.24317334
+[17,] 0.44362840 -0.24933170
+[18,] 0.46383606 -0.25354429
+[19,] 0.48267660 -0.25568949
+[20,] 0.50006961 -0.25564569
+[21,] 0.51593467 -0.25329128
+[22,] 0.53019136 -0.24850464
+[23,] 0.54275927 -0.24116417
+[24,] 0.55355797 -0.23114825
+[25,] 0.56250705 -0.21833528
+[26,] 0.56952943 -0.20260871
+[27,] 0.57462513 -0.18396854
+[28,] 0.57787120 -0.16253131
+[29,] 0.57934806 -0.13841863
+[30,] 0.57913614 -0.11175212
+[31,] 0.57731586 -0.08265339
+[32,] 0.57396762 -0.05124405
+[33,] 0.56917185 -0.01764570
+[34,] 0.56300897  0.01802003
+[35,] 0.55555939  0.05563154
+[36,] 0.54690354  0.09506722
+[37,] 0.53712183  0.13620546
+[38,] 0.52629468  0.17892464
+[39,] 0.51450251  0.22310315
+[40,] 0.50182573  0.26861939
+[41,] 0.48834478  0.31535174
+[42,] 0.47414005  0.36317859
+[43,] 0.45929198  0.41197833
+[44,] 0.44388099  0.46162934
+[45,] 0.42798748  0.51201003
+[46,] 0.41169188  0.56299877
+[47,] 0.39507460  0.61447395
+[48,] 0.37821607  0.66631397
+[49,] 0.36119670  0.71839720
+[50,] 0.34409692  0.77060206
+attr(,&quot;degree&quot;)
+[1] 3
+attr(,&quot;knots&quot;)
+50% 
+5.5 
+attr(,&quot;Boundary.knots&quot;)
+[1]  1 10
+attr(,&quot;intercept&quot;)
+[1] FALSE
+attr(,&quot;class&quot;)
+[1] &quot;ns&quot;     &quot;basis&quot;  &quot;matrix&quot;</code></pre>
+</section><section class="slide level2">
+
+<p>Plot of basis function values vs <code>x1</code>.</p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; summary(myglm)
+
+Call:
+glm(formula = y ~ ns(x1, df = 2) + x2, family = binomial(), data = df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0214  -0.3730  -0.0162   0.5762   1.7616  
+
+Coefficients:
+                Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)     -10.9229     5.3079  -2.058  0.03960 * 
+ns(x1, df = 2)1  21.3848    10.1318   2.111  0.03480 * 
+ns(x1, df = 2)2   6.3266     2.1103   2.998  0.00272 **
+x2                0.7342     0.6089   1.206  0.22795   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 68.029  on 49  degrees of freedom
+Residual deviance: 35.682  on 46  degrees of freedom
+AIC: 43.682
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; anova(myglm, test=&quot;LRT&quot;)
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: y
+
+Terms added sequentially (first to last)
+
+               Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                              49     68.029              
+ns(x1, df = 2)  2   30.755        47     37.274 2.097e-07 ***
+x2              1    1.592        46     35.682     0.207    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</section><section class="slide level2">
+
+<p>True probabilities vs. estimated probabilities.</p>
+<pre class="r"><code>&gt; plot(p, myglm$fitted.values, pch=19); abline(0,1)</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="bootstrap-for-statistical-models" class="titleslide slide level1"><h1>Bootstrap for Statistical Models</h1></section><section id="homoskedastic-models" class="slide level2">
+<h1>Homoskedastic Models</h1>
+<p>Let’s first discuss how one can utilize the bootstrap on any of the three homoskedastic models:</p>
+<ul>
+<li>Simple linear regression</li>
+<li>Ordinary least squares</li>
+<li>Additive models</li>
+</ul>
+</section><section id="residuals" class="slide level2">
+<h1>Residuals</h1>
+<p>In each of these scenarios we sample data <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), ({\boldsymbol{X}}_2, Y_2), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span>. Let suppose we calculate fitted values <span class="math inline">\(\hat{Y}_i\)</span> and they are unbiased:</p>
+<p><span class="math display">\[
+{\operatorname{E}}[\hat{Y}_i | {\boldsymbol{X}}] = {\operatorname{E}}[Y_i | {\boldsymbol{X}}].
+\]</span></p>
+<p>We can calculate residuals <span class="math inline">\(\hat{E}_i = Y_i - \hat{Y}_i\)</span> for <span class="math inline">\(i=1, 2, \ldots, n\)</span>.</p>
+</section><section id="studentized-residuals" class="slide level2">
+<h1>Studentized Residuals</h1>
+<p>One complication is that the residuals have a covariance. For example, in OLS we showed that</p>
+<p><span class="math display">\[
+{\operatorname{Cov}}(\hat{{\boldsymbol{E}}}) = \sigma^2 ({\boldsymbol{I}}- {\boldsymbol{P}})
+\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{P}}= {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T\)</span>.</p>
+<p>To correct for this induced heteroskedasticity, we studentize the residuals by calculating</p>
+<p><span class="math display">\[
+R_i = \frac{\hat{E}_i}{\sqrt{1-P_{ii}}}
+\]</span></p>
+<p>which gives <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{R}}) = \sigma^2 {\boldsymbol{I}}\)</span>.</p>
+</section><section id="confidence-intervals" class="slide level2">
+<h1>Confidence Intervals</h1>
+<p>The following is a bootstrap procedure for calculating a confidence interval on some statistic <span class="math inline">\(\hat{\theta}\)</span> calculated from a homoskedastic model fit. An example is <span class="math inline">\(\hat{\beta}_j\)</span> in an OLS.</p>
+<ol type="1">
+<li>Fit the model to obtain fitted values <span class="math inline">\(\hat{Y}_i\)</span>, studentized residuals <span class="math inline">\(R_i\)</span>, and the statistic of interest <span class="math inline">\(\hat{\theta}\)</span>.<br />
+For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>.</li>
+<li>Sample <span class="math inline">\(n\)</span> observations with replacement from <span class="math inline">\(\{R_i\}_{i=1}^n\)</span> to obtain bootstrap residuals <span class="math inline">\(R_1^{*}, R_2^{*}, \ldots, R_n^{*}\)</span>.</li>
+<li>Form new response variables <span class="math inline">\(Y_i^{*} = \hat{Y}_i + R_i^{*}\)</span>.</li>
+<li>Fit the model to obtain <span class="math inline">\(\hat{Y}^{*}_i\)</span> and all other fitted parameters.</li>
+<li>Calculate statistic of interest <span class="math inline">\(\hat{\theta}^{*(b)}\)</span>.</li>
+</ol>
+</section><section class="slide level2">
+
+<p>The bootstrap statistics <span class="math inline">\(\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\)</span> are then utilized through one of the techniques discussed earlier (percentile, pivotal, studentized pivotal) to calculate a bootstrap CI.</p>
+</section><section id="hypothesis-testing-1" class="slide level2">
+<h1>Hypothesis Testing</h1>
+<p>Suppose we are testing the hypothesis <span class="math inline">\(H_0: {\operatorname{E}}[Y | {\boldsymbol{X}}] = f_0({\boldsymbol{X}})\)</span> vs <span class="math inline">\(H_1: {\operatorname{E}}[Y | {\boldsymbol{X}}] = f_1({\boldsymbol{X}})\)</span>. Suppose it is possible to form unbiased estimates <span class="math inline">\(f_0({\boldsymbol{X}})\)</span> and <span class="math inline">\(f_1({\boldsymbol{X}})\)</span> given <span class="math inline">\({\boldsymbol{X}}\)</span>, and <span class="math inline">\(f_0\)</span> is a restricted version of <span class="math inline">\(f_1\)</span>.</p>
+<p>Suppose also we have a statistic <span class="math inline">\(T(\hat{f}_0, \hat{f}_1)\)</span> for performing this test so that the larger the statistic, the more evidence there is against the null hypothesis in favor of the alternative.</p>
+<p>The big picture strategy is to bootstrap studentized residuals from the unconstrained (alternative hypothesis) fitted model and then add those to the constrained (null hypothesis) fitted model to generate bootstrap null data sets.</p>
+</section><section class="slide level2">
+
+<ol type="1">
+<li>Fit the models to obtain fitted values <span class="math inline">\(\hat{f}_0({\boldsymbol{X}}_i)\)</span> and <span class="math inline">\(\hat{f}_1({\boldsymbol{X}}_i)\)</span>, studentized residuals <span class="math inline">\(R_i\)</span> from the fit <span class="math inline">\(\hat{f}_1({\boldsymbol{X}}_i)\)</span>, and the observed statistic <span class="math inline">\(T(\hat{f}_0, \hat{f}_1)\)</span>.<br />
+For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>.</li>
+<li>Sample <span class="math inline">\(n\)</span> observations with replacement from <span class="math inline">\(\{R_i\}_{i=1}^n\)</span> to obtain bootstrap residuals <span class="math inline">\(R_1^{*}, R_2^{*}, \ldots, R_n^{*}\)</span>.</li>
+<li>Form new response variables <span class="math inline">\(Y_i^{*} = \hat{f}_0({\boldsymbol{X}}_i) + R_i^{*}\)</span>.</li>
+<li>Fit the models on the response variables <span class="math inline">\(Y_i^{*}\)</span> to obtain <span class="math inline">\(\hat{f}^{*}_0\)</span> and <span class="math inline">\(\hat{f}^{*}_1\)</span>.</li>
+<li>Calculate statistic <span class="math inline">\(T(\hat{f}^{*(b)}_0, \hat{f}^{*(b)}_1)\)</span>.</li>
+</ol>
+</section><section class="slide level2">
+
+<p>The p-value is then calculated as</p>
+<p><span class="math display">\[
+\frac{\sum_{b=1}^B 1\left(T(\hat{f}^{*(b)}_0, \hat{f}^{*(b)}_1) \geq T(\hat{f}_0, \hat{f}_1) \right) }{B}
+\]</span></p>
+</section><section id="parametric-bootstrap" class="slide level2">
+<h1>Parametric Bootstrap</h1>
+<p>For more complex scenarios, such as GLMs, GAMs, and heteroskedastic models, it is typically more straightforward to utilize a parametric bootstrap.</p>
+</section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
@@ -695,35 +1172,35 @@ locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods  
-[7] base     
+[1] splines   stats     graphics  grDevices utils     datasets 
+[7] methods   base     
 
 other attached packages:
- [1] lmtest_0.9-35   zoo_1.8-0       car_2.1-4      
- [4] broom_0.4.2     dplyr_0.5.0     purrr_0.2.2    
- [7] readr_1.0.0     tidyr_0.6.1     tibble_1.2     
-[10] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
-[13] magrittr_1.5    devtools_1.12.0
+ [1] mgcv_1.8-17     nlme_3.1-131    lmtest_0.9-35  
+ [4] zoo_1.8-0       car_2.1-4       broom_0.4.2    
+ [7] dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
+[10] tidyr_0.6.1     tibble_1.2      ggplot2_2.2.1  
+[13] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
+[16] devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] revealjs_0.8       reshape2_1.4.2     splines_3.3.2     
- [4] haven_1.0.0        lattice_0.20-34    colorspace_1.3-2  
- [7] htmltools_0.3.5    yaml_2.1.14        mgcv_1.8-17       
-[10] nloptr_1.0.4       foreign_0.8-67     withr_1.0.2       
-[13] DBI_0.5-1          modelr_0.1.0       readxl_0.1.1      
-[16] plyr_1.8.4         stringr_1.1.0      MatrixModels_0.4-1
-[19] munsell_0.4.3      gtable_0.2.0       rvest_0.3.2       
-[22] psych_1.6.12       memoise_1.0.0      evaluate_0.10     
-[25] labeling_0.3       forcats_0.2.0      SparseM_1.74      
-[28] quantreg_5.29      pbkrtest_0.4-6     parallel_3.3.2    
-[31] Rcpp_0.12.9        scales_0.4.1       backports_1.0.5   
-[34] jsonlite_1.2       lme4_1.1-12        mnormt_1.5-5      
-[37] hms_0.3            digest_0.6.12      stringi_1.1.2     
-[40] grid_3.3.2         rprojroot_1.2      tools_3.3.2       
-[43] lazyeval_0.2.0     MASS_7.3-45        Matrix_1.2-8      
-[46] xml2_1.1.1         lubridate_1.6.0    assertthat_0.1    
-[49] minqa_1.2.4        rmarkdown_1.3      httr_1.2.1        
-[52] R6_2.2.0           nnet_7.3-12        nlme_3.1-131      </code></pre>
+ [1] revealjs_0.8       reshape2_1.4.2     haven_1.0.0       
+ [4] lattice_0.20-34    colorspace_1.3-2   htmltools_0.3.5   
+ [7] yaml_2.1.14        nloptr_1.0.4       foreign_0.8-67    
+[10] withr_1.0.2        DBI_0.5-1          modelr_0.1.0      
+[13] readxl_0.1.1       plyr_1.8.4         stringr_1.1.0     
+[16] MatrixModels_0.4-1 munsell_0.4.3      gtable_0.2.0      
+[19] rvest_0.3.2        psych_1.6.12       memoise_1.0.0     
+[22] evaluate_0.10      labeling_0.3       forcats_0.2.0     
+[25] SparseM_1.74       quantreg_5.29      pbkrtest_0.4-6    
+[28] parallel_3.3.2     Rcpp_0.12.9        scales_0.4.1      
+[31] backports_1.0.5    jsonlite_1.2       lme4_1.1-12       
+[34] mnormt_1.5-5       hms_0.3            digest_0.6.12     
+[37] stringi_1.1.2      grid_3.3.2         rprojroot_1.2     
+[40] tools_3.3.2        lazyeval_0.2.0     MASS_7.3-45       
+[43] Matrix_1.2-8       xml2_1.1.1         lubridate_1.6.0   
+[46] assertthat_0.1     minqa_1.2.4        rmarkdown_1.3     
+[49] httr_1.2.1         R6_2.2.0           nnet_7.3-12       </code></pre>
 </section>
 </section></section>
     </div>

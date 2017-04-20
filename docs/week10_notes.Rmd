@@ -39,10 +39,15 @@ theme_set(theme_bw())
 \newcommand{\bZ}{\boldsymbol{Z}}
 \newcommand{\be}{\boldsymbol{e}}
 \newcommand{\bE}{\boldsymbol{E}}
+\newcommand{\bs}{\boldsymbol{s}}
+\newcommand{\bS}{\boldsymbol{S}}
 \newcommand{\bP}{\boldsymbol{P}}
 \newcommand{\bI}{\boldsymbol{I}}
 \newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bN}{\boldsymbol{N}}
+\newcommand{\bR}{\boldsymbol{R}}
 \newcommand{\bO}{\boldsymbol{0}}
+\newcommand{\bOmega}{\boldsymbol{\Omega}}
 \newcommand{\bSig}{\boldsymbol{\Sigma}}
 \newcommand{\bt}{\boldsymbol{\theta}}
 \newcommand{\bT}{\boldsymbol{\Theta}}
@@ -72,7 +77,7 @@ where the $\hat{Y}_i$ are the result of a **linear projection** of the $Y_i$.
 
 ## OLS Normal Model
 
-In this section, let's assume that $(\bX_1, Y_1), \ldots, (\bX_n, Y_n)$ are distribution so that
+In this section, let's assume that $(\bX_1, Y_1), \ldots, (\bX_n, Y_n)$ are distributed so that
 
 $$
 \begin{aligned}
@@ -276,7 +281,7 @@ and these two rv's are independent.
 
 Suppose that the OLS model holds where $\bE | \bX \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$.
 
-In order to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$, we can form the $F$ statistic as given above, which has null distribution $F_{p_1 - p_0, n - p_1}$.  The p-value is calculated as $\Pr(F \geq F^*)$ where $F$ is the observed $F$ statistic and $F^* \sim F_{p_1 - p_0, n - p_1}$.
+In order to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$, we can form the $F$ statistic as given above, which has null distribution $F_{p_1 - p_0, n - p_1}$.  The p-value is calculated as $\Pr(F^* \geq F)$ where $F$ is the observed $F$ statistic and $F^* \sim F_{p_1 - p_0, n - p_1}$.
 
 If the above assumption on the distribution of $\bE | \bX$ only approximately holds, then the $F$ test p-value is also an approximation.
 
@@ -682,21 +687,473 @@ help(family)
 
 # Nonparametric Regression
 
-# Generalized Additive Models
+## Simple Linear Regression
 
-```{r, echo=FALSE, eval=FALSE}
-## Definition
-
-$Y | \bX$ is distributed according to an exponential family distribution.  The models, which are called **generalized additive models** (GAMs), will be of the form
+Recall the set up for simple linear regression.  For random variables $(X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)$, **simple linear regression** estimates the model
 
 $$
-\eta\left(\E[Y | \bX]\right) = \sum_{j=1}^p \sum_{k=1}^d h_k(X_{j})
+Y_i  = \beta_1 + \beta_2 X_i + E_i
 $$
 
-where $\eta$ is the canonical link function and the $h_k(\cdot)$ functions are very flexible.
+where $\E[E_i | X_i] = 0$, $\V(E_i | X_i) = \sigma^2$, and $\Cov(E_i, E_j | X_i, X_j) = 0$ for all $1 \leq i, j \leq n$ and $i \not= j$.
+
+Note that in this model $\E[Y | X] = \beta_1 + \beta_2 X.$
+
+## Simple Nonparametric Regression
+
+In **simple nonparametric regression**, we define a similar model while eliminating the linear assumption:
+
+$$
+Y_i  = s(X_i) + E_i
+$$
+
+for some function $s(\cdot)$ with the same assumptions on the distribution of $\bE | \bX$.  In this model, we also have
+
+$$
+\E[Y | X] = s(X).
+$$
+
+## Smooth Functions
+
+Suppose we consider fitting the model $Y_i  = s(X_i) + E_i$ with the restriction that $s \in C^2$, the class of functions with continuous second derivatives.  We can set up an objective function that regularizes how smooth vs wiggly $s$ is.  
+
+Specifically, suppose for a given set of observed data $(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)$ we wish to identify a function $s \in C^2$ that minimizes for some $\lambda$
+
+$$
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s''(x)|^2 dx
+$$
+
+## Smoothness Parameter $\lambda$
+
+When minimizing
+
+$$
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
+$$
+
+it follows that if $\lambda=0$ then any function $s \in C^2$ that interpolates the data is a solution.  
+
+As $\lambda \rightarrow \infty$, then the minimizing function is the simple linear regression solution.
+
+## The Solution
+
+For an observed data set $(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)$ where $n \geq 4$ and a fixed value $\lambda$, there is an exact solution to minimizing
+
+$$
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx.
+$$
+
+The solution is called a **natural cubic spline**, which is constructed to have knots at $x_1, x_2, \ldots, x_n$.
+
+## Natural Cubic Splines
+
+Suppose without loss of generality that we have ordered $x_1 < x_2 < \cdots < x_n$.  We assume all $x_i$ are unique to simplify the explanation here, but ties can be deal with.
+
+A **natural cubic spline** (NCS) is a function constructed from a set of piecewise cubic functions over the range $[x_1, x_n]$ joined at the knots so that the second derivative is continuous at the knots.  Outside of the range ($< x_1$ or $> x_n$), the spline is linear and it has continuous second derivatives at the endpoint knots.
+
+## Basis Functions
+
+Depending on the value $\lambda$, a different ncs will be constructed, but the entire family of ncs solutions over $0 < \lambda < \infty$ can be constructed from a common set of basis functions.
+
+We construct $n$ basis functions $N_1(x), N_2(x), \ldots, N_n(x)$ with coefficients $\theta_1(\lambda), \theta_2(\lambda), \ldots, \theta_n(\lambda)$. The NCS takes the form
+
+$$
+s(x) = \sum_{i=1}^n \theta_i(\lambda) N_i(x).
+$$
+
+
+Define $N_1(x) = 1$ and $N_2(x) = x$.  For $i = 3, \ldots, n$, define $N_i(x) = d_{i-1}(x) - d_{i-2}(x)$ where
+
+$$
+d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
+$$
+
+Recall that we've labeled indices so that $x_1 < x_2 < \cdots < x_n$. 
+
+## Calculating the Solution 
+
+Let $\bt_\lambda = (\theta_1(\lambda), \theta_2(\lambda), \ldots, \theta_n(\lambda))^T$ and let $\bN$ be the $n \times n$ matrix with $(i, j)$ entry equal to $N_j(x_i)$.  Finally, let $\bOmega$ be the $n \times n$ matrix with $(i,j)$ entry equal to $\int N_i^{\prime\prime}(x) N_j^{\prime\prime}(x) dx$.
+
+The solution to $\bt_\lambda$ are the values that minimize
+
+$$
+(\by - \bN \bt)^T (\by - \bN \bt) + \lambda \bt^T \bOmega \bt.
+$$
+
+which results in
+
+$$
+\hat{\bt}_\lambda = (\bN^T \bN + \lambda \bOmega)^{-1} \bN^T \by.
+$$
+
+## Linear Operator
+
+Letting 
+
+$$
+\bS_\lambda = \bN (\bN^T \bN + \lambda \bOmega)^{-1} \bN^T
+$$
+
+it folows that the fitted values are 
+
+$$
+\hat{\by} = \bS_\lambda \by.
+$$
+
+Thus, the fitted values from a NCS are contructed by taking linear combination of the response variable values $y_1, y_2, \ldots, y_n$.
+
+## Degrees of Freedom
+
+Recall that in OLS, we formed projection matrix $\bP = \bX (\bX^T \bX)^{-1} \bX^T$ and noted that the number of columns $p$ of $\bX$ is also found in the trace of $\bP$ where $\operatorname{tr}(\bP) = p$.
+
+The effective degrees of freedom for a model fit by a linear operator is calculated as the trace of the operator.  
+
+Therefore, for a given $\lambda$, the effective degrees of freedom is 
+
+$$
+\operatorname{df}_\lambda = \operatorname{tr}(\bS_\lambda).
+$$
+
+## Bayesian Intepretation
+
+Minimizing
+
+$$
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
+$$
+
+is equivalent to maximizing
+
+$$
+\exp\left\{ -\frac{\sum_{i=1}^n (y_i - s(x_i))^2}{2\sigma^2} \right\} \exp\left\{-\frac{\lambda}{2\sigma^2} \int |s^{\prime\prime}(x)|^2 dx\right\}.
+$$
+
+Therefore, the NCS solution can be interpreted as calculting the MAP where $Y | X$ is Normal and there's an Exponential prior on the smoothness of $s$.
+
+## Bias and Variance Trade-off
+
+Typically we will choose some $0 < \lambda < \infty$ in an effort to balance the bias and variance.  Let $\hat{Y} = \hat{s}(X; \lambda)$ where $\hat{s}(\cdot; \lambda)$ minimizes the above for some chosen $\lambda$ on an independent data set.  Then
+
+$$
+\begin{aligned}
+\E\left[\left(Y - \hat{Y}\right)^2\right] & = {\rm E}\left[\left(s(x) + E - \hat{s}(x; \lambda)\right)^2 \right] \\
+\ & = {\rm E}\left[\left( s(x) - \hat{s}(x; \lambda) \right)^2 \right] + {\rm Var}(E) \\
+\ & = \left( s(x) - {\rm E}[\hat{s}(x; \lambda)]\right)^2 + {\rm Var}\left(\hat{s}(x; \lambda)\right) + {\rm Var}(E) \\ 
+\ & = \mbox{bias}^2_{\lambda} + \mbox{variance}_{\lambda} + {\rm Var}(E)
+\end{aligned}
+$$
+
+where all of the above calculations are conditioned on $X=x$.
+
+
+In minimizing
+
+$$
+\sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
+$$ 
+
+the relationship is such that:
+
+$$
+\uparrow \lambda \Longrightarrow \mbox{bias}^2 \uparrow, \mbox{variance} \downarrow
+$$
+
+$$
+\downarrow \lambda \Longrightarrow \mbox{bias}^2 \downarrow, \mbox{variance} \uparrow
+$$
+
+## Choosing $\lambda$
+
+There are several approaches that are commonly used to identify a value of $\lambda$, including:
+
+- Scientific knowledge that guides the acceptable value of $\operatorname{df}_\lambda$
+- Cross-validation or some other prediction quality measure
+- Model selection measures, such as Akaike information criterion (AIC) or Mallows $C_p$
+
+## Smoothers and Spline Models
+
+We investigated one type of nonparametric regression model here, the NCS.  However, in general there are many such "smoother" methods available in the simple nonparametric regression scenario.
+
+Splines are particularly popular since splines are constructed from putting together polynomials and are therefore usually tractable to compute and analyze.
+
+## Smoothers in R
+
+There are several functions and packages available in R for computing smoothers and tuning smoothness parameters.  Examples include:
+
+- `splines` library
+- `smooth.spline()`
+- `loess()`
+- `lowess()`
+
+## Example
+
+```{r, echo=FALSE}
+set.seed(777)
+x <- seq(1, 10, length.out=25)
+n <- length(x)
+f <- 4*log(x) + sin(x)
+y <- f + rnorm(n)
+plot(x, y, pch=19, ylim=c(0, 12))
+lines(x, f, lty=3, lw=2)
 ```
 
+
+```{r}
+y2 <- smooth.spline(x=x, y=y, df=2)
+y5 <- smooth.spline(x=x, y=y, df=5)
+y25 <- smooth.spline(x=x, y=y, df=25)
+ycv <- smooth.spline(x=x, y=y)
+ycv
+```
+
+
+```{r, echo=FALSE}
+plot(x, y, pch=19, ylim=c(0, 12))
+lines(x, f, lty=3, lw=2)
+lines(y2, col="red", lw=2)
+lines(predict(y5, x=seq(1,10,0.01)), col="purple", lw=2)
+lines(ycv, col="blue", lw=2)
+lines(predict(y25, x=seq(1,10,0.01)), col="grey40", lw=2)
+```
+
+# Generalized Additive Models
+
+## Ordinary Least Squares
+
+Recall that OLS estimates the model
+
+$$
+\begin{aligned}
+Y_i & = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
+ & = \bX_i \bb + E_i
+\end{aligned}
+$$
+
+where $\E[\bE | \bX] = \bO$ and $\Cov(\bE | \bX) = \sigma^2 \bI$.
+
+## Additive Models
+
+The **additive model** (which could also be called "ordinary nonparametric additive regression") is of the form 
+
+$$
+\begin{aligned}
+Y_i & = s_1(X_{i1}) + s_2(X_{i2}) + \ldots + s_p(X_{ip}) + E_i \\
+ & = \sum_{j=1}^p s_j(X_{ij}) + E_i
+\end{aligned}
+$$
+
+
+where the $s_j(\cdot)$ for $j = 1, \ldots, p$ are a set of nonparametric (or flexible) functions.  Again, we assume that $\E[\bE | \bX] = \bO$ and $\Cov(\bE | \bX) = \sigma^2 \bI$.
+
+## Backfitting
+
+The additive model can be fit through a technique called **backfitting**.
+
+1. Intialize $s^{(0)}_j(x)$ for $j = 1, \ldots, p$.
+2. For $t=1, 2, \ldots$, fit $s_j^{(t)}(x)$ on response variable $$y_i - \sum_{k \not= j} s_k^{(t-1)}(x_{ij}).$$
+3. Repeat until convergence.
+
+Note that some extra steps have to be taken to deal with the intercept.
+
+## GAM Definition 
+
+$Y | \bX$ is distributed according to an exponential family distribution.  The extension of additive models to this family of response variable is called **generalized additive models** (GAMs).  The model is of the form
+
+$$
+g\left(\E[Y_i | \bX_i]\right) = \sum_{j=1}^p s_j(X_{ij})
+$$
+
+where $g(\cdot)$ is the link function and the $s_j(\cdot)$ are flexible and/or nonparametric functions.
+
+## Overview of Fitting GAMs
+
+Fitting GAMs involves putting together the following three tools:
+
+1.  We know how to fit a GLM via IRLS 
+2.  We know how to fit a smoother of a single explanatory variable via a least squares solution, as seen for the NCS
+3.  We know how to combine additive smoothers by backfitting
+
+## GAMs in R
+
+Three common ways to fit GAMs in R:
+
+1.  Utilize `glm()` on explanatory variables constructed from `ns()` or `bs()`
+2.  The `gam` library
+3.  The `mgcv` library
+
+## Example
+
+```{r}
+set.seed(508)
+x1 <- seq(1, 10, length.out=50)
+n <- length(x1)
+x2 <- rnorm(n)
+f <- 4*log(x1) + sin(x1) - 7 + 0.5*x2
+p <- exp(f)/(1+exp(f))
+summary(p)
+y <- rbinom(n, size=1, prob=p)
+mean(y)
+df <- data.frame(x1=x1, x2=x2, y=y)
+```
+
+
+Here, we use the `gam()` function from the `mgcv` library.  It automates choosing the smoothness of the splines.
+
+```{r, message=FALSE}
+library(mgcv)
+mygam <- gam(y ~ s(x1) + s(x2), family = binomial(), data=df)
+library(broom)
+tidy(mygam)
+```
+
+
+```{r}
+summary(mygam)
+```
+
+
+True probabilities vs. estimated probabilities.
+
+```{r}
+plot(p, mygam$fitted.values, pch=19); abline(0,1)
+```
+
+
+Smoother estimated for `x1`.
+
+```{r}
+plot(mygam, select=1)
+```
+
+
+Smoother estimated for `x2`.
+
+```{r}
+plot(mygam, select=2)
+```
+
+
+Here, we use the `glm()` function and include as an explanatory variable a NCS built from the `ns()` function from the `splines` library.  We include a `df` argument in the `ns()` call.
+
+```{r, message=FALSE}
+library(splines)
+myglm <- glm(y ~ ns(x1, df=2) + x2, family = binomial(), data=df)
+tidy(myglm)
+```
+
+
+The spline basis evaluated at `x1` values.
+
+```{r}
+ns(x1, df=2)
+```
+
+
+Plot of basis function values vs `x1`.
+
+```{r, echo=FALSE}
+plot(x1, ns(x1,df=2)[,2], type="l", col="blue", ylab="basis function")
+lines(x1, ns(x1,df=2)[,1], col="red")
+```
+
+
+```{r}
+summary(myglm)
+```
+
+
+```{r}
+anova(myglm, test="LRT")
+```
+
+
+True probabilities vs. estimated probabilities.
+
+```{r}
+plot(p, myglm$fitted.values, pch=19); abline(0,1)
+```
+
+
+
 # Bootstrap for Statistical Models
+
+## Homoskedastic Models
+
+Let's first discuss how one can utilize the bootstrap on any of the three homoskedastic models:
+
+- Simple linear regression
+- Ordinary least squares
+- Additive models
+
+## Residuals
+
+In each of these scenarios we sample data $(\bX_1, Y_1), (\bX_2, Y_2), \ldots, (\bX_n, Y_n)$.  Let suppose we calculate fitted values $\hat{Y}_i$ and they are unbiased:
+
+$$
+\E[\hat{Y}_i | \bX] = \E[Y_i | \bX].
+$$
+
+We can calculate residuals $\hat{E}_i = Y_i - \hat{Y}_i$ for $i=1, 2, \ldots, n$.
+
+## Studentized Residuals
+
+One complication is that the residuals have a covariance.  For example, in OLS we showed that 
+
+$$
+\Cov(\hat{\bE}) = \sigma^2 (\bI - \bP)
+$$
+
+where $\bP = \bX (\bX^T \bX)^{-1} \bX^T$.
+
+To correct for this induced heteroskedasticity, we studentize the residuals by calculating
+
+$$
+R_i = \frac{\hat{E}_i}{\sqrt{1-P_{ii}}}
+$$
+
+which gives $\Cov(\bR) = \sigma^2 \bI$.
+
+## Confidence Intervals
+
+The following is a bootstrap procedure for calculating a confidence interval on some statistic $\hat{\theta}$ calculated from a homoskedastic model fit.  An example is $\hat{\beta}_j$ in an OLS.
+
+1. Fit the model to obtain fitted values $\hat{Y}_i$, studentized residuals $R_i$, and the statistic of interest $\hat{\theta}$.  
+For $b = 1, 2, \ldots, B$.
+2. Sample $n$ observations with replacement from $\{R_i\}_{i=1}^n$ to obtain bootstrap residuals $R_1^{*}, R_2^{*}, \ldots, R_n^{*}$. 
+3. Form new response variables $Y_i^{*} = \hat{Y}_i + R_i^{*}$.
+4. Fit the model to obtain $\hat{Y}^{*}_i$ and all other fitted parameters.
+5. Calculate statistic of interest $\hat{\theta}^{*(b)}$.
+
+
+The bootstrap statistics $\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}$ are then utilized through one of the techniques discussed earlier (percentile, pivotal, studentized pivotal) to calculate a bootstrap CI.
+
+## Hypothesis Testing
+
+Suppose we are testing the hypothesis $H_0: \E[Y | \bX] = f_0(\bX)$ vs $H_1: \E[Y | \bX] = f_1(\bX)$. Suppose it is possible to form unbiased estimates $f_0(\bX)$ and $f_1(\bX)$ given $\bX$, and $f_0$ is a restricted version of $f_1$.  
+
+Suppose also we have a statistic $T(\hat{f}_0, \hat{f}_1)$ for performing this test so that the larger the statistic, the more evidence there is against the null hypothesis in favor of the alternative.
+
+The big picture strategy is to bootstrap studentized residuals from the unconstrained (alternative hypothesis) fitted model and then add those to the constrained (null hypothesis) fitted model to generate bootstrap null data sets.
+
+
+1. Fit the models to obtain fitted values $\hat{f}_0(\bX_i)$ and $\hat{f}_1(\bX_i)$, studentized residuals $R_i$ from the fit $\hat{f}_1(\bX_i)$, and the observed statistic $T(\hat{f}_0, \hat{f}_1)$.  
+For $b = 1, 2, \ldots, B$.
+2. Sample $n$ observations with replacement from $\{R_i\}_{i=1}^n$ to obtain bootstrap residuals $R_1^{*}, R_2^{*}, \ldots, R_n^{*}$. 
+3. Form new response variables $Y_i^{*} = \hat{f}_0(\bX_i) + R_i^{*}$.
+4. Fit the models on the response variables $Y_i^{*}$ to obtain $\hat{f}^{*}_0$ and $\hat{f}^{*}_1$.
+5. Calculate statistic $T(\hat{f}^{*(b)}_0, \hat{f}^{*(b)}_1)$.
+
+
+The p-value is then calculated as
+
+$$
+\frac{\sum_{b=1}^B 1\left(T(\hat{f}^{*(b)}_0, \hat{f}^{*(b)}_1) \geq T(\hat{f}_0, \hat{f}_1) \right) }{B}
+$$
+
+
+## Parametric Bootstrap
+
+For more complex scenarios, such as GLMs, GAMs, and heteroskedastic models, it is typically more straightforward to utilize a parametric bootstrap.
 
 # Extras
 
