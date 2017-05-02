@@ -1,0 +1,709 @@
+---
+title: QCB 508 -- Week 12
+author: John D. Storey
+date: Spring 2017
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    keep_tex: true
+geometry: right=2.5in
+---
+
+```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
+library(knitr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
+})
+opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE, small.mar=TRUE)
+options(width=63)
+library(tidyverse)
+library(broom)
+library(MASS)
+theme_set(theme_bw())
+```
+
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\V}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\se}{\operatorname{se}}
+\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\newcommand{\asim}{\; \stackrel{.}{\sim}\;}
+\newcommand{\xs}{x_1, x_2, \ldots, x_n}
+\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
+\newcommand{\bB}{\boldsymbol{B}}
+\newcommand{\bb}{\boldsymbol{\beta}}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\bX}{\boldsymbol{X}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bY}{\boldsymbol{Y}}
+\newcommand{\bz}{\boldsymbol{z}}
+\newcommand{\bZ}{\boldsymbol{Z}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\bE}{\boldsymbol{E}}
+\newcommand{\bs}{\boldsymbol{s}}
+\newcommand{\bS}{\boldsymbol{S}}
+\newcommand{\bP}{\boldsymbol{P}}
+\newcommand{\bI}{\boldsymbol{I}}
+\newcommand{\bD}{\boldsymbol{D}}
+\newcommand{\bd}{\boldsymbol{d}}
+\newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bw}{\boldsymbol{w}}
+\newcommand{\bN}{\boldsymbol{N}}
+\newcommand{\bR}{\boldsymbol{R}}
+\newcommand{\bu}{\boldsymbol{u}}
+\newcommand{\bU}{\boldsymbol{U}}
+\newcommand{\bv}{\boldsymbol{v}}
+\newcommand{\bV}{\boldsymbol{V}}
+\newcommand{\bO}{\boldsymbol{0}}
+\newcommand{\bOmega}{\boldsymbol{\Omega}}
+\newcommand{\bLambda}{\boldsymbol{\Lambda}}
+\newcommand{\bSig}{\boldsymbol{\Sigma}}
+\newcommand{\bSigma}{\boldsymbol{\Sigma}}
+\newcommand{\bt}{\boldsymbol{\theta}}
+\newcommand{\bT}{\boldsymbol{\Theta}}
+\newcommand{\bpi}{\boldsymbol{\pi}}
+\newcommand{\argmax}{\text{argmax}}
+\newcommand{\KL}{\text{KL}}
+\newcommand{\fdr}{{\rm FDR}}
+\newcommand{\pfdr}{{\rm pFDR}}
+\newcommand{\mfdr}{{\rm mFDR}}
+\newcommand{\bh}{\hat}
+\newcommand{\dd}{\lambda}
+\newcommand{\q}{\operatorname{q}}
+
+
+# <img src="./images/howto.jpg"></img>
+
+# EDA of HD Data
+
+## Rationale
+
+Exploratory data analysis (EDA) of high-dimensional data adds the additional challenge that many variables must be examined simultaneously.  Therefore, in addition to the EDA methods we discussed earlier, methods are often employed to organize, visualize, or numerically capture high-dimensional data into lower dimensions.
+
+Examples of EDA approaches applied to HD data include:
+
+- Traditional EDA methods covered earlier
+- Cluster analysis
+- Dimensionality reduction
+
+## Cluster Analysis
+
+An overview of common **cluster analysis** methods can be found here:
+
+<http://sml201.github.io/lectures/week12/week12.html>
+
+These slides include:
+
+- Distance measures
+- Hierarchical clustering
+- $K$-means clustering
+
+## Example: Cancer Subtypes
+
+<center>![cancer_clustering](images/cancer_clustering.jpg)</center>
+
+<font size=3em>
+Figure from [Alizadeh et al. (2000) *Nature*](http://www.nature.com/nature/journal/v403/n6769/abs/403503a0.html).
+</font>
+
+## Dimensionality Reduction
+
+The goal of **dimensionality reduction** is to extract low dimensional representations of high dimensional data that are useful for visualization, exploration, inference, or prediction.
+
+The low dimensional representations should capture key sources of variation in the data.
+
+## Some Methods
+
+- Principal component analysis
+- Singular value decomposition 
+- Latent variable modeling
+- Vector quantization
+- Self-organizing maps
+- Multidimensional scaling
+
+## Example: Weather Data
+
+These daily temperature data (in tenths of degrees C) come from meteorogical observations for weather stations in the US for the year 2012 provided by NOAA (National Oceanic and Atmospheric Administration).:
+
+```{r}
+load("../data/weather_data.RData")
+dim(weather_data)
+
+weather_data[1:5, 1:7]
+```
+
+This matrix contains temperature data on `r ncol(weather_data)` days and `r nrow(weather_data)` stations that were randomly selected.
+
+
+Convert temperatures to Fahrenheit:
+
+```{r}
+weather_data <- 0.18*weather_data + 32
+weather_data[1:5, 1:6]
+
+apply(weather_data, 1, median) %>% 
+  quantile(probs=seq(0,1,0.1))
+```
+
+
+Here are the `r nrow(weather_data)` rows converted to a single row that captures the most variation among the rows:
+
+```{r, echo=FALSE}
+m <- rowMeans(weather_data)
+tm <- mean(weather_data)
+x <- weather_data - m
+x <- x/sqrt(nrow(x)-1)
+s <- svd(x)
+#y <- colMeans(s$d[1] * (s$u[,1] %*% t(s$v[,1]))) + tm
+y <- -s$d[1] * s$v[,1] + tm
+day_of_the_year <- as.numeric(colnames(weather_data))
+data.frame(day=day_of_the_year, max_temp=y) %>%
+  ggplot() + geom_point(aes(x=day, y=max_temp))
+```
+
+
+# Principal Component Analysis
+
+## Goal
+
+For a given set of variables, **principal component analysis** (PCA) finds (constrained) weighted sums of the variables to produce variables (called principal components) that capture consectuive maximum levels of variation in the data.
+
+Specifically, the first principal component is the weighted sum of the variables that results in a component with the highest variation.  
+
+This component is then "removed" from the data, and the second principal component is obtained on the resulting residuals.  
+
+This process is repeated until there is no variation left in the data.
+
+## Population PCA
+
+Suppose we have $m$ random variables $X_1, X_2, \ldots, X_m$.  We wish to identify a set of weights $w_1, w_2, \ldots, w_m$ that maximizes
+
+$$
+\V\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right).
+$$
+
+However, this is unbounded, so we need to constrain the weights.  It turns out that constraining the weights so that 
+
+$$
+\| \bw \|_2^2 = \sum_{i=1}^m w_i^2 = 1
+$$
+
+is both interpretable and mathematically tractable.
+
+
+Therefore we wish to maximize
+
+$$
+\V\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right)
+$$
+
+subject to $\| \bw \|_2^2 = 1$.  Let $\bSig$ be the $m \times m$ population covariance matrix of the random variables $X_1, X_2, \ldots, X_m$.  It follows that
+
+$$
+\V\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right) = \bw^T \bSig \bw.
+$$
+
+Using a Lagrange multiplier, we wish to maximize
+
+$$
+\bw^T \bSig \bw + \lambda(\bw^T \bw - 1).
+$$
+
+
+Differentiating with respect to $\bw$ and setting to $\bO$, we get $\bSig \bw - \lambda \bw = 0$ or
+
+$$
+\bSig \bw = \lambda \bw.
+$$
+
+For any such $\bw$ and $\lambda$ where this holds, note that
+
+$$
+\V\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right) = \bw^T \bSig \bw = \lambda
+$$
+
+so the variance is $\lambda$.
+
+
+The eigendecompositon of a matrix identifies all such solutions to $\bSig \bw = \lambda \bw$.  Specifically, it calculates the decompositon
+
+$$
+\bSig = \bW \bLambda \bW^T
+$$
+
+where $\bW$ is an $m \times m$ orthogonal matrix and $\bLambda$ is a diagonal matrix with entries $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m$.  
+
+The fact that $\bW$ is orthogonal means $\bW \bW^T = \bW^T \bW = \bI$.  
+
+
+The following therefore hold:
+
+- For each column $j$ of $\bW$, say $\bw_j$, it follows that $\bSig \bw_j = \lambda_j \bw_j$
+- $\| \bw_j \|^2_2 = 1$ and $\bw_j^T \bw_k = \bO$ for $\lambda_j \not= \lambda_k$
+- $\V(\bw_j^T \bX) = \lambda_j$
+- $\V(\bw_1^T \bX) \geq \V(\bw_2^T \bX) \geq \cdots \geq \V(\bw_m^T \bX)$
+- $\bSig = \sum_{j=1}^m \lambda_j \bw^j \bw_j^T$
+- For $\lambda_j \not= \lambda_k$, 
+$$\Cov(\bw_j^T \bX, \bw_k^T \bX) = \bw_j^T \bSig \bw_k = \lambda_k \bw_j^T \bw_k =  \bO$$ 
+
+## Population PCs
+
+The $j$th **population principal component** (PC) of $X_1, X_2, \ldots, X_m$ is 
+
+$$
+\bw_j^T \bX = w_{1j} X_1 + w_{2j} X_2 + \cdots + w_{mj} X_m
+$$
+
+where $\bw_j = (w_{1j}, w_{2j}, \ldots, w_{mj})^T$ is column $j$ of $\bW$ from the eigendecomposition
+
+$$
+\bSig = \bW \bLambda \bW^T.
+$$
+
+The column $\bw_j$ are called the **loadings** of the $j$th principal component.  The **variance explained** by the $j$th PC is $\lambda_j$, which is diagonal element $j$ of $\bLambda$.
+
+## Sample PCA
+
+Suppose we have $m$ variables, each with $n$ observations:
+
+
+$$
+\begin{aligned}
+\bx_1 & = (x_{11}, x_{12}, \ldots, x_{1n}) \\
+\bx_2 & = (x_{21}, x_{22}, \ldots, x_{2n}) \\
+\  & \vdots \ \\
+\bx_m & = (x_{m1}, x_{m2}, \ldots, x_{mn})
+\end{aligned}
+$$
+
+We can organize these variables into an $m \times n$ matrix $\bX$ where row $i$ is $\bx_i$.
+
+PCA can be extended from the population scenario applied to rv's to the sample scenario applied to the observed data $\bX$.
+
+
+Consider all possible weighted sums of these variables
+
+$$\tilde{\pmb{x}} = \sum_{i=1}^{m} u_i \pmb{x_i}$$
+
+where we constrain $\sum_{i=1}^{m} u_i^2 = 1$.
+
+The first principal component of $\bX$ is the results $\tilde{\bx}$ with maximum sample variance
+
+$$
+s^2_{\tilde{\bx}} = \frac{\sum_{j=1}^n \left(\tilde{x}_j - \frac{1}{n} \sum_{k=1}^n \tilde{x}_k \right)^2}{n-1}.
+$$
+
+This first sample principal component (PC) is then "removed" from the data, and the procedure is repeated until $\min(m, n-1)$ sample PCs are constructed.
+
+
+The sample PCs are found in a manner analogous to the population PCs. First, we construct the $m \times m$ sample covariance matrix $\bS$ with $(i,j)$ entry
+
+$$
+s_{ij} = \frac{\sum_{k=1}^n (x_{ik} - \bar{x}_{i\cdot})(x_{jk} - \bar{x}_{j\cdot})}{n-1}.
+$$
+
+Identifying $\bu$ that maximizes $s^2_{\tilde{\bx}}$ also maximizes
+
+$$
+\bu^T \bS \bu.
+$$
+
+
+Following the steps from before, we want to identify $\bu$ and $\lambda$ where
+
+$$
+\bS \bu = \lambda \bu.
+$$
+
+which is accomplished with the eigendecomposition
+
+$$
+\bS = \bU \bLambda \bU^T
+$$
+
+where again $\bU^T \bU = \bU \bU^T = \bI$ and $\bLambda$ is a diagonal matrix so that $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m \geq 0$.
+
+## Sample PCs
+
+Let $x^*_{ij} = x_{ij} - \bar{x}_{i\cdot}$ be the row-wise mean-centered values of $\bX$, and let $\bX^*$ be the matrix composed of these values.  Also, let $\bu_j$ be column $j$ of $\bU$ from $\bS = \bU \bLambda \bU^T$.
+
+Sample PC $j$ is then 
+
+$$
+\tilde{\bx}_j = \bu_j^T \bX^* = \sum_{i=1}^m u_{ij} \bx^*_i 
+$$
+
+for $j = 1, 2, \ldots, \min(m, n-1)$.
+
+
+The loadings corresponding to PC $j$ are $\bu_j$.
+
+Note that the mean of PC $j$ is zero, i.e., that
+
+$$
+\frac{1}{n} \sum_{k=1}^n \tilde{x}_{jk} = 0.
+$$
+
+It can be calculated that the variance of PC $j$ is
+
+$$
+s^2_{\tilde{\bx}_j} = \frac{\sum_{k=1}^n \tilde{x}_{jk}^2}{n-1} = \lambda_j.
+$$
+
+## Proportion of Variance Explained
+
+The proportion of variance explained by PC $j$ is
+
+$$
+\operatorname{PVE}_j = \frac{\lambda_j}{\sum_{k=1}^m \lambda_k}.
+$$
+
+## Singular Value Decomposition
+
+One way in which PCA is performed is to carry out a **singular value decomposition** (SVD) of the data matrix $\bX$.  Let $q = \min(m, n-1)$. Recalling that $\bX^*$ is the row-wise mean centered $\bX$, we can take the SVD of $\bX^*/\sqrt{n-1}$ to obtain
+
+$$
+\frac{1}{\sqrt{n-1}} \bX^* = \bU \bD \bV^T
+$$
+
+where $\bU_{m \times q}$, $\bV_{n \times q}$, and diagonal $\bD_{q \times q}$.  Also, we have the orthogonality properties $\bV^T \bV = \bU^T \bU = \bI_{q}$.  Finally, $\bD$ is composed of diagonal elements $d_1 \geq d_2 \geq \cdots \geq d_q \geq 0$ where $d_q = 0$ if $q = n-1$.
+
+
+Note that
+
+$$
+\bS = \frac{1}{n-1} \bX^{*} \bX^{*T} = \bU \bD \bV^T \left(\bU \bD \bV^T\right)^T = \bU \bD^2 \bU^T.
+$$
+
+Therefore:
+
+- The variance of PC $j$ is $\lambda_j = d_j^2$
+- The loadings of PC $j$ are contained in the columns of the left-hand matrix from the decomposition of $\bS$ or $\bX^*$
+- PC $j$ is row $j$ of $\bD \bV^T$
+
+## My PCA Function
+
+```{r}
+pca <- function(x, space=c("rows", "columns"), 
+                center=TRUE, scale=FALSE) {
+  space <- match.arg(space)
+  if(space=="columns") {x <- t(x)}
+  x <- t(scale(t(x), center=center, scale=scale))
+  x <- x/sqrt(nrow(x)-1)
+  s <- svd(x)
+  loading <- s$u
+  colnames(loading) <- paste0("Loading", 1:ncol(loading))
+  rownames(loading) <- rownames(x)
+  pc <- diag(s$d) %*% t(s$v)
+  rownames(pc) <- paste0("PC", 1:nrow(pc))
+  colnames(pc) <- colnames(x)
+  pve <- s$d^2 / sum(s$d^2)
+  if(space=="columns") {pc <- t(pc); loading <- t(loading)}
+  return(list(pc=pc, loading=loading, pve=pve))
+}
+```
+
+## How It Works
+
+Input is as follows:
+
+- `x`: a matrix of numerical values
+- `space`: either `"rows"` or `"columns"`, denoting which dimension contains the variables
+- `center`: if `TRUE` then the variables are mean centered before calculating PCs
+- `scale`: if `TRUE` then the variables are std dev scaled before calculating PCs
+
+
+Output is a list with the following items:
+
+- `pc`: a matrix of all possible PCs
+- `loading`:  the weights or "loadings" that determined each PC
+- `pve`: the proportion of variation explained by each PC
+
+Note that the rows or columns of `pc` and `loading` have names to let you know on which dimension the values are organized.
+
+## The Ubiquitous Example
+
+Here's an example very frequently encountered to explain PCA, but it's slightly complicated.
+
+```{r}
+set.seed(508)
+n <- 70
+z <- sqrt(0.8) * rnorm(n)
+x1 <- z + sqrt(0.2) * rnorm(n)
+x2 <- z + sqrt(0.2) * rnorm(n)
+X <- rbind(x1, x2)
+p <- pca(x=X, space="rows")
+``` 
+
+
+"The first PC finds the direction of maximal variance in the data..."
+
+```{r, echo=FALSE, fig.width=7}
+df <- data.frame(x1=c(x1, lm(x1 ~ p$pc[1,])$fit), x2=c(x2, lm(x2 ~ p$pc[1,])$fit), legend=c(rep("data",n),rep("pc1_projection",n)))
+ggplot(df) + geom_point(aes(x=x1,y=x2,color=legend)) + 
+  scale_color_manual(values=c("blue", "red"))
+```
+
+
+
+The above figure was made with the following code:
+
+```{r, eval=FALSE}
+df <- data.frame(x1=c(x1, lm(x1 ~ p$pc[1,])$fit), 
+                 x2=c(x2, lm(x2 ~ p$pc[1,])$fit), 
+                 legend=c(rep("data",n),rep("pc1_projection",n)))
+ggplot(df) + geom_point(aes(x=x1,y=x2,color=legend)) + 
+  scale_color_manual(values=c("blue", "red"))
+```
+
+The red dots are therefore the projection of `x1` and `x2` onto the first PC, so they are neither the loadings nor the PC.
+
+Note that 
+
+```
+outer(p$loading[,1], p$pc[1,])[1,] + mean(x1) 
+# yields the same as  
+lm(x1 ~ p$pc[1,])$fit # and
+outer(p$loading[,1], p$pc[1,])[2,] + mean(x2) 
+# yields the same as 
+lm(x2 ~ p$pc[1,])$fit
+```
+
+
+Here is PC1 vs PC2:
+
+```{r}
+data.frame(pc1=p$pc[1,], pc2=p$pc[2,]) %>% 
+  ggplot() + geom_point(aes(x=pc1,y=pc2)) + 
+  theme(aspect.ratio=1)
+```
+
+
+
+Here is PC1 vs `x1`:
+
+```{r}
+data.frame(pc1=p$pc[1,], x1=x1) %>% 
+  ggplot() + geom_point(aes(x=pc1,y=x1)) + 
+  theme(aspect.ratio=1)
+```
+
+
+Here is PC1 vs `x2`:
+
+```{r}
+data.frame(pc1=p$pc[1,], x2=x2) %>% 
+  ggplot() + geom_point(aes(x=pc1,y=x2)) + 
+  theme(aspect.ratio=1)
+```
+
+
+# PCA Examples
+
+## Weather Data
+
+```{r}
+mypca <- pca(weather_data, space="rows")
+
+names(mypca)
+dim(mypca$pc)
+dim(mypca$loading)
+```
+
+```{r}
+mypca$pc[1:3, 1:3]
+mypca$loading[1:3, 1:3]
+```
+
+
+### PC1 vs Time
+
+```{r}
+day_of_the_year <- as.numeric(colnames(weather_data))
+data.frame(day=day_of_the_year, PC1=mypca$pc[1,]) %>%
+  ggplot() + geom_point(aes(x=day, y=PC1), size=2)
+```
+
+
+
+### PC2 vs Time
+
+```{r}
+data.frame(day=day_of_the_year, PC2=mypca$pc[2,]) %>%
+  ggplot() + geom_point(aes(x=day, y=PC2), size=2)
+```
+
+
+### PC Biplots
+
+Sometimes it is really informative to plot a PC versus another PC (as in the previous slide).  This is called a *PC biplot*.
+
+It is possible that interesting subgroups or clusters of *observations* will emerge.
+
+This does not appear to be the case in the weather data set, however, due to what we observe in the next two plots.
+
+
+### PC1 vs PC2 Biplot
+
+```{r}
+data.frame(PC1=mypca$pc[1,], PC2=mypca$pc[2,]) %>%
+  ggplot() + geom_point(aes(x=PC1, y=PC2), size=2)
+```
+
+
+### Proportion of Variance Explained
+
+```{r}
+data.frame(Component=1:length(mypca$pve), PVE=mypca$pve) %>%
+  ggplot() + geom_point(aes(x=Component, y=PVE), size=2)
+```
+
+
+### PCs Reproduce the Data
+
+We can multiple the loadings matrix by the PCs matrix to reproduce the data:
+```{r}
+# mean centered weather data
+weather_data_mc <- weather_data - rowMeans(weather_data)
+
+# difference between the PC projections and the data
+# the small sum is just machine imprecision
+sum(abs(weather_data_mc/sqrt(nrow(weather_data_mc)-1) - 
+          mypca$loading %*% mypca$pc))
+```
+
+
+### Loadings 
+
+The sum of squared weights -- i.e., loadings -- equals one for each component:
+
+```{r}
+sum(mypca$loading[,1]^2)
+
+apply(mypca$loading, 2, function(x) {sum(x^2)})
+```
+
+
+### Pairs of PCs Have Correlaton Zero
+
+PCs by contruction have sample correlation equal to zero:
+
+```{r}
+cor(mypca$pc[1,], mypca$pc[2,])
+cor(mypca$pc[1,], mypca$pc[3,])
+cor(mypca$pc[1,], mypca$pc[12,])
+cor(mypca$pc[5,], mypca$pc[27,])
+# etc...
+```
+
+
+```{r}
+day_of_the_year <- as.numeric(colnames(weather_data))
+y <- -mypca$pc[1,] + mean(weather_data)
+data.frame(day=day_of_the_year, max_temp=y) %>%
+  ggplot() + geom_point(aes(x=day, y=max_temp))
+```
+
+## Yeast Gene Expression
+
+Yeast cells were synchronized so that they were on the same approximate cell cycle timing.  The goal was to understand how gene expression varies over the cell cycle from a genome-wide perspective.
+
+```{r}
+load("../data/spellman.RData")
+time
+dim(gene_expression)
+gene_expression[1:6,1:5]
+```
+
+
+### Proportion Variance Explained
+
+```{r}
+p <- pca(gene_expression, space="rows")
+ggplot(data.frame(pc=1:13, pve=p$pve)) + 
+  geom_point(aes(x=pc,y=pve), size=2)
+```
+
+
+### PCs vs Time (with Smoothers)
+
+```{r, echo=FALSE}
+plot(rep(time,2), c(p$pc[1,], p$pc[2,]), pch=" ",xlab="time",ylab="principal component")
+points(time, p$pc[1,], pch=19, col="blue")
+points(time, p$pc[2,], pch=19, col="red")
+lines(smooth.spline(x=time,y=p$pc[1,],df=5), lwd=2, col="blue")
+lines(smooth.spline(x=time,y=p$pc[2,],df=5), lwd=2, col="red")
+legend(x="topright", legend=c("PC1", "PC2"), pch=c(19,19), col=c("blue", "red"))
+```
+
+## HapMap Genotypes
+
+Recall the example of HapMap data used to demonstrate the MCMC algorithm for estimating structure.  We curated a small data set that cleanly separated human subpopulations.
+
+```{r}
+hapmap <- read.table("../data/hapmap_sample.txt")
+dim(hapmap)
+hapmap[1:6,1:6]
+```
+
+
+### Proportion Variance Explained
+
+```{r}
+p <- pca(hapmap, space="rows")
+ggplot(data.frame(pc=(1:ncol(hapmap)), pve=p$pve)) + 
+  geom_point(aes(x=pc,y=pve), size=2)
+```
+
+
+### PC1 vs PC2 Biplot
+
+```{r, echo=FALSE}
+df <- as.data.frame(t(p$pc))
+ggplot(df) + 
+  geom_point(aes(x=PC1, y=PC2), size=2, alpha=0.7)
+```
+
+
+### PC1 vs PC3 Biplot
+
+```{r, echo=FALSE}
+ggplot(df) + 
+  geom_point(aes(x=PC1, y=PC3), size=2, alpha=0.7)
+```
+
+
+
+### PC2 vs PC3 Biplot
+
+```{r, echo=FALSE}
+ggplot(df) + 
+  geom_point(aes(x=PC2, y=PC3), size=2, alpha=0.7)
+```
+
+
+# HD Latent Variable Models
+
+# Jackstraw
+
+# Surrogate Variable Analysis
+
+# Regression Herding
+
+# Extras
+
+## Source
+
+[License](https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md)
+
+[Source Code](https://github.com/jdstorey/asdslectures/)
+
+## Session Information
+
+<section style="font-size: 0.75em;">
+```{r}
+sessionInfo()
+```
+</section>
+
