@@ -366,13 +366,13 @@ $$
 
 ## Singular Value Decomposition
 
-One way in which PCA is performed is to carry out a **singular value decomposition** (SVD) of the data matrix $\bX$.  Let $q = \min(m, n-1)$. Recalling that $\bX^*$ is the row-wise mean centered $\bX$, we can take the SVD of $\bX^*/\sqrt{n-1}$ to obtain
+One way in which PCA is performed is to carry out a **singular value decomposition** (SVD) of the data matrix $\bX$.  Let $q = \min(m, n)$. Recalling that $\bX^*$ is the row-wise mean centered $\bX$, we can take the SVD of $\bX^*/\sqrt{n-1}$ to obtain
 
 $$
 \frac{1}{\sqrt{n-1}} \bX^* = \bU \bD \bV^T
 $$
 
-where $\bU_{m \times q}$, $\bV_{n \times q}$, and diagonal $\bD_{q \times q}$.  Also, we have the orthogonality properties $\bV^T \bV = \bU^T \bU = \bI_{q}$.  Finally, $\bD$ is composed of diagonal elements $d_1 \geq d_2 \geq \cdots \geq d_q \geq 0$ where $d_q = 0$ if $q = n-1$.
+where $\bU_{m \times q}$, $\bV_{n \times q}$, and diagonal $\bD_{q \times q}$.  Also, we have the orthogonality properties $\bV^T \bV = \bU^T \bU = \bI_{q}$.  Finally, $\bD$ is composed of diagonal elements $d_1 \geq d_2 \geq \cdots \geq d_q \geq 0$ where $d_q = 0$ if $q = n$.
 
 
 Note that

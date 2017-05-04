@@ -697,11 +697,11 @@ s^2_{\tilde{{\boldsymbol{x}}}_j} = \frac{\sum_{k=1}^n \tilde{x}_{jk}^2}{n-1} = \
 \]</span></p>
 </section><section id="singular-value-decomposition" class="slide level2">
 <h1>Singular Value Decomposition</h1>
-<p>One way in which PCA is performed is to carry out a <strong>singular value decomposition</strong> (SVD) of the data matrix <span class="math inline">\({\boldsymbol{X}}\)</span>. Let <span class="math inline">\(q = \min(m, n-1)\)</span>. Recalling that <span class="math inline">\({\boldsymbol{X}}^*\)</span> is the row-wise mean centered <span class="math inline">\({\boldsymbol{X}}\)</span>, we can take the SVD of <span class="math inline">\({\boldsymbol{X}}^*/\sqrt{n-1}\)</span> to obtain</p>
+<p>One way in which PCA is performed is to carry out a <strong>singular value decomposition</strong> (SVD) of the data matrix <span class="math inline">\({\boldsymbol{X}}\)</span>. Let <span class="math inline">\(q = \min(m, n)\)</span>. Recalling that <span class="math inline">\({\boldsymbol{X}}^*\)</span> is the row-wise mean centered <span class="math inline">\({\boldsymbol{X}}\)</span>, we can take the SVD of <span class="math inline">\({\boldsymbol{X}}^*/\sqrt{n-1}\)</span> to obtain</p>
 <p><span class="math display">\[
 \frac{1}{\sqrt{n-1}} {\boldsymbol{X}}^* = {\boldsymbol{U}}{\boldsymbol{D}}{\boldsymbol{V}}^T
 \]</span></p>
-<p>where <span class="math inline">\({\boldsymbol{U}}_{m \times q}\)</span>, <span class="math inline">\({\boldsymbol{V}}_{n \times q}\)</span>, and diagonal <span class="math inline">\({\boldsymbol{D}}_{q \times q}\)</span>. Also, we have the orthogonality properties <span class="math inline">\({\boldsymbol{V}}^T {\boldsymbol{V}}= {\boldsymbol{U}}^T {\boldsymbol{U}}= {\boldsymbol{I}}_{q}\)</span>. Finally, <span class="math inline">\({\boldsymbol{D}}\)</span> is composed of diagonal elements <span class="math inline">\(d_1 \geq d_2 \geq \cdots \geq d_q \geq 0\)</span> where <span class="math inline">\(d_q = 0\)</span> if <span class="math inline">\(q = n-1\)</span>.</p>
+<p>where <span class="math inline">\({\boldsymbol{U}}_{m \times q}\)</span>, <span class="math inline">\({\boldsymbol{V}}_{n \times q}\)</span>, and diagonal <span class="math inline">\({\boldsymbol{D}}_{q \times q}\)</span>. Also, we have the orthogonality properties <span class="math inline">\({\boldsymbol{V}}^T {\boldsymbol{V}}= {\boldsymbol{U}}^T {\boldsymbol{U}}= {\boldsymbol{I}}_{q}\)</span>. Finally, <span class="math inline">\({\boldsymbol{D}}\)</span> is composed of diagonal elements <span class="math inline">\(d_1 \geq d_2 \geq \cdots \geq d_q \geq 0\)</span> where <span class="math inline">\(d_q = 0\)</span> if <span class="math inline">\(q = n\)</span>.</p>
 </section><section class="slide level2">
 
 <p>Note that</p>
