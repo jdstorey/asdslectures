@@ -602,7 +602,7 @@ AGM00060468 50.90000 53.96000 49.46 79.44286 59.90 41.36
 <p><span class="math display">\[
 {\boldsymbol{\Sigma}}= {\boldsymbol{W}}{\boldsymbol{\Lambda}}{\boldsymbol{W}}^T
 \]</span></p>
-<p>where <span class="math inline">\({\boldsymbol{W}}\)</span> is an <span class="math inline">\(m \times m\)</span> orthogonal matrix and <span class="math inline">\({\boldsymbol{\Lambda}}\)</span> is a diagonal matrix with entries <span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m\)</span>.</p>
+<p>where <span class="math inline">\({\boldsymbol{W}}\)</span> is an <span class="math inline">\(m \times m\)</span> orthogonal matrix and <span class="math inline">\({\boldsymbol{\Lambda}}\)</span> is a diagonal matrix with entries <span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m \geq 0\)</span>.</p>
 <p>The fact that <span class="math inline">\({\boldsymbol{W}}\)</span> is orthogonal means <span class="math inline">\({\boldsymbol{W}}{\boldsymbol{W}}^T = {\boldsymbol{W}}^T {\boldsymbol{W}}= {\boldsymbol{I}}\)</span>.</p>
 </section><section class="slide level2">
 
@@ -802,6 +802,13 @@ lm(x2 ~ p$pc[1,])$fit</code></pre>
 +   ggplot() + geom_point(aes(x=pc1,y=x2)) + 
 +   theme(aspect.ratio=1)</code></pre>
 <p><img src="week12_files/figure-revealjs/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Here is PC1 vs <code>z</code>:</p>
+<pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], z=z) %&gt;% 
++   ggplot() + geom_point(aes(x=pc1,y=z)) + 
++   theme(aspect.ratio=1)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="pca-examples" class="titleslide slide level1"><h1>PCA Examples</h1></section><section id="weather-data" class="slide level2">
 <h1>Weather Data</h1>
@@ -829,17 +836,17 @@ AGM00060425 -0.015779138 0.007026312 -0.009907972</code></pre>
 <pre class="r"><code>&gt; day_of_the_year &lt;- as.numeric(colnames(weather_data))
 &gt; data.frame(day=day_of_the_year, PC1=mypca$pc[1,]) %&gt;%
 +   ggplot() + geom_point(aes(x=day, y=PC1), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pc2-vs-time">PC2 vs Time</h3>
 <pre class="r"><code>&gt; data.frame(day=day_of_the_year, PC2=mypca$pc[2,]) %&gt;%
 +   ggplot() + geom_point(aes(x=day, y=PC2), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pc-biplots">PC Biplots</h3>
-<p>Sometimes it is really informative to plot a PC versus another PC (as in the previous slide). This is called a <em>PC biplot</em>.</p>
+<p>Sometimes it is informative to plot a PC versus another PC. This is called a <strong>PC biplot</strong>.</p>
 <p>It is possible that interesting subgroups or clusters of <em>observations</em> will emerge.</p>
 <p>This does not appear to be the case in the weather data set, however, due to what we observe in the next two plots.</p>
 </section><section class="slide level2">
@@ -847,13 +854,13 @@ AGM00060425 -0.015779138 0.007026312 -0.009907972</code></pre>
 <h3 id="pc1-vs-pc2-biplot">PC1 vs PC2 Biplot</h3>
 <pre class="r"><code>&gt; data.frame(PC1=mypca$pc[1,], PC2=mypca$pc[2,]) %&gt;%
 +   ggplot() + geom_point(aes(x=PC1, y=PC2), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="proportion-of-variance-explained-1">Proportion of Variance Explained</h3>
 <pre class="r"><code>&gt; data.frame(Component=1:length(mypca$pve), PVE=mypca$pve) %&gt;%
 +   ggplot() + geom_point(aes(x=Component, y=PVE), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pcs-reproduce-the-data">PCs Reproduce the Data</h3>
@@ -911,7 +918,7 @@ Loading49 Loading50
 &gt; y &lt;- -mypca$pc[1,] + mean(weather_data)
 &gt; data.frame(day=day_of_the_year, max_temp=y) %&gt;%
 +   ggplot() + geom_point(aes(x=day, y=max_temp))</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="yeast-gene-expression" class="slide level2">
 <h1>Yeast Gene Expression</h1>
 <p>Yeast cells were synchronized so that they were on the same approximate cell cycle timing. The goal was to understand how gene expression varies over the cell cycle from a genome-wide perspective.</p>
@@ -934,14 +941,14 @@ YAL007C -0.86693416 -1.1642322 -0.6359588 1.1179131  1.9587021</code></pre>
 <pre class="r"><code>&gt; p &lt;- pca(gene_expression, space=&quot;rows&quot;)
 &gt; ggplot(data.frame(pc=1:13, pve=p$pve)) + 
 +   geom_point(aes(x=pc,y=pve), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pcs-vs-time-with-smoothers">PCs vs Time (with Smoothers)</h3>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="hapmap-genotypes" class="slide level2">
 <h1>HapMap Genotypes</h1>
-<p>Recall the example of HapMap data used to demonstrate the MCMC algorithm for estimating structure. We curated a small data set that cleanly separated human subpopulations.</p>
+<p>Recall the example HapMap data used to demonstrate the MCMC algorithm for estimating structure. We curated a small data set that cleanly separates human subpopulations.</p>
 <pre class="r"><code>&gt; hapmap &lt;- read.table(&quot;../data/hapmap_sample.txt&quot;)
 &gt; dim(hapmap)
 [1] 400  24
@@ -959,24 +966,196 @@ rs2095381        1       2       1       2       1       1</code></pre>
 <pre class="r"><code>&gt; p &lt;- pca(hapmap, space=&quot;rows&quot;)
 &gt; ggplot(data.frame(pc=(1:ncol(hapmap)), pve=p$pve)) + 
 +   geom_point(aes(x=pc,y=pve), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
-</section><section class="slide level2">
-
-<h3 id="pc1-vs-pc2-biplot-1">PC1 vs PC2 Biplot</h3>
 <p><img src="week12_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
-<h3 id="pc1-vs-pc3-biplot">PC1 vs PC3 Biplot</h3>
+<h3 id="pc1-vs-pc2-biplot-1">PC1 vs PC2 Biplot</h3>
 <p><img src="week12_files/figure-revealjs/unnamed-chunk-27-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
-<h3 id="pc2-vs-pc3-biplot">PC2 vs PC3 Biplot</h3>
+<h3 id="pc1-vs-pc3-biplot">PC1 vs PC3 Biplot</h3>
 <p><img src="week12_files/figure-revealjs/unnamed-chunk-28-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc2-vs-pc3-biplot">PC2 vs PC3 Biplot</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
-<section><section id="hd-latent-variable-models" class="titleslide slide level1"><h1>HD Latent Variable Models</h1></section></section>
-<section><section id="jackstraw" class="titleslide slide level1"><h1>Jackstraw</h1></section></section>
-<section><section id="surrogate-variable-analysis" class="titleslide slide level1"><h1>Surrogate Variable Analysis</h1></section></section>
-<section><section id="regression-herding" class="titleslide slide level1"><h1>Regression Herding</h1></section></section>
+<section><section id="hd-latent-variable-models" class="titleslide slide level1"><h1>HD Latent Variable Models</h1></section><section id="definition" class="slide level2">
+<h1>Definition</h1>
+<p>Latent variables (or hidden variables) are random variables that are present in the underlying probabilistic model of the data, but they are unobserved.</p>
+<p>In high-dimensional data, there may be latent variables present that affect many variables simultaneously.</p>
+<p>These are latent variables that induce <strong>systematic variation</strong>. A topic of much interest is how to estimate these and incorporate them into further HD inference procedures.</p>
+</section><section id="model" class="slide level2">
+<h1>Model</h1>
+<p>Suppose we have observed data <span class="math inline">\({\boldsymbol{Y}}_{m \times n}\)</span> of <span class="math inline">\(m\)</span> variables with <span class="math inline">\(n\)</span> observations each. Suppose there are <span class="math inline">\(r\)</span> latent variables contained in the <span class="math inline">\(r\)</span> rows of <span class="math inline">\({\boldsymbol{Z}}_{r \times n}\)</span> where</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[{\boldsymbol{Y}}_{m \times n} \left. \right| {\boldsymbol{Z}}_{r \times n} \right] = {\boldsymbol{\Phi}}_{m \times r} {\boldsymbol{Z}}_{r \times n}.
+\]</span></p>
+<p>Let’s also assume that <span class="math inline">\(m \gg n &gt; r\)</span>. The latent variables <span class="math inline">\({\boldsymbol{Z}}\)</span> induce systematic variation in variable <span class="math inline">\({\boldsymbol{y}}_i\)</span> parameterized by <span class="math inline">\({\boldsymbol{\phi}}_i\)</span> for <span class="math inline">\(i = 1, 2, \ldots, m\)</span>.</p>
+</section><section id="estimation" class="slide level2">
+<h1>Estimation</h1>
+<p>There exist methods for estimating the row space of <span class="math inline">\({\boldsymbol{Z}}\)</span> with probability 1 as <span class="math inline">\(m \rightarrow \infty\)</span> for a fixed <span class="math inline">\(n\)</span> in two scenarios.</p>
+<p><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0420.2010.01455.x/abstract">Leek (2011)</a> shows how to do this when <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\sim \text{MVN}({\boldsymbol{\phi}}_i {\boldsymbol{Z}}, \sigma^2_i {\boldsymbol{I}})\)</span>, and the <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\)</span> are jointly independent.</p>
+<p><a href="https://arxiv.org/abs/1510.03497">Chen and Storey (2015)</a> show how to do this when the <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\)</span> are distributed according to a single parameter exponential family distribution with mean <span class="math inline">\({\boldsymbol{\phi}}_i {\boldsymbol{Z}}\)</span>, and the <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\)</span> are jointly independent.</p>
+</section><section id="jackstraw" class="slide level2">
+<h1>Jackstraw</h1>
+<p>Suppose we have a reasonable method for estimating <span class="math inline">\({\boldsymbol{Z}}\)</span> in the model</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[{\boldsymbol{Y}}\left. \right| {\boldsymbol{Z}}\right] = {\boldsymbol{\Phi}}{\boldsymbol{Z}}.
+\]</span></p>
+<p>The <strong>jackstraw</strong> method allows us to perform hypothesis tests of the form</p>
+<p><span class="math display">\[
+H_0: {\boldsymbol{\phi}}_i = {\boldsymbol{0}}\mbox{ vs } H_1: {\boldsymbol{\phi}}_i \not= {\boldsymbol{0}}.
+\]</span></p>
+<p>We can also perform this hypothesis test on any subset of the columns of <span class="math inline">\({\boldsymbol{\Phi}}\)</span>.</p>
+<p>This is a challening problem because we have to “double dip” in the data <span class="math inline">\({\boldsymbol{Y}}\)</span>, first to estimate <span class="math inline">\({\boldsymbol{Z}}\)</span>, and second to perform significance tests on <span class="math inline">\({\boldsymbol{\Phi}}\)</span>.</p>
+</section><section id="procedure" class="slide level2">
+<h1>Procedure</h1>
+<p>The first step is to form estimate <span class="math inline">\(\hat{{\boldsymbol{Z}}}\)</span> and then test statistic <span class="math inline">\(t_i\)</span> that performs the hypothesis test for each <span class="math inline">\({\boldsymbol{\phi}}_i\)</span> from <span class="math inline">\({\boldsymbol{y}}_i\)</span> and <span class="math inline">\(\hat{{\boldsymbol{Z}}}\)</span> (<span class="math inline">\(i=1, \ldots, m\)</span>). Assume that the larger <span class="math inline">\(t_i\)</span> is, the more evidence there is against the null hypothesis in favor of the alternative.</p>
+<p>Next we randomly select <span class="math inline">\(s\)</span> rows of <span class="math inline">\({\boldsymbol{Y}}\)</span> and permute them to create data set <span class="math inline">\({\boldsymbol{Y}}^{0}\)</span>. Let this set of <span class="math inline">\(s\)</span> variables be indexed by <span class="math inline">\(\mathcal{S}\)</span>. This breaks the relationship between <span class="math inline">\({\boldsymbol{y}}_i\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span>, thereby inducing a true <span class="math inline">\(H_0\)</span>, for each <span class="math inline">\(i \in \mathcal{S}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>We estimate <span class="math inline">\(\hat{{\boldsymbol{Z}}}^{0}\)</span> from <span class="math inline">\({\boldsymbol{Y}}^{0}\)</span> and again obtain test statistics <span class="math inline">\(t_i^{0}\)</span>. Specifically, the test statistics <span class="math inline">\(t_i^{0}\)</span> for <span class="math inline">\(i \in \mathcal{S}\)</span> are saved as draws from the null distribution.</p>
+<p>We repeat permutation procedure <span class="math inline">\(B\)</span> times, and then utilize all saved <span class="math inline">\(sB\)</span> permutation null statistics to calculate empirical p-values:</p>
+<p><span class="math display">\[
+p_i = \frac{1}{sB} \sum_{b=1}^B \sum_{k \in \mathcal{S}_b} 1\left(t_i \geq  t_k^{0b} \right).
+\]</span></p>
+</section><section id="example-yeast-cell-cycle" class="slide level2">
+<h1>Example: Yeast Cell Cycle</h1>
+<p>Recall the yeast cell cycle data from earlier. We will test which genes have expression significantly associated with PC1 and PC2 since these both capture cell cycle regulation.</p>
+<pre class="r"><code>&gt; library(jackstraw)
+&gt; load(&quot;../data/spellman.RData&quot;)
+&gt; time
+ [1]   0  30  60  90 120 150 180 210 240 270 330 360 390
+&gt; dim(gene_expression)
+[1] 5981   13
+&gt; dat &lt;- t(scale(t(gene_expression), center=TRUE, scale=FALSE))</code></pre>
+</section><section class="slide level2">
+
+<p style="font-size: 0.75em;">
+Test for associations between PC1 and each gene, conditioning on PC1 and PC2 being relevant sources of systematic variation.
+</p>
+<pre class="r"><code>&gt; jsobj &lt;- jackstraw(dat, r1=1, r=2, B=500, s=50, verbose=FALSE)
+&gt; jsobj$p.value %&gt;% qvalue() %&gt;% hist()</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>This is the most significant gene plotted with PC1.</p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p style="font-size: 0.75em;">
+Test for associations between PC2 and each gene, conditioning on PC1 and PC2 being relevant sources of systematic variation.
+</p>
+<pre class="r"><code>&gt; jsobj &lt;- jackstraw(dat, r1=2, r=2, B=500, s=50, verbose=FALSE)
+&gt; jsobj$p.value %&gt;% qvalue() %&gt;% hist()</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>This is the most significant gene plotted with PC2.</p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="surrogate-variable-analysis" class="slide level2">
+<h1>Surrogate Variable Analysis</h1>
+<p>The <strong>surrogate variable analysis</strong> (SVA) model combines the many responses model with the latent variable model introduced above:</p>
+<p><span class="math display">\[
+{\boldsymbol{Y}}_{m \times n} = {\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n} + {\boldsymbol{\Phi}}_{m \times r} {\boldsymbol{Z}}_{r \times n} + {\boldsymbol{E}}_{m \times n}
+\]</span></p>
+<p>where <span class="math inline">\(m \gg n &gt; d + r\)</span>.</p>
+<p>Here, only <span class="math inline">\({\boldsymbol{Y}}\)</span> and <span class="math inline">\({\boldsymbol{X}}\)</span> are observed, so we must combine many regressors model fitting techniques with latent variable estimation.</p>
+<p>The variables <span class="math inline">\({\boldsymbol{Z}}\)</span> are called <strong>surrogate variables</strong> for what would be a complete model of all systematic variation.</p>
+</section><section id="procedure-1" class="slide level2">
+<h1>Procedure</h1>
+<p>The main challenge is that the row spaces of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span> may overlap. Even when <span class="math inline">\({\boldsymbol{X}}\)</span> is the result of a randomized experiment, there will be a high probability that the row spaces of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span> have some overlap.</p>
+<p>Therefore, one cannot simply estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> by applying a latent variable esitmation method on the residuals <span class="math inline">\({\boldsymbol{Y}}- \hat{{\boldsymbol{B}}} {\boldsymbol{X}}\)</span> or on the observed response data <span class="math inline">\({\boldsymbol{Y}}\)</span>. In the former case, we will only estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> in the space orthogonal to <span class="math inline">\(\hat{{\boldsymbol{B}}} {\boldsymbol{X}}\)</span>. In the latter case, the estimate of <span class="math inline">\({\boldsymbol{Z}}\)</span> may modify the signal we can estimate in <span class="math inline">\({\boldsymbol{B}}{\boldsymbol{X}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>A <a href="http://dx.doi.org/10.1080/01621459.2011.645777">recent method</a>, takes an EM approach to esitmating <span class="math inline">\({\boldsymbol{Z}}\)</span> in the model</p>
+<p><span class="math display">\[
+{\boldsymbol{Y}}_{m \times n} = {\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n} + {\boldsymbol{\Phi}}_{m \times r} {\boldsymbol{Z}}_{r \times n} + {\boldsymbol{E}}_{m \times n}.
+\]</span></p>
+<p>It is shown to be necessary to penalize the likelihood in the estimation of <span class="math inline">\({\boldsymbol{B}}\)</span> — i.e., form shrinkage estimates of <span class="math inline">\({\boldsymbol{B}}\)</span> — in order to properly balance the row spaces of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The regularized EM algorithm, called <strong>cross-dimensonal inference</strong> (CDI) iterates between</p>
+<ol type="1">
+<li>Estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> from <span class="math inline">\({\boldsymbol{Y}}- \hat{{\boldsymbol{B}}}^{\text{Reg}} {\boldsymbol{X}}\)</span></li>
+<li>Estimate <span class="math inline">\({\boldsymbol{B}}\)</span> from <span class="math inline">\({\boldsymbol{Y}}- \hat{{\boldsymbol{\Phi}}} \hat{{\boldsymbol{Z}}}\)</span></li>
+</ol>
+<p>where <span class="math inline">\(\hat{{\boldsymbol{B}}}^{\text{Reg}}\)</span> is a regularized or shrunken estimate of <span class="math inline">\({\boldsymbol{B}}\)</span>.</p>
+<p>It can be shown that when the regularization can be represented by a prior distribution on <span class="math inline">\({\boldsymbol{B}}\)</span> then this algorithm achieves the MAP.</p>
+</section><section id="example-kidney-expr-by-age" class="slide level2">
+<h1>Example: Kidney Expr by Age</h1>
+<p>In <a href="http://www.pnas.org/content/102/36/12837.full">Storey et al. (2005)</a>, we considered a study where kidney samples were obtained on individuals across a range of ages. The goal was to identify genes with expression associated with age.</p>
+<pre class="r"><code>&gt; library(edge)
+&gt; library(splines)
+&gt; load(&quot;../data/kidney.RData&quot;)
+&gt; age &lt;- kidcov$age
+&gt; sex &lt;- kidcov$sex
+&gt; dim(kidexpr)
+[1] 34061    72
+&gt; cov &lt;- data.frame(sex = sex, age = age)
+&gt; null_model &lt;- ~sex
+&gt; full_model &lt;- ~sex + ns(age, df = 3)</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; de_obj &lt;- build_models(data = kidexpr, cov = cov, 
++                        null.model = null_model, 
++                        full.model = full_model)
+&gt; de_lrt &lt;- lrt(de_obj, nullDistn = &quot;bootstrap&quot;, bs.its = 100, verbose=FALSE)
+&gt; qobj1 &lt;- qvalueObj(de_lrt)
+&gt; hist(qobj1)</code></pre>
+<p><img src="week12_files/figure-revealjs/kid_lrt-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Now that we have completed a standard generalized LRT, let’s estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> (the surrogate variables) using the <code>sva</code> package as accessed via the <code>edge</code> package.</p>
+<pre class="r"><code>&gt; dim(nullMatrix(de_obj))
+[1] 72  2
+&gt; de_sva &lt;- apply_sva(de_obj, n.sv=4, method=&quot;irw&quot;, B=10)
+Number of significant surrogate variables is:  4 
+Iteration (out of 10 ):1  2  3  4  5  6  7  8  9  10  
+&gt; dim(nullMatrix(de_sva))
+[1] 72  6
+&gt; de_svalrt &lt;- lrt(de_sva, nullDistn = &quot;bootstrap&quot;, bs.its = 100, verbose=FALSE)</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qobj2 &lt;- qvalueObj(de_svalrt)
+&gt; hist(qobj2)</code></pre>
+<p><img src="week12_files/figure-revealjs/kid_svaq-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; summary(qobj1)
+
+Call:
+qvalue(p = pval)
+
+pi0:    0.7939407   
+
+Cumulative number of significant calls:
+
+          &lt;1e-04 &lt;0.001 &lt;0.01 &lt;0.025 &lt;0.05 &lt;0.1    &lt;1
+p-value       26    145   798   1709  2966 5392 34061
+q-value        0      0     2      3     8   26 34061
+local FDR      0      0     2      2     2   12 34061</code></pre>
+<pre class="r"><code>&gt; summary(qobj2)
+
+Call:
+qvalue(p = pval)
+
+pi0:    0.698907    
+
+Cumulative number of significant calls:
+
+          &lt;1e-04 &lt;0.001 &lt;0.01 &lt;0.025 &lt;0.05 &lt;0.1    &lt;1
+p-value       28    158  1014   2067  3555 6141 34061
+q-value        0      0     0      3     6   47 34061
+local FDR      0      0     0      1     4   29 34054</code></pre>
+</section><section class="slide level2">
+
+<p>P-values from two analyses are fairly different.</p>
+<pre class="r"><code>&gt; data.frame(lrt=-log10(qobj1$pval), sva=-log10(qobj2$pval)) %&gt;% 
++   ggplot() + geom_point(aes(x=lrt, y=sva), alpha=0.3) + geom_abline()</code></pre>
+<p><img src="week12_files/figure-revealjs/pval_comp-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
@@ -997,27 +1176,29 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] MASS_7.3-47     broom_0.4.2     dplyr_0.5.0    
- [4] purrr_0.2.2     readr_1.1.0     tidyr_0.6.1    
- [7] tibble_1.3.0    ggplot2_2.2.1   tidyverse_1.1.1
-[10] knitr_1.15.1    magrittr_1.5    devtools_1.12.0
+ [1] jackstraw_1.1   qvalue_2.1.1    MASS_7.3-47    
+ [4] broom_0.4.2     dplyr_0.5.0     purrr_0.2.2    
+ [7] readr_1.1.0     tidyr_0.6.1     tibble_1.3.0   
+[10] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
+[13] magrittr_1.5    devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.10     highr_0.6        cellranger_1.1.0
- [4] plyr_1.8.4       forcats_0.2.0    tools_3.3.2     
- [7] digest_0.6.12    lubridate_1.6.0  jsonlite_1.4    
-[10] evaluate_0.10    memoise_1.1.0    nlme_3.1-131    
-[13] gtable_0.2.0     lattice_0.20-35  psych_1.7.3.21  
-[16] DBI_0.6-1        yaml_2.1.14      parallel_3.3.2  
-[19] haven_1.0.0      xml2_1.1.1       withr_1.0.2     
-[22] stringr_1.2.0    httr_1.2.1       revealjs_0.9    
-[25] hms_0.3          rprojroot_1.2    grid_3.3.2      
-[28] R6_2.2.0         readxl_1.0.0     foreign_0.8-68  
-[31] rmarkdown_1.5    modelr_0.1.0     reshape2_1.4.2  
-[34] backports_1.0.5  scales_0.4.1     htmltools_0.3.6 
-[37] rvest_0.3.2      assertthat_0.2.0 mnormt_1.5-5    
-[40] colorspace_1.3-2 labeling_0.3     stringi_1.1.5   
-[43] lazyeval_0.2.0   munsell_0.4.3   </code></pre>
+ [1] Rcpp_0.12.10     lfa_1.4.0        highr_0.6       
+ [4] cellranger_1.1.0 plyr_1.8.4       forcats_0.2.0   
+ [7] tools_3.3.2      digest_0.6.12    lubridate_1.6.0 
+[10] jsonlite_1.4     evaluate_0.10    memoise_1.1.0   
+[13] nlme_3.1-131     gtable_0.2.0     lattice_0.20-35 
+[16] psych_1.7.5      DBI_0.6-1        yaml_2.1.14     
+[19] parallel_3.3.2   haven_1.0.0      xml2_1.1.1      
+[22] withr_1.0.2      stringr_1.2.0    httr_1.2.1      
+[25] revealjs_0.9     hms_0.3          rprojroot_1.2   
+[28] grid_3.3.2       R6_2.2.0         readxl_1.0.0    
+[31] foreign_0.8-68   rmarkdown_1.5    corpcor_1.6.9   
+[34] modelr_0.1.0     reshape2_1.4.2   splines_3.3.2   
+[37] backports_1.0.5  scales_0.4.1     htmltools_0.3.6 
+[40] rvest_0.3.2      assertthat_0.2.0 mnormt_1.5-5    
+[43] colorspace_1.3-2 labeling_0.3     stringi_1.1.5   
+[46] lazyeval_0.2.0   munsell_0.4.3   </code></pre>
 </section>
 </section></section>
     </div>

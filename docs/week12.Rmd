@@ -29,7 +29,9 @@ options(width=63)
 library(tidyverse)
 library(broom)
 library(MASS)
+library(qvalue)
 theme_set(theme_bw())
+set.seed(508)
 ```
 
 \newcommand{\E}{\operatorname{E}}
@@ -58,6 +60,9 @@ theme_set(theme_bw())
 \newcommand{\bd}{\boldsymbol{d}}
 \newcommand{\bW}{\boldsymbol{W}}
 \newcommand{\bw}{\boldsymbol{w}}
+\newcommand{\bM}{\boldsymbol{M}}
+\newcommand{\bPhi}{\boldsymbol{\Phi}}
+\newcommand{\bphi}{\boldsymbol{\phi}}
 \newcommand{\bN}{\boldsymbol{N}}
 \newcommand{\bR}{\boldsymbol{R}}
 \newcommand{\bu}{\boldsymbol{u}}
@@ -246,7 +251,7 @@ $$
 \bSig = \bW \bLambda \bW^T
 $$
 
-where $\bW$ is an $m \times m$ orthogonal matrix and $\bLambda$ is a diagonal matrix with entries $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m$.  
+where $\bW$ is an $m \times m$ orthogonal matrix and $\bLambda$ is a diagonal matrix with entries $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m \geq 0$.  
 
 The fact that $\bW$ is orthogonal means $\bW \bW^T = \bW^T \bW = \bI$.  
 
@@ -524,6 +529,15 @@ data.frame(pc1=p$pc[1,], x2=x2) %>%
   theme(aspect.ratio=1)
 ```
 
+----
+
+Here is PC1 vs `z`:
+
+```{r}
+data.frame(pc1=p$pc[1,], z=z) %>% 
+  ggplot() + geom_point(aes(x=pc1,y=z)) + 
+  theme(aspect.ratio=1)
+```
 
 # PCA Examples
 
@@ -566,7 +580,7 @@ data.frame(day=day_of_the_year, PC2=mypca$pc[2,]) %>%
 
 ### PC Biplots
 
-Sometimes it is really informative to plot a PC versus another PC (as in the previous slide).  This is called a *PC biplot*.
+Sometimes it is informative to plot a PC versus another PC.  This is called a **PC biplot**.
 
 It is possible that interesting subgroups or clusters of *observations* will emerge.
 
@@ -676,7 +690,7 @@ legend(x="topright", legend=c("PC1", "PC2"), pch=c(19,19), col=c("blue", "red"))
 
 ## HapMap Genotypes
 
-Recall the example of HapMap data used to demonstrate the MCMC algorithm for estimating structure.  We curated a small data set that cleanly separated human subpopulations.
+Recall the example HapMap data used to demonstrate the MCMC algorithm for estimating structure.  We curated a small data set that cleanly separates human subpopulations.
 
 ```{r}
 hapmap <- read.table("../data/hapmap_sample.txt")
@@ -726,11 +740,236 @@ ggplot(df) +
 
 # HD Latent Variable Models
 
-# Jackstraw
+## Definition
 
-# Surrogate Variable Analysis
+Latent variables (or hidden variables) are random variables that are present in the underlying probabilistic model of the data, but they are unobserved.
 
-# Regression Herding
+In high-dimensional data, there may be latent variables present that affect many variables simultaneously.
+
+These are latent variables that induce **systematic variation**.  A topic of much interest is how to estimate these and incorporate them into further HD inference procedures.
+
+## Model
+
+Suppose we have observed data $\bY_{m \times n}$ of $m$ variables with $n$ observations each.  Suppose there are $r$ latent variables contained in the $r$ rows of $\bZ_{r \times n}$ where
+
+$$
+\E\left[\bY_{m \times n} \left. \right| \bZ_{r \times n} \right] = \bPhi_{m \times r} \bZ_{r \times n}.
+$$
+
+Let's also assume that $m \gg n > r$.  The latent variables $\bZ$ induce systematic variation in variable $\by_i$ parameterized by $\bphi_i$ for $i = 1, 2, \ldots, m$.
+
+## Estimation
+
+There exist methods for estimating the row space of $\bZ$ with probability 1 as $m \rightarrow \infty$ for a fixed $n$ in two scenarios.
+
+[Leek (2011)](http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0420.2010.01455.x/abstract) shows how to do this when $\by_i | \bZ \sim \text{MVN}(\bphi_i \bZ, \sigma^2_i \bI)$, and the $\by_i | \bZ$ are jointly independent.   
+
+[Chen and Storey (2015)](https://arxiv.org/abs/1510.03497) show how to do this when the $\by_i | \bZ$ are distributed according to a single parameter exponential family distribution with mean $\bphi_i \bZ$, and the $\by_i | \bZ$ are jointly independent.
+
+## Jackstraw
+
+Suppose we have a reasonable method for estimating $\bZ$ in the model
+
+$$
+\E\left[\bY \left. \right| \bZ \right] = \bPhi \bZ.
+$$
+
+The **jackstraw** method allows us to perform hypothesis tests of the form
+
+$$
+H_0: \bphi_i = \bO \mbox{ vs } H_1: \bphi_i \not= \bO.
+$$
+
+We can also perform this hypothesis test on any subset of the columns of $\bPhi$.
+
+This is a challening problem because we have to "double dip" in the data $\bY$, first to estimate $\bZ$, and second to perform significance tests on $\bPhi$.
+
+## Procedure
+
+The first step is to form estimate $\hat{\bZ}$ and then test statistic $t_i$ that performs the hypothesis test for each $\bphi_i$  from $\by_i$ and $\hat{\bZ}$ ($i=1, \ldots, m$).  Assume that the larger $t_i$ is, the more evidence there is against the null hypothesis in favor of the alternative.
+
+Next we randomly select $s$ rows of $\bY$ and permute them to create data set $\bY^{0}$.  Let this set of $s$ variables be indexed by $\mathcal{S}$.  This breaks the relationship between $\by_i$ and $\bZ$, thereby inducing a true $H_0$, for each $i \in \mathcal{S}$.
+
+----
+
+We estimate $\hat{\bZ}^{0}$ from $\bY^{0}$ and again obtain test statistics $t_i^{0}$.  Specifically, the test statistics $t_i^{0}$ for $i \in \mathcal{S}$ are saved as draws from the null distribution.
+
+We repeat permutation procedure $B$ times, and then utilize all saved $sB$ permutation null statistics to calculate empirical p-values:
+
+$$
+p_i = \frac{1}{sB} \sum_{b=1}^B \sum_{k \in \mathcal{S}_b} 1\left(t_i \geq  t_k^{0b} \right).
+$$
+
+## Example: Yeast Cell Cycle
+
+Recall the yeast cell cycle data from earlier.  We will test which genes have expression significantly associated with PC1 and PC2 since these both capture cell cycle regulation.
+
+```{r, message=FALSE}
+library(jackstraw)
+load("../data/spellman.RData")
+time
+dim(gene_expression)
+dat <- t(scale(t(gene_expression), center=TRUE, scale=FALSE))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Test for associations between PC1 and each gene, conditioning on PC1 and PC2 being relevant sources of systematic variation.
+</p>
+
+```{r, message=FALSE}
+jsobj <- jackstraw(dat, r1=1, r=2, B=500, s=50, verbose=FALSE)
+jsobj$p.value %>% qvalue() %>% hist()
+```
+
+----
+
+This is the most significant gene plotted with PC1.
+
+```{r, echo=FALSE}
+y <- gene_expression[which.min(jsobj$p.value),]
+p <- pca(gene_expression, space="rows")
+plot(rep(time,2), c(p$pc[1,], y), pch=" ",xlab="time",ylab="expression")
+points(time, p$pc[1,], pch=19, col="blue")
+points(time, y, pch=19, col="red")
+lines(smooth.spline(x=time,y=p$pc[1,],df=5), lwd=2, col="blue")
+lines(smooth.spline(x=time,y=y,df=5), lwd=2, col="red")
+legend(x="topright", legend=c("PC1", "top gene"), pch=c(19,19), col=c("blue", "red"))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Test for associations between PC2 and each gene, conditioning on PC1 and PC2 being relevant sources of systematic variation.
+</p>
+
+
+```{r, message=FALSE}
+jsobj <- jackstraw(dat, r1=2, r=2, B=500, s=50, verbose=FALSE)
+jsobj$p.value %>% qvalue() %>% hist()
+```
+
+----
+
+This is the most significant gene plotted with PC2.
+
+```{r, echo=FALSE}
+y <- gene_expression[which.min(jsobj$p.value),]
+p <- pca(gene_expression, space="rows")
+plot(rep(time,2), c(p$pc[2,], y), pch=" ",xlab="time",ylab="expression")
+points(time, p$pc[2,], pch=19, col="blue")
+points(time, y, pch=19, col="red")
+lines(smooth.spline(x=time,y=p$pc[2,],df=5), lwd=2, col="blue")
+lines(smooth.spline(x=time,y=y,df=5), lwd=2, col="red")
+legend(x="topright", legend=c("PC2", "top gene"), pch=c(19,19), col=c("blue", "red"))
+```
+
+## Surrogate Variable Analysis
+
+The **surrogate variable analysis** (SVA) model combines the many responses model with the latent variable model introduced above:
+
+$$
+\bY_{m \times n} = \bB_{m \times d} \bX_{d \times n} + \bPhi_{m \times r} \bZ_{r \times n} + \bE_{m \times n}
+$$
+
+where $m \gg n > d + r$.
+
+Here, only $\bY$ and $\bX$ are observed, so we must combine many regressors model fitting techniques with latent variable estimation.
+
+The variables $\bZ$ are called **surrogate variables** for what would be a complete model of all systematic variation.
+
+## Procedure
+
+The main challenge is that the row spaces of $\bX$ and $\bZ$ may overlap.  Even when $\bX$ is the result of a randomized experiment, there will be a high probability that the row spaces of $\bX$ and $\bZ$ have some overlap.
+
+Therefore, one cannot simply estimate $\bZ$ by applying a latent variable esitmation method on the residuals $\bY - \hat{\bB} \bX$ or on the observed response data $\bY$.  In the former case, we will only estimate $\bZ$ in the space orthogonal to $\hat{\bB} \bX$.  In the latter case, the estimate of $\bZ$ may modify the signal we can estimate in $\bB \bX$.
+
+----
+
+A [recent method](http://dx.doi.org/10.1080/01621459.2011.645777), takes an EM approach to esitmating $\bZ$ in the model 
+
+$$
+\bY_{m \times n} = \bB_{m \times d} \bX_{d \times n} + \bPhi_{m \times r} \bZ_{r \times n} + \bE_{m \times n}.
+$$
+
+It is shown to be necessary to penalize the likelihood in the estimation of $\bB$ --- i.e., form shrinkage estimates of $\bB$ --- in order to properly balance the row spaces of $\bX$ and $\bZ$.
+
+----
+
+The regularized EM algorithm, called **cross-dimensonal inference** (CDI) iterates between
+
+1. Estimate $\bZ$ from $\bY - \hat{\bB}^{\text{Reg}} \bX$
+2. Estimate $\bB$ from $\bY - \hat{\bPhi} \hat{\bZ}$
+
+where $\hat{\bB}^{\text{Reg}}$ is a regularized or shrunken estimate of $\bB$.
+
+It can be shown that when the regularization can be represented by a prior distribution on $\bB$ then this algorithm achieves the MAP.
+
+
+## Example: Kidney Expr by Age
+
+In [Storey et al. (2005)](http://www.pnas.org/content/102/36/12837.full), we considered a study where kidney samples were obtained on individuals across a range of ages.  The goal was to identify genes with expression associated with age.
+
+```{r kid_load, message=FALSE, cache=TRUE}
+library(edge)
+library(splines)
+load("../data/kidney.RData")
+age <- kidcov$age
+sex <- kidcov$sex
+dim(kidexpr)
+cov <- data.frame(sex = sex, age = age)
+null_model <- ~sex
+full_model <- ~sex + ns(age, df = 3)
+```
+
+----
+
+```{r kid_lrt, dependson="kid_load", cache=TRUE}
+de_obj <- build_models(data = kidexpr, cov = cov, 
+                       null.model = null_model, 
+                       full.model = full_model)
+de_lrt <- lrt(de_obj, nullDistn = "bootstrap", bs.its = 100, verbose=FALSE)
+qobj1 <- qvalueObj(de_lrt)
+hist(qobj1)
+```
+
+----
+
+Now that we have completed a standard generalized LRT, let's estimate $\bZ$ (the surrogate variables) using the `sva` package as accessed via the `edge` package.
+
+```{r kid_sva, dependson="kid_lrt", cache=TRUE}
+dim(nullMatrix(de_obj))
+de_sva <- apply_sva(de_obj, n.sv=4, method="irw", B=10)
+dim(nullMatrix(de_sva))
+de_svalrt <- lrt(de_sva, nullDistn = "bootstrap", bs.its = 100, verbose=FALSE)
+```
+
+----
+
+```{r kid_svaq, dependson="kid_sva", cache=TRUE}
+qobj2 <- qvalueObj(de_svalrt)
+hist(qobj2)
+```
+
+----
+
+```{r qvalues1, dependson="kid_svaq"}
+summary(qobj1)
+```
+
+```{r qvalues2, dependson="kid_svaq"}
+summary(qobj2)
+```
+
+----
+
+P-values from two analyses are fairly different.
+
+```{r pval_comp, dependson="kid_svaq"}
+data.frame(lrt=-log10(qobj1$pval), sva=-log10(qobj2$pval)) %>% 
+  ggplot() + geom_point(aes(x=lrt, y=sva), alpha=0.3) + geom_abline()
+```
 
 # Extras
 
