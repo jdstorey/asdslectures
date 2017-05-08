@@ -517,7 +517,7 @@ p {
 </section><section id="example-weather-data" class="slide level2">
 <h1>Example: Weather Data</h1>
 <p>These daily temperature data (in tenths of degrees C) come from meteorogical observations for weather stations in the US for the year 2012 provided by NOAA (National Oceanic and Atmospheric Administration).:</p>
-<pre class="r"><code>&gt; load(&quot;../data/weather_data.RData&quot;)
+<pre class="r"><code>&gt; load(&quot;./data/weather_data.RData&quot;)
 &gt; dim(weather_data)
 [1] 2811   50
 &gt; 
@@ -552,7 +552,7 @@ AGM00060468 50.90000 53.96000 49.46 79.44286 59.90 41.36
 </section><section class="slide level2">
 
 <p>Here are the 2811 rows converted to a single row that captures the most variation among the rows:</p>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="principal-component-analysis" class="titleslide slide level1"><h1>Principal Component Analysis</h1></section><section id="goal" class="slide level2">
 <h1>Goal</h1>
@@ -764,7 +764,7 @@ s^2_{\tilde{{\boldsymbol{x}}}_j} = \frac{\sum_{k=1}^n \tilde{x}_{jk}^2}{n-1} = \
 </section><section class="slide level2">
 
 <p>“The first PC finds the direction of maximal variance in the data…”</p>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>The above figure was made with the following code:</p>
@@ -787,28 +787,28 @@ lm(x2 ~ p$pc[1,])$fit</code></pre>
 <pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], pc2=p$pc[2,]) %&gt;% 
 +   ggplot() + geom_point(aes(x=pc1,y=pc2)) + 
 +   theme(aspect.ratio=1)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Here is PC1 vs <code>x1</code>:</p>
 <pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], x1=x1) %&gt;% 
 +   ggplot() + geom_point(aes(x=pc1,y=x1)) + 
 +   theme(aspect.ratio=1)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Here is PC1 vs <code>x2</code>:</p>
 <pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], x2=x2) %&gt;% 
 +   ggplot() + geom_point(aes(x=pc1,y=x2)) + 
 +   theme(aspect.ratio=1)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Here is PC1 vs <code>z</code>:</p>
 <pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], z=z) %&gt;% 
 +   ggplot() + geom_point(aes(x=pc1,y=z)) + 
 +   theme(aspect.ratio=1)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="pca-examples" class="titleslide slide level1"><h1>PCA Examples</h1></section><section id="weather-data" class="slide level2">
 <h1>Weather Data</h1>
@@ -836,13 +836,13 @@ AGM00060425 -0.015779138 0.007026312 -0.009907972</code></pre>
 <pre class="r"><code>&gt; day_of_the_year &lt;- as.numeric(colnames(weather_data))
 &gt; data.frame(day=day_of_the_year, PC1=mypca$pc[1,]) %&gt;%
 +   ggplot() + geom_point(aes(x=day, y=PC1), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pc2-vs-time">PC2 vs Time</h3>
 <pre class="r"><code>&gt; data.frame(day=day_of_the_year, PC2=mypca$pc[2,]) %&gt;%
 +   ggplot() + geom_point(aes(x=day, y=PC2), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pc-biplots">PC Biplots</h3>
@@ -854,13 +854,13 @@ AGM00060425 -0.015779138 0.007026312 -0.009907972</code></pre>
 <h3 id="pc1-vs-pc2-biplot">PC1 vs PC2 Biplot</h3>
 <pre class="r"><code>&gt; data.frame(PC1=mypca$pc[1,], PC2=mypca$pc[2,]) %&gt;%
 +   ggplot() + geom_point(aes(x=PC1, y=PC2), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="proportion-of-variance-explained-1">Proportion of Variance Explained</h3>
 <pre class="r"><code>&gt; data.frame(Component=1:length(mypca$pve), PVE=mypca$pve) %&gt;%
 +   ggplot() + geom_point(aes(x=Component, y=PVE), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pcs-reproduce-the-data">PCs Reproduce the Data</h3>
@@ -918,11 +918,11 @@ Loading49 Loading50
 &gt; y &lt;- -mypca$pc[1,] + mean(weather_data)
 &gt; data.frame(day=day_of_the_year, max_temp=y) %&gt;%
 +   ggplot() + geom_point(aes(x=day, y=max_temp))</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="yeast-gene-expression" class="slide level2">
 <h1>Yeast Gene Expression</h1>
 <p>Yeast cells were synchronized so that they were on the same approximate cell cycle timing. The goal was to understand how gene expression varies over the cell cycle from a genome-wide perspective.</p>
-<pre class="r"><code>&gt; load(&quot;../data/spellman.RData&quot;)
+<pre class="r"><code>&gt; load(&quot;./data/spellman.RData&quot;)
 &gt; time
  [1]   0  30  60  90 120 150 180 210 240 270 330 360 390
 &gt; dim(gene_expression)
@@ -941,15 +941,15 @@ YAL007C -0.86693416 -1.1642322 -0.6359588 1.1179131  1.9587021</code></pre>
 <pre class="r"><code>&gt; p &lt;- pca(gene_expression, space=&quot;rows&quot;)
 &gt; ggplot(data.frame(pc=1:13, pve=p$pve)) + 
 +   geom_point(aes(x=pc,y=pve), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <h3 id="pcs-vs-time-with-smoothers">PCs vs Time (with Smoothers)</h3>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="hapmap-genotypes" class="slide level2">
 <h1>HapMap Genotypes</h1>
 <p>Recall the example HapMap data used to demonstrate the MCMC algorithm for estimating structure. We curated a small data set that cleanly separates human subpopulations.</p>
-<pre class="r"><code>&gt; hapmap &lt;- read.table(&quot;../data/hapmap_sample.txt&quot;)
+<pre class="r"><code>&gt; hapmap &lt;- read.table(&quot;./data/hapmap_sample.txt&quot;)
 &gt; dim(hapmap)
 [1] 400  24
 &gt; hapmap[1:6,1:6]
@@ -966,19 +966,19 @@ rs2095381        1       2       1       2       1       1</code></pre>
 <pre class="r"><code>&gt; p &lt;- pca(hapmap, space=&quot;rows&quot;)
 &gt; ggplot(data.frame(pc=(1:ncol(hapmap)), pve=p$pve)) + 
 +   geom_point(aes(x=pc,y=pve), size=2)</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
-</section><section class="slide level2">
-
-<h3 id="pc1-vs-pc2-biplot-1">PC1 vs PC2 Biplot</h3>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-27-1.png" width="576" style="display: block; margin: auto;" /></p>
-</section><section class="slide level2">
-
-<h3 id="pc1-vs-pc3-biplot">PC1 vs PC3 Biplot</h3>
 <p><img src="week12_files/figure-revealjs/unnamed-chunk-28-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
-<h3 id="pc2-vs-pc3-biplot">PC2 vs PC3 Biplot</h3>
+<h3 id="pc1-vs-pc2-biplot-1">PC1 vs PC2 Biplot</h3>
 <p><img src="week12_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc1-vs-pc3-biplot">PC1 vs PC3 Biplot</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-30-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc2-vs-pc3-biplot">PC2 vs PC3 Biplot</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="hd-latent-variable-models" class="titleslide slide level1"><h1>HD Latent Variable Models</h1></section><section id="definition" class="slide level2">
 <h1>Definition</h1>
@@ -1024,7 +1024,7 @@ p_i = \frac{1}{sB} \sum_{b=1}^B \sum_{k \in \mathcal{S}_b} 1\left(t_i \geq  t_k^
 <h1>Example: Yeast Cell Cycle</h1>
 <p>Recall the yeast cell cycle data from earlier. We will test which genes have expression significantly associated with PC1 and PC2 since these both capture cell cycle regulation.</p>
 <pre class="r"><code>&gt; library(jackstraw)
-&gt; load(&quot;../data/spellman.RData&quot;)
+&gt; load(&quot;./data/spellman.RData&quot;)
 &gt; time
  [1]   0  30  60  90 120 150 180 210 240 270 330 360 390
 &gt; dim(gene_expression)
@@ -1037,11 +1037,11 @@ Test for associations between PC1 and each gene, conditioning on PC1 and PC2 bei
 </p>
 <pre class="r"><code>&gt; jsobj &lt;- jackstraw(dat, r1=1, r=2, B=500, s=50, verbose=FALSE)
 &gt; jsobj$p.value %&gt;% qvalue() %&gt;% hist()</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>This is the most significant gene plotted with PC1.</p>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1049,11 +1049,11 @@ Test for associations between PC2 and each gene, conditioning on PC1 and PC2 bei
 </p>
 <pre class="r"><code>&gt; jsobj &lt;- jackstraw(dat, r1=2, r=2, B=500, s=50, verbose=FALSE)
 &gt; jsobj$p.value %&gt;% qvalue() %&gt;% hist()</code></pre>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-35-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>This is the most significant gene plotted with PC2.</p>
-<p><img src="week12_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-36-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="surrogate-variable-analysis" class="slide level2">
 <h1>Surrogate Variable Analysis</h1>
 <p>The <strong>surrogate variable analysis</strong> (SVA) model combines the many responses model with the latent variable model introduced above:</p>
@@ -1088,7 +1088,7 @@ Test for associations between PC2 and each gene, conditioning on PC1 and PC2 bei
 <p>In <a href="http://www.pnas.org/content/102/36/12837.full">Storey et al. (2005)</a>, we considered a study where kidney samples were obtained on individuals across a range of ages. The goal was to identify genes with expression associated with age.</p>
 <pre class="r"><code>&gt; library(edge)
 &gt; library(splines)
-&gt; load(&quot;../data/kidney.RData&quot;)
+&gt; load(&quot;./data/kidney.RData&quot;)
 &gt; age &lt;- kidcov$age
 &gt; sex &lt;- kidcov$sex
 &gt; dim(kidexpr)

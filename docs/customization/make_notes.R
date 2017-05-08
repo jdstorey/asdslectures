@@ -11,7 +11,7 @@ convert_flag = FALSE
 
 writeLines("---", f_out)
 for(line in text){
-  if(line=="# <img src=\"../images/howto.jpg\"></img>") {
+  if(line=="# <img src=\"./images/howto.jpg\"></img>") {
 
   } else if(!is.na(str_match(line, "^output:"))){
     YAML_header_flag <- TRUE
@@ -20,7 +20,7 @@ for(line in text){
                  "    toc: true",
                  "    toc_depth: 2",
                  "    keep_tex: true",
-                 "geometry: right=2.5in",
+#                 "geometry: right=2.5in",
                  "---"), f_out)
   } else if(YAML_header_flag) {
     if(!is.na(str_match(line, "^---"))){

@@ -15,64 +15,71 @@ output:
       slideNumber: false
       progress: true
     includes:
-      before_body: ../customization/doc_prefix.html
+      before_body: customization/doc_prefix.html
     css: customization/custom.css
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
-library(knitr)
-knit_hooks$set(small.mar = function(before, options, envir) {
-    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
-})
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE, small.mar=TRUE)
-options(width=63)
-library(tidyverse)
-library(broom)
-library(MASS)
-theme_set(theme_bw())
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
 ```
 
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\V}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\se}{\operatorname{se}}
-\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
-\newcommand{\asim}{\; \stackrel{.}{\sim}\;}
-\newcommand{\xs}{x_1, x_2, \ldots, x_n}
-\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
-\newcommand{\bB}{\boldsymbol{B}}
-\newcommand{\bb}{\boldsymbol{\beta}}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bX}{\boldsymbol{X}}
-\newcommand{\by}{\boldsymbol{y}}
-\newcommand{\bY}{\boldsymbol{Y}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bZ}{\boldsymbol{Z}}
-\newcommand{\be}{\boldsymbol{e}}
-\newcommand{\bE}{\boldsymbol{E}}
-\newcommand{\bs}{\boldsymbol{s}}
-\newcommand{\bS}{\boldsymbol{S}}
-\newcommand{\bP}{\boldsymbol{P}}
-\newcommand{\bI}{\boldsymbol{I}}
-\newcommand{\bW}{\boldsymbol{W}}
-\newcommand{\bN}{\boldsymbol{N}}
-\newcommand{\bR}{\boldsymbol{R}}
-\newcommand{\bu}{\boldsymbol{u}}
-\newcommand{\bV}{\boldsymbol{V}}
-\newcommand{\bO}{\boldsymbol{0}}
-\newcommand{\bOmega}{\boldsymbol{\Omega}}
-\newcommand{\bSig}{\boldsymbol{\Sigma}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-\newcommand{\bT}{\boldsymbol{\Theta}}
-\newcommand{\bpi}{\boldsymbol{\pi}}
-\newcommand{\argmax}{\text{argmax}}
-\newcommand{\KL}{\text{KL}}
-\newcommand{\fdr}{{\rm FDR}}
-\newcommand{\pfdr}{{\rm pFDR}}
-\newcommand{\mfdr}{{\rm mFDR}}
-\newcommand{\bh}{\hat}
-\newcommand{\dd}{\lambda}
-\newcommand{\q}{\operatorname{q}}
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+library(broom)
+library(MASS)
+```
 
 
 # <img src="./images/howto.jpg"></img>
@@ -966,10 +973,10 @@ It also deals with collinearity among explanatory variables.  **Collinearity** i
 Under the OLS model assumptions, ridge regression fits model by minimizing the following:
 
 $$
-\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m \beta_i^2.
+\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m \beta_k^2.
 $$
 
-Recall the $\ell_2$ norm: $\sum_{k=1}^m \beta_i^2 = \| \bb \|^2_2$.  Sometimes ridge regression is called $\ell_2$ penalized regression.
+Recall the $\ell_2$ norm: $\sum_{k=1}^m \beta_k^2 = \| \bb \|^2_2$.  Sometimes ridge regression is called $\ell_2$ penalized regression.
 
 As with natural cubic splines, the paramater $\lambda$ is a tuning paramater that controls how much shrinkage occurs.  
 
@@ -1018,7 +1025,7 @@ lm.ridge(y~x1+x2, lambda=1) # from MASS package
 
 ## Existence of Solution
 
-When $d > n$ or when there is high collinearity, then $(\bX\bX^T)^{-1}$ will not exist.  
+When $m > n$ or when there is high collinearity, then $(\bX\bX^T)^{-1}$ will not exist.  
 
 However, for $\lambda > 0$, it is always the case that $\left(\bX\bX^T + \lambda \bI\right)^{-1}$ exists.
 
@@ -1067,7 +1074,7 @@ This says that by sacrificing some bias in the ridge estimator, we can obtain a 
 The ridge regression solution is equivalent to maximizing
 
 $$
--\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m \beta_i^2
+-\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m \beta_k^2
 $$
 
 which means it can be interpreted as the MAP solution with a Normal prior on the $\beta_i$ values.
@@ -1131,10 +1138,10 @@ This performs a similar optimization as ridge, but with an $\ell_1$ penalty inst
 Starting with the OLS model assumptions again, we wish to find $\bb$ that minimizes
 
 $$
-\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m |\beta_i|.
+\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m |\beta_k|.
 $$
 
-Note that $\sum_{k=1}^m |\beta_i| = \| \bb \|_1$, which is the $\ell_1$ vector norm.
+Note that $\sum_{k=1}^m |\beta_k| = \| \bb \|_1$, which is the $\ell_1$ vector norm.
 
 As before, the paramater $\lambda$ is a tuning paramater that controls how much shrinkage and selection occurs.
 
@@ -1180,7 +1187,7 @@ plot(cvlassofit)
 The ridge regression solution is equivalent to maximizing
 
 $$
--\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m |\beta_i|
+-\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m |\beta_k|
 $$
 
 which means it can be interpreted as the MAP solution with a Exponential prior on the $\beta_i$ values.
@@ -1225,5 +1232,6 @@ sessionInfo()
 </section>
 
 ```{r converttonotes, include=FALSE, cache=FALSE}
-source("../customization/make_notes.R")
+source("./customization/make_notes.R")
+source("./customization/make_bookdown.R")
 ```

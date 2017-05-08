@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -55,21 +55,393 @@
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
     <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
@@ -332,11 +704,11 @@ p {
 <h1>Barplot</h1>
 <pre class="r"><code>&gt; cyl_tbl &lt;- table(mtcars$cyl)
 &gt; barplot(cyl_tbl, xlab=&quot;Cylinders&quot;, ylab=&quot;Count&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-13-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="boxplot" class="slide level2">
 <h1>Boxplot</h1>
 <pre class="r"><code>&gt; boxplot(mtcars$mpg, ylab=&quot;MPG&quot;, col=&quot;lightgray&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-14-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="constructing-boxplots" class="slide level2">
 <h1>Constructing Boxplots</h1>
 <ul>
@@ -352,25 +724,25 @@ p {
 <h1>Boxplot with Outliers</h1>
 <pre class="r"><code>&gt; boxplot(mtcars$wt, ylab=&quot;Weight (1000 lbs)&quot;, 
 +         col=&quot;lightgray&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-15-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="histogram" class="slide level2">
 <h1>Histogram</h1>
 <pre class="r"><code>&gt; hist(mtcars$mpg, xlab=&quot;MPG&quot;, main=&quot;&quot;, col=&quot;lightgray&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-16-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="histogram-with-more-breaks" class="slide level2">
 <h1>Histogram with More Breaks</h1>
 <pre class="r"><code>&gt; hist(mtcars$mpg, breaks=12, xlab=&quot;MPG&quot;, main=&quot;&quot;, col=&quot;lightgray&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-17-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="density-plot" class="slide level2">
 <h1>Density Plot</h1>
 <pre class="r"><code>&gt; plot(density(mtcars$mpg), xlab=&quot;MPG&quot;, main=&quot;&quot;)
 &gt; polygon(density(mtcars$mpg), col=&quot;lightgray&quot;, border=&quot;black&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-18-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="boxplot-side-by-side" class="slide level2">
 <h1>Boxplot (Side-By-Side)</h1>
 <pre class="r"><code>&gt; boxplot(mpg ~ cyl, data=mtcars, xlab=&quot;Cylinders&quot;, 
 +         ylab=&quot;MPG&quot;, col=&quot;lightgray&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-19-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="stacked-barplot" class="slide level2">
 <h1>Stacked Barplot</h1>
 <pre class="r"><code>&gt; counts &lt;- table(mtcars$cyl, mtcars$gear)
@@ -387,12 +759,12 @@ p {
 +        fill = c(&quot;blue&quot;,&quot;red&quot;, &quot;lightgray&quot;))</code></pre>
 </section><section class="slide level2">
 
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-22-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="scatterplot" class="slide level2">
 <h1>Scatterplot</h1>
 <pre class="r"><code>&gt; plot(mtcars$wt, mtcars$mpg, xlab=&quot;Weight (1000 lbs)&quot;, 
 +      ylab=&quot;MPG&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-23-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="a-grammar-of-graphics" class="titleslide slide level1"><h1>A Grammar of Graphics</h1></section><section id="rationale" class="slide level2">
 <h1>Rationale</h1>
@@ -483,19 +855,19 @@ The <code>geom_bar()</code> layer forms a barplot and only requires an <code>x</
 </p>
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-28-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-30-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Color in the bars by assigning <code>fill</code> in <code>geom_bar()</code>, but outside of <code>aes()</code>:</p>
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut), fill = &quot;tomato&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-29-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Color <em>within</em> the bars according to a variable by assigning <code>fill</code> in <code>geom_bar()</code> <em>inside</em> of <code>aes()</code>:</p>
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-30-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -503,7 +875,7 @@ When we use <code>fill = clarity</code> within <code>aes()</code>, we see that i
 </p>
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = clarity))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-31-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -512,7 +884,7 @@ By setting <code>position = &quot;dodge&quot;</code> outside of <code>aes()</cod
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping= aes(x = cut, fill = clarity), 
 +            position = &quot;dodge&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-32-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -522,7 +894,7 @@ By setting <code>position = &quot;fill&quot;</code>, it shows the proportion of 
 +   geom_bar(mapping=aes(x = cut, fill = clarity), 
 +            position = &quot;fill&quot;) +
 +   labs(x = &quot;cut&quot;, y = &quot;relative proporition within cut&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-33-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-35-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="boxplots-and-violin-plots" class="titleslide slide level1"><h1>Boxplots and Violin Plots</h1></section><section class="slide level2">
 
@@ -531,7 +903,7 @@ The <code>geom_boxplot()</code> layer forms a boxplot and requires both <code>x<
 </p>
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_boxplot(mapping = aes(x = 1, y = hwy))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-34-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-36-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -541,7 +913,7 @@ Color in the boxes by assigning <code>fill</code> in <code>geom_boxplot()</code>
 +   geom_boxplot(mapping = aes(x = 1, y = hwy), 
 +                fill=&quot;lightblue&quot;) +
 +   labs(x=NULL)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-35-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-37-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -549,7 +921,7 @@ Show a boxplot for the <code>y</code> values occurring within each <code>x</code
 </p>
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_boxplot(mapping = aes(x = factor(cyl), y = hwy))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-36-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-38-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -558,7 +930,7 @@ By assigning the <code>fill</code> argument <em>within</em> <code>aes()</code>, 
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_boxplot(mapping = aes(x = factor(cyl), y = hwy, 
 +                              fill = factor(cyl)))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-37-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -567,7 +939,7 @@ The <code>geom_jitter()</code> function plots the data points and randomly jitte
 <pre class="r"><code>&gt; ggplot(data = mpg, mapping = aes(x=factor(cyl), y=hwy)) + 
 +   geom_boxplot(fill = &quot;lightblue&quot;) +
 +   geom_jitter(width = 0.2)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-38-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-40-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -575,7 +947,7 @@ A violin plot, called via <code>geom_violin()</code>, is similar to a boxplot, e
 </p>
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_violin(mapping = aes(x = drv, y = hwy))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-39-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-41-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -584,7 +956,7 @@ Add a <code>geom_jitter()</code> to see how the original data points relate to t
 <pre class="r"><code>&gt; ggplot(data = mpg, mapping = aes(x = drv, y = hwy)) + 
 +   geom_violin(adjust=1.2) +
 +   geom_jitter(width=0.2, alpha=0.5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-40-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -593,7 +965,7 @@ Boxplot example on the <code>gapminder</code> data:
 <pre class="r"><code>&gt; ggplot(gapminder, aes(x = continent, y = lifeExp)) +
 +   geom_boxplot(outlier.colour = &quot;red&quot;) +
 +   geom_jitter(width = 0.1, alpha = 0.25)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-41-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -602,7 +974,7 @@ Analogous violin plot example on the <code>gapminder</code> data:
 <pre class="r"><code>&gt; ggplot(gapminder, aes(x = continent, y = lifeExp)) +
 +   geom_violin() +
 +   geom_jitter(width = 0.1, alpha = 0.25)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-42-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="histograms-and-density-plots" class="titleslide slide level1"><h1>Histograms and Density Plots</h1></section><section class="slide level2">
 
@@ -611,7 +983,7 @@ We can create a histogram using the <code>geom_histogram()</code> layer, which r
 </p>
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_histogram(mapping = aes(x=lifeExp))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-43-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -619,7 +991,7 @@ We can change the bin width directly in the histogram, which is an intuitive par
 </p>
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_histogram(mapping = aes(x=lifeExp), binwidth=5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-44-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -627,7 +999,7 @@ The bins are sometimes centered in an unexpected manner in <code>ggplot2</code>:
 </p>
 <pre class="r"><code>&gt; ggplot(diamonds) +
 +   geom_histogram(mapping = aes(x=price), binwidth = 1000)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-45-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-47-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -636,7 +1008,7 @@ Let’s fix how the bins are centered (make <code>center</code> half of <code>bi
 <pre class="r"><code>&gt; ggplot(diamonds) +
 +   geom_histogram(mapping = aes(x=price), binwidth = 1000, 
 +                  center=500)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-46-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-48-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -645,7 +1017,7 @@ Instead of counts on the y-axis, we may instead want the area of the bars to sum
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_histogram(mapping = aes(x=lifeExp, y=..density..), 
 +                  binwidth=5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-47-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-49-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -654,7 +1026,7 @@ When we use <code>fill = continent</code> within <code>aes()</code>, we see that
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_histogram(mapping = aes(x=lifeExp, fill = continent), 
 +                  binwidth = 5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-48-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-50-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -662,7 +1034,7 @@ Display a density plot using the <code>geom_density()</code> layer:
 </p>
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_density(mapping = aes(x=lifeExp))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-49-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -671,7 +1043,7 @@ Employ the arguments <code>color=&quot;blue&quot;</code> and <code>fill=&quot;li
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_density(mapping = aes(x=lifeExp), color=&quot;blue&quot;, 
 +                fill=&quot;lightblue&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-50-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-52-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -680,7 +1052,7 @@ By utilizing <code>color=as.factor(year)</code> we plot a density of <code>lifeE
 <pre class="r"><code>&gt; ggplot(gapminder) +
 +   geom_density(aes(x=lifeExp, color=as.factor(year)), 
 +                size=1.2)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-51-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-53-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -690,7 +1062,7 @@ Overlay a density plot and a histogram together:
 +   geom_histogram(aes(y=..density..), color=&quot;black&quot;, 
 +                  fill=&quot;white&quot;) +
 +   geom_density(fill=&quot;lightblue&quot;, alpha=.5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-52-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-54-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="line-plots" class="titleslide slide level1"><h1>Line Plots</h1></section><section class="slide level2">
 
@@ -704,12 +1076,12 @@ Overlay a density plot and a histogram together:
 # A tibble: 6 × 5
    year   sex  name     n       prop
   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
-1  1880     M  John  9655 0.08154561
-2  1881     M  John  8769 0.08098149
-3  1882     M  John  9557 0.07831488
-4  1883     M  John  8894 0.07907183
-5  1884     M  John  9388 0.07648626
-6  1885     M  John  8756 0.07551726</code></pre>
+1  1880     M  John  9655 0.08154630
+2  1881     M  John  8769 0.08098299
+3  1882     M  John  9557 0.07831617
+4  1883     M  John  8894 0.07907324
+5  1884     M  John  9388 0.07648751
+6  1885     M  John  8756 0.07551791</code></pre>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -717,7 +1089,7 @@ We can <code>geom_lines()</code> to plot a line showing the popularity of “Joh
 </p>
 <pre class="r"><code>&gt; ggplot(data = john) + 
 +   geom_line(mapping = aes(x=year, y=prop), size=1.5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-54-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-56-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -727,7 +1099,7 @@ Now let’s look at a name that occurs nontrivially in males and females:
 &gt; ggplot(data = kelly) + 
 +   geom_line(mapping = aes(x=year, y=prop, color=sex), 
 +             size=1.5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-55-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-57-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="scatterplots" class="titleslide slide level1"><h1>Scatterplots</h1></section><section class="slide level2">
 
@@ -736,7 +1108,7 @@ The layer <code>geom_point()</code> produces a scatterplot, and the <code>aes()<
 </p>
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-56-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-58-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -745,7 +1117,7 @@ Give the points a color:
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy), 
 +              color = &quot;blue&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-57-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-59-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -754,7 +1126,7 @@ Color the points according to a factor variable by including <code>color = class
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, 
 +                            color = class))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-58-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-60-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -763,7 +1135,7 @@ Increase the size of points with <code>size=2</code> outside of the <code>aes()<
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, 
 +                            color = class), size=2)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-59-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-61-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -772,7 +1144,7 @@ Vary the size of the points according to the <code>pop</code> variable:
 <pre class="r"><code>&gt; gapminder %&gt;% filter(year==2007) %&gt;% ggplot() + 
 +   geom_point(aes(x = log(gdpPercap), y = lifeExp, 
 +                  size = pop))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-60-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-62-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -781,7 +1153,7 @@ Vary the transparency of the points according to the <code>class</code> factor v
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, 
 +                            alpha = class))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-61-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-63-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -790,7 +1162,7 @@ Vary the shape of the points according to the <code>class</code> factor variable
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, 
 +                            shape = class))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-62-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-64-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -799,7 +1171,7 @@ Color the points according to the <code>cut</code> variable by setting <code>col
 <pre class="r"><code>&gt; ggplot(data = diamonds) +
 +   geom_point(mapping = aes(x=carat, y=price, color=cut),
 +              alpha=0.7)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-63-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-65-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -808,7 +1180,7 @@ Color the points according to the <code>clarity</code> variable by setting <code
 <pre class="r"><code>&gt; ggplot(data = diamonds) +
 +   geom_point(mapping=aes(x=carat, y=price, color=clarity), 
 +              alpha=0.3)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-64-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-66-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -818,7 +1190,7 @@ Override the <code>alpha=0.3</code> in the legend:
 +   geom_point(mapping=aes(x=carat, y=price, color=clarity), 
 +              alpha=0.3) + 
 +   guides(color=guide_legend(override.aes = list(alpha = 1)))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-65-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-67-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="axis-scales" class="titleslide slide level1"><h1>Axis Scales</h1></section><section class="slide level2">
 
@@ -829,7 +1201,7 @@ A different way to take the log of <code>gdpPercap</code>:
 +   geom_point(aes(x = gdpPercap, y = lifeExp, 
 +                  size = pop)) +
 +   scale_x_log10()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-66-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-68-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -837,7 +1209,7 @@ The <code>price</code> variable seems to be significantly right-skewed:
 </p>
 <pre class="r"><code>&gt; ggplot(diamonds) + 
 +   geom_boxplot(aes(x=color, y=price)) </code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-67-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-69-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -846,7 +1218,7 @@ We can try to reduce this skewness by rescaling the variables. We first try to t
 <pre class="r"><code>&gt; ggplot(diamonds) + 
 +   geom_boxplot(aes(x=color, y=price)) + 
 +   scale_y_log10()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-68-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-70-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -855,7 +1227,7 @@ Let’s repeat this on the analogous violing plots:
 <pre class="r"><code>&gt; ggplot(diamonds) + 
 +   geom_violin(aes(x=color, y=price)) + 
 +   scale_y_log10()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-69-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-71-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -864,7 +1236,7 @@ The relationship between <code>carat</code> and <code>price</code> is nonlinear.
 <pre class="r"><code>&gt; ggplot(data = diamonds) +
 +   geom_point(mapping=aes(x=carat, y=price, color=clarity), 
 +              alpha=0.3)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-70-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-72-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -874,7 +1246,7 @@ First try to take the squareroot of the the <code>price</code> variable:
 +   geom_point(aes(x=carat, y=price, color=clarity), 
 +              alpha=0.3) +
 +   scale_y_sqrt()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-71-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-73-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -884,7 +1256,7 @@ Now let’s try to take <code>log(base=10)</code> on both the <code>carat</code>
 +   geom_point(aes(x=carat, y=price, color=clarity), alpha=0.3) +
 +   scale_y_log10(breaks=c(1000,5000,10000)) + 
 +   scale_x_log10(breaks=1:5)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-72-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-74-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -894,7 +1266,7 @@ Forming a violin plot of <code>price</code> stratified by <code>clarity</code> a
 +   geom_violin(aes(x=clarity, y=price, fill=clarity), 
 +               adjust=1.5) +  
 +   scale_y_log10()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-73-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-75-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="scatterplot-smoothers" class="titleslide slide level1"><h1>Scatterplot Smoothers</h1></section><section class="slide level2">
 
@@ -914,7 +1286,7 @@ Recall the scatterplot showing the relationship between highway mpg and displace
 </p>
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-74-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-76-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -923,7 +1295,7 @@ Plot a smoother with <code>geom_smooth()</code> using the default settings (othe
 <pre class="r"><code>&gt; ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
 +   geom_point() + 
 +   geom_smooth(se=FALSE)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-75-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-77-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -933,7 +1305,7 @@ The default smoother here is a “loess” smoother. Let’s compare that to the
 +   geom_point() + 
 +   geom_smooth(aes(colour = &quot;loess&quot;), method = &quot;loess&quot;, se = FALSE) + 
 +   geom_smooth(aes(colour = &quot;lm&quot;), method = &quot;lm&quot;, se = FALSE)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-76-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -943,7 +1315,7 @@ Now let’s plot a smoother to the points stratified by the <code>drv</code> var
 +                                linetype = drv)) + 
 +   geom_point() + 
 +   geom_smooth(se=FALSE)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-77-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-79-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -953,7 +1325,7 @@ Instead of different line types, let’s instead differentiate them by line colo
 +                                  color=drv)) + 
 +   geom_point() +
 +   geom_smooth(se=FALSE)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-78-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-80-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="overplotting" class="titleslide slide level1"><h1>Overplotting</h1></section><section class="slide level2">
 
@@ -972,7 +1344,7 @@ Here is an example of an overplotted scatterplot:
 </p>
 <pre class="r"><code>&gt; ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
 +   geom_point()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-79-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-81-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -980,7 +1352,7 @@ Let’s reduce the <code>alpha</code> of the points:
 </p>
 <pre class="r"><code>&gt; ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
 +   geom_point(alpha=0.1)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-80-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-82-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -988,7 +1360,7 @@ Let’s further reduce the <code>alpha</code>:
 </p>
 <pre class="r"><code>&gt; ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
 +   geom_point(alpha=0.01)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-81-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-83-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -996,7 +1368,7 @@ We can bin the points into hexagons, and report how many points fall within each
 </p>
 <pre class="r"><code>&gt; ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
 +   geom_hex()</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-82-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-84-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1006,7 +1378,7 @@ Let’s try to improve the color scheme:
 +   geom_hex() + 
 +   scale_fill_gradient2(low=&quot;lightblue&quot;, mid=&quot;purple&quot;, high=&quot;black&quot;, 
 +                        midpoint=3000)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-83-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-85-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1015,7 +1387,7 @@ We can combine the scale transformation used earlier with the “hexbin” plott
 <pre class="r"><code>&gt; ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
 +   geom_hex(bins=20) +
 +   scale_x_log10(breaks=1:5) + scale_y_log10(breaks=c(1000,5000,10000)) </code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-84-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-86-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="labels-and-legends" class="titleslide slide level1"><h1>Labels and Legends</h1></section><section class="slide level2">
 
@@ -1026,7 +1398,7 @@ Here’s how you can change the axis labels and give the plot a title:
 +   geom_boxplot(mapping = aes(x = factor(cyl), y = hwy)) +
 +   labs(title=&quot;Highway MPG by Cylinders&quot;,x=&quot;Cylinders&quot;,
 +        y=&quot;Highway MPG&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-85-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-87-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1035,7 +1407,7 @@ You can remove the legend to a plot by the following:
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut)) +
 +   theme(legend.position=&quot;none&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-86-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-88-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1044,7 +1416,7 @@ The legend can be placed on the “top”, “bottom”, “left”, or “right
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut)) +
 +   theme(legend.position=&quot;bottom&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-87-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-89-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1053,7 +1425,7 @@ The legend can be moved inside the plot itself:
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut)) +
 +   theme(legend.position=c(0.15,0.75))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-88-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-90-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1062,7 +1434,7 @@ Change the name of the legend:
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut)) +
 +   scale_fill_discrete(name=&quot;Diamond\nCut&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-89-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-91-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1071,7 +1443,7 @@ Change the labels within the legend:
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut)) +
 +   scale_fill_discrete(labels=c(&quot;F&quot;, &quot;G&quot;, &quot;VG&quot;, &quot;P&quot;, &quot;I&quot;))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-90-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-92-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="facets" class="titleslide slide level1"><h1>Facets</h1></section><section class="slide level2">
 
@@ -1080,7 +1452,7 @@ Here is the histogram of the <code>displ</code> variable from the <code>mpg</cod
 </p>
 <pre class="r"><code>&gt; ggplot(mpg) + geom_histogram(mapping=aes(x=displ), 
 +                              binwidth=0.25)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-91-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-93-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1089,7 +1461,7 @@ The <code>facet_wrap()</code> layer allows us to stratify the <code>displ</code>
 <pre class="r"><code>&gt; ggplot(mpg) + 
 +   geom_histogram(mapping=aes(x=displ), binwidth=0.25) + 
 +   facet_wrap(~ cyl)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-92-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-94-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1098,7 +1470,7 @@ Here is <code>facet_wrap()</code> applied to <code>displ</code> startified by th
 <pre class="r"><code>&gt; ggplot(mpg) + 
 +   geom_histogram(mapping=aes(x=displ), binwidth=0.25) + 
 +   facet_wrap(~ drv)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-93-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-95-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1107,7 +1479,7 @@ We can stratify by two variable simultaneously by using the <code>facet_grid()</
 <pre class="r"><code>&gt; ggplot(mpg) + 
 +   geom_histogram(mapping=aes(x=displ), binwidth=0.25) + 
 +   facet_grid(drv ~ cyl)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-94-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-96-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1115,7 +1487,7 @@ Let’s carry out a similar faceting on the <code>diamonds</code> data over the 
 </p>
 <pre class="r"><code>&gt; ggplot(diamonds) + 
 +   geom_histogram(mapping=aes(x=price), binwidth=500)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-95-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-97-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1124,7 +1496,7 @@ Stratify <code>price</code> by <code>clarity</code>:
 <pre class="r"><code>&gt; ggplot(diamonds) + 
 +   geom_histogram(mapping=aes(x=price), binwidth=500) + 
 +   facet_wrap(~ clarity)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-96-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-98-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1133,7 +1505,7 @@ Stratify <code>price</code> by <code>clarity</code>, but allow each y-axis range
 <pre class="r"><code>&gt; ggplot(diamonds) + 
 +   geom_histogram(mapping=aes(x=price), binwidth=500) + 
 +   facet_wrap(~ clarity, scale=&quot;free_y&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-97-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-99-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1143,7 +1515,7 @@ Jointly stratify <code>price</code> by <code>cut</code> and <code>clarify</code>
 +   geom_histogram(mapping=aes(x=price), binwidth=500) + 
 +   facet_grid(cut ~ clarity) +
 +   scale_x_continuous(breaks=9000)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-98-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-100-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="colors" class="titleslide slide level1"><h1>Colors</h1></section><section id="finding-colors" class="slide level2">
 <h1>Finding Colors</h1>
@@ -1171,7 +1543,7 @@ Manually determine colors to fill the barplot using the color blind palette defi
 <pre class="r"><code>&gt; ggplot(data = diamonds) + 
 +   geom_bar(mapping = aes(x = cut, fill = cut)) +
 +   scale_fill_manual(values=cbPalette)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-100-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-102-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1180,7 +1552,7 @@ Manually determine point colors using the color blind palette defined above, <co
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, color = class), size=2) +
 +   scale_color_manual(values=cbPalette)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-101-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-103-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1189,7 +1561,7 @@ Fill the histogram bars using a color gradient by their counts, where we determi
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_histogram(aes(x=hwy, fill=..count..)) + 
 +   scale_fill_gradient(low=&quot;blue&quot;, high=&quot;red&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-102-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-104-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1198,7 +1570,7 @@ Color the points based on a gradient formed from the quantitative variable, <cod
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(aes(x=hwy, y=cty, color=displ), size=2) + 
 +   scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-103-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-105-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1207,7 +1579,7 @@ An example of using the palette “Set1” from the <code>RColorBrewer</code> pa
 <pre class="r"><code>&gt; ggplot(diamonds) +
 +   geom_density(mapping = aes(x=price, color=clarity)) +
 +   scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-104-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-106-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1216,7 +1588,7 @@ Another example of using the palette “Set1” from the <code>RColorBrewer</cod
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, color = class)) +
 +   scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-105-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-107-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p style="font-size: 0.75em;">
@@ -1227,7 +1599,7 @@ The <code>gapminder</code> package comes with its own set of colors, <code>count
 +            color = country)) +
 +   geom_line(show.legend = FALSE) + facet_wrap(~ continent) +
 +   scale_color_manual(values = country_colors)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-106-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-108-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="saving-plots" class="titleslide slide level1"><h1>Saving Plots</h1></section><section id="saving-plots-as-variables" class="slide level2">
 <h1>Saving Plots as Variables</h1>
@@ -1272,7 +1644,7 @@ function (filename, plot = last_plot(), device = NULL,
 +                    color = continent, frame = year)) +
 +         scale_x_log10()
 &gt; gganimate(p)</code></pre>
-<video width="648"  controls loop>
+<video width="576"  controls loop>
 <source src="week03_files/figure-revealjs/animation_ex-.webm" />
 <p>
 video of chunk animation_ex
@@ -1286,7 +1658,7 @@ video of chunk animation_ex
 +                size=1.2) +
 +   scale_color_discrete(name=&quot;year&quot;)
 &gt; gganimate(p)</code></pre>
-<video width="648"  controls loop>
+<video width="576"  controls loop>
 <source src="week03_files/figure-revealjs/animation_ex2-.webm" />
 <p>
 video of chunk animation_ex2
@@ -1300,7 +1672,7 @@ video of chunk animation_ex2
 +                size=1.2) +
 +   scale_color_discrete(name=&quot;year&quot;)
 &gt; gganimate(p)</code></pre>
-<video width="648"  controls loop>
+<video width="576"  controls loop>
 <source src="week03_files/figure-revealjs/animation_ex3-.webm" />
 <p>
 video of chunk animation_ex3
@@ -1345,7 +1717,7 @@ gdpPercap
  gdpPercap 
 -0.1524203 
 &gt; rnorm(10000) %&gt;% skewness()
-[1] -0.005986304</code></pre>
+[1] -0.01402231</code></pre>
 </section><section id="measuring-tails" class="slide level2">
 <h1>Measuring Tails</h1>
 <p>The tails of a distribution are often described as being heavy or light depending on how slowly they descend.</p>
@@ -1370,13 +1742,13 @@ gdpPercap
 gdpPercap 
  1.871608 
 &gt; rnorm(10000) %&gt;% kurtosis()
-[1] 3.081543</code></pre>
+[1] 2.99372</code></pre>
 </section><section id="visualizing-skewness-and-kurtosis" class="slide level2">
 <h1>Visualizing Skewness and Kurtosis</h1>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-116-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-118-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="visualizing-skewness-and-kurtosis-1" class="slide level2">
 <h1>Visualizing Skewness and Kurtosis</h1>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-117-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-119-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="correlation" class="slide level2">
 <h1>Correlation</h1>
 <ul>
@@ -1407,7 +1779,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 [1] 0.7542651
 &gt; cor(x, y, method=&quot;spearman&quot;)
 [1] 0.7499555</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-120-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-122-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; x &lt;- rnorm(500)
@@ -1416,7 +1788,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 [1] 0.5164903
 &gt; cor(x, y, method=&quot;spearman&quot;)
 [1] 0.5093092</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-123-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-125-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; x &lt;- c(rnorm(499), 100)
@@ -1425,7 +1797,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 [1] 0.9528564
 &gt; cor(x, y, method=&quot;spearman&quot;)
 [1] -0.02133551</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-126-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-128-1.png" width="960" style="display: block; margin: auto;" /></p>
 </section><section id="quantile-quantile-plots" class="slide level2">
 <h1>Quantile-Quantile Plots</h1>
 <p>Quantile-quantile plots display the <a href="#//quantiles-and-percentiles">quantiles</a> of:</p>
@@ -1439,7 +1811,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 
 <pre class="r"><code>&gt; qqnorm(mtcars$mpg, main=&quot; &quot;)
 &gt; qqline(mtcars$mpg) # line through Q1 and Q3</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-127-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-129-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; before1980 &lt;- gapminder %&gt;% filter(year &lt; 1980) %&gt;% 
@@ -1447,20 +1819,20 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 &gt; after1980 &lt;- gapminder %&gt;% filter(year &gt; 1980) %&gt;% 
 +   select(lifeExp) %&gt;% unlist()
 &gt; qqplot(before1980, after1980); abline(0,1)</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-128-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-130-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; ggplot(mtcars) + stat_qq(aes(sample = mpg))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-129-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-131-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; ggplot(gapminder) + stat_qq(aes(sample=lifeExp))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-130-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-132-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; ggplot(gapminder) + 
 +   stat_qq(aes(sample=lifeExp, color=continent))</code></pre>
-<p><img src="week03_files/figure-revealjs/unnamed-chunk-131-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="week03_files/figure-revealjs/unnamed-chunk-133-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>
@@ -1472,7 +1844,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12.3
+Running under: macOS Sierra 10.12.4
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1482,37 +1854,37 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] rmutil_1.1.0    moments_0.14    hexbin_1.27.1  
- [4] babynames_0.2.1 rvest_0.3.2     xml2_1.1.1     
- [7] gapminder_0.2.0 gganimate_0.1   animation_2.4  
-[10] dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
-[13] tidyr_0.6.1     tibble_1.2      ggplot2_2.2.1  
+ [1] rmutil_1.1.0    moments_0.14    rvest_0.3.2    
+ [4] xml2_1.1.1      hexbin_1.27.1   babynames_0.3.0
+ [7] gapminder_0.2.0 gganimate_0.1   animation_2.5  
+[10] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
+[13] tidyr_0.6.1     tibble_1.3.0    ggplot2_2.2.1  
 [16] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
 [19] devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] revealjs_0.8       reshape2_1.4.2     haven_1.0.0       
- [4] lattice_0.20-34    colorspace_1.3-2   htmltools_0.3.5   
- [7] yaml_2.1.14        foreign_0.8-67     withr_1.0.2       
-[10] DBI_0.5-1          RColorBrewer_1.1-2 modelr_0.1.0      
-[13] readxl_0.1.1       plyr_1.8.4         stringr_1.1.0     
-[16] munsell_0.4.3      gtable_0.2.0       codetools_0.2-15  
-[19] psych_1.6.12       memoise_1.0.0      evaluate_0.10     
-[22] labeling_0.3       forcats_0.2.0      parallel_3.3.2    
-[25] highr_0.6          broom_0.4.2        Rcpp_0.12.9       
-[28] scales_0.4.1       backports_1.0.5    jsonlite_1.2      
-[31] mnormt_1.5-5       hms_0.3            digest_0.6.12     
-[34] stringi_1.1.2      grid_3.3.2         rprojroot_1.2     
-[37] tools_3.3.2        lazyeval_0.2.0     lubridate_1.6.0   
-[40] assertthat_0.1     rmarkdown_1.3      httr_1.2.1        
-[43] R6_2.2.0           nlme_3.1-131      </code></pre>
+ [1] revealjs_0.9       reshape2_1.4.2     haven_1.0.0       
+ [4] lattice_0.20-35    colorspace_1.3-2   htmltools_0.3.6   
+ [7] yaml_2.1.14        foreign_0.8-68     withr_1.0.2       
+[10] DBI_0.6-1          RColorBrewer_1.1-2 modelr_0.1.0      
+[13] readxl_1.0.0       plyr_1.8.4         stringr_1.2.0     
+[16] munsell_0.4.3      gtable_0.2.0       cellranger_1.1.0  
+[19] codetools_0.2-15   psych_1.7.5        memoise_1.1.0     
+[22] evaluate_0.10      labeling_0.3       forcats_0.2.0     
+[25] parallel_3.3.2     highr_0.6          broom_0.4.2       
+[28] Rcpp_0.12.10       scales_0.4.1       backports_1.0.5   
+[31] jsonlite_1.4       mnormt_1.5-5       hms_0.3           
+[34] digest_0.6.12      stringi_1.1.5      grid_3.3.2        
+[37] rprojroot_1.2      tools_3.3.2        lazyeval_0.2.0    
+[40] lubridate_1.6.0    assertthat_0.2.0   rmarkdown_1.5     
+[43] httr_1.2.1         R6_2.2.0           nlme_3.1-131      </code></pre>
 </section>
 </section></section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -1533,6 +1905,7 @@ loaded via a namespace (and not attached):
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
 
+
         chalkboard: {
         },
 
@@ -1546,8 +1919,8 @@ loaded via a namespace (and not attached):
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
@@ -1556,7 +1929,7 @@ loaded via a namespace (and not attached):
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

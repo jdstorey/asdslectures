@@ -15,22 +15,65 @@ output:
       slideNumber: false
       progress: true
     includes:
-      before_body: ../customization/doc_prefix.html
+      before_body: customization/doc_prefix.html
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
-library(knitr)
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
-options(width=63)
-library(tidyverse)
-theme_set(theme_bw())
-```
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
 
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\V}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\se}{\operatorname{se}}
-\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
+```
 
 # <img src="./images/howto.jpg"></img>
 
@@ -126,7 +169,7 @@ Although the Bayesian inference framework has its roots in the subjective view o
 
 When subjectivism is ignored, is this really Bayesian statistics, or is it frequentist statistics that includes a probability model on the unknown parameter(s) that employes Bayes Theorem?
 
-## In Practice (cont'd)
+----
 
 Bayesian inference is often used because it provides a flexible and sometimes superior model for real world problems.  But the interpretation and evaluation are often tacitly frequentist.
 
@@ -443,7 +486,7 @@ $$
 $$
 
 
-## Example: Normal (cont'd)
+----
 
 \begin{align*}
 \operatorname{E}[\mu_i | x_i] & = \frac{1}{1+b^2}a + \frac{b^2}{1+b^2}x_i \implies \\
@@ -471,5 +514,6 @@ sessionInfo()
 </section>
 
 ```{r converttonotes, include=FALSE, cache=FALSE}
-source("../customization/make_notes.R")
+source("./customization/make_notes.R")
+source("./customization/make_bookdown.R")
 ```

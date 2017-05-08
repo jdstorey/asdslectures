@@ -15,37 +15,67 @@ output:
       slideNumber: false
       progress: true
     includes:
-      before_body: ../customization/doc_prefix.html
+      before_body: customization/doc_prefix.html
     css: customization/custom.css
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
-library(knitr)
-knit_hooks$set(small.mar = function(before, options, envir) {
-    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
-})
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
-options(width=63)
-library(tidyverse)
-theme_set(theme_bw())
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
 ```
 
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\V}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\se}{\operatorname{se}}
-\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
-\newcommand{\xs}{x_1, x_2, \ldots, x_n}
-\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bX}{\boldsymbol{X}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bZ}{\boldsymbol{Z}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-\newcommand{\bT}{\boldsymbol{\Theta}}
-\newcommand{\bpi}{\boldsymbol{\pi}}
-\newcommand{\argmax}{\text{argmax}}
-\newcommand{\KL}{\text{KL}}
 
 # <img src="./images/howto.jpg"></img>
 
@@ -454,7 +484,7 @@ $$
 
 where again $s^{2*}$ is the pooled sample variance.
 
----- 
+----
 
 In order to obtain a p-value, we calculate $t^{*(b)}$ for $b=1, 2, \ldots, B$ bootstrap data sets.
 
@@ -1041,5 +1071,6 @@ sessionInfo()
 </section>
 
 ```{r converttonotes, include=FALSE, cache=FALSE}
-source("../customization/make_notes.R")
+source("./customization/make_notes.R")
+source("./customization/make_bookdown.R")
 ```

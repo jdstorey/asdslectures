@@ -7,17 +7,69 @@ output:
     toc: true
     toc_depth: 2
     keep_tex: true
-geometry: right=2.5in
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE}
-library(knitr)
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
-options(width=63)
-set.seed(508)
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
 ```
 
-# <img src="./images/howto.jpg"></img>
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+library(magrittr)
+```
+
 
 # Data Wrangling
 
@@ -65,7 +117,6 @@ From *R for Data Science*.
 
 From Wickham (2014), "Tidy Data", *Journal of Statistical Software*
 
-## Definition (cont'd)
 
 > A dataset is a collection of values, usually either numbers (if quantitative) or strings (if qualitative). Values are organized in two ways. Every value belongs to a variable and an observation. A variable contains all values that measure the same underlying attribute (like height, temperature, duration) across units. An observation contains all values measured on the same unit (like a person, or a day, or a race) across attributes.
 
@@ -288,12 +339,6 @@ Verbs:
 - `rename`: rename variables in a data frame
 - `select`: return a subset of the columns of a data frame, using a flexible notation
 
-Partially based on *R Programming for Data Science* 
-
-
-## Grammar of `dplyr`
-
-Verbs (continued):
 
 - `mutate`: add new variables/columns or transform existing variables
 - `distinct`: returns only the unique values in a table
@@ -693,7 +738,7 @@ The data was distributed as a collection of matrices in R.
 
 ```{r, cache=FALSE}
 rm(list=ls())
-load("../data/smith_kruglyak.RData")
+load("./data/smith_kruglyak.RData")
 ls()
 eapply(env=.GlobalEnv, dim)
 ```

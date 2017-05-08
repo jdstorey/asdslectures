@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -55,21 +55,393 @@
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
     <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
@@ -139,8 +511,8 @@ p {
 <p>Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.</p>
 </blockquote>
 <p>From Wickham (2014), “Tidy Data”, <em>Journal of Statistical Software</em></p>
-</section><section id="definition-contd" class="slide level2">
-<h1>Definition (cont’d)</h1>
+</section><section class="slide level2">
+
 <blockquote>
 <p>A dataset is a collection of values, usually either numbers (if quantitative) or strings (if qualitative). Values are organized in two ways. Every value belongs to a variable and an observation. A variable contains all values that measure the same underlying attribute (like height, temperature, duration) across units. An observation contains all values measured on the same unit (like a person, or a day, or a race) across attributes.</p>
 </blockquote>
@@ -235,16 +607,7 @@ p {
 </ul>
 </section><section id="loading-tidyverse" class="slide level2">
 <h1>Loading <code>tidyverse</code></h1>
-<pre class="r"><code>&gt; library(tidyverse)
-Loading tidyverse: ggplot2
-Loading tidyverse: tibble
-Loading tidyverse: tidyr
-Loading tidyverse: readr
-Loading tidyverse: purrr
-Loading tidyverse: dplyr
-Conflicts with tidy packages ----------------------------------
-filter(): dplyr, stats
-lag():    dplyr, stats</code></pre>
+<pre class="r"><code>&gt; library(tidyverse)</code></pre>
 </section></section>
 <section><section id="tidying-data" class="titleslide slide level1"><h1>Tidying Data</h1></section><section id="tidyr-package" class="slide level2">
 <h1><code>tidyr</code> Package</h1>
@@ -427,10 +790,8 @@ No id variables; using all as measure variables
 <li><code>rename</code>: rename variables in a data frame</li>
 <li><code>select</code>: return a subset of the columns of a data frame, using a flexible notation</li>
 </ul>
-<p>Partially based on <em>R Programming for Data Science</em></p>
-</section><section id="grammar-of-dplyr-1" class="slide level2">
-<h1>Grammar of <code>dplyr</code></h1>
-<p>Verbs (continued):</p>
+</section><section class="slide level2">
+
 <ul>
 <li><code>mutate</code>: add new variables/columns or transform existing variables</li>
 <li><code>distinct</code>: returns only the unique values in a table</li>
@@ -452,39 +813,39 @@ character(0)
 <pre class="r"><code>&gt; class(babynames)
 [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;
 &gt; dim(babynames)
-[1] 1825433       5</code></pre>
+[1] 1858689       5</code></pre>
 <pre class="r"><code>&gt; babynames
-# A tibble: 1,825,433 × 5
+# A tibble: 1,858,689 × 5
     year   sex      name     n       prop
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
-1   1880     F      Mary  7065 0.07238359
-2   1880     F      Anna  2604 0.02667896
-3   1880     F      Emma  2003 0.02052149
-4   1880     F Elizabeth  1939 0.01986579
-5   1880     F    Minnie  1746 0.01788843
-6   1880     F  Margaret  1578 0.01616720
-7   1880     F       Ida  1472 0.01508119
-8   1880     F     Alice  1414 0.01448696
-9   1880     F    Bertha  1320 0.01352390
-10  1880     F     Sarah  1288 0.01319605
-# ... with 1,825,423 more rows</code></pre>
+1   1880     F      Mary  7065 0.07238433
+2   1880     F      Anna  2604 0.02667923
+3   1880     F      Emma  2003 0.02052170
+4   1880     F Elizabeth  1939 0.01986599
+5   1880     F    Minnie  1746 0.01788861
+6   1880     F  Margaret  1578 0.01616737
+7   1880     F       Ida  1472 0.01508135
+8   1880     F     Alice  1414 0.01448711
+9   1880     F    Bertha  1320 0.01352404
+10  1880     F     Sarah  1288 0.01319618
+# ... with 1,858,679 more rows</code></pre>
 </section><section id="peek-at-the-data" class="slide level2">
 <h1>Peek at the Data</h1>
 <pre class="r"><code>&gt; set.seed(201)
 &gt; sample_n(babynames, 10) 
 # A tibble: 10 × 5
-    year   sex    name     n         prop
-   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
-1   1991     M  Esaias     5 2.359700e-06
-2   1933     F   Maida    33 3.155410e-05
-3   1967     M   Alvis    33 1.853916e-05
-4   1905     M Gaylord    11 7.679151e-05
-5   1993     F Kyleigh   157 7.965969e-05
-6   1927     M   Della     8 6.886519e-06
-7   1908     F Luberta    12 3.384753e-05
-8   1968     F  Andrea  7086 4.145300e-03
-9   1921     F Ardelle    50 3.907288e-05
-10  1955     M  Dainel     7 3.351657e-06
+    year   sex     name     n         prop
+   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
+1   1992     M   Kelcey    17 8.101322e-06
+2   1933     M   Hervey    14 1.372698e-05
+3   1968     M     Rich   116 6.529976e-05
+4   1906     F    Annis    30 9.571179e-05
+5   1993     M Stefanos     9 4.358763e-06
+6   1928     F   Janine    10 8.365506e-06
+7   1908     M    Pedro    53 3.185632e-04
+8   1968     M Rosemary     6 3.377574e-06
+9   1921     F    Rheda     7 5.470113e-06
+10  1956     M Clemente    26 1.212302e-05
 &gt; # try also sample_frac(babynames, 6e-6)</code></pre>
 </section><section id="operator" class="slide level2">
 <h1><code>%&gt;%</code> Operator</h1>
@@ -498,91 +859,91 @@ character(0)
 [1] 6.559763</code></pre>
 <pre class="r"><code>&gt; babynames %&gt;% sample_n(5)
 # A tibble: 5 × 5
-   year   sex    name     n         prop
-  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
-1  1979     M   Sunil    42 2.344364e-05
-2  1996     F  Kelina     5 2.608857e-06
-3  1991     F  Gimena     7 3.443326e-06
-4  1979     M Neilson     9 5.023636e-06
-5  1984     F Romelia     5 2.774045e-06</code></pre>
+   year   sex      name     n         prop
+  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
+1  1980     F      Pola     6 3.370355e-06
+2  1997     F Shermaine     8 4.191640e-06
+3  1992     F       Mee    17 8.482331e-06
+4  1980     M     Abram   147 7.925844e-05
+5  1985     F   Coralia     6 3.250954e-06</code></pre>
 </section><section id="filter" class="slide level2">
 <h1><code>filter()</code></h1>
 <pre class="r"><code>&gt; filter(babynames, year==1880, sex==&quot;F&quot;)
 # A tibble: 942 × 5
     year   sex      name     n       prop
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
-1   1880     F      Mary  7065 0.07238359
-2   1880     F      Anna  2604 0.02667896
-3   1880     F      Emma  2003 0.02052149
-4   1880     F Elizabeth  1939 0.01986579
-5   1880     F    Minnie  1746 0.01788843
-6   1880     F  Margaret  1578 0.01616720
-7   1880     F       Ida  1472 0.01508119
-8   1880     F     Alice  1414 0.01448696
-9   1880     F    Bertha  1320 0.01352390
-10  1880     F     Sarah  1288 0.01319605
+1   1880     F      Mary  7065 0.07238433
+2   1880     F      Anna  2604 0.02667923
+3   1880     F      Emma  2003 0.02052170
+4   1880     F Elizabeth  1939 0.01986599
+5   1880     F    Minnie  1746 0.01788861
+6   1880     F  Margaret  1578 0.01616737
+7   1880     F       Ida  1472 0.01508135
+8   1880     F     Alice  1414 0.01448711
+9   1880     F    Bertha  1320 0.01352404
+10  1880     F     Sarah  1288 0.01319618
 # ... with 932 more rows
 &gt; # same as filter(babynames, year==1880 &amp; sex==&quot;F&quot;)</code></pre>
 <pre class="r"><code>&gt; filter(babynames, year==1880, sex==&quot;F&quot;, n &gt; 5000)
 # A tibble: 1 × 5
    year   sex  name     n       prop
   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
-1  1880     F  Mary  7065 0.07238359</code></pre>
+1  1880     F  Mary  7065 0.07238433</code></pre>
 </section><section id="arrange" class="slide level2">
 <h1><code>arrange()</code></h1>
 <pre class="r"><code>&gt; arrange(babynames, name, year, sex)
-# A tibble: 1,825,433 × 5
+# A tibble: 1,858,689 × 5
     year   sex  name     n         prop
    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
-1   2007     M Aaban     5 2.260251e-06
-2   2009     M Aaban     6 2.834029e-06
-3   2010     M Aaban     9 4.390297e-06
-4   2011     M Aaban    11 5.429927e-06
-5   2012     M Aaban    11 5.440091e-06
-6   2013     M Aaban    14 6.961721e-06
-7   2014     M Aaban    16 7.882569e-06
-8   2011     F Aabha     7 3.622491e-06
-9   2012     F Aabha     5 2.587144e-06
-10  2014     F Aabha     9 4.642684e-06
-# ... with 1,825,423 more rows</code></pre>
+1   2007     M Aaban     5 2.259872e-06
+2   2009     M Aaban     6 2.833201e-06
+3   2010     M Aaban     9 4.388578e-06
+4   2011     M Aaban    11 5.427020e-06
+5   2012     M Aaban    11 5.435940e-06
+6   2013     M Aaban    14 6.952863e-06
+7   2014     M Aaban    16 7.843929e-06
+8   2015     M Aaban    15 7.400566e-06
+9   2011     F Aabha     7 3.620673e-06
+10  2012     F Aabha     5 2.585247e-06
+# ... with 1,858,679 more rows</code></pre>
 </section><section id="arrange-1" class="slide level2">
 <h1><code>arrange()</code></h1>
 <pre class="r"><code>&gt; arrange(babynames, desc(name), desc(year), sex)
-# A tibble: 1,825,433 × 5
+# A tibble: 1,858,689 × 5
     year   sex      name     n         prop
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
-1   2010     M     Zzyzx     5 2.439054e-06
-2   2014     M     Zyyon     6 2.955964e-06
-3   2010     F   Zyyanna     6 3.067323e-06
-4   2009     M    Zyvion     5 2.361691e-06
-5   2010     M Zytavious     6 2.926865e-06
-6   2009     M Zytavious     7 3.306368e-06
-7   2007     M Zytavious     6 2.712301e-06
-8   2006     M Zytavious     7 3.196664e-06
-9   2005     M Zytavious     5 2.352830e-06
-10  2004     M Zytavious     6 2.841628e-06
-# ... with 1,825,423 more rows</code></pre>
+1   2010     M     Zzyzx     5 2.438099e-06
+2   2014     M     Zyyon     6 2.941474e-06
+3   2010     F   Zyyanna     6 3.066148e-06
+4   2015     M     Zyvon     6 2.960226e-06
+5   2009     M    Zyvion     5 2.361001e-06
+6   2015     M      Zyus     5 2.466855e-06
+7   2010     M Zytavious     6 2.925719e-06
+8   2009     M Zytavious     7 3.305401e-06
+9   2007     M Zytavious     6 2.711846e-06
+10  2006     M Zytavious     7 3.196251e-06
+# ... with 1,858,679 more rows</code></pre>
 </section><section id="rename" class="slide level2">
 <h1><code>rename()</code></h1>
 <pre class="r"><code>&gt; rename(babynames, number=n)
-# A tibble: 1,825,433 × 5
+# A tibble: 1,858,689 × 5
     year   sex      name number       prop
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;
-1   1880     F      Mary   7065 0.07238359
-2   1880     F      Anna   2604 0.02667896
-3   1880     F      Emma   2003 0.02052149
-4   1880     F Elizabeth   1939 0.01986579
-5   1880     F    Minnie   1746 0.01788843
-6   1880     F  Margaret   1578 0.01616720
-7   1880     F       Ida   1472 0.01508119
-8   1880     F     Alice   1414 0.01448696
-9   1880     F    Bertha   1320 0.01352390
-10  1880     F     Sarah   1288 0.01319605
-# ... with 1,825,423 more rows</code></pre>
+1   1880     F      Mary   7065 0.07238433
+2   1880     F      Anna   2604 0.02667923
+3   1880     F      Emma   2003 0.02052170
+4   1880     F Elizabeth   1939 0.01986599
+5   1880     F    Minnie   1746 0.01788861
+6   1880     F  Margaret   1578 0.01616737
+7   1880     F       Ida   1472 0.01508135
+8   1880     F     Alice   1414 0.01448711
+9   1880     F    Bertha   1320 0.01352404
+10  1880     F     Sarah   1288 0.01319618
+# ... with 1,858,679 more rows</code></pre>
 </section><section id="select" class="slide level2">
 <h1><code>select()</code></h1>
 <pre class="r"><code>&gt; select(babynames, sex, name, n)
-# A tibble: 1,825,433 × 3
+# A tibble: 1,858,689 × 3
      sex      name     n
    &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;
 1      F      Mary  7065
@@ -595,12 +956,12 @@ character(0)
 8      F     Alice  1414
 9      F    Bertha  1320
 10     F     Sarah  1288
-# ... with 1,825,423 more rows
+# ... with 1,858,679 more rows
 &gt; # same as select(babynames, sex:n)</code></pre>
 </section><section id="renaming-with-select" class="slide level2">
 <h1>Renaming with <code>select()</code></h1>
 <pre class="r"><code>&gt; select(babynames, sex, name, number=n)
-# A tibble: 1,825,433 × 3
+# A tibble: 1,858,689 × 3
      sex      name number
    &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;
 1      F      Mary   7065
@@ -613,92 +974,92 @@ character(0)
 8      F     Alice   1414
 9      F    Bertha   1320
 10     F     Sarah   1288
-# ... with 1,825,423 more rows</code></pre>
+# ... with 1,858,679 more rows</code></pre>
 </section><section id="mutate" class="slide level2">
 <h1><code>mutate()</code></h1>
 <pre class="r"><code>&gt; mutate(babynames, total_by_year=round(n/prop))
-# A tibble: 1,825,433 × 6
+# A tibble: 1,858,689 × 6
     year   sex      name     n       prop total_by_year
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;         &lt;dbl&gt;
-1   1880     F      Mary  7065 0.07238359         97605
-2   1880     F      Anna  2604 0.02667896         97605
-3   1880     F      Emma  2003 0.02052149         97605
-4   1880     F Elizabeth  1939 0.01986579         97605
-5   1880     F    Minnie  1746 0.01788843         97605
-6   1880     F  Margaret  1578 0.01616720         97605
-7   1880     F       Ida  1472 0.01508119         97605
-8   1880     F     Alice  1414 0.01448696         97605
-9   1880     F    Bertha  1320 0.01352390         97605
-10  1880     F     Sarah  1288 0.01319605         97605
-# ... with 1,825,423 more rows
+1   1880     F      Mary  7065 0.07238433         97604
+2   1880     F      Anna  2604 0.02667923         97604
+3   1880     F      Emma  2003 0.02052170         97604
+4   1880     F Elizabeth  1939 0.01986599         97604
+5   1880     F    Minnie  1746 0.01788861         97604
+6   1880     F  Margaret  1578 0.01616737         97604
+7   1880     F       Ida  1472 0.01508135         97604
+8   1880     F     Alice  1414 0.01448711         97604
+9   1880     F    Bertha  1320 0.01352404         97604
+10  1880     F     Sarah  1288 0.01319618         97604
+# ... with 1,858,679 more rows
 &gt; # see also transmutate</code></pre>
 </section><section id="no.-individuals-by-year-and-sex" class="slide level2">
 <h1>No. Individuals by Year and Sex</h1>
 <p>Let’s put a few things together now adding the function <code>distinct()</code>…</p>
 <pre class="r"><code>&gt; babynames %&gt;% mutate(total_by_year=round(n/prop)) %&gt;% 
 +   select(sex, year, total_by_year) %&gt;% distinct()
-# A tibble: 270 × 3
+# A tibble: 272 × 3
      sex  year total_by_year
    &lt;chr&gt; &lt;dbl&gt;         &lt;dbl&gt;
-1      F  1880         97605
-2      M  1880        118400
-3      F  1881         98856
-4      M  1881        108284
-5      F  1882        115698
-6      M  1882        122033
-7      F  1883        120064
-8      M  1883        112480
-9      F  1884        137588
-10     M  1884        122741
-# ... with 260 more rows</code></pre>
+1      F  1880         97604
+2      M  1880        118399
+3      F  1881         98855
+4      M  1881        108282
+5      F  1882        115696
+6      M  1882        122031
+7      F  1883        120059
+8      M  1883        112478
+9      F  1884        137586
+10     M  1884        122739
+# ... with 262 more rows</code></pre>
 </section><section id="summarize" class="slide level2">
 <h1><code>summarize()</code></h1>
 <pre class="r"><code>&gt; summarize(babynames, mean_n = mean(n), median_n = median(n), 
 +           number_sex = n_distinct(sex), 
 +           distinct_names = n_distinct(name))
 # A tibble: 1 × 4
-    mean_n median_n number_sex distinct_names
-     &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;          &lt;int&gt;
-1 184.6879       12          2          93889</code></pre>
+   mean_n median_n number_sex distinct_names
+    &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;          &lt;int&gt;
+1 183.383       12          2          95025</code></pre>
 </section><section id="group_by" class="slide level2">
 <h1><code>group_by()</code></h1>
 <pre class="r"><code>&gt; babynames %&gt;% group_by(year, sex)
-Source: local data frame [1,825,433 x 5]
-Groups: year, sex [270]
+Source: local data frame [1,858,689 x 5]
+Groups: year, sex [272]
 
     year   sex      name     n       prop
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
-1   1880     F      Mary  7065 0.07238359
-2   1880     F      Anna  2604 0.02667896
-3   1880     F      Emma  2003 0.02052149
-4   1880     F Elizabeth  1939 0.01986579
-5   1880     F    Minnie  1746 0.01788843
-6   1880     F  Margaret  1578 0.01616720
-7   1880     F       Ida  1472 0.01508119
-8   1880     F     Alice  1414 0.01448696
-9   1880     F    Bertha  1320 0.01352390
-10  1880     F     Sarah  1288 0.01319605
-# ... with 1,825,423 more rows</code></pre>
+1   1880     F      Mary  7065 0.07238433
+2   1880     F      Anna  2604 0.02667923
+3   1880     F      Emma  2003 0.02052170
+4   1880     F Elizabeth  1939 0.01986599
+5   1880     F    Minnie  1746 0.01788861
+6   1880     F  Margaret  1578 0.01616737
+7   1880     F       Ida  1472 0.01508135
+8   1880     F     Alice  1414 0.01448711
+9   1880     F    Bertha  1320 0.01352404
+10  1880     F     Sarah  1288 0.01319618
+# ... with 1,858,679 more rows</code></pre>
 </section><section id="no.-individuals-by-year-and-sex-1" class="slide level2">
 <h1>No. Individuals by Year and Sex</h1>
 <pre class="r"><code>&gt; babynames %&gt;% group_by(year, sex) %&gt;% 
 +   summarize(total_by_year=sum(n))
-Source: local data frame [270 x 3]
+Source: local data frame [272 x 3]
 Groups: year [?]
 
     year   sex total_by_year
    &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;
-1   1880     F         90993
-2   1880     M        110491
-3   1881     F         91954
-4   1881     M        100745
-5   1882     F        107850
-6   1882     M        113688
-7   1883     F        112321
-8   1883     M        104629
-9   1884     F        129022
-10  1884     M        114445
-# ... with 260 more rows</code></pre>
+1   1880     F         90992
+2   1880     M        110490
+3   1881     F         91953
+4   1881     M        100743
+5   1882     F        107848
+6   1882     M        113686
+7   1883     F        112318
+8   1883     M        104627
+9   1884     F        129020
+10  1884     M        114443
+# ... with 262 more rows</code></pre>
 <p>Compare to earlier slide. Why the difference?</p>
 </section><section id="how-many-distinct-names" class="slide level2">
 <h1>How Many Distinct Names?</h1>
@@ -708,8 +1069,8 @@ Groups: year [?]
 # A tibble: 2 × 3
     sex   mean_n distinct_names_sex
   &lt;chr&gt;    &lt;dbl&gt;              &lt;int&gt;
-1     F 154.4542              64911
-2     M 228.6588              39199</code></pre>
+1     F 153.3909              65658
+2     M 226.9508              39728</code></pre>
 </section><section id="most-popular-names" class="slide level2">
 <h1>Most Popular Names</h1>
 <pre class="r"><code>&gt; top_names &lt;- babynames %&gt;% group_by(year, sex) %&gt;% 
@@ -736,16 +1097,16 @@ Groups: year [5]
 
     year   sex top_name
    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
-1   2010     F Isabella
-2   2010     M    Jacob
-3   2011     F   Sophia
-4   2011     M    Jacob
-5   2012     F   Sophia
-6   2012     M    Jacob
-7   2013     F   Sophia
-8   2013     M     Noah
-9   2014     F     Emma
-10  2014     M     Noah</code></pre>
+1   2011     F   Sophia
+2   2011     M    Jacob
+3   2012     F   Sophia
+4   2012     M    Jacob
+5   2013     F   Sophia
+6   2013     M     Noah
+7   2014     F     Emma
+8   2014     M     Noah
+9   2015     F     Emma
+10  2015     M     Noah</code></pre>
 </section><section id="most-popular-female-names" class="slide level2">
 <h1>Most Popular Female Names</h1>
 <h3 id="s">1990s</h3>
@@ -789,13 +1150,13 @@ Groups: year [10]
 <pre class="r"><code>&gt; # Analyzing the name &#39;John&#39;
 &gt; john &lt;- babynames %&gt;% filter(sex==&quot;M&quot;, name==&quot;John&quot;)
 &gt; plot(john$year, john$prop, type=&quot;l&quot;)</code></pre>
-<p><img src="week02_files/figure-revealjs/unnamed-chunk-41-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week02_files/figure-revealjs/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; # Analyzing the name &#39;Bella&#39;
 &gt; bella &lt;- babynames %&gt;% filter(sex==&quot;F&quot;, name==&quot;Bella&quot;) 
 &gt; plot(bella$year, bella$prop, type=&quot;l&quot;)</code></pre>
-<p><img src="week02_files/figure-revealjs/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week02_files/figure-revealjs/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="additional-examples" class="slide level2">
 <h1>Additional Examples</h1>
 <p>You should study additional tutorials of <code>dplyr</code> that utilize other data sets:</p>
@@ -1000,16 +1361,16 @@ Joining, by = &quot;key&quot;
 &gt; officers &lt;- html_nodes(usg, &quot;.team-member-name&quot;) %&gt;% 
 +             html_text
 &gt; head(officers, n=20)
- [1] &quot;Aleksandra Czulak&quot; &quot;Jeremy Burton&quot;    
- [3] &quot;Hunter Dong&quot;       &quot;Daniel Qian&quot;      
- [5] &quot;Sung Won Chang&quot;    &quot;Pooja Patel&quot;      
- [7] &quot;Miranda Rosen&quot;     &quot;Michael Asparrin&quot; 
- [9] &quot;Devin Kilpatrick&quot;  &quot;Pritika Mehra&quot;    
-[11] &quot;Olivia Grah&quot;       &quot;Lucas Ramos&quot;      
-[13] &quot;Ellie Shannon&quot;     &quot;Nicholas Wu&quot;      
-[15] &quot;Wendy Zhao&quot;        &quot;Kishan Bhatt&quot;     
-[17] &quot;Cailin Hong&quot;       &quot;Myesha Jemison&quot;   
-[19] &quot;Eli Schechner&quot;     &quot;Ruby Guo&quot;         </code></pre>
+ [1] &quot;Myesha Jemison&quot;       &quot;Daniel Qian&quot;         
+ [3] &quot;Alison Shim&quot;          &quot;Katherine Wang&quot;      
+ [5] &quot;Pooja Patel&quot;          &quot;Miranda Rosen&quot;       
+ [7] &quot;Michael Asparrin&quot;     &quot;Devin Kilpatrick&quot;    
+ [9] &quot;Pritika Mehra&quot;        &quot;Olivia Grah&quot;         
+[11] &quot;Lucas Ramos&quot;          &quot;Ellie Shannon&quot;       
+[13] &quot;Nicholas Wu&quot;          &quot;Wendy Zhao&quot;          
+[15] &quot;Soraya Morales Nuñez&quot; &quot;Eli Schechner&quot;       
+[17] &quot;Ruby Guo&quot;             &quot;Andrew Ma&quot;           
+[19] &quot;Nate Lambert&quot;         &quot;June Philippe&quot;       </code></pre>
 </section><section id="apis" class="slide level2">
 <h1>APIs</h1>
 <p>API stands for “application programming interface” which is <a href="https://en.wikipedia.org/wiki/Application_programming_interface">a set of routines, protocols, and tools for building software and applications</a>.</p>
@@ -1024,7 +1385,7 @@ Joining, by = &quot;key&quot;
 <h1>Load Data</h1>
 <p>The data was distributed as a collection of matrices in R.</p>
 <pre class="r"><code>&gt; rm(list=ls())
-&gt; load(&quot;../data/smith_kruglyak.RData&quot;)
+&gt; load(&quot;./data/smith_kruglyak.RData&quot;)
 &gt; ls()
 [1] &quot;exp.e&quot;      &quot;exp.g&quot;      &quot;exp.pos&quot;    &quot;marker&quot;    
 [5] &quot;marker.pos&quot;
@@ -1408,7 +1769,7 @@ Groups: chr [16]
 +   ggplot(aes(x = glucose, y = ethanol)) +
 +   geom_point() +  theme_bw() +
 +   theme(legend.position = &quot;none&quot;)</code></pre>
-<p><img src="week02_files/figure-revealjs/unnamed-chunk-74-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week02_files/figure-revealjs/unnamed-chunk-76-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
 <h1>Source</h1>
@@ -1420,7 +1781,7 @@ Groups: chr [16]
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12.3
+Running under: macOS Sierra 10.12.4
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1430,35 +1791,35 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] rvest_0.3.2     xml2_1.1.1      babynames_0.2.1
+ [1] rvest_0.3.2     xml2_1.1.1      babynames_0.3.0
  [4] reshape2_1.4.2  dplyr_0.5.0     purrr_0.2.2    
- [7] readr_1.0.0     tidyr_0.6.1     tibble_1.2     
+ [7] readr_1.1.0     tidyr_0.6.1     tibble_1.3.0   
 [10] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
 [13] magrittr_1.5    devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.9      plyr_1.8.4       forcats_0.2.0   
- [4] tools_3.3.2      digest_0.6.12    lubridate_1.6.0 
- [7] jsonlite_1.2     evaluate_0.10    memoise_1.0.0   
-[10] nlme_3.1-131     gtable_0.2.0     lattice_0.20-34 
-[13] psych_1.6.12     DBI_0.5-1        curl_2.3        
-[16] yaml_2.1.14      parallel_3.3.2   haven_1.0.0     
-[19] withr_1.0.2      stringr_1.1.0    httr_1.2.1      
-[22] revealjs_0.8     hms_0.3          rprojroot_1.2   
-[25] grid_3.3.2       R6_2.2.0         XML_3.98-1.5    
-[28] readxl_0.1.1     foreign_0.8-67   rmarkdown_1.3   
-[31] selectr_0.3-1    modelr_0.1.0     backports_1.0.5 
-[34] scales_0.4.1     htmltools_0.3.5  assertthat_0.1  
-[37] mnormt_1.5-5     colorspace_1.3-2 labeling_0.3    
-[40] stringi_1.1.2    lazyeval_0.2.0   munsell_0.4.3   
-[43] broom_0.4.1     </code></pre>
+ [1] Rcpp_0.12.10     cellranger_1.1.0 plyr_1.8.4      
+ [4] forcats_0.2.0    tools_3.3.2      digest_0.6.12   
+ [7] lubridate_1.6.0  jsonlite_1.4     evaluate_0.10   
+[10] memoise_1.1.0    nlme_3.1-131     gtable_0.2.0    
+[13] lattice_0.20-35  psych_1.7.5      DBI_0.6-1       
+[16] curl_2.6         yaml_2.1.14      parallel_3.3.2  
+[19] haven_1.0.0      withr_1.0.2      stringr_1.2.0   
+[22] httr_1.2.1       revealjs_0.9     hms_0.3         
+[25] rprojroot_1.2    grid_3.3.2       R6_2.2.0        
+[28] XML_3.98-1.7     readxl_1.0.0     foreign_0.8-68  
+[31] rmarkdown_1.5    selectr_0.3-1    modelr_0.1.0    
+[34] backports_1.0.5  scales_0.4.1     htmltools_0.3.6 
+[37] assertthat_0.2.0 mnormt_1.5-5     colorspace_1.3-2
+[40] labeling_0.3     stringi_1.1.5    lazyeval_0.2.0  
+[43] munsell_0.4.3    broom_0.4.2     </code></pre>
 </section>
 </section></section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -1479,6 +1840,7 @@ loaded via a namespace (and not attached):
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
 
+
         chalkboard: {
         },
 
@@ -1492,8 +1854,8 @@ loaded via a namespace (and not attached):
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
@@ -1502,7 +1864,7 @@ loaded via a namespace (and not attached):
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

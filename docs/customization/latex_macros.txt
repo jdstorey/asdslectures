@@ -1,0 +1,52 @@
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}

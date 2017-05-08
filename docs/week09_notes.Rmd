@@ -7,45 +7,66 @@ output:
     toc: true
     toc_depth: 2
     keep_tex: true
-geometry: right=2.5in
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
-library(knitr)
-knit_hooks$set(small.mar = function(before, options, envir) {
-    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
-})
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE, small.mar=TRUE)
-options(width=63)
-library(tidyverse)
-theme_set(theme_bw())
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
 ```
 
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\V}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\se}{\operatorname{se}}
-\newcommand{\logit}{\operatorname{logit}}
-\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
-\newcommand{\xs}{x_1, x_2, \ldots, x_n}
-\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
-\newcommand{\bb}{\boldsymbol{\beta}}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bX}{\boldsymbol{X}}
-\newcommand{\by}{\boldsymbol{y}}
-\newcommand{\bY}{\boldsymbol{Y}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bZ}{\boldsymbol{Z}}
-\newcommand{\be}{\boldsymbol{e}}
-\newcommand{\bE}{\boldsymbol{E}}
-\newcommand{\bSig}{\boldsymbol{\Sigma}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-\newcommand{\bT}{\boldsymbol{\Theta}}
-\newcommand{\bpi}{\boldsymbol{\pi}}
-\newcommand{\argmax}{\text{argmax}}
-\newcommand{\KL}{\text{KL}}
 
-# <img src="./images/howto.jpg"></img>
 
 # Statistical Models
 
@@ -998,202 +1019,331 @@ ggplot(pollen_study) + geom_point(aes(x=week_new, y=pollen))
 ```
 
 
-# Logistic Regression
+# OLS Goodness of Fit
 
-## Goal
+## Pythagorean Theorem
 
-Logistic regression models a Bernoulli distributed response variable in terms of linear combinations of explanatory variables.
+<div id="left">
+![PythMod](images/right_triangle_model_fits.png)
+</div>
 
-This extends least squares regression to the case where the response variable captures a "success" or "failure" type outcome.
+<div id="right">
+Least squares model fitting can be understood through the Pythagorean theorem: $a^2 + b^2 = c^2$.  However, here we have:
 
-## Bernoulli as EFD
+$$
+\sum_{i=1}^n Y_i^2 = \sum_{i=1}^n \hat{Y}_i^2 + \sum_{i=1}^n (Y_i - \hat{Y}_i)^2
+$$
 
-If $Y \sim \mbox{Bernoulli}(p)$, then its pmf is:
+where the $\hat{Y}_i$ are the result of a **linear projection** of the $Y_i$.
+</div>
+
+## OLS Normal Model
+
+In this section, let's assume that $(\bX_1, Y_1), \ldots, (\bX_n, Y_n)$ are distributed so that
 
 $$
 \begin{aligned}
-f(y; p) & = p^{y} (1-p)^{1-y} \\
- & = \exp\left\{ \log\left(\frac{p}{1-p}\right)y + \log(1-p) \right\}
+Y_i & = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
+ & = \bX_i \bb + E_i
 \end{aligned}
 $$
 
-In exponential family distribution (EFD) notation, 
+where $\bE | \bX \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$.  Note that we haven't specified the distribution of the $\bX_i$ rv's.
+
+## Projection Matrices
+
+In the OLS framework we have:
 
 $$
-\eta(p) = \log\left(\frac{p}{1-p}\right) \equiv \logit(p),
+\hat{\bY} = \bX (\bX^T \bX)^{-1} \bX^T \bY.
 $$
 
-$A(\eta(p)) = \log(1 + \exp(\eta)) = \log(1-p)$, and $y$ is the sufficient statistic.
+The matrix $\bP_{n \times n} = \bX (\bX^T \bX)^{-1} \bX^T$ is a projection matrix.  The vector $\bY$ is projected into the space spanned by the column space of $\bX$.
 
-## Model
 
-$(\bX_1, Y_1), (\bX_2, Y_2), \ldots, (\bX_n, Y_n)$ are distributed so that $Y_i | \bX_i \sim \mbox{Bernoulli}(p_i)$, where $\{Y_i | \bX_i\}_{i=1}^n$ are jointly independent and
+Project matrices have the following properties:
 
-$$
-\logit\left(\E[Y_i | \bX_i]\right) = \log\left( \frac{\Pr(Y_i = 1 | \bX_i)}{\Pr(Y_i = 0 | \bX_i)} \right)  = \bX_i \bb.
-$$
+- $\bP$ is symmetric
+- $\bP$ is idempotent so that $\bP \bP = \bP$
+- If $\bX$ has column rank $p$, then $\bP$ has rank $p$
+- The eigenvalues of $\bP$ are $p$ 1's and $n-p$ 0's
+- The trace (sum of diagonal entries) is $\operatorname{tr}(\bP) = p$
+- $\bI - \bP$ is also a projection matrix with rank $n-p$
 
-From this it follows that
+## Decomposition
 
-$$
-p_i = \frac{\exp\left(\bX_i \bb\right)}{1 + \exp\left(\bX_i \bb\right)}.
-$$
+Note that $\bP (\bI - \bP) = \bP - \bP \bP = \bP - \bP = \bO$.  
 
-## Maximum Likelihood Estimation
-
-The $\bb$ are estimated from the MLE calculated from:
+We have
 
 $$
 \begin{aligned}
-\ell\left(\bb ; \by, \bX \right) & = \sum_{i=1}^n \log\left(\frac{p_i}{1-p_i}\right) y_i + \log(1-p_i) \\
- & = \sum_{i=1}^n (\bx_i \bb) y_i - \log\left(1 + \exp\left(\bx_i \bb\right) \right)  
+\| \bY\|_{2}^{2} = \bY^T \bY & = (\bP \bY + (\bI - \bP) \bY)^T (\bP \bY + (\bI - \bP) \bY) \\
+ & = (\bP \bY)^T (\bP \bY) + ((\bI - \bP) \bY)^T ((\bI - \bP) \bY) \\
+ & = \| \bP \bY\|_{2}^{2} + \| (\bI - \bP) \bY \|_{2}^{2}
 \end{aligned}
 $$
 
-## Iteratively Reweighted Least Squares
-
-1. Initialize $\bb^{(1)}$.
-
-2. For each iteration $t=1, 2, \ldots$, set 
-$$
-p_i^{(t)} = \logit^{-1}\left( \bx_i \bb^{(t)} \right), \ \ \ \ 
-z_i^{(t)} = \logit\left(p_i^{(t)}\right) + \frac{y_i - p_i^{(t)}}{p_i^{(t)}(1-p_i^{(t)})}
-$$
-and let $\bz^{(t)} = \left\{z_i^{(t)}\right\}_{i=1}^n$.
+where the cross terms disappear because $\bP (\bI - \bP) = \bO$.
 
 
-3. Form $n \times n$ diagonal matrix $\boldsymbol{W}^{(t)}$ with $(i, i)$ entry equal to $p_i^{(t)}(1-p_i^{(t)})$.
-
-4. Obtain $\bb^{(t+1)}$ by performing the wieghted least squares regression (see [GLS](#/generalized-least-squares-1) from earlier)
+Note:  The $\ell_p$ norm of an $n$-vector $\boldsymbol{w}$ is defined as
 
 $$
-\bb^{(t+1)} = \left(\bX^T \boldsymbol{W}^{(t)} \bX \right)^{-1} \bX^T \boldsymbol{W}^{(t)} \bz^{(t)}.
+\| \boldsymbol{w} \|_p = \left(\sum_{i=1}^n |w_i|^p\right)^{1/p}.
 $$
 
-5.  Iterate Steps 2-4 over $t=1, 2, 3, \ldots$ until convergence, setting $\hat{\bb} = \bb^{(\infty)}$.
-
-## GLMs
-
-For exponential family distribution response variables, the **generalized linear model** is
+Above we calculated 
 
 $$
-\eta\left(\E[Y | \bX]\right) = \bX \bb
+\| \boldsymbol{w} \|_2^2 = \sum_{i=1}^n w_i^2.
 $$
 
-where $\eta(\theta)$ is function of the expected value $\theta$ into the natural parameter.  This is called the **canonical link function** in the GLM setting.
+## Distribution of Projection
 
-The **iteratively reweighted least squares** algorithm presented above for calculating (local) maximum likelihood estimates of $\bb$ has a generalization to a large class of exponential family distribution response vairables.
+Suppose that $Y_1, Y_2, \ldots, Y_n \iid \mbox{Normal}(0,\sigma^2)$. This can also be written as $\bY \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$. It follows that 
+
+$$
+\bP \bY \sim \mbox{MVN}_{n}(\bO, \sigma^2 \bP \bI \bP^T).
+$$
+
+where $\bP \bI \bP^T = \bP \bP^T = \bP \bP = \bP$.
+
+Also, $(\bP \bY)^T (\bP \bY) = \bY^T \bP^T \bP \bY = \bY^T \bP \bY$, a **quadratic form**.  Given the eigenvalues of $\bP$, $\bY^T \bP \bY$ is equivalent in distribution to $p$ squared iid Normal(0,1) rv's, so 
+
+$$
+\frac{\bY^T \bP \bY}{\sigma^2} \sim \chi^2_{p}.
+$$
+
+## Distribution of Residuals
+
+If $\bP \bY = \hat{\bY}$ are the fitted OLS values, then $(\bI-\bP) \bY = \bY - \hat{\bY}$ are the residuals.
+
+It follows by the same argument as above that
+
+$$
+\frac{\bY^T (\bI-\bP) \bY}{\sigma^2} \sim \chi^2_{n-p}.
+$$
+
+It's also straightforward to show that $(\bI-\bP)\bY \sim \mbox{MVN}_{n}(\bO, \sigma^2(\bI-\bP))$ and $\Cov(\bP\bY, (\bI-\bP)\bY) = \bO$. 
 
 
-Next week we will study the summary statistics, sampling distributions, and inference procedures for GLMs that are analogous to those we covered above for least squares regression.
+## Degrees of Freedom
 
-# `glm()` Function in R
+The degrees of freedom, $p$, of a linear projection model fit is equal to
 
-## Example: Grad School Admissions
+- The number of linearly dependent columns of $\bX$
+- The number of nonzero eigenvalues of $\bP$ (where nonzero eigenvalues are equal to 1)
+- The trace of the projection matrix, $\operatorname{tr}(\bP)$.
 
-```{r ucladata, cache=TRUE}
-mydata <- 
-  read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
-dim(mydata)
-head(mydata)
+The reason why we divide estimates of variance by $n-p$ is because this is the number of effective independent sources of variation remaining after the model is fit by projecting the $n$ observations into a $p$ dimensional linear space.
+
+## Submodels
+
+Consider the OLS model $\bY = \bX \bb + \bE$ where there are $p$ columns of $\bX$ and $\bb$ is a $p$-vector.
+
+Let $\bX_0$ be a subset of $p_0$ columns of $\bX$ and let $\bX_1$ be a subset of $p_1$ columns, where $1 \leq p_0 < p_1 \leq p$.  Also, assume that the columns of $\bX_0$ are a subset of $\bX_1$.
+
+We can form $\hat{\bY}_0 = \bP_0 \bY$ where $\bP_0$ is the projection matrix built from $\bX_0$.  We can analogously form $\hat{\bY}_1 = \bP_1 \bY$.
+
+
+## Hypothesis Testing
+
+Without loss of generality, suppose that $\bb_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T$ and $\bb_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T$.
+
+How do we compare these models, specifically to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$?
+
+The basic idea to perform this test is to compare the goodness of fits of each model via a pivotal statistic.  We will discuss the generalized LRT and ANOVA approaches.
+
+## Generalized LRT
+
+Under the OLS Normal model, it follows that $\hat{\bb}_0 = (\bX^T_0 \bX_0)^{-1} \bX_0^T \bY$ is the MLE under the null hypothesis and $\hat{\bb}_1 = (\bX^T_1 \bX_1)^{-1} \bX_1^T \bY$ is the unconstrained MLE.  Also, the respective MLEs of $\sigma^2$ are
+
+$$
+\hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2}{n}
+$$
+
+$$
+\hat{\sigma}^2_1 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2}{n}
+$$
+
+where $\hat{\bY}_{0} = \bX_0 \hat{\bb}_0$ and $\hat{\bY}_{1} = \bX_1 \hat{\bb}_1$.
+
+
+The generalized LRT statistic is
+
+$$
+\lambda(\bX, \bY) = \frac{L\left(\hat{\bb}_1, \hat{\sigma}^2_1; \bX, \bY \right)}{L\left(\hat{\bb}_0, \hat{\sigma}^2_0; \bX, \bY \right)}
+$$
+
+where $2\log\lambda(\bX, \bY)$ has a $\chi^2_{p_1 - p_0}$ null distribution.
+
+## Nested Projections
+
+We can apply the Pythagorean theorem we saw earlier to linear subspaces to get:
+
+$$
+\begin{aligned}
+\| \bY \|^2_2 & = \| (\bI - \bP_1) \bY \|_{2}^{2} + \| \bP_1 \bY\|_{2}^{2} \\
+& = \| (\bI - \bP_1) \bY \|_{2}^{2} + \| (\bP_1 - \bP_0) \bY\|_{2}^{2} + \| \bP_0 \bY\|_{2}^{2}
+\end{aligned}
+$$
+
+We can also use the Pythagorean theorem to decompose the residuals from the smaller projection $\bP_0$:
+
+$$
+\| (\bI - \bP_0) \bY \|^2_2 = \| (\bI - \bP_1) \bY \|^2_2 + \| (\bP_1 - \bP_0) \bY \|^2_2
+$$
+
+## *F* Statistic
+
+The $F$ statistic compares the improvement of goodness in fit of the larger model to that of the smaller model in terms of sums of squared residuals, and it scales this improvement by an estimate of $\sigma^2$:
+
+$$
+\begin{aligned}
+F & = \frac{\left[\| (\bI - \bP_0) \bY \|^2_2 - \| (\bI - \bP_1) \bY \|^2_2\right]/(p_1 - p_0)}{\| (\bI - \bP_1) \bY \|^2_2/(n-p_1)} \\
+& = \frac{\left[\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2 - \sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 \right]/(p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)} \\
+\end{aligned}
+$$
+
+
+Since $\| (\bI - \bP_0) \bY \|^2_2 - \| (\bI - \bP_1) \bY \|^2_2 = \| (\bP_1 - \bP_0) \bY \|^2_2$, we can equivalently write the $F$ statistic as:
+
+$$
+\begin{aligned}
+F & = \frac{\| (\bP_1 - \bP_0) \bY \|^2_2 / (p_1 - p_0)}{\| (\bI - \bP_1) \bY \|^2_2/(n-p_1)} \\
+& = \frac{\sum_{i=1}^n (\hat{Y}_{1,i} - \hat{Y}_{0,i})^2 / (p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)}
+\end{aligned} 
+$$
+
+## *F* Distribution
+
+Suppose we have independent random variables $V \sim \chi^2_a$ and $W \sim \chi^2_b$.  It follows that 
+
+$$
+\frac{V/a}{W/b} \sim F_{a,b}
+$$
+
+where $F_{a,b}$ is the $F$ distribution with $(a, b)$ degrees of freedom.
+
+
+By arguments similar to those given above, we have
+
+$$
+\frac{\| (\bP_1 - \bP_0) \bY \|^2_2}{\sigma^2} \sim \chi^2_{p_1 - p_0}
+$$
+
+$$
+\frac{\| (\bI - \bP_1) \bY \|^2_2}{\sigma^2} \sim \chi^2_{n-p_1}
+$$
+
+and these two rv's are independent.
+
+## *F* Test
+
+Suppose that the OLS model holds where $\bE | \bX \sim \mbox{MVN}_n(\bO, \sigma^2 \bI)$.
+
+In order to test $H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = \bO$ vs $H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= \bO$, we can form the $F$ statistic as given above, which has null distribution $F_{p_1 - p_0, n - p_1}$.  The p-value is calculated as $\Pr(F^* \geq F)$ where $F$ is the observed $F$ statistic and $F^* \sim F_{p_1 - p_0, n - p_1}$.
+
+If the above assumption on the distribution of $\bE | \bX$ only approximately holds, then the $F$ test p-value is also an approximation.
+
+## Example: Davis Data
+
+```{r, message=FALSE}
+library("car")
+data("Davis", package="car")
 ```
-
-Data and analysis courtesy of <http://www.ats.ucla.edu/stat/r/dae/logit.htm>.
-
-
-## Explore the Data
 
 ```{r}
-apply(mydata, 2, mean)
-apply(mydata, 2, sd)
-
-table(mydata$admit, mydata$rank)
+htwt <- tbl_df(Davis)
+htwt[12,c(2,3)] <- htwt[12,c(3,2)]
+head(htwt)
 ```
 
+## Comparing Linear Models in R
+
+Example: Davis Data
+
+Suppose we are considering the three following models:
 
 ```{r}
-ggplot(data=mydata) +
-  geom_boxplot(aes(x=as.factor(admit), y=gre))
+f1 <- lm(weight ~ height, data=htwt)
+f2 <- lm(weight ~ height + sex, data=htwt)
+f3 <- lm(weight ~ height + sex + height:sex, data=htwt)
 ```
 
+How do we determine if the additional terms in models `f2` and `f3` are needed?
+
+## ANOVA (Version 2)
+
+A generalization of ANOVA exists that allows us to compare two nested models, quantifying their differences in terms of goodness of fit and performing a hypothesis test of whether this difference is statistically significant.  
+
+A model is *nested* within another model if their difference is simply the absence of certain terms in the smaller model.  
+
+The null hypothesis is that the additional terms have coefficients equal to zero, and the alternative hypothesis is that at least one coefficient is nonzero.
+
+Both versions of ANOVA can be described in a single, elegant mathematical framework.
+
+## Comparing Two Models <br> with `anova()`
+
+This provides a comparison of the improvement in fit from model `f2` compared to model `f1`:
+```{r}
+anova(f1, f2)
+```
+
+## When There's a Single Variable Difference  
+
+Compare above `anova(f1, f2)` p-value to that for the `sex` term from the `f2` model:
+```{r}
+library(broom)
+tidy(f2)
+```
+
+## Calculating the F-statistic
 
 ```{r}
-ggplot(data=mydata) +
-  geom_boxplot(aes(x=as.factor(admit), y=gpa))
+anova(f1, f2)
 ```
 
-## Logistic Regression in R
+How the F-statistic is calculated:
+```{r}
+n <- nrow(htwt)
+ss1 <- (n-1)*var(f1$residuals)
+ss1
+ss2 <- (n-1)*var(f2$residuals)
+ss2
+((ss1 - ss2)/anova(f1, f2)$Df[2])/(ss2/f2$df.residual)
+```
+
+## Calculating the Generalized LRT
 
 ```{r}
-mydata$rank <- factor(mydata$rank, levels=c(1, 2, 3, 4))
-myfit <- glm(admit ~ gre + gpa + rank, 
-             data = mydata, family = "binomial")
-myfit
+anova(f1, f2, test="LRT")
 ```
 
-## Summary of Fit
+```{r, message=FALSE}
+library(lmtest)
+lrtest(f1, f2)
+```
+
+
+These tests produce slightly different answers because `anova()` adjusts for degrees of freedom when estimating the variance, whereas `lrtest()` is the strict generalized LRT. See [here](https://stats.stackexchange.com/questions/155474/r-why-does-lrtest-not-match-anovatest-lrt).
+
+## ANOVA on More Distant Models
+
+We can compare models with multiple differences in terms:
 
 ```{r}
-summary(myfit)
+anova(f1, f3)
 ```
 
-## ANOVA of Fit
+## Compare Multiple Models at Once
+
+We can compare multiple models at once:
 
 ```{r}
-anova(myfit, test="Chisq")
-anova(myfit, test="LRT")
+anova(f1, f2, f3)
 ```
-
-## Example: Contraceptive Use
-
-```{r wws509data, cache=TRUE}
-cuse <- 
-  read.table("http://data.princeton.edu/wws509/datasets/cuse.dat", 
-             header=TRUE)
-dim(cuse)
-head(cuse)
-```
-
-Data and analysis courtesy of <http://data.princeton.edu/R/glms.html>.
-
-## A Different Format
-
-Note that in this data set there are multiple observations per explanatory variable configuration.
-
-The last two columns of the data frame count the successes and failures per configuration.
-
-```{r}
-head(cuse)
-```
-
-## Fitting the Model
-
-When this is the case, we call the `glm()` function slighlty differently.
-
-```{r}
-myfit <- glm(cbind(using, notUsing) ~ age + education + wantsMore, 
-             data=cuse, family = binomial)
-myfit
-```
-
-## Summary of Fit
-
-```{r}
-summary(myfit)
-```
-
-## ANOVA of Fit
-
-```{r}
-anova(myfit)
-```
-
-## More on this Data Set
-
-See <http://data.princeton.edu/R/glms.html> for more on fitting logistic regression to this data set.
-
-A number of interesting choices are made that reveal more about the data.
-
 
 # Extras
 

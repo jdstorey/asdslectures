@@ -15,33 +15,65 @@ output:
       slideNumber: false
       progress: true
     includes:
-      before_body: ../customization/doc_prefix.html
+      before_body: customization/doc_prefix.html
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
-library(knitr)
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
-options(width=63)
-library(tidyverse)
-theme_set(theme_bw())
-```
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
 
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\V}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\se}{\operatorname{se}}
-\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
-\newcommand{\xs}{x_1, x_2, \ldots, x_n}
-\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bX}{\boldsymbol{X}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bZ}{\boldsymbol{Z}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-\newcommand{\bT}{\boldsymbol{\Theta}}
-\newcommand{\bpi}{\boldsymbol{\pi}}
-\newcommand{\argmax}{\text{argmax}}
-\newcommand{\KL}{\text{KL}}
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
+```
 
 
 # <img src="./images/howto.jpg"></img>
@@ -276,7 +308,7 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 </p>
 
 ```{r, echo=FALSE}
-df = read.table("../data/gfp.txt")
+df = read.table("./data/gfp.txt")
 names(df) <- c("gfp", "truth")
 df$truth <- as.character(df$truth)
 df$truth[df$truth=="1"] <- "mating"
@@ -407,14 +439,12 @@ $$
 
 If we set $q(\bz) = f(\bz | \bx; \bt^{(t)})$, then for a fixed $\bt^{(t)}$ and as a function of $\bt$, 
 
-\begin{eqnarray}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-
-\mathcal{L}(q(\bz), \bt) & \propto & \int f(\bz | \bx; \bt^{(t)}) \log f(\bx, \bz ; \bt) d\bz \\
- & = & Q(\bt, \bt^{(t)})
-\end{eqnarray}
+$$
+\begin{aligned}
+\mathcal{L}(q(\bz), \bt) & \propto \int f(\bz | \bx; \bt^{(t)}) \log f(\bx, \bz ; \bt) d\bz \\
+ & = Q(\bt, \bt^{(t)})
+\end{aligned}
+$$
 
 ## EM Increases Likelihood
 
@@ -682,7 +712,7 @@ Note that $\boldsymbol{Z}_A$ and $\boldsymbol{Z}_B$ are the only parts of this m
 \propto& \left( \prod_{\ell=1}^L \prod_{k=1}^K Q_{nk}^{\mathbb{1}(Z_{An\ell}=k)+\mathbb{1}(Z_{Bn\ell}=k)} \right)
 \end{align*}
 
-##
+----
 
 $$=\prod_{k=1}^K Q_{nk}^{S_{nk}}$$
 
@@ -769,7 +799,7 @@ rdirichlet <- function(alpha) {
 ```{r, include=FALSE}
 set.seed(1234)
 
-X <- read.table("../data/hapmap_sample.txt", stringsAsFactors=FALSE, header=TRUE)
+X <- read.table("./data/hapmap_sample.txt", stringsAsFactors=FALSE, header=TRUE)
 X <- as.matrix(X)
 
 Xa <- X
@@ -888,7 +918,7 @@ LL_end <- rep(0, TAIL)
 
 ## Run Sampler
 
-```{r sampler3, cache=TRUE}
+```{r sampler3, cache=TRUE, eval=FALSE}
 set.seed(1234)
 
 for(it in 1:MAX_IT) {
@@ -907,7 +937,7 @@ Q_MEAN <- QSUM/((MAX_IT-BURNIN)/THIN)
 
 ## Posterior Mean of $\boldsymbol{Q}$
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, eval=FALSE}
 library(reshape2)
 rownames(Q_MEAN) <- colnames(X)
 DF <- melt(Q_MEAN, varnames=c("individual", "population"))
@@ -916,17 +946,25 @@ ggplot(DF, aes(individual, value, fill=population)) + geom_bar(stat="identity") 
   theme(axis.text.x=element_text(angle=90))
 ```
 
+```{r, echo=FALSE}
+knitr::include_graphics("./images/postQ_keq3.png")
+```
+
 ## Plot Log-likelihood Steps
 
 Note both the needed burn-in and thinning.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 data.frame(ll=c(LL_start, LL_end), 
            iter=c(1:START, (MAX_IT-TAIL+1):MAX_IT),
            tail=c(rep("start", START), rep("tail", TAIL))) %>%
   ggplot(aes(iter, ll)) + geom_point() + 
   geom_line() + theme_bw() +
   facet_grid(~tail, scales="free_x", space="free_x")
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("./images/burnin_keq3.png")
 ```
 
 ## What Happens for K=4?
@@ -942,7 +980,7 @@ QSUM <- matrix(0, N, K)
 
 ## Run Sampler Again
 
-```{r sampler4, cache=TRUE}
+```{r sampler4, cache=TRUE, eval=FALSE}
 for(it in 1:MAX_IT) {
   P <- update_P()
   Q <- update_Q()
@@ -960,13 +998,17 @@ Q_MEAN <- QSUM/((MAX_IT-BURNIN)/THIN)
 ## Posterior Mean of $\boldsymbol{Q}$
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 rownames(Q_MEAN) <- colnames(X)
 DF <- melt(Q_MEAN, varnames=c("individual", "population"))
 DF$population <- as.factor(DF$population)
 ggplot(DF, aes(individual, value, fill=population)) +
   geom_bar(stat="identity") + scale_fill_brewer(palette="Set1") +
   theme(axis.text.x=element_text(angle=90))
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("./images/postQ_keq4.png")
 ```
 
 # Further Reading
@@ -1016,5 +1058,6 @@ sessionInfo()
 </section>
 
 ```{r converttonotes, include=FALSE, cache=FALSE}
-source("../customization/make_notes.R")
+source("./customization/make_notes.R")
+source("./customization/make_bookdown.R")
 ```

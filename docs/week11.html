@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -55,22 +55,394 @@
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
     <link rel="stylesheet" href="customization/custom.css"/>
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
     <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
@@ -374,20 +746,20 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{JS}}\right) &lt; 
 
 <pre class="r"><code>&gt; beta &lt;- seq(-1, 1, length.out=50)
 &gt; y &lt;- beta + rnorm(length(beta))</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>The blue line is the least squares regression line.</p>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; beta &lt;- seq(-10, 10, length.out=50)
 &gt; y &lt;- beta + rnorm(length(beta))</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>The blue line is the least squares regression line.</p>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="inverse-regression-approach" class="slide level2">
 <h1>Inverse Regression Approach</h1>
 <p>While <span class="math inline">\(Y_i = \beta_i + E_i\)</span> where <span class="math inline">\(E_i \sim \mbox{Normal}(0,1)\)</span>, it is also the case that <span class="math inline">\(\beta_i = Y_i - E_i\)</span> where <span class="math inline">\(-E_i \sim \mbox{Normal}(0,1)\)</span>.</p>
@@ -467,7 +839,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{IR}}\right) &lt; 
 </section><section class="slide level2">
 
 <p>The blue line is the least squares regression line of <span class="math inline">\(\beta_i\)</span> on <span class="math inline">\(Y_i\)</span>, and the red line is <span class="math inline">\(\hat{\beta}_i^{\text{IR}}\)</span>.</p>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="empirical-bayes-estimate" class="slide level2">
 <h1>Empirical Bayes Estimate</h1>
 <p>Suppose that <span class="math inline">\(Y_i | \beta_i \sim \mbox{Normal}(\beta_i, 1)\)</span> where these rv’s are jointly independent. Also suppose that <span class="math inline">\(\beta_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(a, b^2)\)</span>. Taking the empirical Bayes approach, we get:</p>
@@ -542,7 +914,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 +          ggtitle(&quot;p-value density histogram&quot;) +
 +          geom_histogram(aes_string(y = &#39;..density..&#39;), colour = &quot;black&quot;,
 +                         fill = &quot;white&quot;, binwidth = 0.04, center=0.02)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="challenges-1" class="slide level2">
 <h1>Challenges</h1>
 <ul>
@@ -555,7 +927,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 
 <pre class="r"><code>&gt; qobj &lt;- qvalue(hedenfalk$p)
 &gt; hist(qobj)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 </section><section id="outcomes" class="slide level2">
 <h1>Outcomes</h1>
 <p>Possible outcomes from <span class="math inline">\(m\)</span> hypothesis tests based on applying a significance threshold <span class="math inline">\(0 &lt; t \leq 1\)</span> to their corresponding p-values.</p>
@@ -700,7 +1072,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; plot(qobj)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bayesian-mixture-model" class="slide level2">
 <h1>Bayesian Mixture Model</h1>
 <p>Let’s return to the <a href="https://jdstorey.github.io/asdslectures/week06.html#/classification">Bayesian classification</a> set up from earlier. Suppose that</p>
@@ -739,7 +1111,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; hist(qobj)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="many-regressors-model-1" class="titleslide slide level1"><h1>Many Regressors Model</h1></section></section>
 <section><section id="ridge-regression" class="titleslide slide level1"><h1>Ridge Regression</h1></section><section id="motivation" class="slide level2">
@@ -750,9 +1122,9 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <h1>Optimization Goal</h1>
 <p>Under the OLS model assumptions, ridge regression fits model by minimizing the following:</p>
 <p><span class="math display">\[
-\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m \beta_i^2.
+\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m \beta_k^2.
 \]</span></p>
-<p>Recall the <span class="math inline">\(\ell_2\)</span> norm: <span class="math inline">\(\sum_{k=1}^m \beta_i^2 = \| {\boldsymbol{\beta}}\|^2_2\)</span>. Sometimes ridge regression is called <span class="math inline">\(\ell_2\)</span> penalized regression.</p>
+<p>Recall the <span class="math inline">\(\ell_2\)</span> norm: <span class="math inline">\(\sum_{k=1}^m \beta_k^2 = \| {\boldsymbol{\beta}}\|^2_2\)</span>. Sometimes ridge regression is called <span class="math inline">\(\ell_2\)</span> penalized regression.</p>
 <p>As with natural cubic splines, the paramater <span class="math inline">\(\lambda\)</span> is a tuning paramater that controls how much shrinkage occurs.</p>
 </section><section id="solution" class="slide level2">
 <h1>Solution</h1>
@@ -791,7 +1163,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 0.9486116 0.8252948 0.8751979 </code></pre>
 </section><section id="existence-of-solution" class="slide level2">
 <h1>Existence of Solution</h1>
-<p>When <span class="math inline">\(d &gt; n\)</span> or when there is high collinearity, then <span class="math inline">\(({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}\)</span> will not exist.</p>
+<p>When <span class="math inline">\(m &gt; n\)</span> or when there is high collinearity, then <span class="math inline">\(({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}\)</span> will not exist.</p>
 <p>However, for <span class="math inline">\(\lambda &gt; 0\)</span>, it is always the case that <span class="math inline">\(\left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}\)</span> exists.</p>
 <p>Therefore, one can always compute a unique <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\)</span> for each <span class="math inline">\(\lambda &gt; 0\)</span>.</p>
 </section><section id="effective-degrees-of-freedom" class="slide level2">
@@ -824,7 +1196,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <h1>Bayesian Interpretation</h1>
 <p>The ridge regression solution is equivalent to maximizing</p>
 <p><span class="math display">\[
--\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m \beta_i^2
+-\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m \beta_k^2
 \]</span></p>
 <p>which means it can be interpreted as the MAP solution with a Normal prior on the <span class="math inline">\(\beta_i\)</span> values.</p>
 </section><section id="example-diabetes-data" class="slide level2">
@@ -858,13 +1230,13 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <pre class="r"><code>&gt; library(glmnetUtils)
 &gt; ridgefit &lt;- glmnetUtils::glmnet(y ~ ., data=df, alpha=0)
 &gt; plot(ridgefit)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Cross-validation to tune the shrinkage parameter.</p>
 <pre class="r"><code>&gt; cvridgefit &lt;- glmnetUtils::cv.glmnet(y ~ ., data=df, alpha=0)
 &gt; plot(cvridgefit)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="glms" class="slide level2">
 <h1>GLMs</h1>
 <p>The <code>glmnet</code> library (and the <code>glmnetUtils</code> wrapper library) allow one to perform ridge regression on generalized linear models.</p>
@@ -883,9 +1255,9 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <h1>Optimization Goal</h1>
 <p>Starting with the OLS model assumptions again, we wish to find <span class="math inline">\({\boldsymbol{\beta}}\)</span> that minimizes</p>
 <p><span class="math display">\[
-\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m |\beta_i|.
+\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m |\beta_k|.
 \]</span></p>
-<p>Note that <span class="math inline">\(\sum_{k=1}^m |\beta_i| = \| {\boldsymbol{\beta}}\|_1\)</span>, which is the <span class="math inline">\(\ell_1\)</span> vector norm.</p>
+<p>Note that <span class="math inline">\(\sum_{k=1}^m |\beta_k| = \| {\boldsymbol{\beta}}\|_1\)</span>, which is the <span class="math inline">\(\ell_1\)</span> vector norm.</p>
 <p>As before, the paramater <span class="math inline">\(\lambda\)</span> is a tuning paramater that controls how much shrinkage and selection occurs.</p>
 </section><section id="solution-1" class="slide level2">
 <h1>Solution</h1>
@@ -903,18 +1275,18 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <p>Let’s return to the <code>diabetes</code> data set. To do lasso regression, we set <code>alpha=1</code>.</p>
 <pre class="r"><code>&gt; lassofit &lt;- glmnetUtils::glmnet(y ~ ., data=df, alpha=1)
 &gt; plot(lassofit)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Cross-validation to tune the shrinkage parameter.</p>
 <pre class="r"><code>&gt; cvlassofit &lt;- glmnetUtils::cv.glmnet(y ~ ., data=df, alpha=1)
 &gt; plot(cvlassofit)</code></pre>
-<p><img src="week11_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bayesian-interpretation-1" class="slide level2">
 <h1>Bayesian Interpretation</h1>
 <p>The ridge regression solution is equivalent to maximizing</p>
 <p><span class="math display">\[
--\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m |\beta_i|
+-\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m |\beta_k|
 \]</span></p>
 <p>which means it can be interpreted as the MAP solution with a Exponential prior on the <span class="math inline">\(\beta_i\)</span> values.</p>
 </section><section id="inference" class="slide level2">
@@ -953,36 +1325,36 @@ attached base packages:
 
 other attached packages:
  [1] glmnetUtils_1.0.2 lars_1.2          qvalue_2.1.1     
- [4] MASS_7.3-45       broom_0.4.2       dplyr_0.5.0      
- [7] purrr_0.2.2       readr_1.0.0       tidyr_0.6.1      
-[10] tibble_1.2        ggplot2_2.2.1     tidyverse_1.1.1  
+ [4] MASS_7.3-47       broom_0.4.2       dplyr_0.5.0      
+ [7] purrr_0.2.2       readr_1.1.0       tidyr_0.6.1      
+[10] tibble_1.3.0      ggplot2_2.2.1     tidyverse_1.1.1  
 [13] knitr_1.15.1      magrittr_1.5      devtools_1.12.0  
 
 loaded via a namespace (and not attached):
- [1] revealjs_0.8     reshape2_1.4.2   splines_3.3.2   
- [4] haven_1.0.0      lattice_0.20-34  colorspace_1.3-2
- [7] htmltools_0.3.5  yaml_2.1.14      foreign_0.8-67  
-[10] withr_1.0.2      DBI_0.5-1        modelr_0.1.0    
-[13] readxl_0.1.1     foreach_1.4.3    plyr_1.8.4      
-[16] stringr_1.1.0    munsell_0.4.3    gtable_0.2.0    
-[19] rvest_0.3.2      codetools_0.2-15 psych_1.6.12    
-[22] memoise_1.0.0    evaluate_0.10    labeling_0.3    
-[25] forcats_0.2.0    parallel_3.3.2   highr_0.6       
-[28] Rcpp_0.12.9      scales_0.4.1     backports_1.0.5 
-[31] jsonlite_1.2     mnormt_1.5-5     hms_0.3         
-[34] digest_0.6.12    stringi_1.1.2    grid_3.3.2      
-[37] rprojroot_1.2    tools_3.3.2      lazyeval_0.2.0  
-[40] glmnet_2.0-5     Matrix_1.2-8     xml2_1.1.1      
-[43] lubridate_1.6.0  assertthat_0.1   rmarkdown_1.3   
-[46] httr_1.2.1       iterators_1.0.8  R6_2.2.0        
-[49] nlme_3.1-131    </code></pre>
+ [1] revealjs_0.9     reshape2_1.4.2   splines_3.3.2   
+ [4] haven_1.0.0      lattice_0.20-35  colorspace_1.3-2
+ [7] htmltools_0.3.6  yaml_2.1.14      foreign_0.8-68  
+[10] withr_1.0.2      DBI_0.6-1        modelr_0.1.0    
+[13] readxl_1.0.0     foreach_1.4.3    plyr_1.8.4      
+[16] stringr_1.2.0    munsell_0.4.3    gtable_0.2.0    
+[19] cellranger_1.1.0 rvest_0.3.2      codetools_0.2-15
+[22] psych_1.7.5      memoise_1.1.0    evaluate_0.10   
+[25] labeling_0.3     forcats_0.2.0    parallel_3.3.2  
+[28] highr_0.6        Rcpp_0.12.10     scales_0.4.1    
+[31] backports_1.0.5  jsonlite_1.4     mnormt_1.5-5    
+[34] hms_0.3          digest_0.6.12    stringi_1.1.5   
+[37] grid_3.3.2       rprojroot_1.2    tools_3.3.2     
+[40] lazyeval_0.2.0   glmnet_2.0-9     Matrix_1.2-10   
+[43] xml2_1.1.1       lubridate_1.6.0  iterators_1.0.8 
+[46] assertthat_0.2.0 rmarkdown_1.5    httr_1.2.1      
+[49] R6_2.2.0         nlme_3.1-131    </code></pre>
 </section>
 </section></section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -1003,6 +1375,7 @@ loaded via a namespace (and not attached):
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
 
+
         chalkboard: {
         },
 
@@ -1016,8 +1389,8 @@ loaded via a namespace (and not attached):
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
@@ -1026,7 +1399,7 @@ loaded via a namespace (and not attached):
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

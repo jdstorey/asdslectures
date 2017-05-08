@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -55,21 +55,393 @@
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
     <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
@@ -260,7 +632,7 @@ Note: You need to use a <a href="http://math.stackexchange.com/questions/421105/
 <p style="font-size: 0.75em;">
 Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP construct that is hypothesized as being nuclear in mitotic cells and largely cytoplasmic in mating cells.
 </p>
-<p><img src="week07_files/figure-revealjs/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week07_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="initialize-values" class="slide level2">
 <h1>Initialize Values</h1>
 <pre class="r"><code>&gt; set.seed(508)
@@ -297,7 +669,7 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 [100,] 2.455325 0.3637967 6.7952 6.058291 0.5340015</code></pre>
 </section><section id="fitted-mixture-distribution" class="slide level2">
 <h1>Fitted Mixture Distribution</h1>
-<p><img src="week07_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week07_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bernoulli-mixture-model-1" class="slide level2">
 <h1>Bernoulli Mixture Model</h1>
 <p>As an exercise, derive the EM algorithm of the Bernoilli mixture model <a href="#//bernoulli-mixture-model">introduced earlier</a>.</p>
@@ -334,14 +706,12 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 \log f({\boldsymbol{x}}; {\boldsymbol{\theta}}) \geq \mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}})
 \]</span></p>
 <p>If we set <span class="math inline">\(q({\boldsymbol{z}}) = f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}}^{(t)})\)</span>, then for a fixed <span class="math inline">\({\boldsymbol{\theta}}^{(t)}\)</span> and as a function of <span class="math inline">\({\boldsymbol{\theta}}\)</span>,</p>
-<span class="math display">\[\begin{eqnarray}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-
-\mathcal{L}(q(\bz), \bt) &amp; \propto &amp; \int f(\bz | \bx; \bt^{(t)}) \log f(\bx, \bz ; \bt) d\bz \\
- &amp; = &amp; Q(\bt, \bt^{(t)})
-\end{eqnarray}\]</span>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}}) &amp; \propto \int f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}}^{(t)}) \log f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) d{\boldsymbol{z}}\\
+ &amp; = Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})
+\end{aligned}
+\]</span></p>
 </section><section id="em-increases-likelihood" class="slide level2">
 <h1>EM Increases Likelihood</h1>
 <p>Since <span class="math inline">\({\boldsymbol{\theta}}^{(t+1)} = {\text{argmax}}_{{\boldsymbol{\theta}}} Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})\)</span>, it follows that</p>
@@ -543,8 +913,8 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 =&amp; \Pr(Z_{An} | Q_n) \Pr(Z_{Bn} | Q_n) \Pr(Q_n)\\
 \propto&amp; \left( \prod_{\ell=1}^L \prod_{k=1}^K Q_{nk}^{\mathbb{1}(Z_{An\ell}=k)+\mathbb{1}(Z_{Bn\ell}=k)} \right)
 \end{align*}\]</span>
-</section><section id="section-1" class="slide level2">
-<h1></h1>
+</section><section class="slide level2">
+
 <p><span class="math display">\[=\prod_{k=1}^K Q_{nk}^{S_{nk}}\]</span></p>
 <p>where <span class="math inline">\(S_{nk}\)</span> is simply the count of the number of alleles for individual <span class="math inline">\(n\)</span> that got assigned to population <span class="math inline">\(k\)</span>.</p>
 <p>Thus, <span class="math inline">\(Q_n | \boldsymbol{Z}_A, \boldsymbol{Z}_B \sim \operatorname{Dirichlet}(S_{j1}+1, \ldots, S_{jk}+1)\)</span>,.</p>
@@ -697,11 +1067,11 @@ rs10019399       1       1       1</code></pre>
 &gt; Q_MEAN &lt;- QSUM/((MAX_IT-BURNIN)/THIN)</code></pre>
 </section><section id="posterior-mean-of-boldsymbolq" class="slide level2">
 <h1>Posterior Mean of <span class="math inline">\(\boldsymbol{Q}\)</span></h1>
-<p><img src="week07_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="images/postQ_keq3.png" style="display: block; margin: auto;" /></p>
 </section><section id="plot-log-likelihood-steps" class="slide level2">
 <h1>Plot Log-likelihood Steps</h1>
 <p>Note both the needed burn-in and thinning.</p>
-<p><img src="week07_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="images/burnin_keq3.png" style="display: block; margin: auto;" /></p>
 </section><section id="what-happens-for-k4" class="slide level2">
 <h1>What Happens for K=4?</h1>
 <pre class="r"><code>&gt; K &lt;- 4
@@ -726,7 +1096,7 @@ rs10019399       1       1       1</code></pre>
 &gt; Q_MEAN &lt;- QSUM/((MAX_IT-BURNIN)/THIN)</code></pre>
 </section><section id="posterior-mean-of-boldsymbolq-1" class="slide level2">
 <h1>Posterior Mean of <span class="math inline">\(\boldsymbol{Q}\)</span></h1>
-<p><img src="week07_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="images/postQ_keq4.png" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="further-reading" class="titleslide slide level1"><h1>Further Reading</h1></section><section id="bishop-2016" class="slide level2">
 <h1>Bishop (2016)</h1>
@@ -757,7 +1127,7 @@ rs10019399       1       1       1</code></pre>
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12.3
+Running under: macOS Sierra 10.12.4
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -768,33 +1138,33 @@ attached base packages:
 
 other attached packages:
  [1] reshape2_1.4.2  dplyr_0.5.0     purrr_0.2.2    
- [4] readr_1.0.0     tidyr_0.6.1     tibble_1.2     
+ [4] readr_1.1.0     tidyr_0.6.1     tibble_1.3.0   
  [7] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
 [10] magrittr_1.5    devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.9        RColorBrewer_1.1-2 plyr_1.8.4        
- [4] forcats_0.2.0      tools_3.3.2        digest_0.6.12     
- [7] lubridate_1.6.0    jsonlite_1.2       evaluate_0.10     
-[10] memoise_1.0.0      nlme_3.1-131       gtable_0.2.0      
-[13] lattice_0.20-34    psych_1.6.12       DBI_0.5-1         
-[16] yaml_2.1.14        parallel_3.3.2     haven_1.0.0       
-[19] xml2_1.1.1         withr_1.0.2        stringr_1.1.0     
-[22] httr_1.2.1         revealjs_0.8       hms_0.3           
-[25] rprojroot_1.2      grid_3.3.2         R6_2.2.0          
-[28] readxl_0.1.1       foreign_0.8-67     rmarkdown_1.3     
-[31] modelr_0.1.0       backports_1.0.5    scales_0.4.1      
-[34] htmltools_0.3.5    rvest_0.3.2        assertthat_0.1    
-[37] mnormt_1.5-5       colorspace_1.3-2   labeling_0.3      
-[40] stringi_1.1.2      lazyeval_0.2.0     munsell_0.4.3     
-[43] broom_0.4.2       </code></pre>
+ [1] Rcpp_0.12.10     highr_0.6        cellranger_1.1.0
+ [4] plyr_1.8.4       forcats_0.2.0    tools_3.3.2     
+ [7] digest_0.6.12    lubridate_1.6.0  jsonlite_1.4    
+[10] evaluate_0.10    memoise_1.1.0    nlme_3.1-131    
+[13] gtable_0.2.0     lattice_0.20-35  psych_1.7.5     
+[16] DBI_0.6-1        yaml_2.1.14      parallel_3.3.2  
+[19] haven_1.0.0      xml2_1.1.1       withr_1.0.2     
+[22] stringr_1.2.0    httr_1.2.1       revealjs_0.9    
+[25] hms_0.3          rprojroot_1.2    grid_3.3.2      
+[28] R6_2.2.0         readxl_1.0.0     foreign_0.8-68  
+[31] rmarkdown_1.5    modelr_0.1.0     backports_1.0.5 
+[34] scales_0.4.1     htmltools_0.3.6  rvest_0.3.2     
+[37] assertthat_0.2.0 mnormt_1.5-5     colorspace_1.3-2
+[40] labeling_0.3     stringi_1.1.5    lazyeval_0.2.0  
+[43] munsell_0.4.3    broom_0.4.2     </code></pre>
 </section>
 </section></section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -815,6 +1185,7 @@ loaded via a namespace (and not attached):
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
 
+
         chalkboard: {
         },
 
@@ -828,8 +1199,8 @@ loaded via a namespace (and not attached):
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
@@ -838,7 +1209,7 @@ loaded via a namespace (and not attached):
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

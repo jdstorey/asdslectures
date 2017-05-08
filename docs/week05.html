@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -55,21 +55,393 @@
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
     <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
@@ -149,15 +521,15 @@ p {
 <li>My data generation model is <span class="math inline">\(X \sim \mbox{Binomial}(20, p)\)</span>.</li>
 <li>I form the statistic <span class="math inline">\(\hat{p} = 16/20\)</span> as an estimate of <span class="math inline">\(p\)</span>.</li>
 </ol>
-</section><section id="example-contd" class="slide level2">
-<h1>Example (cont’d)</h1>
+</section><section class="slide level2">
+
 <p>Let’s simulate 10,000 times what my estimate would look like if <span class="math inline">\(p=0.5\)</span> and I repeated the 20 coin flips over and over.</p>
 <pre class="r"><code>&gt; x &lt;- replicate(n=1e4, expr=rbinom(1, size=20, prob=0.5))
 &gt; sim_p_hat &lt;- x/20
 &gt; my_p_hat &lt;- 16/20</code></pre>
 <p>What can I do with this information?</p>
-</section><section id="example-contd-1" class="slide level2">
-<h1>Example (cont’d)</h1>
+</section><section class="slide level2">
+
 <p><img src="week05_files/figure-revealjs/sampling_plot-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="inference-goals-and-strategies" class="titleslide slide level1"><h1>Inference Goals and Strategies</h1></section><section id="basic-idea" class="slide level2">
@@ -226,15 +598,15 @@ p {
 &gt; ci &lt;- cbind(m - 1.96/sqrt(n), m + 1.96/sqrt(n))
 &gt; head(ci)
          [,1]     [,2]
-[1,] 4.916469 5.793008
-[2,] 4.507025 5.383563
-[3,] 4.672412 5.548950
-[4,] 4.791153 5.667692
-[5,] 4.413962 5.290500
-[6,] 4.514039 5.390578</code></pre>
+[1,] 4.797848 5.674386
+[2,] 4.599996 5.476534
+[3,] 4.472930 5.349468
+[4,] 4.778946 5.655485
+[5,] 4.778710 5.655248
+[6,] 4.425023 5.301561</code></pre>
 <pre class="r"><code>&gt; cover &lt;- (mu &gt; ci[,1]) &amp; (mu &lt; ci[,2])
 &gt; mean(cover)
-[1] 0.9464</code></pre>
+[1] 0.9512</code></pre>
 </section><section id="normal01-percentiles" class="slide level2">
 <h1>Normal<span class="math inline">\((0,1)\)</span> Percentiles</h1>
 <p>Above we constructed a 95% CI. How do we construct (1-<span class="math inline">\(\alpha\)</span>)-level CIs?</p>
@@ -278,8 +650,8 @@ p {
 <li>I form the statistic <span class="math inline">\(\hat{p} = 16/20\)</span> as an estimate of <span class="math inline">\(p\)</span>.</li>
 </ol>
 <p>More formally, I want to <strong>test the hypothesis</strong>: <span class="math inline">\(H_0: p=0.5\)</span> vs. <span class="math inline">\(H_1: p \not=0.5\)</span> under the model <span class="math inline">\(X \sim \mbox{Binomial}(20, p)\)</span> based on the <strong>test statistic</strong> <span class="math inline">\(\hat{p} = X/n\)</span>.</p>
-</section><section id="example-contd-null-distribution" class="slide level2">
-<h1>Example (cont’d): Null Distribution</h1>
+</section><section class="slide level2">
+
 <p>Let’s simulate 10,000 times what my estimate would look like if <span class="math inline">\(p=0.5\)</span> and I repeated the 20 coin flips over and over.</p>
 <pre class="r"><code>&gt; x &lt;- replicate(n=1e4, expr=rbinom(1, size=20, prob=0.5))
 &gt; sim_p_hat &lt;- x/20
@@ -288,12 +660,12 @@ p {
 </section><section class="slide level2">
 
 <p><img src="week05_files/figure-revealjs/sampling_plot_3-1.png" width="576" style="display: block; margin: auto;" /></p>
-</section><section id="example-contd-p-value" class="slide level2">
-<h1>Example (cont’d): P-value</h1>
+</section><section class="slide level2">
+
 <p>The deviation of the test statistic from the null hypothesis can be measured by <span class="math inline">\(|\hat{p} - 0.5|\)</span>.</p>
 <p>Let’s compare our observed deviation <span class="math inline">\(|16/20 - 0.5|\)</span> to the 10,000 simulated null data sets. Specifically, let’s calculate the frequency by which these 10,000 cases are <strong>as or more extreme</strong> than the observed test statistic.</p>
 <pre class="r"><code>&gt; sum(abs(sim_p_hat-0.5) &gt;= abs(my_p_hat-0.5))/1e4
-[1] 0.0077</code></pre>
+[1] 0.0055</code></pre>
 <p>This quantity is called the <strong>p-value</strong> of the hypothesis test.</p>
 </section><section id="a-caveat" class="slide level2">
 <h1>A Caveat</h1>
@@ -688,7 +1060,7 @@ z = \frac{\hat{p}_1 - \hat{p}_2 }{\sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \fr
 </ul>
 </section><section id="t-vs-normal" class="slide level2">
 <h1><em>t</em> vs Normal</h1>
-<p><img src="week05_files/figure-revealjs/unnamed-chunk-6-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p><img src="week05_files/figure-revealjs/unnamed-chunk-7-1.png" width="864" style="display: block; margin: auto;" /></p>
 </section><section id="t-percentiles" class="slide level2">
 <h1><em>t</em> Percentiles</h1>
 <p>We calculated percentiles of the Normal(0,1) distribution (e.g., <span class="math inline">\(z_\alpha\)</span>). We can do the analogous calculation with the <em>t</em> distribution.</p>
@@ -804,8 +1176,8 @@ mean of x
 <li><p>We covered a convenient, unified MLE framework that allows us to better understand how confidence intervals and hypothesis testing are performed</p></li>
 <li><p>However, this framework requires large sample sizes and is not necessarily the best method to apply in all circumstances</p></li>
 </ul>
-</section><section id="about-these-functions-contd" class="slide level2">
-<h1>About These Functions (cont’d)</h1>
+</section><section class="slide level2">
+
 <ul>
 <li><p>The above R functions are versatile functions for analyzing Normal, Binomial, and Poisson distributed data (or approximations thereof) that use much broader theory and methods than we have covered</p></li>
 <li><p>However, the arguments these functions take and the ouput of the functions are in line with the framework that we have covered</p></li>
@@ -835,7 +1207,7 @@ mean of x
 <pre class="r"><code>&gt; ggplot(htwt) + 
 + geom_point(aes(x=height, y=weight, color=sex), size=2, alpha=0.5) +
 + scale_colour_manual(values=c(&quot;red&quot;, &quot;blue&quot;))</code></pre>
-<p><img src="week05_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week05_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="an-error" class="slide level2">
 <h1>An Error?</h1>
 <pre class="r"><code>&gt; which(htwt$height &lt; 100)
@@ -851,19 +1223,19 @@ mean of x
 <pre class="r"><code>&gt; ggplot(htwt) + 
 +   geom_point(aes(x=height, y=weight, color=sex), size=2, alpha=0.5) +
 +   scale_color_manual(values=c(&quot;red&quot;, &quot;blue&quot;))</code></pre>
-<p><img src="week05_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week05_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="density-plots-of-height" class="slide level2">
 <h1>Density Plots of Height</h1>
 <pre class="r"><code>&gt; ggplot(htwt) + 
 +   geom_density(aes(x=height, color=sex), size=1.5) + 
 +   scale_color_manual(values=c(&quot;red&quot;, &quot;blue&quot;))</code></pre>
-<p><img src="week05_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week05_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="density-plots-of-weight" class="slide level2">
 <h1>Density Plots of Weight</h1>
 <pre class="r"><code>&gt; ggplot(htwt) + 
 +   geom_density(aes(x=weight, color=sex), size=1.5) + 
 +   scale_color_manual(values=c(&quot;red&quot;, &quot;blue&quot;))</code></pre>
-<p><img src="week05_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week05_files/figure-revealjs/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="t.test-function" class="slide level2">
 <h1><code>t.test()</code> Function</h1>
 <p>From the help file…</p>
@@ -1352,7 +1724,7 @@ p(\boldsymbol{x}) &amp; = \min \left\{\alpha: \boldsymbol{x} \in \Gamma_\alpha \
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12.3
+Running under: macOS Sierra 10.12.4
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1363,38 +1735,38 @@ attached base packages:
 
 other attached packages:
  [1] broom_0.4.2     car_2.1-4       BSDA_1.01      
- [4] lattice_0.20-34 e1071_1.6-8     dplyr_0.5.0    
- [7] purrr_0.2.2     readr_1.0.0     tidyr_0.6.1    
-[10] tibble_1.2      ggplot2_2.2.1   tidyverse_1.1.1
+ [4] lattice_0.20-35 e1071_1.6-8     dplyr_0.5.0    
+ [7] purrr_0.2.2     readr_1.1.0     tidyr_0.6.1    
+[10] tibble_1.3.0    ggplot2_2.2.1   tidyverse_1.1.1
 [13] knitr_1.15.1    magrittr_1.5    devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] revealjs_0.8       reshape2_1.4.2     splines_3.3.2     
- [4] haven_1.0.0        colorspace_1.3-2   htmltools_0.3.5   
+ [1] revealjs_0.9       reshape2_1.4.2     splines_3.3.2     
+ [4] haven_1.0.0        colorspace_1.3-2   htmltools_0.3.6   
  [7] mgcv_1.8-17        yaml_2.1.14        nloptr_1.0.4      
-[10] foreign_0.8-67     withr_1.0.2        DBI_0.5-1         
-[13] modelr_0.1.0       readxl_0.1.1       plyr_1.8.4        
-[16] stringr_1.1.0      MatrixModels_0.4-1 munsell_0.4.3     
-[19] gtable_0.2.0       rvest_0.3.2        psych_1.6.12      
-[22] memoise_1.0.0      evaluate_0.10      labeling_0.3      
-[25] forcats_0.2.0      SparseM_1.74       quantreg_5.29     
-[28] pbkrtest_0.4-6     parallel_3.3.2     class_7.3-14      
-[31] highr_0.6          Rcpp_0.12.9        scales_0.4.1      
-[34] backports_1.0.5    jsonlite_1.2       lme4_1.1-12       
-[37] mnormt_1.5-5       hms_0.3            digest_0.6.12     
-[40] stringi_1.1.2      grid_3.3.2         rprojroot_1.2     
-[43] tools_3.3.2        lazyeval_0.2.0     Matrix_1.2-8      
-[46] MASS_7.3-45        xml2_1.1.1         lubridate_1.6.0   
-[49] minqa_1.2.4        assertthat_0.1     rmarkdown_1.3     
-[52] httr_1.2.1         R6_2.2.0           nnet_7.3-12       
-[55] nlme_3.1-131      </code></pre>
+[10] foreign_0.8-68     withr_1.0.2        DBI_0.6-1         
+[13] modelr_0.1.0       readxl_1.0.0       plyr_1.8.4        
+[16] stringr_1.2.0      MatrixModels_0.4-1 munsell_0.4.3     
+[19] gtable_0.2.0       cellranger_1.1.0   rvest_0.3.2       
+[22] codetools_0.2-15   psych_1.7.5        memoise_1.1.0     
+[25] evaluate_0.10      labeling_0.3       forcats_0.2.0     
+[28] SparseM_1.77       quantreg_5.33      pbkrtest_0.4-7    
+[31] parallel_3.3.2     class_7.3-14       highr_0.6         
+[34] Rcpp_0.12.10       scales_0.4.1       backports_1.0.5   
+[37] jsonlite_1.4       lme4_1.1-13        mnormt_1.5-5      
+[40] hms_0.3            digest_0.6.12      stringi_1.1.5     
+[43] grid_3.3.2         rprojroot_1.2      tools_3.3.2       
+[46] lazyeval_0.2.0     Matrix_1.2-10      MASS_7.3-47       
+[49] xml2_1.1.1         lubridate_1.6.0    minqa_1.2.4       
+[52] assertthat_0.2.0   rmarkdown_1.5      httr_1.2.1        
+[55] R6_2.2.0           nnet_7.3-12        nlme_3.1-131      </code></pre>
 </section>
 </section></section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -1415,6 +1787,7 @@ loaded via a namespace (and not attached):
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
 
+
         chalkboard: {
         },
 
@@ -1428,8 +1801,8 @@ loaded via a namespace (and not attached):
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
@@ -1438,7 +1811,7 @@ loaded via a namespace (and not attached):
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

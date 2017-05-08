@@ -7,16 +7,65 @@ output:
     toc: true
     toc_depth: 2
     keep_tex: true
-geometry: right=2.5in
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE}
-library(knitr)
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
-options(width=63)
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
 ```
 
-# <img src="./images/howto.jpg"></img>
 
 # Statistics and Data Science
 
@@ -62,11 +111,9 @@ From [The Future of Data Analysis](https://projecteuclid.org/euclid.aoms/1177704
 
 > For a long time I have thought I was a statistician, interested in inferences from the particular to the general. But as I have watched mathematical statistics evolve, I have had cause to wonder and to doubt.
 
-## John Tukey (cont'd)
 
 > All in all, I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.
 
-## John Tukey (cont'd)
 
 > Data analysis is a larger and more varied field than inference, or incisive procedures, or allocation.
 
@@ -131,7 +178,6 @@ I think there are three main steps in a data science project: you collect data (
 
 <http://bulletin.imstat.org/2014/09/data-science-how-is-it-different-to-statistics%E2%80%89/>
 
-## Hadley Wickham (cont'd)
 
 "Statistics is a part of data science, not the whole thing. Statistics research focuses on data collection and modelling, and there is little work on developing good questions, thinking about the shape of data, communicating results or building data products."
 
@@ -144,12 +190,16 @@ I think there are three main steps in a data science project: you collect data (
 <http://simplystatistics.org/2013/12/12/the-key-word-in-data-science-is-not-data-it-is-science/>
 
 
-<center>![DS Venn Diagram](./images/Data_Science_VD.png)</center>
+<center>
+![DS Venn Diagram](./images/Data_Science_VD.png)
+</center>
 
 <http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram>
 
 
-<center>![Storey Lab](./images/storey_lab.jpeg)</center>
+<center>
+![Storey Lab](./images/storey_lab.jpeg)
+</center>
 
 # QCB 508
 
@@ -485,7 +535,6 @@ attributes(m)
 
 ```
 
-## Attributes (cont'd)
 
 ```{r}
 paint <- factor(c("red", "white", "blue", "blue", "red", 
@@ -571,7 +620,6 @@ These two terms are often confused, so it is important to clearly state the defi
     - Exploratory figures
     - Final figures
 
-## Organizing Your Data Analysis (cont'd)
 
 - R code
     - Raw or unused scripts
@@ -608,7 +656,6 @@ output:
     toc: true
     toc_depth: 2
     keep_tex: true
-geometry: right=2.5in
 ---
 ```
 
@@ -637,7 +684,6 @@ Content Cell  | Content Cell
 Content Cell  | Content Cell
 ```
 
-## Markdown (cont'd)
 
 Unordered list:
 ```
@@ -656,7 +702,6 @@ Ordered list:
     - Item 3b
 ```
 
-## Markdown (cont'd)
 
 Links:
 ```
@@ -673,7 +718,6 @@ Florence Nightingale once said:
 > to have the best. 
 ```
 
-## Markdown (cont'd)
 
 Plain code blocks:  
 
@@ -968,7 +1012,6 @@ for(i in 1:10) {
 }
 ```
 
-## `for` Loops (cont'd)
 
 Examples:
 
@@ -1420,7 +1463,7 @@ An `.RData` file is a binary file containing R objects.  These can be saved from
 
 ```{r, include=FALSE, cache=FALSE}
 rm(list=ls())
-load("../data/project_1_R_basics.RData")
+load("./data/project_1_R_basics.RData")
 ```
 
 ```
@@ -1511,7 +1554,6 @@ biocLite("qvalue")
 
 Be *very* careful about dependencies when installing from GitHub.
 
-## Installing Packages (cont'd)
 
 Multiple packages:
 ```
@@ -1587,7 +1629,6 @@ for(i in 1:10) {
 }
 ```
 
-## Suggestions (cont'd)
 
 3\. Generously comment your code.
 

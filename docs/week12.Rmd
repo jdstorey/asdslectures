@@ -15,77 +15,72 @@ output:
       slideNumber: false
       progress: true
     includes:
-      before_body: ../customization/doc_prefix.html
+      before_body: customization/doc_prefix.html
     css: customization/custom.css
 ---
 
-```{r my_opts, cache=FALSE, include=FALSE, message=FALSE}
-library(knitr)
-knit_hooks$set(small.mar = function(before, options, envir) {
-    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
-})
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE, small.mar=TRUE)
-options(width=63)
-library(tidyverse)
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
+```
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
 library(broom)
 library(MASS)
 library(qvalue)
-theme_set(theme_bw())
-set.seed(508)
 ```
-
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\V}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\se}{\operatorname{se}}
-\newcommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
-\newcommand{\asim}{\; \stackrel{.}{\sim}\;}
-\newcommand{\xs}{x_1, x_2, \ldots, x_n}
-\newcommand{\Xs}{X_1, X_2, \ldots, X_n}
-\newcommand{\bB}{\boldsymbol{B}}
-\newcommand{\bb}{\boldsymbol{\beta}}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bX}{\boldsymbol{X}}
-\newcommand{\by}{\boldsymbol{y}}
-\newcommand{\bY}{\boldsymbol{Y}}
-\newcommand{\bz}{\boldsymbol{z}}
-\newcommand{\bZ}{\boldsymbol{Z}}
-\newcommand{\be}{\boldsymbol{e}}
-\newcommand{\bE}{\boldsymbol{E}}
-\newcommand{\bs}{\boldsymbol{s}}
-\newcommand{\bS}{\boldsymbol{S}}
-\newcommand{\bP}{\boldsymbol{P}}
-\newcommand{\bI}{\boldsymbol{I}}
-\newcommand{\bD}{\boldsymbol{D}}
-\newcommand{\bd}{\boldsymbol{d}}
-\newcommand{\bW}{\boldsymbol{W}}
-\newcommand{\bw}{\boldsymbol{w}}
-\newcommand{\bM}{\boldsymbol{M}}
-\newcommand{\bPhi}{\boldsymbol{\Phi}}
-\newcommand{\bphi}{\boldsymbol{\phi}}
-\newcommand{\bN}{\boldsymbol{N}}
-\newcommand{\bR}{\boldsymbol{R}}
-\newcommand{\bu}{\boldsymbol{u}}
-\newcommand{\bU}{\boldsymbol{U}}
-\newcommand{\bv}{\boldsymbol{v}}
-\newcommand{\bV}{\boldsymbol{V}}
-\newcommand{\bO}{\boldsymbol{0}}
-\newcommand{\bOmega}{\boldsymbol{\Omega}}
-\newcommand{\bLambda}{\boldsymbol{\Lambda}}
-\newcommand{\bSig}{\boldsymbol{\Sigma}}
-\newcommand{\bSigma}{\boldsymbol{\Sigma}}
-\newcommand{\bt}{\boldsymbol{\theta}}
-\newcommand{\bT}{\boldsymbol{\Theta}}
-\newcommand{\bpi}{\boldsymbol{\pi}}
-\newcommand{\argmax}{\text{argmax}}
-\newcommand{\KL}{\text{KL}}
-\newcommand{\fdr}{{\rm FDR}}
-\newcommand{\pfdr}{{\rm pFDR}}
-\newcommand{\mfdr}{{\rm mFDR}}
-\newcommand{\bh}{\hat}
-\newcommand{\dd}{\lambda}
-\newcommand{\q}{\operatorname{q}}
-
 
 # <img src="./images/howto.jpg"></img>
 
@@ -141,7 +136,7 @@ The low dimensional representations should capture key sources of variation in t
 These daily temperature data (in tenths of degrees C) come from meteorogical observations for weather stations in the US for the year 2012 provided by NOAA (National Oceanic and Atmospheric Administration).:
 
 ```{r}
-load("../data/weather_data.RData")
+load("./data/weather_data.RData")
 dim(weather_data)
 
 weather_data[1:5, 1:7]
@@ -659,7 +654,7 @@ data.frame(day=day_of_the_year, max_temp=y) %>%
 Yeast cells were synchronized so that they were on the same approximate cell cycle timing.  The goal was to understand how gene expression varies over the cell cycle from a genome-wide perspective.
 
 ```{r}
-load("../data/spellman.RData")
+load("./data/spellman.RData")
 time
 dim(gene_expression)
 gene_expression[1:6,1:5]
@@ -693,7 +688,7 @@ legend(x="topright", legend=c("PC1", "PC2"), pch=c(19,19), col=c("blue", "red"))
 Recall the example HapMap data used to demonstrate the MCMC algorithm for estimating structure.  We curated a small data set that cleanly separates human subpopulations.
 
 ```{r}
-hapmap <- read.table("../data/hapmap_sample.txt")
+hapmap <- read.table("./data/hapmap_sample.txt")
 dim(hapmap)
 hapmap[1:6,1:6]
 ```
@@ -806,7 +801,7 @@ Recall the yeast cell cycle data from earlier.  We will test which genes have ex
 
 ```{r, message=FALSE}
 library(jackstraw)
-load("../data/spellman.RData")
+load("./data/spellman.RData")
 time
 dim(gene_expression)
 dat <- t(scale(t(gene_expression), center=TRUE, scale=FALSE))
@@ -914,7 +909,7 @@ In [Storey et al. (2005)](http://www.pnas.org/content/102/36/12837.full), we con
 ```{r kid_load, message=FALSE, cache=TRUE}
 library(edge)
 library(splines)
-load("../data/kidney.RData")
+load("./data/kidney.RData")
 age <- kidcov$age
 sex <- kidcov$sex
 dim(kidexpr)
@@ -988,5 +983,6 @@ sessionInfo()
 </section>
 
 ```{r converttonotes, include=FALSE, cache=FALSE}
-source("../customization/make_notes.R")
+source("./customization/make_notes.R")
+source("./customization/make_bookdown.R")
 ```
