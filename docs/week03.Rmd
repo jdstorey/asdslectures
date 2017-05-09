@@ -1,0 +1,1874 @@
+---
+title: QCB 508 -- Week 3
+author: John D. Storey
+date: Spring 2017
+output: 
+  revealjs::revealjs_presentation:
+    theme: simple
+    transition: slide
+    center: true
+    highlight: null
+    self_contained: false
+    lib_dir: libs
+    reveal_plugins: ["chalkboard", "zoom"]
+    reveal_options:
+      slideNumber: false
+      progress: true
+    includes:
+      before_body: customization/doc_prefix.html
+---
+
+\providecommand{\E}{\operatorname{E}}
+\providecommand{\V}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\se}{\operatorname{se}}
+\providecommand{\logit}{\operatorname{logit}}
+\providecommand{\iid}{\; \stackrel{\text{iid}}{\sim}\;}
+\providecommand{\asim}{\; \stackrel{.}{\sim}\;}
+\providecommand{\xs}{x_1, x_2, \ldots, x_n}
+\providecommand{\Xs}{X_1, X_2, \ldots, X_n}
+\providecommand{\bB}{\boldsymbol{B}}
+\providecommand{\bb}{\boldsymbol{\beta}}
+\providecommand{\bx}{\boldsymbol{x}}
+\providecommand{\bX}{\boldsymbol{X}}
+\providecommand{\by}{\boldsymbol{y}}
+\providecommand{\bY}{\boldsymbol{Y}}
+\providecommand{\bz}{\boldsymbol{z}}
+\providecommand{\bZ}{\boldsymbol{Z}}
+\providecommand{\be}{\boldsymbol{e}}
+\providecommand{\bE}{\boldsymbol{E}}
+\providecommand{\bs}{\boldsymbol{s}}
+\providecommand{\bS}{\boldsymbol{S}}
+\providecommand{\bP}{\boldsymbol{P}}
+\providecommand{\bI}{\boldsymbol{I}}
+\providecommand{\bD}{\boldsymbol{D}}
+\providecommand{\bd}{\boldsymbol{d}}
+\providecommand{\bW}{\boldsymbol{W}}
+\providecommand{\bw}{\boldsymbol{w}}
+\providecommand{\bM}{\boldsymbol{M}}
+\providecommand{\bPhi}{\boldsymbol{\Phi}}
+\providecommand{\bphi}{\boldsymbol{\phi}}
+\providecommand{\bN}{\boldsymbol{N}}
+\providecommand{\bR}{\boldsymbol{R}}
+\providecommand{\bu}{\boldsymbol{u}}
+\providecommand{\bU}{\boldsymbol{U}}
+\providecommand{\bv}{\boldsymbol{v}}
+\providecommand{\bV}{\boldsymbol{V}}
+\providecommand{\bO}{\boldsymbol{0}}
+\providecommand{\bOmega}{\boldsymbol{\Omega}}
+\providecommand{\bLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bSig}{\boldsymbol{\Sigma}}
+\providecommand{\bSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bt}{\boldsymbol{\theta}}
+\providecommand{\bT}{\boldsymbol{\Theta}}
+\providecommand{\bpi}{\boldsymbol{\pi}}
+\providecommand{\argmax}{\text{argmax}}
+\providecommand{\KL}{\text{KL}}
+\providecommand{\fdr}{{\rm FDR}}
+\providecommand{\pfdr}{{\rm pFDR}}
+\providecommand{\mfdr}{{\rm mFDR}}
+\providecommand{\bh}{\hat}
+\providecommand{\dd}{\lambda}
+\providecommand{\q}{\operatorname{q}}
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+source("./customization/knitr_options.R")
+```
+
+```{r, message=FALSE, echo=FALSE, cache=FALSE}
+library("datasets")
+library("animation")
+library("gganimate")
+```
+
+# <img src="./images/howto.jpg"></img>
+
+# Exploratory Data Analysis
+
+## What is EDA?
+
+Exploratory data analysis (EDA) is the process of analzying data to uncover their key features.
+
+John Tukey pioneered this framework, writing a seminal book on the topic (called *Exploratory Data Analysis*).
+
+EDA involves calculating numerical summaries of data, visualizing data in a variety of ways, and considering interesting data points. 
+
+Before any model fitting is done to data, some exploratory data analysis should always be performed. 
+
+*Data science seems to focus much more on EDA than traditional statistics.*
+
+## Descriptive Statistics Examples
+
+- Facebook's [Visualizing Friendships](https://www.facebook.com/note.php?note_id=469716398919)   (side note: [a discussion](http://flowingdata.com/2010/12/13/facebook-worldwide-friendships-mapped/))
+
+- [Hans Rosling: Debunking third-world myths with the best stats you've ever seen](https://www.youtube.com/watch?v=RUwS1uAdUcI&t=3m22s&version=3)
+
+- Flowing Data's [A Day in the Life of Americans](http://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/)
+
+## Components of EDA
+
+EDA involves calculating quantities and visualizing data for:
+
+- Checking the *n*'s
+- Checking for missing data
+- Characterizing the distributional properties of the data
+- Characterizing relationships among variables and observations
+- Dimension reduction
+- Model formulation
+- Hypothesis generation
+
+... and there are possible many more activities one can do.
+
+## *R4DS* Workflow
+
+Which of the following components of the *R4DS* workflow involve EDA?
+
+1. Import
+2. Tidy
+3. Transform $\leftrightarrow$ Visualize $\leftrightarrow$ Model (*iterate*)
+4. Communicate
+
+
+# Data Sets
+
+## Data `mtcars`
+
+Load the `mtcars` data set:
+
+```{r}
+library("tidyverse") # why load tidyverse?
+data("mtcars", package="datasets")
+mtcars <- as_tibble(mtcars)
+head(mtcars)
+```
+
+## Data `mpg`
+
+Load the `mpg` data set:
+
+```{r, cache=FALSE, message=FALSE}
+data("mpg", package="ggplot2")
+head(mpg)
+```
+
+## Data `diamonds`
+
+Load the `diamonds` data set:
+
+```{r, cache=FALSE, message=FALSE}
+data("diamonds", package="ggplot2")
+head(diamonds)
+```
+
+## Data `gapminder`
+
+Load the `gapminder` data set:
+
+```{r, cache=FALSE, message=FALSE}
+library("gapminder")
+data("gapminder", package="gapminder")
+gapminder <- as_tibble(gapminder)
+head(gapminder)
+```
+
+# Numerical Summaries of Data
+
+## Useful Summaries
+
+- **Center**: mean, median, mode
+
+- **Quantiles**: percentiles, five number summaries
+
+- **Spread**: standard deviation, variance, interquartile range
+
+- **Outliers**
+
+- **Shape**: skewness, kurtosis
+
+- **Concordance**: correlation, quantile-quantile plots
+
+## Measures of Center
+
+Suppose we have data points $x_1, x_2, \ldots, x_n$.  
+
+**Mean**: $$\overline{x} = \frac{x_1 + x_2 + \cdots + x_n}{n}$$
+
+**Median**: Order the points $x_{(1)} \leq x_{(2)} \leq \cdots \leq x_{(n)}$.  The median is the middle value:  
+- $x_{((n+1)/2)}$ if $n$ is odd  
+- $(x_{(n/2)} + x_{(n/2+1)})/2$ if $n$ is even
+
+**Mode**: The most frequently repeated value among the data (if any).  If there are ties, then there is more than one mode.
+
+## Mean, Median, and Mode in R
+
+Let's calculate these quantities in R.
+
+```{r}
+mean(mtcars$mpg)
+median(mtcars$mpg)
+
+sample_mode <- function(x) {
+  as.numeric(names(which(table(x) == max(table(x)))))
+}
+
+sample_mode(round(mtcars$mpg))
+```
+
+It appears there is no R base function for calculating the mode.
+
+## Quantiles and Percentiles
+
+The $p$th **percentile** of $x_1, x_2, \ldots, x_n$ is a number such that $p$% of the data are less than this number.
+
+The 25th, 50th, and 75th percentiles are called 1st, 2nd, and 3rd "quartiles", respectively. These are sometimes denoted as Q1, Q2, and Q3. The median is the 50th percentile aka the 2nd quartile aka Q2.
+
+In general, $q$-**quantiles** are cut points that divide the data into $q$ approximately equally sized groups.  The cut points are the percentiles $1/q, 2/q, \ldots, (q-1)/q.$
+
+## Five Number Summary
+
+The "five number summary" is the minimum, the three quartiles, and the maximum. This can be calculated via `fivenum()` and `summary()`. [They can produce different values.](https://chemicalstatistician.wordpress.com/2013/08/12/exploratory-data-analysis-the-5-number-summary-two-different-methods-in-r-2/) Finally, `quantile()` extracts any set of percentiles.
+
+```{r}
+fivenum(mtcars$mpg)
+summary(mtcars$mpg)
+
+quantile(mtcars$mpg, prob=seq(0, 1, 0.25))
+```
+
+## Measures of Spread
+
+The variance, standard deviation (SD), and interquartile range (IQR) measure the "spread" of the data.
+
+**Variance**:
+$$s^2 = \frac{\sum_{i=1}^n \left(x_i - \overline{x}\right)^2}{n-1}$$
+
+**Standard Deviation**: $s = \sqrt{s^2}$
+
+**Iterquartile Range**: IQR $=$ Q3 $-$ Q1 
+
+The SD and IQR have the same units as the observed data, but the variance is in squared units.
+
+
+## Variance, SD, and IQR in R
+
+Variance:
+```{r}
+var(mtcars$mpg)
+```
+
+Standard deviation:
+```{r}
+sd(mtcars$mpg)
+```
+
+Interquartile range:
+```{r}
+IQR(mtcars$mpg)
+diff(fivenum(mtcars$mpg)[c(2,4)])
+```
+
+## Identifying Outliers
+
+An **outlier** is an unusual data point.  Outliers can be perfectly valid but they can also be due to errors (as can non-outliers). 
+
+One must define what is meant by an outlier. 
+
+One definition is a data point that less than Q1 or greater than Q3 by 1.5 $\times$ IQR or more.
+
+Another definition is a data point whose difference from the mean is greater than 3 $\times$ SD or more. For Normal distributed data (bell curve shaped), the probability of this is less than 0.27%.
+
+## Application to `mtcars` Data
+
+```{r}
+sd_units <- abs(mtcars$wt - mean(mtcars$wt))/sd(mtcars$wt)
+sum(sd_units > 3)
+max(sd_units)
+
+iqr_outlier_cuts <- fivenum(mtcars$wt)[c(2,4)] + 
+      c(-1.5, 1.5)*diff(fivenum(mtcars$wt)[c(2,4)])
+sum(mtcars$wt < iqr_outlier_cuts[1] | 
+    mtcars$wt > iqr_outlier_cuts[2])
+```
+
+# Data Visualization Basics
+
+## Plots
+
+- Single variables:
+    - Barplot
+    - Boxplot
+    - Histogram
+    - Density plot
+- Two or more variables:
+    - Side-by-Side Boxplots
+    - Stacked Barplot
+    - Scatterplot
+
+## R Base Graphics
+
+- We'll first plodding through "R base graphics", which means graphics functions that come with R.  
+- By default they are very simple.  However, they can be customized *a lot*, but it takes *a lot* of work. 
+- Also, the syntax varies significantly among plot types and some think the syntax is not user-friendly.
+- We will consider a very highly used graphics package next week, called `ggplot2` that provides a "grammar of graphics". It hits a sweet spot of "flexibility vs. complexity" for many data scientists.
+
+## Read the Documentation
+
+For all of the plotting functions covered below, read the help files.
+
+```{r, eval=FALSE}
+?barplot
+?boxplot
+?hist
+?density
+?plot
+?legend
+```
+
+## Barplot
+
+```{r, eval=FALSE}
+cyl_tbl <- table(mtcars$cyl)
+barplot(cyl_tbl, xlab="Cylinders", ylab="Count")
+```
+
+```{r, echo=FALSE}
+cyl_tbl <- table(mtcars$cyl)
+barplot(cyl_tbl, xlab="Cylinders", ylab="Count", ylim=c(0,16))
+```
+
+## Boxplot
+
+```{r}
+boxplot(mtcars$mpg, ylab="MPG", col="lightgray")
+```
+
+## Constructing Boxplots
+
+- The top of the box is Q3
+- The line through the middle of the box is the median
+- The bottom of the box is Q1
+- The top whisker is the minimum of Q3 + 1.5 $\times$ IQR or the largest data point
+- The bottom whisker is the maximum of Q1 - 1.5 $\times$ IQR or the smallest data point
+- Outliers lie outside of (Q1 - 1.5 $\times$ IQR) or (Q3 + 1.5 $\times$ IQR), and they are shown as points
+- Outliers are calculated using the `fivenum()` function
+
+
+## Boxplot with Outliers
+
+```{r}
+boxplot(mtcars$wt, ylab="Weight (1000 lbs)", 
+        col="lightgray")
+```
+
+## Histogram
+
+```{r}
+hist(mtcars$mpg, xlab="MPG", main="", col="lightgray")
+```
+
+## Histogram with More Breaks
+
+```{r}
+hist(mtcars$mpg, breaks=12, xlab="MPG", main="", col="lightgray")
+```
+
+
+## Density Plot
+
+```{r}
+plot(density(mtcars$mpg), xlab="MPG", main="")
+polygon(density(mtcars$mpg), col="lightgray", border="black")
+```
+
+## Boxplot (Side-By-Side)
+
+```{r}
+boxplot(mpg ~ cyl, data=mtcars, xlab="Cylinders", 
+        ylab="MPG", col="lightgray")
+```
+
+## Stacked Barplot
+
+```{r}
+counts <- table(mtcars$cyl, mtcars$gear)
+counts
+```
+
+```{r, eval=FALSE}
+barplot(counts, main="Number of Gears and Cylinders",
+  xlab="Gears", col=c("blue","red", "lightgray"))
+legend(x="topright", title="Cyl",
+       legend = rownames(counts), 
+       fill = c("blue","red", "lightgray"))
+```
+
+----
+
+```{r, echo=FALSE, small.mar=FALSE}
+par(mar = c(4, 4, 1, 1))
+counts <- table(mtcars$cyl, mtcars$gear)
+barplot(counts, main="Number of Gears and Cylinders",
+  xlab="Gears", col=c("blue","red", "lightgray"), ylim=c(0,16))
+legend(x="topright", title="Cyl",
+       legend = rownames(counts), 
+       fill = c("blue","red", "lightgray"))
+```
+
+
+
+## Scatterplot
+
+```{r}
+plot(mtcars$wt, mtcars$mpg, xlab="Weight (1000 lbs)", 
+     ylab="MPG")
+```
+
+# A Grammar of Graphics
+
+## Rationale
+
+A grammar for communicating data visualization:
+
+- *Data*: the data set we are plotting
+- *Aesthetics*: the variation or relationships in the data we want to visualize
+- *Geometries*: the geometric object by which we render the aesthetics
+- *Coordinates*: the coordinate system used (not covered here)
+- *Facets*: the layout of plots required to visualize the data
+- Other Options:  any other customizations we wish to make, such as changing the color scheme or labels
+
+These are strung together like words in a sentence.
+
+## Package `ggplot2` 
+
+The R package `ggplot2` implements a grammar of graphics along these lines.  First, let's load `ggplot2`:
+
+```{r, cache=FALSE}
+library(ggplot2)
+```
+
+Now let's set a theme (more on this later):
+
+```{r, cache=FALSE}
+theme_set(theme_bw())
+```
+
+## Pieces of the Grammar
+
+- `ggplot()`
+- `aes()`
+- `geom_*()`
+- `facet_*()`
+- `scale_*()`
+- `theme()`
+- `labs()`
+
+The `*` is a placeholder for a variety of terms that we will consider.
+
+## Geometries
+
+Perhaps the most important aspect of `ggplot2` is to understand the "geoms". We will cover the following:
+
+- `geom_bar()`
+- `geom_boxplot()`
+- `geom_violin()`
+- `geom_histogram()`
+- `geom_density()`
+- `geom_line()`
+- `geom_point()`
+- `geom_smooth()`
+- `geom_hex()`
+
+## Call Format
+
+The most basic `ggplot2` plot is made with something like:
+
+```
+ggplot(data = <DATA FRAME>) +
+ geom_*(mapping = aes(x = <VAR X>, y = <VAR Y>))
+``` 
+
+where `<DATA FRAME>` is a data frame and `<VAR X>` and `<VAR Y>` are variables (i.e., columns) from this data frame.  Recall `geom_*` is a placeholder for a geometry such as `geom_boxplot`.
+
+## Layers
+
+There's a complex "layers" construct occurring in the `ggplot2` package. However, for our purposes, it suffices to note that the different parts of the plots are layered together through the `+` operator:
+
+```{r, eval=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color=drv)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, color=drv)) + 
+  scale_color_brewer(palette = "Set1", name = "Drivetrain") +
+  labs(title = "Highway MPG By Drivetrain and Displacement", 
+       x = "Displacement", y = "Highway MPG")
+```
+
+## Placement of the `aes()` Call
+
+In the previous slide, we saw that the same `aes()` call was made for two `geom`'s.  When this is the case, we may more simply call `aes()` from within `ggplot()`:
+
+```{r, eval=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) + 
+  geom_point() +
+  geom_smooth() + 
+  scale_color_brewer(palette = "Set1", name = "Drivetrain") +
+  labs(title = "Highway MPG By Drivetrain and Displacement", 
+       x = "Displacement", y = "Highway MPG")
+```
+
+There may be cases where different `geom`'s are layered and require different `aes()` calls.  This is something to keep in mind as we go through the specifics of the `ggplot2` package.
+
+## Original Publications
+
+Wickham, H. (2010) [A Layered Grammar of Graphics.](http://www.tandfonline.com/doi/abs/10.1198/jcgs.2009.07098) *Journal of Computational and Graphical Statistics*, 19 (1): 3--28.
+
+This paper designs an implementation of *The Grammar of Graphics* by Leland Wilkinson (published in 2005).
+
+## Documentation
+
+- In R: `help(package="ggplot2")`
+- <http://docs.ggplot2.org/current/>
+- <http://www.cookbook-r.com/Graphs/>
+- [*ggplot2: Elegant Graphics for Data Analysis*](http://amzn.com/0387981403) (somewhat outdated, but gives clear rationale)
+
+# Barplots
+
+----
+
+<p style="font-size: 0.75em;">
+The `geom_bar()` layer forms a barplot and only requires an `x` assignment in the `aes()` call:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+```
+
+----
+
+Color in the bars by assigning `fill` in `geom_bar()`, but outside of `aes()`:
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut), fill = "tomato")
+```
+
+
+----
+
+Color *within* the bars according to a variable by assigning `fill` in `geom_bar()` *inside* of `aes()`:
+
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+When we use `fill = clarity` within `aes()`, we see that it shows the proportion of each `clarity` value within each `cut` value:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+By setting `position = "dodge"` outside of `aes()`, it shows bar charts for the `clarity` values within each `cut` value:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping= aes(x = cut, fill = clarity), 
+           position = "dodge")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+By setting `position = "fill"`, it shows the proportion of `clarity` values within each `cut` value and no longer shows the `cut` values:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping=aes(x = cut, fill = clarity), 
+           position = "fill") +
+  labs(x = "cut", y = "relative proporition within cut")
+```
+
+# Boxplots and Violin Plots
+
+----
+
+<p style="font-size: 0.75em;">
+The `geom_boxplot()` layer forms a boxplot and requires both `x` and `y` assignments in the `aes()` call, even when plotting a single boxplot:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_boxplot(mapping = aes(x = 1, y = hwy))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Color in the boxes by assigning `fill` in `geom_boxplot()`, but outside of `aes()`:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_boxplot(mapping = aes(x = 1, y = hwy), 
+               fill="lightblue") +
+  labs(x=NULL)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Show a boxplot for the `y` values occurring within each `x` factor level by making these assignments in `aes()`:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_boxplot(mapping = aes(x = factor(cyl), y = hwy))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+By assigning the `fill` argument *within* `aes()`, we can color each boxplot according to the x-axis factor variable:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_boxplot(mapping = aes(x = factor(cyl), y = hwy, 
+                             fill = factor(cyl)))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The `geom_jitter()` function plots the data points and randomly jitters them so we can better see all of the points:
+</p>
+
+```{r}
+ggplot(data = mpg, mapping = aes(x=factor(cyl), y=hwy)) + 
+  geom_boxplot(fill = "lightblue") +
+  geom_jitter(width = 0.2)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+A violin plot, called via `geom_violin()`, is similar to a boxplot, except shows a density plot turned on its side and reflected across its vertical axis:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_violin(mapping = aes(x = drv, y = hwy))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Add a `geom_jitter()` to see how the original data points relate to the violin plots:
+</p>
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = drv, y = hwy)) + 
+  geom_violin(adjust=1.2) +
+  geom_jitter(width=0.2, alpha=0.5)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Boxplot example on the `gapminder` data:
+</p>
+
+```{r}
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot(outlier.colour = "red") +
+  geom_jitter(width = 0.1, alpha = 0.25)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Analogous violin plot example on the `gapminder` data:
+</p>
+
+```{r}
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_violin() +
+  geom_jitter(width = 0.1, alpha = 0.25)
+```
+
+
+# Histograms and Density Plots
+
+----
+
+<p style="font-size: 0.75em;">
+We can create a histogram using the `geom_histogram()` layer, which requires an `x` argument only in the `aes()` call:
+</p>
+
+```{r, message=FALSE}
+ggplot(gapminder) +
+  geom_histogram(mapping = aes(x=lifeExp))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+We can change the bin width directly in the histogram, which is an intuitive parameter to change based on visual inspection:
+</p>
+
+```{r, message=FALSE}
+ggplot(gapminder) +
+  geom_histogram(mapping = aes(x=lifeExp), binwidth=5)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The bins are sometimes centered in an unexpected manner in `ggplot2`:
+</p>
+
+```{r}
+ggplot(diamonds) +
+  geom_histogram(mapping = aes(x=price), binwidth = 1000)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Let's fix how the bins are centered (make `center` half of `binwidth`).
+</p>
+
+```{r}
+ggplot(diamonds) +
+  geom_histogram(mapping = aes(x=price), binwidth = 1000, 
+                 center=500)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Instead of counts on the y-axis, we may instead want the area of the bars to sum to 1, like a probability density:
+</p>
+
+```{r}
+ggplot(gapminder) +
+  geom_histogram(mapping = aes(x=lifeExp, y=..density..), 
+                 binwidth=5)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+When we use `fill = continent` within `aes()`, we see that it shows the counts of each `continent` value within each `lifeExp` bin:
+</p>
+
+```{r}
+ggplot(gapminder) +
+  geom_histogram(mapping = aes(x=lifeExp, fill = continent), 
+                 binwidth = 5)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Display a density plot using the `geom_density()` layer:
+</p>
+
+```{r}
+ggplot(gapminder) +
+  geom_density(mapping = aes(x=lifeExp))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Employ the arguments `color="blue"` and `fill="lightblue"` outside of the `aes()` call to include some colors:
+</p>
+
+```{r}
+ggplot(gapminder) +
+  geom_density(mapping = aes(x=lifeExp), color="blue", 
+               fill="lightblue")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+By utilizing `color=as.factor(year)` we plot a density of `lifeExp` stratified by each `year` value:
+</p>
+
+```{r}
+ggplot(gapminder) +
+  geom_density(aes(x=lifeExp, color=as.factor(year)), 
+               size=1.2)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Overlay a density plot and a histogram together:
+</p>
+
+```{r, message=FALSE}
+ggplot(gapminder, mapping = aes(x=lifeExp)) + 
+  geom_histogram(aes(y=..density..), color="black", 
+                 fill="white") +
+  geom_density(fill="lightblue", alpha=.5)
+```
+
+# Line Plots
+
+
+----
+
+<h2>`babynames` Revisited</h2>
+
+Let's first create a data frame that captures the number of times "John" is registered in males per year:
+
+```{r}
+library("babynames")
+john <- babynames %>% filter(sex=="M", name=="John")
+head(john)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+We can `geom_lines()` to plot a line showing the popularity of "John" over time:
+</p>
+
+```{r}
+ggplot(data = john) + 
+  geom_line(mapping = aes(x=year, y=prop), size=1.5)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Now let's look at a name that occurs nontrivially in males and females:
+</p>
+
+```{r}
+kelly <- babynames %>% filter(name=="Kelly")
+ggplot(data = kelly) + 
+  geom_line(mapping = aes(x=year, y=prop, color=sex), 
+            size=1.5)
+```
+
+# Scatterplots
+
+----
+
+<p style="font-size: 0.75em;">
+The layer `geom_point()` produces a scatterplot, and the `aes()` call requires `x` and `y` assignment:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Give the points a color:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), 
+             color = "blue")
+  
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Color the points according to a factor variable by including `color = class` within the `aes()` call:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, 
+                           color = class))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Increase the size of points with `size=2` outside of the `aes()` call:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, 
+                           color = class), size=2)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Vary the size of the points according to the `pop` variable:
+</p>
+
+```{r}
+gapminder %>% filter(year==2007) %>% ggplot() + 
+  geom_point(aes(x = log(gdpPercap), y = lifeExp, 
+                 size = pop))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Vary the transparency of the points according to the `class` factor variable by setting `alpha=class` within the `aes()` call:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, 
+                           alpha = class))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Vary the shape of the points according to the `class` factor variable by setting `alpha=class` within the `aes()` call (maximum 6 possible shapes -- oops!):
+</p>
+
+```{r, warning=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, 
+                           shape = class))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Color the points according to the `cut` variable by setting `color=cut` within the `aes()` call:
+</p>
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x=carat, y=price, color=cut),
+             alpha=0.7)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Color the points according to the `clarity` variable by setting `color=clarity` within the `aes()` call:
+</p>
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping=aes(x=carat, y=price, color=clarity), 
+             alpha=0.3)
+```
+
+
+----
+
+<p style="font-size: 0.75em;">
+Override the `alpha=0.3` in the legend:
+</p>
+
+```{r}
+ggplot(data=diamonds) +
+  geom_point(mapping=aes(x=carat, y=price, color=clarity), 
+             alpha=0.3) + 
+  guides(color=guide_legend(override.aes = list(alpha = 1)))
+```
+
+# Axis Scales
+
+----
+
+<p style="font-size: 0.75em;">
+A different way to take the log of `gdpPercap`:
+</p>
+
+```{r}
+gapminder %>% filter(year==2007) %>% ggplot() + 
+  geom_point(aes(x = gdpPercap, y = lifeExp, 
+                 size = pop)) +
+  scale_x_log10()
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The `price` variable seems to be significantly right-skewed:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_boxplot(aes(x=color, y=price)) 
+```
+
+----
+
+<p style="font-size: 0.75em;">
+We can try to reduce this skewness by rescaling the variables.  We first try to take the `log(base=10)` of the `price` variable via `scale_y_log10()`:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_boxplot(aes(x=color, y=price)) + 
+  scale_y_log10()
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Let's repeat this on the analogous violing plots:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_violin(aes(x=color, y=price)) + 
+  scale_y_log10()
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The relationship between `carat` and `price` is nonlinear.  Let's explore different transformations to find an approximately linear relationship.
+</p>
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping=aes(x=carat, y=price, color=clarity), 
+             alpha=0.3)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+First try to take the squareroot of the the `price` variable:
+</p>
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(aes(x=carat, y=price, color=clarity), 
+             alpha=0.3) +
+  scale_y_sqrt()
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Now let's try to take `log(base=10)` on both the `carat` and `price` variables:
+</p>
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(aes(x=carat, y=price, color=clarity), alpha=0.3) +
+  scale_y_log10(breaks=c(1000,5000,10000)) + 
+  scale_x_log10(breaks=1:5)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Forming a violin plot of `price` stratified by `clarity` and transforming the `price` variable yields an interesting relationship in this data set:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_violin(aes(x=clarity, y=price, fill=clarity), 
+              adjust=1.5) +  
+  scale_y_log10()
+```
+
+# Scatterplot Smoothers
+
+----
+
+<h2>Fitting "Smoothers" and Other Models to Scatterplots</h2>
+
+- Later this semester, we will spend several weeks learning how to explain or predict an outcome variable in terms of predictor variables  
+- We will briefly show here how to plot some simple model fits to scatterplots
+- You may want to return to these slides later in the semester once we cover modeling in more detail
+
+----
+
+<p style="font-size: 0.75em;">
+Recall the scatterplot showing the relationship between highway mpg and displacement.  How can we plot a smoothed relationship between these two variables?
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Plot a smoother with `geom_smooth()` using the default settings (other than removing the error bands):
+</p>
+
+```{r, message=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(se=FALSE)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The default smoother here is a "loess" smoother. Let's compare that to the least squares regresson line:
+</p>
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(aes(colour = "loess"), method = "loess", se = FALSE) + 
+  geom_smooth(aes(colour = "lm"), method = "lm", se = FALSE)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Now let's plot a smoother to the points stratified by the `drv` variable:
+</p>
+
+```{r, message=FALSE}
+ggplot(data=mpg, mapping = aes(x = displ, y = hwy, 
+                               linetype = drv)) + 
+  geom_point() + 
+  geom_smooth(se=FALSE)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Instead of different line types, let's instead differentiate them by line color:
+</p>
+
+```{r, message=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, 
+                                 color=drv)) + 
+  geom_point() +
+  geom_smooth(se=FALSE)
+```
+
+# Overplotting
+
+----
+
+<h2> Definition </h2>
+
+- Overplotting occurs when there are many observations, resulting in many objects being plotted on top of each other
+- For example, the `diamonds` data set has `r nrow(diamonds)` observations per variable
+- Let's explore some ways to deal with overplotting
+
+----
+
+<p style="font-size: 0.75em;">
+Here is an example of an overplotted scatterplot:
+</p>
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
+  geom_point()
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Let's reduce the `alpha` of the points:
+</p>
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
+  geom_point(alpha=0.1)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Let's further reduce the `alpha`:
+</p>
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
+  geom_point(alpha=0.01)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+We can bin the points into hexagons, and report how many points fall within each bin.  We use the `geom_hex()` layer to do this:
+</p>
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
+  geom_hex()
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Let's try to improve the color scheme:
+</p>
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
+  geom_hex() + 
+  scale_fill_gradient2(low="lightblue", mid="purple", high="black", 
+                       midpoint=3000)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+We can combine the scale transformation used earlier with the "hexbin" plotting method:
+</p>
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x=carat, y=price)) +
+  geom_hex(bins=20) +
+  scale_x_log10(breaks=1:5) + scale_y_log10(breaks=c(1000,5000,10000)) 
+```
+
+
+# Labels and Legends
+
+----
+
+<p style="font-size: 0.75em;">
+Here's how you can change the axis labels and give the plot a title:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_boxplot(mapping = aes(x = factor(cyl), y = hwy)) +
+  labs(title="Highway MPG by Cylinders",x="Cylinders",
+       y="Highway MPG")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+You can remove the legend to a plot by the following:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut)) +
+  theme(legend.position="none")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The legend can be placed on the "top", "bottom", "left", or "right":
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut)) +
+  theme(legend.position="bottom")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The legend can be moved inside the plot itself:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut)) +
+  theme(legend.position=c(0.15,0.75))
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Change the name of the legend:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut)) +
+  scale_fill_discrete(name="Diamond\nCut")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Change the labels within the legend:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut)) +
+  scale_fill_discrete(labels=c("F", "G", "VG", "P", "I"))
+```
+
+# Facets
+
+----
+
+<p style="font-size: 0.75em;">
+Here is the histogram of the `displ` variable from the `mpg` data set:
+</p>
+
+```{r}
+ggplot(mpg) + geom_histogram(mapping=aes(x=displ), 
+                             binwidth=0.25)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The `facet_wrap()` layer allows us to stratify the `displ` variable according to `cyl`, and show the histograms for the strata in an organized fashion:
+</p>
+
+```{r}
+ggplot(mpg) + 
+  geom_histogram(mapping=aes(x=displ), binwidth=0.25) + 
+  facet_wrap(~ cyl)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Here is `facet_wrap()` applied to `displ` startified by the `drv` variable:
+</p>
+
+```{r}
+ggplot(mpg) + 
+  geom_histogram(mapping=aes(x=displ), binwidth=0.25) + 
+  facet_wrap(~ drv)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+We can stratify by two variable simultaneously by using the `facet_grid()` layer:
+</p>
+
+```{r}
+ggplot(mpg) + 
+  geom_histogram(mapping=aes(x=displ), binwidth=0.25) + 
+  facet_grid(drv ~ cyl)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Let's carry out a similar faceting on the `diamonds` data over the next four plots:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping=aes(x=price), binwidth=500)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Stratify `price` by `clarity`:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping=aes(x=price), binwidth=500) + 
+  facet_wrap(~ clarity)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Stratify `price` by `clarity`, but allow each y-axis range to be different by including the `scale="free_y"` argument:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping=aes(x=price), binwidth=500) + 
+  facet_wrap(~ clarity, scale="free_y")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Jointly stratify `price` by `cut` and `clarify`:
+</p>
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping=aes(x=price), binwidth=500) + 
+  facet_grid(cut ~ clarity) +
+  scale_x_continuous(breaks=9000)
+```
+
+# Colors
+
+## Finding Colors
+
+- [A list](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) of named colors in R (e.g., "lightblue")
+- [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html) package
+- The Crayola crayon colors from the [`broman`](https://cran.r-project.org/web/packages/broman/index.html) package -- use `brocolors(set="crayons")`
+- [Color blind palette](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/): 
+
+```{r} 
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", 
+               "#D55E00", "#CC79A7")
+```
+
+## Some Useful Layers
+
+- `scale_fill_manual()`
+- `scale_color_manual()`
+- `scale_fill_gradient()`
+- `scale_color_gradient()`
+
+
+----
+
+<p style="font-size: 0.75em;">
+Manually determine colors to fill the barplot using the color blind palette defined above, `cbPalette`:
+</p>
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut)) +
+  scale_fill_manual(values=cbPalette)
+```
+
+
+----
+
+<p style="font-size: 0.75em;">
+Manually determine point colors using the color blind palette defined above, `cbPalette`:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class), size=2) +
+  scale_color_manual(values=cbPalette)
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Fill the histogram bars using a color gradient by their counts, where we determine the endpoint colors:
+</p>
+
+```{r, message=FALSE}
+ggplot(data = mpg) + 
+  geom_histogram(aes(x=hwy, fill=..count..)) + 
+  scale_fill_gradient(low="blue", high="red")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Color the points based on a gradient formed from the quantitative variable, `displ`, where we we determine the endpoint colors:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(aes(x=hwy, y=cty, color=displ), size=2) + 
+  scale_color_gradient(low="blue", high="red")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+An example of using the palette "Set1" from the `RColorBrewer` package, included in `ggplot2`:
+</p>
+
+```{r}
+ggplot(diamonds) +
+  geom_density(mapping = aes(x=price, color=clarity)) +
+  scale_color_brewer(palette = "Set1")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+Another example of using the palette "Set1" from the `RColorBrewer` package, included in `ggplot2`:
+</p>
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class)) +
+  scale_color_brewer(palette = "Set1")
+```
+
+----
+
+<p style="font-size: 0.75em;">
+The `gapminder` package comes with its own set of colors, `country_colors`.
+</p>
+
+```{r}
+ggplot(subset(gapminder, continent != "Oceania"),
+       aes(x = year, y = lifeExp, group = country, 
+           color = country)) +
+  geom_line(show.legend = FALSE) + facet_wrap(~ continent) +
+  scale_color_manual(values = country_colors)
+```
+
+# Saving Plots
+
+## Saving Plots as Variables
+
+Pieces of the plots can be saved as variables, which is particular useful to explortatory data analysis. These all produce the same plot:
+
+```{r, eval=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) + 
+  geom_point() +
+  geom_smooth(se=FALSE)
+```
+
+```{r, eval=FALSE}
+p <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) +  
+  geom_point() 
+p + geom_smooth(se=FALSE)
+```
+
+```{r, eval=FALSE}
+p <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) 
+p +  geom_point() + geom_smooth(se=FALSE)
+```
+
+Try it yourself!
+
+## Saving Plots to Files
+
+Plots can be saved to many formats using the `ggsave()` function.  Here are some examples:
+
+```{r, eval=FALSE}
+p <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) + 
+  geom_point() +
+  geom_smooth(se=FALSE)
+ggsave(filename="my_plot.pdf", plot=p) # saves PDF file
+ggsave(filename="my_plot.png", plot=p) # saves PNG file
+```
+
+Here are the arguments that `ggsave()` takes:
+```{r}
+str(ggsave)
+```
+
+# Dynamic Visualization
+
+## Examples
+
+Tools to dynamically interact with data visualizations (and calculations) are becoming increasingly common and straightforward to implement.  Here are several examples:
+
+- [Shiny](https://shiny.rstudio.com)  (see also, [example from my lab](http://qvalue.princeton.edu))
+- [plotly](https://plot.ly/r/)
+- [ggvis](http://ggvis.rstudio.com)
+- [animation](https://cran.r-project.org/web/packages/animation/index.html)
+- [gganimate](https://github.com/dgrtwo/gganimate)
+
+----
+
+```{r animation_ex1, message=FALSE, warning=FALSE, eval=FALSE}
+p <- ggplot(gapminder) +
+        geom_point(aes(x=gdpPercap, y=lifeExp, size = pop, 
+                   color = continent, frame = year)) +
+        scale_x_log10()
+gganimate(p, "animation_ex1.gif", ani.height=400, ani.width=500)
+```
+
+The resulting file can be viewed here: [https://github.com/jdstorey/asdslectures/blob/master/docs/images/animation_ex1.gif](https://raw.githubusercontent.com/jdstorey/asdslectures/master/docs/images/animation_ex1.gif)
+
+----
+
+```{r animation_ex2, message=FALSE, warning=FALSE, eval=FALSE}
+p <- ggplot(gapminder) +
+  geom_density(aes(x=lifeExp, color=as.factor(year), 
+                   frame=year), 
+               size=1.2) +
+  scale_color_discrete(name="year")
+gganimate(p, "animation_ex2.gif", ani.height=400, ani.width=500)
+```
+
+The resulting file can be viewed here: [https://github.com/jdstorey/asdslectures/blob/master/docs/images/animation_ex2.gif](https://raw.githubusercontent.com/jdstorey/asdslectures/master/docs/images/animation_ex2.gif)
+
+
+----
+
+```{r animation_ex3, message=FALSE, warning=FALSE, eval=FALSE}
+p <- ggplot(gapminder) +
+  geom_density(aes(x=lifeExp, color=as.factor(year), 
+                   frame=year, cumulative = TRUE), 
+               size=1.2) +
+  scale_color_discrete(name="year")
+gganimate(p, "animation_ex3.gif", ani.height=400, ani.width=500)
+```
+
+The resulting file can be viewed here: [https://github.com/jdstorey/asdslectures/blob/master/docs/images/animation_ex3.gif](https://raw.githubusercontent.com/jdstorey/asdslectures/master/docs/images/animation_ex3.gif)
+
+
+# Themes
+
+## Available Themes
+
+<center>![themes](./images/visualization-themes.png)</center>
+
+<p style="font-size: 0.75em;">
+From <http://r4ds.had.co.nz/visualize.html>.  See also [`ggthemes`](https://cran.r-project.org/web/packages/ggthemes/index.html) package.
+</p>
+
+## Setting a Theme
+
+Globally:
+
+```{r, eval=FALSE}
+theme_set(theme_minimal())
+```
+
+Locally: 
+
+```{r, eval=FALSE}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) + 
+  theme_minimal()
+```
+
+
+# More Numerical Summaries
+
+## Measuring Symmetry
+
+The **skewness** statistic measures symmetry of the data.  It is calculated by:
+
+$$
+\gamma = \frac{\sum_{i=1}^n (x_i - \overline{x})^3/n}{s^3}
+$$
+
+A negative number is left-skewed, and a positive number is right-skewed.  
+
+Note:  Use of $n$ vs. $n-1$ may vary -- check the code.
+
+## `skewness()` Function
+
+In R, there is a function call `skewness()` from the `moments` package for calculating this statistic on data.
+
+```{r}
+library(moments)
+gapminder %>% filter(year==2007) %>% select(gdpPercap) %>% 
+  skewness()
+gapminder %>% filter(year==2007) %>% select(gdpPercap) %>% 
+  log() %>% skewness()
+rnorm(10000) %>% skewness()
+```
+
+## Measuring Tails
+
+The tails of a distribution are often described as being heavy or light depending on how slowly they descend.
+
+This can be measured through statistic called **kurtosis**:
+
+$$
+\kappa = \frac{\sum_{i=1}^n (x_i - \overline{x})^4/n}{s^4}
+$$
+As with skewness $\gamma$, use of $n$ vs $n-1$ may vary.
+
+## Excess Kurtosis
+
+For a standard Normal distribution (mean 0 and standard deviation 1), the kurtosis is on average 3.
+
+Therefore, a measure called "excess kurtosis" is defined to be $\kappa - 3$.  A positive value implies heavier tails and a negative value implies lighter tails.
+
+## `kurtosis()` Function
+
+In R, there is a function call `kurtosis()` from the `moments` package for calculating this statistic on data.
+
+```{r}
+library(moments)
+gapminder %>% filter(year==2007) %>% select(gdpPercap) %>% 
+  kurtosis()
+gapminder %>% filter(year==2007) %>% select(gdpPercap) %>% 
+  log() %>% kurtosis()
+rnorm(10000) %>% kurtosis()
+```
+
+## Visualizing Skewness and Kurtosis
+
+```{r, echo=FALSE}
+y <- gapminder %>% filter(year==2007) %>% select(gdpPercap) %>%
+  unlist()
+hist(y, freq=FALSE, main=" ", ylab=" ", xlab="gdpPercap", nclass=20, col="lightgray")
+x <- seq(min(y), max(y), length.out=200)
+lines(x, dnorm(x, mean=mean(y), sd=sd(y)), lw=3)
+```
+
+## Visualizing Skewness and Kurtosis
+
+```{r, echo=FALSE}
+y <- gapminder %>% filter(year==2007) %>% select(gdpPercap) %>%
+  unlist()
+y <- log(y)
+hist(y, freq=FALSE, main=" ", ylab=" ", xlab="gdpPercap", nclass=20, col="lightgray")
+x <- seq(min(y), max(y), length.out=200)
+lines(x, dnorm(x, mean=mean(y), sd=sd(y)), lw=3)
+```
+
+## Correlation
+
+- It is often the case that two or more quantitative variables are measured on each unit of observation (such as an individual).  
+
+- We are then often interested in characterizing how pairs of variables are associated or how they vary together.
+
+- A common measure that is used is called "correlation", which is most well suited for measuring linear associations
+
+## Pearson Correlation
+
+Suppose we observe $n$ pairs of data $(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)$. Their sample correlation is
+
+\begin{eqnarray}
+r_{xy} & = & \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y})}{\sqrt{\sum_{i=1}^n (x_i - \overline{x})^2 \sum_{i=1}^n (y_i - \overline{y})^2}} \\
+\ & = & \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y})}{(n-1) s_x s_y}
+\end{eqnarray}
+
+where $s_x$ and $s_y$ are the sample standard deviations of each measured variable.
+
+## Spearman Correlation
+
+- There are other ways to measure correlation that are less reliant on linear trends in covariation and are also more robust to outliers.
+
+- Specifically, one can convert each measured variable to ranks by size (1 for the smallest, $n$ for the largest) and then use a formula for correlation designed for these ranks.
+
+- One popular measure of rank-based correlation is the [Spearman correlation](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient).
+
+----
+
+```{r, echo=FALSE}
+set.seed(508)
+```
+
+```{r}
+x <- rnorm(500)
+y <- x + rnorm(500)
+cor(x, y, method="pearson")
+cor(x, y, method="spearman")
+```
+
+```{r, echo=FALSE}
+plot(x, y, pch=20)
+```
+
+----
+
+```{r, echo=FALSE}
+set.seed(508)
+```
+
+```{r}
+x <- rnorm(500)
+y <- x + rnorm(500, sd=2)
+cor(x, y, method="pearson")
+cor(x, y, method="spearman")
+```
+
+```{r, echo=FALSE}
+plot(x, y, pch=20)
+```
+
+----
+
+```{r, echo=FALSE}
+set.seed(508)
+```
+
+```{r}
+x <- c(rnorm(499), 100)
+y <- c(rnorm(499), 100)
+cor(x, y, method="pearson")
+cor(x, y, method="spearman")
+```
+
+```{r, echo=FALSE, fig.width=10, small.mar=FALSE}
+par(mfrow=c(1,2))
+plot(x, y, pch=20)
+plot(x^(1/3), y^(1/3), pch=20)
+```
+
+
+## Quantile-Quantile Plots
+
+Quantile-quantile plots display the [quantiles](#/quantiles-and-percentiles) of: 
+
+1. two samples of data
+2. a sample of data vs a theoretical distribution
+
+The first type allows one to assess how similar the distributions are of two samples of data.
+
+The second allows one to assess how similar a sample of data is to a theoretical distribution (often Normal with mean 0 and standard deviation 1).
+
+----
+
+```{r}
+qqnorm(mtcars$mpg, main=" ")
+qqline(mtcars$mpg) # line through Q1 and Q3
+```
+
+----
+  
+```{r}
+before1980 <- gapminder %>% filter(year < 1980) %>% 
+  select(lifeExp) %>% unlist()
+after1980 <- gapminder %>% filter(year > 1980) %>% 
+  select(lifeExp) %>% unlist()
+qqplot(before1980, after1980); abline(0,1)
+```
+
+----
+
+```{r}
+ggplot(mtcars) + stat_qq(aes(sample = mpg))
+```
+
+----
+
+```{r}
+ggplot(gapminder) + stat_qq(aes(sample=lifeExp))
+```
+
+----
+
+```{r}
+ggplot(gapminder) + 
+  stat_qq(aes(sample=lifeExp, color=continent))
+```
+
+
+# Extras
+
+## Source
+
+[License](https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md)
+
+[Source Code](https://github.com/jdstorey/asdslectures/)
+
+## Session Information
+
+<section style="font-size: 0.75em;">
+```{r}
+sessionInfo()
+```
+</section>
+
+```{r converttonotes, include=FALSE, cache=FALSE}
+source("./customization/make_notes.R")
+source("./customization/make_bookdown.R")
+```

@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 12</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="customization/custom.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 12</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="eda-of-hd-data" class="titleslide slide level1"><h1>EDA of HD Data</h1></section><section id="rationale" class="slide level2">
+<h2>Rationale</h2>
+<p>Exploratory data analysis (EDA) of high-dimensional data adds the additional challenge that many variables must be examined simultaneously. Therefore, in addition to the EDA methods we discussed earlier, methods are often employed to organize, visualize, or numerically capture high-dimensional data into lower dimensions.</p>
+<p>Examples of EDA approaches applied to HD data include:</p>
+<ul>
+<li>Traditional EDA methods covered earlier</li>
+<li>Cluster analysis</li>
+<li>Dimensionality reduction</li>
+</ul>
+</section><section id="cluster-analysis" class="slide level2">
+<h2>Cluster Analysis</h2>
+<p>An overview of common <strong>cluster analysis</strong> methods can be found here:</p>
+<p><a href="http://sml201.github.io/lectures/week12/week12.html" class="uri">http://sml201.github.io/lectures/week12/week12.html</a></p>
+<p>These slides include:</p>
+<ul>
+<li>Distance measures</li>
+<li>Hierarchical clustering</li>
+<li><span class="math inline">\(K\)</span>-means clustering</li>
+</ul>
+</section><section id="example-cancer-subtypes" class="slide level2">
+<h2>Example: Cancer Subtypes</h2>
+<center>
+<img src="images/cancer_clustering.jpg" alt="cancer_clustering" />
+</center>
+<p><font size=3em> Figure from <a href="http://www.nature.com/nature/journal/v403/n6769/abs/403503a0.html">Alizadeh et al. (2000) <em>Nature</em></a>. </font></p>
+</section><section id="dimensionality-reduction" class="slide level2">
+<h2>Dimensionality Reduction</h2>
+<p>The goal of <strong>dimensionality reduction</strong> is to extract low dimensional representations of high dimensional data that are useful for visualization, exploration, inference, or prediction.</p>
+<p>The low dimensional representations should capture key sources of variation in the data.</p>
+</section><section id="some-methods" class="slide level2">
+<h2>Some Methods</h2>
+<ul>
+<li>Principal component analysis</li>
+<li>Singular value decomposition</li>
+<li>Latent variable modeling</li>
+<li>Vector quantization</li>
+<li>Self-organizing maps</li>
+<li>Multidimensional scaling</li>
+</ul>
+</section><section id="example-weather-data" class="slide level2">
+<h2>Example: Weather Data</h2>
+<p>These daily temperature data (in tenths of degrees C) come from meteorogical observations for weather stations in the US for the year 2012 provided by NOAA (National Oceanic and Atmospheric Administration).:</p>
+<pre class="r"><code>&gt; load(&quot;./data/weather_data.RData&quot;)
+&gt; dim(weather_data)
+[1] 2811   50
+&gt; 
+&gt; weather_data[1:5, 1:7]
+                  11       16  18       19  27  30       31
+AG000060611 138.0000 175.0000 173 164.0000 218 160 163.0000
+AGM00060369 158.0000 162.0000 154 159.0000 165 125 171.0000
+AGM00060425 272.7619 272.7619 152 163.0000 163 108 158.0000
+AGM00060444 128.0000 102.0000 100 111.0000 125  33 125.0000
+AGM00060468 105.0000 122.0000  97 263.5714 155  52 263.5714</code></pre>
+<p>This matrix contains temperature data on 50 days and 2811 stations that were randomly selected.</p>
+</section><section class="slide level2">
+
+<p>Convert temperatures to Fahrenheit:</p>
+<pre class="r"><code>&gt; weather_data &lt;- 0.18*weather_data + 32
+&gt; weather_data[1:5, 1:6]
+                  11       16    18       19    27    30
+AG000060611 56.84000 63.50000 63.14 61.52000 71.24 60.80
+AGM00060369 60.44000 61.16000 59.72 60.62000 61.70 54.50
+AGM00060425 81.09714 81.09714 59.36 61.34000 61.34 51.44
+AGM00060444 55.04000 50.36000 50.00 51.98000 54.50 37.94
+AGM00060468 50.90000 53.96000 49.46 79.44286 59.90 41.36
+&gt; 
+&gt; apply(weather_data, 1, median) %&gt;% 
++   quantile(probs=seq(0,1,0.1))
+        0%        10%        20%        30%        40% 
+  8.886744  49.010000  54.500000  58.460000  62.150000 
+       50%        60%        70%        80%        90% 
+ 65.930000  69.679318  73.490000  77.990000  82.940000 
+      100% 
+140.000000 </code></pre>
+</section><section class="slide level2">
+
+<p>Here are the 2811 rows converted to a single row that captures the most variation among the rows:</p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="principal-component-analysis" class="titleslide slide level1"><h1>Principal Component Analysis</h1></section><section id="goal" class="slide level2">
+<h2>Goal</h2>
+<p>For a given set of variables, <strong>principal component analysis</strong> (PCA) finds (constrained) weighted sums of the variables to produce variables (called principal components) that capture consectuive maximum levels of variation in the data.</p>
+<p>Specifically, the first principal component is the weighted sum of the variables that results in a component with the highest variation.</p>
+<p>This component is then “removed” from the data, and the second principal component is obtained on the resulting residuals.</p>
+<p>This process is repeated until there is no variation left in the data.</p>
+</section><section id="population-pca" class="slide level2">
+<h2>Population PCA</h2>
+<p>Suppose we have <span class="math inline">\(m\)</span> random variables <span class="math inline">\(X_1, X_2, \ldots, X_m\)</span>. We wish to identify a set of weights <span class="math inline">\(w_1, w_2, \ldots, w_m\)</span> that maximizes</p>
+<p><span class="math display">\[
+{\operatorname{Var}}\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right).
+\]</span></p>
+<p>However, this is unbounded, so we need to constrain the weights. It turns out that constraining the weights so that</p>
+<p><span class="math display">\[
+\| {\boldsymbol{w}}\|_2^2 = \sum_{i=1}^m w_i^2 = 1
+\]</span></p>
+<p>is both interpretable and mathematically tractable.</p>
+</section><section class="slide level2">
+
+<p>Therefore we wish to maximize</p>
+<p><span class="math display">\[
+{\operatorname{Var}}\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right)
+\]</span></p>
+<p>subject to <span class="math inline">\(\| {\boldsymbol{w}}\|_2^2 = 1\)</span>. Let <span class="math inline">\({\boldsymbol{\Sigma}}\)</span> be the <span class="math inline">\(m \times m\)</span> population covariance matrix of the random variables <span class="math inline">\(X_1, X_2, \ldots, X_m\)</span>. It follows that</p>
+<p><span class="math display">\[
+{\operatorname{Var}}\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right) = {\boldsymbol{w}}^T {\boldsymbol{\Sigma}}{\boldsymbol{w}}.
+\]</span></p>
+<p>Using a Lagrange multiplier, we wish to maximize</p>
+<p><span class="math display">\[
+{\boldsymbol{w}}^T {\boldsymbol{\Sigma}}{\boldsymbol{w}}+ \lambda({\boldsymbol{w}}^T {\boldsymbol{w}}- 1).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Differentiating with respect to <span class="math inline">\({\boldsymbol{w}}\)</span> and setting to <span class="math inline">\({\boldsymbol{0}}\)</span>, we get <span class="math inline">\({\boldsymbol{\Sigma}}{\boldsymbol{w}}- \lambda {\boldsymbol{w}}= 0\)</span> or</p>
+<p><span class="math display">\[
+{\boldsymbol{\Sigma}}{\boldsymbol{w}}= \lambda {\boldsymbol{w}}.
+\]</span></p>
+<p>For any such <span class="math inline">\({\boldsymbol{w}}\)</span> and <span class="math inline">\(\lambda\)</span> where this holds, note that</p>
+<p><span class="math display">\[
+{\operatorname{Var}}\left(w_1 X_1 + w_2 X_2 + \cdots + w_m X_m \right) = {\boldsymbol{w}}^T {\boldsymbol{\Sigma}}{\boldsymbol{w}}= \lambda
+\]</span></p>
+<p>so the variance is <span class="math inline">\(\lambda\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The eigendecompositon of a matrix identifies all such solutions to <span class="math inline">\({\boldsymbol{\Sigma}}{\boldsymbol{w}}= \lambda {\boldsymbol{w}}\)</span>. Specifically, it calculates the decompositon</p>
+<p><span class="math display">\[
+{\boldsymbol{\Sigma}}= {\boldsymbol{W}}{\boldsymbol{\Lambda}}{\boldsymbol{W}}^T
+\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{W}}\)</span> is an <span class="math inline">\(m \times m\)</span> orthogonal matrix and <span class="math inline">\({\boldsymbol{\Lambda}}\)</span> is a diagonal matrix with entries <span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m \geq 0\)</span>.</p>
+<p>The fact that <span class="math inline">\({\boldsymbol{W}}\)</span> is orthogonal means <span class="math inline">\({\boldsymbol{W}}{\boldsymbol{W}}^T = {\boldsymbol{W}}^T {\boldsymbol{W}}= {\boldsymbol{I}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The following therefore hold:</p>
+<ul>
+<li>For each column <span class="math inline">\(j\)</span> of <span class="math inline">\({\boldsymbol{W}}\)</span>, say <span class="math inline">\({\boldsymbol{w}}_j\)</span>, it follows that <span class="math inline">\({\boldsymbol{\Sigma}}{\boldsymbol{w}}_j = \lambda_j {\boldsymbol{w}}_j\)</span></li>
+<li><span class="math inline">\(\| {\boldsymbol{w}}_j \|^2_2 = 1\)</span> and <span class="math inline">\({\boldsymbol{w}}_j^T {\boldsymbol{w}}_k = {\boldsymbol{0}}\)</span> for <span class="math inline">\(\lambda_j \not= \lambda_k\)</span></li>
+<li><span class="math inline">\({\operatorname{Var}}({\boldsymbol{w}}_j^T {\boldsymbol{X}}) = \lambda_j\)</span></li>
+<li><span class="math inline">\({\operatorname{Var}}({\boldsymbol{w}}_1^T {\boldsymbol{X}}) \geq {\operatorname{Var}}({\boldsymbol{w}}_2^T {\boldsymbol{X}}) \geq \cdots \geq {\operatorname{Var}}({\boldsymbol{w}}_m^T {\boldsymbol{X}})\)</span></li>
+<li><span class="math inline">\({\boldsymbol{\Sigma}}= \sum_{j=1}^m \lambda_j {\boldsymbol{w}}^j {\boldsymbol{w}}_j^T\)</span></li>
+<li>For <span class="math inline">\(\lambda_j \not= \lambda_k\)</span>, <span class="math display">\[{\operatorname{Cov}}({\boldsymbol{w}}_j^T {\boldsymbol{X}}, {\boldsymbol{w}}_k^T {\boldsymbol{X}}) = {\boldsymbol{w}}_j^T {\boldsymbol{\Sigma}}{\boldsymbol{w}}_k = \lambda_k {\boldsymbol{w}}_j^T {\boldsymbol{w}}_k =  {\boldsymbol{0}}\]</span></li>
+</ul>
+</section><section id="population-pcs" class="slide level2">
+<h2>Population PCs</h2>
+<p>The <span class="math inline">\(j\)</span>th <strong>population principal component</strong> (PC) of <span class="math inline">\(X_1, X_2, \ldots, X_m\)</span> is</p>
+<p><span class="math display">\[
+{\boldsymbol{w}}_j^T {\boldsymbol{X}}= w_{1j} X_1 + w_{2j} X_2 + \cdots + w_{mj} X_m
+\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{w}}_j = (w_{1j}, w_{2j}, \ldots, w_{mj})^T\)</span> is column <span class="math inline">\(j\)</span> of <span class="math inline">\({\boldsymbol{W}}\)</span> from the eigendecomposition</p>
+<p><span class="math display">\[
+{\boldsymbol{\Sigma}}= {\boldsymbol{W}}{\boldsymbol{\Lambda}}{\boldsymbol{W}}^T.
+\]</span></p>
+<p>The column <span class="math inline">\({\boldsymbol{w}}_j\)</span> are called the <strong>loadings</strong> of the <span class="math inline">\(j\)</span>th principal component. The <strong>variance explained</strong> by the <span class="math inline">\(j\)</span>th PC is <span class="math inline">\(\lambda_j\)</span>, which is diagonal element <span class="math inline">\(j\)</span> of <span class="math inline">\({\boldsymbol{\Lambda}}\)</span>.</p>
+</section><section id="sample-pca" class="slide level2">
+<h2>Sample PCA</h2>
+<p>Suppose we have <span class="math inline">\(m\)</span> variables, each with <span class="math inline">\(n\)</span> observations:</p>
+<p><span class="math display">\[
+\begin{aligned}
+{\boldsymbol{x}}_1 &amp; = (x_{11}, x_{12}, \ldots, x_{1n}) \\
+{\boldsymbol{x}}_2 &amp; = (x_{21}, x_{22}, \ldots, x_{2n}) \\
+\  &amp; \vdots \ \\
+{\boldsymbol{x}}_m &amp; = (x_{m1}, x_{m2}, \ldots, x_{mn})
+\end{aligned}
+\]</span></p>
+<p>We can organize these variables into an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\({\boldsymbol{X}}\)</span> where row <span class="math inline">\(i\)</span> is <span class="math inline">\({\boldsymbol{x}}_i\)</span>.</p>
+<p>PCA can be extended from the population scenario applied to rv’s to the sample scenario applied to the observed data <span class="math inline">\({\boldsymbol{X}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Consider all possible weighted sums of these variables</p>
+<p><span class="math display">\[\tilde{\pmb{x}} = \sum_{i=1}^{m} u_i \pmb{x_i}\]</span></p>
+<p>where we constrain <span class="math inline">\(\sum_{i=1}^{m} u_i^2 = 1\)</span>.</p>
+<p>The first principal component of <span class="math inline">\({\boldsymbol{X}}\)</span> is the results <span class="math inline">\(\tilde{{\boldsymbol{x}}}\)</span> with maximum sample variance</p>
+<p><span class="math display">\[
+s^2_{\tilde{{\boldsymbol{x}}}} = \frac{\sum_{j=1}^n \left(\tilde{x}_j - \frac{1}{n} \sum_{k=1}^n \tilde{x}_k \right)^2}{n-1}.
+\]</span></p>
+<p>This first sample principal component (PC) is then “removed” from the data, and the procedure is repeated until <span class="math inline">\(\min(m, n-1)\)</span> sample PCs are constructed.</p>
+</section><section class="slide level2">
+
+<p>The sample PCs are found in a manner analogous to the population PCs. First, we construct the <span class="math inline">\(m \times m\)</span> sample covariance matrix <span class="math inline">\({\boldsymbol{S}}\)</span> with <span class="math inline">\((i,j)\)</span> entry</p>
+<p><span class="math display">\[
+s_{ij} = \frac{\sum_{k=1}^n (x_{ik} - \bar{x}_{i\cdot})(x_{jk} - \bar{x}_{j\cdot})}{n-1}.
+\]</span></p>
+<p>Identifying <span class="math inline">\({\boldsymbol{u}}\)</span> that maximizes <span class="math inline">\(s^2_{\tilde{{\boldsymbol{x}}}}\)</span> also maximizes</p>
+<p><span class="math display">\[
+{\boldsymbol{u}}^T {\boldsymbol{S}}{\boldsymbol{u}}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Following the steps from before, we want to identify <span class="math inline">\({\boldsymbol{u}}\)</span> and <span class="math inline">\(\lambda\)</span> where</p>
+<p><span class="math display">\[
+{\boldsymbol{S}}{\boldsymbol{u}}= \lambda {\boldsymbol{u}}.
+\]</span></p>
+<p>which is accomplished with the eigendecomposition</p>
+<p><span class="math display">\[
+{\boldsymbol{S}}= {\boldsymbol{U}}{\boldsymbol{\Lambda}}{\boldsymbol{U}}^T
+\]</span></p>
+<p>where again <span class="math inline">\({\boldsymbol{U}}^T {\boldsymbol{U}}= {\boldsymbol{U}}{\boldsymbol{U}}^T = {\boldsymbol{I}}\)</span> and <span class="math inline">\({\boldsymbol{\Lambda}}\)</span> is a diagonal matrix so that <span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_m \geq 0\)</span>.</p>
+</section><section id="sample-pcs" class="slide level2">
+<h2>Sample PCs</h2>
+<p>Let <span class="math inline">\(x^*_{ij} = x_{ij} - \bar{x}_{i\cdot}\)</span> be the row-wise mean-centered values of <span class="math inline">\({\boldsymbol{X}}\)</span>, and let <span class="math inline">\({\boldsymbol{X}}^*\)</span> be the matrix composed of these values. Also, let <span class="math inline">\({\boldsymbol{u}}_j\)</span> be column <span class="math inline">\(j\)</span> of <span class="math inline">\({\boldsymbol{U}}\)</span> from <span class="math inline">\({\boldsymbol{S}}= {\boldsymbol{U}}{\boldsymbol{\Lambda}}{\boldsymbol{U}}^T\)</span>.</p>
+<p>Sample PC <span class="math inline">\(j\)</span> is then</p>
+<p><span class="math display">\[
+\tilde{{\boldsymbol{x}}}_j = {\boldsymbol{u}}_j^T {\boldsymbol{X}}^* = \sum_{i=1}^m u_{ij} {\boldsymbol{x}}^*_i 
+\]</span></p>
+<p>for <span class="math inline">\(j = 1, 2, \ldots, \min(m, n-1)\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The loadings corresponding to PC <span class="math inline">\(j\)</span> are <span class="math inline">\({\boldsymbol{u}}_j\)</span>.</p>
+<p>Note that the mean of PC <span class="math inline">\(j\)</span> is zero, i.e., that</p>
+<p><span class="math display">\[
+\frac{1}{n} \sum_{k=1}^n \tilde{x}_{jk} = 0.
+\]</span></p>
+<p>It can be calculated that the variance of PC <span class="math inline">\(j\)</span> is</p>
+<p><span class="math display">\[
+s^2_{\tilde{{\boldsymbol{x}}}_j} = \frac{\sum_{k=1}^n \tilde{x}_{jk}^2}{n-1} = \lambda_j.
+\]</span></p>
+</section><section id="proportion-of-variance-explained" class="slide level2">
+<h2>Proportion of Variance Explained</h2>
+<p>The proportion of variance explained by PC <span class="math inline">\(j\)</span> is</p>
+<p><span class="math display">\[
+\operatorname{PVE}_j = \frac{\lambda_j}{\sum_{k=1}^m \lambda_k}.
+\]</span></p>
+</section><section id="singular-value-decomposition" class="slide level2">
+<h2>Singular Value Decomposition</h2>
+<p>One way in which PCA is performed is to carry out a <strong>singular value decomposition</strong> (SVD) of the data matrix <span class="math inline">\({\boldsymbol{X}}\)</span>. Let <span class="math inline">\(q = \min(m, n)\)</span>. Recalling that <span class="math inline">\({\boldsymbol{X}}^*\)</span> is the row-wise mean centered <span class="math inline">\({\boldsymbol{X}}\)</span>, we can take the SVD of <span class="math inline">\({\boldsymbol{X}}^*/\sqrt{n-1}\)</span> to obtain</p>
+<p><span class="math display">\[
+\frac{1}{\sqrt{n-1}} {\boldsymbol{X}}^* = {\boldsymbol{U}}{\boldsymbol{D}}{\boldsymbol{V}}^T
+\]</span></p>
+<p>where <span class="math inline">\({\boldsymbol{U}}_{m \times q}\)</span>, <span class="math inline">\({\boldsymbol{V}}_{n \times q}\)</span>, and diagonal <span class="math inline">\({\boldsymbol{D}}_{q \times q}\)</span>. Also, we have the orthogonality properties <span class="math inline">\({\boldsymbol{V}}^T {\boldsymbol{V}}= {\boldsymbol{U}}^T {\boldsymbol{U}}= {\boldsymbol{I}}_{q}\)</span>. Finally, <span class="math inline">\({\boldsymbol{D}}\)</span> is composed of diagonal elements <span class="math inline">\(d_1 \geq d_2 \geq \cdots \geq d_q \geq 0\)</span> where <span class="math inline">\(d_q = 0\)</span> if <span class="math inline">\(q = n\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Note that</p>
+<p><span class="math display">\[
+{\boldsymbol{S}}= \frac{1}{n-1} {\boldsymbol{X}}^{*} {\boldsymbol{X}}^{*T} = {\boldsymbol{U}}{\boldsymbol{D}}{\boldsymbol{V}}^T \left({\boldsymbol{U}}{\boldsymbol{D}}{\boldsymbol{V}}^T\right)^T = {\boldsymbol{U}}{\boldsymbol{D}}^2 {\boldsymbol{U}}^T.
+\]</span></p>
+<p>Therefore:</p>
+<ul>
+<li>The variance of PC <span class="math inline">\(j\)</span> is <span class="math inline">\(\lambda_j = d_j^2\)</span></li>
+<li>The loadings of PC <span class="math inline">\(j\)</span> are contained in the columns of the left-hand matrix from the decomposition of <span class="math inline">\({\boldsymbol{S}}\)</span> or <span class="math inline">\({\boldsymbol{X}}^*\)</span></li>
+<li>PC <span class="math inline">\(j\)</span> is row <span class="math inline">\(j\)</span> of <span class="math inline">\({\boldsymbol{D}}{\boldsymbol{V}}^T\)</span></li>
+</ul>
+</section><section id="my-pca-function" class="slide level2">
+<h2>My PCA Function</h2>
+<pre class="r"><code>&gt; pca &lt;- function(x, space=c(&quot;rows&quot;, &quot;columns&quot;), 
++                 center=TRUE, scale=FALSE) {
++   space &lt;- match.arg(space)
++   if(space==&quot;columns&quot;) {x &lt;- t(x)}
++   x &lt;- t(scale(t(x), center=center, scale=scale))
++   x &lt;- x/sqrt(nrow(x)-1)
++   s &lt;- svd(x)
++   loading &lt;- s$u
++   colnames(loading) &lt;- paste0(&quot;Loading&quot;, 1:ncol(loading))
++   rownames(loading) &lt;- rownames(x)
++   pc &lt;- diag(s$d) %*% t(s$v)
++   rownames(pc) &lt;- paste0(&quot;PC&quot;, 1:nrow(pc))
++   colnames(pc) &lt;- colnames(x)
++   pve &lt;- s$d^2 / sum(s$d^2)
++   if(space==&quot;columns&quot;) {pc &lt;- t(pc); loading &lt;- t(loading)}
++   return(list(pc=pc, loading=loading, pve=pve))
++ }</code></pre>
+</section><section id="how-it-works" class="slide level2">
+<h2>How It Works</h2>
+<p>Input is as follows:</p>
+<ul>
+<li><code>x</code>: a matrix of numerical values</li>
+<li><code>space</code>: either <code>&quot;rows&quot;</code> or <code>&quot;columns&quot;</code>, denoting which dimension contains the variables</li>
+<li><code>center</code>: if <code>TRUE</code> then the variables are mean centered before calculating PCs</li>
+<li><code>scale</code>: if <code>TRUE</code> then the variables are std dev scaled before calculating PCs</li>
+</ul>
+</section><section class="slide level2">
+
+<p>Output is a list with the following items:</p>
+<ul>
+<li><code>pc</code>: a matrix of all possible PCs</li>
+<li><code>loading</code>: the weights or “loadings” that determined each PC</li>
+<li><code>pve</code>: the proportion of variation explained by each PC</li>
+</ul>
+<p>Note that the rows or columns of <code>pc</code> and <code>loading</code> have names to let you know on which dimension the values are organized.</p>
+</section><section id="the-ubiquitous-example" class="slide level2">
+<h2>The Ubiquitous Example</h2>
+<p>Here’s an example very frequently encountered to explain PCA, but it’s slightly complicated.</p>
+<pre class="r"><code>&gt; set.seed(508)
+&gt; n &lt;- 70
+&gt; z &lt;- sqrt(0.8) * rnorm(n)
+&gt; x1 &lt;- z + sqrt(0.2) * rnorm(n)
+&gt; x2 &lt;- z + sqrt(0.2) * rnorm(n)
+&gt; X &lt;- rbind(x1, x2)
+&gt; p &lt;- pca(x=X, space=&quot;rows&quot;)</code></pre>
+</section><section class="slide level2">
+
+<p>“The first PC finds the direction of maximal variance in the data…”</p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>The above figure was made with the following code:</p>
+<pre class="r"><code>&gt; df &lt;- data.frame(x1=c(x1, lm(x1 ~ p$pc[1,])$fit), 
++                  x2=c(x2, lm(x2 ~ p$pc[1,])$fit), 
++                  legend=c(rep(&quot;data&quot;,n),rep(&quot;pc1_projection&quot;,n)))
+&gt; ggplot(df) + geom_point(aes(x=x1,y=x2,color=legend)) + 
++   scale_color_manual(values=c(&quot;blue&quot;, &quot;red&quot;))</code></pre>
+<p>The red dots are therefore the projection of <code>x1</code> and <code>x2</code> onto the first PC, so they are neither the loadings nor the PC.</p>
+<p>Note that</p>
+<pre><code>outer(p$loading[,1], p$pc[1,])[1,] + mean(x1) 
+# yields the same as  
+lm(x1 ~ p$pc[1,])$fit # and
+outer(p$loading[,1], p$pc[1,])[2,] + mean(x2) 
+# yields the same as 
+lm(x2 ~ p$pc[1,])$fit</code></pre>
+</section><section class="slide level2">
+
+<p>Here is PC1 vs PC2:</p>
+<pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], pc2=p$pc[2,]) %&gt;% 
++   ggplot() + geom_point(aes(x=pc1,y=pc2)) + 
++   theme(aspect.ratio=1)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Here is PC1 vs <code>x1</code>:</p>
+<pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], x1=x1) %&gt;% 
++   ggplot() + geom_point(aes(x=pc1,y=x1)) + 
++   theme(aspect.ratio=1)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Here is PC1 vs <code>x2</code>:</p>
+<pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], x2=x2) %&gt;% 
++   ggplot() + geom_point(aes(x=pc1,y=x2)) + 
++   theme(aspect.ratio=1)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Here is PC1 vs <code>z</code>:</p>
+<pre class="r"><code>&gt; data.frame(pc1=p$pc[1,], z=z) %&gt;% 
++   ggplot() + geom_point(aes(x=pc1,y=z)) + 
++   theme(aspect.ratio=1)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="pca-examples" class="titleslide slide level1"><h1>PCA Examples</h1></section><section id="weather-data" class="slide level2">
+<h2>Weather Data</h2>
+<pre class="r"><code>&gt; mypca &lt;- pca(weather_data, space=&quot;rows&quot;)
+&gt; 
+&gt; names(mypca)
+[1] &quot;pc&quot;      &quot;loading&quot; &quot;pve&quot;    
+&gt; dim(mypca$pc)
+[1] 50 50
+&gt; dim(mypca$loading)
+[1] 2811   50</code></pre>
+<pre class="r"><code>&gt; mypca$pc[1:3, 1:3]
+            11        16         18
+PC1 19.5166741 25.441401 25.9023874
+PC2 -2.6025225 -4.310673  0.9707207
+PC3 -0.6681223 -1.240748 -3.7276658
+&gt; mypca$loading[1:3, 1:3]
+                Loading1    Loading2     Loading3
+AG000060611 -0.015172744 0.013033849 -0.011273121
+AGM00060369 -0.009439176 0.016884418 -0.004611284
+AGM00060425 -0.015779138 0.007026312 -0.009907972</code></pre>
+</section><section class="slide level2">
+
+<h3 id="pc1-vs-time">PC1 vs Time</h3>
+<pre class="r"><code>&gt; day_of_the_year &lt;- as.numeric(colnames(weather_data))
+&gt; data.frame(day=day_of_the_year, PC1=mypca$pc[1,]) %&gt;%
++   ggplot() + geom_point(aes(x=day, y=PC1), size=2)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc2-vs-time">PC2 vs Time</h3>
+<pre class="r"><code>&gt; data.frame(day=day_of_the_year, PC2=mypca$pc[2,]) %&gt;%
++   ggplot() + geom_point(aes(x=day, y=PC2), size=2)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc-biplots">PC Biplots</h3>
+<p>Sometimes it is informative to plot a PC versus another PC. This is called a <strong>PC biplot</strong>.</p>
+<p>It is possible that interesting subgroups or clusters of <em>observations</em> will emerge.</p>
+<p>This does not appear to be the case in the weather data set, however, due to what we observe in the next two plots.</p>
+</section><section class="slide level2">
+
+<h3 id="pc1-vs-pc2-biplot">PC1 vs PC2 Biplot</h3>
+<pre class="r"><code>&gt; data.frame(PC1=mypca$pc[1,], PC2=mypca$pc[2,]) %&gt;%
++   ggplot() + geom_point(aes(x=PC1, y=PC2), size=2)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="proportion-of-variance-explained-1">Proportion of Variance Explained</h3>
+<pre class="r"><code>&gt; data.frame(Component=1:length(mypca$pve), PVE=mypca$pve) %&gt;%
++   ggplot() + geom_point(aes(x=Component, y=PVE), size=2)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pcs-reproduce-the-data">PCs Reproduce the Data</h3>
+<p>We can multiple the loadings matrix by the PCs matrix to reproduce the data:</p>
+<pre class="r"><code>&gt; # mean centered weather data
+&gt; weather_data_mc &lt;- weather_data - rowMeans(weather_data)
+&gt; 
+&gt; # difference between the PC projections and the data
+&gt; # the small sum is just machine imprecision
+&gt; sum(abs(weather_data_mc/sqrt(nrow(weather_data_mc)-1) - 
++           mypca$loading %*% mypca$pc))
+[1] 1.329755e-10</code></pre>
+</section><section class="slide level2">
+
+<h3 id="loadings">Loadings</h3>
+<p>The sum of squared weights – i.e., loadings – equals one for each component:</p>
+<pre class="r"><code>&gt; sum(mypca$loading[,1]^2)
+[1] 1
+&gt; 
+&gt; apply(mypca$loading, 2, function(x) {sum(x^2)})
+ Loading1  Loading2  Loading3  Loading4  Loading5  Loading6 
+        1         1         1         1         1         1 
+ Loading7  Loading8  Loading9 Loading10 Loading11 Loading12 
+        1         1         1         1         1         1 
+Loading13 Loading14 Loading15 Loading16 Loading17 Loading18 
+        1         1         1         1         1         1 
+Loading19 Loading20 Loading21 Loading22 Loading23 Loading24 
+        1         1         1         1         1         1 
+Loading25 Loading26 Loading27 Loading28 Loading29 Loading30 
+        1         1         1         1         1         1 
+Loading31 Loading32 Loading33 Loading34 Loading35 Loading36 
+        1         1         1         1         1         1 
+Loading37 Loading38 Loading39 Loading40 Loading41 Loading42 
+        1         1         1         1         1         1 
+Loading43 Loading44 Loading45 Loading46 Loading47 Loading48 
+        1         1         1         1         1         1 
+Loading49 Loading50 
+        1         1 </code></pre>
+</section><section class="slide level2">
+
+<h3 id="pairs-of-pcs-have-correlaton-zero">Pairs of PCs Have Correlaton Zero</h3>
+<p>PCs by contruction have sample correlation equal to zero:</p>
+<pre class="r"><code>&gt; cor(mypca$pc[1,], mypca$pc[2,])
+[1] 3.135149e-17
+&gt; cor(mypca$pc[1,], mypca$pc[3,])
+[1] 2.273613e-16
+&gt; cor(mypca$pc[1,], mypca$pc[12,])
+[1] -1.231339e-16
+&gt; cor(mypca$pc[5,], mypca$pc[27,])
+[1] -2.099516e-17
+&gt; # etc...</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; day_of_the_year &lt;- as.numeric(colnames(weather_data))
+&gt; y &lt;- -mypca$pc[1,] + mean(weather_data)
+&gt; data.frame(day=day_of_the_year, max_temp=y) %&gt;%
++   ggplot() + geom_point(aes(x=day, y=max_temp))</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="yeast-gene-expression" class="slide level2">
+<h2>Yeast Gene Expression</h2>
+<p>Yeast cells were synchronized so that they were on the same approximate cell cycle timing. The goal was to understand how gene expression varies over the cell cycle from a genome-wide perspective.</p>
+<pre class="r"><code>&gt; load(&quot;./data/spellman.RData&quot;)
+&gt; time
+ [1]   0  30  60  90 120 150 180 210 240 270 330 360 390
+&gt; dim(gene_expression)
+[1] 5981   13
+&gt; gene_expression[1:6,1:5]
+                  0         30         60        90        120
+YAL001C  0.69542786 -0.4143538  3.2350520 1.6323737 -2.1091820
+YAL002W -0.01210662  3.0465649  1.1062193 4.0591467 -0.1166399
+YAL003W -2.78570526 -1.0156981 -2.1387564 1.9299681  0.7797033
+YAL004W  0.55165887  0.6590093  0.5857847 0.3890409 -1.0009777
+YAL005C -0.53191556  0.1577985 -1.2401448 0.8170350 -1.3520947
+YAL007C -0.86693416 -1.1642322 -0.6359588 1.1179131  1.9587021</code></pre>
+</section><section class="slide level2">
+
+<h3 id="proportion-variance-explained">Proportion Variance Explained</h3>
+<pre class="r"><code>&gt; p &lt;- pca(gene_expression, space=&quot;rows&quot;)
+&gt; ggplot(data.frame(pc=1:13, pve=p$pve)) + 
++   geom_point(aes(x=pc,y=pve), size=2)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pcs-vs-time-with-smoothers">PCs vs Time (with Smoothers)</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="hapmap-genotypes" class="slide level2">
+<h2>HapMap Genotypes</h2>
+<p>Recall the example HapMap data used to demonstrate the MCMC algorithm for estimating structure. We curated a small data set that cleanly separates human subpopulations.</p>
+<pre class="r"><code>&gt; hapmap &lt;- read.table(&quot;./data/hapmap_sample.txt&quot;)
+&gt; dim(hapmap)
+[1] 400  24
+&gt; hapmap[1:6,1:6]
+           NA18516 NA19138 NA19137 NA19223 NA19200 NA19131
+rs2051075        0       1       2       1       1       1
+rs765546         2       2       0       0       0       0
+rs10019399       2       2       2       1       1       2
+rs7055827        2       2       1       2       0       2
+rs6943479        0       0       2       0       1       0
+rs2095381        1       2       1       2       1       1</code></pre>
+</section><section class="slide level2">
+
+<h3 id="proportion-variance-explained-1">Proportion Variance Explained</h3>
+<pre class="r"><code>&gt; p &lt;- pca(hapmap, space=&quot;rows&quot;)
+&gt; ggplot(data.frame(pc=(1:ncol(hapmap)), pve=p$pve)) + 
++   geom_point(aes(x=pc,y=pve), size=2)</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-28-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc1-vs-pc2-biplot-1">PC1 vs PC2 Biplot</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc1-vs-pc3-biplot">PC1 vs PC3 Biplot</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-30-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<h3 id="pc2-vs-pc3-biplot">PC2 vs PC3 Biplot</h3>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="hd-latent-variable-models" class="titleslide slide level1"><h1>HD Latent Variable Models</h1></section><section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p>Latent variables (or hidden variables) are random variables that are present in the underlying probabilistic model of the data, but they are unobserved.</p>
+<p>In high-dimensional data, there may be latent variables present that affect many variables simultaneously.</p>
+<p>These are latent variables that induce <strong>systematic variation</strong>. A topic of much interest is how to estimate these and incorporate them into further HD inference procedures.</p>
+</section><section id="model" class="slide level2">
+<h2>Model</h2>
+<p>Suppose we have observed data <span class="math inline">\({\boldsymbol{Y}}_{m \times n}\)</span> of <span class="math inline">\(m\)</span> variables with <span class="math inline">\(n\)</span> observations each. Suppose there are <span class="math inline">\(r\)</span> latent variables contained in the <span class="math inline">\(r\)</span> rows of <span class="math inline">\({\boldsymbol{Z}}_{r \times n}\)</span> where</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[{\boldsymbol{Y}}_{m \times n} \left. \right| {\boldsymbol{Z}}_{r \times n} \right] = {\boldsymbol{\Phi}}_{m \times r} {\boldsymbol{Z}}_{r \times n}.
+\]</span></p>
+<p>Let’s also assume that <span class="math inline">\(m \gg n &gt; r\)</span>. The latent variables <span class="math inline">\({\boldsymbol{Z}}\)</span> induce systematic variation in variable <span class="math inline">\({\boldsymbol{y}}_i\)</span> parameterized by <span class="math inline">\({\boldsymbol{\phi}}_i\)</span> for <span class="math inline">\(i = 1, 2, \ldots, m\)</span>.</p>
+</section><section id="estimation" class="slide level2">
+<h2>Estimation</h2>
+<p>There exist methods for estimating the row space of <span class="math inline">\({\boldsymbol{Z}}\)</span> with probability 1 as <span class="math inline">\(m \rightarrow \infty\)</span> for a fixed <span class="math inline">\(n\)</span> in two scenarios.</p>
+<p><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0420.2010.01455.x/abstract">Leek (2011)</a> shows how to do this when <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\sim \text{MVN}({\boldsymbol{\phi}}_i {\boldsymbol{Z}}, \sigma^2_i {\boldsymbol{I}})\)</span>, and the <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\)</span> are jointly independent.</p>
+<p><a href="https://arxiv.org/abs/1510.03497">Chen and Storey (2015)</a> show how to do this when the <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\)</span> are distributed according to a single parameter exponential family distribution with mean <span class="math inline">\({\boldsymbol{\phi}}_i {\boldsymbol{Z}}\)</span>, and the <span class="math inline">\({\boldsymbol{y}}_i | {\boldsymbol{Z}}\)</span> are jointly independent.</p>
+</section><section id="jackstraw" class="slide level2">
+<h2>Jackstraw</h2>
+<p>Suppose we have a reasonable method for estimating <span class="math inline">\({\boldsymbol{Z}}\)</span> in the model</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[{\boldsymbol{Y}}\left. \right| {\boldsymbol{Z}}\right] = {\boldsymbol{\Phi}}{\boldsymbol{Z}}.
+\]</span></p>
+<p>The <strong>jackstraw</strong> method allows us to perform hypothesis tests of the form</p>
+<p><span class="math display">\[
+H_0: {\boldsymbol{\phi}}_i = {\boldsymbol{0}}\mbox{ vs } H_1: {\boldsymbol{\phi}}_i \not= {\boldsymbol{0}}.
+\]</span></p>
+<p>We can also perform this hypothesis test on any subset of the columns of <span class="math inline">\({\boldsymbol{\Phi}}\)</span>.</p>
+<p>This is a challening problem because we have to “double dip” in the data <span class="math inline">\({\boldsymbol{Y}}\)</span>, first to estimate <span class="math inline">\({\boldsymbol{Z}}\)</span>, and second to perform significance tests on <span class="math inline">\({\boldsymbol{\Phi}}\)</span>.</p>
+</section><section id="procedure" class="slide level2">
+<h2>Procedure</h2>
+<p>The first step is to form estimate <span class="math inline">\(\hat{{\boldsymbol{Z}}}\)</span> and then test statistic <span class="math inline">\(t_i\)</span> that performs the hypothesis test for each <span class="math inline">\({\boldsymbol{\phi}}_i\)</span> from <span class="math inline">\({\boldsymbol{y}}_i\)</span> and <span class="math inline">\(\hat{{\boldsymbol{Z}}}\)</span> (<span class="math inline">\(i=1, \ldots, m\)</span>). Assume that the larger <span class="math inline">\(t_i\)</span> is, the more evidence there is against the null hypothesis in favor of the alternative.</p>
+<p>Next we randomly select <span class="math inline">\(s\)</span> rows of <span class="math inline">\({\boldsymbol{Y}}\)</span> and permute them to create data set <span class="math inline">\({\boldsymbol{Y}}^{0}\)</span>. Let this set of <span class="math inline">\(s\)</span> variables be indexed by <span class="math inline">\(\mathcal{S}\)</span>. This breaks the relationship between <span class="math inline">\({\boldsymbol{y}}_i\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span>, thereby inducing a true <span class="math inline">\(H_0\)</span>, for each <span class="math inline">\(i \in \mathcal{S}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>We estimate <span class="math inline">\(\hat{{\boldsymbol{Z}}}^{0}\)</span> from <span class="math inline">\({\boldsymbol{Y}}^{0}\)</span> and again obtain test statistics <span class="math inline">\(t_i^{0}\)</span>. Specifically, the test statistics <span class="math inline">\(t_i^{0}\)</span> for <span class="math inline">\(i \in \mathcal{S}\)</span> are saved as draws from the null distribution.</p>
+<p>We repeat permutation procedure <span class="math inline">\(B\)</span> times, and then utilize all saved <span class="math inline">\(sB\)</span> permutation null statistics to calculate empirical p-values:</p>
+<p><span class="math display">\[
+p_i = \frac{1}{sB} \sum_{b=1}^B \sum_{k \in \mathcal{S}_b} 1\left(t_i \geq  t_k^{0b} \right).
+\]</span></p>
+</section><section id="example-yeast-cell-cycle" class="slide level2">
+<h2>Example: Yeast Cell Cycle</h2>
+<p>Recall the yeast cell cycle data from earlier. We will test which genes have expression significantly associated with PC1 and PC2 since these both capture cell cycle regulation.</p>
+<pre class="r"><code>&gt; library(jackstraw)
+&gt; load(&quot;./data/spellman.RData&quot;)
+&gt; time
+ [1]   0  30  60  90 120 150 180 210 240 270 330 360 390
+&gt; dim(gene_expression)
+[1] 5981   13
+&gt; dat &lt;- t(scale(t(gene_expression), center=TRUE, scale=FALSE))</code></pre>
+</section><section class="slide level2">
+
+<p style="font-size: 0.75em;">
+Test for associations between PC1 and each gene, conditioning on PC1 and PC2 being relevant sources of systematic variation.
+</p>
+<pre class="r"><code>&gt; jsobj &lt;- jackstraw(dat, r1=1, r=2, B=500, s=50, verbose=FALSE)
+&gt; jsobj$p.value %&gt;% qvalue() %&gt;% hist()</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>This is the most significant gene plotted with PC1.</p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p style="font-size: 0.75em;">
+Test for associations between PC2 and each gene, conditioning on PC1 and PC2 being relevant sources of systematic variation.
+</p>
+<pre class="r"><code>&gt; jsobj &lt;- jackstraw(dat, r1=2, r=2, B=500, s=50, verbose=FALSE)
+&gt; jsobj$p.value %&gt;% qvalue() %&gt;% hist()</code></pre>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-35-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>This is the most significant gene plotted with PC2.</p>
+<p><img src="week12_files/figure-revealjs/unnamed-chunk-36-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="surrogate-variable-analysis" class="slide level2">
+<h2>Surrogate Variable Analysis</h2>
+<p>The <strong>surrogate variable analysis</strong> (SVA) model combines the many responses model with the latent variable model introduced above:</p>
+<p><span class="math display">\[
+{\boldsymbol{Y}}_{m \times n} = {\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n} + {\boldsymbol{\Phi}}_{m \times r} {\boldsymbol{Z}}_{r \times n} + {\boldsymbol{E}}_{m \times n}
+\]</span></p>
+<p>where <span class="math inline">\(m \gg n &gt; d + r\)</span>.</p>
+<p>Here, only <span class="math inline">\({\boldsymbol{Y}}\)</span> and <span class="math inline">\({\boldsymbol{X}}\)</span> are observed, so we must combine many regressors model fitting techniques with latent variable estimation.</p>
+<p>The variables <span class="math inline">\({\boldsymbol{Z}}\)</span> are called <strong>surrogate variables</strong> for what would be a complete model of all systematic variation.</p>
+</section><section id="procedure-1" class="slide level2">
+<h2>Procedure</h2>
+<p>The main challenge is that the row spaces of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span> may overlap. Even when <span class="math inline">\({\boldsymbol{X}}\)</span> is the result of a randomized experiment, there will be a high probability that the row spaces of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span> have some overlap.</p>
+<p>Therefore, one cannot simply estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> by applying a latent variable esitmation method on the residuals <span class="math inline">\({\boldsymbol{Y}}- \hat{{\boldsymbol{B}}} {\boldsymbol{X}}\)</span> or on the observed response data <span class="math inline">\({\boldsymbol{Y}}\)</span>. In the former case, we will only estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> in the space orthogonal to <span class="math inline">\(\hat{{\boldsymbol{B}}} {\boldsymbol{X}}\)</span>. In the latter case, the estimate of <span class="math inline">\({\boldsymbol{Z}}\)</span> may modify the signal we can estimate in <span class="math inline">\({\boldsymbol{B}}{\boldsymbol{X}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>A <a href="http://dx.doi.org/10.1080/01621459.2011.645777">recent method</a>, takes an EM approach to esitmating <span class="math inline">\({\boldsymbol{Z}}\)</span> in the model</p>
+<p><span class="math display">\[
+{\boldsymbol{Y}}_{m \times n} = {\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n} + {\boldsymbol{\Phi}}_{m \times r} {\boldsymbol{Z}}_{r \times n} + {\boldsymbol{E}}_{m \times n}.
+\]</span></p>
+<p>It is shown to be necessary to penalize the likelihood in the estimation of <span class="math inline">\({\boldsymbol{B}}\)</span> — i.e., form shrinkage estimates of <span class="math inline">\({\boldsymbol{B}}\)</span> — in order to properly balance the row spaces of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{Z}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The regularized EM algorithm, called <strong>cross-dimensonal inference</strong> (CDI) iterates between</p>
+<ol type="1">
+<li>Estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> from <span class="math inline">\({\boldsymbol{Y}}- \hat{{\boldsymbol{B}}}^{\text{Reg}} {\boldsymbol{X}}\)</span></li>
+<li>Estimate <span class="math inline">\({\boldsymbol{B}}\)</span> from <span class="math inline">\({\boldsymbol{Y}}- \hat{{\boldsymbol{\Phi}}} \hat{{\boldsymbol{Z}}}\)</span></li>
+</ol>
+<p>where <span class="math inline">\(\hat{{\boldsymbol{B}}}^{\text{Reg}}\)</span> is a regularized or shrunken estimate of <span class="math inline">\({\boldsymbol{B}}\)</span>.</p>
+<p>It can be shown that when the regularization can be represented by a prior distribution on <span class="math inline">\({\boldsymbol{B}}\)</span> then this algorithm achieves the MAP.</p>
+</section><section id="example-kidney-expr-by-age" class="slide level2">
+<h2>Example: Kidney Expr by Age</h2>
+<p>In <a href="http://www.pnas.org/content/102/36/12837.full">Storey et al. (2005)</a>, we considered a study where kidney samples were obtained on individuals across a range of ages. The goal was to identify genes with expression associated with age.</p>
+<pre class="r"><code>&gt; library(edge)
+&gt; library(splines)
+&gt; load(&quot;./data/kidney.RData&quot;)
+&gt; age &lt;- kidcov$age
+&gt; sex &lt;- kidcov$sex
+&gt; dim(kidexpr)
+[1] 34061    72
+&gt; cov &lt;- data.frame(sex = sex, age = age)
+&gt; null_model &lt;- ~sex
+&gt; full_model &lt;- ~sex + ns(age, df = 3)</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; de_obj &lt;- build_models(data = kidexpr, cov = cov, 
++                        null.model = null_model, 
++                        full.model = full_model)
+&gt; de_lrt &lt;- lrt(de_obj, nullDistn = &quot;bootstrap&quot;, bs.its = 100, verbose=FALSE)
+&gt; qobj1 &lt;- qvalueObj(de_lrt)
+&gt; hist(qobj1)</code></pre>
+<p><img src="week12_files/figure-revealjs/kid_lrt-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Now that we have completed a standard generalized LRT, let’s estimate <span class="math inline">\({\boldsymbol{Z}}\)</span> (the surrogate variables) using the <code>sva</code> package as accessed via the <code>edge</code> package.</p>
+<pre class="r"><code>&gt; dim(nullMatrix(de_obj))
+[1] 72  2
+&gt; de_sva &lt;- apply_sva(de_obj, n.sv=4, method=&quot;irw&quot;, B=10)
+Number of significant surrogate variables is:  4 
+Iteration (out of 10 ):1  2  3  4  5  6  7  8  9  10  
+&gt; dim(nullMatrix(de_sva))
+[1] 72  6
+&gt; de_svalrt &lt;- lrt(de_sva, nullDistn = &quot;bootstrap&quot;, bs.its = 100, verbose=FALSE)</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qobj2 &lt;- qvalueObj(de_svalrt)
+&gt; hist(qobj2)</code></pre>
+<p><img src="week12_files/figure-revealjs/kid_svaq-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; summary(qobj1)
+
+Call:
+qvalue(p = pval)
+
+pi0:    0.7939407   
+
+Cumulative number of significant calls:
+
+          &lt;1e-04 &lt;0.001 &lt;0.01 &lt;0.025 &lt;0.05 &lt;0.1    &lt;1
+p-value       26    145   798   1709  2966 5392 34061
+q-value        0      0     2      3     8   26 34061
+local FDR      0      0     2      2     2   12 34061</code></pre>
+<pre class="r"><code>&gt; summary(qobj2)
+
+Call:
+qvalue(p = pval)
+
+pi0:    0.698907    
+
+Cumulative number of significant calls:
+
+          &lt;1e-04 &lt;0.001 &lt;0.01 &lt;0.025 &lt;0.05 &lt;0.1    &lt;1
+p-value       28    158  1014   2067  3555 6141 34061
+q-value        0      0     0      3     6   47 34061
+local FDR      0      0     0      1     4   29 34054</code></pre>
+</section><section class="slide level2">
+
+<p>P-values from two analyses are fairly different.</p>
+<pre class="r"><code>&gt; data.frame(lrt=-log10(qobj1$pval), sva=-log10(qobj2$pval)) %&gt;% 
++   ggplot() + geom_point(aes(x=lrt, y=sva), alpha=0.3) + geom_abline()</code></pre>
+<p><img src="week12_files/figure-revealjs/pval_comp-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h2>Source</h2>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h2>Session Information</h2>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.4
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] splines   parallel  stats     graphics  grDevices utils    
+[7] datasets  methods   base     
+
+other attached packages:
+ [1] edge_2.6.0          Biobase_2.34.0     
+ [3] BiocGenerics_0.20.0 jackstraw_1.1      
+ [5] qvalue_2.1.1        MASS_7.3-47        
+ [7] broom_0.4.2         dplyr_0.5.0        
+ [9] purrr_0.2.2         readr_1.1.0        
+[11] tidyr_0.6.2         tibble_1.3.0       
+[13] ggplot2_2.2.1       tidyverse_1.1.1    
+[15] knitr_1.15.1        magrittr_1.5       
+[17] devtools_1.12.0    
+
+loaded via a namespace (and not attached):
+ [1] httr_1.2.1           jsonlite_1.4        
+ [3] modelr_0.1.0         assertthat_0.2.0    
+ [5] highr_0.6            stats4_3.3.2        
+ [7] cellranger_1.1.0     yaml_2.1.14         
+ [9] RSQLite_1.1-2        backports_1.0.5     
+[11] lattice_0.20-35      digest_0.6.12       
+[13] rvest_0.3.2          minqa_1.2.4         
+[15] colorspace_1.3-2     htmltools_0.3.6     
+[17] Matrix_1.2-10        plyr_1.8.4          
+[19] psych_1.7.5          XML_3.98-1.7        
+[21] haven_1.0.0          genefilter_1.56.0   
+[23] xtable_1.8-2         revealjs_0.9        
+[25] corpcor_1.6.9        scales_0.4.1        
+[27] lme4_1.1-13          annotate_1.52.1     
+[29] mgcv_1.8-17          IRanges_2.8.2       
+[31] withr_1.0.2          lazyeval_0.2.0      
+[33] mnormt_1.5-5         survival_2.41-3     
+[35] snm_1.22.0           readxl_1.0.0        
+[37] memoise_1.1.0        evaluate_0.10       
+[39] nlme_3.1-131         forcats_0.2.0       
+[41] xml2_1.1.1           foreign_0.8-68      
+[43] tools_3.3.2          hms_0.3             
+[45] stringr_1.2.0        S4Vectors_0.12.2    
+[47] lfa_1.4.0            munsell_0.4.3       
+[49] AnnotationDbi_1.36.2 grid_3.3.2          
+[51] RCurl_1.95-4.8       nloptr_1.0.4        
+[53] bitops_1.0-6         labeling_0.3        
+[55] rmarkdown_1.5        codetools_0.2-15    
+[57] gtable_0.2.0         DBI_0.6-1           
+[59] reshape2_1.4.2       R6_2.2.0            
+[61] lubridate_1.6.0      rprojroot_1.2       
+[63] stringi_1.1.5        sva_3.22.0          
+[65] Rcpp_0.12.10        </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

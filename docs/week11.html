@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 11</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="customization/custom.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 11</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="high-dimensional-inference" class="titleslide slide level1"><h1>High-Dimensional Inference</h1></section><section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p><strong>High-dimesional inference</strong> is the scenario where we perform inference simultaneously on “many” paramaters.</p>
+<p>“Many” can be as few as three parameters (which is where things start to get interesting), but in modern applications this is typically on the order of thousands to billions of paramaters.</p>
+<p><strong>High-dimesional data</strong> is a data set where the number of variables measured is many.</p>
+</section><section class="slide level2">
+
+<p><strong>Large same size</strong> data is a data set where few variables are measured, but many observations are measured.</p>
+<p><strong>Big data</strong> is a data set where there are so many data points that it cannot be managed straightforwardly in memory, but must rather be stored and accessed elsewhere. Big data can be high-dimensional, large sample size, or both.</p>
+<p>We will abbreviate high-dimensional with <strong>HD</strong>.</p>
+</section><section id="examples" class="slide level2">
+<h2>Examples</h2>
+<p>In all of these examples, many measurements are taken and the goal is often to perform inference on many paramaters simultaneously.</p>
+<ul>
+<li>Spatial epidemiology</li>
+<li>Environmental monitoring</li>
+<li>Internet user behavior</li>
+<li>Genomic profiling</li>
+<li>Neuroscience imaging</li>
+<li>Financial time series</li>
+</ul>
+</section><section id="hd-gene-expression-data" class="slide level2">
+<h2>HD Gene Expression Data</h2>
+<div id="left">
+<center>
+<img src="images/rna_sequencing.png" alt="Gene Expression" />
+</center>
+</div>
+<div id="right">
+<p>It’s possible to measure the level of gene expression – how much mRNA is being transcribed – from thousands of cell simultaneously in a single biological sample.</p>
+</div>
+</section><section class="slide level2">
+
+<p>Typically, gene expression is measured over varying biological conditions, and the goal is to perform inference on the relationship between expression and the varying conditions.</p>
+<p>This results in thousands of simultaneous inferences.</p>
+<p>The typical sizes of these data sets are 1000 to 50,000 genes and 10 to 1000 observations.</p>
+<p>The gene expression values are typically modeled as approximately Normal or overdispersed Poisson.</p>
+<p>There is usually shared signal among the genes, and there are often unobserved latent variables.</p>
+</section><section class="slide level2">
+
+<div id="left">
+<p><span style="font-size:0.75em; line-height:0%"> <span class="math display">\[
+\begin{array}{rc}
+&amp; {\boldsymbol{Y}}_{m \times n} \\
+&amp; \text{observations} \\
+\text{genes} &amp;
+\begin{bmatrix}
+    y_{11} &amp; y_{12} &amp; \cdots &amp; y_{1n} \\
+    y_{21} &amp; y_{22} &amp; \cdots &amp; y_{2n} \\
+     &amp; &amp; &amp; \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+     &amp; &amp; &amp; \\
+    y_{m1} &amp; y_{m2} &amp; \cdots &amp; y_{mn}
+\end{bmatrix} \\
+&amp; \\
+&amp; {\boldsymbol{X}}_{d \times n} \ \text{study design} \\
+&amp; 
+\begin{bmatrix}
+    x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    x_{d1} &amp; x_{d2} &amp; \cdots &amp; x_{dn}
+\end{bmatrix}
+\end{array}
+\]</span> </span></p>
+</div>
+<div id="right">
+<p> </p>
+<p>The <span class="math inline">\({\boldsymbol{Y}}\)</span> matrix contains gene expression measurements for <span class="math inline">\(m\)</span> genes (rows) by <span class="math inline">\(n\)</span> observations (columns). The values <span class="math inline">\(y_{ij}\)</span> are either in <span class="math inline">\(\mathbb{R}\)</span> or <span class="math inline">\(\mathbb{Z}^{+} = \{0, 1, 2, \ldots \}\)</span>.</p>
+<p>The <span class="math inline">\({\boldsymbol{X}}\)</span> matrix contains the study design of <span class="math inline">\(d\)</span> explanatory variables (rows) by the <span class="math inline">\(n\)</span> observations (columns).</p>
+<p>Note that <span class="math inline">\(m \gg n \gg d\)</span>.</p>
+</div>
+</section><section id="many-responses-model" class="slide level2">
+<h2>Many Responses Model</h2>
+<p>Gene expression is an example of what I call the <strong>many responses model</strong>.</p>
+<p>We’re interested in performing simultaneous inference on <span class="math inline">\(d\)</span> paramaters for each of <span class="math inline">\(m\)</span> models such as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; {\boldsymbol{Y}}_{1} = {\boldsymbol{\beta}}_1 {\boldsymbol{X}}+ {\boldsymbol{E}}_1 \\
+&amp; {\boldsymbol{Y}}_{2} = {\boldsymbol{\beta}}_2 {\boldsymbol{X}}+ {\boldsymbol{E}}_2 \\
+&amp; \vdots \\
+&amp; {\boldsymbol{Y}}_{m} = {\boldsymbol{\beta}}_m {\boldsymbol{X}}+ {\boldsymbol{E}}_m \\
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>For example, <span class="math inline">\({\boldsymbol{Y}}_{1} = {\boldsymbol{\beta}}_1 {\boldsymbol{X}}+ {\boldsymbol{E}}_1\)</span> is vector notation of (in terms of observations <span class="math inline">\(j\)</span>):</p>
+<p><span class="math display">\[
+\left\{ Y_{1j} = \beta_{11} X_{1j} + \beta_{12} X_{2j}  + \cdots + \beta_{1d} X_{dj}  + E_{1j} \right\}_{j=1}^n
+\]</span></p>
+<p>We have made two changes from last week:</p>
+<ol type="1">
+<li>We have transposed <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</li>
+<li>We have changed the number of explanatory variables from <span class="math inline">\(p\)</span> to <span class="math inline">\(d\)</span>.</li>
+</ol>
+</section><section class="slide level2">
+
+<p>Let <span class="math inline">\({\boldsymbol{B}}_{m \times d}\)</span> be the matrix of parameters <span class="math inline">\((\beta_{ik})\)</span> relating the <span class="math inline">\(m\)</span> response variables to the <span class="math inline">\(d\)</span> explanatory variables. The full HD model is</p>
+<p><span style="font-size:0.65em; line-height:0%"> <span class="math display">\[
+\begin{array}{cccccc}
+{\boldsymbol{Y}}_{m \times n}  &amp; = &amp; {\boldsymbol{B}}_{m \times d} &amp; {\boldsymbol{X}}_{d \times n} &amp; + &amp; {\boldsymbol{E}}_{m \times n} \\
+\begin{bmatrix}
+ &amp; &amp; \\
+ &amp; &amp; \\
+ &amp; &amp; \\
+ Y_{i1} &amp; \cdots &amp; Y_{in}\\
+ &amp; &amp; \\
+ &amp; &amp; \\
+ &amp; &amp; \\
+\end{bmatrix} &amp; 
+= &amp; 
+\begin{bmatrix}
+ &amp; \\
+ &amp; \\
+ &amp; \\
+ \beta_{i1} &amp; \beta_{id} \\
+ &amp; \\
+ &amp; \\
+ &amp; \\
+\end{bmatrix} &amp; 
+\begin{bmatrix}
+X_{11} &amp; \cdots &amp; X_{1n} \\
+X_{d1} &amp; \cdots &amp; X_{dn} \\
+\end{bmatrix} &amp; 
++ &amp; 
+\begin{bmatrix}
+ &amp; &amp; \\
+ &amp; &amp; \\
+ &amp; &amp; \\
+ E_{i1} &amp; \cdots &amp; E_{in} \\
+ &amp; &amp; \\
+ &amp; &amp; \\
+ &amp; &amp; \\
+\end{bmatrix} 
+\end{array}
+\]</span> </span></p>
+</section><section class="slide level2">
+
+<p>Note that if we make OLS assumptions, then we can calculate:</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{B}}}^{\text{OLS}} = {\boldsymbol{Y}}{\boldsymbol{X}}^T ({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}
+\]</span></p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{Y}}} = \hat{{\boldsymbol{B}}} {\boldsymbol{X}}= {\boldsymbol{Y}}{\boldsymbol{X}}^T ({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1} {\boldsymbol{X}}\]</span></p>
+<p>so here the projection matrix is <span class="math inline">\({\boldsymbol{P}}= {\boldsymbol{X}}^T ({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1} {\boldsymbol{X}}\)</span> and acts from the RHS, <span class="math inline">\(\hat{{\boldsymbol{Y}}} = {\boldsymbol{Y}}{\boldsymbol{P}}\)</span>.</p>
+<p>We will see this week and next that <span class="math inline">\(\hat{{\boldsymbol{B}}}^{\text{OLS}}\)</span> has nontrivial drawbacks. Thefore, we will be exploring other ways of estimating <span class="math inline">\({\boldsymbol{B}}\)</span>.</p>
+</section><section class="slide level2">
+
+<p>We of course aren’t limited to OLS models. We could consider the many response GLM:</p>
+<p><span class="math display">\[
+g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}_{m \times n} \right| {\boldsymbol{X}}\right]\right) = {\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n}
+\]</span></p>
+<p>and we could even replace <span class="math inline">\({\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n}\)</span> with <span class="math inline">\(d\)</span> smoothers for each of the <span class="math inline">\(m\)</span> response variable.</p>
+</section><section id="hd-snp-data" class="slide level2">
+<h2>HD SNP Data</h2>
+<div id="left">
+<center>
+<img src="images/snp_dna.png" alt="SNPs" />
+</center>
+</div>
+<div id="right">
+<p>It is possible to measure single nucleotide polymorphisms at millions of locations across the genome.</p>
+<p>The base (A, C, G, or T) is measured from one of the strands.</p>
+<p>For example, on the figure to the left, the individual is heterozygous CT at this SNP location.</p>
+</div>
+</section><section class="slide level2">
+
+<div id="left">
+<p><span style="font-size:0.75em; line-height:0%"> <span class="math display">\[
+\begin{array}{rc}
+&amp; {\boldsymbol{X}}_{m \times n} \\
+&amp; \text{individuals} \\
+\text{SNPs} &amp;
+\begin{bmatrix}
+    x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n} \\
+    x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2n} \\
+     &amp; &amp; &amp; \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+     &amp; &amp; &amp; \\
+    x_{m1} &amp; x_{m2} &amp; \cdots &amp; x_{mn}
+\end{bmatrix} \\
+&amp; \\
+&amp; {\boldsymbol{y}}_{1 \times n} \ \text{trait} \\
+&amp; 
+\begin{bmatrix}
+    y_{11} &amp; y_{12} &amp; \cdots &amp; y_{1n} 
+\end{bmatrix}
+\end{array}
+\]</span> </span></p>
+</div>
+<div id="right">
+<p>The <span class="math inline">\({\boldsymbol{X}}\)</span> matrix contains SNP genotypes for <span class="math inline">\(m\)</span> SNPs (rows) by <span class="math inline">\(n\)</span> individuals (columns). The values <span class="math inline">\(x_{ij} \in \{0, 1, 2\}\)</span> are conversions of genotypes (e.g., CC, CT, TT) to counts of one of the alleles.</p>
+<p>The <span class="math inline">\({\boldsymbol{y}}\)</span> vector contains the trait values of the <span class="math inline">\(n\)</span> individuals.</p>
+<p>Note that <span class="math inline">\(m \gg n\)</span>.</p>
+</div>
+</section><section id="many-regressors-model" class="slide level2">
+<h2>Many Regressors Model</h2>
+<p>The SNP-trait model is an example of what I call the <strong>many regressors model</strong>. A single model is fit of a response variable on many regressors (i.e., explanatory variables) simultaneously.</p>
+<p>This involves simultaneously inferring <span class="math inline">\(m\)</span> paramaters <span class="math inline">\({\boldsymbol{\beta}}= (\beta_1, \beta_2, \ldots, \beta_m)\)</span> in models such as:</p>
+<p><span class="math display">\[
+{\boldsymbol{Y}}= \alpha \boldsymbol{1} + {\boldsymbol{\beta}}{\boldsymbol{X}}+ {\boldsymbol{E}}\]</span></p>
+<p>which is an <span class="math inline">\(n\)</span>-vector with component <span class="math inline">\(j\)</span> being:</p>
+<p><span class="math display">\[
+Y_j = \alpha + \sum_{i=1}^m \beta_i X_{ij} + E_{j}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>As with the many responses model, we do not need to limit the model to the OLS type where the response variable is approximately Normal distributed. Instead we can consider more general models such as</p>
+<p><span class="math display">\[
+g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}\right| {\boldsymbol{X}}\right]\right) = \alpha \boldsymbol{1} + {\boldsymbol{\beta}}{\boldsymbol{X}}\]</span></p>
+<p>for some link function <span class="math inline">\(g(\cdot)\)</span>.</p>
+</section><section id="goals" class="slide level2">
+<h2>Goals</h2>
+<p>In both types of models we are interested in:</p>
+<ul>
+<li>Forming point estimates</li>
+<li>Testing statistical hypothesis</li>
+<li>Calculating posterior distributions</li>
+<li>Leveraging the HD data to increase our power and accuracy</li>
+</ul>
+<p>Sometimes we are also interested in confidence intervals in high dimensions, but this is less common.</p>
+</section><section id="challenges" class="slide level2">
+<h2>Challenges</h2>
+<p>Here are several of the new challenges we face when analyzing high-dimensional data:</p>
+<ul>
+<li>Standard estimation methods may be suboptimal in high dimensions</li>
+<li>New measures of significance are needed</li>
+<li>There may be dependence and latent variables among the high-dimensional variables</li>
+<li>The fact that <span class="math inline">\(m \gg n\)</span> poses challenges, especially in the many regressors model</li>
+</ul>
+<p>HD data provide new challenges, but they also provide opportunities to model variation in the data in ways not possible for low-dimensional data.</p>
+</section></section>
+<section><section id="many-responses-model-1" class="titleslide slide level1"><h1>Many Responses Model</h1></section></section>
+<section><section id="shrinkage-and-empirical-bayes" class="titleslide slide level1"><h1>Shrinkage and Empirical Bayes</h1></section><section id="estimating-several-means" class="slide level2">
+<h2>Estimating Several Means</h2>
+<p>Let’s start with the simplest <em>many responses model</em> where there is only an interncept and only one observation per variable. This means that <span class="math inline">\(n=1\)</span> and <span class="math inline">\(d=1\)</span> where <span class="math inline">\({\boldsymbol{X}}= 1\)</span>.</p>
+<p>This model can be written as <span class="math inline">\(Y_i \sim \mbox{Normal}(\beta_i, 1)\)</span> for the <span class="math inline">\(i=1, 2, \ldots, m\)</span> response variables. Suppose also that <span class="math inline">\(Y_1, Y_2, \ldots, Y_m\)</span> are jointly independent.</p>
+<p>Let’s assume that <span class="math inline">\(\beta_1, \beta_2, \ldots, \beta_m\)</span> are <em>fixed, nonrandom parameters</em>.</p>
+</section><section id="usual-mle" class="slide level2">
+<h2>Usual MLE</h2>
+<p>The usual estimates of <span class="math inline">\(\beta_i\)</span> are to set</p>
+<p><span class="math display">\[
+\hat{\beta}_i^{\text{MLE}} = {\boldsymbol{Y}}_i.
+\]</span></p>
+<p>This is also the OLS solution.</p>
+</section><section id="loss-function" class="slide level2">
+<h2>Loss Function</h2>
+<p>Suppose we are interested in the simultaneous loss function</p>
+<p><span class="math display">\[
+L({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}) = \sum_{i=1} (\beta_i - \hat{\beta}_i)^2
+\]</span></p>
+<p>with risk <span class="math inline">\(R({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}) = {\operatorname{E}}[L({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}})]\)</span>.</p>
+</section><section id="steins-paradox" class="slide level2">
+<h2>Stein’s Paradox</h2>
+<p>Consider the following <strong>James-Stein estimator</strong>:</p>
+<p><span class="math display">\[
+\hat{\beta}_i^{\text{JS}} = \left(1 - \frac{m-2}{\sum_{k=1}^m Y_k^2} \right) Y_i.
+\]</span></p>
+<p>In a shocking result called <strong>Stein’s paradox</strong>, it was shown that when <span class="math inline">\(m \geq 3\)</span> then</p>
+<p><span class="math display">\[
+R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{JS}}\right) &lt; R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{MLE}}\right).
+\]</span></p>
+<p>This means that the usual MLE is dominated by this JS estimator for any, even nonrandom, configuration of <span class="math inline">\(\beta_1, \beta_2, \ldots, \beta_m\)</span>!</p>
+</section><section class="slide level2">
+
+<p>What is going on?</p>
+<p>Let’s first take a <em>linear regression</em> point of view to better understand this paradox.</p>
+<p>Then we will return to the <em>empirical Bayes</em> example from earlier.</p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; beta &lt;- seq(-1, 1, length.out=50)
+&gt; y &lt;- beta + rnorm(length(beta))</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>The blue line is the least squares regression line.</p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; beta &lt;- seq(-10, 10, length.out=50)
+&gt; y &lt;- beta + rnorm(length(beta))</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>The blue line is the least squares regression line.</p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="inverse-regression-approach" class="slide level2">
+<h2>Inverse Regression Approach</h2>
+<p>While <span class="math inline">\(Y_i = \beta_i + E_i\)</span> where <span class="math inline">\(E_i \sim \mbox{Normal}(0,1)\)</span>, it is also the case that <span class="math inline">\(\beta_i = Y_i - E_i\)</span> where <span class="math inline">\(-E_i \sim \mbox{Normal}(0,1)\)</span>.</p>
+<p>Even though we’re assuming the <span class="math inline">\(\beta_i\)</span> are fixed, suppose we imagine for the moment that the <span class="math inline">\(\beta_i\)</span> are random and take a least squares appraoch. We will try to estimate the linear model</p>
+<p><span class="math display">\[
+{\operatorname{E}}[\beta_i | Y_i] = a + b Y_i.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Why would we do this? The loss function is</p>
+<p><span class="math display">\[
+\sum_{i=1}^m (\beta_i - \hat{\beta}_i)^2
+\]</span></p>
+<p>so it makes sense to estimate <span class="math inline">\(\beta_i\)</span> by setting <span class="math inline">\(\hat{\beta}_i\)</span> to a regression line.</p>
+</section><section class="slide level2">
+
+<p>The least squares solution tells us to set</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\beta}_i &amp; = \hat{a} + \hat{b} Y_i \\
+&amp; = (\bar{\beta} - \hat{b} \bar{Y}) + \hat{b} Y_i \\
+&amp; = \bar{\beta} + \hat{b} (Y_i - \bar{Y})
+\end{aligned}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\hat{b} = \frac{\sum_{i=1}^m (Y_i - \bar{Y})(\beta_i - \bar{\beta})}{\sum_{i=1}^m (Y_i - \bar{Y})^2}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>We can estimate <span class="math inline">\(\bar{\beta}\)</span> with <span class="math inline">\(\bar{Y}\)</span> since <span class="math inline">\({\operatorname{E}}[\bar{\beta}] = {\operatorname{E}}[\bar{Y}]\)</span>.</p>
+<p>We also need to find an estimate of <span class="math inline">\(\sum_{i=1}^m (Y_i - \bar{Y})(\beta_i - \bar{\beta})\)</span>. Note that</p>
+<p><span class="math display">\[
+\beta_i - \bar{\beta} = Y_i - \bar{Y} - (E_i + \bar{E}) 
+\]</span></p>
+<p>so that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^m (Y_i - \bar{Y})(\beta_i - \bar{\beta}) = &amp; \sum_{i=1}^m (Y_i - \bar{Y})(Y_i - \bar{Y}) \\
+&amp; + \sum_{i=1}^m (Y_i - \bar{Y})(E_i - \bar{E})
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Since <span class="math inline">\(Y_i = \beta_i + E_i\)</span> it follows that</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[\sum_{i=1}^m (Y_i - \bar{Y})(E_i - \bar{E})\right] = {\operatorname{E}}\left[\sum_{i=1}^m (E_i - \bar{E})(E_i - \bar{E})\right] = m-1.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[\sum_{i=1}^m (Y_i - \bar{Y})(\beta_i - \bar{\beta})\right] = {\operatorname{E}}\left[\sum_{i=1}^m (Y_i - \bar{Y})^2 - (m-1)\right].
+\]</span></p>
+</section><section class="slide level2">
+
+<p>This yields</p>
+<p><span class="math display">\[
+\hat{b} = \frac{\sum_{i=1}^m (Y_i - \bar{Y})^2 - (m-1)}{\sum_{i=1}^m (Y_i - \bar{Y})^2} = 1 - \frac{m-1}{\sum_{i=1}^m (Y_i - \bar{Y})^2}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\hat{\beta}_i^{\text{IR}} = \bar{Y} + \left(1 - \frac{m-1}{\sum_{i=1}^m (Y_i - \bar{Y})^2}\right) (Y_i - \bar{Y})
+\]</span></p>
+</section><section class="slide level2">
+
+<p>If instead we had started with the no intercept model</p>
+<p><span class="math display">\[
+{\operatorname{E}}[\beta_i | Y_i] = b Y_i.
+\]</span></p>
+<p>we would have ended up with</p>
+<p><span class="math display">\[
+\hat{\beta}_i^{\text{IR}} = \left(1 - \frac{m-1}{\sum_{i=1}^m (Y_i - \bar{Y})^2}\right) Y_i
+\]</span></p>
+<p>In either case, it can be shown that</p>
+<p><span class="math display">\[
+R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{IR}}\right) &lt; R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{MLE}}\right).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>The blue line is the least squares regression line of <span class="math inline">\(\beta_i\)</span> on <span class="math inline">\(Y_i\)</span>, and the red line is <span class="math inline">\(\hat{\beta}_i^{\text{IR}}\)</span>.</p>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="empirical-bayes-estimate" class="slide level2">
+<h2>Empirical Bayes Estimate</h2>
+<p>Suppose that <span class="math inline">\(Y_i | \beta_i \sim \mbox{Normal}(\beta_i, 1)\)</span> where these rv’s are jointly independent. Also suppose that <span class="math inline">\(\beta_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(a, b^2)\)</span>. Taking the empirical Bayes approach, we get:</p>
+<p><span class="math display">\[
+f(y_i ; a, b) = \int f(y_i | \beta_i) f(\beta_i; a, b) d\beta_i \sim \mbox{Normal}(a, 1+b^2).
+\]</span></p>
+<p><span class="math display">\[
+\implies \hat{a} = \overline{Y}, \ 1+\hat{b}^2 =  \frac{\sum_{k=1}^m (Y_k - \overline{Y})^2}{n}
+\]</span></p>
+</section><section class="slide level2">
+
+<p><span class="math display">\[
+\begin{aligned}
+{\operatorname{E}}[\beta_i | Y_i] &amp; = \frac{1}{1+b^2}a + \frac{b^2}{1+b^2}Y_i \implies \\
+ &amp; \\
+\hat{\beta}_i^{\text{EB}} &amp; = \hat{{\operatorname{E}}}[\beta_i | Y_i] = \frac{1}{1+\hat{b}^2}\hat{a} + \frac{\hat{b}^2}{1+\hat{b}^2}Y_i \\
+ &amp; = \frac{m}{\sum_{k=1}^m (Y_k - \overline{Y})^2} \overline{Y} + \left(1-\frac{m}{\sum_{k=1}^m (Y_k - \overline{Y})^2}\right) Y_i
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>As with <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{JS}}\)</span> and <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{IR}}\)</span>, we have</p>
+<p><span class="math display">\[
+R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{MLE}}\right).
+\]</span></p>
+</section><section id="eb-for-a-many-responses-model" class="slide level2">
+<h2>EB for a Many Responses Model</h2>
+<p>Consider the <em>many responses model</em> where <span class="math inline">\({\boldsymbol{Y}}_{i} | {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{\beta}}_i {\boldsymbol{X}}, \sigma^2 {\boldsymbol{I}})\)</span> where the vectors <span class="math inline">\({\boldsymbol{Y}}_{i} | {\boldsymbol{X}}\)</span> are jointly independent (<span class="math inline">\(i=1, 2, \ldots, m\)</span>). Here we’ve made the simplifying assumption that the variance <span class="math inline">\(\sigma^2\)</span> is equal across all responses, but this would not be generally true.</p>
+<p>The OLS (and MLE) solution is</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{B}}}= {\boldsymbol{Y}}{\boldsymbol{X}}^T ({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Suppose we extend this so that <span class="math inline">\({\boldsymbol{Y}}_{i} | {\boldsymbol{X}}, {\boldsymbol{\beta}}_i \sim \mbox{MVN}_n({\boldsymbol{\beta}}_i {\boldsymbol{X}}, \sigma^2 {\boldsymbol{I}})\)</span> and <span class="math inline">\({\boldsymbol{\beta}}_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{MVN}_d({\boldsymbol{u}}, {\boldsymbol{V}})\)</span>.</p>
+<p>Since <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_i | {\boldsymbol{\beta}}_i \sim \mbox{MVN}_d({\boldsymbol{\beta}}_i, \sigma^2({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1})\)</span>, it follows that marginally</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{\beta}}}_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{MVN}_d({\boldsymbol{u}}, \sigma^2({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1} + {\boldsymbol{V}}).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Therefore,</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{u}}} = \frac{\sum_{i=1}^m \hat{{\boldsymbol{\beta}}}_i}{m}
+\]</span></p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{V}}} = \hat{{\operatorname{Cov}}}\left(\hat{{\boldsymbol{\beta}}}\right) - \hat{\sigma}^2({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{{\operatorname{Cov}}}\left(\hat{{\boldsymbol{\beta}}}\right)\)</span> is the <span class="math inline">\(d \times d\)</span> sample covariance (or MLE covariance) of the <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_i\)</span> estimates.</p>
+<p>Also, <span class="math inline">\(\hat{\sigma}^2\)</span> is obtained by averaging the estimate over all <span class="math inline">\(m\)</span> regressions.</p>
+</section><section class="slide level2">
+
+<p>We then do inference based on the prior distribution <span class="math inline">\({\boldsymbol{\beta}}_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{MVN}_d(\hat{{\boldsymbol{u}}}, \hat{{\boldsymbol{V}}})\)</span>. The posterior distribution of <span class="math inline">\({\boldsymbol{\beta}}_i | {\boldsymbol{Y}}, {\boldsymbol{X}}\)</span> is MVN with mean</p>
+<p><span class="math display">\[
+\left(\frac{1}{\hat{\sigma}^2}({\boldsymbol{X}}{\boldsymbol{X}}^T) + \hat{{\boldsymbol{V}}}^{-1}\right)^{-1} \left(\frac{1}{\hat{\sigma}^2}({\boldsymbol{X}}{\boldsymbol{X}}^T) \hat{{\boldsymbol{\beta}}}_i + \hat{{\boldsymbol{V}}}^{-1} \hat{{\boldsymbol{u}}} \right)
+\]</span></p>
+<p>and covariance</p>
+<p><span class="math display">\[
+\left(\frac{1}{\hat{\sigma}^2}({\boldsymbol{X}}{\boldsymbol{X}}^T) + \hat{{\boldsymbol{V}}}^{-1}\right)^{-1}.
+\]</span></p>
+</section></section>
+<section><section id="multiple-testing" class="titleslide slide level1"><h1>Multiple Testing</h1></section><section id="motivating-example" class="slide level2">
+<h2>Motivating Example</h2>
+<p>Hedenfalk et al. (2001) <em>NEJM</em> measured gene expression in three different breast cancer tumor types. In your homework, you have analyzed these data and have specifically compared BRCA1 mutation positive tumors to BRCA2 mutation positive tumors.</p>
+<p>The <code>qvalue</code> package has the p-values when testing for a difference in population means between these two groups (called “differential expression”). There are 3170 genes tested, resulting in 3170 p-values.</p>
+<p>Note that this analysis is a version of the many responses model.</p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; library(qvalue)
+&gt; data(hedenfalk); df &lt;- data.frame(p=hedenfalk$p)
+&gt; ggplot(df, aes(x = p)) +
++          ggtitle(&quot;p-value density histogram&quot;) +
++          geom_histogram(aes_string(y = &#39;..density..&#39;), colour = &quot;black&quot;,
++                         fill = &quot;white&quot;, binwidth = 0.04, center=0.02)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="challenges-1" class="slide level2">
+<h2>Challenges</h2>
+<ul>
+<li>Traditional p-value thresholds such as 0.01 or 0.05 may result in too many false positives. For example, in the above example, a 0.05 threshold could result in 158 false positives.</li>
+<li>A careful balance of true positives and false positives must be achieved in a manner that is scientifically interpretable.</li>
+<li>There is information in the joint distribution of the p-values that can be leveraged.</li>
+<li>Dependent p-values may make this type of analysis especially difficult (next week’s topic).</li>
+</ul>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qobj &lt;- qvalue(hedenfalk$p)
+&gt; hist(qobj)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+</section><section id="outcomes" class="slide level2">
+<h2>Outcomes</h2>
+<p>Possible outcomes from <span class="math inline">\(m\)</span> hypothesis tests based on applying a significance threshold <span class="math inline">\(0 &lt; t \leq 1\)</span> to their corresponding p-values.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Not Significant</th>
+<th>Significant</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Null True</td>
+<td><span class="math inline">\(U\)</span></td>
+<td><span class="math inline">\(V\)</span></td>
+<td><span class="math inline">\(m_0\)</span></td>
+</tr>
+<tr class="even">
+<td>Alternative True</td>
+<td><span class="math inline">\(T\)</span></td>
+<td><span class="math inline">\(S\)</span></td>
+<td><span class="math inline">\(m_1\)</span></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(W\)</span></td>
+<td><span class="math inline">\(R\)</span></td>
+<td><span class="math inline">\(m\)</span></td>
+</tr>
+</tbody>
+</table>
+</section><section id="error-rates" class="slide level2">
+<h2>Error Rates</h2>
+<p>Suppose we are testing <span class="math inline">\(m\)</span> hypotheses based on p-values <span class="math inline">\(p_1, p_2, \ldots, p_m\)</span>.</p>
+<p><strong>Multiple hypothesis testing</strong> is the process of deciding which of these p-values should be called statistically significant.</p>
+<p>This requires formulating and estimating a compound <strong>error rate</strong> that quantifies the quality of the decision.</p>
+</section><section id="bonferroni-correction" class="slide level2">
+<h2>Bonferroni Correction</h2>
+<p>The <strong>family-wise error rate</strong> is the probability of <em>any</em> false positive occurring among all tests called significant. The <strong>Bonferroni correction</strong> is a result that shows that utilizing a p-value threshold of <span class="math inline">\(\alpha/m\)</span> results in FWER <span class="math inline">\(\leq \alpha\)</span>. Specifically,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{FWER} &amp; \leq \Pr(\cup \{P_i \leq \alpha/m\}) \\
+ &amp; \leq \sum_{i=1}^m \Pr(P_i \leq \alpha/m) = \sum_{i=1}^m \alpha/m = \alpha
+\end{aligned}
+\]</span></p>
+<p>where the above probability calculations are done under the assumption that all <span class="math inline">\(H_0\)</span> are true.</p>
+</section><section id="false-discovery-rate" class="slide level2">
+<h2>False Discovery Rate</h2>
+<p>The <strong>false discovery rate</strong> (FDR) measures the proportion of Type I errors — or “false discoveries” — among all hypothesis tests called statistically significant. It is defined as</p>
+<p><span class="math display">\[
+{{\rm FDR}}= {\operatorname{E}}\left[ \frac{V}{R \vee 1} \right] = {\operatorname{E}}\left[ \left.
+\frac{V}{R} \right| R&gt;0 \right] \Pr(R&gt;0).
+\]</span></p>
+<p>This is less conservative than the FWER and it offers a clearer balance between true positives and false positives.</p>
+</section><section class="slide level2">
+
+<p>There are two other false discovery rate definitions, where the main difference is in how the <span class="math inline">\(R=0\)</span> event is handled. These quantities are called the <strong>positive false discovery rate</strong> (pFDR) and the <strong>marginal false discovery rate</strong> (mFDR), defined as follows:</p>
+<p><span class="math display">\[
+{{\rm pFDR}}= {\operatorname{E}}\left[ \left. \frac{V}{R} \right| R&gt;0 \right],
+\]</span></p>
+<p><span class="math display">\[
+{{\rm mFDR}}= \frac{{\operatorname{E}}\left[ V \right]}{{\operatorname{E}}\left[ R \right]}.
+\]</span></p>
+<p>Note that <span class="math inline">\({{\rm pFDR}}= {{\rm mFDR}}= 1\)</span> whenever all null hypotheses are true, whereas FDR can always be made arbitrarily small because of the extra term <span class="math inline">\(\Pr(R &gt; 0)\)</span>.</p>
+</section><section id="point-estimate" class="slide level2">
+<h2>Point Estimate</h2>
+<p>Let <span class="math inline">\({{\rm FDR}}(t)\)</span> denote the FDR when calling null hypotheses significant whenever <span class="math inline">\(p_i \leq t\)</span>, for <span class="math inline">\(i = 1, 2, \ldots, m\)</span>. For <span class="math inline">\(0 &lt; t \leq 1\)</span>, we define the following random variables:</p>
+<p><span class="math display">\[
+\begin{aligned}
+V(t) &amp; =  \#\{\mbox{true null } p_i: p_i \leq t \} \\
+R(t) &amp; = \#\{p_i: p_i \leq t\}
+\end{aligned}
+\]</span> In terms of these, we have</p>
+<p><span class="math display">\[
+{{\rm FDR}}(t) = {\operatorname{E}}\left[ \frac{V(t)}{R(t) \vee 1} \right].
+\]</span></p>
+</section><section class="slide level2">
+
+<p>For fixed <span class="math inline">\(t\)</span>, the following defines a family of conservatively biased point estimates of <span class="math inline">\({{\rm FDR}}(t)\)</span>:</p>
+<p><span class="math display">\[
+\hat{{{\rm FDR}}}(t) = \frac{\hat{m}_0(\lambda) \cdot t}{[R(t) \vee 1]}.
+\]</span></p>
+<p>The term <span class="math inline">\(\hat{m}_0({\lambda})\)</span> is an estimate of <span class="math inline">\(m_0\)</span>, the number of true null hypotheses. This estimate depends on the tuning parameter <span class="math inline">\({\lambda}\)</span>, and it is defined as</p>
+<p><span class="math display">\[
+\hat{m}_0({\lambda}) = \frac{m - R({\lambda})}{(1-{\lambda})}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Sometimes instead of <span class="math inline">\(m_0\)</span>, the quantity</p>
+<p><span class="math display">\[
+\pi_0 = \frac{m_0}{m}
+\]</span></p>
+<p>is estimated, where simply</p>
+<p><span class="math display">\[
+\hat{\pi}_0({\lambda}) = \frac{\hat{m}_0({\lambda})}{m} = \frac{m - R({\lambda})}{m(1-{\lambda})}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>It can be shown that <span class="math inline">\({\operatorname{E}}[\hat{m}_0({\lambda})] \geq m_0\)</span> when the p-values corresponding to the true null hypotheses are Uniform(0,1) distributed (or stochastically greater).</p>
+<p>There is an inherent bias/variance trade-off in the choice of <span class="math inline">\({\lambda}\)</span>. In most cases, when <span class="math inline">\({\lambda}\)</span> gets smaller, the bias of <span class="math inline">\(\hat{m}_0({\lambda})\)</span> gets larger, but the variance gets smaller.</p>
+<p>Therefore, <span class="math inline">\({\lambda}\)</span> can be chosen to try to balance this trade-off.</p>
+</section><section id="adaptive-threshold" class="slide level2">
+<h2>Adaptive Threshold</h2>
+<p>If we desire a FDR level of <span class="math inline">\(\alpha\)</span>, it is tempting to use the p-value threshold</p>
+<p><span class="math display">\[
+t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
+\]</span></p>
+<p>which identifies the largest estimated FDR less than or equal to <span class="math inline">\(\alpha\)</span>.</p>
+</section><section id="conservative-properties" class="slide level2">
+<h2>Conservative Properties</h2>
+<p>When the p-value corresponding to true null hypothesis are distributed iid Uniform(0,1), then we have the following two conservative properties.</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; {\operatorname{E}}\left[ \hat{{{\rm FDR}}}(t) \right] \geq {{\rm FDR}}(t) \\
+&amp; {\operatorname{E}}\left[ \hat{{{\rm FDR}}}(t^*_\alpha) \right] \leq \alpha
+\end{aligned}
+\]</span></p>
+</section><section id="q-values" class="slide level2">
+<h2>Q-Values</h2>
+<p>In single hypothesis testing, it is common to report the p-value as a measure of significance. The <strong>q-value</strong> is the FDR based measure of significance that can be calculated simultaneously for multiple hypothesis tests.</p>
+<p>The p-value is constructed so that a threshold of <span class="math inline">\(\alpha\)</span> results in a Type I error rate <span class="math inline">\(\leq \alpha\)</span>. Likewise, the q-value is constructed so that a threshold of <span class="math inline">\(\alpha\)</span> results in a FDR <span class="math inline">\(\leq \alpha\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Initially it seems that the q-value should capture the FDR incurred when the significance threshold is set at the p-value itself, <span class="math inline">\({{\rm FDR}}(p_i)\)</span>. However, unlike Type I error rates, the FDR is not necessarily strictly increasing with an increasing significance threshold.</p>
+<p>To accommodate this property, the q-value is defined to be the minimum FDR (or pFDR) at which the test is called significant:</p>
+<p><span class="math display">\[
+{\operatorname{q}}{\rm\mbox{-}value}(p_i) = \min_{t \geq p_i} {{\rm FDR}}(t)
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+{\operatorname{q}}{\rm\mbox{-}value}(p_i) = \min_{t \geq p_i} {{\rm pFDR}}(t).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>To estimate this in practice, a simple plug-in estimate is formed, for example:</p>
+<p><span class="math display">\[
+\hat{{\operatorname{q}}}{\rm\mbox{-}value}(p_i) = \min_{t \geq p_i} \hat{{{\rm FDR}}}(t).
+\]</span></p>
+<p>Various theoretical properties have been shown for these estimates under certain conditions, notably that the estimated q-values of the entire set of tests are simultaneously conservative as the number of hypothesis tests grows large.</p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; plot(qobj)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="bayesian-mixture-model" class="slide level2">
+<h2>Bayesian Mixture Model</h2>
+<p>Let’s return to the <a href="https://jdstorey.github.io/asdslectures/week06.html#/classification">Bayesian classification</a> set up from earlier. Suppose that</p>
+<ul>
+<li><span class="math inline">\(H_i =\)</span> 0 or 1 according to whether the <span class="math inline">\(i\)</span>th null hypothesis is true or not</li>
+<li><span class="math inline">\(H_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Bernoulli}(1-\pi_0)\)</span> so that <span class="math inline">\(\Pr(H_i=0)=\pi_0\)</span> and <span class="math inline">\(\Pr(H_i=1)=1-\pi_0\)</span></li>
+<li><span class="math inline">\(P_i | H_i {\; \stackrel{\text{iid}}{\sim}\;}(1-H_i) \cdot F_0 + H_i \cdot F_1\)</span>, where <span class="math inline">\(F_0\)</span> is the null distribution and <span class="math inline">\(F_1\)</span> is the alternative distribution</li>
+</ul>
+</section><section id="bayesian-frequentist-connection" class="slide level2">
+<h2>Bayesian-Frequentist Connection</h2>
+<p>Under these assumptions, it has been shown that</p>
+<p><span class="math display">\[
+\begin{aligned}
+{{\rm pFDR}}(t) &amp; = {\operatorname{E}}\left[ \left. \frac{V(t)}{R(t)} \right| R(t) &gt; 0 \right] \\
+\ &amp; = \Pr(H_i = 0 | P_i \leq t)
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\Pr(H_i = 0 | P_i \leq t)\)</span> is the same for each <span class="math inline">\(i\)</span> because of the iid assumptions.</p>
+</section><section class="slide level2">
+
+<p>Under these modeling assumptions, it follows that</p>
+<p><span class="math display">\[
+\mbox{q-value}(p_i) = \min_{t \geq p_i} \Pr(H_i = 0 | P_i \leq t)
+\]</span></p>
+<p>which is a Bayesian analogue of the p-value — or rather a “Bayesian posterior Type I error rate”.</p>
+</section><section id="local-fdr" class="slide level2">
+<h2>Local FDR</h2>
+<p>In this scenario, it also follows that</p>
+<p><span class="math display">\[
+{{\rm pFDR}}(t) = \int \Pr(H_i = 0 | P_i = p_i) dF(p_i | p_i \leq t)
+\]</span></p>
+<p>where <span class="math inline">\(F = \pi_0 F_0 + (1-\pi_0) F_1\)</span>.</p>
+<p>This connects the pFDR to the <strong>posterior error probability</strong></p>
+<p><span class="math display">\[\Pr(H_i = 0 | P_i = p_i)\]</span></p>
+<p>making this latter quantity sometimes interpreted as a <strong>local false discovery rate</strong>.</p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; hist(qobj)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="many-regressors-model-1" class="titleslide slide level1"><h1>Many Regressors Model</h1></section></section>
+<section><section id="ridge-regression" class="titleslide slide level1"><h1>Ridge Regression</h1></section><section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<p><strong>Ridge regression</strong> is a technique for shrinking the coefficients towards zero in linear models.</p>
+<p>It also deals with collinearity among explanatory variables. <strong>Collinearity</strong> is the presence of strong correlation among two or more explanatory variables.</p>
+</section><section id="optimization-goal" class="slide level2">
+<h2>Optimization Goal</h2>
+<p>Under the OLS model assumptions, ridge regression fits model by minimizing the following:</p>
+<p><span class="math display">\[
+\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m \beta_k^2.
+\]</span></p>
+<p>Recall the <span class="math inline">\(\ell_2\)</span> norm: <span class="math inline">\(\sum_{k=1}^m \beta_k^2 = \| {\boldsymbol{\beta}}\|^2_2\)</span>. Sometimes ridge regression is called <span class="math inline">\(\ell_2\)</span> penalized regression.</p>
+<p>As with natural cubic splines, the paramater <span class="math inline">\(\lambda\)</span> is a tuning paramater that controls how much shrinkage occurs.</p>
+</section><section id="solution" class="slide level2">
+<h2>Solution</h2>
+<p>The ridge regression solution is</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{\beta}}}^{\text{Ridge}} = {\boldsymbol{y}}{\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}.
+\]</span></p>
+<p> </p>
+<p>As <span class="math inline">\(\lambda \rightarrow 0\)</span>, the <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}} \rightarrow \hat{{\boldsymbol{\beta}}}^{\text{OLS}}\)</span>.</p>
+<p>As <span class="math inline">\(\lambda \rightarrow \infty\)</span>, the <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}} \rightarrow {\boldsymbol{0}}\)</span>.</p>
+</section><section id="preprocessing" class="slide level2">
+<h2>Preprocessing</h2>
+<p>Implicitly…</p>
+<p>We mean center <span class="math inline">\({\boldsymbol{y}}\)</span>.</p>
+<p>We also mean center and standard deviation scale each explanatory variable. Why?</p>
+</section><section id="shrinkage" class="slide level2">
+<h2>Shrinkage</h2>
+<p>When <span class="math inline">\({\boldsymbol{X}}{\boldsymbol{X}}^T = {\boldsymbol{I}}\)</span>, then</p>
+<p><span class="math display">\[
+\hat{\beta}^{\text{Ridge}}_{j} = \frac{\hat{\beta}^{\text{OLS}}_{j}}{1+\lambda}. 
+\]</span></p>
+<p>This shows how ridge regression acts as a technique for shrinking regression coefficients towards zero. It also shows that when <span class="math inline">\(\hat{\beta}^{\text{OLS}}_{j} \not= 0\)</span>, then for all finite <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\hat{\beta}^{\text{Ridge}}_{j} \not= 0\)</span>.</p>
+</section><section id="example" class="slide level2">
+<h2>Example</h2>
+<pre class="r"><code>&gt; set.seed(508)
+&gt; x1 &lt;- rnorm(20)
+&gt; x2 &lt;- x1 + rnorm(20, sd=0.1)
+&gt; y &lt;- 1 + x1 + x2 + rnorm(20)
+&gt; tidy(lm(y~x1+x2))
+         term  estimate std.error statistic      p.value
+1 (Intercept) 0.9647132 0.2036815 4.7363815 0.0001908984
+2          x1 0.4927857 2.8104958 0.1753376 0.8628858043
+3          x2 1.2599509 2.8876230 0.4363280 0.6680895121
+&gt; lm.ridge(y~x1+x2, lambda=1) # from MASS package
+                 x1        x2 
+0.9486116 0.8252948 0.8751979 </code></pre>
+</section><section id="existence-of-solution" class="slide level2">
+<h2>Existence of Solution</h2>
+<p>When <span class="math inline">\(m &gt; n\)</span> or when there is high collinearity, then <span class="math inline">\(({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}\)</span> will not exist.</p>
+<p>However, for <span class="math inline">\(\lambda &gt; 0\)</span>, it is always the case that <span class="math inline">\(\left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}\)</span> exists.</p>
+<p>Therefore, one can always compute a unique <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\)</span> for each <span class="math inline">\(\lambda &gt; 0\)</span>.</p>
+</section><section id="effective-degrees-of-freedom" class="slide level2">
+<h2>Effective Degrees of Freedom</h2>
+<p>Similarly to natural cubic splines, we can calculate an effective degrees of freedom by noting that:</p>
+<p><span class="math display">\[
+\hat{{\boldsymbol{y}}} = {\boldsymbol{y}}{\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1} {\boldsymbol{X}}\]</span></p>
+<p>The effective degrees of freedom is then the trace of the linear operator:</p>
+<p><span class="math display">\[
+\operatorname{tr} \left({\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1} {\boldsymbol{X}}\right)
+\]</span></p>
+</section><section id="bias-and-covariance" class="slide level2">
+<h2>Bias and Covariance</h2>
+<p>Under the OLS model assumptions,</p>
+<p><span class="math display">\[
+{\operatorname{Cov}}\left(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\right) = \sigma^2 \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1} {\boldsymbol{X}}{\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\text{bias} = {\operatorname{E}}\left[\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\right] - {\boldsymbol{\beta}}= - \lambda {\boldsymbol{\beta}}\left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}.
+\]</span></p>
+</section><section id="ridge-vs-ols" class="slide level2">
+<h2>Ridge vs OLS</h2>
+<p>When the OLS model is true, there exists a <span class="math inline">\(\lambda &gt; 0\)</span> such that the MSE of the ridge estimate is lower than than of the OLS estimate:</p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[ \| {\boldsymbol{\beta}}- \hat{{\boldsymbol{\beta}}}^{\text{Ridge}} \|^2_2 \right] &lt; {\operatorname{E}}\left[ \| {\boldsymbol{\beta}}- \hat{{\boldsymbol{\beta}}}^{\text{OLS}} \|^2_2 \right].
+\]</span></p>
+<p>This says that by sacrificing some bias in the ridge estimator, we can obtain a smaller overall MSE, which is bias<span class="math inline">\(^2\)</span> + variance.</p>
+</section><section id="bayesian-interpretation" class="slide level2">
+<h2>Bayesian Interpretation</h2>
+<p>The ridge regression solution is equivalent to maximizing</p>
+<p><span class="math display">\[
+-\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m \beta_k^2
+\]</span></p>
+<p>which means it can be interpreted as the MAP solution with a Normal prior on the <span class="math inline">\(\beta_i\)</span> values.</p>
+</section><section id="example-diabetes-data" class="slide level2">
+<h2>Example: Diabetes Data</h2>
+<pre class="r"><code>&gt; library(lars)
+&gt; data(diabetes)
+&gt; x &lt;- diabetes$x2 %&gt;% unclass() %&gt;% as.data.frame()
+&gt; y &lt;- diabetes$y
+&gt; dim(x)
+[1] 442  64
+&gt; length(y)
+[1] 442
+&gt; df &lt;- cbind(x,y)
+&gt; names(df)
+ [1] &quot;age&quot;     &quot;sex&quot;     &quot;bmi&quot;     &quot;map&quot;     &quot;tc&quot;     
+ [6] &quot;ldl&quot;     &quot;hdl&quot;     &quot;tch&quot;     &quot;ltg&quot;     &quot;glu&quot;    
+[11] &quot;age^2&quot;   &quot;bmi^2&quot;   &quot;map^2&quot;   &quot;tc^2&quot;    &quot;ldl^2&quot;  
+[16] &quot;hdl^2&quot;   &quot;tch^2&quot;   &quot;ltg^2&quot;   &quot;glu^2&quot;   &quot;age:sex&quot;
+[21] &quot;age:bmi&quot; &quot;age:map&quot; &quot;age:tc&quot;  &quot;age:ldl&quot; &quot;age:hdl&quot;
+[26] &quot;age:tch&quot; &quot;age:ltg&quot; &quot;age:glu&quot; &quot;sex:bmi&quot; &quot;sex:map&quot;
+[31] &quot;sex:tc&quot;  &quot;sex:ldl&quot; &quot;sex:hdl&quot; &quot;sex:tch&quot; &quot;sex:ltg&quot;
+[36] &quot;sex:glu&quot; &quot;bmi:map&quot; &quot;bmi:tc&quot;  &quot;bmi:ldl&quot; &quot;bmi:hdl&quot;
+[41] &quot;bmi:tch&quot; &quot;bmi:ltg&quot; &quot;bmi:glu&quot; &quot;map:tc&quot;  &quot;map:ldl&quot;
+[46] &quot;map:hdl&quot; &quot;map:tch&quot; &quot;map:ltg&quot; &quot;map:glu&quot; &quot;tc:ldl&quot; 
+[51] &quot;tc:hdl&quot;  &quot;tc:tch&quot;  &quot;tc:ltg&quot;  &quot;tc:glu&quot;  &quot;ldl:hdl&quot;
+[56] &quot;ldl:tch&quot; &quot;ldl:ltg&quot; &quot;ldl:glu&quot; &quot;hdl:tch&quot; &quot;hdl:ltg&quot;
+[61] &quot;hdl:glu&quot; &quot;tch:ltg&quot; &quot;tch:glu&quot; &quot;ltg:glu&quot; &quot;y&quot;      </code></pre>
+</section><section class="slide level2">
+
+<p>The <code>glmnet()</code> function will perform ridge regression when we set <code>alpha=0</code>.</p>
+<pre class="r"><code>&gt; library(glmnetUtils)
+&gt; ridgefit &lt;- glmnetUtils::glmnet(y ~ ., data=df, alpha=0)
+&gt; plot(ridgefit)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Cross-validation to tune the shrinkage parameter.</p>
+<pre class="r"><code>&gt; cvridgefit &lt;- glmnetUtils::cv.glmnet(y ~ ., data=df, alpha=0)
+&gt; plot(cvridgefit)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="glms" class="slide level2">
+<h2>GLMs</h2>
+<p>The <code>glmnet</code> library (and the <code>glmnetUtils</code> wrapper library) allow one to perform ridge regression on generalized linear models.</p>
+<p>A penalized maximum likelihood estimate is calculated based on</p>
+<p><span class="math display">\[
+-\lambda \sum_{i=1}^m \beta_i^2
+\]</span></p>
+<p>added to the log-likelihood.</p>
+</section></section>
+<section><section id="lasso-regression" class="titleslide slide level1"><h1>Lasso Regression</h1></section><section id="motivation-1" class="slide level2">
+<h2>Motivation</h2>
+<p>One drawback of the ridge regression approach is that coefficients will be small, but they will be nonzero.</p>
+<p>An alternative appraoch is the <strong>lasso</strong>, which stands for “Least Absolute Shrinkage and Selection Operator”.</p>
+<p>This performs a similar optimization as ridge, but with an <span class="math inline">\(\ell_1\)</span> penalty instead. This changes the geometry of the problem so that coefficients may be zero.</p>
+</section><section id="optimization-goal-1" class="slide level2">
+<h2>Optimization Goal</h2>
+<p>Starting with the OLS model assumptions again, we wish to find <span class="math inline">\({\boldsymbol{\beta}}\)</span> that minimizes</p>
+<p><span class="math display">\[
+\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m |\beta_k|.
+\]</span></p>
+<p>Note that <span class="math inline">\(\sum_{k=1}^m |\beta_k| = \| {\boldsymbol{\beta}}\|_1\)</span>, which is the <span class="math inline">\(\ell_1\)</span> vector norm.</p>
+<p>As before, the paramater <span class="math inline">\(\lambda\)</span> is a tuning paramater that controls how much shrinkage and selection occurs.</p>
+</section><section id="solution-1" class="slide level2">
+<h2>Solution</h2>
+<p>There is no closed form solution to this optimization problem, so it must be solved numerically.</p>
+<p>Originally, a <em>quadratic programming</em> solution was proposed with has <span class="math inline">\(O(n 2^m)\)</span> operations.</p>
+<p>Then a <em>least angle regression</em> solution reduced the solution to <span class="math inline">\(O(nm^2)\)</span> operations.</p>
+<p>Modern <em>coordinate descent</em> methods have further reduced this to <span class="math inline">\(O(nm)\)</span> operations.</p>
+</section><section id="preprocessing-1" class="slide level2">
+<h2>Preprocessing</h2>
+<p>Implicitly…</p>
+<p>We mean center <span class="math inline">\({\boldsymbol{y}}\)</span>.</p>
+<p>We also mean center and standard deviation scale each explanatory variable. Why?</p>
+</section><section class="slide level2">
+
+<p>Let’s return to the <code>diabetes</code> data set. To do lasso regression, we set <code>alpha=1</code>.</p>
+<pre class="r"><code>&gt; lassofit &lt;- glmnetUtils::glmnet(y ~ ., data=df, alpha=1)
+&gt; plot(lassofit)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Cross-validation to tune the shrinkage parameter.</p>
+<pre class="r"><code>&gt; cvlassofit &lt;- glmnetUtils::cv.glmnet(y ~ ., data=df, alpha=1)
+&gt; plot(cvlassofit)</code></pre>
+<p><img src="week11_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="bayesian-interpretation-1" class="slide level2">
+<h2>Bayesian Interpretation</h2>
+<p>The ridge regression solution is equivalent to maximizing</p>
+<p><span class="math display">\[
+-\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m |\beta_k|
+\]</span></p>
+<p>which means it can be interpreted as the MAP solution with a Exponential prior on the <span class="math inline">\(\beta_i\)</span> values.</p>
+</section><section id="inference" class="slide level2">
+<h2>Inference</h2>
+<p>Inference on the lasso model fit is difficult. However, there has been recent progress.</p>
+<p>One idea proposes a conditional covariance statistic, but this requires all explanatory variables to be uncorrelated.</p>
+<p>Another idea called the <em>knockoff filter</em> controls the false discovery rate and allows for correlation among explanatory variables.</p>
+<p>Both of these ideas have some restrictive assumptions and require the number of observations to exceed the number of explanatory variables, <span class="math inline">\(n &gt; m\)</span>.</p>
+</section><section id="glms-1" class="slide level2">
+<h2>GLMs</h2>
+<p>The <code>glmnet</code> library (and the <code>glmnetUtils</code> wrapper library) allow one to perform lasso regression on generalized linear models.</p>
+<p>A penalized maximum likelihood estimate is calculated based on</p>
+<p><span class="math display">\[
+-\lambda \sum_{i=1}^m |\beta_i|
+\]</span></p>
+<p>added to the log-likelihood.</p>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h2>Source</h2>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h2>Session Information</h2>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.4
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+ [1] glmnetUtils_1.0.2 lars_1.2          qvalue_2.1.1     
+ [4] MASS_7.3-47       broom_0.4.2       dplyr_0.5.0      
+ [7] purrr_0.2.2       readr_1.1.0       tidyr_0.6.2      
+[10] tibble_1.3.0      ggplot2_2.2.1     tidyverse_1.1.1  
+[13] knitr_1.15.1      magrittr_1.5      devtools_1.12.0  
+
+loaded via a namespace (and not attached):
+ [1] revealjs_0.9     reshape2_1.4.2   splines_3.3.2   
+ [4] haven_1.0.0      lattice_0.20-35  colorspace_1.3-2
+ [7] htmltools_0.3.6  yaml_2.1.14      foreign_0.8-68  
+[10] withr_1.0.2      DBI_0.6-1        modelr_0.1.0    
+[13] readxl_1.0.0     foreach_1.4.3    plyr_1.8.4      
+[16] stringr_1.2.0    munsell_0.4.3    gtable_0.2.0    
+[19] cellranger_1.1.0 rvest_0.3.2      codetools_0.2-15
+[22] psych_1.7.5      memoise_1.1.0    evaluate_0.10   
+[25] labeling_0.3     forcats_0.2.0    parallel_3.3.2  
+[28] highr_0.6        Rcpp_0.12.10     scales_0.4.1    
+[31] backports_1.0.5  jsonlite_1.4     mnormt_1.5-5    
+[34] hms_0.3          digest_0.6.12    stringi_1.1.5   
+[37] grid_3.3.2       rprojroot_1.2    tools_3.3.2     
+[40] lazyeval_0.2.0   glmnet_2.0-10    Matrix_1.2-10   
+[43] xml2_1.1.1       lubridate_1.6.0  iterators_1.0.8 
+[46] assertthat_0.2.0 rmarkdown_1.5    httr_1.2.1      
+[49] R6_2.2.0         nlme_3.1-131    </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

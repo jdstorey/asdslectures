@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 2</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 2</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="data-wrangling" class="titleslide slide level1"><h1>Data Wrangling</h1></section><section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p>Data wrangling is loosely defined as the process of manually converting or mapping data from one “raw” form into another format that allows for more convenient consumption of the data with the help of semi-automated tools.</p>
+<p>It typically follows a set of general steps which begin with extracting the data in a raw form from the data source, “wrangling” the raw data using algorithms (e.g. sorting) or parsing the data into predefined data structures, and finally depositing the resulting content into a data sink for storage and future use.</p>
+<p>From <a href="https://en.wikipedia.org/wiki/Data_wrangling" class="uri">https://en.wikipedia.org/wiki/Data_wrangling</a></p>
+</section><section id="workflow" class="slide level2">
+<h2>Workflow</h2>
+<p>These steps are typically taken in a data science project.</p>
+<ol type="1">
+<li><strong>Import</strong></li>
+<li><strong>Tidy</strong></li>
+<li><strong>Transform</strong> <span class="math inline">\(\leftrightarrow\)</span> Visualize <span class="math inline">\(\leftrightarrow\)</span> Model (<em>iterate</em>)</li>
+<li>Communicate</li>
+</ol>
+<p>The bold terms are part of data wrangling.</p>
+</section><section id="challenges" class="slide level2">
+<h2>Challenges</h2>
+<ul>
+<li>Importing files</li>
+<li>Organizing data sets</li>
+<li>Transforming data</li>
+<li>Combining data sets</li>
+<li>Dealing with various data types (e.g., dates)</li>
+<li>Identifying errors</li>
+</ul>
+</section></section>
+<section><section id="tidy-data" class="titleslide slide level1"><h1>Tidy Data</h1></section><section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<p>“Happy families are all alike; every unhappy family is unhappy in its own way.” – Leo Tolstoy</p>
+<p>“Tidy datasets are all alike, but every messy dataset is messy in its own way.” – Hadley Wickham</p>
+<p>From <em>R for Data Science</em>.</p>
+</section><section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<blockquote>
+<p>Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.</p>
+</blockquote>
+<p>From Wickham (2014), “Tidy Data”, <em>Journal of Statistical Software</em></p>
+</section><section class="slide level2">
+
+<blockquote>
+<p>A dataset is a collection of values, usually either numbers (if quantitative) or strings (if qualitative). Values are organized in two ways. Every value belongs to a variable and an observation. A variable contains all values that measure the same underlying attribute (like height, temperature, duration) across units. An observation contains all values measured on the same unit (like a person, or a day, or a race) across attributes.</p>
+</blockquote>
+<p>From: Wickham H (2014), “Tidy Data”, <em>Journal of Statistical Software</em></p>
+</section><section id="example-titanic-data" class="slide level2">
+<h2>Example: Titanic Data</h2>
+<p>According to the <code>Titanic</code> data from the <code>datasets</code> package: 367 males survived, 1364 males perished, 344 females survived, and 126 females perished.</p>
+<p>How should we organize these data?</p>
+</section><section id="intuitive-format" class="slide level2">
+<h2>Intuitive Format</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Survived</th>
+<th>Perished</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Male</strong></td>
+<td>367</td>
+<td>1364</td>
+</tr>
+<tr class="even">
+<td><strong>Female</strong></td>
+<td>344</td>
+<td>126</td>
+</tr>
+</tbody>
+</table>
+</section><section id="tidy-format" class="slide level2">
+<h2>Tidy Format</h2>
+<table>
+<thead>
+<tr class="header">
+<th>fate</th>
+<th>sex</th>
+<th>number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>perished</td>
+<td>male</td>
+<td>1364</td>
+</tr>
+<tr class="even">
+<td>perished</td>
+<td>female</td>
+<td>126</td>
+</tr>
+<tr class="odd">
+<td>survived</td>
+<td>male</td>
+<td>367</td>
+</tr>
+<tr class="even">
+<td>survived</td>
+<td>female</td>
+<td>344</td>
+</tr>
+</tbody>
+</table>
+</section><section id="rules-of-thumb" class="slide level2">
+<h2>Rules of Thumb</h2>
+<ol type="1">
+<li>Something is a value if it represents different forms of a common object and it changes throughout the data set.</li>
+<li>Something is a value if the data can be arranged so that it appears across rows within a column and this makes sense.</li>
+</ol>
+<p>For example, <code>fate</code> and <code>sex</code> do not satisfy these criteria in the <code>Titanic</code> data, but <code>perished</code>/<code>survived</code> and <code>female</code>/<code>male</code> do.</p>
+</section></section>
+<section><section id="tidyverse" class="titleslide slide level1"><h1>Tidyverse</h1></section><section id="idea" class="slide level2">
+<h2>Idea</h2>
+<p>When the data are in tidy format, one can design functions around this format to consistently and intuitively perform data wrangling and analysis operations. The packages containing these are called the “tidyverse.”</p>
+<p>Note: The idea of tidy data was first proposed by Hadley Wickham and he created several of the core packages, so this used to be called (semi-seriously) the “hadleyverse.”</p>
+</section><section id="packages" class="slide level2">
+<h2>Packages</h2>
+<blockquote>
+<p>The tidyverse is a set of packages that work in harmony because they share common data representations and API design. The <code>tidyverse</code> package is designed to make it easy to install and load core packages from the tidyverse in a single command.</p>
+</blockquote>
+<p><a href="https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/" class="uri">https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/</a></p>
+</section><section id="primary-packages" class="slide level2">
+<h2>Primary Packages</h2>
+<ul>
+<li><code>dplyr</code>: data manipulation</li>
+<li><code>ggplot2</code>: data visualization</li>
+<li><code>purrr</code>: functional programming</li>
+<li><code>readr</code>: data import</li>
+<li><code>tibble</code>: modernization of data frames</li>
+<li><code>tidyr</code>: data tidying</li>
+</ul>
+</section><section id="loading-tidyverse" class="slide level2">
+<h2>Loading <code>tidyverse</code></h2>
+<pre class="r"><code>&gt; library(tidyverse)</code></pre>
+</section></section>
+<section><section id="tidying-data" class="titleslide slide level1"><h1>Tidying Data</h1></section><section id="tidyr-package" class="slide level2">
+<h2><code>tidyr</code> Package</h2>
+<p>This package provides a variety of functions that allow one to tidy data.</p>
+<p>Importantly, it solves two common ways that data come as untidy.</p>
+<ol type="1">
+<li><code>gather()</code>: Gathers a variable distributed across two or more columns into a single column.</li>
+<li><code>spread()</code>: Spreads a column containing two or more variables into one column per variable.</li>
+</ol>
+</section><section id="untidy-titanic-data" class="slide level2">
+<h2>Untidy Titanic Data</h2>
+<p>This does not satisfy the definition of tidy data because a variable’s observations are distributed as column names.</p>
+<pre class="r"><code>&gt; df &lt;- tibble(sex=c(&quot;male&quot;, &quot;female&quot;), 
++              survived=c(367, 344),
++              perished=c(1364, 126))
+&gt; df
+# A tibble: 2 × 3
+     sex survived perished
+   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1   male      367     1364
+2 female      344      126</code></pre>
+</section><section id="gather" class="slide level2">
+<h2><code>gather()</code></h2>
+<p>We apply the <code>gather()</code> function to make a column containing the <code>survived</code> and <code>perished</code> observations.</p>
+<pre class="r"><code>&gt; df &lt;- gather(df, survived, perished, 
++                key=&quot;fate&quot;, value=&quot;number&quot;)
+&gt; df
+# A tibble: 4 × 3
+     sex     fate number
+   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;
+1   male survived    367
+2 female survived    344
+3   male perished   1364
+4 female perished    126</code></pre>
+</section><section id="spread" class="slide level2">
+<h2><code>spread()</code></h2>
+<p>This example is here to show that <code>spread()</code> does the opposite operation as <code>gather()</code>. It isn’t used appropriately here because we revert the data back to untidy format.</p>
+<pre class="r"><code>&gt; spread(df, key=fate, value=number)
+# A tibble: 2 × 3
+     sex perished survived
+*  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 female      126      344
+2   male     1364      367</code></pre>
+</section><section id="tidy-with-spread" class="slide level2">
+<h2>Tidy with <code>spread()</code></h2>
+<p>Median cost of home and median income per city are two variables included in a single column. This means we need to use <code>spread()</code>.</p>
+<pre class="r"><code>&gt; df
+# A tibble: 4 × 3
+     city median_value dollars
+    &lt;chr&gt;        &lt;chr&gt;   &lt;dbl&gt;
+1  Boston         home  527300
+2  Boston       income   71738
+3 Raleigh         home  215700
+4 Raleigh       income   65778</code></pre>
+<pre class="r"><code>&gt; spread(df, key=median_value, value=dollars)
+# A tibble: 2 × 3
+     city   home income
+*   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1  Boston 527300  71738
+2 Raleigh 215700  65778</code></pre>
+</section></section>
+<section><section id="reshaping-data" class="titleslide slide level1"><h1>Reshaping Data</h1></section><section id="wide-vs.long-format" class="slide level2">
+<h2>Wide vs. Long Format</h2>
+<p>Tidy data are in “wide format” in that they have a column for each variable and there is one observed unit per row.</p>
+<p>However, sometimes it’s useful to transform to “long format.” The simplest long format data have two columns. The first column contains the variable names and the second colum contains the values for the variables. There are “wider” long format data that have additional columns that identify connections between observations.</p>
+<p>Wide format data is useful for some analyses and long format for others.</p>
+</section><section id="reshape2-package" class="slide level2">
+<h2><code>reshape2</code> Package</h2>
+<p>The <code>reshape2</code> package has three important functions: <code>melt</code>, <code>dcast</code>, and <code>acast</code>. It allows one to move between wide and long tidy data formats.</p>
+<pre class="r"><code>&gt; library(&quot;reshape2&quot;)
+&gt; library(&quot;datasets&quot;)
+&gt; data(airquality, package=&quot;datasets&quot;)
+&gt; names(airquality)
+[1] &quot;Ozone&quot;   &quot;Solar.R&quot; &quot;Wind&quot;    &quot;Temp&quot;    &quot;Month&quot;   &quot;Day&quot;    
+&gt; dim(airquality)
+[1] 153   6
+&gt; airquality &lt;- as_tibble(airquality)</code></pre>
+</section><section id="air-quality-data-set" class="slide level2">
+<h2>Air Quality Data Set</h2>
+<pre class="r"><code>&gt; head(airquality)
+# A tibble: 6 × 6
+  Ozone Solar.R  Wind  Temp Month   Day
+  &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1    41     190   7.4    67     5     1
+2    36     118   8.0    72     5     2
+3    12     149  12.6    74     5     3
+4    18     313  11.5    62     5     4
+5    NA      NA  14.3    56     5     5
+6    28      NA  14.9    66     5     6</code></pre>
+<pre class="r"><code>&gt; tail(airquality)
+# A tibble: 6 × 6
+  Ozone Solar.R  Wind  Temp Month   Day
+  &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1    14      20  16.6    63     9    25
+2    30     193   6.9    70     9    26
+3    NA     145  13.2    77     9    27
+4    14     191  14.3    75     9    28
+5    18     131   8.0    76     9    29
+6    20     223  11.5    68     9    30</code></pre>
+</section><section id="melt" class="slide level2">
+<h2>Melt</h2>
+<p>Melting can be thought of as melting a piece of solid metal (wide data), so it drips into long format.</p>
+<pre class="r"><code>&gt; aql &lt;- melt(airquality)
+No id variables; using all as measure variables
+&gt; head(aql)
+  variable value
+1    Ozone    41
+2    Ozone    36
+3    Ozone    12
+4    Ozone    18
+5    Ozone    NA
+6    Ozone    28</code></pre>
+<pre class="r"><code>&gt; tail(aql)
+    variable value
+913      Day    25
+914      Day    26
+915      Day    27
+916      Day    28
+917      Day    29
+918      Day    30</code></pre>
+</section><section id="guided-melt" class="slide level2">
+<h2>Guided Melt</h2>
+<p>In the previous example, we lose the fact that a set of measurements occurred on a particular day and month, so we can do a guided melt to keep this information.</p>
+<pre class="r"><code>&gt; aql &lt;- melt(airquality, id.vars = c(&quot;Month&quot;, &quot;Day&quot;))
+&gt; head(aql)
+  Month Day variable value
+1     5   1    Ozone    41
+2     5   2    Ozone    36
+3     5   3    Ozone    12
+4     5   4    Ozone    18
+5     5   5    Ozone    NA
+6     5   6    Ozone    28</code></pre>
+<pre class="r"><code>&gt; tail(aql)
+    Month Day variable value
+607     9  25     Temp    63
+608     9  26     Temp    70
+609     9  27     Temp    77
+610     9  28     Temp    75
+611     9  29     Temp    76
+612     9  30     Temp    68</code></pre>
+</section><section id="casting" class="slide level2">
+<h2>Casting</h2>
+<p>Casting allows us to go from long format to wide format data. It can be visualized as pouring molten metal (long format) into a cast to create a solid piece of metal (wide format).</p>
+<p>Casting is more difficult because choices have to be made to determine how the wide format will be organized. It often takes some thought and experimentation for new users.</p>
+<p>Let’s do an example with <code>dcast</code>, which is casting for data frames.</p>
+</section><section id="dcast" class="slide level2">
+<h2><code>dcast()</code></h2>
+<pre class="r"><code>&gt; aqw &lt;- dcast(aql, Month + Day ~ variable)
+&gt; head(aqw)
+  Month Day Ozone Solar.R Wind Temp
+1     5   1    41     190  7.4   67
+2     5   2    36     118  8.0   72
+3     5   3    12     149 12.6   74
+4     5   4    18     313 11.5   62
+5     5   5    NA      NA 14.3   56
+6     5   6    28      NA 14.9   66</code></pre>
+<pre class="r"><code>&gt; tail(aqw)
+    Month Day Ozone Solar.R Wind Temp
+148     9  25    14      20 16.6   63
+149     9  26    30     193  6.9   70
+150     9  27    NA     145 13.2   77
+151     9  28    14     191 14.3   75
+152     9  29    18     131  8.0   76
+153     9  30    20     223 11.5   68</code></pre>
+</section></section>
+<section><section id="transforming-data" class="titleslide slide level1"><h1>Transforming Data</h1></section><section id="dplyr-package" class="slide level2">
+<h2><code>dplyr</code> Package</h2>
+<p><code>dplyr</code> is a package with the following description:</p>
+<blockquote>
+<p>A fast, consistent tool for working with data frame like objects, both in memory and out of memory.</p>
+</blockquote>
+<p>This package offers a “grammar” for manipulating data frames.</p>
+<p>Everything that <code>dplyr</code> does can also be done using basic R commands – however, it tends to be much faster and easier to use <code>dplyr</code>.</p>
+</section><section id="grammar-of-dplyr" class="slide level2">
+<h2>Grammar of <code>dplyr</code></h2>
+<p>Verbs:</p>
+<ul>
+<li><code>filter</code>: extract a subset of rows from a data frame based on logical conditions</li>
+<li><code>arrange</code>: reorder rows of a data frame</li>
+<li><code>rename</code>: rename variables in a data frame</li>
+<li><code>select</code>: return a subset of the columns of a data frame, using a flexible notation</li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li><code>mutate</code>: add new variables/columns or transform existing variables</li>
+<li><code>distinct</code>: returns only the unique values in a table</li>
+<li><code>summarize</code>: generate summary statistics of different variables in the data frame, possibly within strata</li>
+<li><code>group_by</code>: breaks down a dataset into specified groups of rows</li>
+</ul>
+<p>Partially based on <em>R Programming for Data Science</em></p>
+</section><section id="example-baby-names" class="slide level2">
+<h2>Example: Baby Names</h2>
+<pre class="r"><code>&gt; library(&quot;dplyr&quot;, verbose=FALSE)
+&gt; library(&quot;babynames&quot;)
+&gt; ls()
+character(0)
+&gt; babynames &lt;- as_tibble(babynames::babynames)
+&gt; ls()
+[1] &quot;babynames&quot;</code></pre>
+</section><section id="babynames-object" class="slide level2">
+<h2><code>babynames</code> Object</h2>
+<pre class="r"><code>&gt; class(babynames)
+[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;
+&gt; dim(babynames)
+[1] 1858689       5</code></pre>
+<pre class="r"><code>&gt; babynames
+# A tibble: 1,858,689 × 5
+    year   sex      name     n       prop
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
+1   1880     F      Mary  7065 0.07238433
+2   1880     F      Anna  2604 0.02667923
+3   1880     F      Emma  2003 0.02052170
+4   1880     F Elizabeth  1939 0.01986599
+5   1880     F    Minnie  1746 0.01788861
+6   1880     F  Margaret  1578 0.01616737
+7   1880     F       Ida  1472 0.01508135
+8   1880     F     Alice  1414 0.01448711
+9   1880     F    Bertha  1320 0.01352404
+10  1880     F     Sarah  1288 0.01319618
+# ... with 1,858,679 more rows</code></pre>
+</section><section id="peek-at-the-data" class="slide level2">
+<h2>Peek at the Data</h2>
+<pre class="r"><code>&gt; set.seed(201)
+&gt; sample_n(babynames, 10) 
+# A tibble: 10 × 5
+    year   sex     name     n         prop
+   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
+1   1992     M   Kelcey    17 8.101322e-06
+2   1933     M   Hervey    14 1.372698e-05
+3   1968     M     Rich   116 6.529976e-05
+4   1906     F    Annis    30 9.571179e-05
+5   1993     M Stefanos     9 4.358763e-06
+6   1928     F   Janine    10 8.365506e-06
+7   1908     M    Pedro    53 3.185632e-04
+8   1968     M Rosemary     6 3.377574e-06
+9   1921     F    Rheda     7 5.470113e-06
+10  1956     M Clemente    26 1.212302e-05
+&gt; # try also sample_frac(babynames, 6e-6)</code></pre>
+</section><section id="operator" class="slide level2">
+<h2><code>%&gt;%</code> Operator</h2>
+<p>Originally from R package <code>magrittr</code>. Provides a mechanism for chaining commands with a forward-pipe operator, <code>%&gt;%</code>.</p>
+<pre class="r"><code>&gt; x &lt;- 1:10
+&gt; 
+&gt; x %&gt;% log(base=10) %&gt;% sum
+[1] 6.559763
+&gt; 
+&gt; sum(log(x,base=10))
+[1] 6.559763</code></pre>
+<pre class="r"><code>&gt; babynames %&gt;% sample_n(5)
+# A tibble: 5 × 5
+   year   sex      name     n         prop
+  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
+1  1980     F      Pola     6 3.370355e-06
+2  1997     F Shermaine     8 4.191640e-06
+3  1992     F       Mee    17 8.482331e-06
+4  1980     M     Abram   147 7.925844e-05
+5  1985     F   Coralia     6 3.250954e-06</code></pre>
+</section><section id="filter" class="slide level2">
+<h2><code>filter()</code></h2>
+<pre class="r"><code>&gt; filter(babynames, year==1880, sex==&quot;F&quot;)
+# A tibble: 942 × 5
+    year   sex      name     n       prop
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
+1   1880     F      Mary  7065 0.07238433
+2   1880     F      Anna  2604 0.02667923
+3   1880     F      Emma  2003 0.02052170
+4   1880     F Elizabeth  1939 0.01986599
+5   1880     F    Minnie  1746 0.01788861
+6   1880     F  Margaret  1578 0.01616737
+7   1880     F       Ida  1472 0.01508135
+8   1880     F     Alice  1414 0.01448711
+9   1880     F    Bertha  1320 0.01352404
+10  1880     F     Sarah  1288 0.01319618
+# ... with 932 more rows
+&gt; # same as filter(babynames, year==1880 &amp; sex==&quot;F&quot;)</code></pre>
+<pre class="r"><code>&gt; filter(babynames, year==1880, sex==&quot;F&quot;, n &gt; 5000)
+# A tibble: 1 × 5
+   year   sex  name     n       prop
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
+1  1880     F  Mary  7065 0.07238433</code></pre>
+</section><section id="arrange" class="slide level2">
+<h2><code>arrange()</code></h2>
+<pre class="r"><code>&gt; arrange(babynames, name, year, sex)
+# A tibble: 1,858,689 × 5
+    year   sex  name     n         prop
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
+1   2007     M Aaban     5 2.259872e-06
+2   2009     M Aaban     6 2.833201e-06
+3   2010     M Aaban     9 4.388578e-06
+4   2011     M Aaban    11 5.427020e-06
+5   2012     M Aaban    11 5.435940e-06
+6   2013     M Aaban    14 6.952863e-06
+7   2014     M Aaban    16 7.843929e-06
+8   2015     M Aaban    15 7.400566e-06
+9   2011     F Aabha     7 3.620673e-06
+10  2012     F Aabha     5 2.585247e-06
+# ... with 1,858,679 more rows</code></pre>
+</section><section id="arrange-1" class="slide level2">
+<h2><code>arrange()</code></h2>
+<pre class="r"><code>&gt; arrange(babynames, desc(name), desc(year), sex)
+# A tibble: 1,858,689 × 5
+    year   sex      name     n         prop
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;
+1   2010     M     Zzyzx     5 2.438099e-06
+2   2014     M     Zyyon     6 2.941474e-06
+3   2010     F   Zyyanna     6 3.066148e-06
+4   2015     M     Zyvon     6 2.960226e-06
+5   2009     M    Zyvion     5 2.361001e-06
+6   2015     M      Zyus     5 2.466855e-06
+7   2010     M Zytavious     6 2.925719e-06
+8   2009     M Zytavious     7 3.305401e-06
+9   2007     M Zytavious     6 2.711846e-06
+10  2006     M Zytavious     7 3.196251e-06
+# ... with 1,858,679 more rows</code></pre>
+</section><section id="rename" class="slide level2">
+<h2><code>rename()</code></h2>
+<pre class="r"><code>&gt; rename(babynames, number=n)
+# A tibble: 1,858,689 × 5
+    year   sex      name number       prop
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;
+1   1880     F      Mary   7065 0.07238433
+2   1880     F      Anna   2604 0.02667923
+3   1880     F      Emma   2003 0.02052170
+4   1880     F Elizabeth   1939 0.01986599
+5   1880     F    Minnie   1746 0.01788861
+6   1880     F  Margaret   1578 0.01616737
+7   1880     F       Ida   1472 0.01508135
+8   1880     F     Alice   1414 0.01448711
+9   1880     F    Bertha   1320 0.01352404
+10  1880     F     Sarah   1288 0.01319618
+# ... with 1,858,679 more rows</code></pre>
+</section><section id="select" class="slide level2">
+<h2><code>select()</code></h2>
+<pre class="r"><code>&gt; select(babynames, sex, name, n)
+# A tibble: 1,858,689 × 3
+     sex      name     n
+   &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;
+1      F      Mary  7065
+2      F      Anna  2604
+3      F      Emma  2003
+4      F Elizabeth  1939
+5      F    Minnie  1746
+6      F  Margaret  1578
+7      F       Ida  1472
+8      F     Alice  1414
+9      F    Bertha  1320
+10     F     Sarah  1288
+# ... with 1,858,679 more rows
+&gt; # same as select(babynames, sex:n)</code></pre>
+</section><section id="renaming-with-select" class="slide level2">
+<h2>Renaming with <code>select()</code></h2>
+<pre class="r"><code>&gt; select(babynames, sex, name, number=n)
+# A tibble: 1,858,689 × 3
+     sex      name number
+   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;
+1      F      Mary   7065
+2      F      Anna   2604
+3      F      Emma   2003
+4      F Elizabeth   1939
+5      F    Minnie   1746
+6      F  Margaret   1578
+7      F       Ida   1472
+8      F     Alice   1414
+9      F    Bertha   1320
+10     F     Sarah   1288
+# ... with 1,858,679 more rows</code></pre>
+</section><section id="mutate" class="slide level2">
+<h2><code>mutate()</code></h2>
+<pre class="r"><code>&gt; mutate(babynames, total_by_year=round(n/prop))
+# A tibble: 1,858,689 × 6
+    year   sex      name     n       prop total_by_year
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+1   1880     F      Mary  7065 0.07238433         97604
+2   1880     F      Anna  2604 0.02667923         97604
+3   1880     F      Emma  2003 0.02052170         97604
+4   1880     F Elizabeth  1939 0.01986599         97604
+5   1880     F    Minnie  1746 0.01788861         97604
+6   1880     F  Margaret  1578 0.01616737         97604
+7   1880     F       Ida  1472 0.01508135         97604
+8   1880     F     Alice  1414 0.01448711         97604
+9   1880     F    Bertha  1320 0.01352404         97604
+10  1880     F     Sarah  1288 0.01319618         97604
+# ... with 1,858,679 more rows
+&gt; # see also transmutate</code></pre>
+</section><section id="no.-individuals-by-year-and-sex" class="slide level2">
+<h2>No. Individuals by Year and Sex</h2>
+<p>Let’s put a few things together now adding the function <code>distinct()</code>…</p>
+<pre class="r"><code>&gt; babynames %&gt;% mutate(total_by_year=round(n/prop)) %&gt;% 
++   select(sex, year, total_by_year) %&gt;% distinct()
+# A tibble: 272 × 3
+     sex  year total_by_year
+   &lt;chr&gt; &lt;dbl&gt;         &lt;dbl&gt;
+1      F  1880         97604
+2      M  1880        118399
+3      F  1881         98855
+4      M  1881        108282
+5      F  1882        115696
+6      M  1882        122031
+7      F  1883        120059
+8      M  1883        112478
+9      F  1884        137586
+10     M  1884        122739
+# ... with 262 more rows</code></pre>
+</section><section id="summarize" class="slide level2">
+<h2><code>summarize()</code></h2>
+<pre class="r"><code>&gt; summarize(babynames, mean_n = mean(n), median_n = median(n), 
++           number_sex = n_distinct(sex), 
++           distinct_names = n_distinct(name))
+# A tibble: 1 × 4
+   mean_n median_n number_sex distinct_names
+    &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;          &lt;int&gt;
+1 183.383       12          2          95025</code></pre>
+</section><section id="group_by" class="slide level2">
+<h2><code>group_by()</code></h2>
+<pre class="r"><code>&gt; babynames %&gt;% group_by(year, sex)
+Source: local data frame [1,858,689 x 5]
+Groups: year, sex [272]
+
+    year   sex      name     n       prop
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
+1   1880     F      Mary  7065 0.07238433
+2   1880     F      Anna  2604 0.02667923
+3   1880     F      Emma  2003 0.02052170
+4   1880     F Elizabeth  1939 0.01986599
+5   1880     F    Minnie  1746 0.01788861
+6   1880     F  Margaret  1578 0.01616737
+7   1880     F       Ida  1472 0.01508135
+8   1880     F     Alice  1414 0.01448711
+9   1880     F    Bertha  1320 0.01352404
+10  1880     F     Sarah  1288 0.01319618
+# ... with 1,858,679 more rows</code></pre>
+</section><section id="no.-individuals-by-year-and-sex-1" class="slide level2">
+<h2>No. Individuals by Year and Sex</h2>
+<pre class="r"><code>&gt; babynames %&gt;% group_by(year, sex) %&gt;% 
++   summarize(total_by_year=sum(n))
+Source: local data frame [272 x 3]
+Groups: year [?]
+
+    year   sex total_by_year
+   &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;
+1   1880     F         90992
+2   1880     M        110490
+3   1881     F         91953
+4   1881     M        100743
+5   1882     F        107848
+6   1882     M        113686
+7   1883     F        112318
+8   1883     M        104627
+9   1884     F        129020
+10  1884     M        114443
+# ... with 262 more rows</code></pre>
+<p>Compare to earlier slide. Why the difference?</p>
+</section><section id="how-many-distinct-names" class="slide level2">
+<h2>How Many Distinct Names?</h2>
+<pre class="r"><code>&gt; babynames %&gt;% group_by(sex) %&gt;% 
++   summarize(mean_n = mean(n), 
++             distinct_names_sex = n_distinct(name))
+# A tibble: 2 × 3
+    sex   mean_n distinct_names_sex
+  &lt;chr&gt;    &lt;dbl&gt;              &lt;int&gt;
+1     F 153.3909              65658
+2     M 226.9508              39728</code></pre>
+</section><section id="most-popular-names" class="slide level2">
+<h2>Most Popular Names</h2>
+<pre class="r"><code>&gt; top_names &lt;- babynames %&gt;% group_by(year, sex) %&gt;% 
++   summarize(top_name = name[which.max(n)])
+&gt; 
+&gt; head(top_names)
+Source: local data frame [6 x 3]
+Groups: year [3]
+
+   year   sex top_name
+  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+1  1880     F     Mary
+2  1880     M     John
+3  1881     F     Mary
+4  1881     M     John
+5  1882     F     Mary
+6  1882     M     John</code></pre>
+</section><section id="most-popular-names-1" class="slide level2">
+<h2>Most Popular Names</h2>
+<h3 id="recent-years">Recent Years</h3>
+<pre class="r"><code>&gt; tail(top_names, n=10)
+Source: local data frame [10 x 3]
+Groups: year [5]
+
+    year   sex top_name
+   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+1   2011     F   Sophia
+2   2011     M    Jacob
+3   2012     F   Sophia
+4   2012     M    Jacob
+5   2013     F   Sophia
+6   2013     M     Noah
+7   2014     F     Emma
+8   2014     M     Noah
+9   2015     F     Emma
+10  2015     M     Noah</code></pre>
+</section><section id="most-popular-female-names" class="slide level2">
+<h2>Most Popular Female Names</h2>
+<h3 id="s">1990s</h3>
+<pre class="r"><code>&gt; top_names %&gt;% filter(year &gt;= 1990 &amp; year &lt; 2000, sex==&quot;F&quot;)
+Source: local data frame [10 x 3]
+Groups: year [10]
+
+    year   sex top_name
+   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+1   1990     F  Jessica
+2   1991     F   Ashley
+3   1992     F   Ashley
+4   1993     F  Jessica
+5   1994     F  Jessica
+6   1995     F  Jessica
+7   1996     F    Emily
+8   1997     F    Emily
+9   1998     F    Emily
+10  1999     F    Emily</code></pre>
+</section><section id="most-popular-male-names" class="slide level2">
+<h2>Most Popular Male Names</h2>
+<h3 id="s-1">1990s</h3>
+<pre class="r"><code>&gt; top_names %&gt;% filter(year &gt;= 1990 &amp; year &lt; 2000, sex==&quot;M&quot;)
+Source: local data frame [10 x 3]
+Groups: year [10]
+
+    year   sex top_name
+   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+1   1990     M  Michael
+2   1991     M  Michael
+3   1992     M  Michael
+4   1993     M  Michael
+5   1994     M  Michael
+6   1995     M  Michael
+7   1996     M  Michael
+8   1997     M  Michael
+9   1998     M  Michael
+10  1999     M    Jacob</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; # Analyzing the name &#39;John&#39;
+&gt; john &lt;- babynames %&gt;% filter(sex==&quot;M&quot;, name==&quot;John&quot;)
+&gt; plot(john$year, john$prop, type=&quot;l&quot;)</code></pre>
+<p><img src="week02_files/figure-revealjs/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; # Analyzing the name &#39;Bella&#39;
+&gt; bella &lt;- babynames %&gt;% filter(sex==&quot;F&quot;, name==&quot;Bella&quot;) 
+&gt; plot(bella$year, bella$prop, type=&quot;l&quot;)</code></pre>
+<p><img src="week02_files/figure-revealjs/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="additional-examples" class="slide level2">
+<h2>Additional Examples</h2>
+<p>You should study additional tutorials of <code>dplyr</code> that utilize other data sets:</p>
+<ul>
+<li>Read the <code>dplyr</code> <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">introductory vignette</a></li>
+<li>Read the examples given in the <em>R for Data Science</em> assigned reading</li>
+</ul>
+</section><section id="additional-dplyr-features" class="slide level2">
+<h2>Additional <code>dplyr</code> Features</h2>
+<ul>
+<li>We’ve only scratched the surface – many interesting demos of <code>dplyr</code> can be found online</li>
+<li><code>dplyr</code> can work with other data frame backends such as SQL databases</li>
+<li>There is an SQL interface for relational databases via the <code>DBI</code> package</li>
+<li><code>dplyr</code> can be integrated with the <code>data.table</code> package for large fast tables</li>
+<li>There is a <a href="http://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly">healthy rivalry</a> between <code>dplyr</code> and <a href="https://cran.r-project.org/web/packages/data.table/index.html"><code>data.table</code></a></li>
+</ul>
+</section></section>
+<section><section id="relational-data" class="titleslide slide level1"><h1>Relational Data</h1></section><section id="multiple-data-sets" class="slide level2">
+<h2>Multiple Data Sets</h2>
+<p>In many data analyses you will have multiple tables of related data that must be combined in order to carry out your analysis.</p>
+<p>The <code>dplyr</code> package includes a number of tools to facilitate this.</p>
+</section><section id="toy-example" class="slide level2">
+<h2>Toy Example</h2>
+<p>Here are two data frames that are related through a common variable called <code>key</code>.</p>
+<pre class="r"><code>&gt; x &lt;- tibble(key = c(1, 2, 3), x_val = c(&quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot;))
+&gt; y &lt;- tibble(key = c(1, 2, 4), y_val = c(&quot;y1&quot;, &quot;y2&quot;, &quot;y4&quot;))</code></pre>
+<pre class="r"><code>&gt; x
+# A tibble: 3 × 2
+    key x_val
+  &lt;dbl&gt; &lt;chr&gt;
+1     1    x1
+2     2    x2
+3     3    x3
+&gt; y
+# A tibble: 3 × 2
+    key y_val
+  &lt;dbl&gt; &lt;chr&gt;
+1     1    y1
+2     2    y2
+3     4    y4</code></pre>
+</section><section id="verbs" class="slide level2">
+<h2>Verbs</h2>
+<p>To work with relational data you need verbs that work with pairs of tables. There are three families of verbs designed to work with relational data.</p>
+<ul>
+<li><em>Mutating joins</em> add new variables to one data frame from matching observations in another.</li>
+<li><em>Filtering joins</em> filter observations from one data frame based on whether or not they match an observation in the other table.</li>
+<li><em>Set operations</em> treat observations as if they were set elements.</li>
+</ul>
+<p>From <em>R for Data Science</em></p>
+</section><section id="inner_join" class="slide level2">
+<h2><code>inner_join()</code></h2>
+<p>An inner-join matches pairs of observations when their keys are equal.</p>
+<pre class="r"><code>&gt; inner_join(x, y, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 2 × 3
+    key x_val y_val
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1    x1    y1
+2     2    x2    y2</code></pre>
+</section><section id="left_join" class="slide level2">
+<h2><code>left_join()</code></h2>
+<p>A left-join keeps all observations in the first argument, <code>x</code>.</p>
+<pre class="r"><code>&gt; left_join(x, y, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 3 × 3
+    key x_val y_val
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1    x1    y1
+2     2    x2    y2
+3     3    x3  &lt;NA&gt;</code></pre>
+<pre class="r"><code>&gt; x %&gt;% left_join(y, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 3 × 3
+    key x_val y_val
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1    x1    y1
+2     2    x2    y2
+3     3    x3  &lt;NA&gt;</code></pre>
+</section><section id="right_join" class="slide level2">
+<h2><code>right_join()</code></h2>
+<p>A right-join keeps all observations in the second argument, <code>y</code>.</p>
+<pre class="r"><code>&gt; right_join(x, y)
+Joining, by = &quot;key&quot;
+# A tibble: 3 × 3
+    key x_val y_val
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1    x1    y1
+2     2    x2    y2
+3     4  &lt;NA&gt;    y4</code></pre>
+</section><section id="full_join" class="slide level2">
+<h2><code>full_join()</code></h2>
+<p>A full-join keeps all observations in either argument, <code>x</code> or <code>y</code>.</p>
+<pre class="r"><code>&gt; full_join(x, y, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 4 × 3
+    key x_val y_val
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1    x1    y1
+2     2    x2    y2
+3     3    x3  &lt;NA&gt;
+4     4  &lt;NA&gt;    y4</code></pre>
+</section><section id="anti_join" class="slide level2">
+<h2><code>anti_join()</code></h2>
+<p>An anti-join removes all observations in the first argument, <code>x</code>, that appear in the second argument, <code>y</code>.</p>
+<pre class="r"><code>&gt; anti_join(x, y, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 1 × 2
+    key x_val
+  &lt;dbl&gt; &lt;chr&gt;
+1     3    x3</code></pre>
+</section><section id="semi_join" class="slide level2">
+<h2><code>semi_join()</code></h2>
+<p>A semi-join keeps all observations in the first argument, <code>x</code>, that have a match in the second argument, <code>y</code>.</p>
+<pre class="r"><code>&gt; semi_join(x, y, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 2 × 2
+    key x_val
+  &lt;dbl&gt; &lt;chr&gt;
+1     1    x1
+2     2    x2</code></pre>
+</section><section id="repeated-key-values" class="slide level2">
+<h2>Repeated Key Values</h2>
+<p>When one of the two data frames has repeated <code>key</code> values, the observations are repeated in the other data frame.</p>
+<pre class="r"><code>&gt; y2
+# A tibble: 4 × 2
+    key y_val
+  &lt;dbl&gt; &lt;chr&gt;
+1     1    y1
+2     2   y2a
+3     2   y2b
+4     4    y4</code></pre>
+<pre class="r"><code>&gt; x %&gt;% left_join(y2, key=&quot;key&quot;)
+Joining, by = &quot;key&quot;
+# A tibble: 4 × 3
+    key x_val y_val
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1    x1    y1
+2     2    x2   y2a
+3     2    x2   y2b
+4     3    x3  &lt;NA&gt;</code></pre>
+</section><section id="set-operations" class="slide level2">
+<h2>Set Operations</h2>
+<p>One can perform traditional set operations on the rows of data frames.</p>
+<ul>
+<li><code>intersect(x, y)</code>: return only observations in both <code>x</code> and <code>y</code></li>
+<li><code>union(x, y)</code>: return unique observations in <code>x</code> and <code>y</code></li>
+<li><code>setdiff(x, y)</code>: return observations in <code>x</code>, but not in <code>y</code></li>
+</ul>
+<p>From <em>R for Data Science</em></p>
+</section><section id="example-setdiff" class="slide level2">
+<h2>Example <code>setdiff()</code></h2>
+<pre class="r"><code>&gt; df1
+# A tibble: 2 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     1
+2     2     1
+&gt; df2
+# A tibble: 2 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     1
+2     1     2
+&gt; setdiff(df1, df2)
+# A tibble: 1 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     2     1</code></pre>
+</section></section>
+<section><section id="getting-data-in-and-out-of-r" class="titleslide slide level1"><h1>Getting Data In and Out of R</h1></section><section id="rdata-files" class="slide level2">
+<h2><code>.RData</code> Files</h2>
+<p>R objects can be saved to binary <code>.RData</code> files and loaded with the <code>save</code> (or <code>save.image</code>) and <code>load</code> functions, respectively.</p>
+<p>This is the easiest way to get data into R.</p>
+</section><section id="readr-package" class="slide level2">
+<h2><code>readr</code> Package</h2>
+<p>There are a number of R packages that provide more sophisticated tools for getting data in and out of R, especially as data sets have become larger and larger.</p>
+<p>One of those packages is <code>readr</code> for text files. It reads and writes data quickly, provides a useful status bar for large files, and does a good job at determining data types.</p>
+<p><code>readr</code> is organized similarly to the base R functions. For example, there are functions <code>read_table</code>, <code>read_csv</code>, <code>write_tsv</code>, and <code>write_csv</code>.</p>
+<p>See also <code>fread</code> and <code>fwrite</code> from the <code>data.table</code> package.</p>
+</section><section id="scraping-from-the-web-ex.-1" class="slide level2">
+<h2>Scraping from the Web (Ex. 1)</h2>
+<p>There are several packages that facilitate “scraping” data from the web, including <code>rvest</code> demonstrated here.</p>
+<pre class="r"><code>&gt; library(&quot;rvest&quot;)
+&gt; schedule &lt;- read_html(&quot;http://jdstorey.github.io/asdscourse/schedule/&quot;)
+&gt; first_table &lt;- html_table(schedule)[[1]]
+&gt; names(first_table) &lt;- c(&quot;week&quot;, &quot;topics&quot;, &quot;reading&quot;)
+&gt; first_table[2,&quot;week&quot;]
+[1] 2
+&gt; first_table[2,&quot;topics&quot;] %&gt;% strsplit(split=&quot;  &quot;)
+[[1]]
+[1] &quot;Data Wrangling&quot;
+&gt; first_table[2,&quot;reading&quot;] %&gt;% strsplit(split=&quot;  &quot;)
+[[1]]
+[1] &quot;R4DS Ch. 5, 9-16&quot;
+&gt; grep(&quot;R4DS&quot;, first_table$reading) # which rows (weeks) have R4DS
+[1] 1 2 3</code></pre>
+</section><section id="scraping-from-the-web-ex.-2" class="slide level2">
+<h2>Scraping from the Web (Ex. 2)</h2>
+<p>The <code>rvest</code> documentation recommends <a href="http://selectorgadget.com">SelectorGadget</a>, which is “a javascript bookmarklet that allows you to interactively figure out what css selector you need to extract desired components from a page.”</p>
+<pre class="r"><code>&gt; usg_url &lt;- &quot;http://princetonusg.com/meet-your-usg-officers/&quot;
+&gt; usg &lt;- read_html(usg_url)
+&gt; officers &lt;- html_nodes(usg, &quot;.team-member-name&quot;) %&gt;% 
++             html_text
+&gt; head(officers, n=20)
+ [1] &quot;Myesha Jemison&quot;       &quot;Daniel Qian&quot;         
+ [3] &quot;Alison Shim&quot;          &quot;Katherine Wang&quot;      
+ [5] &quot;Pooja Patel&quot;          &quot;Miranda Rosen&quot;       
+ [7] &quot;Michael Asparrin&quot;     &quot;Devin Kilpatrick&quot;    
+ [9] &quot;Pritika Mehra&quot;        &quot;Olivia Grah&quot;         
+[11] &quot;Lucas Ramos&quot;          &quot;Ellie Shannon&quot;       
+[13] &quot;Nicholas Wu&quot;          &quot;Wendy Zhao&quot;          
+[15] &quot;Soraya Morales Nuñez&quot; &quot;Eli Schechner&quot;       
+[17] &quot;Ruby Guo&quot;             &quot;Andrew Ma&quot;           
+[19] &quot;Nate Lambert&quot;         &quot;June Philippe&quot;       </code></pre>
+</section><section id="apis" class="slide level2">
+<h2>APIs</h2>
+<p>API stands for “application programming interface” which is <a href="https://en.wikipedia.org/wiki/Application_programming_interface">a set of routines, protocols, and tools for building software and applications</a>.</p>
+<p>A specific website may provide an API for scraping data from that website.</p>
+<p>There are R packages that provide an interface with specific APIs, such as the <a href="https://cran.r-project.org/web/packages/twitteR/index.html"><code>twitteR</code></a> package.</p>
+</section></section>
+<section><section id="case-study" class="titleslide slide level1"><h1>Case Study</h1></section><section id="yeast-genomics" class="slide level2">
+<h2>Yeast Genomics</h2>
+<p><a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083">Smith and Kruglyak (2008)</a> is a study that measured 2820 genotypes in 109 yeast F1 segregants from a cross between parental lines BY and RM.</p>
+<p>They also measured gene expression on 4482 genes in each of these segregants when growing in two different Carbon sources, glucose and ethanol.</p>
+</section><section id="load-data" class="slide level2">
+<h2>Load Data</h2>
+<p>The data was distributed as a collection of matrices in R.</p>
+<pre class="r"><code>&gt; rm(list=ls())
+&gt; load(&quot;./data/smith_kruglyak.RData&quot;)
+&gt; ls()
+[1] &quot;exp.e&quot;      &quot;exp.g&quot;      &quot;exp.pos&quot;    &quot;marker&quot;    
+[5] &quot;marker.pos&quot;
+&gt; eapply(env=.GlobalEnv, dim)
+$exp.e
+[1] 4482  109
+
+$exp.g
+[1] 4482  109
+
+$marker
+[1] 2820  109
+
+$exp.pos
+[1] 4482    3
+
+$marker.pos
+[1] 2820    2</code></pre>
+</section><section id="gene-expression-matrices" class="slide level2">
+<h2>Gene Expression Matrices</h2>
+<pre class="r"><code>&gt; exp.g %&gt;% cbind(rownames(exp.g), .) %&gt;% as_tibble() %&gt;% 
++   print()
+# A tibble: 4,482 × 110
+        `` X100g.20_4_c.glucose X101g.21_1_d.glucose
+     &lt;chr&gt;                &lt;chr&gt;                &lt;chr&gt;
+1  YJR107W                 0.22                 0.18
+2  YPL270W                -0.29                 -0.2
+3  YDR518W                 0.72                 0.04
+4  YDR233C                 0.23                 0.31
+5  YHR098C                  0.4                -0.04
+6  YFR029W                -0.36                 0.35
+7  YPL198W                 0.23                -0.21
+8  YDR001C                -0.09                 0.57
+9  YLR394W                -0.23                 0.13
+10 YCR079W                -0.25                -0.98
+# ... with 4,472 more rows, and 107 more variables:
+#   X102g.21_2_d.glucose &lt;chr&gt;, X103g.21_3_d.glucose &lt;chr&gt;,
+#   X104g.21_4_d.glucose &lt;chr&gt;, X105g.21_5_c.glucose &lt;chr&gt;,
+#   X106g.22_2_d.glucose &lt;chr&gt;, X107g.22_3_b.glucose &lt;chr&gt;,
+#   X109g.22_5_d.glucose &lt;chr&gt;, X10g.2_5_d.glucose &lt;chr&gt;,
+#   X110g.23_3_d.glucose &lt;chr&gt;, X111g.23_5_d.glucose &lt;chr&gt;,
+#   X112g.24_1_d.glucose &lt;chr&gt;, X113g.25_1_d.glucose &lt;chr&gt;,
+#   X114g.25_3_d.glucose &lt;chr&gt;, X115g.25_4_d.glucose &lt;chr&gt;,
+#   X116g.26_1_d.glucose &lt;chr&gt;, X117g.26_2_d.glucose &lt;chr&gt;,
+#   X11g.2_6_d.glucose &lt;chr&gt;, X12g.2_7_a.glucose &lt;chr&gt;,
+#   X13g.3_1_d.glucose &lt;chr&gt;, X15g.3_3_d.glucose &lt;chr&gt;,
+#   X16g.3_4_d.glucose &lt;chr&gt;, X17g.3_5_d.glucose &lt;chr&gt;,
+#   X18g.4_1_c.glucose &lt;chr&gt;, X1g.1_1_d.glucose &lt;chr&gt;,
+#   X20g.4_3_d.glucose &lt;chr&gt;, X21g.4_4_d.glucose &lt;chr&gt;,
+#   X22g.5_1_d.glucose &lt;chr&gt;, X23g.5_2_d.glucose &lt;chr&gt;,
+#   X24g.5_3_d.glucose &lt;chr&gt;, X25g.5_4_d.glucose &lt;chr&gt;,
+#   X26g.5_5_d.glucose &lt;chr&gt;, X27g.6_1_d.glucose &lt;chr&gt;,
+#   X28g.6_2_b.glucose &lt;chr&gt;, X29g.6_3_c.glucose &lt;chr&gt;,
+#   X30g.6_4_d.glucose &lt;chr&gt;, X31g.6_5_d.glucose &lt;chr&gt;,
+#   X32g.6_6_d.glucose &lt;chr&gt;, X33g.6_7_d.glucose &lt;chr&gt;,
+#   X34g.7_1_d.glucose &lt;chr&gt;, X35g.7_2_c.glucose &lt;chr&gt;,
+#   X36g.7_3_d.glucose &lt;chr&gt;, X37g.7_4_c.glucose &lt;chr&gt;,
+#   X38g.7_5_d.glucose &lt;chr&gt;, X39g.7_6_c.glucose &lt;chr&gt;,
+#   X3g.1_3_d.glucose &lt;chr&gt;, X40g.7_7_c.glucose &lt;chr&gt;,
+#   X41g.7_8_d.glucose &lt;chr&gt;, X42g.8_1_a.glucose &lt;chr&gt;,
+#   X43g.8_2_d.glucose &lt;chr&gt;, X44g.8_3_a.glucose &lt;chr&gt;,
+#   X45g.8_4_c.glucose &lt;chr&gt;, X46g.8_5_b.glucose &lt;chr&gt;,
+#   X47g.8_6_c.glucose &lt;chr&gt;, X48g.8_7_b.glucose &lt;chr&gt;,
+#   X49g.9_1_d.glucose &lt;chr&gt;, X4g.1_4_d.glucose &lt;chr&gt;,
+#   X50g.9_2_d.glucose &lt;chr&gt;, X51g.9_3_d.glucose &lt;chr&gt;,
+#   X52g.9_4_d.glucose &lt;chr&gt;, X53g.9_5_d.glucose &lt;chr&gt;,
+#   X54g.9_6_d.glucose &lt;chr&gt;, X55g.9_7_d.glucose &lt;chr&gt;,
+#   X56g.10_1_c.glucose &lt;chr&gt;, X57g.10_2_d.glucose &lt;chr&gt;,
+#   X58g.10_3_c.glucose &lt;chr&gt;, X59g.10_4_d.glucose &lt;chr&gt;,
+#   X5g.1_5_c.glucose &lt;chr&gt;, X60g.11_1_a.glucose &lt;chr&gt;,
+#   X61g.11_2_d.glucose &lt;chr&gt;, X62g.11_3_b.glucose &lt;chr&gt;,
+#   X63g.12_1_d.glucose &lt;chr&gt;, X64g.12_2_b.glucose &lt;chr&gt;,
+#   X65g.13_1_a.glucose &lt;chr&gt;, X66g.13_2_c.glucose &lt;chr&gt;,
+#   X67g.13_3_b.glucose &lt;chr&gt;, X68g.13_4_a.glucose &lt;chr&gt;,
+#   X69g.13_5_c.glucose &lt;chr&gt;, X70g.14_1_b.glucose &lt;chr&gt;,
+#   X71g.14_2_c.glucose &lt;chr&gt;, X73g.14_4_a.glucose &lt;chr&gt;,
+#   X74g.14_5_b.glucose &lt;chr&gt;, X75g.14_6_d.glucose &lt;chr&gt;,
+#   X76g.14_7_c.glucose &lt;chr&gt;, X77g.15_2_d.glucose &lt;chr&gt;,
+#   X78g.15_3_b.glucose &lt;chr&gt;, X79g.15_4_d.glucose &lt;chr&gt;,
+#   X7g.2_2_d.glucose &lt;chr&gt;, X80g.15_5_b.glucose &lt;chr&gt;,
+#   X82g.16_1_d.glucose &lt;chr&gt;, X83g.17_1_a.glucose &lt;chr&gt;,
+#   X84g.17_2_d.glucose &lt;chr&gt;, X85g.17_4_a.glucose &lt;chr&gt;,
+#   X86g.17_5_b.glucose &lt;chr&gt;, X87g.18_1_d.glucose &lt;chr&gt;,
+#   X88g.18_2_d.glucose &lt;chr&gt;, X89g.18_3_d.glucose &lt;chr&gt;,
+#   X8g.2_3_d.glucose &lt;chr&gt;, X90g.18_4_c.glucose &lt;chr&gt;,
+#   X92g.19_1_c.glucose &lt;chr&gt;, X93g.19_2_c.glucose &lt;chr&gt;, ...</code></pre>
+</section><section id="gene-position-matrix" class="slide level2">
+<h2>Gene Position Matrix</h2>
+<pre class="r"><code>&gt; exp.pos %&gt;% cbind(rownames(exp.pos), .) %&gt;% as_tibble() %&gt;% 
++   print()
+# A tibble: 4,482 × 4
+        `` Chromsome Start_coord End_coord
+     &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;
+1  YJR107W        10      627333    628319
+2  YPL270W        16       30482     32803
+3  YDR518W         4     1478600   1480153
+4  YDR233C         4      930353    929466
+5  YHR098C         8      301937    299148
+6  YFR029W         6      210925    212961
+7  YPL198W        16      173151    174701
+8  YDR001C         4      452472    450217
+9  YLR394W        12      907950    909398
+10 YCR079W         3      252842    254170
+# ... with 4,472 more rows</code></pre>
+</section><section id="row-names" class="slide level2">
+<h2>Row Names</h2>
+<p>The gene names are contained in the row names.</p>
+<pre class="r"><code>&gt; head(rownames(exp.g))
+[1] &quot;YJR107W&quot; &quot;YPL270W&quot; &quot;YDR518W&quot; &quot;YDR233C&quot; &quot;YHR098C&quot; &quot;YFR029W&quot;
+&gt; head(rownames(exp.e))
+[1] &quot;YJR107W&quot; &quot;YPL270W&quot; &quot;YDR518W&quot; &quot;YDR233C&quot; &quot;YHR098C&quot; &quot;YFR029W&quot;
+&gt; head(rownames(exp.pos))
+[1] &quot;YJR107W&quot; &quot;YPL270W&quot; &quot;YDR518W&quot; &quot;YDR233C&quot; &quot;YHR098C&quot; &quot;YFR029W&quot;
+&gt; all.equal(rownames(exp.g), rownames(exp.e))
+[1] TRUE
+&gt; all.equal(rownames(exp.g), rownames(exp.pos))
+[1] TRUE</code></pre>
+</section><section id="unify-column-names" class="slide level2">
+<h2>Unify Column Names</h2>
+<p>The segregants are column names, and they are inconsistent across matrices.</p>
+<pre class="r"><code>&gt; head(colnames(exp.g))
+[1] &quot;X100g.20_4_c.glucose&quot; &quot;X101g.21_1_d.glucose&quot;
+[3] &quot;X102g.21_2_d.glucose&quot; &quot;X103g.21_3_d.glucose&quot;
+[5] &quot;X104g.21_4_d.glucose&quot; &quot;X105g.21_5_c.glucose&quot;
+&gt; head(colnames(marker))
+[1] &quot;20_4_c&quot; &quot;21_1_d&quot; &quot;21_2_d&quot; &quot;21_3_d&quot; &quot;21_4_d&quot; &quot;21_5_c&quot;
+&gt;      
+&gt; #fix column names with gsub
+&gt; colnames(exp.g) %&lt;&gt;% strsplit(split=&quot;.&quot;, fixed=TRUE) %&gt;%
++   lapply(function(x) {x[2]})
+&gt; colnames(exp.e) %&lt;&gt;% strsplit(split=&quot;.&quot;, fixed=TRUE) %&gt;%
++   lapply(function(x) {x[2]})
+&gt; head(colnames(exp.g))
+[1] &quot;20_4_c&quot; &quot;21_1_d&quot; &quot;21_2_d&quot; &quot;21_3_d&quot; &quot;21_4_d&quot; &quot;21_5_c&quot;</code></pre>
+</section><section id="gene-positions" class="slide level2">
+<h2>Gene Positions</h2>
+<p>Let’s first pull out rownames of <code>exp.pos</code> and make them a column in the data frame.</p>
+<pre class="r"><code>&gt; gene_pos &lt;- exp.pos %&gt;% as_tibble() %&gt;%
++   mutate(gene = rownames(exp.pos)) %&gt;%
++   dplyr::select(gene, chr = Chromsome, start = Start_coord, 
++                 end = End_coord)
+&gt; print(gene_pos, n=7)
+# A tibble: 4,482 × 4
+     gene   chr   start     end
+    &lt;chr&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
+1 YJR107W    10  627333  628319
+2 YPL270W    16   30482   32803
+3 YDR518W     4 1478600 1480153
+4 YDR233C     4  930353  929466
+5 YHR098C     8  301937  299148
+6 YFR029W     6  210925  212961
+7 YPL198W    16  173151  174701
+# ... with 4,475 more rows</code></pre>
+</section><section id="tidy-each-expression-matrix" class="slide level2">
+<h2>Tidy Each Expression Matrix</h2>
+<p>We <code>melt</code> the expression matrices and bind them together into one big tidy data frame.</p>
+<pre class="r"><code>&gt; exp_g &lt;- melt(exp.g) %&gt;% as_tibble() %&gt;% 
++   dplyr::select(gene = Var1, segregant = Var2, 
++                 expression = value) %&gt;%
++   mutate(condition = &quot;glucose&quot;)
+&gt; exp_e &lt;- melt(exp.e) %&gt;% as_tibble() %&gt;% 
++   dplyr::select(gene = Var1, segregant = Var2, 
++                 expression = value) %&gt;%
++   mutate(condition = &quot;ethanol&quot;)
+&gt; print(exp_e, n=4)
+# A tibble: 488,538 × 4
+     gene segregant expression condition
+   &lt;fctr&gt;    &lt;fctr&gt;      &lt;dbl&gt;     &lt;chr&gt;
+1 YJR107W    20_4_c       0.06   ethanol
+2 YPL270W    20_4_c      -0.13   ethanol
+3 YDR518W    20_4_c      -0.94   ethanol
+4 YDR233C    20_4_c       0.04   ethanol
+# ... with 4.885e+05 more rows</code></pre>
+</section><section id="combine-into-single-data-frame" class="slide level2">
+<h2>Combine Into Single Data Frame</h2>
+<p>Combine gene expression data from two conditions into a single data frame.</p>
+<pre class="r"><code>&gt; exp_all &lt;- bind_rows(exp_g, exp_e)
+&gt; sample_n(exp_all, size=10)
+# A tibble: 10 × 4
+      gene segregant expression condition
+    &lt;fctr&gt;    &lt;fctr&gt;      &lt;dbl&gt;     &lt;chr&gt;
+1  YBL087C    21_4_d      -0.72   ethanol
+2  YDR524C    21_2_d      -0.17   glucose
+3  YGR067C     9_1_d      -3.92   glucose
+4  YHR207C    26_1_d      -0.43   ethanol
+5  YDR329C    20_2_d      -0.06   glucose
+6  YGL121C     8_7_b       1.00   ethanol
+7  YJR044C     3_3_d      -0.12   ethanol
+8  YIL088C     2_7_a       0.10   ethanol
+9  YML127W     5_1_d      -0.08   ethanol
+10 YMR304W     6_1_d       0.20   ethanol</code></pre>
+</section><section id="join-gene-positions" class="slide level2">
+<h2>Join Gene Positions</h2>
+<p>Now we want to join the gene positions with the expression data.</p>
+<pre class="r"><code>&gt; exp_all &lt;- exp_all %&gt;%
++   mutate(gene = as.character(gene), 
++          segregant = as.character(segregant))
+&gt; sk_tidy &lt;- exp_all %&gt;%
++   left_join(gene_pos, by = &quot;gene&quot;)
+&gt; sample_n(sk_tidy, size=7)
+# A tibble: 7 × 7
+     gene segregant expression condition   chr  start    end
+    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;     &lt;chr&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+1 YGL189C     1_3_d      -0.26   ethanol     7 148594 148235
+2 YBR257W    13_2_c       0.02   ethanol     2 728880 729719
+3 YER098W    21_1_d       0.46   ethanol     5 355462 357726
+4 YCR035C     9_1_d       0.07   glucose     3 193014 191830
+5 YBR097W    17_5_b      -0.03   glucose     2 436945 441309
+6 YBR235W     8_4_c      -0.18   ethanol     2 686896 690258
+7 YJL094C    14_6_d       0.00   glucose    10 254437 251816</code></pre>
+</section><section id="apply-dplyr-functions" class="slide level2">
+<h2>Apply <code>dplyr</code> Functions</h2>
+<p>Now that we have the data made tidy in the data frame <code>sk_tidy</code>, let’s apply some <code>dplyr</code> operations…</p>
+</section><section class="slide level2">
+
+<p>Does each gene have the same number of observations?</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;% group_by(gene) %&gt;% 
++   summarize(value = n()) %&gt;%
++   summary()
+     gene               value      
+ Length:4478        Min.   :218.0  
+ Class :character   1st Qu.:218.0  
+ Mode  :character   Median :218.0  
+                    Mean   :218.6  
+                    3rd Qu.:218.0  
+                    Max.   :872.0  </code></pre>
+<p>No, so let’s see which genes have more than one set of observations.</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;% group_by(gene) %&gt;% 
++   summarize(value = n()) %&gt;%
++   filter(value &gt; median(value))
+# A tibble: 4 × 2
+       gene value
+      &lt;chr&gt; &lt;int&gt;
+1 YFR024C-A   872
+2   YJL012C   872
+3   YKL198C   872
+4   YPR089W   872</code></pre>
+</section><section class="slide level2">
+
+<p>Let’s remove replicated measurements for these genes.</p>
+<pre class="r"><code>&gt; sk_tidy %&lt;&gt;% distinct(gene, segregant, condition, 
++                       .keep_all = TRUE)
+&gt; 
+&gt; sk_tidy %&gt;% group_by(gene) %&gt;% 
++   summarize(value = n()) %&gt;%
++   summary()
+     gene               value    
+ Length:4478        Min.   :218  
+ Class :character   1st Qu.:218  
+ Mode  :character   Median :218  
+                    Mean   :218  
+                    3rd Qu.:218  
+                    Max.   :218  </code></pre>
+<p>As an exercise, think about how you would use <code>dplyr</code> to replace the replicated gene expression values with a single averaged expression value for these genes.</p>
+</section><section class="slide level2">
+
+<p>Get the mean and standard deviation expression per chromosome.</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;%
++   group_by(chr) %&gt;%
++   summarize(mean = mean(expression), sd=sd(expression))
+# A tibble: 16 × 3
+     chr        mean        sd
+   &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1      1 -0.07618458 0.8257397
+2      2 -0.04471450 0.6322533
+3      3 -0.02296456 0.6815490
+4      4 -0.02325893 0.5368523
+5      5 -0.05793524 0.6098741
+6      6 -0.07721815 0.6598159
+7      7 -0.04409662 0.6174735
+8      8 -0.04743984 0.6377910
+9      9 -0.04298423 0.6144313
+10    10 -0.02994634 0.5701558
+11    11 -0.03964107 0.6130319
+12    12 -0.05146305 0.6432055
+13    13 -0.02646819 0.5835865
+14    14 -0.02943206 0.6423964
+15    15 -0.01301063 0.5544749
+16    16 -0.03681626 0.6044444</code></pre>
+</section><section class="slide level2">
+
+<p>Get the mean and standard deviation expression per chromosome in each condition.</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;%
++   group_by(chr, condition) %&gt;%
++   summarize(mean = mean(expression), sd=sd(expression))
+Source: local data frame [32 x 4]
+Groups: chr [?]
+
+     chr condition          mean        sd
+   &lt;int&gt;     &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+1      1   ethanol  0.0260098709 0.4796494
+2      1   glucose -0.1783790350 1.0549134
+3      2   ethanol  0.0131661446 0.4793614
+4      2   glucose -0.1025951501 0.7503419
+5      3   ethanol  0.0001644526 0.5360078
+6      3   glucose -0.0460935780 0.8004235
+7      4   ethanol  0.0018726571 0.4817756
+8      4   glucose -0.0483905104 0.5857082
+9      5   ethanol -0.0297045435 0.4787130
+10     5   glucose -0.0861659403 0.7163443
+# ... with 22 more rows</code></pre>
+</section><section class="slide level2">
+
+<p>Count the number of genes per chromosome.</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;%
++   filter(condition == &quot;glucose&quot;, segregant == &quot;20_4_c&quot;) %&gt;%
++   group_by(chr) %&gt;% 
++   summarize(num.genes = n())
+# A tibble: 16 × 2
+     chr num.genes
+   &lt;int&gt;     &lt;int&gt;
+1      1        60
+2      2       298
+3      3       125
+4      4       629
+5      5       207
+6      6        79
+7      7       395
+8      8       209
+9      9       152
+10    10       256
+11    11       241
+12    12       387
+13    13       367
+14    14       319
+15    15       388
+16    16       366</code></pre>
+</section><section class="slide level2">
+
+<p>Filter for the first gene on every chromosome.</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;%
++   filter(condition == &quot;glucose&quot;, segregant == &quot;20_4_c&quot;) %&gt;%
++   group_by(chr) %&gt;%
++   filter(start == min(start))
+Source: local data frame [16 x 7]
+Groups: chr [16]
+
+      gene segregant expression condition   chr start   end
+     &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;     &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1  YHL040C    20_4_c      -2.79   glucose     8 20968 19085
+2  YNL334C    20_4_c      -0.90   glucose    14 12876 12208
+3  YOL157C    20_4_c      -1.06   glucose    15 24293 22524
+4  YKL222C    20_4_c       0.09   glucose    11  5621  3504
+5  YIL168W    20_4_c      -1.14   glucose     9 29032 29415
+6  YJL213W    20_4_c       0.84   glucose    10 32163 33158
+7  YPL272C    20_4_c      -0.18   glucose    16 28164 26611
+8  YLL063C    20_4_c      -0.66   glucose    12 16072 14648
+9  YFL048C    20_4_c      -0.09   glucose     6 40180 38843
+10 YML132W    20_4_c      -0.21   glucose    13  7244  8383
+11 YGL261C    20_4_c      -0.14   glucose     7  6652  6290
+12 YBL107C    20_4_c       0.29   glucose     2 10551  9961
+13 YDL248W    20_4_c      -0.68   glucose     4  1802  2953
+14 YEL073C    20_4_c      -0.02   glucose     5  7553  7230
+15 YAL062W    20_4_c      -5.64   glucose     1 31568 32941
+16 YCL068C    20_4_c       0.47   glucose     3 12285 11503</code></pre>
+</section><section class="slide level2">
+
+<p>To plot expression in glucose versus ethanol we first need to use <code>dcast()</code>.</p>
+<pre class="r"><code>&gt; sk_tidy %&gt;% dcast(gene + segregant ~ condition, 
++                   value.var = &quot;expression&quot;) %&gt;%
++   as_tibble()
+# A tibble: 488,102 × 4
+      gene segregant ethanol glucose
+     &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1  YAL002W     1_1_d    0.37   -0.01
+2  YAL002W     1_3_d    0.23    0.03
+3  YAL002W     1_4_d    0.08    0.07
+4  YAL002W     1_5_c   -0.12    0.13
+5  YAL002W    10_1_c    0.12   -0.10
+6  YAL002W    10_2_d    0.10   -0.20
+7  YAL002W    10_3_c    0.07   -0.15
+8  YAL002W    10_4_d    0.06   -0.04
+9  YAL002W    11_1_a    0.07   -0.07
+10 YAL002W    11_2_d    0.30    0.10
+# ... with 488,092 more rows</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; sk_tidy %&gt;% dcast(gene + segregant ~ condition, 
++                   value.var = &quot;expression&quot;) %&gt;%
++   filter(gene == &quot;YAL002W&quot;) %&gt;%
++   ggplot(aes(x = glucose, y = ethanol)) +
++   geom_point() +  theme_bw() +
++   theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="week02_files/figure-revealjs/unnamed-chunk-76-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h2>Source</h2>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h2>Session Information</h2>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.4
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+ [1] rvest_0.3.2     xml2_1.1.1      babynames_0.3.0
+ [4] reshape2_1.4.2  dplyr_0.5.0     purrr_0.2.2    
+ [7] readr_1.1.0     tidyr_0.6.2     tibble_1.3.0   
+[10] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
+[13] magrittr_1.5    devtools_1.12.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.10     cellranger_1.1.0 plyr_1.8.4      
+ [4] forcats_0.2.0    tools_3.3.2      digest_0.6.12   
+ [7] lubridate_1.6.0  jsonlite_1.4     evaluate_0.10   
+[10] memoise_1.1.0    nlme_3.1-131     gtable_0.2.0    
+[13] lattice_0.20-35  psych_1.7.5      DBI_0.6-1       
+[16] curl_2.6         yaml_2.1.14      parallel_3.3.2  
+[19] haven_1.0.0      withr_1.0.2      stringr_1.2.0   
+[22] httr_1.2.1       revealjs_0.9     hms_0.3         
+[25] rprojroot_1.2    grid_3.3.2       R6_2.2.0        
+[28] XML_3.98-1.7     readxl_1.0.0     foreign_0.8-68  
+[31] rmarkdown_1.5    selectr_0.3-1    modelr_0.1.0    
+[34] backports_1.0.5  scales_0.4.1     htmltools_0.3.6 
+[37] assertthat_0.2.0 mnormt_1.5-5     colorspace_1.3-2
+[40] labeling_0.3     stringi_1.1.5    lazyeval_0.2.0  
+[43] munsell_0.4.3    broom_0.4.2     </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

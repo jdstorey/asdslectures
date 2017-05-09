@@ -1,0 +1,16 @@
+\documentclass{standalone}
+
+\usepackage{tikz,amsmath}
+
+\usetikzlibrary{positioning} 
+
+\begin{document}
+
+\begin{tikzpicture}
+\coordinate(A) {};
+\coordinate[above=4cm of A](B) {};
+\coordinate[right=3cm of A](C) {};
+\draw (A) -- node[left] {$\boldsymbol{Y} - \hat{\boldsymbol{Y}}$} (B) -- node[above right] {$\boldsymbol{Y}$} (C) -- node[below] {$\hat{\boldsymbol{Y}}$} (A);
+\end{tikzpicture}
+
+\end{document}

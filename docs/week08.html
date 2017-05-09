@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John D. Storey" />
+  <title>QCB 508 – Week 8</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="customization/custom.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<style type="text/css">
+p { 
+  text-align: left; 
+  }
+.reveal pre code { 
+  color: #000000; 
+  background-color: rgb(240,240,240);
+  font-size: 1.15em;
+  border:none; 
+  }
+.reveal section img { 
+  background:none; 
+  border:none; 
+  box-shadow:none;
+  height: 500px;
+  }
+}
+</style>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">QCB 508 – Week 8</h1>
+    <h2 class="author">John D. Storey</h2>
+    <h3 class="date">Spring 2017</h3>
+</section>
+
+<section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
+<section><section id="nonparametric-statistics" class="titleslide slide level1"><h1>Nonparametric Statistics</h1></section><section id="parametric-inference" class="slide level2">
+<h2>Parametric Inference</h2>
+<p><strong>Parametric inference</strong> is based on a family of known probability distributions governed by a defined parameter space.</p>
+<p>The goal is to perform inference (or more generally statistics) on the values of the parameters.</p>
+</section><section id="nonparametric-inference" class="slide level2">
+<h2>Nonparametric Inference</h2>
+<p><strong>Nonparametric inference or modeling</strong> can be described in two ways (not mutually exclusive):</p>
+<ol type="1">
+<li><p>An inference procedure or model that does not depend on or utilize the parametrized probability distribution from which the data are generated.</p></li>
+<li><p>An inference procedure or model that may have a specific structure or based on a specific formula, but the complexity is adaptive and can grow to arbitrary levels of complexity as the sample size grows.</p></li>
+</ol>
+</section><section class="slide level2">
+
+<p>In <em>All of Nonparametric Statistics</em>, Larry Wasserman says:</p>
+<blockquote>
+<p>… it is difficult to give a precise definition of nonparametric inference…. For the purposes of this book, we will use the phrase nonparametric inference to refer to a set of modern statistical methods that aim to keep the number of underlying assumptions as weak as possible.</p>
+</blockquote>
+<p>He then lists five estimation examples (see Section 1.1): distributions, functionals, densities, regression curves, and Normal means.</p>
+</section><section id="nonparametric-descriptive-statistics" class="slide level2">
+<h2>Nonparametric Descriptive Statistics</h2>
+<p>Almost all of the exploratory data analysis methods we covered in the beginning of the course are nonparametric.</p>
+<p>Sometimes the exploratory methods are calibrated by known probability distributions, but they are usually informative regardless of the underlying probability distribution (or lack thereof) of the data.</p>
+</section><section id="semiparametric-inference" class="slide level2">
+<h2>Semiparametric Inference</h2>
+<p><em>Semiparametric inference or modeling</em> methods contain both parametric and nonparametric components.</p>
+<p>An example is <span class="math inline">\(X_i | \mu_i \sim \mbox{Normal}(\mu_i, 1)\)</span> and <span class="math inline">\(\mu_i {\; \stackrel{\text{iid}}{\sim}\;}F\)</span> for some arbitrary distribution <span class="math inline">\(F\)</span>.</p>
+</section><section id="topics-this-week" class="slide level2">
+<h2>Topics This Week</h2>
+<ul>
+<li>Empirical distribution functions</li>
+<li>Bootstrap</li>
+<li>Permutation methods</li>
+<li>Goodness of fit</li>
+<li>Method of moments</li>
+</ul>
+</section></section>
+<section><section id="empirical-distribution-functions" class="titleslide slide level1"><h1>Empirical Distribution Functions</h1></section><section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. The <strong>empirical distribution function</strong> (edf) – or <strong>empirical cumulative distribution function</strong> (ecdf) – is the distribution that puts probability <span class="math inline">\(1/n\)</span> on each observed value <span class="math inline">\(X_i\)</span>.</p>
+<p>Let <span class="math inline">\(1(X_i \leq y) = 1\)</span> if <span class="math inline">\(X_i \leq y\)</span> and <span class="math inline">\(1(X_i \leq y) = 0\)</span> if <span class="math inline">\(X_i &gt; y\)</span>.</p>
+<p><span class="math display">\[
+\mbox{Random variable:  } \hat{F}_{{\boldsymbol{X}}}(y) = \frac{1}{n} \sum_{i=1}^{n} 1(X_i \leq y)
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Observed variable:  } \hat{F}_{{\boldsymbol{x}}}(y) = \frac{1}{n} \sum_{i=1}^{n} 1(x_i \leq y)
+\]</span></p>
+</section><section id="example-normal" class="slide level2">
+<h2>Example: Normal</h2>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="pointwise-convergence" class="slide level2">
+<h2>Pointwise Convergence</h2>
+<p>Under our assumptions, by the strong law of large numbers for each <span class="math inline">\(y \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\hat{F}_{{\boldsymbol{X}}}(y) \stackrel{\text{a.s.}}{\longrightarrow} F(y)
+\]</span></p>
+<p>as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
+</section><section id="glivenko-cantelli-theorem" class="slide level2">
+<h2>Glivenko-Cantelli Theorem</h2>
+<p>Under our assumptions, we can get a much stronger convergence result:</p>
+<p><span class="math display">\[
+\sup_{y \in \mathbb{R}} \left| \hat{F}_{{\boldsymbol{X}}}(y) - F(y) \right| \stackrel{\text{a.s.}}{\longrightarrow} 0
+\]</span></p>
+<p>as <span class="math inline">\(n \rightarrow \infty\)</span>. Here, “sup” is short for <em>supremum</em>, which is a mathematical generalization of <em>maximum</em>.</p>
+<p>This result says that even the worst difference between the edf and the true cdf converges with probability 1 to zero.</p>
+</section><section id="dvoretzky-kiefer-wolfowitz-dkw-inequality" class="slide level2">
+<h2>Dvoretzky-Kiefer-Wolfowitz (DKW) Inequality</h2>
+<p>This result gives us an upper bound on how far off the edf is from the true cdf, which allows us to construct confidence bands about the edf.</p>
+<p><span class="math display">\[
+\Pr\left( \sup_{y \in \mathbb{R}} \left| \hat{F}_{{\boldsymbol{X}}}(y) - F(y) \right| &gt; \epsilon \right) \leq 2 \exp{-2 n \epsilon^2}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>As outlined in <em>All of Nonparametric Statistics</em>, setting</p>
+<p><span class="math display">\[\epsilon_n = \sqrt{\frac{1}{2n} \log\left(\frac{2}{\alpha}\right)}\]</span></p>
+<p><span class="math display">\[L(y) = \max\{\hat{F}_{{\boldsymbol{X}}}(y) - \epsilon_n, 0 \}\]</span></p>
+<p><span class="math display">\[U(y) = \min\{\hat{F}_{{\boldsymbol{X}}}(y) + \epsilon_n, 1 \}\]</span></p>
+<p>guarantees that <span class="math inline">\(\Pr(L(y) \leq F(y) \leq U(y) \mbox{ for all } y) \geq 1-\alpha\)</span>.</p>
+</section><section id="statistical-functionals" class="slide level2">
+<h2>Statistical Functionals</h2>
+<p>A <strong>statistical functional</strong> <span class="math inline">\(T(F)\)</span> is any function of <span class="math inline">\(F\)</span>. Examples:</p>
+<ul>
+<li><span class="math inline">\(\mu(F) = \int x dF(x)\)</span></li>
+<li><span class="math inline">\(\sigma^2(F) = \int (x-\mu(F))^2 dF(x)\)</span></li>
+<li><span class="math inline">\(\text{median}(F) = F^{-1}(1/2)\)</span></li>
+</ul>
+<p>A <strong>linear statistical functional</strong> is such that <span class="math inline">\(T(F) = \int a(x) dF(x)\)</span>.</p>
+</section><section id="plug-in-estimator" class="slide level2">
+<h2>Plug-In Estimator</h2>
+<p>A plug-in estimator of <span class="math inline">\(T(F)\)</span> based on the edf is <span class="math inline">\(T(\hat{F}_{{\boldsymbol{X}}})\)</span>. Examples:</p>
+<ul>
+<li><p><span class="math inline">\(\hat{\mu} = \mu(\hat{F}_{{\boldsymbol{X}}}) = \int x \hat{F}_{{\boldsymbol{X}}}(x) = \frac{1}{n} \sum_{i=1}^n X_i\)</span></p></li>
+<li><p><span class="math inline">\(\hat{\sigma}^2 = \sigma^2(\hat{F}_{{\boldsymbol{X}}}) = \int (x-\hat{\mu})^2 \hat{F}_{{\boldsymbol{X}}}(x) = \frac{1}{n} \sum_{i=1}^n (X_i - \hat{\mu})^2\)</span></p></li>
+<li><p><span class="math inline">\(\text{median}(\hat{F}_{{\boldsymbol{X}}}) = \hat{F}_{{\boldsymbol{X}}}^{-1}(1/2)\)</span></p></li>
+</ul>
+</section><section id="edf-standard-error" class="slide level2">
+<h2>EDF Standard Error</h2>
+<p>Suppose that <span class="math inline">\(T(F) = \int a(x) dF(x)\)</span> is a linear functional. Then:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ &amp; {\operatorname{Var}}(T(\hat{F}_{{\boldsymbol{X}}})) = \frac{1}{n^2} \sum_{i=1}^n {\operatorname{Var}}(a(X_i)) = \frac{{\operatorname{Var}}_F(a(X))}{n} \\
+\ &amp; {\operatorname{se}}(T(\hat{F}_{{\boldsymbol{X}}})) = \sqrt{\frac{{\operatorname{Var}}_F(a(X))}{n}} \\
+\ &amp; \hat{{\operatorname{se}}}(T(\hat{F}_{{\boldsymbol{X}}})) = \sqrt{\frac{{\operatorname{Var}}_{\hat{F}_{{\boldsymbol{X}}}}(a(X))}{n}}
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Note that</p>
+<p><span class="math display">\[
+{\operatorname{Var}}_F(a(X)) = \int (a(x) - T(F))^2 dF(x)
+\]</span> because <span class="math inline">\(T(F) = \int a(x) dF(x) = {\operatorname{E}}_F[a(X)]\)</span>. Likewise,</p>
+<p><span class="math display">\[
+{\operatorname{Var}}_{\hat{F}_{{\boldsymbol{X}}}}(a(X)) = \frac{1}{n} \sum_{i=1}^n (a(X_i) - T(\hat{F}_{{\boldsymbol{X}}}))^2
+\]</span></p>
+<p>where <span class="math inline">\(T(\hat{F}_{{\boldsymbol{X}}}) = \frac{1}{n} \sum_{i=1}^n a(X_i)\)</span>.</p>
+</section><section id="edf-clt" class="slide level2">
+<h2>EDF CLT</h2>
+<p>Suppose that <span class="math inline">\({\operatorname{Var}}_F(a(X)) &lt; \infty\)</span>. Then we have the following convergences as <span class="math inline">\(n \rightarrow \infty\)</span>:</p>
+<p><span class="math display">\[
+\frac{{\operatorname{Var}}_{\hat{F}_{{\boldsymbol{X}}}}(a(X))}{{\operatorname{Var}}_{F}(a(X))} \stackrel{P}{\longrightarrow} 1
+\mbox{ ,   }
+\frac{\hat{{\operatorname{se}}}(T(\hat{F}_{{\boldsymbol{X}}}))}{{\operatorname{se}}(T(\hat{F}_{{\boldsymbol{X}}}))}  \stackrel{P}{\longrightarrow} 1
+\]</span></p>
+<p><span class="math display">\[
+\frac{T(F) - T(\hat{F}_{{\boldsymbol{X}}})}{\hat{{\operatorname{se}}}(T(\hat{F}_{{\boldsymbol{X}}}))} \stackrel{D}{\longrightarrow} \mbox{Normal}(0,1)
+\]</span></p>
+<p>The estimators are very easy to calculate on real data, so this a powerful set of results.</p>
+</section></section>
+<section><section id="bootstrap" class="titleslide slide level1"><h1>Bootstrap</h1></section><section id="rationale" class="slide level2">
+<h2>Rationale</h2>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. If the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> is an accurate approximation for the true cdf <span class="math inline">\(F\)</span>, then we can utilize <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> in place of <span class="math inline">\(F\)</span> to nonparametrically characterize the sampling distribution of a statistic <span class="math inline">\(T({\boldsymbol{X}})\)</span>.</p>
+<p>This allows for the sampling distribution of more general statistics to be considered, such as the median or a percentile, as well as more traditional statistics, such as the mean, when the underlying distribution is unknown.</p>
+<p>When we encounter modeling fitting, the bootstrap may be very useful for characterizing the sampling distribution of complex statistics we calculate from fitted models.</p>
+</section><section id="big-picture" class="slide level2">
+<h2>Big Picture</h2>
+<p>We calculate <span class="math inline">\(T({\boldsymbol{x}})\)</span> on the observed data, and we also form the edf, <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>.</p>
+<p>To approximate the sampling distribution of <span class="math inline">\(T({\boldsymbol{X}})\)</span> we generate <span class="math inline">\(B\)</span> random samples of <span class="math inline">\(n\)</span> iid data points from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and calculate <span class="math inline">\(T({\boldsymbol{x}}^{*(b)})\)</span> for each bootstrap sample <span class="math inline">\(b = 1, 2, \ldots, B\)</span> where <span class="math inline">\({\boldsymbol{x}}^{*(b)} = (x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)})^T\)</span>.</p>
+<p>Sampling <span class="math inline">\(X_1^{*}, \ldots, X_n^{*} {\; \stackrel{\text{iid}}{\sim}\;}\hat{F}_{{\boldsymbol{x}}}\)</span> is accomplished by sampling <span class="math inline">\(n\)</span> times <em>with replacement</em> from the observed data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
+<p>This means <span class="math inline">\(\Pr\left(X^{*} = x_j\right) = \frac{1}{n}\)</span> for all <span class="math inline">\(j\)</span>.</p>
+</section><section id="bootstrap-variance" class="slide level2">
+<h2>Bootstrap Variance</h2>
+<p>For each bootstrap sample <span class="math inline">\({\boldsymbol{x}}^{*(b)} = (x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)})^T\)</span>, calculate bootstrap statistic <span class="math inline">\(T({\boldsymbol{x}}^{*(b)})\)</span>.</p>
+<p>Repeat this for <span class="math inline">\(b = 1, 2, \ldots, B\)</span>.</p>
+<p>Estimate the sampling variance of <span class="math inline">\(T({\boldsymbol{x}})\)</span> by</p>
+<p><span class="math display">\[
+\hat{{\operatorname{Var}}}(T({\boldsymbol{x}})) = \frac{1}{B} \sum_{b=1}^B \left(T\left({\boldsymbol{x}}^{*(b)}\right) -  \frac{1}{B} \sum_{k=1}^B T\left({\boldsymbol{x}}^{*(k)}\right) \right)^2
+\]</span></p>
+</section><section id="caveat" class="slide level2">
+<h2>Caveat</h2>
+<p>Why haven’t we just been doing this the entire time?!</p>
+<p>In <em>All of Nonparametric Statistics</em>, Larry Wasserman states:</p>
+<blockquote>
+<p>There is a tendency to treat the bootstrap as a panacea for all problems. But the bootstrap requires regularity conditions to yield valid answers. It should not be applied blindly.</p>
+</blockquote>
+<p>The bootstrap is easy to motivate, but it is quite tricky to implement outside of the very standard problems. It sometimes requires deeper knowledge of statistical theory than likelihood-based inference.</p>
+</section><section id="bootstrap-sample" class="slide level2">
+<h2>Bootstrap Sample</h2>
+<p>For a sample of size <span class="math inline">\(n\)</span>, what percentage of the data is present in any given bootstrap sample?</p>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="bootstrap-cis" class="slide level2">
+<h2>Bootstrap CIs</h2>
+<p>Suppose that <span class="math inline">\(\theta = T(F)\)</span> and <span class="math inline">\(\hat{\theta} = T(\hat{F}_{{\boldsymbol{x}}})\)</span>.</p>
+<p>We can use the bootstrap to generate data from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>.</p>
+<p>For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>, we draw <span class="math inline">\(x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)}\)</span> as iid realiztions from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>, and calculate <span class="math inline">\(\hat{\theta}^{*(b)} = T(\hat{F}_{{\boldsymbol{x}}^{*(b)}})\)</span>.</p>
+<p>Let <span class="math inline">\(p^{*}_{\alpha}\)</span> be the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\left\{\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\right\}\)</span>.</p>
+<p>Let’s discuss several ways of calculating confidence intervals for <span class="math inline">\(\theta = T(F)\)</span>.</p>
+</section><section id="invoking-the-clt" class="slide level2">
+<h2>Invoking the CLT</h2>
+<p>If we have evidence that the central limit theorem can be applied, we can form the <span class="math inline">\((1-\alpha)\)</span> CI as:</p>
+<p><span class="math display">\[
+(\hat{\theta} - |z_{\alpha/2}| {\operatorname{se}}^*, \hat{\theta} + |z_{\alpha/2}| {\operatorname{se}}^*)
+\]</span></p>
+<p>where <span class="math inline">\({\operatorname{se}}^*\)</span> is the bootstrap standard error calculated as</p>
+<p><span class="math display">\[
+{\operatorname{se}}^{*} = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(\hat{\theta}^{*(b)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(k)} \right)^2}.
+\]</span></p>
+<p> </p>
+<p>Note that <span class="math inline">\({\operatorname{se}}^*\)</span> serves as estimate of <span class="math inline">\({\operatorname{se}}(\hat{\theta})\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Note that to get this confidence interval we need to justify that the following pivotal statistics are approximately Normal(0,1):</p>
+<p><span class="math display">\[
+\frac{\hat{\theta} - \theta}{{\operatorname{se}}(\hat{\theta})} \approx \frac{\hat{\theta} - \theta}{{\operatorname{se}}^*}
+\]</span></p>
+</section><section id="percentile-interval" class="slide level2">
+<h2>Percentile Interval</h2>
+<p>If a <em>monotone</em> function <span class="math inline">\(m(\cdot)\)</span> exists so that <span class="math inline">\(m\left(\hat{\theta}\right) \sim \mbox{Normal}(m(\theta), b^2)\)</span>, then we can form the <span class="math inline">\((1-\alpha)\)</span> CI as:</p>
+<p><span class="math display">\[
+\left(p^*_{\alpha/2}, p^*_{1-\alpha/2} \right)
+\]</span></p>
+<p>where recall that in general <span class="math inline">\(p^{*}_{\alpha}\)</span> is the <span class="math inline">\(\alpha\)</span> percentile of bootstrap estimates <span class="math inline">\(\left\{\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\right\}\)</span></p>
+</section><section id="pivotal-interval" class="slide level2">
+<h2>Pivotal Interval</h2>
+<p>Suppose we can calculate percentiles of <span class="math inline">\(\hat{\theta} - \theta\)</span>, say <span class="math inline">\(q_{\alpha}\)</span>. Note that the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\hat{\theta}\)</span> is <span class="math inline">\(q_\alpha + \theta\)</span>. The <span class="math inline">\(1-\alpha\)</span> CI is</p>
+<p><span class="math display">\[
+(\hat{\theta}-q_{1-\alpha/2}, \hat{\theta}-q_{\alpha/2})
+\]</span></p>
+<p>which comes from:</p>
+<p><span class="math display">\[
+\begin{aligned}
+1-\alpha &amp; =  \Pr(q_{\alpha/2} \leq \hat{\theta} - \theta \leq q_{1-\alpha/2}) \\
+ &amp; =  \Pr(-q_{1-\alpha/2} \leq \theta - \hat{\theta} \leq -q_{\alpha/2}) \\
+ &amp; =  \Pr(\hat{\theta}-q_{1-\alpha/2} \leq \theta \leq \hat{\theta}-q_{\alpha/2}) \\
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Suppose the sampling distribution of <span class="math inline">\(\hat{\theta}^* - \hat{\theta}\)</span> is an approximation for that of <span class="math inline">\(\hat{\theta} - \theta\)</span>.</p>
+<p>If <span class="math inline">\(p^*_{\alpha}\)</span> is the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\hat{\theta}^*\)</span> then, <span class="math inline">\(p^*_{\alpha} - \hat{\theta}\)</span> is the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\hat{\theta}^* - \hat{\theta}\)</span>.</p>
+<p>Therefore, <span class="math inline">\(p^*_{\alpha} - \hat{\theta}\)</span> is the bootstrap estimate of <span class="math inline">\(q_{\alpha}\)</span>. Plugging this into <span class="math inline">\((\hat{\theta}-q_{1-\alpha/2}, \hat{\theta}-q_{\alpha/2})\)</span>, we get the following <span class="math inline">\((1-\alpha)\)</span> bootstrap CI:</p>
+<p><span class="math display">\[
+\left(2\hat{\theta}-p^*_{1-\alpha/2}, 2\hat{\theta}-p^*_{\alpha/2}\right).
+\]</span></p>
+</section><section id="studentized-pivotal-interval" class="slide level2">
+<h2>Studentized Pivotal Interval</h2>
+<p>In the previous scenario, we needed to assume that the sampling distribution of <span class="math inline">\(\hat{\theta}^* - \hat{\theta}\)</span> is an approximation for that of <span class="math inline">\(\hat{\theta} - \theta\)</span>. Sometimes this will not be the case and instead we can studentize this pivotal quantity. That is, the distribution of</p>
+<p><span class="math display">\[
+\frac{\hat{\theta} - \theta}{\hat{{\operatorname{se}}}\left(\hat{\theta}\right)}
+\]</span></p>
+<p>is well-approximated by that of</p>
+<p><span class="math display">\[
+\frac{\hat{\theta}^* - \hat{\theta}}{\hat{{\operatorname{se}}}\left(\hat{\theta}^{*}\right)}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Let <span class="math inline">\(z^{*}_{\alpha}\)</span> be the <span class="math inline">\(\alpha\)</span> percentile of</p>
+<p><span class="math display">\[
+\left\{ \frac{\hat{\theta}^{*(1)} - \hat{\theta}}{\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(1)}\right)}, \ldots, \frac{\hat{\theta}^{*(B)} - \hat{\theta}}{\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(B)}\right)}  \right\}.
+\]</span></p>
+<p> </p>
+<p>Then a <span class="math inline">\((1-\alpha)\)</span> bootstrap CI is</p>
+<p><span class="math display">\[
+\left(\hat{\theta} - z^{*}_{1-\alpha/2} \hat{{\operatorname{se}}}\left(\hat{\theta}\right), \hat{\theta} - z^{*}_{\alpha/2} \hat{{\operatorname{se}}}\left(\hat{\theta}\right)\right).
+\]</span></p>
+<p> </p>
+<p>Exercise: Why?</p>
+</section><section class="slide level2">
+
+<p>How do we obtain <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}\right)\)</span> and <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right)\)</span>?</p>
+<p>If we have an analytical formula for these, then <span class="math inline">\(\hat{{\operatorname{se}}}(\hat{\theta})\)</span> is calculated from the original data and <span class="math inline">\(\hat{{\operatorname{se}}}(\hat{\theta}^{*(b)})\)</span> from the bootstrap data sets. But we probably don’t since we’re using the bootstrap.</p>
+<p>Instead, we can calculate:</p>
+<p><span class="math display">\[
+\hat{{\operatorname{se}}}\left(\hat{\theta}\right) = \sqrt{\frac{1}{B} \sum_{b=1}^B \left(\hat{\theta}^{*(b)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(k)} \right)^2}.
+\]</span></p>
+<p>This is what we called <span class="math inline">\({\operatorname{se}}^*\)</span> above. But what about <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right)\)</span>?</p>
+</section><section class="slide level2">
+
+<p>To estimate <span class="math inline">\(\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right)\)</span> we need to do a double bootstrap. For each bootstrap sample <span class="math inline">\(b\)</span> we need to bootstrap that daat set another <span class="math inline">\(B\)</span> times to calculate:</p>
+<p><span class="math display">\[
+\hat{{\operatorname{se}}}\left(\hat{\theta}^{*(b)}\right) = \sqrt{\frac{1}{B} \sum_{v=1}^B \left(\hat{\theta}^{*(b)*(v)} -  \frac{1}{B} \sum_{k=1}^B \hat{\theta}^{*(b)*(k)} \right)^2}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\theta}^{*(b)*(v)}\)</span> is the statistic calculated from bootstrap sample <span class="math inline">\(v\)</span> within bootstrap sample <span class="math inline">\(b\)</span>. This can be very computationally intensive, and it requires a large sample size <span class="math inline">\(n\)</span>.</p>
+</section><section id="bootstrap-hypothesis-testing" class="slide level2">
+<h2>Bootstrap Hypothesis Testing</h2>
+<p>As we have seen, hypothesis testing and confidence intervals are very related. For a simple null hypothesis, a bootstrap hypothesis test p-value can be calculated by finding the minimum <span class="math inline">\(\alpha\)</span> for which the <span class="math inline">\((1-\alpha)\)</span> CI does not contain the null hypothesis value. You showed this on your homework.</p>
+</section><section class="slide level2">
+
+<p>The general approach is to calculate a test statistic based on the observed data. Then the null distribution of this statistic is approximated by forming bootstrap test statistics under the scenario that the null hypothesis is true. This can often be accomplished because the <span class="math inline">\(\hat{\theta}\)</span> estimated from the observed data is the <em>population</em> parameter from the bootstrap distribution.</p>
+</section><section id="example-t-test" class="slide level2">
+<h2>Example: <em>t</em>-test</h2>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>. We wish to test <span class="math inline">\(H_0: \mu(F_X) = \mu(F_Y)\)</span> vs <span class="math inline">\(H_1: \mu(F_X) \not= \mu(F_Y)\)</span>. Suppose that we know <span class="math inline">\(\sigma^2(F_X) = \sigma^2(F_Y)\)</span> (if not, it is straightforward to adjust the proecure below).</p>
+<p>Our test statistic is</p>
+<p><span class="math display">\[
+t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^2}}
+\]</span></p>
+<p>where <span class="math inline">\(s^2\)</span> is the pooled sample variance.</p>
+</section><section class="slide level2">
+
+<p>Note that the bootstrap distributions are such that <span class="math inline">\(\mu(\hat{F}_{X^{*}}) = \overline{x}\)</span> and <span class="math inline">\(\mu(\hat{F}_{Y^{*}}) = \overline{y}\)</span>. Thus we want to center the bootstrap t-statistics about these known means.</p>
+<p>Specifically, for a bootstrap data set <span class="math inline">\(x^{*} = (x_1^{*}, x_2^{*}, \ldots, x_m^{*})^T\)</span> and <span class="math inline">\(y^{*} = (y_1^{*}, y_2^{*}, \ldots, y_n^{*})^T\)</span>, we form null t-statistic</p>
+<p><span class="math display">\[
+t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y})}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2*}}}
+\]</span></p>
+<p>where again <span class="math inline">\(s^{2*}\)</span> is the pooled sample variance.</p>
+</section><section class="slide level2">
+
+<p>In order to obtain a p-value, we calculate <span class="math inline">\(t^{*(b)}\)</span> for <span class="math inline">\(b=1, 2, \ldots, B\)</span> bootstrap data sets.</p>
+<p>The p-value of <span class="math inline">\(t\)</span> is then the proportion of bootstrap statistics as or more extreme than the observed statistic:</p>
+<p><span class="math display">\[
+\mbox{p-value}(t) = \frac{1}{B} \sum_{b=1}^{B} 1\left(|t^{*(b)}| \geq |t|\right).
+\]</span></p>
+</section><section id="parametric-bootstrap" class="slide level2">
+<h2>Parametric Bootstrap</h2>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_\theta\)</span> for some parametric <span class="math inline">\(F_\theta\)</span>. We form estimate <span class="math inline">\(\hat{\theta}\)</span>, but we don’t have a known sampling distribution we can use to do inference with <span class="math inline">\(\hat{\theta}\)</span>.</p>
+<p>The parametric bootstrap generates bootstrap data sets from <span class="math inline">\(F_{\hat{\theta}}\)</span> rather than from the edf. It proceeds as we outlined above for these bootstrap data sets.</p>
+</section><section id="example-exponential-data" class="slide level2">
+<h2>Example: Exponential Data</h2>
+<p>In the homework, you will be performing a bootstrap t-test of the mean and a bootstrap percentile CI of the median for the following Exponential(<span class="math inline">\(\lambda\)</span>) data:</p>
+<pre class="r"><code>&gt; set.seed(1111)
+&gt; pop.mean &lt;- 2
+&gt; X &lt;- matrix(rexp(1000*30, rate=1/pop.mean), nrow=1000, ncol=30)</code></pre>
+<p>Let’s construct a pivotal bootstrap CI of the median here instead.</p>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; # population median 2*log(2)
+&gt; pop_med &lt;- qexp(0.5, rate=1/pop.mean); pop_med
+[1] 1.386294
+&gt; 
+&gt; obs_meds &lt;- apply(X, 1, median)
+&gt; plot(density(obs_meds, adj=1.5), main=&quot; &quot;); abline(v=pop_med)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Some embarrassingly inefficient code to calculate bootstrap medians.</p>
+<pre class="r"><code>&gt; B &lt;- 1000
+&gt; boot_meds &lt;- matrix(0, nrow=1000, ncol=B)
+&gt; 
+&gt; for(b in 1:B) {
++   idx &lt;- sample(1:30, replace=TRUE)
++   boot_meds[,b] &lt;- apply(X[,idx], 1, median)
++ }</code></pre>
+</section><section class="slide level2">
+
+<p>Plot the bootstrap medians.</p>
+<pre class="r"><code>&gt; plot(density(obs_meds, adj=1.5), main=&quot; &quot;); abline(v=pop_med)
+&gt; lines(density(as.vector(boot_meds[1:4,]), adj=1.5), col=&quot;red&quot;)
+&gt; lines(density(as.vector(boot_meds), adj=1.5), col=&quot;blue&quot;)</code></pre>
+<p><img src="week08_files/figure-revealjs/plot_boot_med,%20-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Compare sampling distribution of <span class="math inline">\(\hat{\theta}-\theta\)</span> to <span class="math inline">\(\hat{\theta}^{*} - \hat{\theta}\)</span>.</p>
+<pre class="r"><code>&gt; v &lt;- obs_meds - pop_med
+&gt; w &lt;- as.vector(boot_meds - obs_meds)
+&gt; qqplot(v, w, pch=20); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Does a 95% bootstrap pivotal interval provide coverage?</p>
+<pre class="r"><code>&gt; ci_lower &lt;- apply(boot_meds, 1, quantile, probs=0.975)
+&gt; ci_upper &lt;- apply(boot_meds, 1, quantile, probs=0.025)
+&gt; 
+&gt; ci_lower &lt;- 2*obs_meds - ci_lower
+&gt; ci_upper &lt;- 2*obs_meds - ci_upper
+&gt; 
+&gt; ci_lower[1]; ci_upper[1]
+[1] 0.8958224
+[1] 2.113859
+&gt; 
+&gt; cover &lt;- (pop_med &gt;= ci_lower) &amp; (pop_med &lt;= ci_upper)
+&gt; mean(cover)
+[1] 0.809
+&gt; 
+&gt; # :-(</code></pre>
+</section><section class="slide level2">
+
+<p>Let’s check the bootstrap variances.</p>
+<pre class="r"><code>&gt; sampling_var &lt;- var(obs_meds)
+&gt; boot_var &lt;- apply(boot_meds, 1, var)
+&gt; plot(density(boot_var, adj=1.5), main=&quot; &quot;)
+&gt; abline(v=sampling_var)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<div id="left">
+<p>We repeated this simulation over a range of <span class="math inline">\(n\)</span> and <span class="math inline">\(B\)</span>.</p>
+</div>
+<div id="right">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;"><em>n</em></th>
+<th style="text-align: right;"><em>B</em></th>
+<th style="text-align: right;"><em>coverage</em></th>
+<th style="text-align: right;"><em>avg CI width</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.868</td>
+<td style="text-align: right;">0.7805404</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">0.7882278</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">0.865</td>
+<td style="text-align: right;">0.7852837</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+02</td>
+<td style="text-align: right;">8000</td>
+<td style="text-align: right;">0.883</td>
+<td style="text-align: right;">0.7817222</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.923</td>
+<td style="text-align: right;">0.2465840</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.909</td>
+<td style="text-align: right;">0.2477463</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">0.915</td>
+<td style="text-align: right;">0.2475550</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+03</td>
+<td style="text-align: right;">8000</td>
+<td style="text-align: right;">0.923</td>
+<td style="text-align: right;">0.2458167</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.935</td>
+<td style="text-align: right;">0.0781421</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.937</td>
+<td style="text-align: right;">0.0784541</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.0784559</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+04</td>
+<td style="text-align: right;">8000</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: right;">0.0785591</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1e+05</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.949</td>
+<td style="text-align: right;">0.0246918</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1e+05</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.0246938</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></section>
+<section><section id="permutation-methods" class="titleslide slide level1"><h1>Permutation Methods</h1></section><section id="rationale-1" class="slide level2">
+<h2>Rationale</h2>
+<p>Permutation methods are useful for testing hypotheses about equality of distributions.</p>
+<p>Observations can be permuted among populations to simulate the case where the distributions are equivalent.</p>
+<p>Many permutation methods only depend on the ranks of the data, so they are a class of robust methods for performing hypothesis tests. However, the types of hypotheses that can be tested are limited.</p>
+</section><section id="permutation-test" class="slide level2">
+<h2>Permutation Test</h2>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>.</p>
+<p>We wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>.</p>
+<p>Consider a general test statistic <span class="math inline">\(S = S(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n)\)</span> so that the larger <span class="math inline">\(S\)</span> is the more evidence there is against the null hypothesis.</p>
+<p>Under the null hypothesis, any reordering of these values, where <span class="math inline">\(m\)</span> are randomly assigned to the “<span class="math inline">\(X\)</span>” population and <span class="math inline">\(n\)</span> are assigned to the “<span class="math inline">\(Y\)</span>” population, should be equivalently distributed.</p>
+</section><section class="slide level2">
+
+<p>For <span class="math inline">\(B\)</span> permutations (possibly all unique permutations), we calculate</p>
+<p><span class="math display">\[
+S^{*(b)} = S\left(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \ldots, Z^{*(b)}_{m+n}\right)
+\]</span></p>
+<p>where <span class="math inline">\(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \ldots, Z^{*(b)}_{m+n}\)</span> is a random permutation of the values <span class="math inline">\(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n\)</span>.</p>
+<p>Example permutation in R:</p>
+<pre class="r"><code>&gt; z &lt;- c(x, y)
+&gt; zstar &lt;- sample(z, replace=FALSE)</code></pre>
+</section><section class="slide level2">
+
+<p>The p-value is calculated as proportion of permutations where the resulting permutation statistic exceeds the observed statistics:</p>
+<p><span class="math display">\[
+\mbox{p-value}(s) = \frac{1}{B} \sum_{b=1}^{B} 1\left(S^{*(b)} \geq S\right).
+\]</span></p>
+<p>This can be (1) an exact calculation where all permutations are considered, (2) a Monte Carlo approximation where <span class="math inline">\(B\)</span> random permutations are considered, or (3) a large <span class="math inline">\(\min(m, n)\)</span> calculation where an asymptotic probabilistic approximation is used.</p>
+</section><section id="wilcoxon-rank-sum-test" class="slide level2">
+<h2>Wilcoxon Rank Sum Test</h2>
+<p>Also called the Mann-Whitney-Wilcoxon test.</p>
+<p>Consider the ranks of the data as a whole, <span class="math inline">\(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n\)</span>, where <span class="math inline">\(r(X_i)\)</span> is the rank of <span class="math inline">\(X_i\)</span> and <span class="math inline">\(r(Y_j)\)</span> is the rank of <span class="math inline">\(Y_j\)</span>. Note that <span class="math inline">\(r(\cdot) \in \{1, 2, \ldots, m+n\}\)</span>. The smallest value is such that <span class="math inline">\(r(X_i)=1\)</span> or <span class="math inline">\(r(Y_j)=1\)</span>, the next smallest value maps to 2, etc.</p>
+<p>Note that</p>
+<p><span class="math display">\[
+\sum_{i=1}^m r(X_i) + \sum_{j=1}^n r(Y_j) = \frac{(m+n)(m+n+1)}{2}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>The statistic <span class="math inline">\(W\)</span> is calculated by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; R_X = \sum_{i=1}^m r(X_i) &amp; R_Y = \sum_{j=1}^n r(Y_j) \\
+&amp; W_X = R_X - \frac{m(m+1)}{2} &amp; W_Y = R_Y - \frac{n(n+1)}{2} \\
+&amp; W = \min(W_X, W_Y) &amp; 
+\end{aligned}
+\]</span></p>
+<p>In this case, the <em>smaller</em> <span class="math inline">\(W\)</span> is, the more significant it is. Note that <span class="math inline">\(mn-W = \max(W_X, W_Y)\)</span>, so we just as well could utilize large <span class="math inline">\(\max(W_X, W_Y)\)</span> as a test statistic.</p>
+</section><section id="wilcoxon-signed-rank-sum-test" class="slide level2">
+<h2>Wilcoxon Signed Rank-Sum Test</h2>
+<p>The Wilcoxon signed rank test is similar to the Wilcoxon two-sample test, except here we have paired observations <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>.</p>
+<p>An example is an individual’s clinical measurement before (<span class="math inline">\(X\)</span>) and after (<span class="math inline">\(Y\)</span>) treatment.</p>
+<p>In order to test the hypothesis, we calculate <span class="math inline">\(r(X_i, Y_i) = |Y_i - X_i|\)</span> and also <span class="math inline">\(s(X_i, Y_i) = \operatorname{sign}(Y_i - X_i)\)</span>.</p>
+<p>The test statistic is <span class="math inline">\(|W|\)</span> where</p>
+<p><span class="math display">\[
+W = \sum_{i=1}^n r(X_i, Y_i) s(X_i, Y_i).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Both of these tests can be carried out using the <code>wilcox.test()</code> function in R.</p>
+<pre><code>wilcox.test(x, y = NULL,
+            alternative = c(&quot;two.sided&quot;, &quot;less&quot;, &quot;greater&quot;),
+            mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
+            conf.int = FALSE, conf.level = 0.95, ...)</code></pre>
+</section><section id="examples" class="slide level2">
+<h2>Examples</h2>
+<p>Same population mean and variance.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 4480, p-value = 0.2043
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same population mean and variance. Large sample size.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(10000, mean=1)
+&gt; y &lt;- rexp(10000, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 53312000, p-value = 4.985e-16
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same mean, very different variances.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1, sd=0.01)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 6579, p-value = 0.0001148
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same variances, different means.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=2)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 7836, p-value = 4.261e-12
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same population mean and variance.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y, paired=TRUE)
+
+    Wilcoxon signed rank test with continuity correction
+
+data:  x and y
+V = 2394, p-value = 0.6536
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; hist(y-x)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>Same population mean and variance. Large sample size.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(10000, mean=1)
+&gt; y &lt;- rexp(10000, rate=1)
+&gt; wilcox.test(x, y, paired=TRUE)
+
+    Wilcoxon signed rank test with continuity correction
+
+data:  x and y
+V = 26770000, p-value = 9.23e-10
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; hist(y-x)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="permutation-t-test" class="slide level2">
+<h2>Permutation <em>t</em>-test</h2>
+<p>As above, suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>, and we wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>. However, suppose we additionally know that <span class="math inline">\({\operatorname{Var}}(X) = {\operatorname{Var}}(Y)\)</span>. We can use a t-statistic to test this hypothesis:</p>
+<p><span class="math display">\[
+t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^2}}
+\]</span></p>
+<p>where <span class="math inline">\(s^2\)</span> is the pooled sample variance.</p>
+</section><section class="slide level2">
+
+<p>To obtain the null distribution, we randomly permute the observations to assign <span class="math inline">\(m\)</span> data points to the <span class="math inline">\(X\)</span> sample and <span class="math inline">\(n\)</span> to the <span class="math inline">\(Y\)</span> sample. This yields permutation data set <span class="math inline">\(x^{*} = (x_1^{*}, x_2^{*}, \ldots, x_m^{*})^T\)</span> and <span class="math inline">\(y^{*} = (y_1^{*}, y_2^{*}, \ldots, y_n^{*})^T\)</span>. We form null t-statistic</p>
+<p><span class="math display">\[
+t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^{2*}}}
+\]</span></p>
+<p>where again <span class="math inline">\(s^{2*}\)</span> is the pooled sample variance.</p>
+</section><section class="slide level2">
+
+<p>In order to obtain a p-value, we calculate <span class="math inline">\(t^{*(b)}\)</span> for <span class="math inline">\(b=1, 2, \ldots, B\)</span> permutation data sets.</p>
+<p>The p-value of <span class="math inline">\(t\)</span> is then the proportion of permutation statistics as or more extreme than the observed statistic:</p>
+<p><span class="math display">\[
+\mbox{p-value}(t) = \frac{1}{B} \sum_{b=1}^{B} 1\left(|t^{*(b)}| \geq |t|\right).
+\]</span></p>
+</section></section>
+<section><section id="goodness-of-fit" class="titleslide slide level1"><h1>Goodness of Fit</h1></section><section id="rationale-2" class="slide level2">
+<h2>Rationale</h2>
+<p>Sometimes we want to figure out which probability distribution is a reasonable model for the data.</p>
+<p>This is related to nonparametric inference in that we wish to go from being in a nonparametric framework to a parametric framework.</p>
+<p>Goodness of fit (GoF) tests allow one to perform a hypothesis test of how well a particular parametric probability model explains variation observed in a data set.</p>
+</section><section id="chi-square-gof-test" class="slide level2">
+<h2>Chi-Square GoF Test</h2>
+<p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F \in \{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> vs <span class="math inline">\(H_1: \mbox{not } H_0\)</span>. Suppose that <span class="math inline">\(\boldsymbol{\Theta}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
+<p>Divide the support of <span class="math inline">\(\{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> into <span class="math inline">\(k\)</span> bins <span class="math inline">\(I_1, I_2, \ldots, I_k\)</span>.</p>
+<p>For <span class="math inline">\(j=1, 2, \ldots, k\)</span>, calculate</p>
+<p><span class="math display">\[
+q_j({\boldsymbol{\theta}}) = \int_{I_j} dF_{{\boldsymbol{\theta}}}(x).
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Suppose we observe data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>. For <span class="math inline">\(j = 1, 2, \ldots, k\)</span>, let <span class="math inline">\(n_j\)</span> be the number of values <span class="math inline">\(x_i \in I_j\)</span>.</p>
+<p>Let <span class="math inline">\(\tilde{\theta}_1, \tilde{\theta}_2, \ldots, \tilde{\theta}_d\)</span> be the values that maximize the multinomial likelihood</p>
+<p><span class="math display">\[
+\prod_{j=1}^k q_j({\boldsymbol{\theta}})^{n_j}.
+\]</span></p>
+</section><section class="slide level2">
+
+<p>Form GoF statistic</p>
+<p><span class="math display">\[
+s({\boldsymbol{x}}) = \sum_{j=1}^k \frac{\left(n_j - n q_j\left(\tilde{{\boldsymbol{\theta}}} \right) \right)^2}{n q_j\left(\tilde{{\boldsymbol{\theta}}} \right)}
+\]</span></p>
+<p>When <span class="math inline">\(H_0\)</span> is true, <span class="math inline">\(S \sim \chi^2_v\)</span> where <span class="math inline">\(v = k - d - 1\)</span>. The p-value is calculated by <span class="math inline">\(\Pr(S^* \geq s({\boldsymbol{x}}))\)</span> where <span class="math inline">\(S^* \sim \chi^2_{k-d-1}\)</span>.</p>
+</section><section id="example-hardy-weinberg" class="slide level2">
+<h2>Example: Hardy-Weinberg</h2>
+<p>Suppose at your favorite SNP, we observe genotypes from 100 randomly sampled individuals as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>AA</th>
+<th>AT</th>
+<th>TT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>28</td>
+<td>60</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>If we code these genotypes as 0, 1, 2, testing for Hardy-Weinberg equilibrium is equivalent to testing whether <span class="math inline">\(X_1, X_2, \ldots, X_{100} {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Binomial}(2, \theta)\)</span> for some unknown allele frequency of T, <span class="math inline">\(\theta\)</span>.</p>
+</section><section class="slide level2">
+
+<p>The parameter dimension is such that <span class="math inline">\(d=1\)</span>. We will also set <span class="math inline">\(k=3\)</span>, where each bin is a genotype. Therefore, we have <span class="math inline">\(n_1 = 28\)</span>, <span class="math inline">\(n_2 = 60\)</span>, and <span class="math inline">\(n_3 = 12\)</span>. Also,</p>
+<p><span class="math display">\[
+q_1(\theta) = (1-\theta)^2, \ \ q_2(\theta) = 2 \theta (1-\theta), \ \ q_3(\theta) = \theta^2.
+\]</span></p>
+<p> </p>
+<p>Forming the multinomial likelihood under these bin probabilities, we find <span class="math inline">\(\tilde{\theta} = (n_2 + 2n_3)/(2n)\)</span>. The degrees of freedom of the <span class="math inline">\(\chi^2_v\)</span> null distribution is <span class="math inline">\(v = k - d - 1 = 3 - 1 - 1 = 1\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Let’s carry out the test in R.</p>
+<pre class="r"><code>&gt; n &lt;- 100
+&gt; nj &lt;- c(28, 60, 12)
+&gt; 
+&gt; # parameter estimates
+&gt; theta &lt;- (nj[2] + 2*nj[3])/(2*n)
+&gt; qj &lt;- c((1-theta)^2, 2*theta*(1-theta), theta^2)
+&gt; 
+&gt; # gof statistic
+&gt; s &lt;- sum((nj - n*qj)^2 / (n*qj))
+&gt; 
+&gt; # p-value
+&gt; 1-pchisq(s, df=1)
+[1] 0.02059811</code></pre>
+</section><section id="kolmogorovsmirnov-test" class="slide level2">
+<h2>Kolmogorov–Smirnov Test</h2>
+<p>The KS test can be used to compare a sample of data to a particular distribution, or to compare two samples of data. The former is a parametric GoF test, and the latter is a nonparametric test of equal distributions.</p>
+</section><section id="one-sample-ks-test" class="slide level2">
+<h2>One Sample KS Test</h2>
+<p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F = F_{{\boldsymbol{\theta}}}\)</span> vs <span class="math inline">\(H_1: F \not= F_{{\boldsymbol{\theta}}}\)</span> for some parametric distribution <span class="math inline">\(F_{{\boldsymbol{\theta}}}\)</span>.</p>
+<p>For observed data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> we form the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and test-statistic</p>
+<p><span class="math display">\[
+D({\boldsymbol{x}}) = \sup_{z} \left| \hat{F}_{{\boldsymbol{x}}}(z) - F_{{\boldsymbol{\theta}}}(z) \right|.
+\]</span></p>
+<p>The null distribution of this test can be approximated based on a stochastic process called the Brownian bridge.</p>
+</section><section id="two-sample-ks-test" class="slide level2">
+<h2>Two Sample KS Test</h2>
+<p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>. We wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>.</p>
+<p>For observed data <span class="math inline">\(x_1, x_2, \ldots, x_m\)</span> and <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> we form the edf’s <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and <span class="math inline">\(\hat{F}_{\boldsymbol{y}}\)</span>. We then form test-statistic</p>
+<p><span class="math display">\[
+D({\boldsymbol{x}},\boldsymbol{y})  = \sup_{z} \left| \hat{F}_{{\boldsymbol{x}}}(z) - \hat{F}_{\boldsymbol{y}}(z) \right|.
+\]</span></p>
+<p>The null distribution of this statistic can be approximated using results on edf’s.</p>
+</section><section class="slide level2">
+
+<p>Both of these tests can be carried out using the <code>ks.test()</code> function in R.</p>
+<pre><code>ks.test(x, y, ...,
+        alternative = c(&quot;two.sided&quot;, &quot;less&quot;, &quot;greater&quot;),
+        exact = NULL)</code></pre>
+</section><section id="example-exponential-vs-normal" class="slide level2">
+<h2>Example: Exponential vs Normal</h2>
+<p>Two sample KS test.</p>
+<pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
+&gt; y &lt;- rexp(100, rate=1)
+&gt; wilcox.test(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data:  x and y
+W = 5021, p-value = 0.9601
+alternative hypothesis: true location shift is not equal to 0
+&gt; ks.test(x, y)
+
+    Two-sample Kolmogorov-Smirnov test
+
+data:  x and y
+D = 0.19, p-value = 0.0541
+alternative hypothesis: two-sided</code></pre>
+</section><section class="slide level2">
+
+<pre class="r"><code>&gt; qqplot(x, y); abline(0,1)</code></pre>
+<p><img src="week08_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section class="slide level2">
+
+<p>One sample KS tests.</p>
+<pre class="r"><code>&gt; ks.test(x=x, y=&quot;pnorm&quot;)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  x
+D = 0.41398, p-value = 2.554e-15
+alternative hypothesis: two-sided
+&gt; 
+&gt; ks.test(x=x, y=&quot;pnorm&quot;, mean=1)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  x
+D = 0.068035, p-value = 0.7436
+alternative hypothesis: two-sided</code></pre>
+</section><section class="slide level2">
+
+<p>Standardize (mean center, sd scale) the observations before comparing to a Normal(0,1) distribution.</p>
+<pre class="r"><code>&gt; ks.test(x=((x-mean(x))/sd(x)), y=&quot;pnorm&quot;)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  ((x - mean(x))/sd(x))
+D = 0.05896, p-value = 0.8778
+alternative hypothesis: two-sided
+&gt; 
+&gt; ks.test(x=((y-mean(y))/sd(y)), y=&quot;pnorm&quot;)
+
+    One-sample Kolmogorov-Smirnov test
+
+data:  ((y - mean(y))/sd(y))
+D = 0.14439, p-value = 0.03092
+alternative hypothesis: two-sided</code></pre>
+</section></section>
+<section><section id="method-of-moments" class="titleslide slide level1"><h1>Method of Moments</h1></section><section id="rationale-3" class="slide level2">
+<h2>Rationale</h2>
+<p>Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. By the strong law of large numbers we have, as <span class="math inline">\(n \rightarrow \infty\)</span></p>
+<p><span class="math display">\[
+\frac{\sum_{i=1}^n X_i^k}{n} \stackrel{\text{a.s.}}{\longrightarrow} {\operatorname{E}}_{F}\left[X^k\right]
+\]</span></p>
+<p>when <span class="math inline">\({\operatorname{E}}_{F}\left[X^k\right]\)</span> exists.</p>
+<p>This means that we can nonparametrically estimate the moments of a distribution. Also, in the parametric setting, these moments can be used to form parameter estimates.</p>
+</section><section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p>Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}\)</span> where <span class="math inline">\({\boldsymbol{\theta}}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
+<p>Calculate moments <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> for <span class="math inline">\(k = 1, 2, \ldots, d&#39;\)</span> where <span class="math inline">\(d&#39; \geq d\)</span>.</p>
+<p>For each parameter <span class="math inline">\(j = 1, 2, \ldots, d\)</span>, solve for <span class="math inline">\(\theta_j\)</span> in terms of <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> for <span class="math inline">\(k = 1, 2, \ldots, d&#39;\)</span>.</p>
+<p>The method of moments estimator of <span class="math inline">\(\theta_j\)</span> is formed by replacing the function of moments <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> that equals <span class="math inline">\(\theta_j\)</span> with the empirical moments <span class="math inline">\(\sum_{i=1}^n X_i^k / n\)</span>.</p>
+</section><section id="example-normal-1" class="slide level2">
+<h2>Example: Normal</h2>
+<p>For a <span class="math inline">\(\mbox{Normal}(\mu, \sigma^2)\)</span> distribution, we have</p>
+<p><span class="math display">\[
+{\operatorname{E}}[X] = \mu
+\]</span></p>
+<p><span class="math display">\[
+{\operatorname{E}}\left[X^2\right] = \sigma^2 + \mu^2
+\]</span></p>
+<p>Solving for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, we have <span class="math inline">\(\mu = {\operatorname{E}}[X]\)</span> and <span class="math inline">\(\sigma^2 = {\operatorname{E}}[X^2] - {\operatorname{E}}[X]^2\)</span>. This yields method of moments estimators</p>
+<p><span class="math display">\[
+\tilde{\mu} = \frac{\sum_{i=1}^n X_i}{n}, \ \ \ \tilde{\sigma}^2 = \frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
+\]</span></p>
+</section><section id="exploring-goodness-of-fit" class="slide level2">
+<h2>Exploring Goodness of Fit</h2>
+<p>As mentioned above, moments can be nonparametrically estimated. At the same time, for a given parametric distribution, these moments can also be written in terms of the parameters.</p>
+</section><section class="slide level2">
+
+<p>For example, consider a single parameter exponential family distribution. The variance is going to be defined in terms of the parameter. At the same time, we can estimate variance through the empirical moments</p>
+<p><span class="math display">\[
+\frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
+\]</span></p>
+<p>In the scenario where several sets of variables are measured, the MLEs of the variance in terms of the single parameter can be compared to the moment estimates of variance to assess goodness of fit of that distribution.</p>
+</section></section>
+<section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
+<h2>Source</h2>
+<p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
+<p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
+</section><section id="session-information" class="slide level2">
+<h2>Session Information</h2>
+<section style="font-size: 0.75em;">
+<pre class="r"><code>&gt; sessionInfo()
+R version 3.3.2 (2016-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.4
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+ [1] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
+ [4] tidyr_0.6.2     tibble_1.3.0    ggplot2_2.2.1  
+ [7] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
+[10] devtools_1.12.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.10     highr_0.6        cellranger_1.1.0
+ [4] plyr_1.8.4       forcats_0.2.0    tools_3.3.2     
+ [7] digest_0.6.12    lubridate_1.6.0  jsonlite_1.4    
+[10] evaluate_0.10    memoise_1.1.0    nlme_3.1-131    
+[13] gtable_0.2.0     lattice_0.20-35  psych_1.7.5     
+[16] DBI_0.6-1        yaml_2.1.14      parallel_3.3.2  
+[19] haven_1.0.0      xml2_1.1.1       withr_1.0.2     
+[22] stringr_1.2.0    httr_1.2.1       revealjs_0.9    
+[25] hms_0.3          rprojroot_1.2    grid_3.3.2      
+[28] R6_2.2.0         readxl_1.0.0     foreign_0.8-68  
+[31] rmarkdown_1.5    modelr_0.1.0     reshape2_1.4.2  
+[34] codetools_0.2-15 backports_1.0.5  scales_0.4.1    
+[37] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
+[40] mnormt_1.5-5     colorspace_1.3-2 labeling_0.3    
+[43] stringi_1.1.5    lazyeval_0.2.0   munsell_0.4.3   
+[46] broom_0.4.2     </code></pre>
+</section>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
