@@ -475,7 +475,7 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="probability-and-statistics" class="titleslide slide level1"><h1>Probability and Statistics</h1></section><section id="roles-in-data-science" class="slide level2">
-<h1>Roles In Data Science</h1>
+<h2>Roles In Data Science</h2>
 <p>Probabilistic modeling and/or statistical inference are required in data science when the goals include:</p>
 <ol type="1">
 <li>Characterizing randomness or “noise” in the data</li>
@@ -483,12 +483,12 @@ p {
 <li>Predicting future observations or decisions in the face of uncertainty</li>
 </ol>
 </section><section id="central-dogma-of-inference" class="slide level2">
-<h1>Central Dogma of Inference</h1>
+<h2>Central Dogma of Inference</h2>
 <center>
 <img src="images/inference_idea.jpg" alt="central_dogma_statistics" />
 </center>
 </section><section id="data-analysis-without-probability" class="slide level2">
-<h1>Data Analysis Without Probability</h1>
+<h2>Data Analysis Without Probability</h2>
 <p>It is possible to do data analysis without probability and formal statistical inference:</p>
 <ul>
 <li>Descriptive statistics can be reported without utilizing probability and statistical inference</li>
@@ -497,7 +497,7 @@ p {
 </ul>
 </section></section>
 <section><section id="probability" class="titleslide slide level1"><h1>Probability</h1></section><section id="sample-space" class="slide level2">
-<h1>Sample Space</h1>
+<h2>Sample Space</h2>
 <ul>
 <li>The <strong>sample space</strong> <span class="math inline">\(\Omega\)</span> is the set of all <strong>outcomes</strong></li>
 <li>We are interested in calculating probabilities on relevant subsets of this space, called <strong>events</strong>: <span class="math inline">\(A \subseteq \Omega\)</span></li>
@@ -510,7 +510,7 @@ p {
 </ul></li>
 </ul>
 </section><section id="measure-theoretic-probabilty" class="slide level2">
-<h1>Measure Theoretic Probabilty</h1>
+<h2>Measure Theoretic Probabilty</h2>
 <p><span class="math display">\[(\Omega, \mathcal{F}, \Pr)\]</span></p>
 <ul>
 <li><span class="math inline">\(\Omega\)</span> is the sample space</li>
@@ -518,7 +518,7 @@ p {
 <li><span class="math inline">\(\Pr\)</span> is the probability measure</li>
 </ul>
 </section><section id="mathematical-probability" class="slide level2">
-<h1>Mathematical Probability</h1>
+<h2>Mathematical Probability</h2>
 <p>A proper mathematical formulation of a probability measure should include the following properties:</p>
 <ol type="1">
 <li>The probability of any even <span class="math inline">\(A\)</span> is such that <span class="math inline">\(0 \leq \Pr(A) \leq 1\)</span></li>
@@ -527,16 +527,16 @@ p {
 <li>For any <span class="math inline">\(n\)</span> events such that <span class="math inline">\(A_i \cap A_j = \varnothing\)</span> for all <span class="math inline">\(i \not= j\)</span>, then <span class="math inline">\(\Pr\left( \cup_{i=1}^n A_i \right) = \sum_{i=1}^n \Pr(A_i)\)</span>, where <span class="math inline">\(\varnothing\)</span> is the empty set</li>
 </ol>
 </section><section id="union-of-two-events" class="slide level2">
-<h1>Union of Two Events</h1>
+<h2>Union of Two Events</h2>
 <p>The probability of two events are calculated by the following general relationship:</p>
 <p><span class="math display">\[\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)\]</span></p>
 <p>where we note that <span class="math inline">\(\Pr(A \cap B)\)</span> gets counted twice in <span class="math inline">\(\Pr(A) + \Pr(B)\)</span>.</p>
 </section><section id="conditional-probability" class="slide level2">
-<h1>Conditional Probability</h1>
+<h2>Conditional Probability</h2>
 <p>An important calclation in probability and statistics is the conditional probability. We can consider the probability of an event <span class="math inline">\(A\)</span>, conditional on the fact that we are restricted to be within event <span class="math inline">\(B\)</span>. This is defined as:</p>
 <p><span class="math display">\[\Pr(A | B) = \frac{\Pr(A \cap B)}{\Pr(B)}\]</span></p>
 </section><section id="independence" class="slide level2">
-<h1>Independence</h1>
+<h2>Independence</h2>
 <p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> by definition independent when:</p>
 <ul>
 <li><span class="math inline">\(\Pr(A | B) = \Pr(A)\)</span></li>
@@ -545,17 +545,17 @@ p {
 </ul>
 <p>All three of these are equivalent.</p>
 </section><section id="bayes-theorem" class="slide level2">
-<h1>Bayes Theorem</h1>
+<h2>Bayes Theorem</h2>
 <p>A common approach in statistics is to obtain a conditional probability of two events through the opposite conditional probability and their marginal probability. This is called Bayes Theorem:</p>
 <p><span class="math display">\[\Pr(B | A) = \frac{\Pr(A | B)\Pr(B)}{\Pr(A)}\]</span></p>
 <p>This forms the basis of <em>Bayesian Inference</em> but has more general use in carrying out probability calculations.</p>
 </section><section id="law-of-total-probability" class="slide level2">
-<h1>Law of Total Probability</h1>
+<h2>Law of Total Probability</h2>
 <p>For events <span class="math inline">\(A_1, \ldots, A_n\)</span> such that <span class="math inline">\(A_i \cap A_j = \varnothing\)</span> for all <span class="math inline">\(i \not= j\)</span> and <span class="math inline">\(\cup_{i=1}^n A_i = \Omega\)</span>, it follows that for any event <span class="math inline">\(B\)</span>:</p>
 <p><span class="math display">\[\Pr(B) = \sum_{i=1}^n \Pr(B | A_i) \Pr(A_i).\]</span></p>
 </section></section>
 <section><section id="random-variables" class="titleslide slide level1"><h1>Random Variables</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>A random variable <span class="math inline">\(X\)</span> is a function from <span class="math inline">\(\Omega\)</span> to the real numbers:</p>
 <p><span class="math display">\[X: \Omega \rightarrow \mathbb{R}\]</span></p>
 <p>For any outcome in <span class="math inline">\(\Omega\)</span>, the function <span class="math inline">\(X(\omega)\)</span> produces a real value.</p>
@@ -563,22 +563,22 @@ p {
 <p><span class="math display">\[\mathcal{R} = \{X(\omega): \omega \in \Omega\}\]</span></p>
 <p>where <span class="math inline">\(\mathcal{R} \subseteq \mathbb{R}\)</span>.</p>
 </section><section id="distributon-of-rv" class="slide level2">
-<h1>Distributon of RV</h1>
+<h2>Distributon of RV</h2>
 <p>We define the probability distribution of a random variable through its <strong>probability mass function</strong> (pmf) for discrete rv’s or its <strong>probability density function</strong> (pdf) for continuous rv’s.</p>
 <p>We can also define the distribution through its <strong>cumulative distribution function</strong> (cdf). The pmf/pdf determines the cdf, and vice versa.</p>
 </section><section id="discrete-random-variables" class="slide level2">
-<h1>Discrete Random Variables</h1>
+<h2>Discrete Random Variables</h2>
 <p>A discrete rv <span class="math inline">\(X\)</span> takes on a discrete set of values such as <span class="math inline">\(\{1, 2, \ldots, n\}\)</span> or <span class="math inline">\(\{0, 1, 2, 3, \ldots \}\)</span>.</p>
 <p>Its distribution is characterized by its pmf <span class="math display">\[f(x) = \Pr(X = x)\]</span> for <span class="math inline">\(x \in \{X(\omega): \omega \in \Omega \}\)</span> and <span class="math inline">\(f(x) = 0\)</span> otherwise.</p>
 <p>Its cdf is <span class="math display">\[F(y) = \Pr(X \leq y) = \sum_{x \leq y} \Pr(X = x)\]</span> for <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
 </section><section id="example-discrete-pmf" class="slide level2">
-<h1>Example: Discrete PMF</h1>
+<h2>Example: Discrete PMF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="example-discrete-cdf" class="slide level2">
-<h1>Example: Discrete CDF</h1>
+<h2>Example: Discrete CDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="probabilities-of-events-via-discrete-cdf" class="slide level2">
-<h1>Probabilities of Events Via Discrete CDF</h1>
+<h2>Probabilities of Events Via Discrete CDF</h2>
 <p>Examples:</p>
 <table>
 <thead>
@@ -617,18 +617,18 @@ p {
 </tbody>
 </table>
 </section><section id="continuous-random-variables" class="slide level2">
-<h1>Continuous Random Variables</h1>
+<h2>Continuous Random Variables</h2>
 <p>A continuous rv <span class="math inline">\(X\)</span> takes on a continuous set of values such as <span class="math inline">\([0, \infty)\)</span> or <span class="math inline">\(\mathbb{R} = (-\infty, \infty)\)</span>.</p>
 <p>The probability that <span class="math inline">\(X\)</span> takes on any specific value is 0; but the probability it lies within an interval can be non-zero. Its pdf <span class="math inline">\(f(x)\)</span> therefore gives an infinitesimal, local, relative probability.</p>
 <p>Its cdf is <span class="math display">\[F(y) = \Pr(X \leq y) = \int_{-\infty}^y f(x) dx\]</span> for <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
 </section><section id="example-continuous-pdf" class="slide level2">
-<h1>Example: Continuous PDF</h1>
+<h2>Example: Continuous PDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="example-continuous-cdf" class="slide level2">
-<h1>Example: Continuous CDF</h1>
+<h2>Example: Continuous CDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="probabilities-of-events-via-continuous-cdf" class="slide level2">
-<h1>Probabilities of Events Via Continuous CDF</h1>
+<h2>Probabilities of Events Via Continuous CDF</h2>
 <p>Examples:</p>
 <table>
 <thead>
@@ -667,17 +667,17 @@ p {
 </tbody>
 </table>
 </section><section id="example-continuous-rv-event" class="slide level2">
-<h1>Example: Continuous RV Event</h1>
+<h2>Example: Continuous RV Event</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="note-on-pmfs-and-pdfs" class="slide level2">
-<h1>Note on PMFs and PDFs</h1>
+<h2>Note on PMFs and PDFs</h2>
 <p>PMFs and PDFs are defined as <span class="math inline">\(f(x)=0\)</span> outside of the range of <span class="math inline">\(X\)</span>, <span class="math inline">\(\mathcal{R} = \{X(\omega): \omega \in \Omega\}\)</span>. That is:</p>
 <p>Also, they sum or integrate to 1:</p>
 <p><span class="math display">\[\sum_{x \in \mathcal{R}} f(x) = 1\]</span></p>
 <p><span class="math display">\[\int_{x \in \mathcal{R}} f(x) dx = 1\]</span></p>
 <p>Using measure theory, we can consider both types of rv’s in one framework, and we would write: <span class="math display">\[\int_{-\infty}^{\infty} dF(x) = 1\]</span></p>
 </section><section id="note-on-cdfs" class="slide level2">
-<h1>Note on CDFs</h1>
+<h2>Note on CDFs</h2>
 <p>Properties of all cdf’s, regardless of continuous or discrete underlying rv:</p>
 <ul>
 <li>They are right continuous with left limits</li>
@@ -686,12 +686,12 @@ p {
 <li>The right derivative of <span class="math inline">\(F(x)\)</span> equals <span class="math inline">\(f(x)\)</span></li>
 </ul>
 </section><section id="sample-vs-population-statistics" class="slide level2">
-<h1>Sample Vs Population Statistics</h1>
+<h2>Sample Vs Population Statistics</h2>
 <p>We earlier discussed measures of center and spread for a set of data, such as the mean and the variance.</p>
 <p>Analogous measures exist for probability distributions.</p>
 <p>These are distinguished by calling those on data “sample” measures (e.g., sample mean) and those on probability distributions “population” measures (e.g., population mean).</p>
 </section><section id="expected-value" class="slide level2">
-<h1>Expected Value</h1>
+<h2>Expected Value</h2>
 <p>The <strong>expected value</strong>, also called the “population mean”, is a measure of center for a rv. It is calculated in a fashion analogous to the sample mean:</p>
 <span class="math display">\[\begin{align*}
 &amp; \operatorname{E}[X] = \sum_{x \in \mathcal{R}} x \  f(x) &amp; \mbox{(discrete)} \\
@@ -699,29 +699,29 @@ p {
 &amp; \operatorname{E}[X] = \int_{-\infty}^{\infty} x \  dF(x) &amp; \mbox{(general)}
 \end{align*}\]</span>
 </section><section id="variance" class="slide level2">
-<h1>Variance</h1>
+<h2>Variance</h2>
 <p>The <strong>variance</strong>, also called the “population variance”, is a measure of spread for a rv. It is calculated in a fashion analogous to the sample variance:</p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = {\operatorname{E}}\left[\left(X-{\operatorname{E}}[X]\right)^2\right] = {\operatorname{E}}[X^2] - E[X]^2\]</span> <span class="math display">\[{\rm SD}(X) = \sqrt{{\operatorname{Var}}(X)}\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = \sum_{x \in \mathcal{R}} \left(x-{\operatorname{E}}[X]\right)^2 \ f(x) \ \ \ \ \mbox{(discrete)}\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = \int_{-\infty}^{\infty} \left(x-{\operatorname{E}}[X]\right)^2 \ f(x) \  dx \ \ \ \ \mbox{(continuous)}\]</span></p>
 </section><section id="covariance" class="slide level2">
-<h1>Covariance</h1>
+<h2>Covariance</h2>
 <p>The <strong>covariance</strong>, also called the “population covariance”, measures how two rv’s covary. It is calculated in a fashion analogous to the sample covariance:</p>
 <p><span class="math display">\[{\operatorname{Cov}}(X, Y) = \operatorname{E} \left[ (X - \operatorname{E}[X]) (Y - \operatorname{E}[Y]) \right]\]</span></p>
 <p>Note that <span class="math inline">\({\operatorname{Cov}}(X, X) = {\operatorname{Var}}(X)\)</span>.</p>
 </section><section id="correlation" class="slide level2">
-<h1>Correlation</h1>
+<h2>Correlation</h2>
 <p>The population <strong>correlation</strong> is calculated analogously to the sample correlation:</p>
 <p><span class="math display">\[\operatorname{Cor}(X, Y) = \frac{{\operatorname{Cov}}(X, Y)}{\operatorname{SD}(X)\operatorname{SD}(Y)}\]</span></p>
 </section><section id="moment-generating-functions" class="slide level2">
-<h1>Moment Generating Functions</h1>
+<h2>Moment Generating Functions</h2>
 <p>The <strong>moment generating function</strong> (mgf) of a rv is defined to be</p>
 <p><span class="math display">\[m(t) = \operatorname{E}\left[e^{tX}\right]\]</span></p>
 <p>whenever this expecation exists.</p>
 <p>Under certain conditions, the <strong>moments</strong> of a rv can then be obtained by:</p>
 <p><span class="math display">\[\operatorname{E} \left[ X^k \right] = \frac{d^k}{dt^k}m(0).\]</span></p>
 </section><section id="random-variables-in-r" class="slide level2">
-<h1>Random Variables in R</h1>
+<h2>Random Variables in R</h2>
 <p>The pmf/pdf, cdf, quantile function, and random number generator for many important random variables are built into R. They all follow the form, where <code>&lt;name&gt;</code> is replaced with the name used in R for each specific distribution:</p>
 <ul>
 <li><code>d&lt;name&gt;</code>: pmf or pdf</li>
@@ -732,17 +732,17 @@ p {
 <p>To see a list of random variables, type <code>?Distributions</code> in R.</p>
 </section></section>
 <section><section id="discrete-rvs" class="titleslide slide level1"><h1>Discrete RVs</h1></section><section id="uniform-discrete" class="slide level2">
-<h1>Uniform (Discrete)</h1>
+<h2>Uniform (Discrete)</h2>
 <p>This simple rv distribution assigns equal probabilities to a finite set of values:</p>
 <p><span class="math display">\[X \sim \mbox{Uniform}\{1, 2, \ldots, n\}\]</span></p>
 <p><span class="math display">\[\mathcal{R} = \{1, 2, \ldots, n\}\]</span></p>
 <p><span class="math display">\[f(x; n) = 1/n \mbox{ for } x \in \mathcal{R}\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}[X] = \frac{n+1}{2}, \ {\operatorname{Var}}(X) = \frac{n^2-1}{12}\]</span></p>
 </section><section id="uniform-discrete-pmf" class="slide level2">
-<h1>Uniform (Discrete) PMF</h1>
+<h2>Uniform (Discrete) PMF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="uniform-discrete-in-r" class="slide level2">
-<h1>Uniform (Discrete) in R</h1>
+<h2>Uniform (Discrete) in R</h2>
 <p>There is no family of functions built into R for this distribution since it is so simple. However, it is possible to generate random values via the <code>sample</code> function:</p>
 <pre class="r"><code>&gt; n &lt;- 20L
 &gt; sample(x=1:n, size=10, replace=TRUE)
@@ -754,14 +754,14 @@ p {
 &gt; var(x) - (n^2-1)/12
 [1] 0.0208284</code></pre>
 </section><section id="bernoulli" class="slide level2">
-<h1>Bernoulli</h1>
+<h2>Bernoulli</h2>
 <p>A single success/failure event, such as heads/tails when flipping a coin or survival/death.</p>
 <p><span class="math display">\[X \sim \mbox{Bernoulli}(p)\]</span></p>
 <p><span class="math display">\[\mathcal{R} = \{0, 1\}\]</span></p>
 <p><span class="math display">\[f(x; p) = p^x (1-p)^{1-x} \mbox{ for } x \in \mathcal{R}\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}[X] = p, \ {\operatorname{Var}}(X) = p(1-p)\]</span></p>
 </section><section id="binomial" class="slide level2">
-<h1>Binomial</h1>
+<h2>Binomial</h2>
 <p>An extension of the Bernoulli distribution to simultaneously considering <span class="math inline">\(n\)</span> independent success/failure trials and counting the number of successes.</p>
 <p><span class="math display">\[X \sim \mbox{Binomial}(n, p)\]</span></p>
 <p><span class="math display">\[\mathcal{R} = \{0, 1, 2, \ldots, n\}\]</span></p>
@@ -769,10 +769,10 @@ p {
 <p><span class="math display">\[{\operatorname{E}}[X] = np, \ {\operatorname{Var}}(X) = np(1-p)\]</span></p>
 <p>Note that <span class="math inline">\({n \choose x} = \frac{n!}{x! (n-x)!}\)</span> is the number of unique ways to choose <span class="math inline">\(x\)</span> items from <span class="math inline">\(n\)</span> without respect to order.</p>
 </section><section id="binomial-pmf" class="slide level2">
-<h1>Binomial PMF</h1>
+<h2>Binomial PMF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="binomial-in-r" class="slide level2">
-<h1>Binomial in R</h1>
+<h2>Binomial in R</h2>
 <pre class="r"><code>&gt; str(dbinom)
 function (x, size, prob, log = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(pbinom)
@@ -782,17 +782,17 @@ function (p, size, prob, lower.tail = TRUE, log.p = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(rbinom)
 function (n, size, prob)  </code></pre>
 </section><section id="poisson" class="slide level2">
-<h1>Poisson</h1>
+<h2>Poisson</h2>
 <p>Models the number of occurrences of something within a defined time/space period, where the occurrences are independent. Examples: the number of lightning strikes on campus in a given year; the number of emails received on a given day.</p>
 <p><span class="math display">\[X \sim \mbox{Poisson}(\lambda)\]</span></p>
 <p><span class="math display">\[\mathcal{R} = \{0, 1, 2, 3, \ldots \}\]</span></p>
 <p><span class="math display">\[f(x; \lambda) = \frac{\lambda^x e^{-\lambda}}{x!} \mbox{ for } x \in \mathcal{R}\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}[X] = \lambda, \ {\operatorname{Var}}(X) = \lambda\]</span></p>
 </section><section id="poisson-pmf" class="slide level2">
-<h1>Poisson PMF</h1>
+<h2>Poisson PMF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="poisson-in-r" class="slide level2">
-<h1>Poisson in R</h1>
+<h2>Poisson in R</h2>
 <pre class="r"><code>&gt; str(dpois)
 function (x, lambda, log = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(ppois)
@@ -803,7 +803,7 @@ function (p, lambda, lower.tail = TRUE, log.p = FALSE)  </code></pre>
 function (n, lambda)  </code></pre>
 </section></section>
 <section><section id="continuous-rvs" class="titleslide slide level1"><h1>Continuous RVs</h1></section><section id="uniform-continuous" class="slide level2">
-<h1>Uniform (Continuous)</h1>
+<h2>Uniform (Continuous)</h2>
 <p>Models the scenario where all values in the unit interval [0,1] are equally likely.</p>
 <p><span class="math display">\[X \sim \mbox{Uniform}(0,1)\]</span></p>
 <p><span class="math display">\[\mathcal{R} = [0,1]\]</span></p>
@@ -811,10 +811,10 @@ function (n, lambda)  </code></pre>
 <p><span class="math display">\[F(y) = y \mbox{ for } y \in \mathcal{R}\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}[X] = 1/2, \ {\operatorname{Var}}(X) = 1/12\]</span></p>
 </section><section id="uniform-continuous-pdf" class="slide level2">
-<h1>Uniform (Continuous) PDF</h1>
+<h2>Uniform (Continuous) PDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="uniform-continuous-in-r" class="slide level2">
-<h1>Uniform (Continuous) in R</h1>
+<h2>Uniform (Continuous) in R</h2>
 <pre class="r"><code>&gt; str(dunif)
 function (x, min = 0, max = 1, log = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(punif)
@@ -824,7 +824,7 @@ function (p, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(runif)
 function (n, min = 0, max = 1)  </code></pre>
 </section><section id="exponential" class="slide level2">
-<h1>Exponential</h1>
+<h2>Exponential</h2>
 <p>Models a time to failure and has a “memoryless property”.</p>
 <p><span class="math display">\[X \sim \mbox{Exponential}(\lambda)\]</span></p>
 <p><span class="math display">\[\mathcal{R} = [0, \infty)\]</span></p>
@@ -832,10 +832,10 @@ function (n, min = 0, max = 1)  </code></pre>
 <p><span class="math display">\[F(y; \lambda) = 1 - e^{-\lambda y} \mbox{ for } y \in \mathcal{R}\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}[X] = \frac{1}{\lambda}, \ {\operatorname{Var}}(X) = \frac{1}{\lambda^2}\]</span></p>
 </section><section id="exponential-pdf" class="slide level2">
-<h1>Exponential PDF</h1>
+<h2>Exponential PDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="exponential-in-r" class="slide level2">
-<h1>Exponential in R</h1>
+<h2>Exponential in R</h2>
 <pre class="r"><code>&gt; str(dexp)
 function (x, rate = 1, log = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(pexp)
@@ -845,7 +845,7 @@ function (p, rate = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(rexp)
 function (n, rate = 1)  </code></pre>
 </section><section id="beta" class="slide level2">
-<h1>Beta</h1>
+<h2>Beta</h2>
 <p>Yields values in <span class="math inline">\((0,1)\)</span>, so often used to generate random probabilities, such as the <span class="math inline">\(p\)</span> in Bernoulli<span class="math inline">\((p)\)</span>.</p>
 <p><span class="math display">\[X \sim \mbox{Beta}(\alpha,\beta) \mbox{ where } \alpha, \beta &gt; 0\]</span></p>
 <p><span class="math display">\[\mathcal{R} = (0,1)\]</span></p>
@@ -854,10 +854,10 @@ function (n, rate = 1)  </code></pre>
 <p><span class="math display">\[{\operatorname{E}}[X] = \frac{\alpha}{\alpha + 
 \beta}, \ {\operatorname{Var}}(X) = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}\]</span></p>
 </section><section id="beta-pdf" class="slide level2">
-<h1>Beta PDF</h1>
+<h2>Beta PDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="beta-in-r" class="slide level2">
-<h1>Beta in R</h1>
+<h2>Beta in R</h2>
 <pre class="r"><code>&gt; str(dbeta) #shape1=alpha, shape2=beta
 function (x, shape1, shape2, ncp = 0, log = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(pbeta)
@@ -869,17 +869,17 @@ function (p, shape1, shape2, ncp = 0, lower.tail = TRUE,
 <pre class="r"><code>&gt; str(rbeta)
 function (n, shape1, shape2, ncp = 0)  </code></pre>
 </section><section id="normal" class="slide level2">
-<h1>Normal</h1>
+<h2>Normal</h2>
 <p>Due to the Central Limit Theorem (covered later), this “bell curve” distribution is often observed in properly normalized real data.</p>
 <p><span class="math display">\[X \sim \mbox{Normal}(\mu, \sigma^2)\]</span></p>
 <p><span class="math display">\[\mathcal{R} = (-\infty, \infty)\]</span></p>
 <p><span class="math display">\[f(x; \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2 \sigma^2}} \mbox{ for } x \in \mathcal{R}\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}[X] = \mu, \ {\operatorname{Var}}(X) = \sigma^2\]</span></p>
 </section><section id="normal-pdf" class="slide level2">
-<h1>Normal PDF</h1>
+<h2>Normal PDF</h2>
 <p><img src="week04_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="normal-in-r" class="slide level2">
-<h1>Normal in R</h1>
+<h2>Normal in R</h2>
 <pre class="r"><code>&gt; str(dnorm) #notice it requires the STANDARD DEVIATION, not the variance
 function (x, mean = 0, sd = 1, log = FALSE)  </code></pre>
 <pre class="r"><code>&gt; str(pnorm)
@@ -890,41 +890,41 @@ function (p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)  </code></pre>
 function (n, mean = 0, sd = 1)  </code></pre>
 </section></section>
 <section><section id="sums-of-random-variables" class="titleslide slide level1"><h1>Sums of Random Variables</h1></section><section id="linear-transformation-of-a-rv" class="slide level2">
-<h1>Linear Transformation of a RV</h1>
+<h2>Linear Transformation of a RV</h2>
 <p>Suppose that <span class="math inline">\(X\)</span> is a random variable and that <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants. Then:</p>
 <p><span class="math display">\[{\operatorname{E}}\left[a + bX \right] = a + b {\operatorname{E}}[X]\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}\left(a + bX \right) = b^2 {\operatorname{Var}}(X)\]</span></p>
 </section><section id="sums-of-independent-rvs" class="slide level2">
-<h1>Sums of Independent RVs</h1>
+<h2>Sums of Independent RVs</h2>
 <p>If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent random variables, then:</p>
 <p><span class="math display">\[{\operatorname{E}}\left[ \sum_{i=1}^n X_i \right] = \sum_{i=1}^n {\operatorname{E}}[X_i]\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n {\operatorname{Var}}(X_i)\]</span></p>
 </section><section id="sums-of-dependent-rvs" class="slide level2">
-<h1>Sums of Dependent RVs</h1>
+<h2>Sums of Dependent RVs</h2>
 <p>If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent random variables, then:</p>
 <p><span class="math display">\[{\operatorname{E}}\left[ \sum_{i=1}^n X_i \right] = \sum_{i=1}^n {\operatorname{E}}[X_i]\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n {\operatorname{Var}}(X_i) + \sum_{i \not= j} {\operatorname{Cov}}(X_i, X_j)\]</span></p>
 </section><section id="means-of-random-variables" class="slide level2">
-<h1>Means of Random Variables</h1>
+<h2>Means of Random Variables</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent and identically distributed (iid) random variables. Let <span class="math inline">\(\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i\)</span> be their sample mean. Then:</p>
 <p><span class="math display">\[{\operatorname{E}}\left[\overline{X}_n \right] = {\operatorname{E}}[X_i]\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}\left(\overline{X}_n \right) = \frac{1}{n}{\operatorname{Var}}(X_i)\]</span></p>
 </section></section>
 <section><section id="convergence-of-random-variables" class="titleslide slide level1"><h1>Convergence of Random Variables</h1></section><section id="sequence-of-rvs" class="slide level2">
-<h1>Sequence of RVs</h1>
+<h2>Sequence of RVs</h2>
 <p>Let <span class="math inline">\(Z_1, Z_2, \ldots\)</span> be an infinite sequence of rv’s.</p>
 <p>An important example is</p>
 <p><span class="math display">\[Z_n = \overline{X}_n = \frac{\sum_{i=1}^n X_i}{n}.\]</span></p>
 <p>It is useful to be able to determine a limiting value or distribution of <span class="math inline">\(\{Z_i\}\)</span>.</p>
 </section><section id="convergence-in-distribution" class="slide level2">
-<h1>Convergence in Distribution</h1>
+<h2>Convergence in Distribution</h2>
 <p><span class="math inline">\(\{Z_i\}\)</span> converges in distribution to <span class="math inline">\(Z\)</span>, written</p>
 <p><span class="math display">\[Z_n \stackrel{D}{\longrightarrow} Z\]</span></p>
 <p>if</p>
 <p><span class="math display">\[F_{Z_n}(y) = \Pr(Z_n \leq y) \rightarrow \Pr(Z \leq y) = F_{Z}(y)\]</span></p>
 <p>as <span class="math inline">\(n \rightarrow \infty\)</span> for all <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
 </section><section id="convergence-in-probability" class="slide level2">
-<h1>Convergence in Probability</h1>
+<h2>Convergence in Probability</h2>
 <p><span class="math inline">\(\{Z_i\}\)</span> converges in probability to <span class="math inline">\(Z\)</span>, written</p>
 <p><span class="math display">\[Z_n \stackrel{P}{\longrightarrow} Z\]</span></p>
 <p>if</p>
@@ -932,23 +932,23 @@ function (n, mean = 0, sd = 1)  </code></pre>
 <p>as <span class="math inline">\(n \rightarrow \infty\)</span> for all <span class="math inline">\(\epsilon &gt; 0\)</span>.</p>
 <p>Note that it may also be the case that <span class="math inline">\(Z_n \stackrel{P}{\longrightarrow} \theta\)</span> for a fixed, nonrandom value <span class="math inline">\(\theta\)</span>.</p>
 </section><section id="almost-sure-convergence" class="slide level2">
-<h1>Almost Sure Convergence</h1>
+<h2>Almost Sure Convergence</h2>
 <p><span class="math inline">\(\{Z_i\}\)</span> converges almost surely (or “with probability 1”) to <span class="math inline">\(Z\)</span>, written</p>
 <p><span class="math display">\[Z_n \stackrel{a.s.}{\longrightarrow} Z\]</span></p>
 <p>if</p>
 <p><span class="math display">\[\Pr\left(\{\omega: |Z_n(\omega) - Z(\omega)| \stackrel{n \rightarrow \infty}{\longrightarrow} 0 \}\right) = 1.\]</span></p>
 <p>Note that it may also be the case that <span class="math inline">\(Z_n \stackrel{a.s.}{\longrightarrow} \theta\)</span> for a fixed, nonrandom value <span class="math inline">\(\theta\)</span>.</p>
 </section><section id="strong-law-of-large-numbers" class="slide level2">
-<h1>Strong Law of Large Numbers</h1>
+<h2>Strong Law of Large Numbers</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are iid rv’s with population mean <span class="math inline">\({\operatorname{E}}[X_i] = \mu\)</span> where <span class="math inline">\({\operatorname{E}}[|X_i|] &lt; \infty\)</span>. Then</p>
 <p><span class="math display">\[\overline{X}_n \stackrel{a.s.}{\longrightarrow} \mu.\]</span></p>
 </section><section id="central-limit-theorem" class="slide level2">
-<h1>Central Limit Theorem</h1>
+<h2>Central Limit Theorem</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are iid rv’s with population mean <span class="math inline">\({\operatorname{E}}[X_i] = \mu\)</span> and variance <span class="math inline">\({\operatorname{Var}}(X_i) = \sigma^2\)</span>. Then as <span class="math inline">\(n \rightarrow \infty\)</span>,</p>
 <p><span class="math display">\[\sqrt{n}(\overline{X}_n - \mu)  \stackrel{D}{\longrightarrow} \mbox{Normal}(0, \sigma^2)\]</span></p>
 <p><span class="math display">\[\frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}  \stackrel{D}{\longrightarrow} \mbox{Normal}(0, 1)\]</span></p>
 </section><section id="example-calculations" class="slide level2">
-<h1>Example: Calculations</h1>
+<h2>Example: Calculations</h2>
 <p>Let <span class="math inline">\(X_1, X_2, \ldots, X_{40}\)</span> be iid Poisson(<span class="math inline">\(\lambda\)</span>) with <span class="math inline">\(\lambda=6\)</span>.</p>
 <p>We will form <span class="math inline">\(\sqrt{40}(\overline{X} - 6)\)</span> over 10,000 realizations and compare their distribution to a Normal(0, 6) distribution.</p>
 <pre class="r"><code>&gt; x &lt;- replicate(n=1e4, expr=rpois(n=40, lambda=6), 
@@ -960,7 +960,7 @@ function (n, mean = 0, sd = 1)  </code></pre>
 +                  y = dnorm(seq(-18,18,length.out=1e4), 
 +                            sd=sqrt(6)))</code></pre>
 </section><section id="example-plot" class="slide level2">
-<h1>Example: Plot</h1>
+<h2>Example: Plot</h2>
 <pre class="r"><code>&gt; ggplot(data=df) +
 +   geom_histogram(aes(x=clt, y=..density..), color=&quot;blue&quot;, 
 +                  fill=&quot;lightgray&quot;, binwidth=0.75) +
@@ -968,7 +968,7 @@ function (n, mean = 0, sd = 1)  </code></pre>
 <p><img src="week04_files/figure-revealjs/clt_plot-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="joint-distributions" class="titleslide slide level1"><h1>Joint Distributions</h1></section><section id="bivariate-random-variables" class="slide level2">
-<h1>Bivariate Random Variables</h1>
+<h2>Bivariate Random Variables</h2>
 <p>For a pair of rv’s <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> defined on the same probability space, we can define their joint pmf or pdf. For the discrete case,</p>
 <span class="math display">\[\begin{align*}
 f(x, y) &amp; = \Pr(\{\omega: X(\omega) = x\} \cap \{\omega: Y(\omega) = y\}) \\
@@ -976,7 +976,7 @@ f(x, y) &amp; = \Pr(\{\omega: X(\omega) = x\} \cap \{\omega: Y(\omega) = y\}) \\
 \end{align*}\]</span>
 <p>The joint pdf is defined analogously for continuous rv’s.</p>
 </section><section id="events-for-bivariate-rvs" class="slide level2">
-<h1>Events for Bivariate RVs</h1>
+<h2>Events for Bivariate RVs</h2>
 <p>Let <span class="math inline">\(A_x \times A_y \subseteq \mathbb{R} \times \mathbb{R}\)</span> be an event. Then <span class="math inline">\(\Pr(X \in A_x, Y \in A_y)\)</span> is calculated by:</p>
 <span class="math display">\[\begin{align*}
 &amp; \sum_{x \in A_x} \sum_{y \in A_y} f(x, y) &amp;  \mbox{(discrete)} \\
@@ -984,12 +984,12 @@ f(x, y) &amp; = \Pr(\{\omega: X(\omega) = x\} \cap \{\omega: Y(\omega) = y\}) \\
 &amp; \int_{x \in A_x} \int_{y \in A_y} dF_Y(y) dF_{X}(x) &amp; \mbox{(general)}
 \end{align*}\]</span>
 </section><section id="marginal-distributions" class="slide level2">
-<h1>Marginal Distributions</h1>
+<h2>Marginal Distributions</h2>
 <p>We can calculate the marginal distribution of <span class="math inline">\(X\)</span> (or <span class="math inline">\(Y\)</span>) from their joint distribution:</p>
 <p><span class="math display">\[f(x) = \sum_{y \in \mathcal{R}_y} f(x, y)\]</span></p>
 <p><span class="math display">\[f(x) = \int_{-\infty}^{\infty} f(x, y) dy\]</span></p>
 </section><section id="independent-random-variables" class="slide level2">
-<h1>Independent Random Variables</h1>
+<h2>Independent Random Variables</h2>
 <p>Two rv’s are independent when their joint pmf or pdf factor:</p>
 <p><span class="math display">\[f(x,y) = f(x) f(y)\]</span></p>
 <p>This means, for example, in the continuous case,</p>
@@ -999,30 +999,30 @@ f(x, y) &amp; = \Pr(\{\omega: X(\omega) = x\} \cap \{\omega: Y(\omega) = y\}) \\
 \ &amp; = \Pr(X \in A_x) \Pr(Y \in A_y)
 \end{align*}\]</span>
 </section><section id="conditional-distributions" class="slide level2">
-<h1>Conditional Distributions</h1>
+<h2>Conditional Distributions</h2>
 <p>We can define the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> as follows. The conditional rv <span class="math inline">\(X | Y \sim F_{X|Y}\)</span> with conditional pmf or pdf for <span class="math inline">\(X | Y=y\)</span> given by</p>
 <p><span class="math display">\[
 f(x | y) = \frac{f(x, y)}{f(y)}. 
 \]</span></p>
 </section><section id="conditional-moments" class="slide level2">
-<h1>Conditional Moments</h1>
+<h2>Conditional Moments</h2>
 <p>The <span class="math inline">\(k\)</span>th conditional moment (when it exists) is calculated by:</p>
 <p><span class="math display">\[{\operatorname{E}}\left[X^k | Y=y\right] = \sum_{x \in \mathcal{R}_x} x^k f(x | y)\]</span></p>
 <p><span class="math display">\[{\operatorname{E}}\left[X^k | Y=y\right] = \int_{-\infty}^{\infty} x^k f(x | y) dx\]</span></p>
 <p>Note that <span class="math inline">\({\operatorname{E}}\left[X^k | Y\right]\)</span> is a random variable that is a function of <span class="math inline">\(Y\)</span> whose distribution is determined by that of <span class="math inline">\(Y\)</span>.</p>
 </section><section id="law-of-total-variance" class="slide level2">
-<h1>Law of Total Variance</h1>
+<h2>Law of Total Variance</h2>
 <p>We can partition the variance of <span class="math inline">\(X\)</span> according to the following conditional calculations on <span class="math inline">\(Y\)</span>:</p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = {\operatorname{Var}}({\operatorname{E}}[X | Y]) + {\operatorname{E}}[{\operatorname{Var}}(X | Y)].\]</span></p>
 <p>This is a useful result for partitioning variation in modeling fitting.</p>
 </section><section id="multivariate-distributions" class="slide level2">
-<h1>Multivariate Distributions</h1>
+<h2>Multivariate Distributions</h2>
 <p>Let <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, \ldots, X_n)^T\)</span> be a vector of <span class="math inline">\(n\)</span> rv’s. We also let realiozed values be <span class="math inline">\(\boldsymbol{x} = (x_1, x_2, \ldots, x_n)^T\)</span>. The joint pmf or pdf is written as</p>
 <p><span class="math display">\[f(\boldsymbol{x}) = f(x_1, x_2, \ldots, x_n)\]</span></p>
 <p>and if the rv’s are independent then</p>
 <p><span class="math display">\[f(\boldsymbol{x}) = \prod_{i=1}^{n} f(x_i).\]</span></p>
 </section><section id="mv-expected-value" class="slide level2">
-<h1>MV Expected Value</h1>
+<h2>MV Expected Value</h2>
 <p>The expected value of <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, \ldots, X_n)^T\)</span> is an <span class="math inline">\(n\)</span>-vector:</p>
 <p><span class="math display">\[{\operatorname{E}}[\boldsymbol{X}] = 
 \begin{bmatrix}
@@ -1033,7 +1033,7 @@ f(x | y) = \frac{f(x, y)}{f(y)}.
 \end{bmatrix}
 \]</span></p>
 </section><section id="mv-variance-covariance-matrix" class="slide level2">
-<h1>MV Variance-Covariance Matrix</h1>
+<h2>MV Variance-Covariance Matrix</h2>
 <p>The variance-covariance matrix of <span class="math inline">\(\boldsymbol{X}\)</span> is an <span class="math inline">\(n \times n\)</span> matrix with <span class="math inline">\((i, j)\)</span> entry equal to <span class="math inline">\({\operatorname{Cov}}(X_i, X_j)\)</span>.</p>
 <p><span class="math display">\[{\operatorname{Var}}(\boldsymbol{X}) =
 \begin{bmatrix}
@@ -1045,7 +1045,7 @@ f(x | y) = \frac{f(x, y)}{f(y)}.
 \]</span></p>
 </section></section>
 <section><section id="multivariate-rvs" class="titleslide slide level1"><h1>Multivariate RVs</h1></section><section id="multinomial" class="slide level2">
-<h1>Multinomial</h1>
+<h2>Multinomial</h2>
 <p>Suppose <span class="math inline">\(\boldsymbol{X}\)</span> (an <span class="math inline">\(m\)</span>-vector) is <span class="math inline">\(\mbox{Multinomial}_m(n, \boldsymbol{p})\)</span>, where <span class="math inline">\(\boldsymbol{p}\)</span> is an <span class="math inline">\(m\)</span>-vector such that <span class="math inline">\(\sum_{i=1}^m p_i = 1\)</span>. It has pmf</p>
 <p><span class="math display">\[
 f(\boldsymbol{x}; \boldsymbol{p}) = 
@@ -1060,7 +1060,7 @@ f(\boldsymbol{x}; \boldsymbol{p}) =
 <p><span class="math display">\[{\operatorname{E}}[X_i] = np_i, \quad {\operatorname{Var}}(X_i) = n p_i (1-p_i),\]</span></p>
 <p><span class="math display">\[{\operatorname{Cov}}(X_i, X_j) = -n p_i p_j \quad (i \not= j).\]</span></p>
 </section><section id="multivariate-normal" class="slide level2">
-<h1>Multivariate Normal</h1>
+<h2>Multivariate Normal</h2>
 <p>The <span class="math inline">\(n\)</span>-vector <span class="math inline">\(\boldsymbol{X}\)</span> has Multivariate Normal distribution when <span class="math inline">\(\boldsymbol{X} \sim \mbox{MVN}_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span> where <span class="math inline">\(\boldsymbol{\mu}\)</span> is the <span class="math inline">\(n\)</span>-vector of population means and <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is the <span class="math inline">\(n \times n\)</span> variance-covariance matrix. Its pdf is</p>
 <p><span class="math display">\[ f(\boldsymbol{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma}) = 
 \frac{1}{\sqrt{2 \pi |\boldsymbol{\Sigma}|}} \exp -\left\{ -\frac{1}{2} (\boldsymbol{x} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\boldsymbol{x} - \boldsymbol{\mu}) \right\}.
@@ -1068,7 +1068,7 @@ f(\boldsymbol{x}; \boldsymbol{p}) =
 <p> </p>
 <p>Fun fact: <span class="math inline">\(\boldsymbol{\Sigma}^{-1/2} (\boldsymbol{X}-\boldsymbol{\mu}) \sim \mbox{MVN}_n(\boldsymbol{0}, \boldsymbol{I})\)</span>.</p>
 </section><section id="dirichlet" class="slide level2">
-<h1>Dirichlet</h1>
+<h2>Dirichlet</h2>
 <p>The Dirichlet distribution models an <span class="math inline">\(m\)</span>-vector <span class="math inline">\(\boldsymbol{X}\)</span> so that <span class="math inline">\(0 \leq X_i \leq 1\)</span> and <span class="math inline">\(\sum_{i=1}^m X_i = 1\)</span>. It is a generalization of the Beta distribution. The rv <span class="math inline">\(\boldsymbol{X} \sim \mbox{Dirichlet}_m(\boldsymbol{\alpha})\)</span>, where <span class="math inline">\(\boldsymbol{\alpha}\)</span> is an <span class="math inline">\(m\)</span>-vector, has pdf</p>
 <p><span class="math display">\[
 f(\boldsymbol{x}; \boldsymbol{\alpha}) =
@@ -1076,36 +1076,36 @@ f(\boldsymbol{x}; \boldsymbol{\alpha}) =
 \]</span></p>
 <p>It can be calculated that <span class="math display">\[{\operatorname{E}}[X_i] = \frac{\alpha_i}{\alpha_0}, {\operatorname{Var}}(X_i) = \frac{\alpha_i (\alpha_0 - \alpha_i)}{\alpha_0^2 (\alpha_0 + 1)}, {\operatorname{Cov}}(X_i, X_j) = \frac{- \alpha_i \alpha_j}{\alpha_0^2 (\alpha_0 + 1)}\]</span> where <span class="math inline">\(\alpha_0 = \sum_{k=1}^m \alpha_k\)</span> and <span class="math inline">\(i \not= j\)</span> in <span class="math inline">\({\operatorname{Cov}}(X_i, X_j)\)</span>.</p>
 </section><section id="in-r" class="slide level2">
-<h1>In R</h1>
+<h2>In R</h2>
 <p>For the Multinomial, base R contains the functions <code>dmultinom</code> and <code>rmultinom</code>.</p>
 <p>For the Multivariate Normal, there are several packages that work with this distribution. One choice is the package <code>mvtnorm</code>, which contains the functions <code>dmvnorm</code> and <code>rmvnorm</code>.</p>
 <p>For the Dirichlet, there are several packages that work with this distribution. One choice is the package <code>MCMCpack</code>, which contains the functions <code>ddirichlet</code> and <code>rdirichlet</code>.</p>
 </section></section>
 <section><section id="likelihood" class="titleslide slide level1"><h1>Likelihood</h1></section><section id="likelihood-function" class="slide level2">
-<h1>Likelihood Function</h1>
+<h2>Likelihood Function</h2>
 <p>Suppose that we observe <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> according to the model <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F_{\theta}\)</span>. The joint pdf is <span class="math inline">\(f(\boldsymbol{x} ; \theta)\)</span>. We view the pdf as being a function of <span class="math inline">\(\boldsymbol{x}\)</span> for a fixed <span class="math inline">\(\theta\)</span>.</p>
 <p>The <strong>likelihood function</strong> is obtained by reversing the arguments and viewing this as a function of <span class="math inline">\(\theta\)</span> for a fixed, observed <span class="math inline">\(\boldsymbol{x}\)</span>:</p>
 <p><span class="math display">\[L(\theta ; \boldsymbol{x}) = f(\boldsymbol{x} ; \theta).\]</span></p>
 </section><section id="log-likelihood-function" class="slide level2">
-<h1>Log-Likelihood Function</h1>
+<h2>Log-Likelihood Function</h2>
 <p>The log-likelihood function is</p>
 <p><span class="math display">\[ \ell(\theta ; \boldsymbol{x}) = \log L(\theta ; \boldsymbol{x}).\]</span></p>
 <p>When the data are iid, we have</p>
 <p><span class="math display">\[ \ell(\theta ; \boldsymbol{x}) = \log \prod_{i=1}^n f(x_i ; \theta) = \sum_{i=1}^n \log f(x_i ; \theta).\]</span></p>
 </section><section id="sufficient-statistics" class="slide level2">
-<h1>Sufficient Statistics</h1>
+<h2>Sufficient Statistics</h2>
 <p>A <strong>statistic</strong> <span class="math inline">\(T(\boldsymbol{x})\)</span> is defined to be a function of the data.</p>
 <p>A <strong>sufficient statistic</strong> is a statistic where the distribution of data, conditional on this statistic, does not depend on <span class="math inline">\(\theta\)</span>. That is, <span class="math inline">\(\boldsymbol{X} | T(\boldsymbol{X})\)</span> does not depend on <span class="math inline">\(\theta\)</span>.</p>
 <p>The interpretation is that the information in <span class="math inline">\(\boldsymbol{X}\)</span> about <span class="math inline">\(\theta\)</span> (the target of inference) is contained in <span class="math inline">\(T(\boldsymbol{X})\)</span>.</p>
 </section><section id="factorization-theorem" class="slide level2">
-<h1>Factorization Theorem</h1>
+<h2>Factorization Theorem</h2>
 <p>The factorization theorem says that <span class="math inline">\(T(\boldsymbol{x})\)</span> is a sufficient statistic if and only if we can factor</p>
 <p><span class="math display">\[f(\boldsymbol{x} ; \theta) = g(T(\boldsymbol{x}), \theta) h(\boldsymbol{x}).\]</span></p>
 <p>Therefore, if <span class="math inline">\(T(\boldsymbol{x})\)</span> is a sufficient statistic then</p>
 <p><span class="math display">\[L(\theta ; \boldsymbol{x}) = g(T(\boldsymbol{x}), \theta) h(\boldsymbol{x}) \propto L(\theta ; T(\boldsymbol{x})).\]</span></p>
 <p>This formalizes the idea that the information in <span class="math inline">\(\boldsymbol{X}\)</span> about <span class="math inline">\(\theta\)</span> (the target of inference) is contained in <span class="math inline">\(T(\boldsymbol{X})\)</span>.</p>
 </section><section id="example-normal" class="slide level2">
-<h1>Example: Normal</h1>
+<h2>Example: Normal</h2>
 <p> </p>
 <p>If <span class="math inline">\(X_1, X_2, \ldots, X_n \stackrel{{\rm iid}}{\sim} \mbox{Normal}(\mu \sigma^2)\)</span>, then <span class="math inline">\(\overline{X}\)</span> is sufficient for <span class="math inline">\(\mu\)</span>.</p>
 <p> </p>
@@ -1113,14 +1113,14 @@ f(\boldsymbol{x}; \boldsymbol{\alpha}) =
 <p> </p>
 <p>Hint: <span class="math inline">\(\sum_{i=1}^n (x_i - \mu)^2 = \sum_{i=1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2\)</span>.</p>
 </section><section id="likelihood-principle" class="slide level2">
-<h1>Likelihood Principle</h1>
+<h2>Likelihood Principle</h2>
 <p> </p>
 <p>If <span class="math inline">\(\boldsymbol{x}\)</span> and <span class="math inline">\(\boldsymbol{y}\)</span> are two data sets so that</p>
 <p><span class="math display">\[L(\theta ; \boldsymbol{x}) \propto L(\theta ; \boldsymbol{y}),\]</span></p>
 <p><span class="math display">\[\mbox{i.e., } L(\theta ; \boldsymbol{x}) = c(\boldsymbol{x}, \boldsymbol{y}) L(\theta ; \boldsymbol{y}),\]</span></p>
 <p>then inferenece <span class="math inline">\(\theta\)</span> should be the same for <span class="math inline">\(\boldsymbol{x}\)</span> and <span class="math inline">\(\boldsymbol{y}\)</span>.</p>
 </section><section id="maximum-likelihood" class="slide level2">
-<h1>Maximum Likelihood</h1>
+<h2>Maximum Likelihood</h2>
 <p>A common starting point for inference is to calculate the <strong>maximum likelihood estimate</strong>. This is the value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(L(\theta ; \boldsymbol{x})\)</span> for an observe data set <span class="math inline">\(\boldsymbol{x}\)</span>.</p>
 <span class="math display">\[\begin{align*}
 \hat{\theta}_{{\rm MLE}} &amp; = \operatorname{argmax}_{\theta} L(\theta ; \boldsymbol{x}) \\
@@ -1129,7 +1129,7 @@ f(\boldsymbol{x}; \boldsymbol{\alpha}) =
 \end{align*}\]</span>
 <p>where the last equality holds for sufficient statistics <span class="math inline">\(T(\boldsymbol{x})\)</span>.</p>
 </section><section id="going-further" class="slide level2">
-<h1>Going Further</h1>
+<h2>Going Further</h2>
 <p>If this interests you, be sure to read about:</p>
 <ul>
 <li>Minimal sufficient statistics</li>
@@ -1139,12 +1139,12 @@ f(\boldsymbol{x}; \boldsymbol{\alpha}) =
 </ul>
 </section></section>
 <section><section id="exponential-family-distributions" class="titleslide slide level1"><h1>Exponential Family Distributions</h1></section><section id="rationale" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p><strong>Exponential family distributions</strong> (EFDs) provide a generalized parameterization and form of a very large class of distributions used in inference. For example, Binomia, Poisson, Exponential, Normal, Multinomial, MVN, and Dirichlet are all EFDs.</p>
 <p>The generalized form provides generally applicable formulas for moments, estimators, etc.</p>
 <p>EFDs also facilitate developing general algorithms for model fitting.</p>
 </section><section id="definition-1" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>If <span class="math inline">\(X\)</span> follows an EFD then it has pdf of the form</p>
 <p><span class="math display">\[f(x ; \boldsymbol{\theta}) =
 h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) - A(\boldsymbol{\eta}) \right\}
@@ -1157,7 +1157,7 @@ h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) - A(\boldsymbo
 <p><span class="math inline">\(A(\boldsymbol{\eta})\)</span> is sometimes called the “log normalizer” because</p>
 <p><span class="math display">\[A(\boldsymbol{\eta}) = \log \int h(x) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x) \right\}.\]</span></p>
 </section><section id="example-bernoulli" class="slide level2">
-<h1>Example: Bernoulli</h1>
+<h2>Example: Bernoulli</h2>
 <span class="math display">\[\begin{align*}
 f(x ; p) &amp; = p^x (1-p)^{1-x} \\
  &amp; = \exp \left\{ x \log(p) + (1-x) \log(1-p) \right\} \\
@@ -1167,7 +1167,7 @@ f(x ; p) &amp; = p^x (1-p)^{1-x} \\
 <p><span class="math inline">\(T(x) = x\)</span></p>
 <p><span class="math inline">\(A(\eta) = \log\left(1 + e^\eta\right)\)</span></p>
 </section><section id="example-normal-1" class="slide level2">
-<h1>Example: Normal</h1>
+<h2>Example: Normal</h2>
 <span class="math display">\[\begin{align*}
 f(x ; \mu, \sigma^2) &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2 \sigma^2}\right\} \\
  &amp; = \frac{1}{\sqrt{2 \pi}} \exp\left\{\frac{\mu}{\sigma^2} x - \frac{1}{2 \sigma^2} x^2 - \log(\sigma) - \frac{\mu^2}{2 \sigma^2}\right\}
@@ -1176,14 +1176,14 @@ f(x ; \mu, \sigma^2) &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{-\frac{(
 <p><span class="math inline">\(\boldsymbol{T}(x) = \left(x, x^2\right)^T\)</span></p>
 <p><span class="math inline">\(A(\boldsymbol{\eta}) = \log(\sigma) + \frac{\mu^2}{2 \sigma^2} = -\frac{1}{2} \log(-2 \eta_2) - \frac{\eta_1^2}{4\eta_2}\)</span></p>
 </section><section id="natural-single-parameter-efd" class="slide level2">
-<h1>Natural Single Parameter EFD</h1>
+<h2>Natural Single Parameter EFD</h2>
 <p> </p>
 <p>A natural single parameter EFD simplifies to the scenario where <span class="math inline">\(d=1\)</span> and <span class="math inline">\(T(x) = x\)</span>:</p>
 <p><span class="math display">\[f(x ; \eta) =
 h(x) \exp \left\{ \eta x - A(\eta) \right\}
 \]</span></p>
 </section><section id="calculating-moments" class="slide level2">
-<h1>Calculating Moments</h1>
+<h2>Calculating Moments</h2>
 <p> </p>
 <p><span class="math display">\[
 \frac{d}{d \eta_k} A(\boldsymbol{\eta}) = {\operatorname{E}}[T_k(X)]
@@ -1193,12 +1193,12 @@ h(x) \exp \left\{ \eta x - A(\eta) \right\}
 \frac{d^2}{d \eta_k^2} A(\boldsymbol{\eta}) = {\operatorname{Var}}[T_k(X)]
 \]</span></p>
 </section><section id="example-normal-2" class="slide level2">
-<h1>Example: Normal</h1>
+<h2>Example: Normal</h2>
 <p>For <span class="math inline">\(X \sim \mbox{Normal}(\mu, \sigma^2)\)</span>,</p>
 <p><span class="math display">\[{\operatorname{E}}[X] = \frac{d}{d \eta_1} A(\boldsymbol{\eta}) = -\frac{\eta_1}{2 \eta_2} = \mu,\]</span></p>
 <p><span class="math display">\[{\operatorname{Var}}(X) = \frac{d^2}{d \eta_1^2} A(\boldsymbol{\eta}) = -\frac{1}{2 \eta_2} = \sigma^2.\]</span></p>
 </section><section id="maximum-likelihood-1" class="slide level2">
-<h1>Maximum Likelihood</h1>
+<h2>Maximum Likelihood</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are iid from some EFD. Then,</p>
 <p><span class="math display">\[
 \ell(\boldsymbol{\eta} ; \boldsymbol{x}) = \sum_{i=1}^n \left[ \log h(x_i) + \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(x_i) - A(\boldsymbol{\eta})  \right]
@@ -1211,11 +1211,11 @@ h(x) \exp \left\{ \eta x - A(\eta) \right\}
 \]</span></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1231,7 +1231,7 @@ attached base packages:
 
 other attached packages:
  [1] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
- [4] tidyr_0.6.1     tibble_1.3.0    ggplot2_2.2.1  
+ [4] tidyr_0.6.2     tibble_1.3.0    ggplot2_2.2.1  
  [7] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
 [10] devtools_1.12.0
 

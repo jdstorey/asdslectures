@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -55,22 +55,394 @@
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
     <link rel="stylesheet" href="customization/custom.css"/>
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
     <link href="libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
@@ -103,313 +475,300 @@ p {
 </section>
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
-<section><section id="ols-goodness-of-fit" class="titleslide slide level1"><h1>OLS Goodness of Fit</h1></section><section id="pythagorean-theorem" class="slide level2">
-<h1>Pythagorean Theorem</h1>
-<div id="left">
-<p><img src="images/right_triangle_model_fits.png" alt="PythMod" /></p>
-</div>
-<div id="right">
-<p>Least squares model fitting can be understood through the Pythagorean theorem: <span class="math inline">\(a^2 + b^2 = c^2\)</span>. However, here we have:</p>
-<p><span class="math display">\[
-\sum_{i=1}^n Y_i^2 = \sum_{i=1}^n \hat{Y}_i^2 + \sum_{i=1}^n (Y_i - \hat{Y}_i)^2
-\]</span></p>
-<p>where the <span class="math inline">\(\hat{Y}_i\)</span> are the result of a <strong>linear projection</strong> of the <span class="math inline">\(Y_i\)</span>.</p>
-</div>
-</section><section id="ols-normal-model" class="slide level2">
-<h1>OLS Normal Model</h1>
-<p>In this section, let’s assume that <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distributed so that</p>
+<section><section id="logistic-regression" class="titleslide slide level1"><h1>Logistic Regression</h1></section><section id="goal" class="slide level2">
+<h2>Goal</h2>
+<p>Logistic regression models a Bernoulli distributed response variable in terms of linear combinations of explanatory variables.</p>
+<p>This extends least squares regression to the case where the response variable captures a “success” or “failure” type outcome.</p>
+</section><section id="bernoulli-as-efd" class="slide level2">
+<h2>Bernoulli as EFD</h2>
+<p>If <span class="math inline">\(Y \sim \mbox{Bernoulli}(p)\)</span>, then its pmf is:</p>
 <p><span class="math display">\[
 \begin{aligned}
-Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
- &amp; = {\boldsymbol{X}}_i {\boldsymbol{\beta}}+ E_i
+f(y; p) &amp; = p^{y} (1-p)^{1-y} \\
+ &amp; = \exp\left\{ \log\left(\frac{p}{1-p}\right)y + \log(1-p) \right\}
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>. Note that we haven’t specified the distribution of the <span class="math inline">\({\boldsymbol{X}}_i\)</span> rv’s.</p>
-</section><section id="projection-matrices" class="slide level2">
-<h1>Projection Matrices</h1>
-<p>In the OLS framework we have:</p>
+<p>In exponential family distribution (EFD) notation,</p>
 <p><span class="math display">\[
-\hat{{\boldsymbol{Y}}} = {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{Y}}.
+\eta(p) = \log\left(\frac{p}{1-p}\right) \equiv {\operatorname{logit}}(p),
 \]</span></p>
-<p>The matrix <span class="math inline">\({\boldsymbol{P}}_{n \times n} = {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T\)</span> is a projection matrix. The vector <span class="math inline">\({\boldsymbol{Y}}\)</span> is projected into the space spanned by the column space of <span class="math inline">\({\boldsymbol{X}}\)</span>.</p>
-</section><section class="slide level2">
-
-<p>Project matrices have the following properties:</p>
-<ul>
-<li><span class="math inline">\({\boldsymbol{P}}\)</span> is symmetric</li>
-<li><span class="math inline">\({\boldsymbol{P}}\)</span> is idempotent so that <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}\)</span></li>
-<li>If <span class="math inline">\({\boldsymbol{X}}\)</span> has column rank <span class="math inline">\(p\)</span>, then <span class="math inline">\({\boldsymbol{P}}\)</span> has rank <span class="math inline">\(p\)</span></li>
-<li>The eigenvalues of <span class="math inline">\({\boldsymbol{P}}\)</span> are <span class="math inline">\(p\)</span> 1’s and <span class="math inline">\(n-p\)</span> 0’s</li>
-<li>The trace (sum of diagonal entries) is <span class="math inline">\(\operatorname{tr}({\boldsymbol{P}}) = p\)</span></li>
-<li><span class="math inline">\({\boldsymbol{I}}- {\boldsymbol{P}}\)</span> is also a projection matrix with rank <span class="math inline">\(n-p\)</span></li>
-</ul>
-</section><section id="decomposition" class="slide level2">
-<h1>Decomposition</h1>
-<p>Note that <span class="math inline">\({\boldsymbol{P}}({\boldsymbol{I}}- {\boldsymbol{P}}) = {\boldsymbol{P}}- {\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}- {\boldsymbol{P}}= {\boldsymbol{0}}\)</span>.</p>
-<p>We have</p>
+<p><span class="math inline">\(A(\eta(p)) = \log(1 + \exp(\eta)) = \log(1-p)\)</span>, and <span class="math inline">\(y\)</span> is the sufficient statistic.</p>
+</section><section id="model" class="slide level2">
+<h2>Model</h2>
+<p><span class="math inline">\(({\boldsymbol{X}}_1, Y_1), ({\boldsymbol{X}}_2, Y_2), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distributed so that <span class="math inline">\(Y_i | {\boldsymbol{X}}_i \sim \mbox{Bernoulli}(p_i)\)</span>, where <span class="math inline">\(\{Y_i | {\boldsymbol{X}}_i\}_{i=1}^n\)</span> are jointly independent and</p>
+<p><span class="math display">\[
+{\operatorname{logit}}\left({\operatorname{E}}[Y_i | {\boldsymbol{X}}_i]\right) = \log\left( \frac{\Pr(Y_i = 1 | {\boldsymbol{X}}_i)}{\Pr(Y_i = 0 | {\boldsymbol{X}}_i)} \right)  = {\boldsymbol{X}}_i {\boldsymbol{\beta}}.
+\]</span></p>
+<p>From this it follows that</p>
+<p><span class="math display">\[
+p_i = \frac{\exp\left({\boldsymbol{X}}_i {\boldsymbol{\beta}}\right)}{1 + \exp\left({\boldsymbol{X}}_i {\boldsymbol{\beta}}\right)}.
+\]</span></p>
+</section><section id="maximum-likelihood-estimation" class="slide level2">
+<h2>Maximum Likelihood Estimation</h2>
+<p>The <span class="math inline">\({\boldsymbol{\beta}}\)</span> are estimated from the MLE calculated from:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\| {\boldsymbol{Y}}\|_{2}^{2} = {\boldsymbol{Y}}^T {\boldsymbol{Y}}&amp; = ({\boldsymbol{P}}{\boldsymbol{Y}}+ ({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}})^T ({\boldsymbol{P}}{\boldsymbol{Y}}+ ({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}}) \\
- &amp; = ({\boldsymbol{P}}{\boldsymbol{Y}})^T ({\boldsymbol{P}}{\boldsymbol{Y}}) + (({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}})^T (({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}}) \\
- &amp; = \| {\boldsymbol{P}}{\boldsymbol{Y}}\|_{2}^{2} + \| ({\boldsymbol{I}}- {\boldsymbol{P}}) {\boldsymbol{Y}}\|_{2}^{2}
+\ell\left({\boldsymbol{\beta}}; {\boldsymbol{y}}, {\boldsymbol{X}}\right) &amp; = \sum_{i=1}^n \log\left(\frac{p_i}{1-p_i}\right) y_i + \log(1-p_i) \\
+ &amp; = \sum_{i=1}^n ({\boldsymbol{x}}_i {\boldsymbol{\beta}}) y_i - \log\left(1 + \exp\left({\boldsymbol{x}}_i {\boldsymbol{\beta}}\right) \right)  
 \end{aligned}
 \]</span></p>
-<p>where the cross terms disappear because <span class="math inline">\({\boldsymbol{P}}({\boldsymbol{I}}- {\boldsymbol{P}}) = {\boldsymbol{0}}\)</span>.</p>
+</section><section id="iteratively-reweighted-least-squares" class="slide level2">
+<h2>Iteratively Reweighted Least Squares</h2>
+<ol type="1">
+<li><p>Initialize <span class="math inline">\({\boldsymbol{\beta}}^{(1)}\)</span>.</p></li>
+<li><p>For each iteration <span class="math inline">\(t=1, 2, \ldots\)</span>, set <span class="math display">\[
+p_i^{(t)} = {\operatorname{logit}}^{-1}\left( {\boldsymbol{x}}_i {\boldsymbol{\beta}}^{(t)} \right), \ \ \ \ 
+z_i^{(t)} = {\operatorname{logit}}\left(p_i^{(t)}\right) + \frac{y_i - p_i^{(t)}}{p_i^{(t)}(1-p_i^{(t)})}
+\]</span> and let <span class="math inline">\({\boldsymbol{z}}^{(t)} = \left\{z_i^{(t)}\right\}_{i=1}^n\)</span>.</p></li>
+</ol>
 </section><section class="slide level2">
 
-<p>Note: The <span class="math inline">\(\ell_p\)</span> norm of an <span class="math inline">\(n\)</span>-vector <span class="math inline">\(\boldsymbol{w}\)</span> is defined as</p>
+<ol start="3" type="1">
+<li><p>Form <span class="math inline">\(n \times n\)</span> diagonal matrix <span class="math inline">\(\boldsymbol{W}^{(t)}\)</span> with <span class="math inline">\((i, i)\)</span> entry equal to <span class="math inline">\(p_i^{(t)}(1-p_i^{(t)})\)</span>.</p></li>
+<li><p>Obtain <span class="math inline">\({\boldsymbol{\beta}}^{(t+1)}\)</span> by performing the wieghted least squares regression (see <a href="#//generalized-least-squares-1">GLS</a> from earlier)</p></li>
+</ol>
 <p><span class="math display">\[
-\| \boldsymbol{w} \|_p = \left(\sum_{i=1}^n |w_i|^p\right)^{1/p}.
+{\boldsymbol{\beta}}^{(t+1)} = \left({\boldsymbol{X}}^T \boldsymbol{W}^{(t)} {\boldsymbol{X}}\right)^{-1} {\boldsymbol{X}}^T \boldsymbol{W}^{(t)} {\boldsymbol{z}}^{(t)}.
 \]</span></p>
-<p>Above we calculated</p>
+<ol start="5" type="1">
+<li>Iterate Steps 2-4 over <span class="math inline">\(t=1, 2, 3, \ldots\)</span> until convergence, setting <span class="math inline">\(\hat{{\boldsymbol{\beta}}} = {\boldsymbol{\beta}}^{(\infty)}\)</span>.</li>
+</ol>
+</section><section id="glms" class="slide level2">
+<h2>GLMs</h2>
+<p>For exponential family distribution response variables, the <strong>generalized linear model</strong> is</p>
 <p><span class="math display">\[
-\| \boldsymbol{w} \|_2^2 = \sum_{i=1}^n w_i^2.
-\]</span></p>
-</section><section id="distribution-of-projection" class="slide level2">
-<h1>Distribution of Projection</h1>
-<p>Suppose that <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0,\sigma^2)\)</span>. This can also be written as <span class="math inline">\({\boldsymbol{Y}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>. It follows that</p>
-<p><span class="math display">\[
-{\boldsymbol{P}}{\boldsymbol{Y}}\sim \mbox{MVN}_{n}({\boldsymbol{0}}, \sigma^2 {\boldsymbol{P}}{\boldsymbol{I}}{\boldsymbol{P}}^T).
-\]</span></p>
-<p>where <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{I}}{\boldsymbol{P}}^T = {\boldsymbol{P}}{\boldsymbol{P}}^T = {\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}\)</span>.</p>
-<p>Also, <span class="math inline">\(({\boldsymbol{P}}{\boldsymbol{Y}})^T ({\boldsymbol{P}}{\boldsymbol{Y}}) = {\boldsymbol{Y}}^T {\boldsymbol{P}}^T {\boldsymbol{P}}{\boldsymbol{Y}}= {\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}\)</span>, a <strong>quadratic form</strong>. Given the eigenvalues of <span class="math inline">\({\boldsymbol{P}}\)</span>, <span class="math inline">\({\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}\)</span> is equivalent in distribution to <span class="math inline">\(p\)</span> squared iid Normal(0,1) rv’s, so</p>
-<p><span class="math display">\[
-\frac{{\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}}{\sigma^2} \sim \chi^2_{p}.
-\]</span></p>
-</section><section id="distribution-of-residuals" class="slide level2">
-<h1>Distribution of Residuals</h1>
-<p>If <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{Y}}= \hat{{\boldsymbol{Y}}}\)</span> are the fitted OLS values, then <span class="math inline">\(({\boldsymbol{I}}-{\boldsymbol{P}}) {\boldsymbol{Y}}= {\boldsymbol{Y}}- \hat{{\boldsymbol{Y}}}\)</span> are the residuals.</p>
-<p>It follows by the same argument as above that</p>
-<p><span class="math display">\[
-\frac{{\boldsymbol{Y}}^T ({\boldsymbol{I}}-{\boldsymbol{P}}) {\boldsymbol{Y}}}{\sigma^2} \sim \chi^2_{n-p}.
-\]</span></p>
-<p>It’s also straightforward to show that <span class="math inline">\(({\boldsymbol{I}}-{\boldsymbol{P}}){\boldsymbol{Y}}\sim \mbox{MVN}_{n}({\boldsymbol{0}}, \sigma^2({\boldsymbol{I}}-{\boldsymbol{P}}))\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{P}}{\boldsymbol{Y}}, ({\boldsymbol{I}}-{\boldsymbol{P}}){\boldsymbol{Y}}) = {\boldsymbol{0}}\)</span>.</p>
-</section><section id="degrees-of-freedom" class="slide level2">
-<h1>Degrees of Freedom</h1>
-<p>The degrees of freedom, <span class="math inline">\(p\)</span>, of a linear projection model fit is equal to</p>
-<ul>
-<li>The number of linearly dependent columns of <span class="math inline">\({\boldsymbol{X}}\)</span></li>
-<li>The number of nonzero eigenvalues of <span class="math inline">\({\boldsymbol{P}}\)</span> (where nonzero eigenvalues are equal to 1)</li>
-<li>The trace of the projection matrix, <span class="math inline">\(\operatorname{tr}({\boldsymbol{P}})\)</span>.</li>
-</ul>
-<p>The reason why we divide estimates of variance by <span class="math inline">\(n-p\)</span> is because this is the number of effective independent sources of variation remaining after the model is fit by projecting the <span class="math inline">\(n\)</span> observations into a <span class="math inline">\(p\)</span> dimensional linear space.</p>
-</section><section id="submodels" class="slide level2">
-<h1>Submodels</h1>
-<p>Consider the OLS model <span class="math inline">\({\boldsymbol{Y}}= {\boldsymbol{X}}{\boldsymbol{\beta}}+ {\boldsymbol{E}}\)</span> where there are <span class="math inline">\(p\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{\beta}}\)</span> is a <span class="math inline">\(p\)</span>-vector.</p>
-<p>Let <span class="math inline">\({\boldsymbol{X}}_0\)</span> be a subset of <span class="math inline">\(p_0\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and let <span class="math inline">\({\boldsymbol{X}}_1\)</span> be a subset of <span class="math inline">\(p_1\)</span> columns, where <span class="math inline">\(1 \leq p_0 &lt; p_1 \leq p\)</span>. Also, assume that the columns of <span class="math inline">\({\boldsymbol{X}}_0\)</span> are a subset of <span class="math inline">\({\boldsymbol{X}}_1\)</span>.</p>
-<p>We can form <span class="math inline">\(\hat{{\boldsymbol{Y}}}_0 = {\boldsymbol{P}}_0 {\boldsymbol{Y}}\)</span> where <span class="math inline">\({\boldsymbol{P}}_0\)</span> is the projection matrix built from <span class="math inline">\({\boldsymbol{X}}_0\)</span>. We can analogously form <span class="math inline">\(\hat{{\boldsymbol{Y}}}_1 = {\boldsymbol{P}}_1 {\boldsymbol{Y}}\)</span>.</p>
-</section><section id="hypothesis-testing" class="slide level2">
-<h1>Hypothesis Testing</h1>
-<p>Without loss of generality, suppose that <span class="math inline">\({\boldsymbol{\beta}}_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T\)</span> and <span class="math inline">\({\boldsymbol{\beta}}_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T\)</span>.</p>
-<p>How do we compare these models, specifically to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>?</p>
-<p>The basic idea to perform this test is to compare the goodness of fits of each model via a pivotal statistic. We will discuss the generalized LRT and ANOVA approaches.</p>
-</section><section id="generalized-lrt" class="slide level2">
-<h1>Generalized LRT</h1>
-<p>Under the OLS Normal model, it follows that <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_0 = ({\boldsymbol{X}}^T_0 {\boldsymbol{X}}_0)^{-1} {\boldsymbol{X}}_0^T {\boldsymbol{Y}}\)</span> is the MLE under the null hypothesis and <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_1 = ({\boldsymbol{X}}^T_1 {\boldsymbol{X}}_1)^{-1} {\boldsymbol{X}}_1^T {\boldsymbol{Y}}\)</span> is the unconstrained MLE. Also, the respective MLEs of <span class="math inline">\(\sigma^2\)</span> are</p>
-<p><span class="math display">\[
-\hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2}{n}
-\]</span></p>
-<p><span class="math display">\[
-\hat{\sigma}^2_1 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2}{n}
-\]</span></p>
-<p>where <span class="math inline">\(\hat{{\boldsymbol{Y}}}_{0} = {\boldsymbol{X}}_0 \hat{{\boldsymbol{\beta}}}_0\)</span> and <span class="math inline">\(\hat{{\boldsymbol{Y}}}_{1} = {\boldsymbol{X}}_1 \hat{{\boldsymbol{\beta}}}_1\)</span>.</p>
+\eta\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\]</span></p>
+<p>where <span class="math inline">\(\eta(\theta)\)</span> is function of the expected value <span class="math inline">\(\theta\)</span> into the natural parameter. This is called the <strong>canonical link function</strong> in the GLM setting.</p>
+<p>The <strong>iteratively reweighted least squares</strong> algorithm presented above for calculating (local) maximum likelihood estimates of <span class="math inline">\({\boldsymbol{\beta}}\)</span> has a generalization to a large class of exponential family distribution response vairables.</p>
+</section></section>
+<section><section id="glm-function-in-r" class="titleslide slide level1"><h1><code>glm()</code> Function in R</h1></section><section id="example-grad-school-admissions" class="slide level2">
+<h2>Example: Grad School Admissions</h2>
+<pre class="r"><code>&gt; mydata &lt;- 
++   read.csv(&quot;http://www.ats.ucla.edu/stat/data/binary.csv&quot;)
+&gt; dim(mydata)
+[1] 400   4
+&gt; head(mydata)
+  admit gre  gpa rank
+1     0 380 3.61    3
+2     1 660 3.67    3
+3     1 800 4.00    1
+4     1 640 3.19    4
+5     0 520 2.93    4
+6     1 760 3.00    2</code></pre>
+<p>Data and analysis courtesy of <a href="http://www.ats.ucla.edu/stat/r/dae/logit.htm" class="uri">http://www.ats.ucla.edu/stat/r/dae/logit.htm</a>.</p>
+</section><section id="explore-the-data" class="slide level2">
+<h2>Explore the Data</h2>
+<pre class="r"><code>&gt; apply(mydata, 2, mean)
+   admit      gre      gpa     rank 
+  0.3175 587.7000   3.3899   2.4850 
+&gt; apply(mydata, 2, sd)
+      admit         gre         gpa        rank 
+  0.4660867 115.5165364   0.3805668   0.9444602 
+&gt; 
+&gt; table(mydata$admit, mydata$rank)
+   
+     1  2  3  4
+  0 28 97 93 55
+  1 33 54 28 12</code></pre>
 </section><section class="slide level2">
 
-<p>The generalized LRT statistic is</p>
-<p><span class="math display">\[
-\lambda({\boldsymbol{X}}, {\boldsymbol{Y}}) = \frac{L\left(\hat{{\boldsymbol{\beta}}}_1, \hat{\sigma}^2_1; {\boldsymbol{X}}, {\boldsymbol{Y}}\right)}{L\left(\hat{{\boldsymbol{\beta}}}_0, \hat{\sigma}^2_0; {\boldsymbol{X}}, {\boldsymbol{Y}}\right)}
-\]</span></p>
-<p>where <span class="math inline">\(2\log\lambda({\boldsymbol{X}}, {\boldsymbol{Y}})\)</span> has a <span class="math inline">\(\chi^2_{p_1 - p_0}\)</span> null distribution.</p>
-</section><section id="nested-projections" class="slide level2">
-<h1>Nested Projections</h1>
-<p>We can apply the Pythagorean theorem we saw earlier to linear subspaces to get:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\| {\boldsymbol{Y}}\|^2_2 &amp; = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|_{2}^{2} + \| {\boldsymbol{P}}_1 {\boldsymbol{Y}}\|_{2}^{2} \\
-&amp; = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|_{2}^{2} + \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|_{2}^{2} + \| {\boldsymbol{P}}_0 {\boldsymbol{Y}}\|_{2}^{2}
-\end{aligned}
-\]</span></p>
-<p>We can also use the Pythagorean theorem to decompose the residuals from the smaller projection <span class="math inline">\({\boldsymbol{P}}_0\)</span>:</p>
-<p><span class="math display">\[
-\| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2 + \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2
-\]</span></p>
-</section><section id="f-statistic" class="slide level2">
-<h1><em>F</em> Statistic</h1>
-<p>The <span class="math inline">\(F\)</span> statistic compares the improvement of goodness in fit of the larger model to that of the smaller model in terms of sums of squared residuals, and it scales this improvement by an estimate of <span class="math inline">\(\sigma^2\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
-F &amp; = \frac{\left[\| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 - \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2\right]/(p_1 - p_0)}{\| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2/(n-p_1)} \\
-&amp; = \frac{\left[\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2 - \sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 \right]/(p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)} \\
-\end{aligned}
-\]</span></p>
+<pre class="r"><code>&gt; ggplot(data=mydata) +
++   geom_boxplot(aes(x=as.factor(admit), y=gre))</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
-<p>Since <span class="math inline">\(\| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 - \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2 = \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2\)</span>, we can equivalently write the <span class="math inline">\(F\)</span> statistic as:</p>
-<p><span class="math display">\[
-\begin{aligned}
-F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 / (p_1 - p_0)}{\| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2/(n-p_1)} \\
-&amp; = \frac{\sum_{i=1}^n (\hat{Y}_{1,i} - \hat{Y}_{0,i})^2 / (p_1 - p_0)}{\sum_{i=1}^n (Y_i - \hat{Y}_{1,i})^2 / (n - p_1)}
-\end{aligned} 
-\]</span></p>
-</section><section id="f-distribution" class="slide level2">
-<h1><em>F</em> Distribution</h1>
-<p>Suppose we have independent random variables <span class="math inline">\(V \sim \chi^2_a\)</span> and <span class="math inline">\(W \sim \chi^2_b\)</span>. It follows that</p>
-<p><span class="math display">\[
-\frac{V/a}{W/b} \sim F_{a,b}
-\]</span></p>
-<p>where <span class="math inline">\(F_{a,b}\)</span> is the <span class="math inline">\(F\)</span> distribution with <span class="math inline">\((a, b)\)</span> degrees of freedom.</p>
-</section><section class="slide level2">
+<pre class="r"><code>&gt; ggplot(data=mydata) +
++   geom_boxplot(aes(x=as.factor(admit), y=gpa))</code></pre>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+</section><section id="logistic-regression-in-r" class="slide level2">
+<h2>Logistic Regression in R</h2>
+<pre class="r"><code>&gt; mydata$rank &lt;- factor(mydata$rank, levels=c(1, 2, 3, 4))
+&gt; myfit &lt;- glm(admit ~ gre + gpa + rank, 
++              data = mydata, family = &quot;binomial&quot;)
+&gt; myfit
 
-<p>By arguments similar to those given above, we have</p>
-<p><span class="math display">\[
-\frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2}{\sigma^2} \sim \chi^2_{p_1 - p_0}
-\]</span></p>
-<p><span class="math display">\[
-\frac{\| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2}{\sigma^2} \sim \chi^2_{n-p_1}
-\]</span></p>
-<p>and these two rv’s are independent.</p>
-</section><section id="f-test" class="slide level2">
-<h1><em>F</em> Test</h1>
-<p>Suppose that the OLS model holds where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>.</p>
-<p>In order to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>, we can form the <span class="math inline">\(F\)</span> statistic as given above, which has null distribution <span class="math inline">\(F_{p_1 - p_0, n - p_1}\)</span>. The p-value is calculated as <span class="math inline">\(\Pr(F^* \geq F)\)</span> where <span class="math inline">\(F\)</span> is the observed <span class="math inline">\(F\)</span> statistic and <span class="math inline">\(F^* \sim F_{p_1 - p_0, n - p_1}\)</span>.</p>
-<p>If the above assumption on the distribution of <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\)</span> only approximately holds, then the <span class="math inline">\(F\)</span> test p-value is also an approximation.</p>
-</section><section id="example-davis-data" class="slide level2">
-<h1>Example: Davis Data</h1>
-<pre class="r"><code>&gt; library(&quot;car&quot;)
-&gt; data(&quot;Davis&quot;, package=&quot;car&quot;)</code></pre>
-<pre class="r"><code>&gt; htwt &lt;- tbl_df(Davis)
-&gt; htwt[12,c(2,3)] &lt;- htwt[12,c(3,2)]
-&gt; head(htwt)
-# A tibble: 6 × 5
-     sex weight height repwt repht
-  &lt;fctr&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;
-1      M     77    182    77   180
-2      F     58    161    51   159
-3      F     53    161    54   158
-4      M     68    177    70   175
-5      F     59    157    59   155
-6      M     76    170    76   165</code></pre>
-</section><section id="comparing-linear-models-in-r" class="slide level2">
-<h1>Comparing Linear Models in R</h1>
-<p>Example: Davis Data</p>
-<p>Suppose we are considering the three following models:</p>
-<pre class="r"><code>&gt; f1 &lt;- lm(weight ~ height, data=htwt)
-&gt; f2 &lt;- lm(weight ~ height + sex, data=htwt)
-&gt; f3 &lt;- lm(weight ~ height + sex + height:sex, data=htwt)</code></pre>
-<p>How do we determine if the additional terms in models <code>f2</code> and <code>f3</code> are needed?</p>
-</section><section id="anova-version-2" class="slide level2">
-<h1>ANOVA (Version 2)</h1>
-<p>A generalization of ANOVA exists that allows us to compare two nested models, quantifying their differences in terms of goodness of fit and performing a hypothesis test of whether this difference is statistically significant.</p>
-<p>A model is <em>nested</em> within another model if their difference is simply the absence of certain terms in the smaller model.</p>
-<p>The null hypothesis is that the additional terms have coefficients equal to zero, and the alternative hypothesis is that at least one coefficient is nonzero.</p>
-<p>Both versions of ANOVA can be described in a single, elegant mathematical framework.</p>
-</section><section id="comparing-two-models-with-anova" class="slide level2">
-<h1>Comparing Two Models <br> with <code>anova()</code></h1>
-<p>This provides a comparison of the improvement in fit from model <code>f2</code> compared to model <code>f1</code>:</p>
-<pre class="r"><code>&gt; anova(f1, f2)
-Analysis of Variance Table
+Call:  glm(formula = admit ~ gre + gpa + rank, family = &quot;binomial&quot;, 
+    data = mydata)
 
-Model 1: weight ~ height
-Model 2: weight ~ height + sex
-  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
-1    198 14321                                  
-2    197 12816  1    1504.9 23.133 2.999e-06 ***
+Coefficients:
+(Intercept)          gre          gpa        rank2  
+  -3.989979     0.002264     0.804038    -0.675443  
+      rank3        rank4  
+  -1.340204    -1.551464  
+
+Degrees of Freedom: 399 Total (i.e. Null);  394 Residual
+Null Deviance:      500 
+Residual Deviance: 458.5    AIC: 470.5</code></pre>
+</section><section id="summary-of-fit" class="slide level2">
+<h2>Summary of Fit</h2>
+<pre class="r"><code>&gt; summary(myfit)
+
+Call:
+glm(formula = admit ~ gre + gpa + rank, family = &quot;binomial&quot;, 
+    data = mydata)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6268  -0.8662  -0.6388   1.1490   2.0790  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -3.989979   1.139951  -3.500 0.000465 ***
+gre          0.002264   0.001094   2.070 0.038465 *  
+gpa          0.804038   0.331819   2.423 0.015388 *  
+rank2       -0.675443   0.316490  -2.134 0.032829 *  
+rank3       -1.340204   0.345306  -3.881 0.000104 ***
+rank4       -1.551464   0.417832  -3.713 0.000205 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 499.98  on 399  degrees of freedom
+Residual deviance: 458.52  on 394  degrees of freedom
+AIC: 470.52
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</section><section id="anova-of-fit" class="slide level2">
+<h2>ANOVA of Fit</h2>
+<pre class="r"><code>&gt; anova(myfit, test=&quot;Chisq&quot;)
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: admit
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                   399     499.98              
+gre   1  13.9204       398     486.06 0.0001907 ***
+gpa   1   5.7122       397     480.34 0.0168478 *  
+rank  3  21.8265       394     458.52 7.088e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt; anova(myfit, test=&quot;LRT&quot;)
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: admit
+
+Terms added sequentially (first to last)
+
+     Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                   399     499.98              
+gre   1  13.9204       398     486.06 0.0001907 ***
+gpa   1   5.7122       397     480.34 0.0168478 *  
+rank  3  21.8265       394     458.52 7.088e-05 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-</section><section id="when-theres-a-single-variable-difference" class="slide level2">
-<h1>When There’s a Single Variable Difference</h1>
-<p>Compare above <code>anova(f1, f2)</code> p-value to that for the <code>sex</code> term from the <code>f2</code> model:</p>
-<pre class="r"><code>&gt; library(broom)
-&gt; tidy(f2)
-         term    estimate   std.error statistic      p.value
-1 (Intercept) -76.6167326 15.71504644 -4.875374 2.231334e-06
-2      height   0.8105526  0.09529565  8.505662 4.499241e-15
-3        sexM   8.2268893  1.71050385  4.809629 2.998988e-06</code></pre>
-</section><section id="calculating-the-f-statistic" class="slide level2">
-<h1>Calculating the F-statistic</h1>
-<pre class="r"><code>&gt; anova(f1, f2)
-Analysis of Variance Table
+</section><section id="example-contraceptive-use" class="slide level2">
+<h2>Example: Contraceptive Use</h2>
+<pre class="r"><code>&gt; cuse &lt;- 
++   read.table(&quot;http://data.princeton.edu/wws509/datasets/cuse.dat&quot;, 
++              header=TRUE)
+&gt; dim(cuse)
+[1] 16  5
+&gt; head(cuse)
+    age education wantsMore notUsing using
+1   &lt;25       low       yes       53     6
+2   &lt;25       low        no       10     4
+3   &lt;25      high       yes      212    52
+4   &lt;25      high        no       50    10
+5 25-29       low       yes       60    14
+6 25-29       low        no       19    10</code></pre>
+<p>Data and analysis courtesy of <a href="http://data.princeton.edu/R/glms.html" class="uri">http://data.princeton.edu/R/glms.html</a>.</p>
+</section><section id="a-different-format" class="slide level2">
+<h2>A Different Format</h2>
+<p>Note that in this data set there are multiple observations per explanatory variable configuration.</p>
+<p>The last two columns of the data frame count the successes and failures per configuration.</p>
+<pre class="r"><code>&gt; head(cuse)
+    age education wantsMore notUsing using
+1   &lt;25       low       yes       53     6
+2   &lt;25       low        no       10     4
+3   &lt;25      high       yes      212    52
+4   &lt;25      high        no       50    10
+5 25-29       low       yes       60    14
+6 25-29       low        no       19    10</code></pre>
+</section><section id="fitting-the-model" class="slide level2">
+<h2>Fitting the Model</h2>
+<p>When this is the case, we call the <code>glm()</code> function slighlty differently.</p>
+<pre class="r"><code>&gt; myfit &lt;- glm(cbind(using, notUsing) ~ age + education + wantsMore, 
++              data=cuse, family = binomial)
+&gt; myfit
 
-Model 1: weight ~ height
-Model 2: weight ~ height + sex
-  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
-1    198 14321                                  
-2    197 12816  1    1504.9 23.133 2.999e-06 ***
+Call:  glm(formula = cbind(using, notUsing) ~ age + education + wantsMore, 
+    family = binomial, data = cuse)
+
+Coefficients:
+ (Intercept)      age25-29      age30-39      age40-49  
+     -0.8082        0.3894        0.9086        1.1892  
+educationlow  wantsMoreyes  
+     -0.3250       -0.8330  
+
+Degrees of Freedom: 15 Total (i.e. Null);  10 Residual
+Null Deviance:      165.8 
+Residual Deviance: 29.92    AIC: 113.4</code></pre>
+</section><section id="summary-of-fit-1" class="slide level2">
+<h2>Summary of Fit</h2>
+<pre class="r"><code>&gt; summary(myfit)
+
+Call:
+glm(formula = cbind(using, notUsing) ~ age + education + wantsMore, 
+    family = binomial, data = cuse)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.5148  -0.9376   0.2408   0.9822   1.7333  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   -0.8082     0.1590  -5.083 3.71e-07 ***
+age25-29       0.3894     0.1759   2.214  0.02681 *  
+age30-39       0.9086     0.1646   5.519 3.40e-08 ***
+age40-49       1.1892     0.2144   5.546 2.92e-08 ***
+educationlow  -0.3250     0.1240  -2.620  0.00879 ** 
+wantsMoreyes  -0.8330     0.1175  -7.091 1.33e-12 ***
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>How the F-statistic is calculated:</p>
-<pre class="r"><code>&gt; n &lt;- nrow(htwt)
-&gt; ss1 &lt;- (n-1)*var(f1$residuals)
-&gt; ss1
-[1] 14321.11
-&gt; ss2 &lt;- (n-1)*var(f2$residuals)
-&gt; ss2
-[1] 12816.18
-&gt; ((ss1 - ss2)/anova(f1, f2)$Df[2])/(ss2/f2$df.residual)
-[1] 23.13253</code></pre>
-</section><section id="calculating-the-generalized-lrt" class="slide level2">
-<h1>Calculating the Generalized LRT</h1>
-<pre class="r"><code>&gt; anova(f1, f2, test=&quot;LRT&quot;)
-Analysis of Variance Table
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Model 1: weight ~ height
-Model 2: weight ~ height + sex
-  Res.Df   RSS Df Sum of Sq  Pr(&gt;Chi)    
-1    198 14321                           
-2    197 12816  1    1504.9 1.512e-06 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<pre class="r"><code>&gt; library(lmtest)
-&gt; lrtest(f1, f2)
-Likelihood ratio test
+(Dispersion parameter for binomial family taken to be 1)
 
-Model 1: weight ~ height
-Model 2: weight ~ height + sex
-  #Df LogLik Df  Chisq Pr(&gt;Chisq)    
-1   3 -710.9                         
-2   4 -699.8  1 22.205   2.45e-06 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-</section><section class="slide level2">
+    Null deviance: 165.772  on 15  degrees of freedom
+Residual deviance:  29.917  on 10  degrees of freedom
+AIC: 113.43
 
-<p>These tests produce slightly different answers because <code>anova()</code> adjusts for degrees of freedom when estimating the variance, whereas <code>lrtest()</code> is the strict generalized LRT. See <a href="https://stats.stackexchange.com/questions/155474/r-why-does-lrtest-not-match-anovatest-lrt">here</a>.</p>
-</section><section id="anova-on-more-distant-models" class="slide level2">
-<h1>ANOVA on More Distant Models</h1>
-<p>We can compare models with multiple differences in terms:</p>
-<pre class="r"><code>&gt; anova(f1, f3)
-Analysis of Variance Table
+Number of Fisher Scoring iterations: 4</code></pre>
+</section><section id="anova-of-fit-1" class="slide level2">
+<h2>ANOVA of Fit</h2>
+<pre class="r"><code>&gt; anova(myfit)
+Analysis of Deviance Table
 
-Model 1: weight ~ height
-Model 2: weight ~ height + sex + height:sex
-  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
-1    198 14321                                  
-2    196 12567  2      1754 13.678 2.751e-06 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-</section><section id="compare-multiple-models-at-once" class="slide level2">
-<h1>Compare Multiple Models at Once</h1>
-<p>We can compare multiple models at once:</p>
-<pre class="r"><code>&gt; anova(f1, f2, f3)
-Analysis of Variance Table
+Model: binomial, link: logit
 
-Model 1: weight ~ height
-Model 2: weight ~ height + sex
-Model 3: weight ~ height + sex + height:sex
-  Res.Df   RSS Df Sum of Sq       F    Pr(&gt;F)    
-1    198 14321                                   
-2    197 12816  1   1504.93 23.4712 2.571e-06 ***
-3    196 12567  1    249.04  3.8841   0.05015 .  
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+Response: cbind(using, notUsing)
+
+Terms added sequentially (first to last)
+
+          Df Deviance Resid. Df Resid. Dev
+NULL                         15    165.772
+age        3   79.192        12     86.581
+education  1    6.162        11     80.418
+wantsMore  1   50.501        10     29.917</code></pre>
+</section><section id="more-on-this-data-set" class="slide level2">
+<h2>More on this Data Set</h2>
+<p>See <a href="http://data.princeton.edu/R/glms.html" class="uri">http://data.princeton.edu/R/glms.html</a> for more on fitting logistic regression to this data set.</p>
+<p>A number of interesting choices are made that reveal more about the data.</p>
 </section></section>
 <section><section id="generalized-linear-models" class="titleslide slide level1"><h1>Generalized Linear Models</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
-<p>The generalized linear model (GLM) builds from OLS and GLS to allow for the case where <span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution. The estimated model is</p>
+<h2>Definition</h2>
+<p>The <strong>generalized linear model</strong> (GLM) builds from OLS and GLS to allow for the case where <span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution. The estimated model is</p>
 <p><span class="math display">\[
 g\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\]</span></p>
 <p>where <span class="math inline">\(g(\cdot)\)</span> is called the <strong>link function</strong>. This model is typically fit by numerical methods to calculate the maximum likelihood estimate of <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</p>
 </section><section id="exponential-family-distributions" class="slide level2">
-<h1>Exponential Family Distributions</h1>
+<h2>Exponential Family Distributions</h2>
 <p>Recall that if <span class="math inline">\(Y\)</span> follows an EFD then it has pdf of the form</p>
 <p><span class="math display">\[f(y ; \boldsymbol{\theta}) =
 h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) - A(\boldsymbol{\eta}) \right\}
@@ -422,21 +781,21 @@ h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) - A(\boldsymbo
 <p><span class="math inline">\(A(\boldsymbol{\eta})\)</span> is sometimes called the <em>log normalizer</em> because</p>
 <p><span class="math display">\[A(\boldsymbol{\eta}) = \log \int h(y) \exp \left\{ \sum_{k=1}^d \eta_k(\boldsymbol{\theta}) T_k(y) \right\}.\]</span></p>
 </section><section id="natural-single-parameter-efd" class="slide level2">
-<h1>Natural Single Parameter EFD</h1>
+<h2>Natural Single Parameter EFD</h2>
 <p>A natural single parameter EFD simplifies to the scenario where <span class="math inline">\(d=1\)</span> and <span class="math inline">\(T(y) = y\)</span></p>
 <p><span class="math display">\[f(y ; \eta) =
 h(y) \exp \left\{ \eta(\theta) y - A(\eta(\theta)) \right\}
 \]</span></p>
 <p>where without loss of generality we can write <span class="math inline">\({\operatorname{E}}[Y] = \theta\)</span>.</p>
 </section><section id="dispersion-efds" class="slide level2">
-<h1>Dispersion EFDs</h1>
+<h2>Dispersion EFDs</h2>
 <p>The family of distributions for which GLMs are most typically developed are dispersion EFDs. An example of a dispersion EFD that extends the natural single parameter EFD is</p>
 <p><span class="math display">\[f(y ; \eta) =
 h(y, \phi) \exp \left\{ \frac{\eta(\theta) y - A(\eta(\theta))}{\phi} \right\}
 \]</span></p>
 <p>where <span class="math inline">\(\phi\)</span> is the dispersion parameter.</p>
 </section><section id="example-normal" class="slide level2">
-<h1>Example: Normal</h1>
+<h2>Example: Normal</h2>
 <p>Let <span class="math inline">\(Y \sim \mbox{Normal}(\mu, \sigma^2)\)</span>. Then:</p>
 <p><span class="math display">\[
 \theta = \mu, \eta(\mu) = \mu
@@ -451,11 +810,11 @@ A(\mu) = \frac{\mu^2}{2}
 h(y, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2}\frac{y^2}{\sigma^2}}
 \]</span></p>
 </section><section id="efd-for-glms" class="slide level2">
-<h1>EFD for GLMs</h1>
+<h2>EFD for GLMs</h2>
 <p>There has been a very broad development of GLMs and extensions. A common setting for introducting GLMs is the dispersion EFD with a general link function <span class="math inline">\(g(\cdot)\)</span>.</p>
 <p>See the classic text <em>Generalized Linear Models</em>, by McCullagh and Nelder, for such a development.</p>
 </section><section id="components-of-a-glm" class="slide level2">
-<h1>Components of a GLM</h1>
+<h2>Components of a GLM</h2>
 <ol type="1">
 <li><p><em>Random</em>: The particular exponential family distribution. <span class="math display">\[
 Y \sim f(y ; \eta, \phi)
@@ -466,7 +825,7 @@ Y \sim f(y ; \eta, \phi)
 g(E[Y_i|{\boldsymbol{X}}_i]) = {\boldsymbol{X}}_i {\boldsymbol{\beta}}\]</span></p></li>
 </ol>
 </section><section id="link-functions" class="slide level2">
-<h1>Link Functions</h1>
+<h2>Link Functions</h2>
 <p>Even though the link function <span class="math inline">\(g(\cdot)\)</span> can be considered in a fairly general framework, the <strong>canonical link function</strong> <span class="math inline">\(\eta(\cdot)\)</span> is often utilized.</p>
 <p>The canonical link function is the function that maps the expected value into the natural paramater.</p>
 <p>In this case, <span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution with</p>
@@ -474,7 +833,7 @@ g(E[Y_i|{\boldsymbol{X}}_i]) = {\boldsymbol{X}}_i {\boldsymbol{\beta}}\]</span><
 \eta \left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}.
 \]</span></p>
 </section><section id="calculating-mles" class="slide level2">
-<h1>Calculating MLEs</h1>
+<h2>Calculating MLEs</h2>
 <p>Given the model <span class="math inline">\(g\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\)</span>, the EFD should be fully parameterized. The Newton-Raphson method or Fisher’s scoring method can be utilized to find the MLE of <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</p>
 </section><section class="slide level2">
 
@@ -498,8 +857,8 @@ g(E[Y_i|{\boldsymbol{X}}_i]) = {\boldsymbol{X}}_i {\boldsymbol{\beta}}\]</span><
 
 <p>When the canonical link function is used, the Newton-Raphson algorithm and Fisher’s scoring algorithm are equivalent.</p>
 <p>Exercise: Prove this.</p>
-</section><section id="iteratively-reweighted-least-squares" class="slide level2">
-<h1>Iteratively Reweighted Least Squares</h1>
+</section><section id="iteratively-reweighted-least-squares-1" class="slide level2">
+<h2>Iteratively Reweighted Least Squares</h2>
 <p>For the canonical link, Fisher’s scoring method can be written as an iteratively reweighted least squares algorithm, as shown earlier for logistic regression. Note that the Fisher information is</p>
 <p><span class="math display">\[
 I({\boldsymbol{\beta}}^{(t)}) = {\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}}\]</span></p>
@@ -526,16 +885,16 @@ s({\boldsymbol{\beta}}^{(t)}) = {\boldsymbol{X}}^T \left( {\boldsymbol{Y}}- {\bo
 \]</span></p>
 <p>This is a generalization of the iteratively reweighted least squares algorithm we showed earlier for logistic regression.</p>
 </section><section id="estimating-dispersion" class="slide level2">
-<h1>Estimating Dispersion</h1>
+<h2>Estimating Dispersion</h2>
 <p>For the simple dispersion model above, it is typically straightforward to calculate the MLE <span class="math inline">\(\hat{\phi}\)</span> once <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> has been calculated.</p>
 </section><section id="clt-applied-to-the-mle" class="slide level2">
-<h1>CLT Applied to the MLE</h1>
+<h2>CLT Applied to the MLE</h2>
 <p>Given that <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> is a maximum likelihood estimate, we have the following CLT result on its distribution as <span class="math inline">\(n \rightarrow \infty\)</span>:</p>
 <p><span class="math display">\[
 \sqrt{n} (\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}) \stackrel{D}{\longrightarrow} \mbox{MVN}_{p}({\boldsymbol{0}}, \phi ({\boldsymbol{X}}^T {\boldsymbol{W}}{\boldsymbol{X}})^{-1})
 \]</span></p>
 </section><section id="approximately-pivotal-statistics" class="slide level2">
-<h1>Approximately Pivotal Statistics</h1>
+<h2>Approximately Pivotal Statistics</h2>
 <p>The previous CLT gives us the following two approximations for pivtoal statistics. The first statistic facilitates getting overall measures of uncertainty on the estimate <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span>.</p>
 <p><span class="math display">\[
 \hat{\phi}^{-1} (\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}})^T ({\boldsymbol{X}}^T \hat{{\boldsymbol{W}}} {\boldsymbol{X}}) (\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}) {\; \stackrel{.}{\sim}\;}\chi^2_1
@@ -545,15 +904,15 @@ s({\boldsymbol{\beta}}^{(t)}) = {\boldsymbol{X}}^T \left( {\boldsymbol{Y}}- {\bo
 \frac{\hat{\beta}_j - \beta_j}{\sqrt{\hat{\phi} [({\boldsymbol{X}}^T \hat{{\boldsymbol{W}}} {\boldsymbol{X}})^{-1}]_{jj}}} {\; \stackrel{.}{\sim}\;}\mbox{Normal}(0,1)
 \]</span></p>
 </section><section id="deviance" class="slide level2">
-<h1>Deviance</h1>
+<h2>Deviance</h2>
 <p>Let <span class="math inline">\(\hat{\boldsymbol{\eta}}\)</span> be the estimated natural parameters from a GLM. For example, <span class="math inline">\(\hat{\boldsymbol{\eta}} = {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}}\)</span> when the canonical link function is used.</p>
 <p>Let <span class="math inline">\(\hat{\boldsymbol{\eta}}_n\)</span> be the <strong>saturated model</strong> wwhere <span class="math inline">\(Y_i\)</span> is directly used to estimate <span class="math inline">\(\eta_i\)</span> without model constraints. For example, in the Bernoulli logistic regression model <span class="math inline">\(\hat{\boldsymbol{\eta}}_n = {\boldsymbol{Y}}\)</span>, the observed outcomes.</p>
 <p>The <strong>deviance</strong> for the model is defined to be</p>
 <p><span class="math display">\[
 D\left(\hat{\boldsymbol{\eta}}\right) = 2 \ell(\hat{\boldsymbol{\eta}}_n; {\boldsymbol{X}}, {\boldsymbol{Y}}) - 2 \ell(\hat{\boldsymbol{\eta}}; {\boldsymbol{X}}, {\boldsymbol{Y}})
 \]</span></p>
-</section><section id="generalized-lrt-1" class="slide level2">
-<h1>Generalized LRT</h1>
+</section><section id="generalized-lrt" class="slide level2">
+<h2>Generalized LRT</h2>
 <p>Let <span class="math inline">\({\boldsymbol{X}}_0\)</span> be a subset of <span class="math inline">\(p_0\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and let <span class="math inline">\({\boldsymbol{X}}_1\)</span> be a subset of <span class="math inline">\(p_1\)</span> columns, where <span class="math inline">\(1 \leq p_0 &lt; p_1 \leq p\)</span>. Also, assume that the columns of <span class="math inline">\({\boldsymbol{X}}_0\)</span> are a subset of <span class="math inline">\({\boldsymbol{X}}_1\)</span>.</p>
 <p>Without loss of generality, suppose that <span class="math inline">\({\boldsymbol{\beta}}_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T\)</span> and <span class="math inline">\({\boldsymbol{\beta}}_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T\)</span>.</p>
 <p>Suppose we wish to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span></p>
@@ -565,21 +924,13 @@ D\left(\hat{\boldsymbol{\eta}}\right) = 2 \ell(\hat{\boldsymbol{\eta}}_n; {\bold
 2 \log \lambda({\boldsymbol{X}}, {\boldsymbol{Y}}) = 2 \log \frac{L(\hat{\boldsymbol{\eta}}_1; {\boldsymbol{X}}, {\boldsymbol{Y}})}{L(\hat{\boldsymbol{\eta}}_0; {\boldsymbol{X}}, {\boldsymbol{Y}})} = D\left(\hat{\boldsymbol{\eta}}_0\right) - D\left(\hat{\boldsymbol{\eta}}_1\right)
 \]</span></p>
 <p>where the null distribution is <span class="math inline">\(\chi^2_{p_1-p_0}\)</span>.</p>
-</section><section id="example-grad-school-admissions" class="slide level2">
-<h1>Example: Grad School Admissions</h1>
+</section><section id="example-grad-school-admissions-1" class="slide level2">
+<h2>Example: Grad School Admissions</h2>
 <p>Let’s revisit a logistic regression example now that we know how the various statistics are calculated.</p>
 <pre class="r"><code>&gt; mydata &lt;- 
 +   read.csv(&quot;http://www.ats.ucla.edu/stat/data/binary.csv&quot;)
 &gt; dim(mydata)
-[1] 400   4
-&gt; head(mydata)
-  admit gre  gpa rank
-1     0 380 3.61    3
-2     1 660 3.67    3
-3     1 800 4.00    1
-4     1 640 3.19    4
-5     0 520 2.93    4
-6     1 760 3.00    2</code></pre>
+&gt; head(mydata)</code></pre>
 </section><section class="slide level2">
 
 <p>Fit the model with basic output. Note the argument <code>family = &quot;binomial&quot;</code>.</p>
@@ -655,19 +1006,19 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <pre class="r"><code>&gt; mydata &lt;- data.frame(mydata, probs = myfit$fitted.values)
 &gt; ggplot(mydata) + geom_point(aes(x=gpa, y=probs, color=rank)) +
 +   geom_jitter(aes(x=gpa, y=admit), width=0, height=0.01, alpha=0.3)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; ggplot(mydata) + geom_point(aes(x=gre, y=probs, color=rank)) +
 +   geom_jitter(aes(x=gre, y=admit), width=0, height=0.01, alpha=0.3)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; ggplot(mydata) + geom_boxplot(aes(x=rank, y=probs)) +
 +   geom_jitter(aes(x=rank, y=probs), width=0.1, height=0.01, alpha=0.3)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="glm-function" class="slide level2">
-<h1><code>glm()</code> Function</h1>
+<h2><code>glm()</code> Function</h2>
 <p>The <code>glm()</code> function has many different options available to the user.</p>
 <pre><code>glm(formula, family = gaussian, data, weights, subset,
     na.action, start = NULL, etastart, mustart, offset,
@@ -677,7 +1028,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <pre><code>help(family)</code></pre>
 </section></section>
 <section><section id="nonparametric-regression" class="titleslide slide level1"><h1>Nonparametric Regression</h1></section><section id="simple-linear-regression" class="slide level2">
-<h1>Simple Linear Regression</h1>
+<h2>Simple Linear Regression</h2>
 <p>Recall the set up for simple linear regression. For random variables <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>, <strong>simple linear regression</strong> estimates the model</p>
 <p><span class="math display">\[
 Y_i  = \beta_1 + \beta_2 X_i + E_i
@@ -685,7 +1036,7 @@ Y_i  = \beta_1 + \beta_2 X_i + E_i
 <p>where <span class="math inline">\({\operatorname{E}}[E_i | X_i] = 0\)</span>, <span class="math inline">\({\operatorname{Var}}(E_i | X_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j | X_i, X_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>.</p>
 <p>Note that in this model <span class="math inline">\({\operatorname{E}}[Y | X] = \beta_1 + \beta_2 X.\)</span></p>
 </section><section id="simple-nonparametric-regression" class="slide level2">
-<h1>Simple Nonparametric Regression</h1>
+<h2>Simple Nonparametric Regression</h2>
 <p>In <strong>simple nonparametric regression</strong>, we define a similar model while eliminating the linear assumption:</p>
 <p><span class="math display">\[
 Y_i  = s(X_i) + E_i
@@ -695,14 +1046,14 @@ Y_i  = s(X_i) + E_i
 {\operatorname{E}}[Y | X] = s(X).
 \]</span></p>
 </section><section id="smooth-functions" class="slide level2">
-<h1>Smooth Functions</h1>
+<h2>Smooth Functions</h2>
 <p>Suppose we consider fitting the model <span class="math inline">\(Y_i = s(X_i) + E_i\)</span> with the restriction that <span class="math inline">\(s \in C^2\)</span>, the class of functions with continuous second derivatives. We can set up an objective function that regularizes how smooth vs wiggly <span class="math inline">\(s\)</span> is.</p>
 <p>Specifically, suppose for a given set of observed data <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span> we wish to identify a function <span class="math inline">\(s \in C^2\)</span> that minimizes for some <span class="math inline">\(\lambda\)</span></p>
 <p><span class="math display">\[
 \sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s&#39;&#39;(x)|^2 dx
 \]</span></p>
 </section><section id="smoothness-parameter-lambda" class="slide level2">
-<h1>Smoothness Parameter <span class="math inline">\(\lambda\)</span></h1>
+<h2>Smoothness Parameter <span class="math inline">\(\lambda\)</span></h2>
 <p>When minimizing</p>
 <p><span class="math display">\[
 \sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
@@ -710,18 +1061,18 @@ Y_i  = s(X_i) + E_i
 <p>it follows that if <span class="math inline">\(\lambda=0\)</span> then any function <span class="math inline">\(s \in C^2\)</span> that interpolates the data is a solution.</p>
 <p>As <span class="math inline">\(\lambda \rightarrow \infty\)</span>, then the minimizing function is the simple linear regression solution.</p>
 </section><section id="the-solution" class="slide level2">
-<h1>The Solution</h1>
+<h2>The Solution</h2>
 <p>For an observed data set <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span> where <span class="math inline">\(n \geq 4\)</span> and a fixed value <span class="math inline">\(\lambda\)</span>, there is an exact solution to minimizing</p>
 <p><span class="math display">\[
 \sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx.
 \]</span></p>
 <p>The solution is called a <strong>natural cubic spline</strong>, which is constructed to have knots at <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
 </section><section id="natural-cubic-splines" class="slide level2">
-<h1>Natural Cubic Splines</h1>
+<h2>Natural Cubic Splines</h2>
 <p>Suppose without loss of generality that we have ordered <span class="math inline">\(x_1 &lt; x_2 &lt; \cdots &lt; x_n\)</span>. We assume all <span class="math inline">\(x_i\)</span> are unique to simplify the explanation here, but ties can be deal with.</p>
 <p>A <strong>natural cubic spline</strong> (NCS) is a function constructed from a set of piecewise cubic functions over the range <span class="math inline">\([x_1, x_n]\)</span> joined at the knots so that the second derivative is continuous at the knots. Outside of the range (<span class="math inline">\(&lt; x_1\)</span> or <span class="math inline">\(&gt; x_n\)</span>), the spline is linear and it has continuous second derivatives at the endpoint knots.</p>
 </section><section id="basis-functions" class="slide level2">
-<h1>Basis Functions</h1>
+<h2>Basis Functions</h2>
 <p>Depending on the value <span class="math inline">\(\lambda\)</span>, a different ncs will be constructed, but the entire family of ncs solutions over <span class="math inline">\(0 &lt; \lambda &lt; \infty\)</span> can be constructed from a common set of basis functions.</p>
 <p>We construct <span class="math inline">\(n\)</span> basis functions <span class="math inline">\(N_1(x), N_2(x), \ldots, N_n(x)\)</span> with coefficients <span class="math inline">\(\theta_1(\lambda), \theta_2(\lambda), \ldots, \theta_n(\lambda)\)</span>. The NCS takes the form</p>
 <p><span class="math display">\[
@@ -735,7 +1086,7 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 \]</span></p>
 <p>Recall that we’ve labeled indices so that <span class="math inline">\(x_1 &lt; x_2 &lt; \cdots &lt; x_n\)</span>.</p>
 </section><section id="calculating-the-solution" class="slide level2">
-<h1>Calculating the Solution</h1>
+<h2>Calculating the Solution</h2>
 <p>Let <span class="math inline">\({\boldsymbol{\theta}}_\lambda = (\theta_1(\lambda), \theta_2(\lambda), \ldots, \theta_n(\lambda))^T\)</span> and let <span class="math inline">\({\boldsymbol{N}}\)</span> be the <span class="math inline">\(n \times n\)</span> matrix with <span class="math inline">\((i, j)\)</span> entry equal to <span class="math inline">\(N_j(x_i)\)</span>. Finally, let <span class="math inline">\({\boldsymbol{\Omega}}\)</span> be the <span class="math inline">\(n \times n\)</span> matrix with <span class="math inline">\((i,j)\)</span> entry equal to <span class="math inline">\(\int N_i^{\prime\prime}(x) N_j^{\prime\prime}(x) dx\)</span>.</p>
 <p>The solution to <span class="math inline">\({\boldsymbol{\theta}}_\lambda\)</span> are the values that minimize</p>
 <p><span class="math display">\[
@@ -746,7 +1097,7 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 \hat{{\boldsymbol{\theta}}}_\lambda = ({\boldsymbol{N}}^T {\boldsymbol{N}}+ \lambda {\boldsymbol{\Omega}})^{-1} {\boldsymbol{N}}^T {\boldsymbol{y}}.
 \]</span></p>
 </section><section id="linear-operator" class="slide level2">
-<h1>Linear Operator</h1>
+<h2>Linear Operator</h2>
 <p>Letting</p>
 <p><span class="math display">\[
 {\boldsymbol{S}}_\lambda = {\boldsymbol{N}}({\boldsymbol{N}}^T {\boldsymbol{N}}+ \lambda {\boldsymbol{\Omega}})^{-1} {\boldsymbol{N}}^T
@@ -756,8 +1107,8 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 \hat{{\boldsymbol{y}}} = {\boldsymbol{S}}_\lambda {\boldsymbol{y}}.
 \]</span></p>
 <p>Thus, the fitted values from a NCS are contructed by taking linear combination of the response variable values <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span>.</p>
-</section><section id="degrees-of-freedom-1" class="slide level2">
-<h1>Degrees of Freedom</h1>
+</section><section id="degrees-of-freedom" class="slide level2">
+<h2>Degrees of Freedom</h2>
 <p>Recall that in OLS, we formed projection matrix <span class="math inline">\({\boldsymbol{P}}= {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T\)</span> and noted that the number of columns <span class="math inline">\(p\)</span> of <span class="math inline">\({\boldsymbol{X}}\)</span> is also found in the trace of <span class="math inline">\({\boldsymbol{P}}\)</span> where <span class="math inline">\(\operatorname{tr}({\boldsymbol{P}}) = p\)</span>.</p>
 <p>The effective degrees of freedom for a model fit by a linear operator is calculated as the trace of the operator.</p>
 <p>Therefore, for a given <span class="math inline">\(\lambda\)</span>, the effective degrees of freedom is</p>
@@ -765,7 +1116,7 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 \operatorname{df}_\lambda = \operatorname{tr}({\boldsymbol{S}}_\lambda).
 \]</span></p>
 </section><section id="bayesian-intepretation" class="slide level2">
-<h1>Bayesian Intepretation</h1>
+<h2>Bayesian Intepretation</h2>
 <p>Minimizing</p>
 <p><span class="math display">\[
 \sum_{i=1}^n (y_i - s(x_i))^2 + \lambda \int |s^{\prime\prime}(x)|^2 dx
@@ -776,7 +1127,7 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 \]</span></p>
 <p>Therefore, the NCS solution can be interpreted as calculting the MAP where <span class="math inline">\(Y | X\)</span> is Normal and there’s an Exponential prior on the smoothness of <span class="math inline">\(s\)</span>.</p>
 </section><section id="bias-and-variance-trade-off" class="slide level2">
-<h1>Bias and Variance Trade-off</h1>
+<h2>Bias and Variance Trade-off</h2>
 <p>Typically we will choose some <span class="math inline">\(0 &lt; \lambda &lt; \infty\)</span> in an effort to balance the bias and variance. Let <span class="math inline">\(\hat{Y} = \hat{s}(X; \lambda)\)</span> where <span class="math inline">\(\hat{s}(\cdot; \lambda)\)</span> minimizes the above for some chosen <span class="math inline">\(\lambda\)</span> on an independent data set. Then</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -801,7 +1152,7 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 \downarrow \lambda \Longrightarrow \mbox{bias}^2 \downarrow, \mbox{variance} \uparrow
 \]</span></p>
 </section><section id="choosing-lambda" class="slide level2">
-<h1>Choosing <span class="math inline">\(\lambda\)</span></h1>
+<h2>Choosing <span class="math inline">\(\lambda\)</span></h2>
 <p>There are several approaches that are commonly used to identify a value of <span class="math inline">\(\lambda\)</span>, including:</p>
 <ul>
 <li>Scientific knowledge that guides the acceptable value of <span class="math inline">\(\operatorname{df}_\lambda\)</span></li>
@@ -809,11 +1160,11 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 <li>Model selection measures, such as Akaike information criterion (AIC) or Mallows <span class="math inline">\(C_p\)</span></li>
 </ul>
 </section><section id="smoothers-and-spline-models" class="slide level2">
-<h1>Smoothers and Spline Models</h1>
+<h2>Smoothers and Spline Models</h2>
 <p>We investigated one type of nonparametric regression model here, the NCS. However, in general there are many such “smoother” methods available in the simple nonparametric regression scenario.</p>
 <p>Splines are particularly popular since splines are constructed from putting together polynomials and are therefore usually tractable to compute and analyze.</p>
 </section><section id="smoothers-in-r" class="slide level2">
-<h1>Smoothers in R</h1>
+<h2>Smoothers in R</h2>
 <p>There are several functions and packages available in R for computing smoothers and tuning smoothness parameters. Examples include:</p>
 <ul>
 <li><code>splines</code> library</li>
@@ -822,8 +1173,8 @@ d_{i}(x) = \frac{(x - x_i)^3 - (x - x_n)^3}{x_n - x_i}.
 <li><code>lowess()</code></li>
 </ul>
 </section><section id="example" class="slide level2">
-<h1>Example</h1>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+<h2>Example</h2>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; y2 &lt;- smooth.spline(x=x, y=y, df=2)
@@ -840,10 +1191,10 @@ Penalized Criterion: 14.80602
 GCV: 1.180651</code></pre>
 </section><section class="slide level2">
 
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="generalized-additive-models" class="titleslide slide level1"><h1>Generalized Additive Models</h1></section><section id="ordinary-least-squares" class="slide level2">
-<h1>Ordinary Least Squares</h1>
+<h2>Ordinary Least Squares</h2>
 <p>Recall that OLS estimates the model</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -853,7 +1204,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \]</span></p>
 <p>where <span class="math inline">\({\operatorname{E}}[{\boldsymbol{E}}| {\boldsymbol{X}}] = {\boldsymbol{0}}\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{E}}| {\boldsymbol{X}}) = \sigma^2 {\boldsymbol{I}}\)</span>.</p>
 </section><section id="additive-models" class="slide level2">
-<h1>Additive Models</h1>
+<h2>Additive Models</h2>
 <p>The <strong>additive model</strong> (which could also be called “ordinary nonparametric additive regression”) is of the form</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -863,7 +1214,7 @@ Y_i &amp; = s_1(X_{i1}) + s_2(X_{i2}) + \ldots + s_p(X_{ip}) + E_i \\
 \]</span></p>
 <p>where the <span class="math inline">\(s_j(\cdot)\)</span> for <span class="math inline">\(j = 1, \ldots, p\)</span> are a set of nonparametric (or flexible) functions. Again, we assume that <span class="math inline">\({\operatorname{E}}[{\boldsymbol{E}}| {\boldsymbol{X}}] = {\boldsymbol{0}}\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{E}}| {\boldsymbol{X}}) = \sigma^2 {\boldsymbol{I}}\)</span>.</p>
 </section><section id="backfitting" class="slide level2">
-<h1>Backfitting</h1>
+<h2>Backfitting</h2>
 <p>The additive model can be fit through a technique called <strong>backfitting</strong>.</p>
 <ol type="1">
 <li>Intialize <span class="math inline">\(s^{(0)}_j(x)\)</span> for <span class="math inline">\(j = 1, \ldots, p\)</span>.</li>
@@ -872,14 +1223,14 @@ Y_i &amp; = s_1(X_{i1}) + s_2(X_{i2}) + \ldots + s_p(X_{ip}) + E_i \\
 </ol>
 <p>Note that some extra steps have to be taken to deal with the intercept.</p>
 </section><section id="gam-definition" class="slide level2">
-<h1>GAM Definition</h1>
+<h2>GAM Definition</h2>
 <p><span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution. The extension of additive models to this family of response variable is called <strong>generalized additive models</strong> (GAMs). The model is of the form</p>
 <p><span class="math display">\[
 g\left({\operatorname{E}}[Y_i | {\boldsymbol{X}}_i]\right) = \sum_{j=1}^p s_j(X_{ij})
 \]</span></p>
 <p>where <span class="math inline">\(g(\cdot)\)</span> is the link function and the <span class="math inline">\(s_j(\cdot)\)</span> are flexible and/or nonparametric functions.</p>
 </section><section id="overview-of-fitting-gams" class="slide level2">
-<h1>Overview of Fitting GAMs</h1>
+<h2>Overview of Fitting GAMs</h2>
 <p>Fitting GAMs involves putting together the following three tools:</p>
 <ol type="1">
 <li>We know how to fit a GLM via IRLS</li>
@@ -887,7 +1238,7 @@ g\left({\operatorname{E}}[Y_i | {\boldsymbol{X}}_i]\right) = \sum_{j=1}^p s_j(X_
 <li>We know how to combine additive smoothers by backfitting</li>
 </ol>
 </section><section id="gams-in-r" class="slide level2">
-<h1>GAMs in R</h1>
+<h2>GAMs in R</h2>
 <p>Three common ways to fit GAMs in R:</p>
 <ol type="1">
 <li>Utilize <code>glm()</code> on explanatory variables constructed from <code>ns()</code> or <code>bs()</code></li>
@@ -895,7 +1246,7 @@ g\left({\operatorname{E}}[Y_i | {\boldsymbol{X}}_i]\right) = \sum_{j=1}^p s_j(X_
 <li>The <code>mgcv</code> library</li>
 </ol>
 </section><section id="example-1" class="slide level2">
-<h1>Example</h1>
+<h2>Example</h2>
 <pre class="r"><code>&gt; set.seed(508)
 &gt; x1 &lt;- seq(1, 10, length.out=50)
 &gt; n &lt;- length(x1)
@@ -948,17 +1299,17 @@ UBRE = -0.12392  Scale est. = 1         n = 50</code></pre>
 
 <p>True probabilities vs. estimated probabilities.</p>
 <pre class="r"><code>&gt; plot(p, mygam$fitted.values, pch=19); abline(0,1)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Smoother estimated for <code>x1</code>.</p>
 <pre class="r"><code>&gt; plot(mygam, select=1)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-27-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Smoother estimated for <code>x2</code>.</p>
 <pre class="r"><code>&gt; plot(mygam, select=2)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-28-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <p>Here, we use the <code>glm()</code> function and include as an explanatory variable a NCS built from the <code>ns()</code> function from the <code>splines</code> library. We include a <code>df</code> argument in the <code>ns()</code> call.</p>
@@ -1039,7 +1390,7 @@ attr(,&quot;class&quot;)
 </section><section class="slide level2">
 
 <p>Plot of basis function values vs <code>x1</code>.</p>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; summary(myglm)
@@ -1088,10 +1439,10 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 
 <p>True probabilities vs. estimated probabilities.</p>
 <pre class="r"><code>&gt; plot(p, myglm$fitted.values, pch=19); abline(0,1)</code></pre>
-<p><img src="week10_files/figure-revealjs/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="week10_files/figure-revealjs/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="bootstrap-for-statistical-models" class="titleslide slide level1"><h1>Bootstrap for Statistical Models</h1></section><section id="homoskedastic-models" class="slide level2">
-<h1>Homoskedastic Models</h1>
+<h2>Homoskedastic Models</h2>
 <p>Let’s first discuss how one can utilize the bootstrap on any of the three homoskedastic models:</p>
 <ul>
 <li>Simple linear regression</li>
@@ -1099,14 +1450,14 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <li>Additive models</li>
 </ul>
 </section><section id="residuals" class="slide level2">
-<h1>Residuals</h1>
+<h2>Residuals</h2>
 <p>In each of these scenarios we sample data <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), ({\boldsymbol{X}}_2, Y_2), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span>. Let suppose we calculate fitted values <span class="math inline">\(\hat{Y}_i\)</span> and they are unbiased:</p>
 <p><span class="math display">\[
 {\operatorname{E}}[\hat{Y}_i | {\boldsymbol{X}}] = {\operatorname{E}}[Y_i | {\boldsymbol{X}}].
 \]</span></p>
 <p>We can calculate residuals <span class="math inline">\(\hat{E}_i = Y_i - \hat{Y}_i\)</span> for <span class="math inline">\(i=1, 2, \ldots, n\)</span>.</p>
 </section><section id="studentized-residuals" class="slide level2">
-<h1>Studentized Residuals</h1>
+<h2>Studentized Residuals</h2>
 <p>One complication is that the residuals have a covariance. For example, in OLS we showed that</p>
 <p><span class="math display">\[
 {\operatorname{Cov}}(\hat{{\boldsymbol{E}}}) = \sigma^2 ({\boldsymbol{I}}- {\boldsymbol{P}})
@@ -1118,7 +1469,7 @@ R_i = \frac{\hat{E}_i}{\sqrt{1-P_{ii}}}
 \]</span></p>
 <p>which gives <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{R}}) = \sigma^2 {\boldsymbol{I}}\)</span>.</p>
 </section><section id="confidence-intervals" class="slide level2">
-<h1>Confidence Intervals</h1>
+<h2>Confidence Intervals</h2>
 <p>The following is a bootstrap procedure for calculating a confidence interval on some statistic <span class="math inline">\(\hat{\theta}\)</span> calculated from a homoskedastic model fit. An example is <span class="math inline">\(\hat{\beta}_j\)</span> in an OLS.</p>
 <ol type="1">
 <li>Fit the model to obtain fitted values <span class="math inline">\(\hat{Y}_i\)</span>, studentized residuals <span class="math inline">\(R_i\)</span>, and the statistic of interest <span class="math inline">\(\hat{\theta}\)</span>.<br />
@@ -1131,8 +1482,8 @@ For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>.</li>
 </section><section class="slide level2">
 
 <p>The bootstrap statistics <span class="math inline">\(\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\)</span> are then utilized through one of the techniques discussed earlier (percentile, pivotal, studentized pivotal) to calculate a bootstrap CI.</p>
-</section><section id="hypothesis-testing-1" class="slide level2">
-<h1>Hypothesis Testing</h1>
+</section><section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis Testing</h2>
 <p>Suppose we are testing the hypothesis <span class="math inline">\(H_0: {\operatorname{E}}[Y | {\boldsymbol{X}}] = f_0({\boldsymbol{X}})\)</span> vs <span class="math inline">\(H_1: {\operatorname{E}}[Y | {\boldsymbol{X}}] = f_1({\boldsymbol{X}})\)</span>. Suppose it is possible to form unbiased estimates <span class="math inline">\(f_0({\boldsymbol{X}})\)</span> and <span class="math inline">\(f_1({\boldsymbol{X}})\)</span> given <span class="math inline">\({\boldsymbol{X}}\)</span>, and <span class="math inline">\(f_0\)</span> is a restricted version of <span class="math inline">\(f_1\)</span>.</p>
 <p>Suppose also we have a statistic <span class="math inline">\(T(\hat{f}_0, \hat{f}_1)\)</span> for performing this test so that the larger the statistic, the more evidence there is against the null hypothesis in favor of the alternative.</p>
 <p>The big picture strategy is to bootstrap studentized residuals from the unconstrained (alternative hypothesis) fitted model and then add those to the constrained (null hypothesis) fitted model to generate bootstrap null data sets.</p>
@@ -1153,15 +1504,15 @@ For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>.</li>
 \frac{\sum_{b=1}^B 1\left(T(\hat{f}^{*(b)}_0, \hat{f}^{*(b)}_1) \geq T(\hat{f}_0, \hat{f}_1) \right) }{B}
 \]</span></p>
 </section><section id="parametric-bootstrap" class="slide level2">
-<h1>Parametric Bootstrap</h1>
+<h2>Parametric Bootstrap</h2>
 <p>For more complex scenarios, such as GLMs, GAMs, and heteroskedastic models, it is typically more straightforward to utilize a parametric bootstrap.</p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1176,38 +1527,35 @@ attached base packages:
 [7] methods   base     
 
 other attached packages:
- [1] mgcv_1.8-17     nlme_3.1-131    lmtest_0.9-35  
- [4] zoo_1.8-0       car_2.1-4       broom_0.4.2    
- [7] dplyr_0.5.0     purrr_0.2.2     readr_1.0.0    
-[10] tidyr_0.6.1     tibble_1.2      ggplot2_2.2.1  
-[13] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
-[16] devtools_1.12.0
+ [1] mgcv_1.8-17     nlme_3.1-131    broom_0.4.2    
+ [4] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
+ [7] tidyr_0.6.2     tibble_1.3.0    ggplot2_2.2.1  
+[10] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
+[13] devtools_1.12.0
 
 loaded via a namespace (and not attached):
- [1] revealjs_0.8       reshape2_1.4.2     haven_1.0.0       
- [4] lattice_0.20-34    colorspace_1.3-2   htmltools_0.3.5   
- [7] yaml_2.1.14        nloptr_1.0.4       foreign_0.8-67    
-[10] withr_1.0.2        DBI_0.5-1          modelr_0.1.0      
-[13] readxl_0.1.1       plyr_1.8.4         stringr_1.1.0     
-[16] MatrixModels_0.4-1 munsell_0.4.3      gtable_0.2.0      
-[19] rvest_0.3.2        psych_1.6.12       memoise_1.0.0     
-[22] evaluate_0.10      labeling_0.3       forcats_0.2.0     
-[25] SparseM_1.74       quantreg_5.29      pbkrtest_0.4-6    
-[28] parallel_3.3.2     Rcpp_0.12.9        scales_0.4.1      
-[31] backports_1.0.5    jsonlite_1.2       lme4_1.1-12       
-[34] mnormt_1.5-5       hms_0.3            digest_0.6.12     
-[37] stringi_1.1.2      grid_3.3.2         rprojroot_1.2     
-[40] tools_3.3.2        lazyeval_0.2.0     MASS_7.3-45       
-[43] Matrix_1.2-8       xml2_1.1.1         lubridate_1.6.0   
-[46] assertthat_0.1     minqa_1.2.4        rmarkdown_1.3     
-[49] httr_1.2.1         R6_2.2.0           nnet_7.3-12       </code></pre>
+ [1] Rcpp_0.12.10     highr_0.6        cellranger_1.1.0
+ [4] plyr_1.8.4       forcats_0.2.0    tools_3.3.2     
+ [7] digest_0.6.12    lubridate_1.6.0  jsonlite_1.4    
+[10] evaluate_0.10    memoise_1.1.0    gtable_0.2.0    
+[13] lattice_0.20-35  Matrix_1.2-10    psych_1.7.5     
+[16] DBI_0.6-1        yaml_2.1.14      parallel_3.3.2  
+[19] haven_1.0.0      xml2_1.1.1       withr_1.0.2     
+[22] stringr_1.2.0    httr_1.2.1       revealjs_0.9    
+[25] hms_0.3          rprojroot_1.2    grid_3.3.2      
+[28] R6_2.2.0         readxl_1.0.0     foreign_0.8-68  
+[31] rmarkdown_1.5    modelr_0.1.0     reshape2_1.4.2  
+[34] backports_1.0.5  scales_0.4.1     htmltools_0.3.6 
+[37] rvest_0.3.2      assertthat_0.2.0 mnormt_1.5-5    
+[40] colorspace_1.3-2 labeling_0.3     stringi_1.1.5   
+[43] lazyeval_0.2.0   munsell_0.4.3   </code></pre>
 </section>
 </section></section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -1228,6 +1576,7 @@ loaded via a namespace (and not attached):
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
 
+
         chalkboard: {
         },
 
@@ -1241,8 +1590,8 @@ loaded via a namespace (and not attached):
 
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'libs/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-          { src: 'libs/reveal.js-3.3.0/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+          { src: 'libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>
@@ -1251,7 +1600,7 @@ loaded via a namespace (and not attached):
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

@@ -475,12 +475,12 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="data-wrangling" class="titleslide slide level1"><h1>Data Wrangling</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>Data wrangling is loosely defined as the process of manually converting or mapping data from one “raw” form into another format that allows for more convenient consumption of the data with the help of semi-automated tools.</p>
 <p>It typically follows a set of general steps which begin with extracting the data in a raw form from the data source, “wrangling” the raw data using algorithms (e.g. sorting) or parsing the data into predefined data structures, and finally depositing the resulting content into a data sink for storage and future use.</p>
 <p>From <a href="https://en.wikipedia.org/wiki/Data_wrangling" class="uri">https://en.wikipedia.org/wiki/Data_wrangling</a></p>
 </section><section id="workflow" class="slide level2">
-<h1>Workflow</h1>
+<h2>Workflow</h2>
 <p>These steps are typically taken in a data science project.</p>
 <ol type="1">
 <li><strong>Import</strong></li>
@@ -490,7 +490,7 @@ p {
 </ol>
 <p>The bold terms are part of data wrangling.</p>
 </section><section id="challenges" class="slide level2">
-<h1>Challenges</h1>
+<h2>Challenges</h2>
 <ul>
 <li>Importing files</li>
 <li>Organizing data sets</li>
@@ -501,12 +501,12 @@ p {
 </ul>
 </section></section>
 <section><section id="tidy-data" class="titleslide slide level1"><h1>Tidy Data</h1></section><section id="motivation" class="slide level2">
-<h1>Motivation</h1>
+<h2>Motivation</h2>
 <p>“Happy families are all alike; every unhappy family is unhappy in its own way.” – Leo Tolstoy</p>
 <p>“Tidy datasets are all alike, but every messy dataset is messy in its own way.” – Hadley Wickham</p>
 <p>From <em>R for Data Science</em>.</p>
 </section><section id="definition-1" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <blockquote>
 <p>Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.</p>
 </blockquote>
@@ -518,11 +518,11 @@ p {
 </blockquote>
 <p>From: Wickham H (2014), “Tidy Data”, <em>Journal of Statistical Software</em></p>
 </section><section id="example-titanic-data" class="slide level2">
-<h1>Example: Titanic Data</h1>
+<h2>Example: Titanic Data</h2>
 <p>According to the <code>Titanic</code> data from the <code>datasets</code> package: 367 males survived, 1364 males perished, 344 females survived, and 126 females perished.</p>
 <p>How should we organize these data?</p>
 </section><section id="intuitive-format" class="slide level2">
-<h1>Intuitive Format</h1>
+<h2>Intuitive Format</h2>
 <table>
 <thead>
 <tr class="header">
@@ -545,7 +545,7 @@ p {
 </tbody>
 </table>
 </section><section id="tidy-format" class="slide level2">
-<h1>Tidy Format</h1>
+<h2>Tidy Format</h2>
 <table>
 <thead>
 <tr class="header">
@@ -578,7 +578,7 @@ p {
 </tbody>
 </table>
 </section><section id="rules-of-thumb" class="slide level2">
-<h1>Rules of Thumb</h1>
+<h2>Rules of Thumb</h2>
 <ol type="1">
 <li>Something is a value if it represents different forms of a common object and it changes throughout the data set.</li>
 <li>Something is a value if the data can be arranged so that it appears across rows within a column and this makes sense.</li>
@@ -586,17 +586,17 @@ p {
 <p>For example, <code>fate</code> and <code>sex</code> do not satisfy these criteria in the <code>Titanic</code> data, but <code>perished</code>/<code>survived</code> and <code>female</code>/<code>male</code> do.</p>
 </section></section>
 <section><section id="tidyverse" class="titleslide slide level1"><h1>Tidyverse</h1></section><section id="idea" class="slide level2">
-<h1>Idea</h1>
+<h2>Idea</h2>
 <p>When the data are in tidy format, one can design functions around this format to consistently and intuitively perform data wrangling and analysis operations. The packages containing these are called the “tidyverse.”</p>
 <p>Note: The idea of tidy data was first proposed by Hadley Wickham and he created several of the core packages, so this used to be called (semi-seriously) the “hadleyverse.”</p>
 </section><section id="packages" class="slide level2">
-<h1>Packages</h1>
+<h2>Packages</h2>
 <blockquote>
 <p>The tidyverse is a set of packages that work in harmony because they share common data representations and API design. The <code>tidyverse</code> package is designed to make it easy to install and load core packages from the tidyverse in a single command.</p>
 </blockquote>
 <p><a href="https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/" class="uri">https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/</a></p>
 </section><section id="primary-packages" class="slide level2">
-<h1>Primary Packages</h1>
+<h2>Primary Packages</h2>
 <ul>
 <li><code>dplyr</code>: data manipulation</li>
 <li><code>ggplot2</code>: data visualization</li>
@@ -606,11 +606,11 @@ p {
 <li><code>tidyr</code>: data tidying</li>
 </ul>
 </section><section id="loading-tidyverse" class="slide level2">
-<h1>Loading <code>tidyverse</code></h1>
+<h2>Loading <code>tidyverse</code></h2>
 <pre class="r"><code>&gt; library(tidyverse)</code></pre>
 </section></section>
 <section><section id="tidying-data" class="titleslide slide level1"><h1>Tidying Data</h1></section><section id="tidyr-package" class="slide level2">
-<h1><code>tidyr</code> Package</h1>
+<h2><code>tidyr</code> Package</h2>
 <p>This package provides a variety of functions that allow one to tidy data.</p>
 <p>Importantly, it solves two common ways that data come as untidy.</p>
 <ol type="1">
@@ -618,7 +618,7 @@ p {
 <li><code>spread()</code>: Spreads a column containing two or more variables into one column per variable.</li>
 </ol>
 </section><section id="untidy-titanic-data" class="slide level2">
-<h1>Untidy Titanic Data</h1>
+<h2>Untidy Titanic Data</h2>
 <p>This does not satisfy the definition of tidy data because a variable’s observations are distributed as column names.</p>
 <pre class="r"><code>&gt; df &lt;- tibble(sex=c(&quot;male&quot;, &quot;female&quot;), 
 +              survived=c(367, 344),
@@ -630,7 +630,7 @@ p {
 1   male      367     1364
 2 female      344      126</code></pre>
 </section><section id="gather" class="slide level2">
-<h1><code>gather()</code></h1>
+<h2><code>gather()</code></h2>
 <p>We apply the <code>gather()</code> function to make a column containing the <code>survived</code> and <code>perished</code> observations.</p>
 <pre class="r"><code>&gt; df &lt;- gather(df, survived, perished, 
 +                key=&quot;fate&quot;, value=&quot;number&quot;)
@@ -643,7 +643,7 @@ p {
 3   male perished   1364
 4 female perished    126</code></pre>
 </section><section id="spread" class="slide level2">
-<h1><code>spread()</code></h1>
+<h2><code>spread()</code></h2>
 <p>This example is here to show that <code>spread()</code> does the opposite operation as <code>gather()</code>. It isn’t used appropriately here because we revert the data back to untidy format.</p>
 <pre class="r"><code>&gt; spread(df, key=fate, value=number)
 # A tibble: 2 × 3
@@ -652,7 +652,7 @@ p {
 1 female      126      344
 2   male     1364      367</code></pre>
 </section><section id="tidy-with-spread" class="slide level2">
-<h1>Tidy with <code>spread()</code></h1>
+<h2>Tidy with <code>spread()</code></h2>
 <p>Median cost of home and median income per city are two variables included in a single column. This means we need to use <code>spread()</code>.</p>
 <pre class="r"><code>&gt; df
 # A tibble: 4 × 3
@@ -670,12 +670,12 @@ p {
 2 Raleigh 215700  65778</code></pre>
 </section></section>
 <section><section id="reshaping-data" class="titleslide slide level1"><h1>Reshaping Data</h1></section><section id="wide-vs.long-format" class="slide level2">
-<h1>Wide vs. Long Format</h1>
+<h2>Wide vs. Long Format</h2>
 <p>Tidy data are in “wide format” in that they have a column for each variable and there is one observed unit per row.</p>
 <p>However, sometimes it’s useful to transform to “long format.” The simplest long format data have two columns. The first column contains the variable names and the second colum contains the values for the variables. There are “wider” long format data that have additional columns that identify connections between observations.</p>
 <p>Wide format data is useful for some analyses and long format for others.</p>
 </section><section id="reshape2-package" class="slide level2">
-<h1><code>reshape2</code> Package</h1>
+<h2><code>reshape2</code> Package</h2>
 <p>The <code>reshape2</code> package has three important functions: <code>melt</code>, <code>dcast</code>, and <code>acast</code>. It allows one to move between wide and long tidy data formats.</p>
 <pre class="r"><code>&gt; library(&quot;reshape2&quot;)
 &gt; library(&quot;datasets&quot;)
@@ -686,7 +686,7 @@ p {
 [1] 153   6
 &gt; airquality &lt;- as_tibble(airquality)</code></pre>
 </section><section id="air-quality-data-set" class="slide level2">
-<h1>Air Quality Data Set</h1>
+<h2>Air Quality Data Set</h2>
 <pre class="r"><code>&gt; head(airquality)
 # A tibble: 6 × 6
   Ozone Solar.R  Wind  Temp Month   Day
@@ -708,7 +708,7 @@ p {
 5    18     131   8.0    76     9    29
 6    20     223  11.5    68     9    30</code></pre>
 </section><section id="melt" class="slide level2">
-<h1>Melt</h1>
+<h2>Melt</h2>
 <p>Melting can be thought of as melting a piece of solid metal (wide data), so it drips into long format.</p>
 <pre class="r"><code>&gt; aql &lt;- melt(airquality)
 No id variables; using all as measure variables
@@ -729,7 +729,7 @@ No id variables; using all as measure variables
 917      Day    29
 918      Day    30</code></pre>
 </section><section id="guided-melt" class="slide level2">
-<h1>Guided Melt</h1>
+<h2>Guided Melt</h2>
 <p>In the previous example, we lose the fact that a set of measurements occurred on a particular day and month, so we can do a guided melt to keep this information.</p>
 <pre class="r"><code>&gt; aql &lt;- melt(airquality, id.vars = c(&quot;Month&quot;, &quot;Day&quot;))
 &gt; head(aql)
@@ -749,12 +749,12 @@ No id variables; using all as measure variables
 611     9  29     Temp    76
 612     9  30     Temp    68</code></pre>
 </section><section id="casting" class="slide level2">
-<h1>Casting</h1>
+<h2>Casting</h2>
 <p>Casting allows us to go from long format to wide format data. It can be visualized as pouring molten metal (long format) into a cast to create a solid piece of metal (wide format).</p>
 <p>Casting is more difficult because choices have to be made to determine how the wide format will be organized. It often takes some thought and experimentation for new users.</p>
 <p>Let’s do an example with <code>dcast</code>, which is casting for data frames.</p>
 </section><section id="dcast" class="slide level2">
-<h1><code>dcast()</code></h1>
+<h2><code>dcast()</code></h2>
 <pre class="r"><code>&gt; aqw &lt;- dcast(aql, Month + Day ~ variable)
 &gt; head(aqw)
   Month Day Ozone Solar.R Wind Temp
@@ -774,7 +774,7 @@ No id variables; using all as measure variables
 153     9  30    20     223 11.5   68</code></pre>
 </section></section>
 <section><section id="transforming-data" class="titleslide slide level1"><h1>Transforming Data</h1></section><section id="dplyr-package" class="slide level2">
-<h1><code>dplyr</code> Package</h1>
+<h2><code>dplyr</code> Package</h2>
 <p><code>dplyr</code> is a package with the following description:</p>
 <blockquote>
 <p>A fast, consistent tool for working with data frame like objects, both in memory and out of memory.</p>
@@ -782,7 +782,7 @@ No id variables; using all as measure variables
 <p>This package offers a “grammar” for manipulating data frames.</p>
 <p>Everything that <code>dplyr</code> does can also be done using basic R commands – however, it tends to be much faster and easier to use <code>dplyr</code>.</p>
 </section><section id="grammar-of-dplyr" class="slide level2">
-<h1>Grammar of <code>dplyr</code></h1>
+<h2>Grammar of <code>dplyr</code></h2>
 <p>Verbs:</p>
 <ul>
 <li><code>filter</code>: extract a subset of rows from a data frame based on logical conditions</li>
@@ -800,7 +800,7 @@ No id variables; using all as measure variables
 </ul>
 <p>Partially based on <em>R Programming for Data Science</em></p>
 </section><section id="example-baby-names" class="slide level2">
-<h1>Example: Baby Names</h1>
+<h2>Example: Baby Names</h2>
 <pre class="r"><code>&gt; library(&quot;dplyr&quot;, verbose=FALSE)
 &gt; library(&quot;babynames&quot;)
 &gt; ls()
@@ -809,7 +809,7 @@ character(0)
 &gt; ls()
 [1] &quot;babynames&quot;</code></pre>
 </section><section id="babynames-object" class="slide level2">
-<h1><code>babynames</code> Object</h1>
+<h2><code>babynames</code> Object</h2>
 <pre class="r"><code>&gt; class(babynames)
 [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;
 &gt; dim(babynames)
@@ -830,7 +830,7 @@ character(0)
 10  1880     F     Sarah  1288 0.01319618
 # ... with 1,858,679 more rows</code></pre>
 </section><section id="peek-at-the-data" class="slide level2">
-<h1>Peek at the Data</h1>
+<h2>Peek at the Data</h2>
 <pre class="r"><code>&gt; set.seed(201)
 &gt; sample_n(babynames, 10) 
 # A tibble: 10 × 5
@@ -848,7 +848,7 @@ character(0)
 10  1956     M Clemente    26 1.212302e-05
 &gt; # try also sample_frac(babynames, 6e-6)</code></pre>
 </section><section id="operator" class="slide level2">
-<h1><code>%&gt;%</code> Operator</h1>
+<h2><code>%&gt;%</code> Operator</h2>
 <p>Originally from R package <code>magrittr</code>. Provides a mechanism for chaining commands with a forward-pipe operator, <code>%&gt;%</code>.</p>
 <pre class="r"><code>&gt; x &lt;- 1:10
 &gt; 
@@ -867,7 +867,7 @@ character(0)
 4  1980     M     Abram   147 7.925844e-05
 5  1985     F   Coralia     6 3.250954e-06</code></pre>
 </section><section id="filter" class="slide level2">
-<h1><code>filter()</code></h1>
+<h2><code>filter()</code></h2>
 <pre class="r"><code>&gt; filter(babynames, year==1880, sex==&quot;F&quot;)
 # A tibble: 942 × 5
     year   sex      name     n       prop
@@ -890,7 +890,7 @@ character(0)
   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;
 1  1880     F  Mary  7065 0.07238433</code></pre>
 </section><section id="arrange" class="slide level2">
-<h1><code>arrange()</code></h1>
+<h2><code>arrange()</code></h2>
 <pre class="r"><code>&gt; arrange(babynames, name, year, sex)
 # A tibble: 1,858,689 × 5
     year   sex  name     n         prop
@@ -907,7 +907,7 @@ character(0)
 10  2012     F Aabha     5 2.585247e-06
 # ... with 1,858,679 more rows</code></pre>
 </section><section id="arrange-1" class="slide level2">
-<h1><code>arrange()</code></h1>
+<h2><code>arrange()</code></h2>
 <pre class="r"><code>&gt; arrange(babynames, desc(name), desc(year), sex)
 # A tibble: 1,858,689 × 5
     year   sex      name     n         prop
@@ -924,7 +924,7 @@ character(0)
 10  2006     M Zytavious     7 3.196251e-06
 # ... with 1,858,679 more rows</code></pre>
 </section><section id="rename" class="slide level2">
-<h1><code>rename()</code></h1>
+<h2><code>rename()</code></h2>
 <pre class="r"><code>&gt; rename(babynames, number=n)
 # A tibble: 1,858,689 × 5
     year   sex      name number       prop
@@ -941,7 +941,7 @@ character(0)
 10  1880     F     Sarah   1288 0.01319618
 # ... with 1,858,679 more rows</code></pre>
 </section><section id="select" class="slide level2">
-<h1><code>select()</code></h1>
+<h2><code>select()</code></h2>
 <pre class="r"><code>&gt; select(babynames, sex, name, n)
 # A tibble: 1,858,689 × 3
      sex      name     n
@@ -959,7 +959,7 @@ character(0)
 # ... with 1,858,679 more rows
 &gt; # same as select(babynames, sex:n)</code></pre>
 </section><section id="renaming-with-select" class="slide level2">
-<h1>Renaming with <code>select()</code></h1>
+<h2>Renaming with <code>select()</code></h2>
 <pre class="r"><code>&gt; select(babynames, sex, name, number=n)
 # A tibble: 1,858,689 × 3
      sex      name number
@@ -976,7 +976,7 @@ character(0)
 10     F     Sarah   1288
 # ... with 1,858,679 more rows</code></pre>
 </section><section id="mutate" class="slide level2">
-<h1><code>mutate()</code></h1>
+<h2><code>mutate()</code></h2>
 <pre class="r"><code>&gt; mutate(babynames, total_by_year=round(n/prop))
 # A tibble: 1,858,689 × 6
     year   sex      name     n       prop total_by_year
@@ -994,7 +994,7 @@ character(0)
 # ... with 1,858,679 more rows
 &gt; # see also transmutate</code></pre>
 </section><section id="no.-individuals-by-year-and-sex" class="slide level2">
-<h1>No. Individuals by Year and Sex</h1>
+<h2>No. Individuals by Year and Sex</h2>
 <p>Let’s put a few things together now adding the function <code>distinct()</code>…</p>
 <pre class="r"><code>&gt; babynames %&gt;% mutate(total_by_year=round(n/prop)) %&gt;% 
 +   select(sex, year, total_by_year) %&gt;% distinct()
@@ -1013,7 +1013,7 @@ character(0)
 10     M  1884        122739
 # ... with 262 more rows</code></pre>
 </section><section id="summarize" class="slide level2">
-<h1><code>summarize()</code></h1>
+<h2><code>summarize()</code></h2>
 <pre class="r"><code>&gt; summarize(babynames, mean_n = mean(n), median_n = median(n), 
 +           number_sex = n_distinct(sex), 
 +           distinct_names = n_distinct(name))
@@ -1022,7 +1022,7 @@ character(0)
     &lt;dbl&gt;    &lt;int&gt;      &lt;int&gt;          &lt;int&gt;
 1 183.383       12          2          95025</code></pre>
 </section><section id="group_by" class="slide level2">
-<h1><code>group_by()</code></h1>
+<h2><code>group_by()</code></h2>
 <pre class="r"><code>&gt; babynames %&gt;% group_by(year, sex)
 Source: local data frame [1,858,689 x 5]
 Groups: year, sex [272]
@@ -1041,7 +1041,7 @@ Groups: year, sex [272]
 10  1880     F     Sarah  1288 0.01319618
 # ... with 1,858,679 more rows</code></pre>
 </section><section id="no.-individuals-by-year-and-sex-1" class="slide level2">
-<h1>No. Individuals by Year and Sex</h1>
+<h2>No. Individuals by Year and Sex</h2>
 <pre class="r"><code>&gt; babynames %&gt;% group_by(year, sex) %&gt;% 
 +   summarize(total_by_year=sum(n))
 Source: local data frame [272 x 3]
@@ -1062,7 +1062,7 @@ Groups: year [?]
 # ... with 262 more rows</code></pre>
 <p>Compare to earlier slide. Why the difference?</p>
 </section><section id="how-many-distinct-names" class="slide level2">
-<h1>How Many Distinct Names?</h1>
+<h2>How Many Distinct Names?</h2>
 <pre class="r"><code>&gt; babynames %&gt;% group_by(sex) %&gt;% 
 +   summarize(mean_n = mean(n), 
 +             distinct_names_sex = n_distinct(name))
@@ -1072,7 +1072,7 @@ Groups: year [?]
 1     F 153.3909              65658
 2     M 226.9508              39728</code></pre>
 </section><section id="most-popular-names" class="slide level2">
-<h1>Most Popular Names</h1>
+<h2>Most Popular Names</h2>
 <pre class="r"><code>&gt; top_names &lt;- babynames %&gt;% group_by(year, sex) %&gt;% 
 +   summarize(top_name = name[which.max(n)])
 &gt; 
@@ -1089,7 +1089,7 @@ Groups: year [3]
 5  1882     F     Mary
 6  1882     M     John</code></pre>
 </section><section id="most-popular-names-1" class="slide level2">
-<h1>Most Popular Names</h1>
+<h2>Most Popular Names</h2>
 <h3 id="recent-years">Recent Years</h3>
 <pre class="r"><code>&gt; tail(top_names, n=10)
 Source: local data frame [10 x 3]
@@ -1108,7 +1108,7 @@ Groups: year [5]
 9   2015     F     Emma
 10  2015     M     Noah</code></pre>
 </section><section id="most-popular-female-names" class="slide level2">
-<h1>Most Popular Female Names</h1>
+<h2>Most Popular Female Names</h2>
 <h3 id="s">1990s</h3>
 <pre class="r"><code>&gt; top_names %&gt;% filter(year &gt;= 1990 &amp; year &lt; 2000, sex==&quot;F&quot;)
 Source: local data frame [10 x 3]
@@ -1127,7 +1127,7 @@ Groups: year [10]
 9   1998     F    Emily
 10  1999     F    Emily</code></pre>
 </section><section id="most-popular-male-names" class="slide level2">
-<h1>Most Popular Male Names</h1>
+<h2>Most Popular Male Names</h2>
 <h3 id="s-1">1990s</h3>
 <pre class="r"><code>&gt; top_names %&gt;% filter(year &gt;= 1990 &amp; year &lt; 2000, sex==&quot;M&quot;)
 Source: local data frame [10 x 3]
@@ -1158,14 +1158,14 @@ Groups: year [10]
 &gt; plot(bella$year, bella$prop, type=&quot;l&quot;)</code></pre>
 <p><img src="week02_files/figure-revealjs/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="additional-examples" class="slide level2">
-<h1>Additional Examples</h1>
+<h2>Additional Examples</h2>
 <p>You should study additional tutorials of <code>dplyr</code> that utilize other data sets:</p>
 <ul>
 <li>Read the <code>dplyr</code> <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">introductory vignette</a></li>
 <li>Read the examples given in the <em>R for Data Science</em> assigned reading</li>
 </ul>
 </section><section id="additional-dplyr-features" class="slide level2">
-<h1>Additional <code>dplyr</code> Features</h1>
+<h2>Additional <code>dplyr</code> Features</h2>
 <ul>
 <li>We’ve only scratched the surface – many interesting demos of <code>dplyr</code> can be found online</li>
 <li><code>dplyr</code> can work with other data frame backends such as SQL databases</li>
@@ -1175,11 +1175,11 @@ Groups: year [10]
 </ul>
 </section></section>
 <section><section id="relational-data" class="titleslide slide level1"><h1>Relational Data</h1></section><section id="multiple-data-sets" class="slide level2">
-<h1>Multiple Data Sets</h1>
+<h2>Multiple Data Sets</h2>
 <p>In many data analyses you will have multiple tables of related data that must be combined in order to carry out your analysis.</p>
 <p>The <code>dplyr</code> package includes a number of tools to facilitate this.</p>
 </section><section id="toy-example" class="slide level2">
-<h1>Toy Example</h1>
+<h2>Toy Example</h2>
 <p>Here are two data frames that are related through a common variable called <code>key</code>.</p>
 <pre class="r"><code>&gt; x &lt;- tibble(key = c(1, 2, 3), x_val = c(&quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot;))
 &gt; y &lt;- tibble(key = c(1, 2, 4), y_val = c(&quot;y1&quot;, &quot;y2&quot;, &quot;y4&quot;))</code></pre>
@@ -1198,7 +1198,7 @@ Groups: year [10]
 2     2    y2
 3     4    y4</code></pre>
 </section><section id="verbs" class="slide level2">
-<h1>Verbs</h1>
+<h2>Verbs</h2>
 <p>To work with relational data you need verbs that work with pairs of tables. There are three families of verbs designed to work with relational data.</p>
 <ul>
 <li><em>Mutating joins</em> add new variables to one data frame from matching observations in another.</li>
@@ -1207,7 +1207,7 @@ Groups: year [10]
 </ul>
 <p>From <em>R for Data Science</em></p>
 </section><section id="inner_join" class="slide level2">
-<h1><code>inner_join()</code></h1>
+<h2><code>inner_join()</code></h2>
 <p>An inner-join matches pairs of observations when their keys are equal.</p>
 <pre class="r"><code>&gt; inner_join(x, y, key=&quot;key&quot;)
 Joining, by = &quot;key&quot;
@@ -1217,7 +1217,7 @@ Joining, by = &quot;key&quot;
 1     1    x1    y1
 2     2    x2    y2</code></pre>
 </section><section id="left_join" class="slide level2">
-<h1><code>left_join()</code></h1>
+<h2><code>left_join()</code></h2>
 <p>A left-join keeps all observations in the first argument, <code>x</code>.</p>
 <pre class="r"><code>&gt; left_join(x, y, key=&quot;key&quot;)
 Joining, by = &quot;key&quot;
@@ -1236,7 +1236,7 @@ Joining, by = &quot;key&quot;
 2     2    x2    y2
 3     3    x3  &lt;NA&gt;</code></pre>
 </section><section id="right_join" class="slide level2">
-<h1><code>right_join()</code></h1>
+<h2><code>right_join()</code></h2>
 <p>A right-join keeps all observations in the second argument, <code>y</code>.</p>
 <pre class="r"><code>&gt; right_join(x, y)
 Joining, by = &quot;key&quot;
@@ -1247,7 +1247,7 @@ Joining, by = &quot;key&quot;
 2     2    x2    y2
 3     4  &lt;NA&gt;    y4</code></pre>
 </section><section id="full_join" class="slide level2">
-<h1><code>full_join()</code></h1>
+<h2><code>full_join()</code></h2>
 <p>A full-join keeps all observations in either argument, <code>x</code> or <code>y</code>.</p>
 <pre class="r"><code>&gt; full_join(x, y, key=&quot;key&quot;)
 Joining, by = &quot;key&quot;
@@ -1259,7 +1259,7 @@ Joining, by = &quot;key&quot;
 3     3    x3  &lt;NA&gt;
 4     4  &lt;NA&gt;    y4</code></pre>
 </section><section id="anti_join" class="slide level2">
-<h1><code>anti_join()</code></h1>
+<h2><code>anti_join()</code></h2>
 <p>An anti-join removes all observations in the first argument, <code>x</code>, that appear in the second argument, <code>y</code>.</p>
 <pre class="r"><code>&gt; anti_join(x, y, key=&quot;key&quot;)
 Joining, by = &quot;key&quot;
@@ -1268,7 +1268,7 @@ Joining, by = &quot;key&quot;
   &lt;dbl&gt; &lt;chr&gt;
 1     3    x3</code></pre>
 </section><section id="semi_join" class="slide level2">
-<h1><code>semi_join()</code></h1>
+<h2><code>semi_join()</code></h2>
 <p>A semi-join keeps all observations in the first argument, <code>x</code>, that have a match in the second argument, <code>y</code>.</p>
 <pre class="r"><code>&gt; semi_join(x, y, key=&quot;key&quot;)
 Joining, by = &quot;key&quot;
@@ -1278,7 +1278,7 @@ Joining, by = &quot;key&quot;
 1     1    x1
 2     2    x2</code></pre>
 </section><section id="repeated-key-values" class="slide level2">
-<h1>Repeated Key Values</h1>
+<h2>Repeated Key Values</h2>
 <p>When one of the two data frames has repeated <code>key</code> values, the observations are repeated in the other data frame.</p>
 <pre class="r"><code>&gt; y2
 # A tibble: 4 × 2
@@ -1298,7 +1298,7 @@ Joining, by = &quot;key&quot;
 3     2    x2   y2b
 4     3    x3  &lt;NA&gt;</code></pre>
 </section><section id="set-operations" class="slide level2">
-<h1>Set Operations</h1>
+<h2>Set Operations</h2>
 <p>One can perform traditional set operations on the rows of data frames.</p>
 <ul>
 <li><code>intersect(x, y)</code>: return only observations in both <code>x</code> and <code>y</code></li>
@@ -1307,7 +1307,7 @@ Joining, by = &quot;key&quot;
 </ul>
 <p>From <em>R for Data Science</em></p>
 </section><section id="example-setdiff" class="slide level2">
-<h1>Example <code>setdiff()</code></h1>
+<h2>Example <code>setdiff()</code></h2>
 <pre class="r"><code>&gt; df1
 # A tibble: 2 × 2
       x     y
@@ -1327,17 +1327,17 @@ Joining, by = &quot;key&quot;
 1     2     1</code></pre>
 </section></section>
 <section><section id="getting-data-in-and-out-of-r" class="titleslide slide level1"><h1>Getting Data In and Out of R</h1></section><section id="rdata-files" class="slide level2">
-<h1><code>.RData</code> Files</h1>
+<h2><code>.RData</code> Files</h2>
 <p>R objects can be saved to binary <code>.RData</code> files and loaded with the <code>save</code> (or <code>save.image</code>) and <code>load</code> functions, respectively.</p>
 <p>This is the easiest way to get data into R.</p>
 </section><section id="readr-package" class="slide level2">
-<h1><code>readr</code> Package</h1>
+<h2><code>readr</code> Package</h2>
 <p>There are a number of R packages that provide more sophisticated tools for getting data in and out of R, especially as data sets have become larger and larger.</p>
 <p>One of those packages is <code>readr</code> for text files. It reads and writes data quickly, provides a useful status bar for large files, and does a good job at determining data types.</p>
 <p><code>readr</code> is organized similarly to the base R functions. For example, there are functions <code>read_table</code>, <code>read_csv</code>, <code>write_tsv</code>, and <code>write_csv</code>.</p>
 <p>See also <code>fread</code> and <code>fwrite</code> from the <code>data.table</code> package.</p>
 </section><section id="scraping-from-the-web-ex.-1" class="slide level2">
-<h1>Scraping from the Web (Ex. 1)</h1>
+<h2>Scraping from the Web (Ex. 1)</h2>
 <p>There are several packages that facilitate “scraping” data from the web, including <code>rvest</code> demonstrated here.</p>
 <pre class="r"><code>&gt; library(&quot;rvest&quot;)
 &gt; schedule &lt;- read_html(&quot;http://jdstorey.github.io/asdscourse/schedule/&quot;)
@@ -1354,7 +1354,7 @@ Joining, by = &quot;key&quot;
 &gt; grep(&quot;R4DS&quot;, first_table$reading) # which rows (weeks) have R4DS
 [1] 1 2 3</code></pre>
 </section><section id="scraping-from-the-web-ex.-2" class="slide level2">
-<h1>Scraping from the Web (Ex. 2)</h1>
+<h2>Scraping from the Web (Ex. 2)</h2>
 <p>The <code>rvest</code> documentation recommends <a href="http://selectorgadget.com">SelectorGadget</a>, which is “a javascript bookmarklet that allows you to interactively figure out what css selector you need to extract desired components from a page.”</p>
 <pre class="r"><code>&gt; usg_url &lt;- &quot;http://princetonusg.com/meet-your-usg-officers/&quot;
 &gt; usg &lt;- read_html(usg_url)
@@ -1372,17 +1372,17 @@ Joining, by = &quot;key&quot;
 [17] &quot;Ruby Guo&quot;             &quot;Andrew Ma&quot;           
 [19] &quot;Nate Lambert&quot;         &quot;June Philippe&quot;       </code></pre>
 </section><section id="apis" class="slide level2">
-<h1>APIs</h1>
+<h2>APIs</h2>
 <p>API stands for “application programming interface” which is <a href="https://en.wikipedia.org/wiki/Application_programming_interface">a set of routines, protocols, and tools for building software and applications</a>.</p>
 <p>A specific website may provide an API for scraping data from that website.</p>
 <p>There are R packages that provide an interface with specific APIs, such as the <a href="https://cran.r-project.org/web/packages/twitteR/index.html"><code>twitteR</code></a> package.</p>
 </section></section>
 <section><section id="case-study" class="titleslide slide level1"><h1>Case Study</h1></section><section id="yeast-genomics" class="slide level2">
-<h1>Yeast Genomics</h1>
+<h2>Yeast Genomics</h2>
 <p><a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083">Smith and Kruglyak (2008)</a> is a study that measured 2820 genotypes in 109 yeast F1 segregants from a cross between parental lines BY and RM.</p>
 <p>They also measured gene expression on 4482 genes in each of these segregants when growing in two different Carbon sources, glucose and ethanol.</p>
 </section><section id="load-data" class="slide level2">
-<h1>Load Data</h1>
+<h2>Load Data</h2>
 <p>The data was distributed as a collection of matrices in R.</p>
 <pre class="r"><code>&gt; rm(list=ls())
 &gt; load(&quot;./data/smith_kruglyak.RData&quot;)
@@ -1405,7 +1405,7 @@ $exp.pos
 $marker.pos
 [1] 2820    2</code></pre>
 </section><section id="gene-expression-matrices" class="slide level2">
-<h1>Gene Expression Matrices</h1>
+<h2>Gene Expression Matrices</h2>
 <pre class="r"><code>&gt; exp.g %&gt;% cbind(rownames(exp.g), .) %&gt;% as_tibble() %&gt;% 
 +   print()
 # A tibble: 4,482 × 110
@@ -1473,7 +1473,7 @@ $marker.pos
 #   X8g.2_3_d.glucose &lt;chr&gt;, X90g.18_4_c.glucose &lt;chr&gt;,
 #   X92g.19_1_c.glucose &lt;chr&gt;, X93g.19_2_c.glucose &lt;chr&gt;, ...</code></pre>
 </section><section id="gene-position-matrix" class="slide level2">
-<h1>Gene Position Matrix</h1>
+<h2>Gene Position Matrix</h2>
 <pre class="r"><code>&gt; exp.pos %&gt;% cbind(rownames(exp.pos), .) %&gt;% as_tibble() %&gt;% 
 +   print()
 # A tibble: 4,482 × 4
@@ -1491,7 +1491,7 @@ $marker.pos
 10 YCR079W         3      252842    254170
 # ... with 4,472 more rows</code></pre>
 </section><section id="row-names" class="slide level2">
-<h1>Row Names</h1>
+<h2>Row Names</h2>
 <p>The gene names are contained in the row names.</p>
 <pre class="r"><code>&gt; head(rownames(exp.g))
 [1] &quot;YJR107W&quot; &quot;YPL270W&quot; &quot;YDR518W&quot; &quot;YDR233C&quot; &quot;YHR098C&quot; &quot;YFR029W&quot;
@@ -1504,7 +1504,7 @@ $marker.pos
 &gt; all.equal(rownames(exp.g), rownames(exp.pos))
 [1] TRUE</code></pre>
 </section><section id="unify-column-names" class="slide level2">
-<h1>Unify Column Names</h1>
+<h2>Unify Column Names</h2>
 <p>The segregants are column names, and they are inconsistent across matrices.</p>
 <pre class="r"><code>&gt; head(colnames(exp.g))
 [1] &quot;X100g.20_4_c.glucose&quot; &quot;X101g.21_1_d.glucose&quot;
@@ -1521,7 +1521,7 @@ $marker.pos
 &gt; head(colnames(exp.g))
 [1] &quot;20_4_c&quot; &quot;21_1_d&quot; &quot;21_2_d&quot; &quot;21_3_d&quot; &quot;21_4_d&quot; &quot;21_5_c&quot;</code></pre>
 </section><section id="gene-positions" class="slide level2">
-<h1>Gene Positions</h1>
+<h2>Gene Positions</h2>
 <p>Let’s first pull out rownames of <code>exp.pos</code> and make them a column in the data frame.</p>
 <pre class="r"><code>&gt; gene_pos &lt;- exp.pos %&gt;% as_tibble() %&gt;%
 +   mutate(gene = rownames(exp.pos)) %&gt;%
@@ -1540,7 +1540,7 @@ $marker.pos
 7 YPL198W    16  173151  174701
 # ... with 4,475 more rows</code></pre>
 </section><section id="tidy-each-expression-matrix" class="slide level2">
-<h1>Tidy Each Expression Matrix</h1>
+<h2>Tidy Each Expression Matrix</h2>
 <p>We <code>melt</code> the expression matrices and bind them together into one big tidy data frame.</p>
 <pre class="r"><code>&gt; exp_g &lt;- melt(exp.g) %&gt;% as_tibble() %&gt;% 
 +   dplyr::select(gene = Var1, segregant = Var2, 
@@ -1560,7 +1560,7 @@ $marker.pos
 4 YDR233C    20_4_c       0.04   ethanol
 # ... with 4.885e+05 more rows</code></pre>
 </section><section id="combine-into-single-data-frame" class="slide level2">
-<h1>Combine Into Single Data Frame</h1>
+<h2>Combine Into Single Data Frame</h2>
 <p>Combine gene expression data from two conditions into a single data frame.</p>
 <pre class="r"><code>&gt; exp_all &lt;- bind_rows(exp_g, exp_e)
 &gt; sample_n(exp_all, size=10)
@@ -1578,7 +1578,7 @@ $marker.pos
 9  YML127W     5_1_d      -0.08   ethanol
 10 YMR304W     6_1_d       0.20   ethanol</code></pre>
 </section><section id="join-gene-positions" class="slide level2">
-<h1>Join Gene Positions</h1>
+<h2>Join Gene Positions</h2>
 <p>Now we want to join the gene positions with the expression data.</p>
 <pre class="r"><code>&gt; exp_all &lt;- exp_all %&gt;%
 +   mutate(gene = as.character(gene), 
@@ -1597,7 +1597,7 @@ $marker.pos
 6 YBR235W     8_4_c      -0.18   ethanol     2 686896 690258
 7 YJL094C    14_6_d       0.00   glucose    10 254437 251816</code></pre>
 </section><section id="apply-dplyr-functions" class="slide level2">
-<h1>Apply <code>dplyr</code> Functions</h1>
+<h2>Apply <code>dplyr</code> Functions</h2>
 <p>Now that we have the data made tidy in the data frame <code>sk_tidy</code>, let’s apply some <code>dplyr</code> operations…</p>
 </section><section class="slide level2">
 
@@ -1772,11 +1772,11 @@ Groups: chr [16]
 <p><img src="week02_files/figure-revealjs/unnamed-chunk-76-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1793,7 +1793,7 @@ attached base packages:
 other attached packages:
  [1] rvest_0.3.2     xml2_1.1.1      babynames_0.3.0
  [4] reshape2_1.4.2  dplyr_0.5.0     purrr_0.2.2    
- [7] readr_1.1.0     tidyr_0.6.1     tibble_1.3.0   
+ [7] readr_1.1.0     tidyr_0.6.2     tibble_1.3.0   
 [10] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
 [13] magrittr_1.5    devtools_1.12.0
 

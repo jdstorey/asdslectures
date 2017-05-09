@@ -475,14 +475,14 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="numerical-methods-for-likelihood" class="titleslide slide level1"><h1>Numerical Methods for Likelihood</h1></section><section id="challenges" class="slide level2">
-<h1>Challenges</h1>
+<h2>Challenges</h2>
 <p>Frequentist model:</p>
 <p><span class="math display">\[X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}\]</span></p>
 <p>Bayesian model:</p>
 <p><span class="math display">\[X_1, X_2, \ldots, X_n | {\boldsymbol{\theta}}{\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}} \mbox{ and } {\boldsymbol{\theta}}\sim F_{\boldsymbol{\tau}}\]</span></p>
 <p>Sometimes it’s not possible to find formulas for <span class="math inline">\(\hat{{\boldsymbol{\theta}}}_{\text{MLE}}\)</span>, <span class="math inline">\(\hat{{\boldsymbol{\theta}}}_{\text{MAP}}\)</span>, <span class="math inline">\({\operatorname{E}}[{\boldsymbol{\theta}}| {\boldsymbol{x}}]\)</span>, or <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span>. We have to use numerical methods instead.</p>
 </section><section id="approaches" class="slide level2">
-<h1>Approaches</h1>
+<h2>Approaches</h2>
 <p>We will discuss the following numerical approaches to likelihood based inference:</p>
 <ul>
 <li>Expectation-maximization (EM) algorithm</li>
@@ -496,17 +496,17 @@ p {
 </ul>
 </section></section>
 <section><section id="latent-variable-models" class="titleslide slide level1"><h1>Latent Variable Models</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>Latent variables (or hidden variables) are random variables that are present in the model, but unobserved.</p>
 <p>We will denote latent variables by <span class="math inline">\(Z\)</span>, and we will assume <span class="math display">\[(X_1, Z_1), (X_2, Z_2), \ldots, (X_n, Z_n) {\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}.\]</span> A realized value of <span class="math inline">\(Z\)</span> is <span class="math inline">\(z\)</span>, <span class="math inline">\({\boldsymbol{Z}}= (Z_1, Z_2, \ldots, Z_n)^T\)</span>, etc.</p>
 <p>The EM algorithm and variational inference involve latent variables.</p>
 <p>Bayesian models are a special case of latent variable models: the unobserved random parameters are latent variables.</p>
 </section><section id="empirical-bayes-revisited" class="slide level2">
-<h1>Empirical Bayes Revisited</h1>
+<h2>Empirical Bayes Revisited</h2>
 <p>In the earlier EB example, we supposed that <span class="math inline">\(X_i | \mu_i \sim \mbox{Normal}(\mu_i, 1)\)</span> for <span class="math inline">\(i=1, 2, \ldots, n\)</span> where these rv’s are independent, and also that <span class="math inline">\(\mu_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(a, b^2)\)</span>.</p>
 <p>The unobserved parameters <span class="math inline">\(\mu_1, \mu_2, \ldots, \mu_n\)</span> are latent variables. In this case, <span class="math inline">\({\boldsymbol{\theta}}= (a, b^2)\)</span>.</p>
 </section><section id="normal-mixture-model" class="slide level2">
-<h1>Normal Mixture Model</h1>
+<h2>Normal Mixture Model</h2>
 <p>Suppose <span class="math inline">\({X_1, X_2, \ldots, X_n}{\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}\)</span> where <span class="math inline">\({\boldsymbol{\theta}}= (\pi_1, \ldots, \pi_K, \mu_1, \ldots, \mu_K, \sigma^2_1, \ldots, \sigma^2_K)\)</span> with pdf</p>
 <p><span class="math display">\[
 f({\boldsymbol{x}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \sum_{k=1}^K \pi_k \frac{1}{\sqrt{2\pi\sigma^2_k}} \exp \left\{ -\frac{(x_i - \mu_k)^2}{2 \sigma^2_k} \right\}.
@@ -529,7 +529,7 @@ f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n f(x
 f(x_i ; {\boldsymbol{\theta}}) = \sum_{{\boldsymbol{z}}_i} f(x_i, {\boldsymbol{z}}_i; {\boldsymbol{\theta}}) = \sum_{k=1}^K \pi_k \frac{1}{\sqrt{2\pi\sigma^2_k}} \exp \left\{ -\frac{(x_i - \mu_k)^2}{2 \sigma^2_k} \right\}.
 \]</span></p>
 </section><section id="bernoulli-mixture-model" class="slide level2">
-<h1>Bernoulli Mixture Model</h1>
+<h2>Bernoulli Mixture Model</h2>
 <p>Suppose <span class="math inline">\({X_1, X_2, \ldots, X_n}{\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}\)</span> where <span class="math inline">\({\boldsymbol{\theta}}= (\pi_1, \ldots, \pi_K, p_1, \ldots, p_K)\)</span> with pdf</p>
 <p><span class="math display">\[
 f({\boldsymbol{x}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \sum_{k=1}^K \pi_k p_k^{x_i} (1-p_k)^{1-x_i}.
@@ -544,7 +544,7 @@ f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \pr
 \]</span></p>
 </section></section>
 <section><section id="em-algorithm" class="titleslide slide level1"><h1>EM Algorithm</h1></section><section id="rationale" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>For any likelihood function, <span class="math inline">\(L({\boldsymbol{\theta}}; {\boldsymbol{x}}) = f({\boldsymbol{x}}; {\boldsymbol{\theta}})\)</span>, there is an abundance of optimization methods that can be used to find the MLE or MAP. However:</p>
 <ul>
 <li>Optimization methods can be messy to implement</li>
@@ -552,12 +552,12 @@ f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \pr
 <li>Optimization isn’t necessarily the only goal, but one may also be interested in point estimates of the latent variable values</li>
 </ul>
 </section><section id="requirement" class="slide level2">
-<h1>Requirement</h1>
+<h2>Requirement</h2>
 <p>The expectation-maximization (EM) algorithm allows us to calculate MLEs and MAPs when certain geometric properties are satisfied in the probabilistic model.</p>
 <p>In order for the EM algorithm to be a practical approach, then we should have a latent variable model <span class="math inline">\(f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}})\)</span> that is used to do inference on <span class="math inline">\(f({\boldsymbol{x}}; {\boldsymbol{\theta}})\)</span> or <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span>.</p>
 <p>Note: Sometimes <span class="math inline">\(({\boldsymbol{x}}, {\boldsymbol{z}})\)</span> is called the <strong>complete data</strong> and <span class="math inline">\({\boldsymbol{x}}\)</span> is called the <strong>observed data</strong> when we are using the EM as a method for dealing with missing data.</p>
 </section><section id="the-algorithm" class="slide level2">
-<h1>The Algorithm</h1>
+<h2>The Algorithm</h2>
 <ol type="1">
 <li><p>Choose initial value <span class="math inline">\({\boldsymbol{\theta}}^{(0)}\)</span></p></li>
 <li><p>Calculate <span class="math inline">\(f({\boldsymbol{z}}| {\boldsymbol{x}}, {\boldsymbol{\theta}}^{(t)})\)</span></p></li>
@@ -566,19 +566,19 @@ f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \pr
 <li><p>Iterate until convergence and set <span class="math inline">\(\widehat{{\boldsymbol{\theta}}} = {\boldsymbol{\theta}}^{(\infty)}\)</span></p></li>
 </ol>
 </section><section id="qboldsymboltheta-boldsymbolthetat" class="slide level2">
-<h1><span class="math inline">\(Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})\)</span></h1>
+<h2><span class="math inline">\(Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})\)</span></h2>
 <p>Continuous <span class="math inline">\({\boldsymbol{Z}}\)</span>:</p>
 <p><span class="math display">\[Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)}) = \int \log f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}}^{(t)}) d{\boldsymbol{z}}\]</span></p>
 <p>Discrete <span class="math inline">\({\boldsymbol{Z}}\)</span>:</p>
 <p><span class="math display">\[Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)}) = \sum_{{\boldsymbol{z}}} \log f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}}^{(t)})\]</span></p>
 </section><section id="em-for-map" class="slide level2">
-<h1>EM for MAP</h1>
+<h2>EM for MAP</h2>
 <p>If we wish to calculate the MAP we replace <span class="math inline">\(Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})\)</span> with</p>
 <p><span class="math display">\[Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)}) = {\operatorname{E}}_{{\boldsymbol{Z}}|{\boldsymbol{X}}={\boldsymbol{x}}}\left[\log f({\boldsymbol{x}}, {\boldsymbol{Z}}; {\boldsymbol{\theta}}); {\boldsymbol{\theta}}^{(t)}\right] + \log f({\boldsymbol{\theta}})\]</span></p>
 <p>where <span class="math inline">\(f({\boldsymbol{\theta}})\)</span> is the prior distribution on <span class="math inline">\({\boldsymbol{\theta}}\)</span>.</p>
 </section></section>
 <section><section id="em-examples" class="titleslide slide level1"><h1>EM Examples</h1></section><section id="normal-mixture-model-1" class="slide level2">
-<h1>Normal Mixture Model</h1>
+<h2>Normal Mixture Model</h2>
 <p>Returning to the Normal mixture model <a href="#//normal-mixture-model">introduced earlier</a>, we first calculate</p>
 <p><span class="math display">\[
 \log f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \sum_{i=1}^n \sum_{k=1}^K z_{ik} \log \pi_k + z_{ik} \log \phi(x_i; \mu_k, \sigma^2_k)
@@ -604,12 +604,12 @@ f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \pr
 \hat{z}_{ik}^{(t)} = {\operatorname{E}}\left[z_{ik} | {\boldsymbol{x}}; {\boldsymbol{\theta}}^{(t)}\right] = \frac{\pi^{(t)}_k \phi(x_i; \mu^{(t)}_k, \sigma^{2, (t)}_k)}{\sum_{j=1}^K \pi^{(t)}_j \phi(x_i; \mu^{(t)}_j, \sigma^{2, (t)}_j)}.
 \]</span></p>
 </section><section id="e-step" class="slide level2">
-<h1>E-Step</h1>
+<h2>E-Step</h2>
 <p>We calculate</p>
 <p><span class="math display">\[Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)}) = {\operatorname{E}}_{{\boldsymbol{Z}}|{\boldsymbol{X}}={\boldsymbol{x}}}\left[\log f({\boldsymbol{x}}, {\boldsymbol{Z}}; {\boldsymbol{\theta}}); {\boldsymbol{\theta}}^{(t)}\right]\]</span> <span class="math display">\[ = \sum_{i=1}^n \sum_{k=1}^K \hat{z}_{ik}^{(t)} \log \pi_k + \hat{z}_{ik}^{(t)} \log \phi(x_i; \mu_k, \sigma^2_k)\]</span></p>
 <p>At this point the parameters making up <span class="math inline">\(\hat{z}_{ik}^{(t)}\)</span> are fixed at <span class="math inline">\({\boldsymbol{\theta}}^{(t)}\)</span>.</p>
 </section><section id="m-step" class="slide level2">
-<h1>M-Step</h1>
+<h2>M-Step</h2>
 <p>We now caculate <span class="math inline">\({\boldsymbol{\theta}}^{(t+1)} = {\text{argmax}}_{{\boldsymbol{\theta}}} Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)}\)</span>, which yields:</p>
 <p><span class="math display">\[
 \pi_k^{(t+1)} = \frac{\sum_{i=1}^n \hat{z}_{ik}^{(t)}}{n}
@@ -624,17 +624,17 @@ f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) = \prod_{i=1}^n \pr
 Note: You need to use a <a href="http://math.stackexchange.com/questions/421105/maximum-likelihood-estimator-of-parameters-of-multinomial-distribution">Lagrange multiplier</a> to obtain <span class="math inline">\(\{\pi_k^{(t+1)}\}_{k=1}^{K}\)</span>.
 </p>
 </section><section id="caveat" class="slide level2">
-<h1>Caveat</h1>
+<h2>Caveat</h2>
 <p>If we assign one and only one data point to mixture component <span class="math inline">\(k\)</span>, meaning <span class="math inline">\(\mu_k^{(t)} = x_i\)</span> and <span class="math inline">\(\hat{z}_{ik}^{(t)}=1\)</span> for some <span class="math inline">\(k\)</span> and <span class="math inline">\(i\)</span>, then as <span class="math inline">\(\sigma^{2, (t)}_k \rightarrow 0\)</span>, the likelihood goes to <span class="math inline">\(\infty\)</span>.</p>
 <p>Therefore, when implementing the EM algorithm for this particular Normal mixture model, we have to be careful to bound all <span class="math inline">\(\sigma^{2, (t)}_k\)</span> away from zero and avoid this scenario.</p>
 </section><section id="yeast-gene-expression" class="slide level2">
-<h1>Yeast Gene Expression</h1>
+<h2>Yeast Gene Expression</h2>
 <p style="font-size: 0.75em;">
 Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP construct that is hypothesized as being nuclear in mitotic cells and largely cytoplasmic in mating cells.
 </p>
 <p><img src="week07_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="initialize-values" class="slide level2">
-<h1>Initialize Values</h1>
+<h2>Initialize Values</h2>
 <pre class="r"><code>&gt; set.seed(508)
 &gt; B &lt;- 100
 &gt; p &lt;- rep(0,B)
@@ -650,7 +650,7 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 &gt; s2[1] &lt;- var(sort(x)[61:120])
 &gt; z &lt;- rep(0,120)</code></pre>
 </section><section id="run-em-algorithm" class="slide level2">
-<h1>Run EM Algorithm</h1>
+<h2>Run EM Algorithm</h2>
 <pre class="r"><code>&gt; for(i in 2:B) {
 +   z &lt;- (p[i-1]*dnorm(x, mean=mu2[i-1], sd=sqrt(s2[i-1])))/
 +     (p[i-1]*dnorm(x, mean=mu2[i-1], sd=sqrt(s2[i-1])) + 
@@ -668,14 +668,14 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
  [99,] 2.455325 0.3637967 6.7952 6.058291 0.5340015
 [100,] 2.455325 0.3637967 6.7952 6.058291 0.5340015</code></pre>
 </section><section id="fitted-mixture-distribution" class="slide level2">
-<h1>Fitted Mixture Distribution</h1>
+<h2>Fitted Mixture Distribution</h2>
 <p><img src="week07_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bernoulli-mixture-model-1" class="slide level2">
-<h1>Bernoulli Mixture Model</h1>
+<h2>Bernoulli Mixture Model</h2>
 <p>As an exercise, derive the EM algorithm of the Bernoilli mixture model <a href="#//bernoulli-mixture-model">introduced earlier</a>.</p>
 <p>Hint: Replace <span class="math inline">\(\phi(x_i; \mu_k, \sigma^2_k)\)</span> with the appropriate Bernoilli pmf.</p>
 </section><section id="other-applications-of-em" class="slide level2">
-<h1>Other Applications of EM</h1>
+<h2>Other Applications of EM</h2>
 <ul>
 <li>Dealing with missing data</li>
 <li>Multiple imputation of missing data</li>
@@ -685,7 +685,7 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 </ul>
 </section></section>
 <section><section id="theory-of-em" class="titleslide slide level1"><h1>Theory of EM</h1></section><section id="decomposition" class="slide level2">
-<h1>Decomposition</h1>
+<h2>Decomposition</h2>
 <p>Let <span class="math inline">\(q({\boldsymbol{z}})\)</span> be a probability distribution on the latent variables, <span class="math inline">\({\boldsymbol{z}}\)</span>. Consider the following decomposition:</p>
 <p><span class="math display">\[
 \log f({\boldsymbol{x}}; {\boldsymbol{\theta}}) = \mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}}) + {\text{KL}}(q({\boldsymbol{z}}) \|f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})) 
@@ -696,11 +696,11 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 <p><span class="math display">\[
 {\text{KL}}(q({\boldsymbol{z}}) \| f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})) = - \int q({\boldsymbol{z}}) \log\left(\frac{f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})}{q({\boldsymbol{z}})}\right) d{\boldsymbol{z}}\]</span></p>
 </section><section id="kullback-leibler-divergence" class="slide level2">
-<h1>Kullback-Leibler Divergence</h1>
+<h2>Kullback-Leibler Divergence</h2>
 <p>The KL divergence provides an asymmetric measure of the difference between two probability distributions.</p>
 <p>The KL divergence is such that <span class="math inline">\({\text{KL}}(q \| f) \geq 0\)</span> where <span class="math inline">\({\text{KL}}(q \| f) = 0\)</span> if and only if <span class="math inline">\(q=f\)</span>. This property is known as <strong>Gibbs inequality</strong>.</p>
 </section><section id="lower-bound" class="slide level2">
-<h1>Lower Bound</h1>
+<h2>Lower Bound</h2>
 <p>Note that <span class="math inline">\(\mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}})\)</span> provides a lower bound on the likelihood function:</p>
 <p><span class="math display">\[
 \log f({\boldsymbol{x}}; {\boldsymbol{\theta}}) \geq \mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}})
@@ -713,7 +713,7 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 \end{aligned}
 \]</span></p>
 </section><section id="em-increases-likelihood" class="slide level2">
-<h1>EM Increases Likelihood</h1>
+<h2>EM Increases Likelihood</h2>
 <p>Since <span class="math inline">\({\boldsymbol{\theta}}^{(t+1)} = {\text{argmax}}_{{\boldsymbol{\theta}}} Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})\)</span>, it follows that</p>
 <p><span class="math display">\[Q({\boldsymbol{\theta}}^{(t+1)}, {\boldsymbol{\theta}}^{(t)}) \geq Q({\boldsymbol{\theta}}^{(t)}, {\boldsymbol{\theta}}^{(t)}).\]</span></p>
 <p>Also, by the properties of KL divergence stated above, we have</p>
@@ -726,35 +726,35 @@ Measured ratios of the nuclear to cytoplasmic fluorescence for a protein-GFP con
 \]</span></p>
 </section></section>
 <section><section id="variational-inference" class="titleslide slide level1"><h1>Variational Inference</h1></section><section id="rationale-1" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>Performing the EM algorithm required us to be able to compute <span class="math inline">\(f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})\)</span> and also optimize <span class="math inline">\(Q({\boldsymbol{\theta}}, {\boldsymbol{\theta}}^{(t)})\)</span>. Sometimes this is not possible. Variational inference takes advantage of the decomposition</p>
 <p><span class="math display">\[
 \log f({\boldsymbol{x}}; {\boldsymbol{\theta}}) = \mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}}) + {\text{KL}}(q({\boldsymbol{z}}) \|f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})) 
 \]</span></p>
 <p>and instead considers other forms of <span class="math inline">\(q({\boldsymbol{z}})\)</span> to identify a more tractable optimization.</p>
 </section><section id="optimization-goal" class="slide level2">
-<h1>Optimization Goal</h1>
+<h2>Optimization Goal</h2>
 <p>Since</p>
 <p><span class="math display">\[
 \log f({\boldsymbol{x}}; {\boldsymbol{\theta}}) = \mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}}) + {\text{KL}}(q({\boldsymbol{z}}) \|f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})) 
 \]</span></p>
 <p>it follows that the closer <span class="math inline">\(q({\boldsymbol{z}})\)</span> is to <span class="math inline">\(f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})\)</span>, the term <span class="math inline">\(\mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}})\)</span> grows larger while <span class="math inline">\({\text{KL}}(q({\boldsymbol{z}}) \|f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}}))\)</span> becomes smaller. The goal is typically to identify a restricted form of <span class="math inline">\(q({\boldsymbol{z}})\)</span> that maximizes <span class="math inline">\(\mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}})\)</span>, which serves as an approximation to the posterior distribution <span class="math inline">\(f({\boldsymbol{z}}| {\boldsymbol{x}}; {\boldsymbol{\theta}})\)</span>.</p>
 </section><section id="mean-field-approximation" class="slide level2">
-<h1>Mean Field Approximation</h1>
+<h2>Mean Field Approximation</h2>
 <p>A mean field approximation implies we restrict <span class="math inline">\(q({\boldsymbol{z}})\)</span> to be</p>
 <p><span class="math display">\[
 q({\boldsymbol{z}}) = \prod_{k=1}^K q_k({\boldsymbol{z}}_k)
 \]</span></p>
 <p>for some partition <span class="math inline">\({\boldsymbol{z}}= ({\boldsymbol{z}}_1, {\boldsymbol{z}}_2, \ldots, {\boldsymbol{z}}_K)\)</span>. This partition is very context specific and is usually driven by the original model and what is tractable.</p>
 </section><section id="optimal-q_kboldsymbolz_k" class="slide level2">
-<h1>Optimal <span class="math inline">\(q_k({\boldsymbol{z}}_k)\)</span></h1>
+<h2>Optimal <span class="math inline">\(q_k({\boldsymbol{z}}_k)\)</span></h2>
 <p>Under the above restriction, it can be shown that the <span class="math inline">\(\{q_k({\boldsymbol{z}}_k)\}\)</span> that maximize <span class="math inline">\(\mathcal{L}(q({\boldsymbol{z}}), {\boldsymbol{\theta}})\)</span> have the form:</p>
 <p><span class="math display">\[
 q_k({\boldsymbol{z}}_k) \propto \exp \left\{ \int \log f({\boldsymbol{x}}, {\boldsymbol{z}}; {\boldsymbol{\theta}}) \prod_{j \not= k} q_j({\boldsymbol{z}}_j)d{\boldsymbol{z}}_j \right\}.
 \]</span></p>
 <p>These pdf’s or pmf’s can be calculated iteratively by cycling over <span class="math inline">\(k=1, 2, \ldots, K\)</span> after intializing them appropriately. Note that convergence is guaranteed.</p>
 </section><section id="remarks" class="slide level2">
-<h1>Remarks</h1>
+<h2>Remarks</h2>
 <ul>
 <li><p>If <span class="math inline">\({\boldsymbol{\theta}}\)</span> is also random, then it can be included in <span class="math inline">\({\boldsymbol{z}}\)</span>.</p></li>
 <li><p>The estimated <span class="math inline">\(\hat{f}({\boldsymbol{z}}| {\boldsymbol{x}})\)</span> is typically concentrated around the high density region of the true <span class="math inline">\(f({\boldsymbol{z}}| {\boldsymbol{x}})\)</span>, so it is useful for calculations such as the MAP, but it is not guaranteed to be a good overall estimate of <span class="math inline">\(f({\boldsymbol{z}}| {\boldsymbol{x}})\)</span>.</p></li>
@@ -763,24 +763,24 @@ q_k({\boldsymbol{z}}_k) \propto \exp \left\{ \int \log f({\boldsymbol{x}}, {\bol
 </ul>
 </section></section>
 <section><section id="markov-chain-monte-carlo" class="titleslide slide level1"><h1>Markov Chain Monte Carlo</h1></section><section id="motivation" class="slide level2">
-<h1>Motivation</h1>
+<h2>Motivation</h2>
 <p>When performing Bayesian inferece, it is often (but not always) possible to calculate</p>
 <p><span class="math display">\[f({\boldsymbol{\theta}}| {\boldsymbol{x}}) \propto L({\boldsymbol{\theta}}; {\boldsymbol{x}}) f({\boldsymbol{\theta}})\]</span></p>
 <p>but it is typically much more difficult to calculate</p>
 <p><span class="math display">\[f({\boldsymbol{\theta}}| {\boldsymbol{x}}) = \frac{L({\boldsymbol{\theta}}; {\boldsymbol{x}}) f({\boldsymbol{\theta}})}{f({\boldsymbol{x}})}.\]</span></p>
 <p>Markov chain Monte Carlo is a method for simulating data approximately from <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span> with knowledge of only <span class="math inline">\(L({\boldsymbol{\theta}}; {\boldsymbol{x}}) f({\boldsymbol{\theta}})\)</span>.</p>
 </section><section id="note" class="slide level2">
-<h1>Note</h1>
+<h2>Note</h2>
 <p>MCMC can be used to approximately simulate data from any distribution that is only proportionally characterized, but it is probably most well know for doing so in the context of Bayesian infererence.</p>
 <p>We will explain MCMC in the context of Bayesian inference.</p>
 </section><section id="big-picture" class="slide level2">
-<h1>Big Picture</h1>
+<h2>Big Picture</h2>
 <p>We draw a Markov chain of <span class="math inline">\({\boldsymbol{\theta}}\)</span> values so that, in some asymptotic sense, these are equivalent to iid draws from <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span>.</p>
 <p>The draws are done competitively so that the next draw of a realization of <span class="math inline">\({\boldsymbol{\theta}}\)</span> depends on the current value.</p>
 <p>The Markov chain is set up so that it only depends on <span class="math inline">\(L({\boldsymbol{\theta}}; {\boldsymbol{x}}) f({\boldsymbol{\theta}})\)</span>.</p>
 <p><em>A lot</em> of practical decisions need to be made by the user, so utilize MCMC carefully.</p>
 </section><section id="metropolis-hastings-algorithm" class="slide level2">
-<h1>Metropolis-Hastings Algorithm</h1>
+<h2>Metropolis-Hastings Algorithm</h2>
 <ol type="1">
 <li><p>Initialize <span class="math inline">\({\boldsymbol{\theta}}^{(0)}\)</span></p></li>
 <li><p>Generate <span class="math inline">\({\boldsymbol{\theta}}^{*} \sim q({\boldsymbol{\theta}}| {\boldsymbol{\theta}}^{(b)})\)</span> for some pdf or pmf <span class="math inline">\(q(\cdot | \cdot)\)</span></p></li>
@@ -788,13 +788,13 @@ q_k({\boldsymbol{z}}_k) \propto \exp \left\{ \int \log f({\boldsymbol{x}}, {\bol
 <li><p>Continue for <span class="math inline">\(b = 1, 2, \ldots, B\)</span> iterations and <em>carefully</em> select which <span class="math inline">\({\boldsymbol{\theta}}^{(b)}\)</span> are utilized to approximate iid observations from <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span></p></li>
 </ol>
 </section><section id="metropolis-algorithm" class="slide level2">
-<h1>Metropolis Algorithm</h1>
+<h2>Metropolis Algorithm</h2>
 <p>The Metropolis algorithm restricts <span class="math inline">\(q(\cdot, \cdot)\)</span> to be symmetric so that <span class="math inline">\(q({\boldsymbol{\theta}}^{(b)} | {\boldsymbol{\theta}}^{*}) = q({\boldsymbol{\theta}}^{*} | {\boldsymbol{\theta}}^{(b)})\)</span> and</p>
 <p><span class="math display">\[
 A({\boldsymbol{\theta}}^{*}, {\boldsymbol{\theta}}^{(b)}) = \min\left( 1, \frac{L({\boldsymbol{\theta}}^{*}; {\boldsymbol{x}}) f({\boldsymbol{\theta}}^{*})}{L({\boldsymbol{\theta}}^{(b)}; {\boldsymbol{x}}) f({\boldsymbol{\theta}}^{(b)})} \right).
 \]</span></p>
 </section><section id="utilizing-mcmc-output" class="slide level2">
-<h1>Utilizing MCMC Output</h1>
+<h2>Utilizing MCMC Output</h2>
 <p>Two common uses of the output from MCMC are as follows:</p>
 <ol type="1">
 <li><p><span class="math inline">\({\operatorname{E}}[f({\boldsymbol{\theta}}) | {\boldsymbol{x}}]\)</span> is approximated by <span class="math display">\[
@@ -803,7 +803,7 @@ A({\boldsymbol{\theta}}^{*}, {\boldsymbol{\theta}}^{(b)}) = \min\left( 1, \frac{
 <li><p>Some subsequence <span class="math inline">\({\boldsymbol{\theta}}^{(b_1)}, {\boldsymbol{\theta}}^{(b_2)}, \ldots, {\boldsymbol{\theta}}^{(b_m)}\)</span> from <span class="math inline">\(\left\{{\boldsymbol{\theta}}^{(b)}\right\}_{b=1}^{B}\)</span> is utilized as an empirical approximation to iid draws from <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span>.</p></li>
 </ol>
 </section><section id="remarks-1" class="slide level2">
-<h1>Remarks</h1>
+<h2>Remarks</h2>
 <ul>
 <li>The random draw <span class="math inline">\({\boldsymbol{\theta}}^{*} \sim q({\boldsymbol{\theta}}| {\boldsymbol{\theta}}^{(b)})\)</span> perturbs the current value <span class="math inline">\({\boldsymbol{\theta}}^{(b)}\)</span> to the next value <span class="math inline">\({\boldsymbol{\theta}}^{(b+1)}\)</span>. It is often a Normal distribution for continuous <span class="math inline">\({\boldsymbol{\theta}}\)</span>.</li>
 <li>Choosing the variance of <span class="math inline">\(q({\boldsymbol{\theta}}| {\boldsymbol{\theta}}^{(b)})\)</span> is important as it requires enough variance for the theory to be applicable within a reasonable number of computations, but it cannot be so large that new values of <span class="math inline">\({\boldsymbol{\theta}}^{(b+1)}\)</span> are rarely generated.</li>
@@ -812,14 +812,14 @@ A({\boldsymbol{\theta}}^{*}, {\boldsymbol{\theta}}^{(b)}) = \min\left( 1, \frac{
 <li>The generated <span class="math inline">\({\boldsymbol{\theta}}^{(b)}\)</span> are typically “thinned” (only sampled every so often) to reduce Markov dependence.</li>
 </ul>
 </section><section id="full-conditionals" class="slide level2">
-<h1>Full Conditionals</h1>
+<h2>Full Conditionals</h2>
 <p>Suppose that <span class="math inline">\({\boldsymbol{\theta}}= (\theta_1, \theta_2, \ldots, \theta_K)\)</span>. Define the subset vector as <span class="math inline">\({\boldsymbol{\theta}}_{a:b} = (\theta_a, \theta_{a+1}, \ldots, \theta_{b-1}, \theta_b)\)</span> for any <span class="math inline">\(1 \leq a \leq b \leq K\)</span>.</p>
 <p>The full conditional of <span class="math inline">\(\theta_k\)</span> is</p>
 <p><span class="math display">\[
 \Pr(\theta_k | {\boldsymbol{\theta}}_{1:k-1}, {\boldsymbol{\theta}}_{k+1:K}, {\boldsymbol{x}})
 \]</span></p>
 </section><section id="gibbs-sampling" class="slide level2">
-<h1>Gibbs Sampling</h1>
+<h2>Gibbs Sampling</h2>
 <p>Gibbs sampling a special type of Metropolis-Hasting MCMC. The algorithm samples one coordinate of <span class="math inline">\({\boldsymbol{\theta}}\)</span> at a time.</p>
 <ol type="1">
 <li>Initialize <span class="math inline">\({\boldsymbol{\theta}}^{(0)}\)</span>.</li>
@@ -833,31 +833,31 @@ A({\boldsymbol{\theta}}^{*}, {\boldsymbol{\theta}}^{(b)}) = \min\left( 1, \frac{
 <li>Continue for <span class="math inline">\(b = 1, 2, \ldots, B\)</span> iterations.</li>
 </ol>
 </section><section id="gibbs-and-mh" class="slide level2">
-<h1>Gibbs and MH</h1>
+<h2>Gibbs and MH</h2>
 <p>As an exercise, show that Gibbs sampling is a special case of the Metropolis-Hastings algorithm where <span class="math inline">\(A({\boldsymbol{\theta}}^{*}, {\boldsymbol{\theta}}^{(b)}) = 1\)</span>.</p>
 </section><section id="latent-variables" class="slide level2">
-<h1>Latent Variables</h1>
+<h2>Latent Variables</h2>
 <p>Note that MCMC is often used to calculate a posterior distribution on latent variables.</p>
 <p>This makes sense because unobserved random paramaters are a special type of latent variable.</p>
 </section><section id="theory" class="slide level2">
-<h1>Theory</h1>
+<h2>Theory</h2>
 <p>The goal of MCMC is to construct a Markov chain that converges to a stationary distribution that is equivalent to the target probability distribution.</p>
 <p>Under reasonably general assumptions, one can show that the Metropolis-Hastings algorithm produces a Markov chain that is <em>homogeneous</em> and achieves <em>detailed balance</em>, which implies the Markov chain is <em>ergodic</em> so that <span class="math inline">\({\boldsymbol{\theta}}^{(B)}\)</span> converges in distribution to <span class="math inline">\(f({\boldsymbol{\theta}}| {\boldsymbol{x}})\)</span> as <span class="math inline">\(B \rightarrow \infty\)</span> and that</p>
 <p><span class="math display">\[
 \hat{{\operatorname{E}}}[f({\boldsymbol{\theta}}) | {\boldsymbol{x}}] = \frac{1}{B} \sum_{b=1}^B f\left({\boldsymbol{\theta}}^{(b)}\right) \stackrel{B \rightarrow \infty}{\longrightarrow} {\operatorname{E}}[f({\boldsymbol{\theta}}) | {\boldsymbol{x}}].
 \]</span></p>
 </section><section id="software" class="slide level2">
-<h1>Software</h1>
+<h2>Software</h2>
 <p><a href="http://mc-stan.org">Stan</a> is probably the currently most popular software for doing Bayesian computation, including MCMC and variational inference.</p>
 <p>There are also popular R packages, such as <a href="https://cran.r-project.org/web/packages/MCMCpack/index.html"><code>MCMCpack</code></a>.</p>
 </section></section>
 <section><section id="mcmc-example" class="titleslide slide level1"><h1>MCMC Example</h1></section><section id="single-nucleotide-polymorphisms" class="slide level2">
-<h1>Single Nucleotide Polymorphisms</h1>
+<h2>Single Nucleotide Polymorphisms</h2>
 <center>
 <img src="images/snp_data.jpg" alt="SNPs" />
 </center>
 </section><section id="psd-admixture-model" class="slide level2">
-<h1>PSD Admixture Model</h1>
+<h2>PSD Admixture Model</h2>
 <center>
 <img src="images/psd_model.jpg" alt="PSD" />
 </center>
@@ -865,16 +865,16 @@ A({\boldsymbol{\theta}}^{*}, {\boldsymbol{\theta}}^{(b)}) = \min\left( 1, \frac{
 PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">Pritchard, Stephens, Donnelly (2000) <em>Genetics</em></a>.
 </p>
 </section><section id="gibbs-sampling-approach" class="slide level2">
-<h1>Gibbs Sampling Approach</h1>
+<h2>Gibbs Sampling Approach</h2>
 <p>The Bayesian Gibbs sampling approach to inferring the PSD model touches on many important ideas, such as conjugate priors and mixture models.</p>
 <p>We will focus on a version of this model for diploid SNPs.</p>
 </section><section id="the-data" class="slide level2">
-<h1>The Data</h1>
+<h2>The Data</h2>
 <p><span class="math inline">\(\boldsymbol{X}\)</span>, a <span class="math inline">\(L \times N\)</span> matrix consisting of the genotypes, coded as <span class="math inline">\(0,1,2\)</span>. Each row is a SNP, each column is an individual.</p>
 <p>In order for this model to work, the data needs to be broken down into “phased” genotypes. For the 0 and 2 cases, it’s obvious how to do this, and for the 1 case, it’ll suffice for this model to randomly assign the alleles to chromosomes. We will explore phasing more on HW4.</p>
 <p>Thus, we wind up with two {0, 1} <em>binary</em> matrices <span class="math inline">\(\boldsymbol{X}_A\)</span> and <span class="math inline">\(\boldsymbol{X}_B\)</span>, both <span class="math inline">\(L \times N\)</span>. We will refer to allele <span class="math inline">\(A\)</span> and allele <span class="math inline">\(B\)</span>. Note <span class="math inline">\({\boldsymbol{X}}= {\boldsymbol{X}}_A + {\boldsymbol{X}}_B\)</span>.</p>
 </section><section id="model-components" class="slide level2">
-<h1>Model Components</h1>
+<h2>Model Components</h2>
 <ul>
 <li><span class="math inline">\(K\)</span>, the number of populations that we model the genotypes as admixtures of. This is chosen before inference.</li>
 <li><span class="math inline">\(\boldsymbol{Q}\)</span>, a <span class="math inline">\(N \times K\)</span> matrix, the admixture proportions, values are in the interval <span class="math inline">\([0, 1]\)</span> and rows are constrained to sum to 1.</li>
@@ -882,7 +882,7 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 <li><span class="math inline">\(\boldsymbol{Z}_A\)</span> and <span class="math inline">\(\boldsymbol{Z}_B\)</span>, two <span class="math inline">\(L \times N\)</span> matrices that tell us which population the respective allele is from. Elements consist of the integers between <span class="math inline">\(1\)</span> and <span class="math inline">\(K\)</span>. This is a hidden variable.</li>
 </ul>
 </section><section id="the-model" class="slide level2">
-<h1>The Model</h1>
+<h2>The Model</h2>
 <ul>
 <li>Each allele (elements of <span class="math inline">\(\boldsymbol{X}_A\)</span> and <span class="math inline">\(\boldsymbol{X}_B\)</span>) is a Bernoulli random variable, with success probability determined by which population that allele is assigned to (i.e., depends on <span class="math inline">\(\boldsymbol{Z}_A\)</span>, <span class="math inline">\(\boldsymbol{Z}_B\)</span>, and <span class="math inline">\(\boldsymbol{P}\)</span>).</li>
 <li>We put a uniform Beta prior, i.e., <span class="math inline">\(\operatorname{Beta}(1, 1)\)</span>, on each element of <span class="math inline">\(\boldsymbol{P}\)</span>.</li>
@@ -890,7 +890,7 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 <li><span class="math inline">\(\boldsymbol{Z}_A\)</span> and <span class="math inline">\(\boldsymbol{Z}_B\)</span> are <span class="math inline">\(K\)</span>-class Multinomial draws where the probability of drawing each class is determined by each row of <span class="math inline">\(Q\)</span>.</li>
 </ul>
 </section><section id="conditional-independence" class="slide level2">
-<h1>Conditional Independence</h1>
+<h2>Conditional Independence</h2>
 <p>The key observation is to understand which parts of the model are dependent on each other in the data generating process.</p>
 <ul>
 <li>The data <span class="math inline">\(\boldsymbol{X}_A\)</span> and <span class="math inline">\(\boldsymbol{X}_B\)</span> depends directly on <span class="math inline">\(\boldsymbol{Z}_A\)</span>, <span class="math inline">\(\boldsymbol{Z}_B\)</span>, and <span class="math inline">\(\boldsymbol{P}\)</span> (not <span class="math inline">\(\boldsymbol{Q}\)</span>!).</li>
@@ -900,11 +900,11 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 <p><span class="math inline">\(\Pr(\boldsymbol{X}_A, \boldsymbol{X}_B, \boldsymbol{Z}_A, \boldsymbol{Z}_B, \boldsymbol{P}, \boldsymbol{Q}) =\)</span><br />
 <span class="math inline">\(\Pr(\boldsymbol{X}_A, \boldsymbol{X}_B | \boldsymbol{Z}_A, \boldsymbol{Z}_B, \boldsymbol{P}) \Pr(\boldsymbol{Z}_A | \boldsymbol{Q}) \Pr(\boldsymbol{Z}_B | \boldsymbol{Q}) \Pr(\boldsymbol{P}) \Pr(\boldsymbol{Q})\)</span></p>
 </section><section id="the-posterior" class="slide level2">
-<h1>The Posterior</h1>
+<h2>The Posterior</h2>
 <p>We desire to compute the posterior distribution <span class="math inline">\(\Pr(\boldsymbol{P}, \boldsymbol{Q}, \boldsymbol{Z}_A, \boldsymbol{Z}_B | \boldsymbol{X}_A, \boldsymbol{X}_B)\)</span>. Gibbs sampling tells us if we can construct conditional distributions for each random variable in our model, then iteratively sampling and updating our model parameters will result in a stationary distribution that is the same as the posterior distribution.</p>
 <p>Gibbs sampling is an extremely powerful approach for this model because we can utilize conjugate priors as well as the independence of various parameters in the model to compute these conditional distributions.</p>
 </section><section id="full-conditional-for-boldsymbolq" class="slide level2">
-<h1>Full Conditional for <span class="math inline">\(\boldsymbol{Q}\)</span></h1>
+<h2>Full Conditional for <span class="math inline">\(\boldsymbol{Q}\)</span></h2>
 <p>Note that <span class="math inline">\(\boldsymbol{Z}_A\)</span> and <span class="math inline">\(\boldsymbol{Z}_B\)</span> are the only parts of this model that directly depend on <span class="math inline">\(\boldsymbol{Q}\)</span>.</p>
 <span class="math display">\[\begin{align*}
 &amp;\Pr(Q_n | \boldsymbol{Q}_{-n}, \boldsymbol{Z}_A, \boldsymbol{Z}_B, \boldsymbol{P}, \boldsymbol{X}_A, \boldsymbol{X}_B)\\
@@ -920,7 +920,7 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 <p>Thus, <span class="math inline">\(Q_n | \boldsymbol{Z}_A, \boldsymbol{Z}_B \sim \operatorname{Dirichlet}(S_{j1}+1, \ldots, S_{jk}+1)\)</span>,.</p>
 <p>We could have guessed that this distribution is Dirichlet given that <span class="math inline">\(\boldsymbol{Z}_A\)</span> and <span class="math inline">\(\boldsymbol{Z}_B\)</span> are multinomial! Let’s use conjugacy to help us in the future.</p>
 </section><section id="full-conditional-for-boldsymbolp" class="slide level2">
-<h1>Full Conditional for <span class="math inline">\(\boldsymbol{P}\)</span></h1>
+<h2>Full Conditional for <span class="math inline">\(\boldsymbol{P}\)</span></h2>
 <span class="math display">\[\begin{align*}
 &amp;\Pr(P_\ell | \boldsymbol{P}_{-\ell}, \boldsymbol{Z}_A, \boldsymbol{Z}_B, \boldsymbol{Q}, \boldsymbol{X}_A, \boldsymbol{X}_B) \\
 \propto&amp; \Pr(\boldsymbol{X}_{A\ell}, \boldsymbol{X}_{B\ell} | P_\ell, \boldsymbol{Z}_{A\ell}, \boldsymbol{Z}_{B\ell}) \Pr(P_\ell) 
@@ -932,7 +932,7 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 <p><span class="math display">\[P_{\ell k} | \boldsymbol{Z}_A, \boldsymbol{Z}_B, \boldsymbol{X}_A, \boldsymbol{X}_B \sim \operatorname{Beta}(1+T_{\ell k 0}, 1+T_{\ell k 1})\]</span></p>
 <p>where <span class="math inline">\(T_{\ell k 0}\)</span> is the total number of 0 alleles at SNP <span class="math inline">\(\ell\)</span> for population <span class="math inline">\(k\)</span>, and <span class="math inline">\(T_{\ell k 1}\)</span> is the analogous quantity for the 1 allele.</p>
 </section><section id="full-conditional-boldsymbolz_a-boldsymbolz_b" class="slide level2">
-<h1>Full Conditional <span class="math inline">\(\boldsymbol{Z}_A\)</span> &amp; <span class="math inline">\(\boldsymbol{Z}_B\)</span></h1>
+<h2>Full Conditional <span class="math inline">\(\boldsymbol{Z}_A\)</span> &amp; <span class="math inline">\(\boldsymbol{Z}_B\)</span></h2>
 <p>We’ll save some math by first noting that alleles <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent of each other, so we can write this for only <span class="math inline">\(\boldsymbol{Z}_A\)</span> without losing any information. Also, all elements of <span class="math inline">\(\boldsymbol{Z}_A\)</span> are independent of each other. Further, note that each element of <span class="math inline">\(\boldsymbol{Z}_A\)</span> is a single multinomial draw, so we are working with a discrete random variable.</p>
 <span class="math display">\[\begin{align*}
 &amp;\Pr(Z_{A\ell n}=k | \boldsymbol{X}_A, \boldsymbol{Q}, \boldsymbol{P}) \\
@@ -948,7 +948,7 @@ PSD model proposed in <a href="http://www.genetics.org/content/155/2/945.long">P
 <p>Thus, we arrive at the formula:</p>
 <p><span class="math display">\[\Pr(Z_{A\ell n}=k | \boldsymbol{X}_A, \boldsymbol{Q}, \boldsymbol{P}) \propto P_{\ell k} Q_{n k}\]</span></p>
 </section><section id="gibbs-sampling-updates" class="slide level2">
-<h1>Gibbs Sampling Updates</h1>
+<h2>Gibbs Sampling Updates</h2>
 <p>It’s neat that we wind up just iteratively counting the various discrete random variables along different dimensions.</p>
 <span class="math display">\[\begin{align*}
 Q_n | \boldsymbol{Z}_A, \boldsymbol{Z}_B &amp;\sim \operatorname{Dirichlet}(S_{j1}+1, \ldots, S_{jk}+1)\\
@@ -957,11 +957,11 @@ Z_{A\ell n} | \boldsymbol{X}_A, \boldsymbol{Q}, \boldsymbol{P} &amp;\sim \operat
 \end{align*}\]</span>
 <p>where <span class="math inline">\(*\)</span> means element-wise vector multiplication.</p>
 </section><section id="implementation" class="slide level2">
-<h1>Implementation</h1>
+<h2>Implementation</h2>
 <p>The Markov chain property means that we can’t use vectorization forward in time, so R is not the best way to implement this algorithm.</p>
 <p>That being said, we can vectorize the pieces that we can and demonstrate what happens.</p>
 </section><section id="matrix-wise-rdirichlet-function" class="slide level2">
-<h1>Matrix-wise <code>rdirichlet</code> Function</h1>
+<h2>Matrix-wise <code>rdirichlet</code> Function</h2>
 <p>Drawing from a Dirichlet is easy and vectorizable because it consists of normalizing independent gamma draws.</p>
 <pre class="r"><code>&gt; rdirichlet &lt;- function(alpha) {
 +   m &lt;- nrow(alpha)
@@ -970,7 +970,7 @@ Z_{A\ell n} | \boldsymbol{X}_A, \boldsymbol{Q}, \boldsymbol{P} &amp;\sim \operat
 +   x/rowSums(x)
 + }</code></pre>
 </section><section id="inspect-data" class="slide level2">
-<h1>Inspect Data</h1>
+<h2>Inspect Data</h2>
 <pre class="r"><code>&gt; dim(Xa)
 [1] 400  24
 &gt; X[1:3,1:3]
@@ -984,7 +984,7 @@ rs2051075        0       0       1
 rs765546         1       1       0
 rs10019399       1       1       1</code></pre>
 </section><section id="model-parameters" class="slide level2">
-<h1>Model Parameters</h1>
+<h2>Model Parameters</h2>
 <pre class="r"><code>&gt; L &lt;- nrow(Xa)
 &gt; N &lt;- ncol(Xa)
 &gt; 
@@ -995,7 +995,7 @@ rs10019399       1       1       1</code></pre>
 &gt; P &lt;- matrix(0, L, K)
 &gt; Q &lt;- matrix(0, N, K)</code></pre>
 </section><section id="update-boldsymbolp" class="slide level2">
-<h1>Update <span class="math inline">\(\boldsymbol{P}\)</span></h1>
+<h2>Update <span class="math inline">\(\boldsymbol{P}\)</span></h2>
 <pre class="r"><code>&gt; update_P &lt;- function() {
 +   Na_0 &lt;- Za * (Xa==0)
 +   Na_1 &lt;- Za * (Xa==1)
@@ -1009,7 +1009,7 @@ rs10019399       1       1       1</code></pre>
 +   P
 + }</code></pre>
 </section><section id="update-boldsymbolq" class="slide level2">
-<h1>Update <span class="math inline">\(\boldsymbol{Q}\)</span></h1>
+<h2>Update <span class="math inline">\(\boldsymbol{Q}\)</span></h2>
 <pre class="r"><code>&gt; update_Q &lt;- function() {
 +   M_POP0 &lt;- apply(Za, 2, function(x) {tabulate(x, nbins=K)} )
 +   M_POP1 &lt;- apply(Zb, 2, function(x) {tabulate(x, nbins=K)} )
@@ -1017,7 +1017,7 @@ rs10019399       1       1       1</code></pre>
 +   rdirichlet(t(1+M_POP0+M_POP1))
 + }</code></pre>
 </section><section id="update-each-boldsymbolz" class="slide level2">
-<h1>Update (Each) <span class="math inline">\(\boldsymbol{Z}\)</span></h1>
+<h2>Update (Each) <span class="math inline">\(\boldsymbol{Z}\)</span></h2>
 <pre class="r"><code>&gt; update_Z &lt;- function(X) {
 +   Z &lt;- matrix(0, nrow(X), ncol(X))
 +   for(n in 1:N) {
@@ -1029,7 +1029,7 @@ rs10019399       1       1       1</code></pre>
 +   Z
 + }</code></pre>
 </section><section id="model-log-likelihood-function" class="slide level2">
-<h1>Model Log-likelihood Function</h1>
+<h2>Model Log-likelihood Function</h2>
 <pre class="r"><code>&gt; model_ll &lt;- function() {
 +   AFa &lt;- t(sapply(1:L, function(i){P[i,][Za[i,]]}))
 +   AFb &lt;- t(sapply(1:L, function(i){P[i,][Zb[i,]]}))
@@ -1038,7 +1038,7 @@ rs10019399       1       1       1</code></pre>
 +     sum(dbinom(Xb, 1, AFb, log=TRUE))
 + }</code></pre>
 </section><section id="mcmc-configuration" class="slide level2">
-<h1>MCMC Configuration</h1>
+<h2>MCMC Configuration</h2>
 <pre class="r"><code>&gt; MAX_IT &lt;- 20000
 &gt; BURNIN &lt;- 5000
 &gt; THIN &lt;- 20
@@ -1050,7 +1050,7 @@ rs10019399       1       1       1</code></pre>
 &gt; LL_start &lt;- rep(0, START)
 &gt; LL_end &lt;- rep(0, TAIL)</code></pre>
 </section><section id="run-sampler" class="slide level2">
-<h1>Run Sampler</h1>
+<h2>Run Sampler</h2>
 <pre class="r"><code>&gt; set.seed(1234)
 &gt; 
 &gt; for(it in 1:MAX_IT) {
@@ -1066,14 +1066,14 @@ rs10019399       1       1       1</code></pre>
 &gt; 
 &gt; Q_MEAN &lt;- QSUM/((MAX_IT-BURNIN)/THIN)</code></pre>
 </section><section id="posterior-mean-of-boldsymbolq" class="slide level2">
-<h1>Posterior Mean of <span class="math inline">\(\boldsymbol{Q}\)</span></h1>
+<h2>Posterior Mean of <span class="math inline">\(\boldsymbol{Q}\)</span></h2>
 <p><img src="images/postQ_keq3.png" style="display: block; margin: auto;" /></p>
 </section><section id="plot-log-likelihood-steps" class="slide level2">
-<h1>Plot Log-likelihood Steps</h1>
+<h2>Plot Log-likelihood Steps</h2>
 <p>Note both the needed burn-in and thinning.</p>
 <p><img src="images/burnin_keq3.png" style="display: block; margin: auto;" /></p>
 </section><section id="what-happens-for-k4" class="slide level2">
-<h1>What Happens for K=4?</h1>
+<h2>What Happens for K=4?</h2>
 <pre class="r"><code>&gt; K &lt;- 4
 &gt; Za &lt;- matrix(sample(1:K, L*N, replace=TRUE), L, N)
 &gt; Zb &lt;- matrix(sample(1:K, L*N, replace=TRUE), L, N)
@@ -1081,7 +1081,7 @@ rs10019399       1       1       1</code></pre>
 &gt; Q &lt;- matrix(0, N, K)
 &gt; QSUM &lt;- matrix(0, N, K)</code></pre>
 </section><section id="run-sampler-again" class="slide level2">
-<h1>Run Sampler Again</h1>
+<h2>Run Sampler Again</h2>
 <pre class="r"><code>&gt; for(it in 1:MAX_IT) {
 +   P &lt;- update_P()
 +   Q &lt;- update_Q()
@@ -1095,34 +1095,34 @@ rs10019399       1       1       1</code></pre>
 &gt; 
 &gt; Q_MEAN &lt;- QSUM/((MAX_IT-BURNIN)/THIN)</code></pre>
 </section><section id="posterior-mean-of-boldsymbolq-1" class="slide level2">
-<h1>Posterior Mean of <span class="math inline">\(\boldsymbol{Q}\)</span></h1>
+<h2>Posterior Mean of <span class="math inline">\(\boldsymbol{Q}\)</span></h2>
 <p><img src="images/postQ_keq4.png" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="further-reading" class="titleslide slide level1"><h1>Further Reading</h1></section><section id="bishop-2016" class="slide level2">
-<h1>Bishop (2016)</h1>
+<h2>Bishop (2016)</h2>
 <p>One of the clearest treatments of the EM algorithm, variational inference, and MCMC can be found in Chapters 9-11 of <a href="https://pulsearch.princeton.edu/catalog/4992869"><em>Pattern Recognition and Machine Learning</em></a>, by Christopher Bishop.</p>
 <p>This is a great book in general!</p>
 </section><section id="em-algorithm-1" class="slide level2">
-<h1>EM Algorithm</h1>
+<h2>EM Algorithm</h2>
 <p>Paper that popularized the method: <a href="https://www.jstor.org/stable/2984875?seq=1#page_scan_tab_contents">Dempster, Laird, Rubin (1977)</a></p>
 <p>Paper that got the theory correct: <a href="http://projecteuclid.org/euclid.aos/1176346060">Wu (1983)</a></p>
 </section><section id="variational-inference-1" class="slide level2">
-<h1>Variational Inference</h1>
+<h2>Variational Inference</h2>
 <p><a href="http://www.nowpublishers.com/article/Details/MAL-001">Wainwright and Jordan (2008)</a></p>
 <p><a href="http://www.maths.usyd.edu.au/u/jormerod/JTOpapers/Ormerod10.pdf">Ormerod and Wand (2010)</a></p>
 <p><a href="https://arxiv.org/abs/1601.00670">Blei et al. (2016)</a></p>
 </section><section id="mcmc" class="slide level2">
-<h1>MCMC</h1>
+<h2>MCMC</h2>
 <p><a href="https://jeremykun.com/2015/04/06/markov-chain-monte-carlo-without-all-the-bullshit/">MCMC Without All the BS</a></p>
 <p><a href="https://pulsearch.princeton.edu/catalog/7647380"><em>Bayesian Data Analysis</em></a> by Gelman et al.</p>
 <p><a href="https://pulsearch.princeton.edu/catalog/8891468"><em>Monte Carlo Strategies in Scientific Computing</em></a> by Jun Liu</p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1137,10 +1137,10 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] reshape2_1.4.2  dplyr_0.5.0     purrr_0.2.2    
- [4] readr_1.1.0     tidyr_0.6.1     tibble_1.3.0   
- [7] ggplot2_2.2.1   tidyverse_1.1.1 knitr_1.15.1   
-[10] magrittr_1.5    devtools_1.12.0
+ [1] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
+ [4] tidyr_0.6.2     tibble_1.3.0    ggplot2_2.2.1  
+ [7] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
+[10] devtools_1.12.0
 
 loaded via a namespace (and not attached):
  [1] Rcpp_0.12.10     highr_0.6        cellranger_1.1.0
@@ -1153,11 +1153,11 @@ loaded via a namespace (and not attached):
 [22] stringr_1.2.0    httr_1.2.1       revealjs_0.9    
 [25] hms_0.3          rprojroot_1.2    grid_3.3.2      
 [28] R6_2.2.0         readxl_1.0.0     foreign_0.8-68  
-[31] rmarkdown_1.5    modelr_0.1.0     backports_1.0.5 
-[34] scales_0.4.1     htmltools_0.3.6  rvest_0.3.2     
-[37] assertthat_0.2.0 mnormt_1.5-5     colorspace_1.3-2
-[40] labeling_0.3     stringi_1.1.5    lazyeval_0.2.0  
-[43] munsell_0.4.3    broom_0.4.2     </code></pre>
+[31] rmarkdown_1.5    modelr_0.1.0     reshape2_1.4.2  
+[34] backports_1.0.5  scales_0.4.1     htmltools_0.3.6 
+[37] rvest_0.3.2      assertthat_0.2.0 mnormt_1.5-5    
+[40] colorspace_1.3-2 labeling_0.3     stringi_1.1.5   
+[43] lazyeval_0.2.0   munsell_0.4.3    broom_0.4.2     </code></pre>
 </section>
 </section></section>
     </div>

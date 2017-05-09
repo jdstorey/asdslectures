@@ -476,11 +476,11 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="nonparametric-statistics" class="titleslide slide level1"><h1>Nonparametric Statistics</h1></section><section id="parametric-inference" class="slide level2">
-<h1>Parametric Inference</h1>
+<h2>Parametric Inference</h2>
 <p><strong>Parametric inference</strong> is based on a family of known probability distributions governed by a defined parameter space.</p>
 <p>The goal is to perform inference (or more generally statistics) on the values of the parameters.</p>
 </section><section id="nonparametric-inference" class="slide level2">
-<h1>Nonparametric Inference</h1>
+<h2>Nonparametric Inference</h2>
 <p><strong>Nonparametric inference or modeling</strong> can be described in two ways (not mutually exclusive):</p>
 <ol type="1">
 <li><p>An inference procedure or model that does not depend on or utilize the parametrized probability distribution from which the data are generated.</p></li>
@@ -494,15 +494,15 @@ p {
 </blockquote>
 <p>He then lists five estimation examples (see Section 1.1): distributions, functionals, densities, regression curves, and Normal means.</p>
 </section><section id="nonparametric-descriptive-statistics" class="slide level2">
-<h1>Nonparametric Descriptive Statistics</h1>
+<h2>Nonparametric Descriptive Statistics</h2>
 <p>Almost all of the exploratory data analysis methods we covered in the beginning of the course are nonparametric.</p>
 <p>Sometimes the exploratory methods are calibrated by known probability distributions, but they are usually informative regardless of the underlying probability distribution (or lack thereof) of the data.</p>
 </section><section id="semiparametric-inference" class="slide level2">
-<h1>Semiparametric Inference</h1>
+<h2>Semiparametric Inference</h2>
 <p><em>Semiparametric inference or modeling</em> methods contain both parametric and nonparametric components.</p>
 <p>An example is <span class="math inline">\(X_i | \mu_i \sim \mbox{Normal}(\mu_i, 1)\)</span> and <span class="math inline">\(\mu_i {\; \stackrel{\text{iid}}{\sim}\;}F\)</span> for some arbitrary distribution <span class="math inline">\(F\)</span>.</p>
 </section><section id="topics-this-week" class="slide level2">
-<h1>Topics This Week</h1>
+<h2>Topics This Week</h2>
 <ul>
 <li>Empirical distribution functions</li>
 <li>Bootstrap</li>
@@ -512,7 +512,7 @@ p {
 </ul>
 </section></section>
 <section><section id="empirical-distribution-functions" class="titleslide slide level1"><h1>Empirical Distribution Functions</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. The <strong>empirical distribution function</strong> (edf) – or <strong>empirical cumulative distribution function</strong> (ecdf) – is the distribution that puts probability <span class="math inline">\(1/n\)</span> on each observed value <span class="math inline">\(X_i\)</span>.</p>
 <p>Let <span class="math inline">\(1(X_i \leq y) = 1\)</span> if <span class="math inline">\(X_i \leq y\)</span> and <span class="math inline">\(1(X_i \leq y) = 0\)</span> if <span class="math inline">\(X_i &gt; y\)</span>.</p>
 <p><span class="math display">\[
@@ -522,17 +522,17 @@ p {
 \mbox{Observed variable:  } \hat{F}_{{\boldsymbol{x}}}(y) = \frac{1}{n} \sum_{i=1}^{n} 1(x_i \leq y)
 \]</span></p>
 </section><section id="example-normal" class="slide level2">
-<h1>Example: Normal</h1>
+<h2>Example: Normal</h2>
 <p><img src="week08_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="pointwise-convergence" class="slide level2">
-<h1>Pointwise Convergence</h1>
+<h2>Pointwise Convergence</h2>
 <p>Under our assumptions, by the strong law of large numbers for each <span class="math inline">\(y \in \mathbb{R}\)</span>,</p>
 <p><span class="math display">\[
 \hat{F}_{{\boldsymbol{X}}}(y) \stackrel{\text{a.s.}}{\longrightarrow} F(y)
 \]</span></p>
 <p>as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
 </section><section id="glivenko-cantelli-theorem" class="slide level2">
-<h1>Glivenko-Cantelli Theorem</h1>
+<h2>Glivenko-Cantelli Theorem</h2>
 <p>Under our assumptions, we can get a much stronger convergence result:</p>
 <p><span class="math display">\[
 \sup_{y \in \mathbb{R}} \left| \hat{F}_{{\boldsymbol{X}}}(y) - F(y) \right| \stackrel{\text{a.s.}}{\longrightarrow} 0
@@ -540,7 +540,7 @@ p {
 <p>as <span class="math inline">\(n \rightarrow \infty\)</span>. Here, “sup” is short for <em>supremum</em>, which is a mathematical generalization of <em>maximum</em>.</p>
 <p>This result says that even the worst difference between the edf and the true cdf converges with probability 1 to zero.</p>
 </section><section id="dvoretzky-kiefer-wolfowitz-dkw-inequality" class="slide level2">
-<h1>Dvoretzky-Kiefer-Wolfowitz (DKW) Inequality</h1>
+<h2>Dvoretzky-Kiefer-Wolfowitz (DKW) Inequality</h2>
 <p>This result gives us an upper bound on how far off the edf is from the true cdf, which allows us to construct confidence bands about the edf.</p>
 <p><span class="math display">\[
 \Pr\left( \sup_{y \in \mathbb{R}} \left| \hat{F}_{{\boldsymbol{X}}}(y) - F(y) \right| &gt; \epsilon \right) \leq 2 \exp{-2 n \epsilon^2}
@@ -553,7 +553,7 @@ p {
 <p><span class="math display">\[U(y) = \min\{\hat{F}_{{\boldsymbol{X}}}(y) + \epsilon_n, 1 \}\]</span></p>
 <p>guarantees that <span class="math inline">\(\Pr(L(y) \leq F(y) \leq U(y) \mbox{ for all } y) \geq 1-\alpha\)</span>.</p>
 </section><section id="statistical-functionals" class="slide level2">
-<h1>Statistical Functionals</h1>
+<h2>Statistical Functionals</h2>
 <p>A <strong>statistical functional</strong> <span class="math inline">\(T(F)\)</span> is any function of <span class="math inline">\(F\)</span>. Examples:</p>
 <ul>
 <li><span class="math inline">\(\mu(F) = \int x dF(x)\)</span></li>
@@ -562,7 +562,7 @@ p {
 </ul>
 <p>A <strong>linear statistical functional</strong> is such that <span class="math inline">\(T(F) = \int a(x) dF(x)\)</span>.</p>
 </section><section id="plug-in-estimator" class="slide level2">
-<h1>Plug-In Estimator</h1>
+<h2>Plug-In Estimator</h2>
 <p>A plug-in estimator of <span class="math inline">\(T(F)\)</span> based on the edf is <span class="math inline">\(T(\hat{F}_{{\boldsymbol{X}}})\)</span>. Examples:</p>
 <ul>
 <li><p><span class="math inline">\(\hat{\mu} = \mu(\hat{F}_{{\boldsymbol{X}}}) = \int x \hat{F}_{{\boldsymbol{X}}}(x) = \frac{1}{n} \sum_{i=1}^n X_i\)</span></p></li>
@@ -570,7 +570,7 @@ p {
 <li><p><span class="math inline">\(\text{median}(\hat{F}_{{\boldsymbol{X}}}) = \hat{F}_{{\boldsymbol{X}}}^{-1}(1/2)\)</span></p></li>
 </ul>
 </section><section id="edf-standard-error" class="slide level2">
-<h1>EDF Standard Error</h1>
+<h2>EDF Standard Error</h2>
 <p>Suppose that <span class="math inline">\(T(F) = \int a(x) dF(x)\)</span> is a linear functional. Then:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -590,7 +590,7 @@ p {
 \]</span></p>
 <p>where <span class="math inline">\(T(\hat{F}_{{\boldsymbol{X}}}) = \frac{1}{n} \sum_{i=1}^n a(X_i)\)</span>.</p>
 </section><section id="edf-clt" class="slide level2">
-<h1>EDF CLT</h1>
+<h2>EDF CLT</h2>
 <p>Suppose that <span class="math inline">\({\operatorname{Var}}_F(a(X)) &lt; \infty\)</span>. Then we have the following convergences as <span class="math inline">\(n \rightarrow \infty\)</span>:</p>
 <p><span class="math display">\[
 \frac{{\operatorname{Var}}_{\hat{F}_{{\boldsymbol{X}}}}(a(X))}{{\operatorname{Var}}_{F}(a(X))} \stackrel{P}{\longrightarrow} 1
@@ -603,18 +603,18 @@ p {
 <p>The estimators are very easy to calculate on real data, so this a powerful set of results.</p>
 </section></section>
 <section><section id="bootstrap" class="titleslide slide level1"><h1>Bootstrap</h1></section><section id="rationale" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. If the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> is an accurate approximation for the true cdf <span class="math inline">\(F\)</span>, then we can utilize <span class="math inline">\(\hat{F}_{{\boldsymbol{X}}}\)</span> in place of <span class="math inline">\(F\)</span> to nonparametrically characterize the sampling distribution of a statistic <span class="math inline">\(T({\boldsymbol{X}})\)</span>.</p>
 <p>This allows for the sampling distribution of more general statistics to be considered, such as the median or a percentile, as well as more traditional statistics, such as the mean, when the underlying distribution is unknown.</p>
 <p>When we encounter modeling fitting, the bootstrap may be very useful for characterizing the sampling distribution of complex statistics we calculate from fitted models.</p>
 </section><section id="big-picture" class="slide level2">
-<h1>Big Picture</h1>
+<h2>Big Picture</h2>
 <p>We calculate <span class="math inline">\(T({\boldsymbol{x}})\)</span> on the observed data, and we also form the edf, <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>.</p>
 <p>To approximate the sampling distribution of <span class="math inline">\(T({\boldsymbol{X}})\)</span> we generate <span class="math inline">\(B\)</span> random samples of <span class="math inline">\(n\)</span> iid data points from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and calculate <span class="math inline">\(T({\boldsymbol{x}}^{*(b)})\)</span> for each bootstrap sample <span class="math inline">\(b = 1, 2, \ldots, B\)</span> where <span class="math inline">\({\boldsymbol{x}}^{*(b)} = (x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)})^T\)</span>.</p>
 <p>Sampling <span class="math inline">\(X_1^{*}, \ldots, X_n^{*} {\; \stackrel{\text{iid}}{\sim}\;}\hat{F}_{{\boldsymbol{x}}}\)</span> is accomplished by sampling <span class="math inline">\(n\)</span> times <em>with replacement</em> from the observed data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
 <p>This means <span class="math inline">\(\Pr\left(X^{*} = x_j\right) = \frac{1}{n}\)</span> for all <span class="math inline">\(j\)</span>.</p>
 </section><section id="bootstrap-variance" class="slide level2">
-<h1>Bootstrap Variance</h1>
+<h2>Bootstrap Variance</h2>
 <p>For each bootstrap sample <span class="math inline">\({\boldsymbol{x}}^{*(b)} = (x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)})^T\)</span>, calculate bootstrap statistic <span class="math inline">\(T({\boldsymbol{x}}^{*(b)})\)</span>.</p>
 <p>Repeat this for <span class="math inline">\(b = 1, 2, \ldots, B\)</span>.</p>
 <p>Estimate the sampling variance of <span class="math inline">\(T({\boldsymbol{x}})\)</span> by</p>
@@ -622,7 +622,7 @@ p {
 \hat{{\operatorname{Var}}}(T({\boldsymbol{x}})) = \frac{1}{B} \sum_{b=1}^B \left(T\left({\boldsymbol{x}}^{*(b)}\right) -  \frac{1}{B} \sum_{k=1}^B T\left({\boldsymbol{x}}^{*(k)}\right) \right)^2
 \]</span></p>
 </section><section id="caveat" class="slide level2">
-<h1>Caveat</h1>
+<h2>Caveat</h2>
 <p>Why haven’t we just been doing this the entire time?!</p>
 <p>In <em>All of Nonparametric Statistics</em>, Larry Wasserman states:</p>
 <blockquote>
@@ -630,18 +630,18 @@ p {
 </blockquote>
 <p>The bootstrap is easy to motivate, but it is quite tricky to implement outside of the very standard problems. It sometimes requires deeper knowledge of statistical theory than likelihood-based inference.</p>
 </section><section id="bootstrap-sample" class="slide level2">
-<h1>Bootstrap Sample</h1>
+<h2>Bootstrap Sample</h2>
 <p>For a sample of size <span class="math inline">\(n\)</span>, what percentage of the data is present in any given bootstrap sample?</p>
 <p><img src="week08_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bootstrap-cis" class="slide level2">
-<h1>Bootstrap CIs</h1>
+<h2>Bootstrap CIs</h2>
 <p>Suppose that <span class="math inline">\(\theta = T(F)\)</span> and <span class="math inline">\(\hat{\theta} = T(\hat{F}_{{\boldsymbol{x}}})\)</span>.</p>
 <p>We can use the bootstrap to generate data from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>.</p>
 <p>For <span class="math inline">\(b = 1, 2, \ldots, B\)</span>, we draw <span class="math inline">\(x_1^{*(b)}, x_2^{*(b)}, \ldots, x_n^{*(b)}\)</span> as iid realiztions from <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span>, and calculate <span class="math inline">\(\hat{\theta}^{*(b)} = T(\hat{F}_{{\boldsymbol{x}}^{*(b)}})\)</span>.</p>
 <p>Let <span class="math inline">\(p^{*}_{\alpha}\)</span> be the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\left\{\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\right\}\)</span>.</p>
 <p>Let’s discuss several ways of calculating confidence intervals for <span class="math inline">\(\theta = T(F)\)</span>.</p>
 </section><section id="invoking-the-clt" class="slide level2">
-<h1>Invoking the CLT</h1>
+<h2>Invoking the CLT</h2>
 <p>If we have evidence that the central limit theorem can be applied, we can form the <span class="math inline">\((1-\alpha)\)</span> CI as:</p>
 <p><span class="math display">\[
 (\hat{\theta} - |z_{\alpha/2}| {\operatorname{se}}^*, \hat{\theta} + |z_{\alpha/2}| {\operatorname{se}}^*)
@@ -659,14 +659,14 @@ p {
 \frac{\hat{\theta} - \theta}{{\operatorname{se}}(\hat{\theta})} \approx \frac{\hat{\theta} - \theta}{{\operatorname{se}}^*}
 \]</span></p>
 </section><section id="percentile-interval" class="slide level2">
-<h1>Percentile Interval</h1>
+<h2>Percentile Interval</h2>
 <p>If a <em>monotone</em> function <span class="math inline">\(m(\cdot)\)</span> exists so that <span class="math inline">\(m\left(\hat{\theta}\right) \sim \mbox{Normal}(m(\theta), b^2)\)</span>, then we can form the <span class="math inline">\((1-\alpha)\)</span> CI as:</p>
 <p><span class="math display">\[
 \left(p^*_{\alpha/2}, p^*_{1-\alpha/2} \right)
 \]</span></p>
 <p>where recall that in general <span class="math inline">\(p^{*}_{\alpha}\)</span> is the <span class="math inline">\(\alpha\)</span> percentile of bootstrap estimates <span class="math inline">\(\left\{\hat{\theta}^{*(1)}, \hat{\theta}^{*(2)}, \ldots, \hat{\theta}^{*(B)}\right\}\)</span></p>
 </section><section id="pivotal-interval" class="slide level2">
-<h1>Pivotal Interval</h1>
+<h2>Pivotal Interval</h2>
 <p>Suppose we can calculate percentiles of <span class="math inline">\(\hat{\theta} - \theta\)</span>, say <span class="math inline">\(q_{\alpha}\)</span>. Note that the <span class="math inline">\(\alpha\)</span> percentile of <span class="math inline">\(\hat{\theta}\)</span> is <span class="math inline">\(q_\alpha + \theta\)</span>. The <span class="math inline">\(1-\alpha\)</span> CI is</p>
 <p><span class="math display">\[
 (\hat{\theta}-q_{1-\alpha/2}, \hat{\theta}-q_{\alpha/2})
@@ -688,7 +688,7 @@ p {
 \left(2\hat{\theta}-p^*_{1-\alpha/2}, 2\hat{\theta}-p^*_{\alpha/2}\right).
 \]</span></p>
 </section><section id="studentized-pivotal-interval" class="slide level2">
-<h1>Studentized Pivotal Interval</h1>
+<h2>Studentized Pivotal Interval</h2>
 <p>In the previous scenario, we needed to assume that the sampling distribution of <span class="math inline">\(\hat{\theta}^* - \hat{\theta}\)</span> is an approximation for that of <span class="math inline">\(\hat{\theta} - \theta\)</span>. Sometimes this will not be the case and instead we can studentize this pivotal quantity. That is, the distribution of</p>
 <p><span class="math display">\[
 \frac{\hat{\theta} - \theta}{\hat{{\operatorname{se}}}\left(\hat{\theta}\right)}
@@ -727,13 +727,13 @@ p {
 \]</span></p>
 <p>where <span class="math inline">\(\hat{\theta}^{*(b)*(v)}\)</span> is the statistic calculated from bootstrap sample <span class="math inline">\(v\)</span> within bootstrap sample <span class="math inline">\(b\)</span>. This can be very computationally intensive, and it requires a large sample size <span class="math inline">\(n\)</span>.</p>
 </section><section id="bootstrap-hypothesis-testing" class="slide level2">
-<h1>Bootstrap Hypothesis Testing</h1>
+<h2>Bootstrap Hypothesis Testing</h2>
 <p>As we have seen, hypothesis testing and confidence intervals are very related. For a simple null hypothesis, a bootstrap hypothesis test p-value can be calculated by finding the minimum <span class="math inline">\(\alpha\)</span> for which the <span class="math inline">\((1-\alpha)\)</span> CI does not contain the null hypothesis value. You showed this on your homework.</p>
 </section><section class="slide level2">
 
 <p>The general approach is to calculate a test statistic based on the observed data. Then the null distribution of this statistic is approximated by forming bootstrap test statistics under the scenario that the null hypothesis is true. This can often be accomplished because the <span class="math inline">\(\hat{\theta}\)</span> estimated from the observed data is the <em>population</em> parameter from the bootstrap distribution.</p>
 </section><section id="example-t-test" class="slide level2">
-<h1>Example: <em>t</em>-test</h1>
+<h2>Example: <em>t</em>-test</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>. We wish to test <span class="math inline">\(H_0: \mu(F_X) = \mu(F_Y)\)</span> vs <span class="math inline">\(H_1: \mu(F_X) \not= \mu(F_Y)\)</span>. Suppose that we know <span class="math inline">\(\sigma^2(F_X) = \sigma^2(F_Y)\)</span> (if not, it is straightforward to adjust the proecure below).</p>
 <p>Our test statistic is</p>
 <p><span class="math display">\[
@@ -756,11 +756,11 @@ t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y}
 \mbox{p-value}(t) = \frac{1}{B} \sum_{b=1}^{B} 1\left(|t^{*(b)}| \geq |t|\right).
 \]</span></p>
 </section><section id="parametric-bootstrap" class="slide level2">
-<h1>Parametric Bootstrap</h1>
+<h2>Parametric Bootstrap</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_\theta\)</span> for some parametric <span class="math inline">\(F_\theta\)</span>. We form estimate <span class="math inline">\(\hat{\theta}\)</span>, but we don’t have a known sampling distribution we can use to do inference with <span class="math inline">\(\hat{\theta}\)</span>.</p>
 <p>The parametric bootstrap generates bootstrap data sets from <span class="math inline">\(F_{\hat{\theta}}\)</span> rather than from the edf. It proceeds as we outlined above for these bootstrap data sets.</p>
 </section><section id="example-exponential-data" class="slide level2">
-<h1>Example: Exponential Data</h1>
+<h2>Example: Exponential Data</h2>
 <p>In the homework, you will be performing a bootstrap t-test of the mean and a bootstrap percentile CI of the median for the following Exponential(<span class="math inline">\(\lambda\)</span>) data:</p>
 <pre class="r"><code>&gt; set.seed(1111)
 &gt; pop.mean &lt;- 2
@@ -930,12 +930,12 @@ t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*} - (\overline{x} - \overline{y}
 </div>
 </section></section>
 <section><section id="permutation-methods" class="titleslide slide level1"><h1>Permutation Methods</h1></section><section id="rationale-1" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>Permutation methods are useful for testing hypotheses about equality of distributions.</p>
 <p>Observations can be permuted among populations to simulate the case where the distributions are equivalent.</p>
 <p>Many permutation methods only depend on the ranks of the data, so they are a class of robust methods for performing hypothesis tests. However, the types of hypotheses that can be tested are limited.</p>
 </section><section id="permutation-test" class="slide level2">
-<h1>Permutation Test</h1>
+<h2>Permutation Test</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>.</p>
 <p>We wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>.</p>
 <p>Consider a general test statistic <span class="math inline">\(S = S(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n)\)</span> so that the larger <span class="math inline">\(S\)</span> is the more evidence there is against the null hypothesis.</p>
@@ -958,7 +958,7 @@ S^{*(b)} = S\left(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \l
 \]</span></p>
 <p>This can be (1) an exact calculation where all permutations are considered, (2) a Monte Carlo approximation where <span class="math inline">\(B\)</span> random permutations are considered, or (3) a large <span class="math inline">\(\min(m, n)\)</span> calculation where an asymptotic probabilistic approximation is used.</p>
 </section><section id="wilcoxon-rank-sum-test" class="slide level2">
-<h1>Wilcoxon Rank Sum Test</h1>
+<h2>Wilcoxon Rank Sum Test</h2>
 <p>Also called the Mann-Whitney-Wilcoxon test.</p>
 <p>Consider the ranks of the data as a whole, <span class="math inline">\(X_1, X_2, \ldots, X_m, Y_1, Y_2, \ldots, Y_n\)</span>, where <span class="math inline">\(r(X_i)\)</span> is the rank of <span class="math inline">\(X_i\)</span> and <span class="math inline">\(r(Y_j)\)</span> is the rank of <span class="math inline">\(Y_j\)</span>. Note that <span class="math inline">\(r(\cdot) \in \{1, 2, \ldots, m+n\}\)</span>. The smallest value is such that <span class="math inline">\(r(X_i)=1\)</span> or <span class="math inline">\(r(Y_j)=1\)</span>, the next smallest value maps to 2, etc.</p>
 <p>Note that</p>
@@ -977,7 +977,7 @@ S^{*(b)} = S\left(Z^{*(b)}_1, Z^{*(b)}_2, \ldots, Z^{*(b)}_m, Z^{*(b)}_{m+1}, \l
 \]</span></p>
 <p>In this case, the <em>smaller</em> <span class="math inline">\(W\)</span> is, the more significant it is. Note that <span class="math inline">\(mn-W = \max(W_X, W_Y)\)</span>, so we just as well could utilize large <span class="math inline">\(\max(W_X, W_Y)\)</span> as a test statistic.</p>
 </section><section id="wilcoxon-signed-rank-sum-test" class="slide level2">
-<h1>Wilcoxon Signed Rank-Sum Test</h1>
+<h2>Wilcoxon Signed Rank-Sum Test</h2>
 <p>The Wilcoxon signed rank test is similar to the Wilcoxon two-sample test, except here we have paired observations <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>.</p>
 <p>An example is an individual’s clinical measurement before (<span class="math inline">\(X\)</span>) and after (<span class="math inline">\(Y\)</span>) treatment.</p>
 <p>In order to test the hypothesis, we calculate <span class="math inline">\(r(X_i, Y_i) = |Y_i - X_i|\)</span> and also <span class="math inline">\(s(X_i, Y_i) = \operatorname{sign}(Y_i - X_i)\)</span>.</p>
@@ -993,7 +993,7 @@ W = \sum_{i=1}^n r(X_i, Y_i) s(X_i, Y_i).
             mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
             conf.int = FALSE, conf.level = 0.95, ...)</code></pre>
 </section><section id="examples" class="slide level2">
-<h1>Examples</h1>
+<h2>Examples</h2>
 <p>Same population mean and variance.</p>
 <pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
 &gt; y &lt;- rexp(100, rate=1)
@@ -1089,7 +1089,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <pre class="r"><code>&gt; hist(y-x)</code></pre>
 <p><img src="week08_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="permutation-t-test" class="slide level2">
-<h1>Permutation <em>t</em>-test</h1>
+<h2>Permutation <em>t</em>-test</h2>
 <p>As above, suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>, and we wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>. However, suppose we additionally know that <span class="math inline">\({\operatorname{Var}}(X) = {\operatorname{Var}}(Y)\)</span>. We can use a t-statistic to test this hypothesis:</p>
 <p><span class="math display">\[
 t = \frac{\overline{x} - \overline{y}}{\sqrt{\left(\frac{1}{m} + \frac{1}{n}\right) s^2}}
@@ -1111,12 +1111,12 @@ t^{*} = \frac{\overline{x}^{*} - \overline{y}^{*}}{\sqrt{\left(\frac{1}{m} + \fr
 \]</span></p>
 </section></section>
 <section><section id="goodness-of-fit" class="titleslide slide level1"><h1>Goodness of Fit</h1></section><section id="rationale-2" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>Sometimes we want to figure out which probability distribution is a reasonable model for the data.</p>
 <p>This is related to nonparametric inference in that we wish to go from being in a nonparametric framework to a parametric framework.</p>
 <p>Goodness of fit (GoF) tests allow one to perform a hypothesis test of how well a particular parametric probability model explains variation observed in a data set.</p>
 </section><section id="chi-square-gof-test" class="slide level2">
-<h1>Chi-Square GoF Test</h1>
+<h2>Chi-Square GoF Test</h2>
 <p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F \in \{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> vs <span class="math inline">\(H_1: \mbox{not } H_0\)</span>. Suppose that <span class="math inline">\(\boldsymbol{\Theta}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
 <p>Divide the support of <span class="math inline">\(\{F_{{\boldsymbol{\theta}}}: {\boldsymbol{\theta}}\in \boldsymbol{\Theta} \}\)</span> into <span class="math inline">\(k\)</span> bins <span class="math inline">\(I_1, I_2, \ldots, I_k\)</span>.</p>
 <p>For <span class="math inline">\(j=1, 2, \ldots, k\)</span>, calculate</p>
@@ -1138,7 +1138,7 @@ s({\boldsymbol{x}}) = \sum_{j=1}^k \frac{\left(n_j - n q_j\left(\tilde{{\boldsym
 \]</span></p>
 <p>When <span class="math inline">\(H_0\)</span> is true, <span class="math inline">\(S \sim \chi^2_v\)</span> where <span class="math inline">\(v = k - d - 1\)</span>. The p-value is calculated by <span class="math inline">\(\Pr(S^* \geq s({\boldsymbol{x}}))\)</span> where <span class="math inline">\(S^* \sim \chi^2_{k-d-1}\)</span>.</p>
 </section><section id="example-hardy-weinberg" class="slide level2">
-<h1>Example: Hardy-Weinberg</h1>
+<h2>Example: Hardy-Weinberg</h2>
 <p>Suppose at your favorite SNP, we observe genotypes from 100 randomly sampled individuals as follows:</p>
 <table>
 <thead>
@@ -1182,10 +1182,10 @@ q_1(\theta) = (1-\theta)^2, \ \ q_2(\theta) = 2 \theta (1-\theta), \ \ q_3(\thet
 &gt; 1-pchisq(s, df=1)
 [1] 0.02059811</code></pre>
 </section><section id="kolmogorovsmirnov-test" class="slide level2">
-<h1>Kolmogorov–Smirnov Test</h1>
+<h2>Kolmogorov–Smirnov Test</h2>
 <p>The KS test can be used to compare a sample of data to a particular distribution, or to compare two samples of data. The former is a parametric GoF test, and the latter is a nonparametric test of equal distributions.</p>
 </section><section id="one-sample-ks-test" class="slide level2">
-<h1>One Sample KS Test</h1>
+<h2>One Sample KS Test</h2>
 <p>Suppose we have data generating process <span class="math inline">\(X_1, X_2, \ldots, X_n \sim F\)</span> for some probability distribution <span class="math inline">\(F\)</span>. We wish to test <span class="math inline">\(H_0: F = F_{{\boldsymbol{\theta}}}\)</span> vs <span class="math inline">\(H_1: F \not= F_{{\boldsymbol{\theta}}}\)</span> for some parametric distribution <span class="math inline">\(F_{{\boldsymbol{\theta}}}\)</span>.</p>
 <p>For observed data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> we form the edf <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and test-statistic</p>
 <p><span class="math display">\[
@@ -1193,7 +1193,7 @@ D({\boldsymbol{x}}) = \sup_{z} \left| \hat{F}_{{\boldsymbol{x}}}(z) - F_{{\bolds
 \]</span></p>
 <p>The null distribution of this test can be approximated based on a stochastic process called the Brownian bridge.</p>
 </section><section id="two-sample-ks-test" class="slide level2">
-<h1>Two Sample KS Test</h1>
+<h2>Two Sample KS Test</h2>
 <p>Suppose <span class="math inline">\(X_1, X_2, \ldots, X_m {\; \stackrel{\text{iid}}{\sim}\;}F_X\)</span> and <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}F_Y\)</span>. We wish to test <span class="math inline">\(H_0: F_X = F_Y\)</span> vs <span class="math inline">\(H_1: F_X \not= F_Y\)</span>.</p>
 <p>For observed data <span class="math inline">\(x_1, x_2, \ldots, x_m\)</span> and <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> we form the edf’s <span class="math inline">\(\hat{F}_{{\boldsymbol{x}}}\)</span> and <span class="math inline">\(\hat{F}_{\boldsymbol{y}}\)</span>. We then form test-statistic</p>
 <p><span class="math display">\[
@@ -1207,7 +1207,7 @@ D({\boldsymbol{x}},\boldsymbol{y})  = \sup_{z} \left| \hat{F}_{{\boldsymbol{x}}}
         alternative = c(&quot;two.sided&quot;, &quot;less&quot;, &quot;greater&quot;),
         exact = NULL)</code></pre>
 </section><section id="example-exponential-vs-normal" class="slide level2">
-<h1>Example: Exponential vs Normal</h1>
+<h2>Example: Exponential vs Normal</h2>
 <p>Two sample KS test.</p>
 <pre class="r"><code>&gt; x &lt;- rnorm(100, mean=1)
 &gt; y &lt;- rexp(100, rate=1)
@@ -1267,7 +1267,7 @@ D = 0.14439, p-value = 0.03092
 alternative hypothesis: two-sided</code></pre>
 </section></section>
 <section><section id="method-of-moments" class="titleslide slide level1"><h1>Method of Moments</h1></section><section id="rationale-3" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F\)</span>. By the strong law of large numbers we have, as <span class="math inline">\(n \rightarrow \infty\)</span></p>
 <p><span class="math display">\[
 \frac{\sum_{i=1}^n X_i^k}{n} \stackrel{\text{a.s.}}{\longrightarrow} {\operatorname{E}}_{F}\left[X^k\right]
@@ -1275,13 +1275,13 @@ alternative hypothesis: two-sided</code></pre>
 <p>when <span class="math inline">\({\operatorname{E}}_{F}\left[X^k\right]\)</span> exists.</p>
 <p>This means that we can nonparametrically estimate the moments of a distribution. Also, in the parametric setting, these moments can be used to form parameter estimates.</p>
 </section><section id="definition-1" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n {\; \stackrel{\text{iid}}{\sim}\;}F_{{\boldsymbol{\theta}}}\)</span> where <span class="math inline">\({\boldsymbol{\theta}}\)</span> is <span class="math inline">\(d\)</span>-dimensional.</p>
 <p>Calculate moments <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> for <span class="math inline">\(k = 1, 2, \ldots, d&#39;\)</span> where <span class="math inline">\(d&#39; \geq d\)</span>.</p>
 <p>For each parameter <span class="math inline">\(j = 1, 2, \ldots, d\)</span>, solve for <span class="math inline">\(\theta_j\)</span> in terms of <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> for <span class="math inline">\(k = 1, 2, \ldots, d&#39;\)</span>.</p>
 <p>The method of moments estimator of <span class="math inline">\(\theta_j\)</span> is formed by replacing the function of moments <span class="math inline">\({\operatorname{E}}\left[X^k\right]\)</span> that equals <span class="math inline">\(\theta_j\)</span> with the empirical moments <span class="math inline">\(\sum_{i=1}^n X_i^k / n\)</span>.</p>
 </section><section id="example-normal-1" class="slide level2">
-<h1>Example: Normal</h1>
+<h2>Example: Normal</h2>
 <p>For a <span class="math inline">\(\mbox{Normal}(\mu, \sigma^2)\)</span> distribution, we have</p>
 <p><span class="math display">\[
 {\operatorname{E}}[X] = \mu
@@ -1294,7 +1294,7 @@ alternative hypothesis: two-sided</code></pre>
 \tilde{\mu} = \frac{\sum_{i=1}^n X_i}{n}, \ \ \ \tilde{\sigma}^2 = \frac{\sum_{i=1}^n X_i^2}{n} - \left[\frac{\sum_{i=1}^n X_i}{n}\right]^2.
 \]</span></p>
 </section><section id="exploring-goodness-of-fit" class="slide level2">
-<h1>Exploring Goodness of Fit</h1>
+<h2>Exploring Goodness of Fit</h2>
 <p>As mentioned above, moments can be nonparametrically estimated. At the same time, for a given parametric distribution, these moments can also be written in terms of the parameters.</p>
 </section><section class="slide level2">
 
@@ -1305,11 +1305,11 @@ alternative hypothesis: two-sided</code></pre>
 <p>In the scenario where several sets of variables are measured, the MLEs of the variance in terms of the single parameter can be compared to the moment estimates of variance to assess goodness of fit of that distribution.</p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1325,7 +1325,7 @@ attached base packages:
 
 other attached packages:
  [1] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
- [4] tidyr_0.6.1     tibble_1.3.0    ggplot2_2.2.1  
+ [4] tidyr_0.6.2     tibble_1.3.0    ggplot2_2.2.1  
  [7] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
 [10] devtools_1.12.0
 

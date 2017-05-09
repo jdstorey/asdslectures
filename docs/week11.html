@@ -476,7 +476,7 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="high-dimensional-inference" class="titleslide slide level1"><h1>High-Dimensional Inference</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p><strong>High-dimesional inference</strong> is the scenario where we perform inference simultaneously on “many” paramaters.</p>
 <p>“Many” can be as few as three parameters (which is where things start to get interesting), but in modern applications this is typically on the order of thousands to billions of paramaters.</p>
 <p><strong>High-dimesional data</strong> is a data set where the number of variables measured is many.</p>
@@ -486,7 +486,7 @@ p {
 <p><strong>Big data</strong> is a data set where there are so many data points that it cannot be managed straightforwardly in memory, but must rather be stored and accessed elsewhere. Big data can be high-dimensional, large sample size, or both.</p>
 <p>We will abbreviate high-dimensional with <strong>HD</strong>.</p>
 </section><section id="examples" class="slide level2">
-<h1>Examples</h1>
+<h2>Examples</h2>
 <p>In all of these examples, many measurements are taken and the goal is often to perform inference on many paramaters simultaneously.</p>
 <ul>
 <li>Spatial epidemiology</li>
@@ -497,7 +497,7 @@ p {
 <li>Financial time series</li>
 </ul>
 </section><section id="hd-gene-expression-data" class="slide level2">
-<h1>HD Gene Expression Data</h1>
+<h2>HD Gene Expression Data</h2>
 <div id="left">
 <center>
 <img src="images/rna_sequencing.png" alt="Gene Expression" />
@@ -547,7 +547,7 @@ p {
 <p>Note that <span class="math inline">\(m \gg n \gg d\)</span>.</p>
 </div>
 </section><section id="many-responses-model" class="slide level2">
-<h1>Many Responses Model</h1>
+<h2>Many Responses Model</h2>
 <p>Gene expression is an example of what I call the <strong>many responses model</strong>.</p>
 <p>We’re interested in performing simultaneous inference on <span class="math inline">\(d\)</span> paramaters for each of <span class="math inline">\(m\)</span> models such as:</p>
 <p><span class="math display">\[
@@ -628,7 +628,7 @@ g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}_{m \times n} \right| {\b
 \]</span></p>
 <p>and we could even replace <span class="math inline">\({\boldsymbol{B}}_{m \times d} {\boldsymbol{X}}_{d \times n}\)</span> with <span class="math inline">\(d\)</span> smoothers for each of the <span class="math inline">\(m\)</span> response variable.</p>
 </section><section id="hd-snp-data" class="slide level2">
-<h1>HD SNP Data</h1>
+<h2>HD SNP Data</h2>
 <div id="left">
 <center>
 <img src="images/snp_dna.png" alt="SNPs" />
@@ -670,7 +670,7 @@ g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}_{m \times n} \right| {\b
 <p>Note that <span class="math inline">\(m \gg n\)</span>.</p>
 </div>
 </section><section id="many-regressors-model" class="slide level2">
-<h1>Many Regressors Model</h1>
+<h2>Many Regressors Model</h2>
 <p>The SNP-trait model is an example of what I call the <strong>many regressors model</strong>. A single model is fit of a response variable on many regressors (i.e., explanatory variables) simultaneously.</p>
 <p>This involves simultaneously inferring <span class="math inline">\(m\)</span> paramaters <span class="math inline">\({\boldsymbol{\beta}}= (\beta_1, \beta_2, \ldots, \beta_m)\)</span> in models such as:</p>
 <p><span class="math display">\[
@@ -686,7 +686,7 @@ Y_j = \alpha + \sum_{i=1}^m \beta_i X_{ij} + E_{j}
 g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}\right| {\boldsymbol{X}}\right]\right) = \alpha \boldsymbol{1} + {\boldsymbol{\beta}}{\boldsymbol{X}}\]</span></p>
 <p>for some link function <span class="math inline">\(g(\cdot)\)</span>.</p>
 </section><section id="goals" class="slide level2">
-<h1>Goals</h1>
+<h2>Goals</h2>
 <p>In both types of models we are interested in:</p>
 <ul>
 <li>Forming point estimates</li>
@@ -696,7 +696,7 @@ g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}\right| {\boldsymbol{X}}\
 </ul>
 <p>Sometimes we are also interested in confidence intervals in high dimensions, but this is less common.</p>
 </section><section id="challenges" class="slide level2">
-<h1>Challenges</h1>
+<h2>Challenges</h2>
 <p>Here are several of the new challenges we face when analyzing high-dimensional data:</p>
 <ul>
 <li>Standard estimation methods may be suboptimal in high dimensions</li>
@@ -708,26 +708,26 @@ g\left({\operatorname{E}}\left[ \left. {\boldsymbol{Y}}\right| {\boldsymbol{X}}\
 </section></section>
 <section><section id="many-responses-model-1" class="titleslide slide level1"><h1>Many Responses Model</h1></section></section>
 <section><section id="shrinkage-and-empirical-bayes" class="titleslide slide level1"><h1>Shrinkage and Empirical Bayes</h1></section><section id="estimating-several-means" class="slide level2">
-<h1>Estimating Several Means</h1>
+<h2>Estimating Several Means</h2>
 <p>Let’s start with the simplest <em>many responses model</em> where there is only an interncept and only one observation per variable. This means that <span class="math inline">\(n=1\)</span> and <span class="math inline">\(d=1\)</span> where <span class="math inline">\({\boldsymbol{X}}= 1\)</span>.</p>
 <p>This model can be written as <span class="math inline">\(Y_i \sim \mbox{Normal}(\beta_i, 1)\)</span> for the <span class="math inline">\(i=1, 2, \ldots, m\)</span> response variables. Suppose also that <span class="math inline">\(Y_1, Y_2, \ldots, Y_m\)</span> are jointly independent.</p>
 <p>Let’s assume that <span class="math inline">\(\beta_1, \beta_2, \ldots, \beta_m\)</span> are <em>fixed, nonrandom parameters</em>.</p>
 </section><section id="usual-mle" class="slide level2">
-<h1>Usual MLE</h1>
+<h2>Usual MLE</h2>
 <p>The usual estimates of <span class="math inline">\(\beta_i\)</span> are to set</p>
 <p><span class="math display">\[
 \hat{\beta}_i^{\text{MLE}} = {\boldsymbol{Y}}_i.
 \]</span></p>
 <p>This is also the OLS solution.</p>
 </section><section id="loss-function" class="slide level2">
-<h1>Loss Function</h1>
+<h2>Loss Function</h2>
 <p>Suppose we are interested in the simultaneous loss function</p>
 <p><span class="math display">\[
 L({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}) = \sum_{i=1} (\beta_i - \hat{\beta}_i)^2
 \]</span></p>
 <p>with risk <span class="math inline">\(R({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}) = {\operatorname{E}}[L({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}})]\)</span>.</p>
 </section><section id="steins-paradox" class="slide level2">
-<h1>Stein’s Paradox</h1>
+<h2>Stein’s Paradox</h2>
 <p>Consider the following <strong>James-Stein estimator</strong>:</p>
 <p><span class="math display">\[
 \hat{\beta}_i^{\text{JS}} = \left(1 - \frac{m-2}{\sum_{k=1}^m Y_k^2} \right) Y_i.
@@ -761,7 +761,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{JS}}\right) &lt; 
 <p>The blue line is the least squares regression line.</p>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="inverse-regression-approach" class="slide level2">
-<h1>Inverse Regression Approach</h1>
+<h2>Inverse Regression Approach</h2>
 <p>While <span class="math inline">\(Y_i = \beta_i + E_i\)</span> where <span class="math inline">\(E_i \sim \mbox{Normal}(0,1)\)</span>, it is also the case that <span class="math inline">\(\beta_i = Y_i - E_i\)</span> where <span class="math inline">\(-E_i \sim \mbox{Normal}(0,1)\)</span>.</p>
 <p>Even though we’re assuming the <span class="math inline">\(\beta_i\)</span> are fixed, suppose we imagine for the moment that the <span class="math inline">\(\beta_i\)</span> are random and take a least squares appraoch. We will try to estimate the linear model</p>
 <p><span class="math display">\[
@@ -841,7 +841,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{IR}}\right) &lt; 
 <p>The blue line is the least squares regression line of <span class="math inline">\(\beta_i\)</span> on <span class="math inline">\(Y_i\)</span>, and the red line is <span class="math inline">\(\hat{\beta}_i^{\text{IR}}\)</span>.</p>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="empirical-bayes-estimate" class="slide level2">
-<h1>Empirical Bayes Estimate</h1>
+<h2>Empirical Bayes Estimate</h2>
 <p>Suppose that <span class="math inline">\(Y_i | \beta_i \sim \mbox{Normal}(\beta_i, 1)\)</span> where these rv’s are jointly independent. Also suppose that <span class="math inline">\(\beta_i {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(a, b^2)\)</span>. Taking the empirical Bayes approach, we get:</p>
 <p><span class="math display">\[
 f(y_i ; a, b) = \int f(y_i | \beta_i) f(\beta_i; a, b) d\beta_i \sim \mbox{Normal}(a, 1+b^2).
@@ -866,7 +866,7 @@ f(y_i ; a, b) = \int f(y_i | \beta_i) f(\beta_i; a, b) d\beta_i \sim \mbox{Norma
 R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{MLE}}\right).
 \]</span></p>
 </section><section id="eb-for-a-many-responses-model" class="slide level2">
-<h1>EB for a Many Responses Model</h1>
+<h2>EB for a Many Responses Model</h2>
 <p>Consider the <em>many responses model</em> where <span class="math inline">\({\boldsymbol{Y}}_{i} | {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{\beta}}_i {\boldsymbol{X}}, \sigma^2 {\boldsymbol{I}})\)</span> where the vectors <span class="math inline">\({\boldsymbol{Y}}_{i} | {\boldsymbol{X}}\)</span> are jointly independent (<span class="math inline">\(i=1, 2, \ldots, m\)</span>). Here we’ve made the simplifying assumption that the variance <span class="math inline">\(\sigma^2\)</span> is equal across all responses, but this would not be generally true.</p>
 <p>The OLS (and MLE) solution is</p>
 <p><span class="math display">\[
@@ -902,7 +902,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 \]</span></p>
 </section></section>
 <section><section id="multiple-testing" class="titleslide slide level1"><h1>Multiple Testing</h1></section><section id="motivating-example" class="slide level2">
-<h1>Motivating Example</h1>
+<h2>Motivating Example</h2>
 <p>Hedenfalk et al. (2001) <em>NEJM</em> measured gene expression in three different breast cancer tumor types. In your homework, you have analyzed these data and have specifically compared BRCA1 mutation positive tumors to BRCA2 mutation positive tumors.</p>
 <p>The <code>qvalue</code> package has the p-values when testing for a difference in population means between these two groups (called “differential expression”). There are 3170 genes tested, resulting in 3170 p-values.</p>
 <p>Note that this analysis is a version of the many responses model.</p>
@@ -916,7 +916,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 +                         fill = &quot;white&quot;, binwidth = 0.04, center=0.02)</code></pre>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="challenges-1" class="slide level2">
-<h1>Challenges</h1>
+<h2>Challenges</h2>
 <ul>
 <li>Traditional p-value thresholds such as 0.01 or 0.05 may result in too many false positives. For example, in the above example, a 0.05 threshold could result in 158 false positives.</li>
 <li>A careful balance of true positives and false positives must be achieved in a manner that is scientifically interpretable.</li>
@@ -929,7 +929,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 &gt; hist(qobj)</code></pre>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 </section><section id="outcomes" class="slide level2">
-<h1>Outcomes</h1>
+<h2>Outcomes</h2>
 <p>Possible outcomes from <span class="math inline">\(m\)</span> hypothesis tests based on applying a significance threshold <span class="math inline">\(0 &lt; t \leq 1\)</span> to their corresponding p-values.</p>
 <table>
 <thead>
@@ -962,12 +962,12 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 </tbody>
 </table>
 </section><section id="error-rates" class="slide level2">
-<h1>Error Rates</h1>
+<h2>Error Rates</h2>
 <p>Suppose we are testing <span class="math inline">\(m\)</span> hypotheses based on p-values <span class="math inline">\(p_1, p_2, \ldots, p_m\)</span>.</p>
 <p><strong>Multiple hypothesis testing</strong> is the process of deciding which of these p-values should be called statistically significant.</p>
 <p>This requires formulating and estimating a compound <strong>error rate</strong> that quantifies the quality of the decision.</p>
 </section><section id="bonferroni-correction" class="slide level2">
-<h1>Bonferroni Correction</h1>
+<h2>Bonferroni Correction</h2>
 <p>The <strong>family-wise error rate</strong> is the probability of <em>any</em> false positive occurring among all tests called significant. The <strong>Bonferroni correction</strong> is a result that shows that utilizing a p-value threshold of <span class="math inline">\(\alpha/m\)</span> results in FWER <span class="math inline">\(\leq \alpha\)</span>. Specifically,</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -977,7 +977,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 \]</span></p>
 <p>where the above probability calculations are done under the assumption that all <span class="math inline">\(H_0\)</span> are true.</p>
 </section><section id="false-discovery-rate" class="slide level2">
-<h1>False Discovery Rate</h1>
+<h2>False Discovery Rate</h2>
 <p>The <strong>false discovery rate</strong> (FDR) measures the proportion of Type I errors — or “false discoveries” — among all hypothesis tests called statistically significant. It is defined as</p>
 <p><span class="math display">\[
 {{\rm FDR}}= {\operatorname{E}}\left[ \frac{V}{R \vee 1} \right] = {\operatorname{E}}\left[ \left.
@@ -995,7 +995,7 @@ R\left({\boldsymbol{\beta}}, \hat{{\boldsymbol{\beta}}}^{\text{EB}}\right) &lt; 
 \]</span></p>
 <p>Note that <span class="math inline">\({{\rm pFDR}}= {{\rm mFDR}}= 1\)</span> whenever all null hypotheses are true, whereas FDR can always be made arbitrarily small because of the extra term <span class="math inline">\(\Pr(R &gt; 0)\)</span>.</p>
 </section><section id="point-estimate" class="slide level2">
-<h1>Point Estimate</h1>
+<h2>Point Estimate</h2>
 <p>Let <span class="math inline">\({{\rm FDR}}(t)\)</span> denote the FDR when calling null hypotheses significant whenever <span class="math inline">\(p_i \leq t\)</span>, for <span class="math inline">\(i = 1, 2, \ldots, m\)</span>. For <span class="math inline">\(0 &lt; t \leq 1\)</span>, we define the following random variables:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1032,14 +1032,14 @@ R(t) &amp; = \#\{p_i: p_i \leq t\}
 <p>There is an inherent bias/variance trade-off in the choice of <span class="math inline">\({\lambda}\)</span>. In most cases, when <span class="math inline">\({\lambda}\)</span> gets smaller, the bias of <span class="math inline">\(\hat{m}_0({\lambda})\)</span> gets larger, but the variance gets smaller.</p>
 <p>Therefore, <span class="math inline">\({\lambda}\)</span> can be chosen to try to balance this trade-off.</p>
 </section><section id="adaptive-threshold" class="slide level2">
-<h1>Adaptive Threshold</h1>
+<h2>Adaptive Threshold</h2>
 <p>If we desire a FDR level of <span class="math inline">\(\alpha\)</span>, it is tempting to use the p-value threshold</p>
 <p><span class="math display">\[
 t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 \]</span></p>
 <p>which identifies the largest estimated FDR less than or equal to <span class="math inline">\(\alpha\)</span>.</p>
 </section><section id="conservative-properties" class="slide level2">
-<h1>Conservative Properties</h1>
+<h2>Conservative Properties</h2>
 <p>When the p-value corresponding to true null hypothesis are distributed iid Uniform(0,1), then we have the following two conservative properties.</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1048,7 +1048,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 \end{aligned}
 \]</span></p>
 </section><section id="q-values" class="slide level2">
-<h1>Q-Values</h1>
+<h2>Q-Values</h2>
 <p>In single hypothesis testing, it is common to report the p-value as a measure of significance. The <strong>q-value</strong> is the FDR based measure of significance that can be calculated simultaneously for multiple hypothesis tests.</p>
 <p>The p-value is constructed so that a threshold of <span class="math inline">\(\alpha\)</span> results in a Type I error rate <span class="math inline">\(\leq \alpha\)</span>. Likewise, the q-value is constructed so that a threshold of <span class="math inline">\(\alpha\)</span> results in a FDR <span class="math inline">\(\leq \alpha\)</span>.</p>
 </section><section class="slide level2">
@@ -1074,7 +1074,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <pre class="r"><code>&gt; plot(qobj)</code></pre>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bayesian-mixture-model" class="slide level2">
-<h1>Bayesian Mixture Model</h1>
+<h2>Bayesian Mixture Model</h2>
 <p>Let’s return to the <a href="https://jdstorey.github.io/asdslectures/week06.html#/classification">Bayesian classification</a> set up from earlier. Suppose that</p>
 <ul>
 <li><span class="math inline">\(H_i =\)</span> 0 or 1 according to whether the <span class="math inline">\(i\)</span>th null hypothesis is true or not</li>
@@ -1082,7 +1082,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <li><span class="math inline">\(P_i | H_i {\; \stackrel{\text{iid}}{\sim}\;}(1-H_i) \cdot F_0 + H_i \cdot F_1\)</span>, where <span class="math inline">\(F_0\)</span> is the null distribution and <span class="math inline">\(F_1\)</span> is the alternative distribution</li>
 </ul>
 </section><section id="bayesian-frequentist-connection" class="slide level2">
-<h1>Bayesian-Frequentist Connection</h1>
+<h2>Bayesian-Frequentist Connection</h2>
 <p>Under these assumptions, it has been shown that</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1099,7 +1099,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 \]</span></p>
 <p>which is a Bayesian analogue of the p-value — or rather a “Bayesian posterior Type I error rate”.</p>
 </section><section id="local-fdr" class="slide level2">
-<h1>Local FDR</h1>
+<h2>Local FDR</h2>
 <p>In this scenario, it also follows that</p>
 <p><span class="math display">\[
 {{\rm pFDR}}(t) = \int \Pr(H_i = 0 | P_i = p_i) dF(p_i | p_i \leq t)
@@ -1115,11 +1115,11 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 </section></section>
 <section><section id="many-regressors-model-1" class="titleslide slide level1"><h1>Many Regressors Model</h1></section></section>
 <section><section id="ridge-regression" class="titleslide slide level1"><h1>Ridge Regression</h1></section><section id="motivation" class="slide level2">
-<h1>Motivation</h1>
+<h2>Motivation</h2>
 <p><strong>Ridge regression</strong> is a technique for shrinking the coefficients towards zero in linear models.</p>
 <p>It also deals with collinearity among explanatory variables. <strong>Collinearity</strong> is the presence of strong correlation among two or more explanatory variables.</p>
 </section><section id="optimization-goal" class="slide level2">
-<h1>Optimization Goal</h1>
+<h2>Optimization Goal</h2>
 <p>Under the OLS model assumptions, ridge regression fits model by minimizing the following:</p>
 <p><span class="math display">\[
 \sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m \beta_k^2.
@@ -1127,7 +1127,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <p>Recall the <span class="math inline">\(\ell_2\)</span> norm: <span class="math inline">\(\sum_{k=1}^m \beta_k^2 = \| {\boldsymbol{\beta}}\|^2_2\)</span>. Sometimes ridge regression is called <span class="math inline">\(\ell_2\)</span> penalized regression.</p>
 <p>As with natural cubic splines, the paramater <span class="math inline">\(\lambda\)</span> is a tuning paramater that controls how much shrinkage occurs.</p>
 </section><section id="solution" class="slide level2">
-<h1>Solution</h1>
+<h2>Solution</h2>
 <p>The ridge regression solution is</p>
 <p><span class="math display">\[
 \hat{{\boldsymbol{\beta}}}^{\text{Ridge}} = {\boldsymbol{y}}{\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}.
@@ -1136,19 +1136,19 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <p>As <span class="math inline">\(\lambda \rightarrow 0\)</span>, the <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}} \rightarrow \hat{{\boldsymbol{\beta}}}^{\text{OLS}}\)</span>.</p>
 <p>As <span class="math inline">\(\lambda \rightarrow \infty\)</span>, the <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}} \rightarrow {\boldsymbol{0}}\)</span>.</p>
 </section><section id="preprocessing" class="slide level2">
-<h1>Preprocessing</h1>
+<h2>Preprocessing</h2>
 <p>Implicitly…</p>
 <p>We mean center <span class="math inline">\({\boldsymbol{y}}\)</span>.</p>
 <p>We also mean center and standard deviation scale each explanatory variable. Why?</p>
 </section><section id="shrinkage" class="slide level2">
-<h1>Shrinkage</h1>
+<h2>Shrinkage</h2>
 <p>When <span class="math inline">\({\boldsymbol{X}}{\boldsymbol{X}}^T = {\boldsymbol{I}}\)</span>, then</p>
 <p><span class="math display">\[
 \hat{\beta}^{\text{Ridge}}_{j} = \frac{\hat{\beta}^{\text{OLS}}_{j}}{1+\lambda}. 
 \]</span></p>
 <p>This shows how ridge regression acts as a technique for shrinking regression coefficients towards zero. It also shows that when <span class="math inline">\(\hat{\beta}^{\text{OLS}}_{j} \not= 0\)</span>, then for all finite <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\hat{\beta}^{\text{Ridge}}_{j} \not= 0\)</span>.</p>
 </section><section id="example" class="slide level2">
-<h1>Example</h1>
+<h2>Example</h2>
 <pre class="r"><code>&gt; set.seed(508)
 &gt; x1 &lt;- rnorm(20)
 &gt; x2 &lt;- x1 + rnorm(20, sd=0.1)
@@ -1162,12 +1162,12 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
                  x1        x2 
 0.9486116 0.8252948 0.8751979 </code></pre>
 </section><section id="existence-of-solution" class="slide level2">
-<h1>Existence of Solution</h1>
+<h2>Existence of Solution</h2>
 <p>When <span class="math inline">\(m &gt; n\)</span> or when there is high collinearity, then <span class="math inline">\(({\boldsymbol{X}}{\boldsymbol{X}}^T)^{-1}\)</span> will not exist.</p>
 <p>However, for <span class="math inline">\(\lambda &gt; 0\)</span>, it is always the case that <span class="math inline">\(\left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}\)</span> exists.</p>
 <p>Therefore, one can always compute a unique <span class="math inline">\(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\)</span> for each <span class="math inline">\(\lambda &gt; 0\)</span>.</p>
 </section><section id="effective-degrees-of-freedom" class="slide level2">
-<h1>Effective Degrees of Freedom</h1>
+<h2>Effective Degrees of Freedom</h2>
 <p>Similarly to natural cubic splines, we can calculate an effective degrees of freedom by noting that:</p>
 <p><span class="math display">\[
 \hat{{\boldsymbol{y}}} = {\boldsymbol{y}}{\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1} {\boldsymbol{X}}\]</span></p>
@@ -1176,7 +1176,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 \operatorname{tr} \left({\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1} {\boldsymbol{X}}\right)
 \]</span></p>
 </section><section id="bias-and-covariance" class="slide level2">
-<h1>Bias and Covariance</h1>
+<h2>Bias and Covariance</h2>
 <p>Under the OLS model assumptions,</p>
 <p><span class="math display">\[
 {\operatorname{Cov}}\left(\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\right) = \sigma^2 \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1} {\boldsymbol{X}}{\boldsymbol{X}}^T \left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}
@@ -1186,21 +1186,21 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 \text{bias} = {\operatorname{E}}\left[\hat{{\boldsymbol{\beta}}}^{\text{Ridge}}\right] - {\boldsymbol{\beta}}= - \lambda {\boldsymbol{\beta}}\left({\boldsymbol{X}}{\boldsymbol{X}}^T + \lambda {\boldsymbol{I}}\right)^{-1}.
 \]</span></p>
 </section><section id="ridge-vs-ols" class="slide level2">
-<h1>Ridge vs OLS</h1>
+<h2>Ridge vs OLS</h2>
 <p>When the OLS model is true, there exists a <span class="math inline">\(\lambda &gt; 0\)</span> such that the MSE of the ridge estimate is lower than than of the OLS estimate:</p>
 <p><span class="math display">\[
 {\operatorname{E}}\left[ \| {\boldsymbol{\beta}}- \hat{{\boldsymbol{\beta}}}^{\text{Ridge}} \|^2_2 \right] &lt; {\operatorname{E}}\left[ \| {\boldsymbol{\beta}}- \hat{{\boldsymbol{\beta}}}^{\text{OLS}} \|^2_2 \right].
 \]</span></p>
 <p>This says that by sacrificing some bias in the ridge estimator, we can obtain a smaller overall MSE, which is bias<span class="math inline">\(^2\)</span> + variance.</p>
 </section><section id="bayesian-interpretation" class="slide level2">
-<h1>Bayesian Interpretation</h1>
+<h2>Bayesian Interpretation</h2>
 <p>The ridge regression solution is equivalent to maximizing</p>
 <p><span class="math display">\[
 -\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m \beta_k^2
 \]</span></p>
 <p>which means it can be interpreted as the MAP solution with a Normal prior on the <span class="math inline">\(\beta_i\)</span> values.</p>
 </section><section id="example-diabetes-data" class="slide level2">
-<h1>Example: Diabetes Data</h1>
+<h2>Example: Diabetes Data</h2>
 <pre class="r"><code>&gt; library(lars)
 &gt; data(diabetes)
 &gt; x &lt;- diabetes$x2 %&gt;% unclass() %&gt;% as.data.frame()
@@ -1238,7 +1238,7 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 &gt; plot(cvridgefit)</code></pre>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="glms" class="slide level2">
-<h1>GLMs</h1>
+<h2>GLMs</h2>
 <p>The <code>glmnet</code> library (and the <code>glmnetUtils</code> wrapper library) allow one to perform ridge regression on generalized linear models.</p>
 <p>A penalized maximum likelihood estimate is calculated based on</p>
 <p><span class="math display">\[
@@ -1247,12 +1247,12 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <p>added to the log-likelihood.</p>
 </section></section>
 <section><section id="lasso-regression" class="titleslide slide level1"><h1>Lasso Regression</h1></section><section id="motivation-1" class="slide level2">
-<h1>Motivation</h1>
+<h2>Motivation</h2>
 <p>One drawback of the ridge regression approach is that coefficients will be small, but they will be nonzero.</p>
 <p>An alternative appraoch is the <strong>lasso</strong>, which stands for “Least Absolute Shrinkage and Selection Operator”.</p>
 <p>This performs a similar optimization as ridge, but with an <span class="math inline">\(\ell_1\)</span> penalty instead. This changes the geometry of the problem so that coefficients may be zero.</p>
 </section><section id="optimization-goal-1" class="slide level2">
-<h1>Optimization Goal</h1>
+<h2>Optimization Goal</h2>
 <p>Starting with the OLS model assumptions again, we wish to find <span class="math inline">\({\boldsymbol{\beta}}\)</span> that minimizes</p>
 <p><span class="math display">\[
 \sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 + \lambda \sum_{k=1}^m |\beta_k|.
@@ -1260,13 +1260,13 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <p>Note that <span class="math inline">\(\sum_{k=1}^m |\beta_k| = \| {\boldsymbol{\beta}}\|_1\)</span>, which is the <span class="math inline">\(\ell_1\)</span> vector norm.</p>
 <p>As before, the paramater <span class="math inline">\(\lambda\)</span> is a tuning paramater that controls how much shrinkage and selection occurs.</p>
 </section><section id="solution-1" class="slide level2">
-<h1>Solution</h1>
+<h2>Solution</h2>
 <p>There is no closed form solution to this optimization problem, so it must be solved numerically.</p>
 <p>Originally, a <em>quadratic programming</em> solution was proposed with has <span class="math inline">\(O(n 2^m)\)</span> operations.</p>
 <p>Then a <em>least angle regression</em> solution reduced the solution to <span class="math inline">\(O(nm^2)\)</span> operations.</p>
 <p>Modern <em>coordinate descent</em> methods have further reduced this to <span class="math inline">\(O(nm)\)</span> operations.</p>
 </section><section id="preprocessing-1" class="slide level2">
-<h1>Preprocessing</h1>
+<h2>Preprocessing</h2>
 <p>Implicitly…</p>
 <p>We mean center <span class="math inline">\({\boldsymbol{y}}\)</span>.</p>
 <p>We also mean center and standard deviation scale each explanatory variable. Why?</p>
@@ -1283,20 +1283,20 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 &gt; plot(cvlassofit)</code></pre>
 <p><img src="week11_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bayesian-interpretation-1" class="slide level2">
-<h1>Bayesian Interpretation</h1>
+<h2>Bayesian Interpretation</h2>
 <p>The ridge regression solution is equivalent to maximizing</p>
 <p><span class="math display">\[
 -\frac{1}{2\sigma^2}\sum_{j=1}^n \left(y_j - \sum_{i=1}^m \beta_{i} x_{ij}\right)^2 - \frac{\lambda}{2\sigma^2} \sum_{k=1}^m |\beta_k|
 \]</span></p>
 <p>which means it can be interpreted as the MAP solution with a Exponential prior on the <span class="math inline">\(\beta_i\)</span> values.</p>
 </section><section id="inference" class="slide level2">
-<h1>Inference</h1>
+<h2>Inference</h2>
 <p>Inference on the lasso model fit is difficult. However, there has been recent progress.</p>
 <p>One idea proposes a conditional covariance statistic, but this requires all explanatory variables to be uncorrelated.</p>
 <p>Another idea called the <em>knockoff filter</em> controls the false discovery rate and allows for correlation among explanatory variables.</p>
 <p>Both of these ideas have some restrictive assumptions and require the number of observations to exceed the number of explanatory variables, <span class="math inline">\(n &gt; m\)</span>.</p>
 </section><section id="glms-1" class="slide level2">
-<h1>GLMs</h1>
+<h2>GLMs</h2>
 <p>The <code>glmnet</code> library (and the <code>glmnetUtils</code> wrapper library) allow one to perform lasso regression on generalized linear models.</p>
 <p>A penalized maximum likelihood estimate is calculated based on</p>
 <p><span class="math display">\[
@@ -1305,11 +1305,11 @@ t^*_\alpha = \max \left\{ t:  \hat{{{\rm FDR}}}(t) \leq \alpha \right\}
 <p>added to the log-likelihood.</p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1326,7 +1326,7 @@ attached base packages:
 other attached packages:
  [1] glmnetUtils_1.0.2 lars_1.2          qvalue_2.1.1     
  [4] MASS_7.3-47       broom_0.4.2       dplyr_0.5.0      
- [7] purrr_0.2.2       readr_1.1.0       tidyr_0.6.1      
+ [7] purrr_0.2.2       readr_1.1.0       tidyr_0.6.2      
 [10] tibble_1.3.0      ggplot2_2.2.1     tidyverse_1.1.1  
 [13] knitr_1.15.1      magrittr_1.5      devtools_1.12.0  
 
@@ -1344,7 +1344,7 @@ loaded via a namespace (and not attached):
 [31] backports_1.0.5  jsonlite_1.4     mnormt_1.5-5    
 [34] hms_0.3          digest_0.6.12    stringi_1.1.5   
 [37] grid_3.3.2       rprojroot_1.2    tools_3.3.2     
-[40] lazyeval_0.2.0   glmnet_2.0-9     Matrix_1.2-10   
+[40] lazyeval_0.2.0   glmnet_2.0-10    Matrix_1.2-10   
 [43] xml2_1.1.1       lubridate_1.6.0  iterators_1.0.8 
 [46] assertthat_0.2.0 rmarkdown_1.5    httr_1.2.1      
 [49] R6_2.2.0         nlme_3.1-131    </code></pre>

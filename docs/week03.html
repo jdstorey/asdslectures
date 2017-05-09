@@ -475,21 +475,21 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="exploratory-data-analysis" class="titleslide slide level1"><h1>Exploratory Data Analysis</h1></section><section id="what-is-eda" class="slide level2">
-<h1>What is EDA?</h1>
+<h2>What is EDA?</h2>
 <p>Exploratory data analysis (EDA) is the process of analzying data to uncover their key features.</p>
 <p>John Tukey pioneered this framework, writing a seminal book on the topic (called <em>Exploratory Data Analysis</em>).</p>
 <p>EDA involves calculating numerical summaries of data, visualizing data in a variety of ways, and considering interesting data points.</p>
 <p>Before any model fitting is done to data, some exploratory data analysis should always be performed.</p>
 <p><em>Data science seems to focus much more on EDA than traditional statistics.</em></p>
 </section><section id="descriptive-statistics-examples" class="slide level2">
-<h1>Descriptive Statistics Examples</h1>
+<h2>Descriptive Statistics Examples</h2>
 <ul>
 <li><p>Facebook’s <a href="https://www.facebook.com/note.php?note_id=469716398919">Visualizing Friendships</a> (side note: <a href="http://flowingdata.com/2010/12/13/facebook-worldwide-friendships-mapped/">a discussion</a>)</p></li>
 <li><p><a href="https://www.youtube.com/watch?v=RUwS1uAdUcI&amp;t=3m22s&amp;version=3">Hans Rosling: Debunking third-world myths with the best stats you’ve ever seen</a></p></li>
 <li><p>Flowing Data’s <a href="http://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/">A Day in the Life of Americans</a></p></li>
 </ul>
 </section><section id="components-of-eda" class="slide level2">
-<h1>Components of EDA</h1>
+<h2>Components of EDA</h2>
 <p>EDA involves calculating quantities and visualizing data for:</p>
 <ul>
 <li>Checking the <em>n</em>’s</li>
@@ -502,7 +502,7 @@ p {
 </ul>
 <p>… and there are possible many more activities one can do.</p>
 </section><section id="r4ds-workflow" class="slide level2">
-<h1><em>R4DS</em> Workflow</h1>
+<h2><em>R4DS</em> Workflow</h2>
 <p>Which of the following components of the <em>R4DS</em> workflow involve EDA?</p>
 <ol type="1">
 <li>Import</li>
@@ -512,7 +512,7 @@ p {
 </ol>
 </section></section>
 <section><section id="data-sets" class="titleslide slide level1"><h1>Data Sets</h1></section><section id="data-mtcars" class="slide level2">
-<h1>Data <code>mtcars</code></h1>
+<h2>Data <code>mtcars</code></h2>
 <p>Load the <code>mtcars</code> data set:</p>
 <pre class="r"><code>&gt; library(&quot;tidyverse&quot;) # why load tidyverse?
 &gt; data(&quot;mtcars&quot;, package=&quot;datasets&quot;)
@@ -529,7 +529,7 @@ p {
 6  18.1     6   225   105  2.76 3.460 20.22     1     0     3
 # ... with 1 more variables: carb &lt;dbl&gt;</code></pre>
 </section><section id="data-mpg" class="slide level2">
-<h1>Data <code>mpg</code></h1>
+<h2>Data <code>mpg</code></h2>
 <p>Load the <code>mpg</code> data set:</p>
 <pre class="r"><code>&gt; data(&quot;mpg&quot;, package=&quot;ggplot2&quot;)
 &gt; head(mpg)
@@ -544,7 +544,7 @@ p {
 6         audi    a4   2.8  1999     6 manual(m5)     f    18
 # ... with 3 more variables: hwy &lt;int&gt;, fl &lt;chr&gt;, class &lt;chr&gt;</code></pre>
 </section><section id="data-diamonds" class="slide level2">
-<h1>Data <code>diamonds</code></h1>
+<h2>Data <code>diamonds</code></h2>
 <p>Load the <code>diamonds</code> data set:</p>
 <pre class="r"><code>&gt; data(&quot;diamonds&quot;, package=&quot;ggplot2&quot;)
 &gt; head(diamonds)
@@ -559,7 +559,7 @@ p {
 6  0.24 Very Good     J    VVS2  62.8    57   336  3.94  3.96
 # ... with 1 more variables: z &lt;dbl&gt;</code></pre>
 </section><section id="data-gapminder" class="slide level2">
-<h1>Data <code>gapminder</code></h1>
+<h2>Data <code>gapminder</code></h2>
 <p>Load the <code>gapminder</code> data set:</p>
 <pre class="r"><code>&gt; library(&quot;gapminder&quot;)
 &gt; data(&quot;gapminder&quot;, package=&quot;gapminder&quot;)
@@ -576,7 +576,7 @@ p {
 6 Afghanistan      Asia  1977  38.438 14880372  786.1134</code></pre>
 </section></section>
 <section><section id="numerical-summaries-of-data" class="titleslide slide level1"><h1>Numerical Summaries of Data</h1></section><section id="useful-summaries" class="slide level2">
-<h1>Useful Summaries</h1>
+<h2>Useful Summaries</h2>
 <ul>
 <li><p><strong>Center</strong>: mean, median, mode</p></li>
 <li><p><strong>Quantiles</strong>: percentiles, five number summaries</p></li>
@@ -586,7 +586,7 @@ p {
 <li><p><strong>Concordance</strong>: correlation, quantile-quantile plots</p></li>
 </ul>
 </section><section id="measures-of-center" class="slide level2">
-<h1>Measures of Center</h1>
+<h2>Measures of Center</h2>
 <p>Suppose we have data points <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
 <p><strong>Mean</strong>: <span class="math display">\[\overline{x} = \frac{x_1 + x_2 + \cdots + x_n}{n}\]</span></p>
 <p><strong>Median</strong>: Order the points <span class="math inline">\(x_{(1)} \leq x_{(2)} \leq \cdots \leq x_{(n)}\)</span>. The median is the middle value:<br />
@@ -594,7 +594,7 @@ p {
 - <span class="math inline">\((x_{(n/2)} + x_{(n/2+1)})/2\)</span> if <span class="math inline">\(n\)</span> is even</p>
 <p><strong>Mode</strong>: The most frequently repeated value among the data (if any). If there are ties, then there is more than one mode.</p>
 </section><section id="mean-median-and-mode-in-r" class="slide level2">
-<h1>Mean, Median, and Mode in R</h1>
+<h2>Mean, Median, and Mode in R</h2>
 <p>Let’s calculate these quantities in R.</p>
 <pre class="r"><code>&gt; mean(mtcars$mpg)
 [1] 20.09062
@@ -609,12 +609,12 @@ p {
 [1] 15 21</code></pre>
 <p>It appears there is no R base function for calculating the mode.</p>
 </section><section id="quantiles-and-percentiles" class="slide level2">
-<h1>Quantiles and Percentiles</h1>
+<h2>Quantiles and Percentiles</h2>
 <p>The <span class="math inline">\(p\)</span>th <strong>percentile</strong> of <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> is a number such that <span class="math inline">\(p\)</span>% of the data are less than this number.</p>
 <p>The 25th, 50th, and 75th percentiles are called 1st, 2nd, and 3rd “quartiles”, respectively. These are sometimes denoted as Q1, Q2, and Q3. The median is the 50th percentile aka the 2nd quartile aka Q2.</p>
 <p>In general, <span class="math inline">\(q\)</span>-<strong>quantiles</strong> are cut points that divide the data into <span class="math inline">\(q\)</span> approximately equally sized groups. The cut points are the percentiles <span class="math inline">\(1/q, 2/q, \ldots, (q-1)/q.\)</span></p>
 </section><section id="five-number-summary" class="slide level2">
-<h1>Five Number Summary</h1>
+<h2>Five Number Summary</h2>
 <p>The “five number summary” is the minimum, the three quartiles, and the maximum. This can be calculated via <code>fivenum()</code> and <code>summary()</code>. <a href="https://chemicalstatistician.wordpress.com/2013/08/12/exploratory-data-analysis-the-5-number-summary-two-different-methods-in-r-2/">They can produce different values.</a> Finally, <code>quantile()</code> extracts any set of percentiles.</p>
 <pre class="r"><code>&gt; fivenum(mtcars$mpg)
 [1] 10.40 15.35 19.20 22.80 33.90
@@ -626,14 +626,14 @@ p {
     0%    25%    50%    75%   100% 
 10.400 15.425 19.200 22.800 33.900 </code></pre>
 </section><section id="measures-of-spread" class="slide level2">
-<h1>Measures of Spread</h1>
+<h2>Measures of Spread</h2>
 <p>The variance, standard deviation (SD), and interquartile range (IQR) measure the “spread” of the data.</p>
 <p><strong>Variance</strong>: <span class="math display">\[s^2 = \frac{\sum_{i=1}^n \left(x_i - \overline{x}\right)^2}{n-1}\]</span></p>
 <p><strong>Standard Deviation</strong>: <span class="math inline">\(s = \sqrt{s^2}\)</span></p>
 <p><strong>Iterquartile Range</strong>: IQR <span class="math inline">\(=\)</span> Q3 <span class="math inline">\(-\)</span> Q1</p>
 <p>The SD and IQR have the same units as the observed data, but the variance is in squared units.</p>
 </section><section id="variance-sd-and-iqr-in-r" class="slide level2">
-<h1>Variance, SD, and IQR in R</h1>
+<h2>Variance, SD, and IQR in R</h2>
 <p>Variance:</p>
 <pre class="r"><code>&gt; var(mtcars$mpg)
 [1] 36.3241</code></pre>
@@ -646,13 +646,13 @@ p {
 &gt; diff(fivenum(mtcars$mpg)[c(2,4)])
 [1] 7.45</code></pre>
 </section><section id="identifying-outliers" class="slide level2">
-<h1>Identifying Outliers</h1>
+<h2>Identifying Outliers</h2>
 <p>An <strong>outlier</strong> is an unusual data point. Outliers can be perfectly valid but they can also be due to errors (as can non-outliers).</p>
 <p>One must define what is meant by an outlier.</p>
 <p>One definition is a data point that less than Q1 or greater than Q3 by 1.5 <span class="math inline">\(\times\)</span> IQR or more.</p>
 <p>Another definition is a data point whose difference from the mean is greater than 3 <span class="math inline">\(\times\)</span> SD or more. For Normal distributed data (bell curve shaped), the probability of this is less than 0.27%.</p>
 </section><section id="application-to-mtcars-data" class="slide level2">
-<h1>Application to <code>mtcars</code> Data</h1>
+<h2>Application to <code>mtcars</code> Data</h2>
 <pre class="r"><code>&gt; sd_units &lt;- abs(mtcars$wt - mean(mtcars$wt))/sd(mtcars$wt)
 &gt; sum(sd_units &gt; 3)
 [1] 0
@@ -666,7 +666,7 @@ p {
 [1] 2</code></pre>
 </section></section>
 <section><section id="data-visualization-basics" class="titleslide slide level1"><h1>Data Visualization Basics</h1></section><section id="plots" class="slide level2">
-<h1>Plots</h1>
+<h2>Plots</h2>
 <ul>
 <li>Single variables:
 <ul>
@@ -683,7 +683,7 @@ p {
 </ul></li>
 </ul>
 </section><section id="r-base-graphics" class="slide level2">
-<h1>R Base Graphics</h1>
+<h2>R Base Graphics</h2>
 <ul>
 <li>We’ll first plodding through “R base graphics”, which means graphics functions that come with R.<br />
 </li>
@@ -692,7 +692,7 @@ p {
 <li>We will consider a very highly used graphics package next week, called <code>ggplot2</code> that provides a “grammar of graphics”. It hits a sweet spot of “flexibility vs. complexity” for many data scientists.</li>
 </ul>
 </section><section id="read-the-documentation" class="slide level2">
-<h1>Read the Documentation</h1>
+<h2>Read the Documentation</h2>
 <p>For all of the plotting functions covered below, read the help files.</p>
 <pre class="r"><code>&gt; ?barplot
 &gt; ?boxplot
@@ -701,16 +701,16 @@ p {
 &gt; ?plot
 &gt; ?legend</code></pre>
 </section><section id="barplot" class="slide level2">
-<h1>Barplot</h1>
+<h2>Barplot</h2>
 <pre class="r"><code>&gt; cyl_tbl &lt;- table(mtcars$cyl)
 &gt; barplot(cyl_tbl, xlab=&quot;Cylinders&quot;, ylab=&quot;Count&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="boxplot" class="slide level2">
-<h1>Boxplot</h1>
+<h2>Boxplot</h2>
 <pre class="r"><code>&gt; boxplot(mtcars$mpg, ylab=&quot;MPG&quot;, col=&quot;lightgray&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="constructing-boxplots" class="slide level2">
-<h1>Constructing Boxplots</h1>
+<h2>Constructing Boxplots</h2>
 <ul>
 <li>The top of the box is Q3</li>
 <li>The line through the middle of the box is the median</li>
@@ -721,30 +721,30 @@ p {
 <li>Outliers are calculated using the <code>fivenum()</code> function</li>
 </ul>
 </section><section id="boxplot-with-outliers" class="slide level2">
-<h1>Boxplot with Outliers</h1>
+<h2>Boxplot with Outliers</h2>
 <pre class="r"><code>&gt; boxplot(mtcars$wt, ylab=&quot;Weight (1000 lbs)&quot;, 
 +         col=&quot;lightgray&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="histogram" class="slide level2">
-<h1>Histogram</h1>
+<h2>Histogram</h2>
 <pre class="r"><code>&gt; hist(mtcars$mpg, xlab=&quot;MPG&quot;, main=&quot;&quot;, col=&quot;lightgray&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="histogram-with-more-breaks" class="slide level2">
-<h1>Histogram with More Breaks</h1>
+<h2>Histogram with More Breaks</h2>
 <pre class="r"><code>&gt; hist(mtcars$mpg, breaks=12, xlab=&quot;MPG&quot;, main=&quot;&quot;, col=&quot;lightgray&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="density-plot" class="slide level2">
-<h1>Density Plot</h1>
+<h2>Density Plot</h2>
 <pre class="r"><code>&gt; plot(density(mtcars$mpg), xlab=&quot;MPG&quot;, main=&quot;&quot;)
 &gt; polygon(density(mtcars$mpg), col=&quot;lightgray&quot;, border=&quot;black&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="boxplot-side-by-side" class="slide level2">
-<h1>Boxplot (Side-By-Side)</h1>
+<h2>Boxplot (Side-By-Side)</h2>
 <pre class="r"><code>&gt; boxplot(mpg ~ cyl, data=mtcars, xlab=&quot;Cylinders&quot;, 
 +         ylab=&quot;MPG&quot;, col=&quot;lightgray&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="stacked-barplot" class="slide level2">
-<h1>Stacked Barplot</h1>
+<h2>Stacked Barplot</h2>
 <pre class="r"><code>&gt; counts &lt;- table(mtcars$cyl, mtcars$gear)
 &gt; counts
    
@@ -761,13 +761,13 @@ p {
 
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="scatterplot" class="slide level2">
-<h1>Scatterplot</h1>
+<h2>Scatterplot</h2>
 <pre class="r"><code>&gt; plot(mtcars$wt, mtcars$mpg, xlab=&quot;Weight (1000 lbs)&quot;, 
 +      ylab=&quot;MPG&quot;)</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="a-grammar-of-graphics" class="titleslide slide level1"><h1>A Grammar of Graphics</h1></section><section id="rationale" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>A grammar for communicating data visualization:</p>
 <ul>
 <li><em>Data</em>: the data set we are plotting</li>
@@ -779,13 +779,13 @@ p {
 </ul>
 <p>These are strung together like words in a sentence.</p>
 </section><section id="package-ggplot2" class="slide level2">
-<h1>Package <code>ggplot2</code></h1>
+<h2>Package <code>ggplot2</code></h2>
 <p>The R package <code>ggplot2</code> implements a grammar of graphics along these lines. First, let’s load <code>ggplot2</code>:</p>
 <pre class="r"><code>&gt; library(ggplot2)</code></pre>
 <p>Now let’s set a theme (more on this later):</p>
 <pre class="r"><code>&gt; theme_set(theme_bw())</code></pre>
 </section><section id="pieces-of-the-grammar" class="slide level2">
-<h1>Pieces of the Grammar</h1>
+<h2>Pieces of the Grammar</h2>
 <ul>
 <li><code>ggplot()</code></li>
 <li><code>aes()</code></li>
@@ -797,7 +797,7 @@ p {
 </ul>
 <p>The <code>*</code> is a placeholder for a variety of terms that we will consider.</p>
 </section><section id="geometries" class="slide level2">
-<h1>Geometries</h1>
+<h2>Geometries</h2>
 <p>Perhaps the most important aspect of <code>ggplot2</code> is to understand the “geoms”. We will cover the following:</p>
 <ul>
 <li><code>geom_bar()</code></li>
@@ -811,13 +811,13 @@ p {
 <li><code>geom_hex()</code></li>
 </ul>
 </section><section id="call-format" class="slide level2">
-<h1>Call Format</h1>
+<h2>Call Format</h2>
 <p>The most basic <code>ggplot2</code> plot is made with something like:</p>
 <pre><code>ggplot(data = &lt;DATA FRAME&gt;) +
  geom_*(mapping = aes(x = &lt;VAR X&gt;, y = &lt;VAR Y&gt;))</code></pre>
 <p>where <code>&lt;DATA FRAME&gt;</code> is a data frame and <code>&lt;VAR X&gt;</code> and <code>&lt;VAR Y&gt;</code> are variables (i.e., columns) from this data frame. Recall <code>geom_*</code> is a placeholder for a geometry such as <code>geom_boxplot</code>.</p>
 </section><section id="layers" class="slide level2">
-<h1>Layers</h1>
+<h2>Layers</h2>
 <p>There’s a complex “layers” construct occurring in the <code>ggplot2</code> package. However, for our purposes, it suffices to note that the different parts of the plots are layered together through the <code>+</code> operator:</p>
 <pre class="r"><code>&gt; ggplot(data = mpg) + 
 +   geom_point(mapping = aes(x = displ, y = hwy, color=drv)) +
@@ -826,7 +826,7 @@ p {
 +   labs(title = &quot;Highway MPG By Drivetrain and Displacement&quot;, 
 +        x = &quot;Displacement&quot;, y = &quot;Highway MPG&quot;)</code></pre>
 </section><section id="placement-of-the-aes-call" class="slide level2">
-<h1>Placement of the <code>aes()</code> Call</h1>
+<h2>Placement of the <code>aes()</code> Call</h2>
 <p>In the previous slide, we saw that the same <code>aes()</code> call was made for two <code>geom</code>’s. When this is the case, we may more simply call <code>aes()</code> from within <code>ggplot()</code>:</p>
 <pre class="r"><code>&gt; ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) + 
 +   geom_point() +
@@ -836,11 +836,11 @@ p {
 +        x = &quot;Displacement&quot;, y = &quot;Highway MPG&quot;)</code></pre>
 <p>There may be cases where different <code>geom</code>’s are layered and require different <code>aes()</code> calls. This is something to keep in mind as we go through the specifics of the <code>ggplot2</code> package.</p>
 </section><section id="original-publications" class="slide level2">
-<h1>Original Publications</h1>
+<h2>Original Publications</h2>
 <p>Wickham, H. (2010) <a href="http://www.tandfonline.com/doi/abs/10.1198/jcgs.2009.07098">A Layered Grammar of Graphics.</a> <em>Journal of Computational and Graphical Statistics</em>, 19 (1): 3–28.</p>
 <p>This paper designs an implementation of <em>The Grammar of Graphics</em> by Leland Wilkinson (published in 2005).</p>
 </section><section id="documentation" class="slide level2">
-<h1>Documentation</h1>
+<h2>Documentation</h2>
 <ul>
 <li>In R: <code>help(package=&quot;ggplot2&quot;)</code></li>
 <li><a href="http://docs.ggplot2.org/current/" class="uri">http://docs.ggplot2.org/current/</a></li>
@@ -1518,7 +1518,7 @@ Jointly stratify <code>price</code> by <code>cut</code> and <code>clarify</code>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-100-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="colors" class="titleslide slide level1"><h1>Colors</h1></section><section id="finding-colors" class="slide level2">
-<h1>Finding Colors</h1>
+<h2>Finding Colors</h2>
 <ul>
 <li><a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">A list</a> of named colors in R (e.g., “lightblue”)</li>
 <li><a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html">RColorBrewer</a> package</li>
@@ -1528,7 +1528,7 @@ Jointly stratify <code>price</code> by <code>cut</code> and <code>clarify</code>
 <pre class="r"><code>&gt; cbPalette &lt;- c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;, &quot;#009E73&quot;, &quot;#F0E442&quot;, &quot;#0072B2&quot;, 
 +                &quot;#D55E00&quot;, &quot;#CC79A7&quot;)</code></pre>
 </section><section id="some-useful-layers" class="slide level2">
-<h1>Some Useful Layers</h1>
+<h2>Some Useful Layers</h2>
 <ul>
 <li><code>scale_fill_manual()</code></li>
 <li><code>scale_color_manual()</code></li>
@@ -1602,7 +1602,7 @@ The <code>gapminder</code> package comes with its own set of colors, <code>count
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-108-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="saving-plots" class="titleslide slide level1"><h1>Saving Plots</h1></section><section id="saving-plots-as-variables" class="slide level2">
-<h1>Saving Plots as Variables</h1>
+<h2>Saving Plots as Variables</h2>
 <p>Pieces of the plots can be saved as variables, which is particular useful to explortatory data analysis. These all produce the same plot:</p>
 <pre class="r"><code>&gt; ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) + 
 +   geom_point() +
@@ -1614,7 +1614,7 @@ The <code>gapminder</code> package comes with its own set of colors, <code>count
 &gt; p +  geom_point() + geom_smooth(se=FALSE)</code></pre>
 <p>Try it yourself!</p>
 </section><section id="saving-plots-to-files" class="slide level2">
-<h1>Saving Plots to Files</h1>
+<h2>Saving Plots to Files</h2>
 <p>Plots can be saved to many formats using the <code>ggsave()</code> function. Here are some examples:</p>
 <pre class="r"><code>&gt; p &lt;- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color=drv)) + 
 +   geom_point() +
@@ -1628,7 +1628,7 @@ function (filename, plot = last_plot(), device = NULL,
         &quot;cm&quot;, &quot;mm&quot;), dpi = 300, limitsize = TRUE, ...)  </code></pre>
 </section></section>
 <section><section id="dynamic-visualization" class="titleslide slide level1"><h1>Dynamic Visualization</h1></section><section id="examples" class="slide level2">
-<h1>Examples</h1>
+<h2>Examples</h2>
 <p>Tools to dynamically interact with data visualizations (and calculations) are becoming increasingly common and straightforward to implement. Here are several examples:</p>
 <ul>
 <li><a href="https://shiny.rstudio.com">Shiny</a> (see also, <a href="http://qvalue.princeton.edu">example from my lab</a>)</li>
@@ -1643,13 +1643,8 @@ function (filename, plot = last_plot(), device = NULL,
 +         geom_point(aes(x=gdpPercap, y=lifeExp, size = pop, 
 +                    color = continent, frame = year)) +
 +         scale_x_log10()
-&gt; gganimate(p)</code></pre>
-<video width="576"  controls loop>
-<source src="week03_files/figure-revealjs/animation_ex-.webm" />
-<p>
-video of chunk animation_ex
-</p>
-</video>
+&gt; gganimate(p, &quot;animation_ex1.gif&quot;, ani.height=400, ani.width=500)</code></pre>
+<p>The resulting file can be viewed here: <a href="https://raw.githubusercontent.com/jdstorey/asdslectures/master/docs/images/animation_ex1.gif">https://github.com/jdstorey/asdslectures/blob/master/docs/images/animation_ex1.gif</a></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; p &lt;- ggplot(gapminder) +
@@ -1657,13 +1652,8 @@ video of chunk animation_ex
 +                    frame=year), 
 +                size=1.2) +
 +   scale_color_discrete(name=&quot;year&quot;)
-&gt; gganimate(p)</code></pre>
-<video width="576"  controls loop>
-<source src="week03_files/figure-revealjs/animation_ex2-.webm" />
-<p>
-video of chunk animation_ex2
-</p>
-</video>
+&gt; gganimate(p, &quot;animation_ex2.gif&quot;, ani.height=400, ani.width=500)</code></pre>
+<p>The resulting file can be viewed here: <a href="https://raw.githubusercontent.com/jdstorey/asdslectures/master/docs/images/animation_ex2.gif">https://github.com/jdstorey/asdslectures/blob/master/docs/images/animation_ex2.gif</a></p>
 </section><section class="slide level2">
 
 <pre class="r"><code>&gt; p &lt;- ggplot(gapminder) +
@@ -1671,16 +1661,11 @@ video of chunk animation_ex2
 +                    frame=year, cumulative = TRUE), 
 +                size=1.2) +
 +   scale_color_discrete(name=&quot;year&quot;)
-&gt; gganimate(p)</code></pre>
-<video width="576"  controls loop>
-<source src="week03_files/figure-revealjs/animation_ex3-.webm" />
-<p>
-video of chunk animation_ex3
-</p>
-</video>
+&gt; gganimate(p, &quot;animation_ex3.gif&quot;, ani.height=400, ani.width=500)</code></pre>
+<p>The resulting file can be viewed here: <a href="https://raw.githubusercontent.com/jdstorey/asdslectures/master/docs/images/animation_ex3.gif">https://github.com/jdstorey/asdslectures/blob/master/docs/images/animation_ex3.gif</a></p>
 </section></section>
 <section><section id="themes" class="titleslide slide level1"><h1>Themes</h1></section><section id="available-themes" class="slide level2">
-<h1>Available Themes</h1>
+<h2>Available Themes</h2>
 <center>
 <img src="images/visualization-themes.png" alt="themes" />
 </center>
@@ -1688,7 +1673,7 @@ video of chunk animation_ex3
 From <a href="http://r4ds.had.co.nz/visualize.html" class="uri">http://r4ds.had.co.nz/visualize.html</a>. See also <a href="https://cran.r-project.org/web/packages/ggthemes/index.html"><code>ggthemes</code></a> package.
 </p>
 </section><section id="setting-a-theme" class="slide level2">
-<h1>Setting a Theme</h1>
+<h2>Setting a Theme</h2>
 <p>Globally:</p>
 <pre class="r"><code>&gt; theme_set(theme_minimal())</code></pre>
 <p>Locally:</p>
@@ -1697,7 +1682,7 @@ From <a href="http://r4ds.had.co.nz/visualize.html" class="uri">http://r4ds.had.
 +   theme_minimal()</code></pre>
 </section></section>
 <section><section id="more-numerical-summaries" class="titleslide slide level1"><h1>More Numerical Summaries</h1></section><section id="measuring-symmetry" class="slide level2">
-<h1>Measuring Symmetry</h1>
+<h2>Measuring Symmetry</h2>
 <p>The <strong>skewness</strong> statistic measures symmetry of the data. It is calculated by:</p>
 <p><span class="math display">\[
 \gamma = \frac{\sum_{i=1}^n (x_i - \overline{x})^3/n}{s^3}
@@ -1705,7 +1690,7 @@ From <a href="http://r4ds.had.co.nz/visualize.html" class="uri">http://r4ds.had.
 <p>A negative number is left-skewed, and a positive number is right-skewed.</p>
 <p>Note: Use of <span class="math inline">\(n\)</span> vs. <span class="math inline">\(n-1\)</span> may vary – check the code.</p>
 </section><section id="skewness-function" class="slide level2">
-<h1><code>skewness()</code> Function</h1>
+<h2><code>skewness()</code> Function</h2>
 <p>In R, there is a function call <code>skewness()</code> from the <code>moments</code> package for calculating this statistic on data.</p>
 <pre class="r"><code>&gt; library(moments)
 &gt; gapminder %&gt;% filter(year==2007) %&gt;% select(gdpPercap) %&gt;% 
@@ -1719,18 +1704,18 @@ gdpPercap
 &gt; rnorm(10000) %&gt;% skewness()
 [1] -0.01402231</code></pre>
 </section><section id="measuring-tails" class="slide level2">
-<h1>Measuring Tails</h1>
+<h2>Measuring Tails</h2>
 <p>The tails of a distribution are often described as being heavy or light depending on how slowly they descend.</p>
 <p>This can be measured through statistic called <strong>kurtosis</strong>:</p>
 <p><span class="math display">\[
 \kappa = \frac{\sum_{i=1}^n (x_i - \overline{x})^4/n}{s^4}
 \]</span> As with skewness <span class="math inline">\(\gamma\)</span>, use of <span class="math inline">\(n\)</span> vs <span class="math inline">\(n-1\)</span> may vary.</p>
 </section><section id="excess-kurtosis" class="slide level2">
-<h1>Excess Kurtosis</h1>
+<h2>Excess Kurtosis</h2>
 <p>For a standard Normal distribution (mean 0 and standard deviation 1), the kurtosis is on average 3.</p>
 <p>Therefore, a measure called “excess kurtosis” is defined to be <span class="math inline">\(\kappa - 3\)</span>. A positive value implies heavier tails and a negative value implies lighter tails.</p>
 </section><section id="kurtosis-function" class="slide level2">
-<h1><code>kurtosis()</code> Function</h1>
+<h2><code>kurtosis()</code> Function</h2>
 <p>In R, there is a function call <code>kurtosis()</code> from the <code>moments</code> package for calculating this statistic on data.</p>
 <pre class="r"><code>&gt; library(moments)
 &gt; gapminder %&gt;% filter(year==2007) %&gt;% select(gdpPercap) %&gt;% 
@@ -1744,20 +1729,20 @@ gdpPercap
 &gt; rnorm(10000) %&gt;% kurtosis()
 [1] 2.99372</code></pre>
 </section><section id="visualizing-skewness-and-kurtosis" class="slide level2">
-<h1>Visualizing Skewness and Kurtosis</h1>
+<h2>Visualizing Skewness and Kurtosis</h2>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-118-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="visualizing-skewness-and-kurtosis-1" class="slide level2">
-<h1>Visualizing Skewness and Kurtosis</h1>
+<h2>Visualizing Skewness and Kurtosis</h2>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-119-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="correlation" class="slide level2">
-<h1>Correlation</h1>
+<h2>Correlation</h2>
 <ul>
 <li><p>It is often the case that two or more quantitative variables are measured on each unit of observation (such as an individual).</p></li>
 <li><p>We are then often interested in characterizing how pairs of variables are associated or how they vary together.</p></li>
 <li><p>A common measure that is used is called “correlation”, which is most well suited for measuring linear associations</p></li>
 </ul>
 </section><section id="pearson-correlation" class="slide level2">
-<h1>Pearson Correlation</h1>
+<h2>Pearson Correlation</h2>
 <p>Suppose we observe <span class="math inline">\(n\)</span> pairs of data <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span>. Their sample correlation is</p>
 <span class="math display">\[\begin{eqnarray}
 r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y})}{\sqrt{\sum_{i=1}^n (x_i - \overline{x})^2 \sum_{i=1}^n (y_i - \overline{y})^2}} \\
@@ -1765,7 +1750,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 \end{eqnarray}\]</span>
 <p>where <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> are the sample standard deviations of each measured variable.</p>
 </section><section id="spearman-correlation" class="slide level2">
-<h1>Spearman Correlation</h1>
+<h2>Spearman Correlation</h2>
 <ul>
 <li><p>There are other ways to measure correlation that are less reliant on linear trends in covariation and are also more robust to outliers.</p></li>
 <li><p>Specifically, one can convert each measured variable to ranks by size (1 for the smallest, <span class="math inline">\(n\)</span> for the largest) and then use a formula for correlation designed for these ranks.</p></li>
@@ -1799,7 +1784,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 [1] -0.02133551</code></pre>
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-128-1.png" width="960" style="display: block; margin: auto;" /></p>
 </section><section id="quantile-quantile-plots" class="slide level2">
-<h1>Quantile-Quantile Plots</h1>
+<h2>Quantile-Quantile Plots</h2>
 <p>Quantile-quantile plots display the <a href="#//quantiles-and-percentiles">quantiles</a> of:</p>
 <ol type="1">
 <li>two samples of data</li>
@@ -1835,11 +1820,11 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 <p><img src="week03_files/figure-revealjs/unnamed-chunk-133-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1854,30 +1839,32 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] rmutil_1.1.0    moments_0.14    rvest_0.3.2    
- [4] xml2_1.1.1      hexbin_1.27.1   babynames_0.3.0
- [7] gapminder_0.2.0 gganimate_0.1   animation_2.5  
-[10] dplyr_0.5.0     purrr_0.2.2     readr_1.1.0    
-[13] tidyr_0.6.1     tibble_1.3.0    ggplot2_2.2.1  
-[16] tidyverse_1.1.1 knitr_1.15.1    magrittr_1.5   
-[19] devtools_1.12.0
+ [1] moments_0.14         hexbin_1.27.1       
+ [3] babynames_0.3.0      gapminder_0.2.0     
+ [5] gganimate_0.1.0.9000 animation_2.5       
+ [7] dplyr_0.5.0          purrr_0.2.2         
+ [9] readr_1.1.0          tidyr_0.6.2         
+[11] tibble_1.3.0         ggplot2_2.2.1       
+[13] tidyverse_1.1.1      knitr_1.15.1        
+[15] magrittr_1.5         devtools_1.12.0     
 
 loaded via a namespace (and not attached):
- [1] revealjs_0.9       reshape2_1.4.2     haven_1.0.0       
- [4] lattice_0.20-35    colorspace_1.3-2   htmltools_0.3.6   
- [7] yaml_2.1.14        foreign_0.8-68     withr_1.0.2       
-[10] DBI_0.6-1          RColorBrewer_1.1-2 modelr_0.1.0      
-[13] readxl_1.0.0       plyr_1.8.4         stringr_1.2.0     
-[16] munsell_0.4.3      gtable_0.2.0       cellranger_1.1.0  
-[19] codetools_0.2-15   psych_1.7.5        memoise_1.1.0     
-[22] evaluate_0.10      labeling_0.3       forcats_0.2.0     
-[25] parallel_3.3.2     highr_0.6          broom_0.4.2       
-[28] Rcpp_0.12.10       scales_0.4.1       backports_1.0.5   
-[31] jsonlite_1.4       mnormt_1.5-5       hms_0.3           
-[34] digest_0.6.12      stringi_1.1.5      grid_3.3.2        
-[37] rprojroot_1.2      tools_3.3.2        lazyeval_0.2.0    
-[40] lubridate_1.6.0    assertthat_0.2.0   rmarkdown_1.5     
-[43] httr_1.2.1         R6_2.2.0           nlme_3.1-131      </code></pre>
+ [1] Rcpp_0.12.10       RColorBrewer_1.1-2 highr_0.6         
+ [4] cellranger_1.1.0   plyr_1.8.4         forcats_0.2.0     
+ [7] tools_3.3.2        digest_0.6.12      lubridate_1.6.0   
+[10] jsonlite_1.4       evaluate_0.10      memoise_1.1.0     
+[13] nlme_3.1-131       gtable_0.2.0       lattice_0.20-35   
+[16] psych_1.7.5        DBI_0.6-1          yaml_2.1.14       
+[19] parallel_3.3.2     haven_1.0.0        xml2_1.1.1        
+[22] withr_1.0.2        stringr_1.2.0      httr_1.2.1        
+[25] revealjs_0.9       hms_0.3            rprojroot_1.2     
+[28] grid_3.3.2         R6_2.2.0           readxl_1.0.0      
+[31] foreign_0.8-68     rmarkdown_1.5      modelr_0.1.0      
+[34] reshape2_1.4.2     backports_1.0.5    scales_0.4.1      
+[37] htmltools_0.3.6    rvest_0.3.2        assertthat_0.2.0  
+[40] mnormt_1.5-5       colorspace_1.3-2   labeling_0.3      
+[43] stringi_1.1.5      lazyeval_0.2.0     munsell_0.4.3     
+[46] broom_0.4.2       </code></pre>
 </section>
 </section></section>
     </div>

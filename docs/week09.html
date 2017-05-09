@@ -476,22 +476,22 @@ p {
 
 <section><section id="section" class="titleslide slide level1"><h1><img src="images/howto.jpg"></img></h1></section></section>
 <section><section id="statistical-models" class="titleslide slide level1"><h1>Statistical Models</h1></section><section id="probabilistic-models" class="slide level2">
-<h1>Probabilistic Models</h1>
+<h2>Probabilistic Models</h2>
 <p>So far we have covered inference of paramters that quantify a population of interest.</p>
 <p>This is called inference of probabilistic models.</p>
 </section><section id="multivariate-models" class="slide level2">
-<h1>Multivariate Models</h1>
+<h2>Multivariate Models</h2>
 <p>Some of the probabilistic models we considered involve calculating conditional probabilities such as <span class="math inline">\(\Pr({\boldsymbol{Z}}| {\boldsymbol{X}}; {\boldsymbol{\theta}})\)</span> or <span class="math inline">\(\Pr({\boldsymbol{\theta}}| {\boldsymbol{X}})\)</span>.</p>
 <p>It is often the case that we would like to build a model that <em>explains the variation of one variable in terms of other variables</em>. <strong>Statistical modeling</strong> typically refers to this goal.</p>
 </section><section id="variables" class="slide level2">
-<h1>Variables</h1>
+<h2>Variables</h2>
 <p>Let’s suppose our does comes in the form <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), ({\boldsymbol{X}}_2, Y_2), \ldots, ({\boldsymbol{X}}_n, Y_n) \sim F\)</span>.</p>
 <p>We will call <span class="math inline">\({\boldsymbol{X}}_i = (X_{i1}, X_{i2}, \ldots, X_{ip}) \in \mathbb{R}_{1 \times p}\)</span> the <strong>explanatory variables</strong> and <span class="math inline">\(Y_i \in \mathbb{R}\)</span> the <strong>dependent variable</strong> or <strong>response variable</strong>.</p>
 <p>We can collect all variables as matrices</p>
 <p><span class="math display">\[ {\boldsymbol{Y}}_{n \times 1} \ \mbox{ and } \ {\boldsymbol{X}}_{n \times p}\]</span></p>
 <p>where each row is a unique observation.</p>
 </section><section id="statistical-model" class="slide level2">
-<h1>Statistical Model</h1>
+<h2>Statistical Model</h2>
 <p>Statistical models are concerned with <em>how</em> variables are dependent. The most general model would be to infer</p>
 <p><span class="math display">\[
 \Pr(Y | {\boldsymbol{X}}) = h({\boldsymbol{X}})
@@ -503,11 +503,11 @@ g\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = h({\boldsymbol{X}})
 \]</span></p>
 <p>which sometimes leads us back to an estimate of <span class="math inline">\(\Pr(Y | {\boldsymbol{X}})\)</span>.</p>
 </section><section id="parametric-vs-nonparametric" class="slide level2">
-<h1>Parametric vs Nonparametric</h1>
+<h2>Parametric vs Nonparametric</h2>
 <p>A <strong>parametric</strong> model is a pre-specified form of <span class="math inline">\(h(X)\)</span> whose terms can be characterized by a formula and interpreted. This usually involves parameters on which inference can be performed, such as coefficients in a linear model.</p>
 <p>A <strong>nonparametric</strong> model is a data-driven form of <span class="math inline">\(h(X)\)</span> that is often very flexible and is not easily expressed or intepreted. A nonparametric model often does not include parameters on which we can do inference.</p>
 </section><section id="simple-linear-regression" class="slide level2">
-<h1>Simple Linear Regression</h1>
+<h2>Simple Linear Regression</h2>
 <p>For random variables <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>, <strong>simple linear regression</strong> estimates the model</p>
 <p><span class="math display">\[
 Y_i  = \beta_1 + \beta_2 X_i + E_i
@@ -515,7 +515,7 @@ Y_i  = \beta_1 + \beta_2 X_i + E_i
 <p>where <span class="math inline">\({\operatorname{E}}[E_i] = 0\)</span>, <span class="math inline">\({\operatorname{Var}}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>.</p>
 <p>Note that in this model <span class="math inline">\({\operatorname{E}}[Y | X] = \beta_1 + \beta_2 X.\)</span></p>
 </section><section id="ordinary-least-squares" class="slide level2">
-<h1>Ordinary Least Squares</h1>
+<h2>Ordinary Least Squares</h2>
 <p><strong>Ordinary least squares</strong> (OLS) estimates the model</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -526,13 +526,13 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 <p>where <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>.</p>
 <p>Note that typically <span class="math inline">\(X_{i1} = 1\)</span> for all <span class="math inline">\(i\)</span> so that <span class="math inline">\(\beta_1 X_{i1} = \beta_1\)</span> serves as the intercept.</p>
 </section><section id="generalized-least-squares" class="slide level2">
-<h1>Generalized Least Squares</h1>
+<h2>Generalized Least Squares</h2>
 <p><strong>Generalized least squares</strong> (GLS) assumes the same model as OLS, except it allows for <strong>heteroskedasticity</strong> and <strong>covariance</strong> among the <span class="math inline">\(E_i\)</span>. Specifically, it is assumed that <span class="math inline">\({\boldsymbol{E}}= (E_1, \ldots, E_n)^T\)</span> is distributed as</p>
 <p><span class="math display">\[
 {\boldsymbol{E}}_{n \times 1} \sim (\boldsymbol{0}, {\boldsymbol{\Sigma}})
 \]</span> where <span class="math inline">\(\boldsymbol{0}\)</span> is the expected value <span class="math inline">\({\boldsymbol{\Sigma}}= (\sigma_{ij})\)</span> is the <span class="math inline">\(n \times n\)</span> symmetric covariance matrix.</p>
 </section><section id="matrix-form-of-linear-models" class="slide level2">
-<h1>Matrix Form of Linear Models</h1>
+<h2>Matrix Form of Linear Models</h2>
 <p>We can write the models as</p>
 <p><span class="math display">\[
 {\boldsymbol{Y}}_{n \times 1} = {\boldsymbol{X}}_{n \times p} {\boldsymbol{\beta}}_{p \times 1} + {\boldsymbol{E}}_{n \times 1}
@@ -542,7 +542,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 {\operatorname{E}}[{\boldsymbol{Y}}| {\boldsymbol{X}}] = {\boldsymbol{X}}{\boldsymbol{\beta}}, \ {\operatorname{Cov}}({\boldsymbol{Y}}| {\boldsymbol{X}}) = {\boldsymbol{\Sigma}}.
 \]</span></p>
 </section><section id="least-squares-regression" class="slide level2">
-<h1>Least Squares Regression</h1>
+<h2>Least Squares Regression</h2>
 <p>In simple linear regression, OLS, and GLS, the <span class="math inline">\({\boldsymbol{\beta}}\)</span> parameters are fit by minimizing the sum of squares between <span class="math inline">\({\boldsymbol{Y}}\)</span> and <span class="math inline">\({\boldsymbol{X}}{\boldsymbol{\beta}}\)</span>.</p>
 <p>Fitting these models by “least squares” satisfies two types of optimality:</p>
 <ol type="1">
@@ -551,20 +551,20 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 </ol>
 <p>Details will follow on these.</p>
 </section><section id="generalized-linear-models" class="slide level2">
-<h1>Generalized Linear Models</h1>
+<h2>Generalized Linear Models</h2>
 <p>The generalized linear model (GLM) builds from OLS and GLS to allow the response variable to be distributed according to an exponential family distribution. Suppose that <span class="math inline">\(\eta(\theta)\)</span> is function of the expected value into the natural parameter. The estimated model is</p>
 <p><span class="math display">\[
 \eta\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = {\boldsymbol{X}}{\boldsymbol{\beta}}\]</span></p>
 <p>which is fit by maximized likelihood estimation.</p>
 </section><section id="generalized-additive-models" class="slide level2">
-<h1>Generalized Additive Models</h1>
+<h2>Generalized Additive Models</h2>
 <p>Next week, we will finally arrive at inferring semiparametric models where <span class="math inline">\(Y | {\boldsymbol{X}}\)</span> is distributed according to an exponential family distribution. The models, which are called <strong>generalized additive models</strong> (GAMs), will be of the form</p>
 <p><span class="math display">\[
 \eta\left({\operatorname{E}}[Y | {\boldsymbol{X}}]\right) = \sum_{j=1}^p \sum_{k=1}^d h_k(X_{j})
 \]</span></p>
 <p>where <span class="math inline">\(\eta\)</span> is the canonical link function and the <span class="math inline">\(h_k(\cdot)\)</span> functions are very flexible.</p>
 </section><section id="some-trade-offs" class="slide level2">
-<h1>Some Trade-offs</h1>
+<h2>Some Trade-offs</h2>
 <p>There are several important trade-offs encountered in statistical modeling:</p>
 <ul>
 <li>Bias vs variance</li>
@@ -573,7 +573,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 </ul>
 <p>These are not mutually exclusive phenomena.</p>
 </section><section id="bias-and-variance" class="slide level2">
-<h1>Bias and Variance</h1>
+<h2>Bias and Variance</h2>
 <p>Suppose we estimate <span class="math inline">\(Y = h({\boldsymbol{X}}) + E\)</span> by some <span class="math inline">\(\hat{Y} = \hat{h}({\boldsymbol{X}})\)</span>. The following bias-variance trade-off exists:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -585,7 +585,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \]</span></p>
 </section></section>
 <section><section id="motivating-examples" class="titleslide slide level1"><h1>Motivating Examples</h1></section><section id="sample-correlation" class="slide level2">
-<h1>Sample Correlation</h1>
+<h2>Sample Correlation</h2>
 <p>Least squares regression “modelizes” correlation. Suppose we observe <span class="math inline">\(n\)</span> pairs of data <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span>. Their sample correlation is</p>
 <span class="math display">\[\begin{eqnarray}
 r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y})}{\sqrt{\sum_{i=1}^n (x_i - \overline{x})^2 \sum_{i=1}^n (y_i - \overline{y})^2}} \\
@@ -593,7 +593,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 \end{eqnarray}\]</span>
 <p>where <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> are the sample standard deviations of each measured variable.</p>
 </section><section id="example-hand-size-vs.-height" class="slide level2">
-<h1>Example: Hand Size Vs. Height</h1>
+<h2>Example: Hand Size Vs. Height</h2>
 <pre class="r"><code>&gt; library(&quot;MASS&quot;)
 &gt; data(&quot;survey&quot;, package=&quot;MASS&quot;)
 &gt; head(survey)
@@ -618,7 +618,7 @@ r_{xy} &amp; = &amp; \frac{\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y}
 +   geom_hline(yintercept=mean(survey$Height, na.rm=TRUE))</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="cor.-of-hand-size-and-height" class="slide level2">
-<h1>Cor. of Hand Size and Height</h1>
+<h2>Cor. of Hand Size and Height</h2>
 <pre class="r"><code>&gt; cor.test(x=survey$Wr.Hnd, y=survey$Height)
 
     Pearson&#39;s product-moment correlation
@@ -632,12 +632,12 @@ sample estimates:
       cor 
 0.6009909 </code></pre>
 </section><section id="lr-hand-sizes" class="slide level2">
-<h1>L/R Hand Sizes</h1>
+<h2>L/R Hand Sizes</h2>
 <pre class="r"><code>&gt; ggplot(data = survey) +
 +   geom_point(aes(x=Wr.Hnd, y=NW.Hnd))</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="correlation-of-hand-sizes" class="slide level2">
-<h1>Correlation of Hand Sizes</h1>
+<h2>Correlation of Hand Sizes</h2>
 <pre class="r"><code>&gt; cor.test(x=survey$Wr.Hnd, y=survey$NW.Hnd)
 
     Pearson&#39;s product-moment correlation
@@ -651,7 +651,7 @@ sample estimates:
       cor 
 0.9483103 </code></pre>
 </section><section id="davis-data" class="slide level2">
-<h1>Davis Data</h1>
+<h2>Davis Data</h2>
 <pre class="r"><code>&gt; library(&quot;car&quot;)
 &gt; data(&quot;Davis&quot;, package=&quot;car&quot;)</code></pre>
 <pre class="r"><code>&gt; htwt &lt;- tbl_df(Davis)
@@ -667,13 +667,13 @@ sample estimates:
 5      F     59    157    59   155
 6      M     76    170    76   165</code></pre>
 </section><section id="height-and-weight" class="slide level2">
-<h1>Height and Weight</h1>
+<h2>Height and Weight</h2>
 <pre class="r"><code>&gt; ggplot(htwt) + 
 +   geom_point(aes(x=height, y=weight, color=sex), size=2, alpha=0.5) +
 +   scale_color_manual(values=c(&quot;red&quot;, &quot;blue&quot;))</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="correlation-of-height-and-weight" class="slide level2">
-<h1>Correlation of Height and Weight</h1>
+<h2>Correlation of Height and Weight</h2>
 <pre class="r"><code>&gt; cor.test(x=htwt$height, y=htwt$weight)
 
     Pearson&#39;s product-moment correlation
@@ -687,7 +687,7 @@ sample estimates:
       cor 
 0.7710743 </code></pre>
 </section><section id="correlation-among-females" class="slide level2">
-<h1>Correlation Among Females</h1>
+<h2>Correlation Among Females</h2>
 <pre class="r"><code>&gt; htwt %&gt;% filter(sex==&quot;F&quot;) %&gt;%  
 +   cor.test(~ height + weight, data = .)
 
@@ -702,7 +702,7 @@ sample estimates:
       cor 
 0.5137293 </code></pre>
 </section><section id="correlation-among-males" class="slide level2">
-<h1>Correlation Among Males</h1>
+<h2>Correlation Among Males</h2>
 <pre class="r"><code>&gt; htwt %&gt;% filter(sex==&quot;M&quot;) %&gt;%  
 +   cor.test(~ height + weight, data = .)
 
@@ -719,47 +719,47 @@ sample estimates:
 <p>Why are the stratified correlations lower?</p>
 </section></section>
 <section><section id="simple-linear-regression-1" class="titleslide slide level1"><h1>Simple Linear Regression</h1></section><section id="definition" class="slide level2">
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>For random variables <span class="math inline">\((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\)</span>, <strong>simple linear regression</strong> estimates the model</p>
 <p><span class="math display">\[
 Y_i  = \beta_1 + \beta_2 X_i + E_i
 \]</span></p>
 <p>where <span class="math inline">\({\operatorname{E}}[E_i] = 0\)</span>, <span class="math inline">\({\operatorname{Var}}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>.</p>
 </section><section id="rationale" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <ul>
 <li><p><strong>Least squares linear regression</strong> is one of the simplest and most useful modeling systems for building a model that explains the variation of one variable in terms of other variables.</p></li>
 <li><p>It is simple to fit, it satisfies some optimality criteria, and it is straightforward to check assumptions on the data so that statistical inference can be performed.</p></li>
 </ul>
 </section><section id="setup" class="slide level2">
-<h1>Setup</h1>
+<h2>Setup</h2>
 <ul>
 <li><p>Suppose that we have observed <span class="math inline">\(n\)</span> pairs of data <span class="math inline">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span>.</p></li>
 <li><p><strong>Least squares linear regression</strong> models variation of the <strong>response variable</strong> <span class="math inline">\(y\)</span> in terms of the <strong>explanatory variable</strong> <span class="math inline">\(x\)</span> in the form of <span class="math inline">\(\beta_1 + \beta_2 x\)</span>, where <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> are chosen to satisfy a least squares optimization.</p></li>
 </ul>
 </section><section id="line-minimizing-squared-error" class="slide level2">
-<h1>Line Minimizing Squared Error</h1>
+<h2>Line Minimizing Squared Error</h2>
 <p>The least squares regression line is formed from the value of <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> that minimize:</p>
 <p><span class="math display">\[\sum_{i=1}^n \left( y_i - \beta_1 - \beta_2 x_i \right)^2.\]</span></p>
 <p>For a given set of data, there is a unique solution to this minimization as long as there are at least two unique values among <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
 <p>Let <span class="math inline">\(\hat{\beta_1}\)</span> and <span class="math inline">\(\hat{\beta_2}\)</span> be the values that minimize this sum of squares.</p>
 </section><section id="least-squares-solution" class="slide level2">
-<h1>Least Squares Solution</h1>
+<h2>Least Squares Solution</h2>
 <p>These values are:</p>
 <p><span class="math display">\[\hat{\beta}_2 = r_{xy} \frac{s_y}{s_x}\]</span></p>
 <p><span class="math display">\[\hat{\beta}_1 = \overline{y} - \hat{\beta}_2 \overline{x}\]</span></p>
 <p>These values have a useful interpretation.</p>
 </section><section id="visualizing-least-squares-line" class="slide level2">
-<h1>Visualizing Least Squares Line</h1>
+<h2>Visualizing Least Squares Line</h2>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="example-height-and-weight" class="slide level2">
-<h1>Example: Height and Weight</h1>
+<h2>Example: Height and Weight</h2>
 <pre class="r"><code>&gt; ggplot(data=htwt, mapping=aes(x=height, y=weight)) + 
 +   geom_point(size=2, alpha=0.5) +
 +   geom_smooth(method=&quot;lm&quot;, se=FALSE, formula=y~x)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="calculate-the-line-directly" class="slide level2">
-<h1>Calculate the Line Directly</h1>
+<h2>Calculate the Line Directly</h2>
 <pre class="r"><code>&gt; beta2 &lt;- cor(htwt$height, htwt$weight) * 
 +                sd(htwt$weight) / sd(htwt$height)
 &gt; beta2
@@ -771,25 +771,25 @@ Y_i  = \beta_1 + \beta_2 X_i + E_i
 &gt; 
 &gt; yhat &lt;- beta1 + beta2 * htwt$height</code></pre>
 </section><section id="plot-the-line" class="slide level2">
-<h1>Plot the Line</h1>
+<h2>Plot the Line</h2>
 <pre class="r"><code>&gt; df &lt;- data.frame(htwt, yhat=yhat)
 &gt; ggplot(data=df) + geom_point(aes(x=height, y=weight), size=2, alpha=0.5) +
 +   geom_line(aes(x=height, y=yhat), color=&quot;blue&quot;, size=1.2)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="observed-data-fits-and-residuals" class="slide level2">
-<h1>Observed Data, Fits, and Residuals</h1>
+<h2>Observed Data, Fits, and Residuals</h2>
 <p>We observe data <span class="math inline">\((x_1, y_1), \ldots, (x_n, y_n)\)</span>. Note that we only observe <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> from the generative model <span class="math inline">\(Y_i = \beta_1 + \beta_2 X_i + E_i\)</span>.</p>
 <p>We calculate fitted values and observed residuals:</p>
 <p><span class="math display">\[\hat{y}_i = \hat{\beta}_1 + \hat{\beta}_2 x_i\]</span></p>
 <p><span class="math display">\[\hat{e}_i = y_i - \hat{y}_i\]</span></p>
 <p>By construction, it is the case that <span class="math inline">\(\sum_{i=1}^n \hat{e}_i = 0\)</span>.</p>
 </section><section id="proportion-of-variation-explained" class="slide level2">
-<h1>Proportion of Variation Explained</h1>
+<h2>Proportion of Variation Explained</h2>
 <p>The proportion of variance explained by the fitted model is called <span class="math inline">\(R^2\)</span> or <span class="math inline">\(r^2\)</span>. It is calculated by:</p>
 <p><span class="math display">\[r^2 = \frac{s^2_{\hat{y}}}{s^2_{y}}\]</span></p>
 </section></section>
 <section><section id="lm-function-in-r" class="titleslide slide level1"><h1><code>lm()</code> Function in R</h1></section><section id="calculate-the-line-in-r" class="slide level2">
-<h1>Calculate the Line in R</h1>
+<h2>Calculate the Line in R</h2>
 <p>The syntax for a model in R is</p>
 <p><code>response variable ~ explanatory variables</code></p>
 <p>where the <code>explanatory variables</code> component can involve several types of terms.</p>
@@ -803,7 +803,7 @@ Coefficients:
 (Intercept)       height  
     -130.91         1.15  </code></pre>
 </section><section id="an-lm-object-is-a-list" class="slide level2">
-<h1>An <code>lm</code> Object is a List</h1>
+<h2>An <code>lm</code> Object is a List</h2>
 <pre class="r"><code>&gt; class(myfit)
 [1] &quot;lm&quot;
 &gt; is.list(myfit)
@@ -814,7 +814,7 @@ Coefficients:
  [7] &quot;qr&quot;            &quot;df.residual&quot;   &quot;xlevels&quot;      
 [10] &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        </code></pre>
 </section><section id="from-the-r-help" class="slide level2">
-<h1>From the R Help</h1>
+<h2>From the R Help</h2>
 <blockquote>
 <p><code>lm</code> returns an object of class “lm” or for multiple responses of class c(“mlm”, “lm”).</p>
 </blockquote>
@@ -822,7 +822,7 @@ Coefficients:
 <p>The functions <code>summary</code> and <code>anova</code> are used to obtain and print a summary and analysis of variance table of the results. The generic accessor functions coefficients, effects, fitted.values and residuals extract various useful features of the value returned by <code>lm</code>.</p>
 </blockquote>
 </section><section id="some-of-the-list-items" class="slide level2">
-<h1>Some of the List Items</h1>
+<h2>Some of the List Items</h2>
 <p>These are some useful items to access from the <code>lm</code> object:</p>
 <ul>
 <li><code>coefficients</code>: a named vector of coefficients</li>
@@ -833,7 +833,7 @@ Coefficients:
 <li><code>model</code>: if requested (the default), the model frame used.</li>
 </ul>
 </section><section id="summary" class="slide level2">
-<h1><code>summary()</code></h1>
+<h2><code>summary()</code></h2>
 <pre class="r"><code>&gt; summary(myfit)
 
 Call:
@@ -854,7 +854,7 @@ Residual standard error: 8.505 on 198 degrees of freedom
 Multiple R-squared:  0.5946,    Adjusted R-squared:  0.5925 
 F-statistic: 290.4 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section><section id="summary-list-elements" class="slide level2">
-<h1><code>summary()</code> List Elements</h1>
+<h2><code>summary()</code> List Elements</h2>
 <pre class="r"><code>&gt; mysummary &lt;- summary(myfit)
 &gt; names(mysummary)
  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;    
@@ -862,14 +862,14 @@ F-statistic: 290.4 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
  [7] &quot;df&quot;            &quot;r.squared&quot;     &quot;adj.r.squared&quot;
 [10] &quot;fstatistic&quot;    &quot;cov.unscaled&quot; </code></pre>
 </section><section id="using-tidy" class="slide level2">
-<h1>Using <code>tidy()</code></h1>
+<h2>Using <code>tidy()</code></h2>
 <pre class="r"><code>&gt; library(broom)
 &gt; tidy(myfit)
          term    estimate   std.error statistic      p.value
 1 (Intercept) -130.910400 11.52792138 -11.35594 2.438012e-23
 2      height    1.150092  0.06749465  17.03975 1.121241e-40</code></pre>
 </section><section id="proportion-of-variation-explained-1" class="slide level2">
-<h1>Proportion of Variation Explained</h1>
+<h2>Proportion of Variation Explained</h2>
 <p>The proportion of variance explained by the fitted model is called <span class="math inline">\(R^2\)</span> or <span class="math inline">\(r^2\)</span>. It is calculated by:</p>
 <p><span class="math display">\[r^2 = \frac{s^2_{\hat{y}}}{s^2_{y}}\]</span></p>
 <pre class="r"><code>&gt; summary(myfit)$r.squared
@@ -878,7 +878,7 @@ F-statistic: 290.4 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 &gt; var(myfit$fitted.values)/var(htwt$weight)
 [1] 0.5945555</code></pre>
 </section><section id="assumptions-to-verify" class="slide level2">
-<h1>Assumptions to Verify</h1>
+<h2>Assumptions to Verify</h2>
 <p>The assumptions on the above linear model are really about the joint distribution of the residuals, which are not directly observed. On data, we try to verify:</p>
 <ol type="1">
 <li>The fitted values and the residuals show no trends with respect to each other</li>
@@ -891,15 +891,15 @@ F-statistic: 290.4 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <p>There are two plots we will use in this course to investigate the first two.</p>
 </section><section id="residual-distribution" class="slide level2">
-<h1>Residual Distribution</h1>
+<h2>Residual Distribution</h2>
 <pre class="r"><code>&gt; plot(myfit, which=1)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="normal-residuals-check" class="slide level2">
-<h1>Normal Residuals Check</h1>
+<h2>Normal Residuals Check</h2>
 <pre class="r"><code>&gt; plot(myfit, which=2)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="fitted-values-vs.-obs.-residuals" class="slide level2">
-<h1>Fitted Values Vs. Obs. Residuals</h1>
+<h2>Fitted Values Vs. Obs. Residuals</h2>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="ordinary-least-squares-1" class="titleslide slide level1"><h1>Ordinary Least Squares</h1></section><section class="slide level2">
@@ -914,7 +914,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 <p>where <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>.</p>
 <p>Note that typically <span class="math inline">\(X_{i1} = 1\)</span> for all <span class="math inline">\(i\)</span> so that <span class="math inline">\(\beta_1 X_{i1} = \beta_1\)</span> serves as the intercept.</p>
 </section><section id="ols-solution" class="slide level2">
-<h1>OLS Solution</h1>
+<h2>OLS Solution</h2>
 <p>The estimates of <span class="math inline">\(\beta_1, \beta_2, \ldots, \beta_p\)</span> are found by identifying the values that minimize:</p>
 <p><span class="math display">\[ 
 \begin{aligned}
@@ -927,7 +927,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \hat{{\boldsymbol{\beta}}} = ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{Y}}.
 \]</span></p>
 </section><section id="sample-variance" class="slide level2">
-<h1>Sample Variance</h1>
+<h2>Sample Variance</h2>
 <p>Let the predicted values of the model be</p>
 <p><span class="math display">\[
 \hat{{\boldsymbol{Y}}} = {\boldsymbol{X}}\hat{{\boldsymbol{\beta}}} = {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{Y}}.
@@ -937,7 +937,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 S^2 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_i)^2}{n-p}.
 \]</span></p>
 </section><section id="sample-covariance" class="slide level2">
-<h1>Sample Covariance</h1>
+<h2>Sample Covariance</h2>
 <p>The <span class="math inline">\(p\)</span>-vector <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> has covariance matrix</p>
 <p><span class="math display">\[
 {\operatorname{Cov}}(\hat{{\boldsymbol{\beta}}} | {\boldsymbol{X}}) = ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2.
@@ -947,7 +947,7 @@ S^2 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_i)^2}{n-p}.
 \widehat{{\operatorname{Cov}}}(\hat{{\boldsymbol{\beta}}}) = ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} S^2.
 \]</span></p>
 </section><section id="expected-values" class="slide level2">
-<h1>Expected Values</h1>
+<h2>Expected Values</h2>
 <p>Under the assumption that <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for all <span class="math inline">\(1 \leq i, j \leq n\)</span> and <span class="math inline">\(i \not= j\)</span>, we have the following:</p>
 <p><span class="math display">\[
 {\operatorname{E}}\left[ \left. \hat{{\boldsymbol{\beta}}} \right| {\boldsymbol{X}}\right] = {\boldsymbol{\beta}}\]</span></p>
@@ -961,7 +961,7 @@ S^2 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_i)^2}{n-p}.
 {\operatorname{Cov}}\left(\hat{\beta}_j, Y_i - \hat{Y}_i\right) = \boldsymbol{0}.
 \]</span></p>
 </section><section id="standard-error" class="slide level2">
-<h1>Standard Error</h1>
+<h2>Standard Error</h2>
 <p>The standard error of <span class="math inline">\(\hat{\beta}_j\)</span> is the square root of the <span class="math inline">\((j, j)\)</span> diagonal entry of <span class="math inline">\(({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2\)</span></p>
 <p><span class="math display">\[
 {\operatorname{se}}(\hat{\beta}_j) = \sqrt{\left[({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2\right]_{jj}}
@@ -971,13 +971,13 @@ S^2 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_i)^2}{n-p}.
 \hat{{\operatorname{se}}}(\hat{\beta}_j) = \sqrt{\left[({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} S^2\right]_{jj}}
 \]</span></p>
 </section><section id="proportion-of-variance-explained" class="slide level2">
-<h1>Proportion of Variance Explained</h1>
+<h2>Proportion of Variance Explained</h2>
 <p>The proportion of variance explained is defined equivalently to the simple linear regression scneario:</p>
 <p><span class="math display">\[
 R^2 = \frac{\sum_{i=1}^n (\hat{Y}_i - \bar{Y})^2}{\sum_{i=1}^n (Y_i - \bar{Y})^2}.
 \]</span></p>
 </section><section id="normal-errors" class="slide level2">
-<h1>Normal Errors</h1>
+<h2>Normal Errors</h2>
 <p>Suppose we assume <span class="math inline">\(E_1, E_2, \ldots, E_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0, \sigma^2)\)</span>. Then</p>
 <p><span class="math display">\[
 \ell\left({\boldsymbol{\beta}}, \sigma^2 ; {\boldsymbol{Y}}, {\boldsymbol{X}}\right) \propto -n\log(\sigma^2) -\frac{1}{\sigma^2} ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})^T ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}}).
@@ -985,7 +985,7 @@ R^2 = \frac{\sum_{i=1}^n (\hat{Y}_i - \bar{Y})^2}{\sum_{i=1}^n (Y_i - \bar{Y})^2
 <p>Since minimizing <span class="math inline">\(({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})^T ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})\)</span> maximizes the likelihood with respect to <span class="math inline">\({\boldsymbol{\beta}}\)</span>, this implies <span class="math inline">\(\hat{{\boldsymbol{\beta}}}\)</span> is the MLE for <span class="math inline">\({\boldsymbol{\beta}}\)</span>.</p>
 <p>It can also be calculated that <span class="math inline">\(\frac{n-p}{n} S^2\)</span> is the MLE for <span class="math inline">\(\sigma^2\)</span>.</p>
 </section><section id="sampling-distribution" class="slide level2">
-<h1>Sampling Distribution</h1>
+<h2>Sampling Distribution</h2>
 <p>When <span class="math inline">\(E_1, E_2, \ldots, E_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0, \sigma^2)\)</span>, it follows that, conditional on <span class="math inline">\({\boldsymbol{X}}\)</span>:</p>
 <p><span class="math display">\[
 \hat{{\boldsymbol{\beta}}} \sim \mbox{MVN}_p\left({\boldsymbol{\beta}}, ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2 \right)
@@ -997,13 +997,13 @@ S^2 \frac{n-p}{\sigma^2} &amp; \sim \chi^2_{n-p} \\
 \end{aligned}
 \]</span></p>
 </section><section id="clt" class="slide level2">
-<h1>CLT</h1>
+<h2>CLT</h2>
 <p>Under the assumption that <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for <span class="math inline">\(i \not= j\)</span>, it follows that as <span class="math inline">\(n \rightarrow \infty\)</span>,</p>
 <p><span class="math display">\[
 \sqrt{n} \left(\hat{{\boldsymbol{\beta}}} - {\boldsymbol{\beta}}\right) \stackrel{D}{\longrightarrow} \mbox{MVN}_p\left( \boldsymbol{0}, ({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} \sigma^2 \right).
 \]</span></p>
 </section><section id="gauss-markov-theorem" class="slide level2">
-<h1>Gauss-Markov Theorem</h1>
+<h2>Gauss-Markov Theorem</h2>
 <p>Under the assumption that <span class="math inline">\({\rm E}[E_i] = 0\)</span>, <span class="math inline">\({\rm Var}(E_i) = \sigma^2\)</span>, and <span class="math inline">\({\operatorname{Cov}}(E_i, E_j) = 0\)</span> for <span class="math inline">\(i \not= j\)</span>, the Gauss-Markov theorem shows that among all BLUEs, <strong>best linear unbiased estimators</strong>, the least squares estimate has the smallest mean-squared error.</p>
 <p>Specifically, suppose that <span class="math inline">\(\tilde{{\boldsymbol{\beta}}}\)</span> is a linear estimator (calculated from a linear operator on <span class="math inline">\({\boldsymbol{Y}}\)</span>) where <span class="math inline">\({\operatorname{E}}[\tilde{{\boldsymbol{\beta}}} | {\boldsymbol{X}}] = {\boldsymbol{\beta}}\)</span>. Then</p>
 <p><span class="math display">\[
@@ -1024,7 +1024,7 @@ S^2 \frac{n-p}{\sigma^2} &amp; \sim \chi^2_{n-p} \\
 {\boldsymbol{\Sigma}}^{-1/2} {\boldsymbol{Y}}= {\boldsymbol{\Sigma}}^{-1/2}{\boldsymbol{X}}{\boldsymbol{\beta}}+ {\boldsymbol{\Sigma}}^{-1/2}{\boldsymbol{E}}\]</span></p>
 <p>satisfies the assumptions of the OLS model.</p>
 </section><section id="gls-solution" class="slide level2">
-<h1>GLS Solution</h1>
+<h2>GLS Solution</h2>
 <p>The solution to minimizing</p>
 <p><span class="math display">\[
 ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})^T {\boldsymbol{\Sigma}}^{-1} ({\boldsymbol{Y}}- {\boldsymbol{X}}{\boldsymbol{\beta}})
@@ -1034,7 +1034,7 @@ S^2 \frac{n-p}{\sigma^2} &amp; \sim \chi^2_{n-p} \\
 \hat{{\boldsymbol{\beta}}} = \left( {\boldsymbol{X}}^T {\boldsymbol{\Sigma}}^{-1} {\boldsymbol{X}}\right)^{-1} {\boldsymbol{X}}^T {\boldsymbol{\Sigma}}^{-1} {\boldsymbol{Y}}.
 \]</span></p>
 </section><section id="other-results" class="slide level2">
-<h1>Other Results</h1>
+<h2>Other Results</h2>
 <p>The issue of estimating <span class="math inline">\({\boldsymbol{\Sigma}}\)</span> if it is unknown is complicated. Other than estimates of <span class="math inline">\(\sigma^2\)</span>, the results from the OLS section recapitulate by replacing <span class="math inline">\({\boldsymbol{Y}}= {\boldsymbol{X}}{\boldsymbol{\beta}}+ {\boldsymbol{E}}\)</span> with</p>
 <p><span class="math display">\[
 {\boldsymbol{\Sigma}}^{-1/2} {\boldsymbol{Y}}= {\boldsymbol{\Sigma}}^{-1/2}{\boldsymbol{X}}{\boldsymbol{\beta}}+ {\boldsymbol{\Sigma}}^{-1/2}{\boldsymbol{E}}.
@@ -1065,7 +1065,7 @@ Coefficients:
 (Intercept)       height         sexM  
    -76.6167       0.8106       8.2269  </code></pre>
 </section><section id="weight-regressed-on-height-sex" class="slide level2">
-<h1>Weight Regressed on Height + Sex</h1>
+<h2>Weight Regressed on Height + Sex</h2>
 <pre class="r"><code>&gt; summary(lm(weight ~ height + sex, data=htwt))
 
 Call:
@@ -1087,7 +1087,7 @@ Residual standard error: 8.066 on 197 degrees of freedom
 Multiple R-squared:  0.6372,    Adjusted R-squared:  0.6335 
 F-statistic:   173 on 2 and 197 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section><section id="one-variable-two-scales" class="slide level2">
-<h1>One Variable, Two Scales</h1>
+<h2>One Variable, Two Scales</h2>
 <p>We can include a single variable but on two different scales:</p>
 <pre class="r"><code>&gt; htwt &lt;- htwt %&gt;% mutate(height2 = height^2)
 &gt; summary(lm(weight ~ height + height2, data=htwt))
@@ -1109,7 +1109,7 @@ Residual standard error: 8.486 on 197 degrees of freedom
 Multiple R-squared:  0.5983,    Adjusted R-squared:  0.5943 
 F-statistic: 146.7 on 2 and 197 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section><section id="interactions" class="slide level2">
-<h1>Interactions</h1>
+<h2>Interactions</h2>
 <p>It is possible to include products of explanatory variables, which is called an <em>interaction</em>.</p>
 <pre class="r"><code>&gt; summary(lm(weight ~ height + sex + height:sex, data=htwt))
 
@@ -1133,7 +1133,7 @@ Residual standard error: 8.007 on 196 degrees of freedom
 Multiple R-squared:  0.6442,    Adjusted R-squared:  0.6388 
 F-statistic: 118.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section><section id="more-on-interactions" class="slide level2">
-<h1>More on Interactions</h1>
+<h2>More on Interactions</h2>
 <p>What happens when there is an interaction between a quantitative explanatory variable and a factor explanatory variable? In the next plot, we show three models:</p>
 <ul>
 <li>Grey solid: <code>lm(weight ~ height, data=htwt)</code></li>
@@ -1141,11 +1141,11 @@ F-statistic: 118.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Color solid: <code>lm(weight ~ height + sex + height:sex, data=htwt)</code></li>
 </ul>
 </section><section id="visualizing-three-different-models" class="slide level2">
-<h1>Visualizing Three Different Models</h1>
+<h2>Visualizing Three Different Models</h2>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-30-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="categorical-explanatory-variables" class="titleslide slide level1"><h1>Categorical Explanatory Variables</h1></section><section id="example-chicken-weights" class="slide level2">
-<h1>Example: Chicken Weights</h1>
+<h2>Example: Chicken Weights</h2>
 <pre class="r"><code>&gt; data(&quot;chickwts&quot;, package=&quot;datasets&quot;)
 &gt; head(chickwts)
   weight      feed
@@ -1159,7 +1159,7 @@ F-statistic: 118.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
    casein horsebean   linseed  meatmeal   soybean sunflower 
        12        10        12        11        14        12 </code></pre>
 </section><section id="factor-variables-in-lm" class="slide level2">
-<h1>Factor Variables in <code>lm()</code></h1>
+<h2>Factor Variables in <code>lm()</code></h2>
 <pre class="r"><code>&gt; chick_fit &lt;- lm(weight ~ feed, data=chickwts)
 &gt; summary(chick_fit)
 
@@ -1185,17 +1185,17 @@ Residual standard error: 54.85 on 65 degrees of freedom
 Multiple R-squared:  0.5417,    Adjusted R-squared:  0.5064 
 F-statistic: 15.36 on 5 and 65 DF,  p-value: 5.936e-10</code></pre>
 </section><section id="plot-the-fit" class="slide level2">
-<h1>Plot the Fit</h1>
+<h2>Plot the Fit</h2>
 <pre class="r"><code>&gt; plot(chickwts$feed, chickwts$weight, xlab=&quot;Feed&quot;, ylab=&quot;Weight&quot;, las=2)
 &gt; points(chickwts$feed, chick_fit$fitted.values, col=&quot;blue&quot;, pch=20, cex=2)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-33-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="anova-version-1" class="slide level2">
-<h1>ANOVA (Version 1)</h1>
+<h2>ANOVA (Version 1)</h2>
 <p>ANOVA (<em>analysis of variance</em>) was originally developed as a statistical model and method for comparing differences in mean values between various groups.</p>
 <p>ANOVA quantifies and tests for differences in response variables with respect to factor variables.</p>
 <p>In doing so, it also partitions the total variance to that due to within and between groups, where groups are defined by the factor variables.</p>
 </section><section id="anova" class="slide level2">
-<h1><code>anova()</code></h1>
+<h2><code>anova()</code></h2>
 <p>The classic ANOVA table:</p>
 <pre class="r"><code>&gt; anova(chick_fit)
 Analysis of Variance Table
@@ -1216,7 +1216,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 &gt; (231129/5)/(195556/65) # F-statistic
 [1] 15.36479</code></pre>
 </section><section id="how-it-works" class="slide level2">
-<h1>How It Works</h1>
+<h2>How It Works</h2>
 <pre class="r"><code>&gt; levels(chickwts$feed)
 [1] &quot;casein&quot;    &quot;horsebean&quot; &quot;linseed&quot;   &quot;meatmeal&quot;  &quot;soybean&quot;  
 [6] &quot;sunflower&quot;
@@ -1234,7 +1234,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 &gt; dim(x)
 [1] 71  6</code></pre>
 </section><section id="top-of-design-matrix" class="slide level2">
-<h1>Top of Design Matrix</h1>
+<h2>Top of Design Matrix</h2>
 <pre class="r"><code>&gt; head(x)
   (Intercept) feedhorsebean feedlinseed feedmeatmeal
 1           1             1           0            0
@@ -1251,7 +1251,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 5           0             0
 6           0             0</code></pre>
 </section><section id="bottom-of-design-matrix" class="slide level2">
-<h1>Bottom of Design Matrix</h1>
+<h2>Bottom of Design Matrix</h2>
 <pre class="r"><code>&gt; tail(x)
    (Intercept) feedhorsebean feedlinseed feedmeatmeal
 66           1             0           0            0
@@ -1268,7 +1268,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 70           0             0
 71           0             0</code></pre>
 </section><section id="model-fits" class="slide level2">
-<h1>Model Fits</h1>
+<h2>Model Fits</h2>
 <pre class="r"><code>&gt; chick_fit$fitted.values %&gt;% round(digits=4) %&gt;% unique()
 [1] 160.2000 218.7500 246.4286 328.9167 276.9091 323.5833</code></pre>
 <pre class="r"><code>&gt; chickwts %&gt;% group_by(feed) %&gt;% summarize(mean(weight))
@@ -1283,16 +1283,16 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 6 sunflower       328.9167</code></pre>
 </section></section>
 <section><section id="variable-transformations" class="titleslide slide level1"><h1>Variable Transformations</h1></section><section id="rationale-1" class="slide level2">
-<h1>Rationale</h1>
+<h2>Rationale</h2>
 <p>In order to obtain reliable model fits and inference on linear models, the model assumptions described earlier must be satisfied.</p>
 <p>Sometimes it is necessary to <em>transform</em> the response variable and/or some of the explanatory variables.</p>
 <p>This process should involve data visualization and exploration.</p>
 </section><section id="power-and-log-transformations" class="slide level2">
-<h1>Power and Log Transformations</h1>
+<h2>Power and Log Transformations</h2>
 <p>It is often useful to explore power and log transforms of the variables, e.g., <span class="math inline">\(\log(y)\)</span> or <span class="math inline">\(y^\lambda\)</span> for some <span class="math inline">\(\lambda\)</span> (and likewise <span class="math inline">\(\log(x)\)</span> or <span class="math inline">\(x^\lambda\)</span>).</p>
 <p>You can read more about the <a href="https://en.wikipedia.org/wiki/Power_transform">Box-Cox family of power transformations</a>.</p>
 </section><section id="diamonds-data" class="slide level2">
-<h1><code>Diamonds</code> Data</h1>
+<h2><code>Diamonds</code> Data</h2>
 <pre class="r"><code>&gt; data(&quot;diamonds&quot;, package=&quot;ggplot2&quot;)
 &gt; head(diamonds)
 # A tibble: 6 × 10
@@ -1306,12 +1306,12 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 6  0.24 Very Good     J    VVS2  62.8    57   336  3.94  3.96
 # ... with 1 more variables: z &lt;dbl&gt;</code></pre>
 </section><section id="nonlinear-relationship" class="slide level2">
-<h1>Nonlinear Relationship</h1>
+<h2>Nonlinear Relationship</h2>
 <pre class="r"><code>&gt; ggplot(data = diamonds) +
 +   geom_point(mapping=aes(x=carat, y=price, color=clarity), alpha=0.3)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="regression-with-nonlinear-relationship" class="slide level2">
-<h1>Regression with Nonlinear Relationship</h1>
+<h2>Regression with Nonlinear Relationship</h2>
 <pre class="r"><code>&gt; diam_fit &lt;- lm(price ~ carat + clarity, data=diamonds)
 &gt; anova(diam_fit)
 Analysis of Variance Table
@@ -1324,22 +1324,22 @@ Residuals 53931 9.0264e+10 1.6737e+06
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </section><section id="residual-distribution-1" class="slide level2">
-<h1>Residual Distribution</h1>
+<h2>Residual Distribution</h2>
 <pre class="r"><code>&gt; plot(diam_fit, which=1)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="normal-residuals-check-1" class="slide level2">
-<h1>Normal Residuals Check</h1>
+<h2>Normal Residuals Check</h2>
 <pre class="r"><code>&gt; plot(diam_fit, which=2)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="log-transformation" class="slide level2">
-<h1>Log-Transformation</h1>
+<h2>Log-Transformation</h2>
 <pre class="r"><code>&gt; ggplot(data = diamonds) +
 +   geom_point(aes(x=carat, y=price, color=clarity), alpha=0.3) +
 +   scale_y_log10(breaks=c(1000,5000,10000)) + 
 +   scale_x_log10(breaks=1:5)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="ols-on-log-transformed-data" class="slide level2">
-<h1>OLS on Log-Transformed Data</h1>
+<h2>OLS on Log-Transformed Data</h2>
 <pre class="r"><code>&gt; diamonds &lt;- mutate(diamonds, log_price = log(price, base=10), 
 +                    log_carat = log(carat, base=10))
 &gt; ldiam_fit &lt;- lm(log_price ~ log_carat + clarity, data=diamonds)
@@ -1354,15 +1354,15 @@ Residuals 53931  362.7     0.0
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </section><section id="residual-distribution-2" class="slide level2">
-<h1>Residual Distribution</h1>
+<h2>Residual Distribution</h2>
 <pre class="r"><code>&gt; plot(ldiam_fit, which=1)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-48-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="normal-residuals-check-2" class="slide level2">
-<h1>Normal Residuals Check</h1>
+<h2>Normal Residuals Check</h2>
 <pre class="r"><code>&gt; plot(ldiam_fit, which=2)</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-49-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="tree-pollen-study" class="slide level2">
-<h1>Tree Pollen Study</h1>
+<h2>Tree Pollen Study</h2>
 <p>Suppose that we have a study where tree pollen measurements are averaged every week, and these data are recorded for 10 years. These data are simulated:</p>
 <pre class="r"><code>&gt; pollen_study
 # A tibble: 520 × 3
@@ -1380,22 +1380,22 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 10    10  2001 2383.945
 # ... with 510 more rows</code></pre>
 </section><section id="tree-pollen-count-by-week" class="slide level2">
-<h1>Tree Pollen Count by Week</h1>
+<h2>Tree Pollen Count by Week</h2>
 <pre class="r"><code>&gt; ggplot(pollen_study) + geom_point(aes(x=week, y=pollen))</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-52-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="a-clever-transformation" class="slide level2">
-<h1>A Clever Transformation</h1>
+<h2>A Clever Transformation</h2>
 <p>We can see there is a linear relationship between <code>pollen</code> and <code>week</code> if we transform <code>week</code> to be number of weeks from the peak week.</p>
 <pre class="r"><code>&gt; pollen_study &lt;- pollen_study %&gt;%  
 +                        mutate(week_new = abs(week-20))</code></pre>
 <p>Note that this is a very different transformation from taking a log or power transformation.</p>
 </section><section id="week-transformed" class="slide level2">
-<h1><code>week</code> Transformed</h1>
+<h2><code>week</code> Transformed</h2>
 <pre class="r"><code>&gt; ggplot(pollen_study) + geom_point(aes(x=week_new, y=pollen))</code></pre>
 <p><img src="week09_files/figure-revealjs/unnamed-chunk-54-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
 <section><section id="ols-goodness-of-fit" class="titleslide slide level1"><h1>OLS Goodness of Fit</h1></section><section id="pythagorean-theorem" class="slide level2">
-<h1>Pythagorean Theorem</h1>
+<h2>Pythagorean Theorem</h2>
 <div id="left">
 <p><img src="images/right_triangle_model_fits.png" alt="PythMod" /></p>
 </div>
@@ -1407,7 +1407,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>where the <span class="math inline">\(\hat{Y}_i\)</span> are the result of a <strong>linear projection</strong> of the <span class="math inline">\(Y_i\)</span>.</p>
 </div>
 </section><section id="ols-normal-model" class="slide level2">
-<h1>OLS Normal Model</h1>
+<h2>OLS Normal Model</h2>
 <p>In this section, let’s assume that <span class="math inline">\(({\boldsymbol{X}}_1, Y_1), \ldots, ({\boldsymbol{X}}_n, Y_n)\)</span> are distributed so that</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1417,7 +1417,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \]</span></p>
 <p>where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>. Note that we haven’t specified the distribution of the <span class="math inline">\({\boldsymbol{X}}_i\)</span> rv’s.</p>
 </section><section id="projection-matrices" class="slide level2">
-<h1>Projection Matrices</h1>
+<h2>Projection Matrices</h2>
 <p>In the OLS framework we have:</p>
 <p><span class="math display">\[
 \hat{{\boldsymbol{Y}}} = {\boldsymbol{X}}({\boldsymbol{X}}^T {\boldsymbol{X}})^{-1} {\boldsymbol{X}}^T {\boldsymbol{Y}}.
@@ -1435,7 +1435,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 <li><span class="math inline">\({\boldsymbol{I}}- {\boldsymbol{P}}\)</span> is also a projection matrix with rank <span class="math inline">\(n-p\)</span></li>
 </ul>
 </section><section id="decomposition" class="slide level2">
-<h1>Decomposition</h1>
+<h2>Decomposition</h2>
 <p>Note that <span class="math inline">\({\boldsymbol{P}}({\boldsymbol{I}}- {\boldsymbol{P}}) = {\boldsymbol{P}}- {\boldsymbol{P}}{\boldsymbol{P}}= {\boldsymbol{P}}- {\boldsymbol{P}}= {\boldsymbol{0}}\)</span>.</p>
 <p>We have</p>
 <p><span class="math display">\[
@@ -1457,7 +1457,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \| \boldsymbol{w} \|_2^2 = \sum_{i=1}^n w_i^2.
 \]</span></p>
 </section><section id="distribution-of-projection" class="slide level2">
-<h1>Distribution of Projection</h1>
+<h2>Distribution of Projection</h2>
 <p>Suppose that <span class="math inline">\(Y_1, Y_2, \ldots, Y_n {\; \stackrel{\text{iid}}{\sim}\;}\mbox{Normal}(0,\sigma^2)\)</span>. This can also be written as <span class="math inline">\({\boldsymbol{Y}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>. It follows that</p>
 <p><span class="math display">\[
 {\boldsymbol{P}}{\boldsymbol{Y}}\sim \mbox{MVN}_{n}({\boldsymbol{0}}, \sigma^2 {\boldsymbol{P}}{\boldsymbol{I}}{\boldsymbol{P}}^T).
@@ -1468,7 +1468,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \frac{{\boldsymbol{Y}}^T {\boldsymbol{P}}{\boldsymbol{Y}}}{\sigma^2} \sim \chi^2_{p}.
 \]</span></p>
 </section><section id="distribution-of-residuals" class="slide level2">
-<h1>Distribution of Residuals</h1>
+<h2>Distribution of Residuals</h2>
 <p>If <span class="math inline">\({\boldsymbol{P}}{\boldsymbol{Y}}= \hat{{\boldsymbol{Y}}}\)</span> are the fitted OLS values, then <span class="math inline">\(({\boldsymbol{I}}-{\boldsymbol{P}}) {\boldsymbol{Y}}= {\boldsymbol{Y}}- \hat{{\boldsymbol{Y}}}\)</span> are the residuals.</p>
 <p>It follows by the same argument as above that</p>
 <p><span class="math display">\[
@@ -1476,7 +1476,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \]</span></p>
 <p>It’s also straightforward to show that <span class="math inline">\(({\boldsymbol{I}}-{\boldsymbol{P}}){\boldsymbol{Y}}\sim \mbox{MVN}_{n}({\boldsymbol{0}}, \sigma^2({\boldsymbol{I}}-{\boldsymbol{P}}))\)</span> and <span class="math inline">\({\operatorname{Cov}}({\boldsymbol{P}}{\boldsymbol{Y}}, ({\boldsymbol{I}}-{\boldsymbol{P}}){\boldsymbol{Y}}) = {\boldsymbol{0}}\)</span>.</p>
 </section><section id="degrees-of-freedom" class="slide level2">
-<h1>Degrees of Freedom</h1>
+<h2>Degrees of Freedom</h2>
 <p>The degrees of freedom, <span class="math inline">\(p\)</span>, of a linear projection model fit is equal to</p>
 <ul>
 <li>The number of linearly dependent columns of <span class="math inline">\({\boldsymbol{X}}\)</span></li>
@@ -1485,17 +1485,17 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 </ul>
 <p>The reason why we divide estimates of variance by <span class="math inline">\(n-p\)</span> is because this is the number of effective independent sources of variation remaining after the model is fit by projecting the <span class="math inline">\(n\)</span> observations into a <span class="math inline">\(p\)</span> dimensional linear space.</p>
 </section><section id="submodels" class="slide level2">
-<h1>Submodels</h1>
+<h2>Submodels</h2>
 <p>Consider the OLS model <span class="math inline">\({\boldsymbol{Y}}= {\boldsymbol{X}}{\boldsymbol{\beta}}+ {\boldsymbol{E}}\)</span> where there are <span class="math inline">\(p\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and <span class="math inline">\({\boldsymbol{\beta}}\)</span> is a <span class="math inline">\(p\)</span>-vector.</p>
 <p>Let <span class="math inline">\({\boldsymbol{X}}_0\)</span> be a subset of <span class="math inline">\(p_0\)</span> columns of <span class="math inline">\({\boldsymbol{X}}\)</span> and let <span class="math inline">\({\boldsymbol{X}}_1\)</span> be a subset of <span class="math inline">\(p_1\)</span> columns, where <span class="math inline">\(1 \leq p_0 &lt; p_1 \leq p\)</span>. Also, assume that the columns of <span class="math inline">\({\boldsymbol{X}}_0\)</span> are a subset of <span class="math inline">\({\boldsymbol{X}}_1\)</span>.</p>
 <p>We can form <span class="math inline">\(\hat{{\boldsymbol{Y}}}_0 = {\boldsymbol{P}}_0 {\boldsymbol{Y}}\)</span> where <span class="math inline">\({\boldsymbol{P}}_0\)</span> is the projection matrix built from <span class="math inline">\({\boldsymbol{X}}_0\)</span>. We can analogously form <span class="math inline">\(\hat{{\boldsymbol{Y}}}_1 = {\boldsymbol{P}}_1 {\boldsymbol{Y}}\)</span>.</p>
 </section><section id="hypothesis-testing" class="slide level2">
-<h1>Hypothesis Testing</h1>
+<h2>Hypothesis Testing</h2>
 <p>Without loss of generality, suppose that <span class="math inline">\({\boldsymbol{\beta}}_0 = (\beta_1, \beta_2, \ldots, \beta_{p_0})^T\)</span> and <span class="math inline">\({\boldsymbol{\beta}}_1 = (\beta_1, \beta_2, \ldots, \beta_{p_1})^T\)</span>.</p>
 <p>How do we compare these models, specifically to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>?</p>
 <p>The basic idea to perform this test is to compare the goodness of fits of each model via a pivotal statistic. We will discuss the generalized LRT and ANOVA approaches.</p>
 </section><section id="generalized-lrt" class="slide level2">
-<h1>Generalized LRT</h1>
+<h2>Generalized LRT</h2>
 <p>Under the OLS Normal model, it follows that <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_0 = ({\boldsymbol{X}}^T_0 {\boldsymbol{X}}_0)^{-1} {\boldsymbol{X}}_0^T {\boldsymbol{Y}}\)</span> is the MLE under the null hypothesis and <span class="math inline">\(\hat{{\boldsymbol{\beta}}}_1 = ({\boldsymbol{X}}^T_1 {\boldsymbol{X}}_1)^{-1} {\boldsymbol{X}}_1^T {\boldsymbol{Y}}\)</span> is the unconstrained MLE. Also, the respective MLEs of <span class="math inline">\(\sigma^2\)</span> are</p>
 <p><span class="math display">\[
 \hat{\sigma}^2_0 = \frac{\sum_{i=1}^n (Y_i - \hat{Y}_{0,i})^2}{n}
@@ -1512,7 +1512,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \]</span></p>
 <p>where <span class="math inline">\(2\log\lambda({\boldsymbol{X}}, {\boldsymbol{Y}})\)</span> has a <span class="math inline">\(\chi^2_{p_1 - p_0}\)</span> null distribution.</p>
 </section><section id="nested-projections" class="slide level2">
-<h1>Nested Projections</h1>
+<h2>Nested Projections</h2>
 <p>We can apply the Pythagorean theorem we saw earlier to linear subspaces to get:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1525,7 +1525,7 @@ Y_i &amp; = \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip} + E_i \\
 \| ({\boldsymbol{I}}- {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2 = \| ({\boldsymbol{I}}- {\boldsymbol{P}}_1) {\boldsymbol{Y}}\|^2_2 + \| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^2_2
 \]</span></p>
 </section><section id="f-statistic" class="slide level2">
-<h1><em>F</em> Statistic</h1>
+<h2><em>F</em> Statistic</h2>
 <p>The <span class="math inline">\(F\)</span> statistic compares the improvement of goodness in fit of the larger model to that of the smaller model in terms of sums of squared residuals, and it scales this improvement by an estimate of <span class="math inline">\(\sigma^2\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1543,7 +1543,7 @@ F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^
 \end{aligned} 
 \]</span></p>
 </section><section id="f-distribution" class="slide level2">
-<h1><em>F</em> Distribution</h1>
+<h2><em>F</em> Distribution</h2>
 <p>Suppose we have independent random variables <span class="math inline">\(V \sim \chi^2_a\)</span> and <span class="math inline">\(W \sim \chi^2_b\)</span>. It follows that</p>
 <p><span class="math display">\[
 \frac{V/a}{W/b} \sim F_{a,b}
@@ -1560,12 +1560,12 @@ F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^
 \]</span></p>
 <p>and these two rv’s are independent.</p>
 </section><section id="f-test" class="slide level2">
-<h1><em>F</em> Test</h1>
+<h2><em>F</em> Test</h2>
 <p>Suppose that the OLS model holds where <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\sim \mbox{MVN}_n({\boldsymbol{0}}, \sigma^2 {\boldsymbol{I}})\)</span>.</p>
 <p>In order to test <span class="math inline">\(H_0: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) = {\boldsymbol{0}}\)</span> vs <span class="math inline">\(H_1: (\beta_{p_0+1}, \beta_{p_0 + 2}, \ldots, \beta_{p_1}) \not= {\boldsymbol{0}}\)</span>, we can form the <span class="math inline">\(F\)</span> statistic as given above, which has null distribution <span class="math inline">\(F_{p_1 - p_0, n - p_1}\)</span>. The p-value is calculated as <span class="math inline">\(\Pr(F^* \geq F)\)</span> where <span class="math inline">\(F\)</span> is the observed <span class="math inline">\(F\)</span> statistic and <span class="math inline">\(F^* \sim F_{p_1 - p_0, n - p_1}\)</span>.</p>
 <p>If the above assumption on the distribution of <span class="math inline">\({\boldsymbol{E}}| {\boldsymbol{X}}\)</span> only approximately holds, then the <span class="math inline">\(F\)</span> test p-value is also an approximation.</p>
 </section><section id="example-davis-data" class="slide level2">
-<h1>Example: Davis Data</h1>
+<h2>Example: Davis Data</h2>
 <pre class="r"><code>&gt; library(&quot;car&quot;)
 &gt; data(&quot;Davis&quot;, package=&quot;car&quot;)</code></pre>
 <pre class="r"><code>&gt; htwt &lt;- tbl_df(Davis)
@@ -1581,7 +1581,7 @@ F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^
 5      F     59    157    59   155
 6      M     76    170    76   165</code></pre>
 </section><section id="comparing-linear-models-in-r" class="slide level2">
-<h1>Comparing Linear Models in R</h1>
+<h2>Comparing Linear Models in R</h2>
 <p>Example: Davis Data</p>
 <p>Suppose we are considering the three following models:</p>
 <pre class="r"><code>&gt; f1 &lt;- lm(weight ~ height, data=htwt)
@@ -1589,13 +1589,13 @@ F &amp; = \frac{\| ({\boldsymbol{P}}_1 - {\boldsymbol{P}}_0) {\boldsymbol{Y}}\|^
 &gt; f3 &lt;- lm(weight ~ height + sex + height:sex, data=htwt)</code></pre>
 <p>How do we determine if the additional terms in models <code>f2</code> and <code>f3</code> are needed?</p>
 </section><section id="anova-version-2" class="slide level2">
-<h1>ANOVA (Version 2)</h1>
+<h2>ANOVA (Version 2)</h2>
 <p>A generalization of ANOVA exists that allows us to compare two nested models, quantifying their differences in terms of goodness of fit and performing a hypothesis test of whether this difference is statistically significant.</p>
 <p>A model is <em>nested</em> within another model if their difference is simply the absence of certain terms in the smaller model.</p>
 <p>The null hypothesis is that the additional terms have coefficients equal to zero, and the alternative hypothesis is that at least one coefficient is nonzero.</p>
 <p>Both versions of ANOVA can be described in a single, elegant mathematical framework.</p>
 </section><section id="comparing-two-models-with-anova" class="slide level2">
-<h1>Comparing Two Models <br> with <code>anova()</code></h1>
+<h2>Comparing Two Models <br> with <code>anova()</code></h2>
 <p>This provides a comparison of the improvement in fit from model <code>f2</code> compared to model <code>f1</code>:</p>
 <pre class="r"><code>&gt; anova(f1, f2)
 Analysis of Variance Table
@@ -1608,7 +1608,7 @@ Model 2: weight ~ height + sex
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </section><section id="when-theres-a-single-variable-difference" class="slide level2">
-<h1>When There’s a Single Variable Difference</h1>
+<h2>When There’s a Single Variable Difference</h2>
 <p>Compare above <code>anova(f1, f2)</code> p-value to that for the <code>sex</code> term from the <code>f2</code> model:</p>
 <pre class="r"><code>&gt; library(broom)
 &gt; tidy(f2)
@@ -1617,7 +1617,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 2      height   0.8105526  0.09529565  8.505662 4.499241e-15
 3        sexM   8.2268893  1.71050385  4.809629 2.998988e-06</code></pre>
 </section><section id="calculating-the-f-statistic" class="slide level2">
-<h1>Calculating the F-statistic</h1>
+<h2>Calculating the F-statistic</h2>
 <pre class="r"><code>&gt; anova(f1, f2)
 Analysis of Variance Table
 
@@ -1639,7 +1639,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 &gt; ((ss1 - ss2)/anova(f1, f2)$Df[2])/(ss2/f2$df.residual)
 [1] 23.13253</code></pre>
 </section><section id="calculating-the-generalized-lrt" class="slide level2">
-<h1>Calculating the Generalized LRT</h1>
+<h2>Calculating the Generalized LRT</h2>
 <pre class="r"><code>&gt; anova(f1, f2, test=&quot;LRT&quot;)
 Analysis of Variance Table
 
@@ -1665,7 +1665,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 
 <p>These tests produce slightly different answers because <code>anova()</code> adjusts for degrees of freedom when estimating the variance, whereas <code>lrtest()</code> is the strict generalized LRT. See <a href="https://stats.stackexchange.com/questions/155474/r-why-does-lrtest-not-match-anovatest-lrt">here</a>.</p>
 </section><section id="anova-on-more-distant-models" class="slide level2">
-<h1>ANOVA on More Distant Models</h1>
+<h2>ANOVA on More Distant Models</h2>
 <p>We can compare models with multiple differences in terms:</p>
 <pre class="r"><code>&gt; anova(f1, f3)
 Analysis of Variance Table
@@ -1678,7 +1678,7 @@ Model 2: weight ~ height + sex + height:sex
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </section><section id="compare-multiple-models-at-once" class="slide level2">
-<h1>Compare Multiple Models at Once</h1>
+<h2>Compare Multiple Models at Once</h2>
 <p>We can compare multiple models at once:</p>
 <pre class="r"><code>&gt; anova(f1, f2, f3)
 Analysis of Variance Table
@@ -1694,11 +1694,11 @@ Model 3: weight ~ height + sex + height:sex
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </section></section>
 <section><section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="source" class="slide level2">
-<h1>Source</h1>
+<h2>Source</h2>
 <p><a href="https://github.com/jdstorey/asdslectures/blob/master/LICENSE.md">License</a></p>
 <p><a href="https://github.com/jdstorey/asdslectures/">Source Code</a></p>
 </section><section id="session-information" class="slide level2">
-<h1>Session Information</h1>
+<h2>Session Information</h2>
 <section style="font-size: 0.75em;">
 <pre class="r"><code>&gt; sessionInfo()
 R version 3.3.2 (2016-10-31)
@@ -1715,7 +1715,7 @@ attached base packages:
 other attached packages:
  [1] lmtest_0.9-35   zoo_1.8-0       broom_0.4.2    
  [4] car_2.1-4       MASS_7.3-47     dplyr_0.5.0    
- [7] purrr_0.2.2     readr_1.1.0     tidyr_0.6.1    
+ [7] purrr_0.2.2     readr_1.1.0     tidyr_0.6.2    
 [10] tibble_1.3.0    ggplot2_2.2.1   tidyverse_1.1.1
 [13] knitr_1.15.1    magrittr_1.5    devtools_1.12.0
 
